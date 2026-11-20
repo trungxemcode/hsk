@@ -36,6 +36,7 @@ body.studio-enabled .overview-search .clean-home-search{margin:0;border:0;paddin
 .overview-word-row summary span:last-child{color:var(--ink);font-size:13px}
 .overview-word-sound button{width:44px;min-height:44px;border:0;background:var(--palette-clear);padding:8px}
 .overview-word-body{border-top:1px solid var(--line);margin-top:10px;padding-top:6px;font-size:14px;line-height:1.5}
+.overview-word-row details:not([open]) > :not(summary){display:none!important}
 .overview-word-body button{min-height:44px;padding:8px;margin:4px 4px 0 0}
 #homeStreak{display:none}
 .overview-v216 .overview-tasks[hidden],.overview-v216 .overview-extras[hidden],.overview-v216 .overview-time[hidden]{display:none!important}

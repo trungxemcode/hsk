@@ -1,4 +1,4 @@
 {
-  "request": "PR #445: add 191 Learn Chinese Through Podcast episodes and 1 Chinese Daily Podcast episode with their four-layer cue packs. The Podcast panel is opened from the Home shortcut and is not a standalone route in the visual-scope inventory; its behavior/layout is covered by tools/check-podcast-ui.cjs. Keep every inventoried route protected, including Home and Admin.",
+  "request": "PR #445: add 186 new Learn Chinese Through Podcast episodes and 1 new Chinese Daily Podcast episode with their four-layer cue packs. The Podcast panel is opened from the Home shortcut and is not a standalone route in the visual-scope inventory; its behavior/layout is covered by tools/check-podcast-ui.cjs. Keep every inventoried route protected, including Home and Admin.",
   "excludedRoutes": []
 }

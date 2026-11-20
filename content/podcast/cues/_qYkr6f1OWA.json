@@ -1,0 +1,4689 @@
+{
+  "id": "_qYkr6f1OWA",
+  "youtubeId": "_qYkr6f1OWA",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 3 - 4 | Mastering Talking About Money in Chinese | Chinese Listening Practice",
+  "durationSec": 1481,
+  "cues": [
+    {
+      "start": 6.27,
+      "end": 7,
+      "zh": "你好",
+      "vi": "Chào bạn!",
+      "en": "Hello.",
+      "pinyin": "nǐ hǎo"
+    },
+    {
+      "start": 7,
+      "end": 11.3,
+      "zh": "欢迎回来我们的中文学习频道嗨",
+      "vi": "Chào mừng các bạn quay lại kênh học tiếng Trung của chúng mình, hi!",
+      "en": "Welcome back to our Chinese Learning Channel. Hi.",
+      "pinyin": "huān yíng huí lái wǒ men de zhōng wén xué xí pín dào hēi"
+    },
+    {
+      "start": 11.3,
+      "end": 13.6,
+      "zh": "今天你过得怎么样",
+      "vi": "Hôm nay bạn thế nào?",
+      "en": "How was your day?",
+      "pinyin": "jīn tiān nǐ guò dé zěn me yàng"
+    },
+    {
+      "start": 13.73,
+      "end": 17.06,
+      "zh": "还不错我刚刚在看一份账单",
+      "vi": "Cũng ổn. Mình vừa xem một hóa đơn.",
+      "en": "Not bad. I was just looking at a bill.",
+      "pinyin": "hái bú cuò wǒ gāng gāng zài kàn yí fèn zhàng dān"
+    },
+    {
+      "start": 17.17,
+      "end": 19.27,
+      "zh": "突然想到一个问题",
+      "vi": "Tự nhiên nghĩ ra một câu hỏi.",
+      "en": "I suddenly think of a problem.",
+      "pinyin": "tū rán xiǎng dào yí gè wèn tí"
+    },
+    {
+      "start": 19.8,
+      "end": 21.07,
+      "zh": "什么问题",
+      "vi": "Câu hỏi gì thế?",
+      "en": "What's the problem?",
+      "pinyin": "shén me wèn tí"
+    },
+    {
+      "start": 21.2,
+      "end": 22.27,
+      "zh": "我发现",
+      "vi": "Mình phát hiện ra...",
+      "en": "I found it.",
+      "pinyin": "wǒ fā xiàn"
+    },
+    {
+      "start": 22.3,
+      "end": 25.87,
+      "zh": "很多中文学习者不会用中文说",
+      "vi": "Nhiều người học tiếng Trung không biết dùng tiếng Trung để nói...",
+      "en": "A lot of Chinese learners don't speak Chinese.",
+      "pinyin": "hěn duō zhōng wén xué xí zhě bú huì yòng zhōng wén shuō"
+    },
+    {
+      "start": 25.93,
+      "end": 27.16,
+      "zh": "钱的事情",
+      "vi": "chuyện tiền bạc.",
+      "en": "Money.",
+      "pinyin": "qián de shì qíng"
+    },
+    {
+      "start": 27.17,
+      "end": 29.27,
+      "zh": "比如怎么买东西",
+      "vi": "Ví dụ như cách mua đồ.",
+      "en": "Like how to buy something.",
+      "pinyin": "bǐ rú zěn me mǎi dōng xī"
+    },
+    {
+      "start": 29.27,
+      "end": 30.7,
+      "zh": "怎么说价格",
+      "vi": "Cách nói giá cả.",
+      "en": "What's the price?",
+      "pinyin": "zěn me shuō jià gé"
+    },
+    {
+      "start": 30.9,
+      "end": 33.1,
+      "zh": "对呀说到钱",
+      "vi": "Đúng rồi, nhắc đến tiền...",
+      "en": "Yes, speaking of money.",
+      "pinyin": "duì ya shuō dào qián"
+    },
+    {
+      "start": 33.1,
+      "end": 37.13,
+      "zh": "我们每天都用到。去超市、吃饭、",
+      "vi": "Ngày nào chúng ta cũng dùng tiền, từ đi siêu thị, ăn uống",
+      "en": "We use it every day. Going to the supermarket, eating out,",
+      "pinyin": "wǒ men měi tiān dōu yòng dào 。 qù chāo shì 、 chī fàn 、"
+    },
+    {
+      "start": 37.13,
+      "end": 39.53,
+      "zh": "买衣服都离不开钱",
+      "vi": "Mua quần áo cũng không thể thiếu tiền.",
+      "en": "You can't buy clothes without money.",
+      "pinyin": "mǎi yī fu dōu lí bù kāi qián"
+    },
+    {
+      "start": 39.53,
+      "end": 40.4,
+      "zh": "没错",
+      "vi": "Đúng vậy.",
+      "en": "That's right.",
+      "pinyin": "méi cuò"
+    },
+    {
+      "start": 40.6,
+      "end": 44.17,
+      "zh": "所以我觉得今天我们可以来聊一聊",
+      "vi": "Nên mình nghĩ hôm nay chúng ta có thể cùng nói về...",
+      "en": "So I thought we could have a chat today.",
+      "pinyin": "suǒ yǐ wǒ jué de jīn tiān wǒ men kě yǐ lái liáo yi liáo"
+    },
+    {
+      "start": 44.17,
+      "end": 47.37,
+      "zh": "怎么用中文说关于钱的事情",
+      "vi": "Cách nói những chuyện liên quan đến tiền bằng tiếng Trung.",
+      "en": "How do you speak Chinese about money?",
+      "pinyin": "zěn me yòng zhōng wén shuō guān yú qián de shì qíng"
+    },
+    {
+      "start": 47.37,
+      "end": 51.9,
+      "zh": "太好了这是一个非常实用的主题",
+      "vi": "Hay quá, đây là một chủ đề rất thực tế.",
+      "en": "That's great. It's a very practical theme.",
+      "pinyin": "tài hǎo le zhè shì yí gè fēi cháng shí yòng de zhǔ tí"
+    },
+    {
+      "start": 51.93,
+      "end": 53.6,
+      "zh": "学会说钱",
+      "vi": "Biết cách nói về tiền.",
+      "en": "Learn to talk about money.",
+      "pinyin": "xué huì shuō qián"
+    },
+    {
+      "start": 53.6,
+      "end": 57.37,
+      "zh": "我们才能更自然的生活在中国",
+      "vi": "Chúng ta mới có thể sống ở Trung Quốc tự nhiên hơn.",
+      "en": "We can live in China more naturally.",
+      "pinyin": "wǒ men cái néng gèng zì rán de shēng huó zài zhōng guó"
+    },
+    {
+      "start": 57.6,
+      "end": 58.5,
+      "zh": "而且",
+      "vi": "Hơn nữa,",
+      "en": "And...",
+      "pinyin": "ér qiě"
+    },
+    {
+      "start": 58.5,
+      "end": 63.3,
+      "zh": "在考试中也经常出现跟钱有关的词",
+      "vi": "trong các kỳ thi cũng thường xuất hiện những từ liên quan đến tiền.",
+      "en": "There's a lot of money-related words in the exams.",
+      "pinyin": "zài kǎo shì zhōng yě jīng cháng chū xiàn gēn qián yǒu guān de cí"
+    },
+    {
+      "start": 63.3,
+      "end": 65.37,
+      "zh": "比如多少钱",
+      "vi": "Ví dụ như 多少钱 (bao nhiêu tiền).",
+      "en": "Like how much?",
+      "pinyin": "bǐ rú duō shǎo qián"
+    },
+    {
+      "start": 65.47,
+      "end": 67.2,
+      "zh": "便宜贵",
+      "vi": "便宜 (rẻ), 贵 (đắt).",
+      "en": "Cheap.",
+      "pinyin": "pián yi guì"
+    },
+    {
+      "start": 67.4,
+      "end": 72.53,
+      "zh": "所以如果你正在准备HSK考试",
+      "vi": "Vì vậy nếu bạn đang ôn thi HSK...",
+      "en": "So if you're preparing for the HSK exam,",
+      "pinyin": "suǒ yǐ rú guǒ nǐ zhèng zài zhǔn bèi HSK kǎo shì"
+    },
+    {
+      "start": 72.53,
+      "end": 75.7,
+      "zh": "这个视频你一定不能错过",
+      "vi": "thì nhất định đừng bỏ lỡ video này.",
+      "en": "You can't miss this video.",
+      "pinyin": "zhè ge shì pín nǐ yí dìng bù néng cuò guò"
+    },
+    {
+      "start": 76.3,
+      "end": 77.7,
+      "zh": "那我们今天",
+      "vi": "Vậy thì hôm nay...",
+      "en": "So, we're going to...",
+      "pinyin": "nà wǒ men jīn tiān"
+    },
+    {
+      "start": 77.7,
+      "end": 81.5,
+      "zh": "会带大家一起学一些常用的词语",
+      "vi": "chúng mình sẽ cùng các bạn học một số từ thông dụng.",
+      "en": "I'll show you some of the usual words.",
+      "pinyin": "huì dài dà jiā yì qǐ xué yì xiē cháng yòng de cí yǔ"
+    },
+    {
+      "start": 81.53,
+      "end": 85.26,
+      "zh": "比如钱快元",
+      "vi": "Ví dụ như 钱 (tiền), 块 (đồng), 元 (nhân dân tệ).",
+      "en": "Like the money.",
+      "pinyin": "bǐ rú qián kuài yuán"
+    },
+    {
+      "start": 85.4,
+      "end": 87.67,
+      "zh": "收入花钱",
+      "vi": "收入 (thu nhập), 花钱 (tiêu tiền).",
+      "en": "Income is money.",
+      "pinyin": "shōu rù huā qián"
+    },
+    {
+      "start": 87.8,
+      "end": 90.7,
+      "zh": "也会通过简单的对话",
+      "vi": "Cũng sẽ thông qua những đoạn hội thoại đơn giản...",
+      "en": "And through a simple conversation.",
+      "pinyin": "yě huì tōng guò jiǎn dān de duì huà"
+    },
+    {
+      "start": 90.7,
+      "end": 93.07,
+      "zh": "教你怎么问价格",
+      "vi": "để dạy bạn cách hỏi giá.",
+      "en": "Teach you how to ask the price.",
+      "pinyin": "jiào nǐ zěn me wèn jià gé"
+    },
+    {
+      "start": 93.1,
+      "end": 95.93,
+      "zh": "怎么说自己花了多少钱",
+      "vi": "Cách nói mình đã tiêu bao nhiêu tiền.",
+      "en": "How much did you spend?",
+      "pinyin": "zěn me shuō zì jǐ huā le duō shǎo qián"
+    },
+    {
+      "start": 95.93,
+      "end": 99.26,
+      "zh": "或者怎么存钱对",
+      "vi": "Hoặc cách tiết kiệm tiền, đúng không?",
+      "en": "Or how to save it.",
+      "pinyin": "huò zhě zěn me cún qián duì"
+    },
+    {
+      "start": 99.37,
+      "end": 101.27,
+      "zh": "还会聊聊工资",
+      "vi": "Còn nói về tiền lương nữa.",
+      "en": "We'll talk about pay.",
+      "pinyin": "hái huì liáo liáo gōng zī"
+    },
+    {
+      "start": 101.27,
+      "end": 104.93,
+      "zh": "理财甚至是投资的简单说法",
+      "vi": "Những cách nói đơn giản về quản lý tài chính, thậm chí cả đầu tư.",
+      "en": "It's a simple word for money and even investment.",
+      "pinyin": "lǐ cái shèn zhì shì tóu zī de jiǎn dān shuō fǎ"
+    },
+    {
+      "start": 104.93,
+      "end": 107.36,
+      "zh": "所以准备好了吗",
+      "vi": "Vậy đã sẵn sàng chưa?",
+      "en": "So are you ready?",
+      "pinyin": "suǒ yǐ zhǔn bèi hǎo le ma"
+    },
+    {
+      "start": 107.37,
+      "end": 108.5,
+      "zh": "准备好了",
+      "vi": "Sẵn sàng rồi!",
+      "en": "Ready.",
+      "pinyin": "zhǔn bèi hǎo le"
+    },
+    {
+      "start": 108.5,
+      "end": 111.4,
+      "zh": "那我们就开始今天的学习吧",
+      "vi": "Vậy chúng ta bắt đầu bài học hôm nay nhé.",
+      "en": "So let's start studying today.",
+      "pinyin": "nà wǒ men jiù kāi shǐ jīn tiān de xué xí ba"
+    },
+    {
+      "start": 111.4,
+      "end": 112.27,
+      "zh": "走吧",
+      "vi": "Đi thôi!",
+      "en": "Come on.",
+      "pinyin": "zǒu ba"
+    },
+    {
+      "start": 112.27,
+      "end": 116.97,
+      "zh": "让我们一起学会怎么用中文谈钱",
+      "vi": "Chúng ta cùng học cách nói về tiền bằng tiếng Trung nhé.",
+      "en": "Let's learn how to talk about money in Chinese.",
+      "pinyin": "ràng wǒ men yì qǐ xué huì zěn me yòng zhōng wén tán qián"
+    },
+    {
+      "start": 118.07,
+      "end": 121.57,
+      "zh": "收到钱你知道钱用中文怎么说吗",
+      "vi": "Nhắc đến tiền, bạn có biết tiền trong tiếng Trung nói thế nào không?",
+      "en": "You know what they say in Chinese when you get the money?",
+      "pinyin": "shōu dào qián nǐ zhī dào qián yòng zhōng wén zěn me shuō ma"
+    },
+    {
+      "start": 121.57,
+      "end": 122.73,
+      "zh": "当然知道啊",
+      "vi": "Tất nhiên là biết rồi.",
+      "en": "Of course I do.",
+      "pinyin": "dāng rán zhī dào a"
+    },
+    {
+      "start": 122.73,
+      "end": 126.06,
+      "zh": "是钱比如你有钱吗",
+      "vi": "Là 钱. Ví dụ: 你有钱吗? (Bạn có tiền không?)",
+      "en": "Is it money like you have money?",
+      "pinyin": "shì qián bǐ rú nǐ yǒu qián ma"
+    },
+    {
+      "start": 126.07,
+      "end": 127.67,
+      "zh": "哈哈哈哈",
+      "vi": "Ha ha ha ha.",
+      "en": "Ha ha ha ha!",
+      "pinyin": "hā hā hā hā"
+    },
+    {
+      "start": 127.67,
+      "end": 128.7,
+      "zh": "那我问你啊",
+      "vi": "Vậy mình hỏi bạn nhé.",
+      "en": "Let me ask you something.",
+      "pinyin": "nà wǒ wèn nǐ a"
+    },
+    {
+      "start": 128.93,
+      "end": 130.6,
+      "zh": "你今天带钱了吗",
+      "vi": "Hôm nay bạn có mang tiền không?",
+      "en": "Did you bring the money today?",
+      "pinyin": "nǐ jīn tiān dài qián le ma"
+    },
+    {
+      "start": 130.6,
+      "end": 133.87,
+      "zh": "没有我现在都用手机付款",
+      "vi": "Không, bây giờ mình toàn thanh toán bằng điện thoại.",
+      "en": "No, I'm paying on my cell phone now.",
+      "pinyin": "méi yǒu wǒ xiàn zài dōu yòng shǒu jī fù kuǎn"
+    },
+    {
+      "start": 133.87,
+      "end": 136,
+      "zh": "不太用现金对",
+      "vi": "Không dùng tiền mặt nhiều, đúng không",
+      "en": "Not much cash, right?",
+      "pinyin": "bú tài yòng xiàn jīn duì"
+    },
+    {
+      "start": 136,
+      "end": 140.07,
+      "zh": "现在很多人用微信或者支付宝付钱",
+      "vi": "Bây giờ nhiều người dùng WeChat hoặc Alipay để trả tiền",
+      "en": "Now, a lot of people pay for it with micro-mails or treasures.",
+      "pinyin": "xiàn zài hěn duō rén yòng wēi xìn huò zhě zhī fù bǎo fù qián"
+    },
+    {
+      "start": 140.07,
+      "end": 144.1,
+      "zh": "不过我们还是要学会怎么说现金",
+      "vi": "Nhưng chúng ta vẫn phải học cách nói 'tiền mặt'",
+      "en": "But we still have to learn how to talk about cash.",
+      "pinyin": "bú guò wǒ men hái shì yào xué huì zěn me shuō xiàn jīn"
+    },
+    {
+      "start": 144.1,
+      "end": 146,
+      "zh": "比如10块",
+      "vi": "Ví dụ 10 tệ",
+      "en": "Like ten bucks.",
+      "pinyin": "bǐ rú 10 kuài"
+    },
+    {
+      "start": 146.27,
+      "end": 148.04,
+      "zh": "50块对",
+      "vi": "50 tệ, đúng rồi",
+      "en": "50 bucks.",
+      "pinyin": "50 kuài duì"
+    },
+    {
+      "start": 148.07,
+      "end": 150.27,
+      "zh": "还有一个词是圆",
+      "vi": "Còn một từ nữa là 'nguyên'",
+      "en": "There's another word for it.",
+      "pinyin": "hái yǒu yí gè cí shì yuán"
+    },
+    {
+      "start": 150.37,
+      "end": 154.2,
+      "zh": "其实快和圆是一样的意思对",
+      "vi": "Thật ra 'khối' và 'nguyên' có nghĩa giống nhau, đúng không",
+      "en": "It's the same thing as a circle.",
+      "pinyin": "qí shí kuài hé yuán shì yí yàng de yì sī duì"
+    },
+    {
+      "start": 154.2,
+      "end": 156.7,
+      "zh": "只是快是口语",
+      "vi": "Chỉ là 'khối' là khẩu ngữ",
+      "en": "It's just a word.",
+      "pinyin": "zhǐ shì kuài shì kǒu yǔ"
+    },
+    {
+      "start": 156.7,
+      "end": 158,
+      "zh": "比较随便",
+      "vi": "khá tùy tiện",
+      "en": "It's easier.",
+      "pinyin": "bǐ jiào suí biàn"
+    },
+    {
+      "start": 158.4,
+      "end": 159.87,
+      "zh": "元是书面语",
+      "vi": "'Nguyên' là ngôn ngữ viết",
+      "en": "Yuan is written.",
+      "pinyin": "yuán shì shū miàn yǔ"
+    },
+    {
+      "start": 159.87,
+      "end": 161.8,
+      "zh": "用在正式场合",
+      "vi": "dùng trong dịp trang trọng",
+      "en": "It's for official use.",
+      "pinyin": "yòng zài zhèng shì chǎng hé"
+    },
+    {
+      "start": 161.8,
+      "end": 163.27,
+      "zh": "比如你去银行",
+      "vi": "Ví dụ bạn đến ngân hàng",
+      "en": "Like you go to the bank.",
+      "pinyin": "bǐ rú nǐ qù yín háng"
+    },
+    {
+      "start": 163.37,
+      "end": 166.7,
+      "zh": "工作人员会说人民币100元",
+      "vi": "nhân viên sẽ nói 100 nhân dân tệ",
+      "en": "The staff will say 100 yuan.",
+      "pinyin": "gōng zuò rén yuán huì shuō rén mín bì 100 yuán"
+    },
+    {
+      "start": 166.77,
+      "end": 171.87,
+      "zh": "但朋友之间就说这件衣服只要100块",
+      "vi": "Nhưng giữa bạn bè thì nói chiếc áo này chỉ có 100 tệ",
+      "en": "But friends said it was for $100.",
+      "pinyin": "dàn péng yǒu zhī jiān jiù shuō zhè jiàn yī fu zhǐ yào 100 kuài"
+    },
+    {
+      "start": 171.87,
+      "end": 174.57,
+      "zh": "哈哈那人民币是什么意思呀",
+      "vi": "Ha ha, vậy 'nhân dân tệ' có nghĩa là gì vậy",
+      "en": "What does Hahana mean?",
+      "pinyin": "hā hā nà rén mín bì shì shén me yì sī ya"
+    },
+    {
+      "start": 174.57,
+      "end": 178.2,
+      "zh": "人民币就是中国的钱的名字",
+      "vi": "Nhân dân tệ chính là tên gọi của đồng tiền Trung Quốc",
+      "en": "The renminbi is the name of Chinese money.",
+      "pinyin": "rén mín bì jiù shì zhōng guó de qián de míng zì"
+    },
+    {
+      "start": 178.37,
+      "end": 182.13,
+      "zh": "因为是RMB哦",
+      "vi": "Bởi vì là RMB đấy",
+      "en": "Because it's RMB.",
+      "pinyin": "yīn wèi shì RMB ò"
+    },
+    {
+      "start": 182.13,
+      "end": 183.3,
+      "zh": "我明白了",
+      "vi": "Tôi hiểu rồi",
+      "en": "I see.",
+      "pinyin": "wǒ míng bái le"
+    },
+    {
+      "start": 183.3,
+      "end": 187.9,
+      "zh": "所以100元人民币就是100RMB对",
+      "vi": "Vậy 100 nhân dân tệ tức là 100 RMB, đúng không",
+      "en": "So 100 yuan is 100 RMB.",
+      "pinyin": "suǒ yǐ 100 yuán rén mín bì jiù shì 100RMB duì"
+    },
+    {
+      "start": 187.97,
+      "end": 190.37,
+      "zh": "那你知道除了元以外",
+      "vi": "Vậy bạn có biết ngoài 'nguyên' ra",
+      "en": "Well, you know that except for Won.",
+      "pinyin": "nà nǐ zhī dào chú le yuán yǐ wài"
+    },
+    {
+      "start": 190.37,
+      "end": 192.77,
+      "zh": "还有什么小单位吗",
+      "vi": "còn có đơn vị nhỏ nào nữa không",
+      "en": "Any other small units?",
+      "pinyin": "hái yǒu shén me xiǎo dān wèi ma"
+    },
+    {
+      "start": 192.77,
+      "end": 195.6,
+      "zh": "有我学过角和分",
+      "vi": "Có, tôi đã học 'giác' và 'phân'",
+      "en": "I've learned the horns and points.",
+      "pinyin": "yǒu wǒ xué guò jiǎo hé fēn"
+    },
+    {
+      "start": 195.97,
+      "end": 197.77,
+      "zh": "10角是1元对吧",
+      "vi": "10 giác là 1 nguyên, đúng không",
+      "en": "That's $1 for ten, isn't it?",
+      "pinyin": "10 jiǎo shì 1 yuán duì ba"
+    },
+    {
+      "start": 197.77,
+      "end": 200.97,
+      "zh": "没错 1元等于10角",
+      "vi": "Đúng vậy, 1 nguyên bằng 10 giác",
+      "en": "That's right. One dollar equals 10.",
+      "pinyin": "méi cuò 1 yuán děng yú 10 jiǎo"
+    },
+    {
+      "start": 201,
+      "end": 203.27,
+      "zh": "一角等于10分",
+      "vi": "Một giác bằng 10 phân",
+      "en": "One corner equals ten points.",
+      "pinyin": "yì jiǎo děng yú 10 fēn"
+    },
+    {
+      "start": 203.6,
+      "end": 208.4,
+      "zh": "比如6块5就是6块5角",
+      "vi": "Ví dụ 6 tệ 5 tức là 6 tệ 5 giác",
+      "en": "Like $6.50 is $6.50.",
+      "pinyin": "bǐ rú 6 kuài 5 jiù shì 6 kuài 5 jiǎo"
+    },
+    {
+      "start": 208.4,
+      "end": 211.37,
+      "zh": "也就是6.5元",
+      "vi": "cũng chính là 6,5 nguyên",
+      "en": "That's $6.50.",
+      "pinyin": "yě jiù shì 6.5 yuán"
+    },
+    {
+      "start": 211.37,
+      "end": 214.73,
+      "zh": "可是现在好像很少人说角和分类",
+      "vi": "Nhưng bây giờ hình như ít người nói 'giác' và 'phân' lắm",
+      "en": "But it seems that there are few people who talk about horns and categories.",
+      "pinyin": "kě shì xiàn zài hǎo xiàng hěn shǎo rén shuō jiǎo hé fēn lèi"
+    },
+    {
+      "start": 214.73,
+      "end": 215.66,
+      "zh": "对啊",
+      "vi": "Đúng vậy",
+      "en": "Yeah.",
+      "pinyin": "duì a"
+    },
+    {
+      "start": 215.7,
+      "end": 221.73,
+      "zh": "现在大家都直接说快或者4块57块8",
+      "vi": "Bây giờ mọi người đều nói thẳng là 'khối' hoặc 4 tệ 5, 7 tệ 8",
+      "en": "Now everybody just says quick or $4.57.8.",
+      "pinyin": "xiàn zài dà jiā dōu zhí jiē shuō kuài huò zhě 4 kuài 57 kuài 8"
+    },
+    {
+      "start": 221.73,
+      "end": 223.03,
+      "zh": "更简单",
+      "vi": "đơn giản hơn",
+      "en": "It's simpler.",
+      "pinyin": "gèng jiǎn dān"
+    },
+    {
+      "start": 223.33,
+      "end": 227.3,
+      "zh": "我小时候买糖果一毛钱可以买两颗",
+      "vi": "Hồi nhỏ tôi mua kẹo, một hào mua được hai viên",
+      "en": "When I was a kid, I could buy two of those.",
+      "pinyin": "wǒ xiǎo shí hòu mǎi táng guǒ yì máo qián kě yǐ mǎi liǎng kē"
+    },
+    {
+      "start": 227.47,
+      "end": 231.27,
+      "zh": "现在一毛钱什么也买不到了",
+      "vi": "Bây giờ một hào chẳng mua được gì cả",
+      "en": "There's nothing to buy a dime now.",
+      "pinyin": "xiàn zài yì máo qián shén me yě mǎi bú dào le"
+    },
+    {
+      "start": 231.27,
+      "end": 232,
+      "zh": "哈哈",
+      "vi": "Ha ha",
+      "en": "Ha ha!",
+      "pinyin": "hā hā"
+    },
+    {
+      "start": 232,
+      "end": 235.5,
+      "zh": "那你平时买东西会问多少钱吗",
+      "vi": "Vậy bình thường bạn mua đồ có hỏi bao nhiêu tiền không",
+      "en": "Do you usually ask how much money you buy?",
+      "pinyin": "nà nǐ píng shí mǎi dōng xī huì wèn duō shǎo qián ma"
+    },
+    {
+      "start": 235.5,
+      "end": 239.13,
+      "zh": "当然啊我会说这个多少钱",
+      "vi": "Tất nhiên rồi, tôi sẽ nói cái này bao nhiêu tiền",
+      "en": "Of course. How much would I say that?",
+      "pinyin": "dāng rán a wǒ huì shuō zhè ge duō shǎo qián"
+    },
+    {
+      "start": 239.13,
+      "end": 241.53,
+      "zh": "或者这个怎么卖",
+      "vi": "Hoặc cái này bán thế nào",
+      "en": "Or how to sell this.",
+      "pinyin": "huò zhě zhè ge zěn me mài"
+    },
+    {
+      "start": 241.53,
+      "end": 245.4,
+      "zh": "很实用我也常常用这个多少钱",
+      "vi": "Rất thực dụng, tôi cũng thường dùng câu 'cái này bao nhiêu tiền'",
+      "en": "It's very practical. How much do I spend on it?",
+      "pinyin": "hěn shí yòng wǒ yě cháng cháng yòng zhè ge duō shǎo qián"
+    },
+    {
+      "start": 245.4,
+      "end": 248.97,
+      "zh": "然后老板会说20块35块",
+      "vi": "Sau đó ông chủ sẽ nói 20 tệ, 35 tệ",
+      "en": "Then the boss says 20:35.",
+      "pinyin": "rán hòu lǎo bǎn huì shuō 20 kuài 35 kuài"
+    },
+    {
+      "start": 248.97,
+      "end": 252.3,
+      "zh": "有时候我会说太贵了",
+      "vi": "Có lúc tôi sẽ nói đắt quá",
+      "en": "Sometimes I say it's too expensive.",
+      "pinyin": "yǒu shí hòu wǒ huì shuō tài guì le"
+    },
+    {
+      "start": 252.3,
+      "end": 255.53,
+      "zh": "可以便宜一点吗哈哈哈哎",
+      "vi": "Có thể rẻ hơn một chút không, ha ha ha",
+      "en": "Can we get a little cheaper? Ha-ha!",
+      "pinyin": "kě yǐ pián yi yì diǎn ma hā hā hā āi"
+    },
+    {
+      "start": 255.53,
+      "end": 257.4,
+      "zh": "你还会讨价还价呢",
+      "vi": "Bạn còn biết mặc cả nữa cơ đấy",
+      "en": "You're a bargaining man.",
+      "pinyin": "nǐ hái huì tǎo jià huán jià ne"
+    },
+    {
+      "start": 257.4,
+      "end": 262.37,
+      "zh": "是啊尤其在市场问价钱一定要贵",
+      "vi": "Đúng vậy, nhất là ở chợ, hỏi giá thì nhất định phải nói đắt",
+      "en": "Yeah, especially in the market. It's gotta be expensive.",
+      "pinyin": "shì a yóu qí zài shì chǎng wèn jià qián yí dìng yào guì"
+    },
+    {
+      "start": 262.57,
+      "end": 265.1,
+      "zh": "那我们复习一下今天学的词吧",
+      "vi": "Vậy chúng ta ôn lại những từ học hôm nay nhé",
+      "en": "Let's review the words we learned today.",
+      "pinyin": "nà wǒ men fù xí yí xià jīn tiān xué de cí ba"
+    },
+    {
+      "start": 265.1,
+      "end": 266.83,
+      "zh": "好钱",
+      "vi": "Được, 'tiền'",
+      "en": "Good money.",
+      "pinyin": "hǎo qián"
+    },
+    {
+      "start": 266.93,
+      "end": 268.96,
+      "zh": "快元",
+      "vi": "'khối', 'nguyên'",
+      "en": "Come on.",
+      "pinyin": "kuài yuán"
+    },
+    {
+      "start": 269.07,
+      "end": 272.64,
+      "zh": "人民币角分",
+      "vi": "nhân dân tệ, giác, phân",
+      "en": "Minus of the renminbi",
+      "pinyin": "rén mín bì jiǎo fēn"
+    },
+    {
+      "start": 272.97,
+      "end": 274.57,
+      "zh": "还有句子",
+      "vi": "Còn có các câu",
+      "en": "There's a sentence.",
+      "pinyin": "hái yǒu jù zi"
+    },
+    {
+      "start": 274.57,
+      "end": 278.3,
+      "zh": "这个多少钱和太贵了对",
+      "vi": "Cái này bao nhiêu tiền, và đắt quá phải không",
+      "en": "How much is this and how much is it?",
+      "pinyin": "zhè ge duō shǎo qián hé tài guì le duì"
+    },
+    {
+      "start": 278.3,
+      "end": 281.4,
+      "zh": "还有一个可以便宜一点吗",
+      "vi": "Còn có thể rẻ hơn một chút không",
+      "en": "Is there another one that could be cheaper?",
+      "pinyin": "hái yǒu yí gè kě yǐ pián yi yì diǎn ma"
+    },
+    {
+      "start": 281.4,
+      "end": 282.4,
+      "zh": "学会这些",
+      "vi": "Học được những điều này",
+      "en": "Learn this.",
+      "pinyin": "xué huì zhè xiē"
+    },
+    {
+      "start": 282.4,
+      "end": 285.4,
+      "zh": "我们在中国生活会方便很多啊",
+      "vi": "cuộc sống của chúng ta ở Trung Quốc sẽ thuận tiện hơn nhiều",
+      "en": "We'll be much easier in China.",
+      "pinyin": "wǒ men zài zhōng guó shēng huó huì fāng biàn hěn duō a"
+    },
+    {
+      "start": 285.4,
+      "end": 287.27,
+      "zh": "没错买东西",
+      "vi": "Đúng vậy, mua đồ",
+      "en": "Yes, it is.",
+      "pinyin": "méi cuò mǎi dōng xī"
+    },
+    {
+      "start": 287.27,
+      "end": 291.84,
+      "zh": "点餐打车天天都要用到钱的众人",
+      "vi": "gọi món, bắt taxi, ngày nào cũng phải dùng đến tiền, mọi người",
+      "en": "People need money every day to order a cab.",
+      "pinyin": "diǎn cān dǎ chē tiān tiān dōu yào yòng dào qián de zhòng rén"
+    },
+    {
+      "start": 292.1,
+      "end": 294.07,
+      "zh": "那接下来我们继续聊聊",
+      "vi": "Vậy tiếp theo chúng ta tiếp tục nói chuyện",
+      "en": "Then we'll talk.",
+      "pinyin": "nà jiē xià lái wǒ men jì xù liáo liáo"
+    },
+    {
+      "start": 294.07,
+      "end": 295.6,
+      "zh": "工作和工资吧",
+      "vi": "về công việc và tiền lương nhé",
+      "en": "Work and pay.",
+      "pinyin": "gōng zuò hé gōng zī ba"
+    },
+    {
+      "start": 295.6,
+      "end": 296.47,
+      "zh": "好啊",
+      "vi": "Được thôi",
+      "en": "Okay.",
+      "pinyin": "hǎo a"
+    },
+    {
+      "start": 296.47,
+      "end": 300.73,
+      "zh": "我最想听的就是你一个月赚多少钱",
+      "vi": "Điều tôi muốn nghe nhất là mỗi tháng bạn kiếm được bao nhiêu tiền",
+      "en": "The most I want to hear is how much you make a month.",
+      "pinyin": "wǒ zuì xiǎng tīng de jiù shì nǐ yí gè yuè zhuàn duō shǎo qián"
+    },
+    {
+      "start": 300.73,
+      "end": 301.3,
+      "zh": "哈哈",
+      "vi": "Ha ha",
+      "en": "Ha ha!",
+      "pinyin": "hā hā"
+    },
+    {
+      "start": 301.53,
+      "end": 304.6,
+      "zh": "你刚才说你一个月赚多少钱",
+      "vi": "Lúc nãy bạn nói mỗi tháng bạn kiếm được bao nhiêu tiền",
+      "en": "How much did you say you made a month?",
+      "pinyin": "nǐ gāng cái shuō nǐ yí gè yuè zhuàn duō shǎo qián"
+    },
+    {
+      "start": 304.6,
+      "end": 307.87,
+      "zh": "那你想知道我一个月赚多少吗",
+      "vi": "Vậy bạn có muốn biết mỗi tháng tôi kiếm được bao nhiêu không",
+      "en": "Do you want to know how much I earn a month?",
+      "pinyin": "nà nǐ xiǎng zhī dào wǒ yí gè yuè zhuàn duō shǎo ma"
+    },
+    {
+      "start": 307.87,
+      "end": 310.53,
+      "zh": "想啊我可以猜一下吗",
+      "vi": "Muốn chứ, tôi có thể đoán một chút không",
+      "en": "Yeah. Can I guess?",
+      "pinyin": "xiǎng a wǒ kě yǐ cāi yí xià ma"
+    },
+    {
+      "start": 310.53,
+      "end": 312.23,
+      "zh": "你猜嗯",
+      "vi": "Bạn đoán đi, ừm",
+      "en": "Guess what.",
+      "pinyin": "nǐ cāi ǹg"
+    },
+    {
+      "start": 312.3,
+      "end": 316.37,
+      "zh": "我觉得你一个月应该有8,000块",
+      "vi": "Tôi nghĩ mỗi tháng bạn nên có 8.000 tệ",
+      "en": "I think you should have $8,000 a month.",
+      "pinyin": "wǒ jué de nǐ yí gè yuè yīng gāi yǒu 8,000 kuài"
+    },
+    {
+      "start": 316.47,
+      "end": 318.67,
+      "zh": "哈哈哈差不多",
+      "vi": "Hahaha, gần đúng rồi",
+      "en": "Ha-ha-ha. Something like that.",
+      "pinyin": "hā hā hā chà bù duō"
+    },
+    {
+      "start": 318.7,
+      "end": 321.67,
+      "zh": "有时候多一点有时候少一点",
+      "vi": "Có lúc nhiều hơn một chút, có lúc ít hơn một chút",
+      "en": "Sometimes a little more, sometimes less.",
+      "pinyin": "yǒu shí hòu duō yì diǎn yǒu shí hòu shǎo yì diǎn"
+    },
+    {
+      "start": 321.7,
+      "end": 323.1,
+      "zh": "那还不错呀",
+      "vi": "Vậy cũng khá đấy chứ",
+      "en": "That's not bad.",
+      "pinyin": "nà hái bú cuò ya"
+    },
+    {
+      "start": 323.17,
+      "end": 325.04,
+      "zh": "你是做什么工作的",
+      "vi": "Bạn làm nghề gì",
+      "en": "What do you do for a living?",
+      "pinyin": "nǐ shì zuò shén me gōng zuò de"
+    },
+    {
+      "start": 325.33,
+      "end": 326.66,
+      "zh": "我是做设计的",
+      "vi": "Tôi làm thiết kế",
+      "en": "I'm a designer.",
+      "pinyin": "wǒ shì zuò shè jì de"
+    },
+    {
+      "start": 326.67,
+      "end": 328.4,
+      "zh": "在一家小公司上班",
+      "vi": "Làm ở một công ty nhỏ",
+      "en": "I work for a small company.",
+      "pinyin": "zài yì jiā xiǎo gōng sī shàng bān"
+    },
+    {
+      "start": 328.4,
+      "end": 331.97,
+      "zh": "你呢我现在是自由职业者",
+      "vi": "Còn bạn thì sao? Hiện giờ tôi là người làm nghề tự do",
+      "en": "What about you? I'm a freelancer now.",
+      "pinyin": "nǐ ne wǒ xiàn zài shì zì yóu zhí yè zhě"
+    },
+    {
+      "start": 331.97,
+      "end": 334.2,
+      "zh": "接一些翻译的工作",
+      "vi": "Nhận một số công việc dịch thuật",
+      "en": "Take some translation work.",
+      "pinyin": "jiē yì xiē fān yì de gōng zuò"
+    },
+    {
+      "start": 334.2,
+      "end": 337.3,
+      "zh": "啊自由职业听起来不错",
+      "vi": "À, nghề tự do nghe có vẻ không tệ",
+      "en": "Ah, freelance sounds good.",
+      "pinyin": "a zì yóu zhí yè tīng qǐ lái bú cuò"
+    },
+    {
+      "start": 337.5,
+      "end": 339.77,
+      "zh": "那你一个月的收入高吗",
+      "vi": "Vậy thu nhập một tháng của bạn có cao không",
+      "en": "Do you have a month's income?",
+      "pinyin": "nà nǐ yí gè yuè de shōu rù gāo ma"
+    },
+    {
+      "start": 339.9,
+      "end": 343.3,
+      "zh": "不一定有时候多有时候少",
+      "vi": "Không nhất định, có lúc nhiều có lúc ít",
+      "en": "It's not necessarily more or less.",
+      "pinyin": "bù yí dìng yǒu shí hòu duō yǒu shí hòu shǎo"
+    },
+    {
+      "start": 343.33,
+      "end": 345.46,
+      "zh": "要看客户多不多",
+      "vi": "Phải xem khách hàng nhiều hay ít",
+      "en": "Depends on the number of clients.",
+      "pinyin": "yào kàn kè hù duō bu duō"
+    },
+    {
+      "start": 345.53,
+      "end": 347.96,
+      "zh": "那你怎么说收入这个词",
+      "vi": "Vậy từ \"thu nhập\" bạn nói thế nào",
+      "en": "What do you call income?",
+      "pinyin": "nà nǐ zěn me shuō shōu rù zhè ge cí"
+    },
+    {
+      "start": 348.1,
+      "end": 350.93,
+      "zh": "很简单就是收入",
+      "vi": "Rất đơn giản, chính là \"thu nhập\"",
+      "en": "Simple is income.",
+      "pinyin": "hěn jiǎn dān jiù shì shōu rù"
+    },
+    {
+      "start": 350.93,
+      "end": 353.56,
+      "zh": "比如我的收入不稳定",
+      "vi": "Ví dụ, thu nhập của tôi không ổn định",
+      "en": "Like my income's unstable.",
+      "pinyin": "bǐ rú wǒ de shōu rù bù wěn dìng"
+    },
+    {
+      "start": 353.57,
+      "end": 358.67,
+      "zh": "明白了还有工资是月薪的意思吧",
+      "vi": "Hiểu rồi, còn \"tiền lương\" là ý lương tháng phải không",
+      "en": "You know what a monthly wage means?",
+      "pinyin": "míng bái le hái yǒu gōng zī shì yuè xīn de yì sī ba"
+    },
+    {
+      "start": 358.67,
+      "end": 359.37,
+      "zh": "对",
+      "vi": "Đúng",
+      "en": "Yeah.",
+      "pinyin": "duì"
+    },
+    {
+      "start": 359.37,
+      "end": 363.7,
+      "zh": "工资就是公司每个月发给你的钱",
+      "vi": "Tiền lương chính là số tiền mà công ty phát cho bạn mỗi tháng",
+      "en": "The paycheck is the money you get every month.",
+      "pinyin": "gōng zī jiù shì gōng sī měi gè yuè fā gěi nǐ de qián"
+    },
+    {
+      "start": 363.73,
+      "end": 365.5,
+      "zh": "那奖金呢",
+      "vi": "Vậy còn tiền thưởng thì sao",
+      "en": "What about the bonus?",
+      "pinyin": "nà jiǎng jīn ne"
+    },
+    {
+      "start": 365.7,
+      "end": 368.1,
+      "zh": "奖金是做得好",
+      "vi": "Tiền thưởng là khi làm tốt",
+      "en": "The bonus is good.",
+      "pinyin": "jiǎng jīn shì zuò dé hǎo"
+    },
+    {
+      "start": 368.13,
+      "end": 371.06,
+      "zh": "公司另外给的奖励的钱",
+      "vi": "số tiền thưởng mà công ty đưa thêm",
+      "en": "The company's other reward money.",
+      "pinyin": "gōng sī lìng wài gěi de jiǎng lì de qián"
+    },
+    {
+      "start": 371.07,
+      "end": 374.53,
+      "zh": "比如年底有年终奖金",
+      "vi": "Ví dụ, cuối năm có tiền thưởng cuối năm",
+      "en": "Like a year-end bonus at the end of the year.",
+      "pinyin": "bǐ rú nián dǐ yǒu nián zhōng jiǎng jīn"
+    },
+    {
+      "start": 374.53,
+      "end": 376.76,
+      "zh": "哇那听起来很棒",
+      "vi": "Wow, nghe tuyệt thật",
+      "en": "Wow, that sounds great.",
+      "pinyin": "wā nà tīng qǐ lái hěn bàng"
+    },
+    {
+      "start": 376.9,
+      "end": 379.67,
+      "zh": "那你每个月大概赚多少钱",
+      "vi": "Vậy mỗi tháng bạn kiếm được khoảng bao nhiêu tiền",
+      "en": "How much do you make every month?",
+      "pinyin": "nà nǐ měi gè yuè dà gài zhuàn duō shǎo qián"
+    },
+    {
+      "start": 379.67,
+      "end": 383.84,
+      "zh": "平均下来大概7,000-9,000吧",
+      "vi": "Tính trung bình thì khoảng 7.000 đến 9.000",
+      "en": "It's an average of 7,000-9,000.",
+      "pinyin": "píng jūn xià lái dà gài 7,000-9,000 ba"
+    },
+    {
+      "start": 384.07,
+      "end": 387.27,
+      "zh": "有时候做的多也可以到1万",
+      "vi": "Có lúc làm nhiều cũng có thể lên tới 1 vạn",
+      "en": "Sometimes you can do as much as 10,000.",
+      "pinyin": "yǒu shí hòu zuò de duō yě kě yǐ dào 1 wàn"
+    },
+    {
+      "start": 387.33,
+      "end": 388.46,
+      "zh": "很厉害",
+      "vi": "Rất giỏi",
+      "en": "It's amazing.",
+      "pinyin": "hěn lì hài"
+    },
+    {
+      "start": 388.7,
+      "end": 391.4,
+      "zh": "那你会把这些钱都存起来吗",
+      "vi": "Vậy bạn có tiết kiệm hết số tiền này không",
+      "en": "So you're gonna save all this money?",
+      "pinyin": "nà nǐ huì bǎ zhè xiē qián dōu cún qǐ lái ma"
+    },
+    {
+      "start": 391.4,
+      "end": 394,
+      "zh": "不会我要交房租",
+      "vi": "Không, tôi phải trả tiền thuê nhà",
+      "en": "No, I have to pay the rent.",
+      "pinyin": "bú huì wǒ yào jiāo fáng zū"
+    },
+    {
+      "start": 394.07,
+      "end": 396.4,
+      "zh": "买东西还要吃饭",
+      "vi": "Mua đồ còn phải ăn cơm nữa",
+      "en": "I have to buy something to eat.",
+      "pinyin": "mǎi dōng xī hái yào chī fàn"
+    },
+    {
+      "start": 396.4,
+      "end": 398.1,
+      "zh": "花的挺快的",
+      "vi": "Tiêu khá nhanh",
+      "en": "The flowers are fast.",
+      "pinyin": "huā de tǐng kuài de"
+    },
+    {
+      "start": 398.13,
+      "end": 399.9,
+      "zh": "哈哈我也是",
+      "vi": "Ha ha, tôi cũng vậy",
+      "en": "Me too.",
+      "pinyin": "hā hā wǒ yě shì"
+    },
+    {
+      "start": 399.93,
+      "end": 403.76,
+      "zh": "有时候觉得钱来的快花的更快",
+      "vi": "Đôi khi cảm thấy tiền kiếm được nhanh mà tiêu còn nhanh hơn",
+      "en": "Sometimes I think money comes and spends it faster.",
+      "pinyin": "yǒu shí hòu jué de qián lái de kuài huā de gèng kuài"
+    },
+    {
+      "start": 403.97,
+      "end": 407.5,
+      "zh": "所以要学会管理好自己的钱",
+      "vi": "Vì vậy phải học cách quản lý tiền của mình cho tốt",
+      "en": "So learn to manage your own money.",
+      "pinyin": "suǒ yǐ yào xué huì guǎn lǐ hǎo zì jǐ de qián"
+    },
+    {
+      "start": 407.6,
+      "end": 410.3,
+      "zh": "不能看到什么都买对",
+      "vi": "Không thể thấy gì cũng mua.",
+      "en": "You can't see anything.",
+      "pinyin": "bù néng kàn dào shén me dōu mǎi duì"
+    },
+    {
+      "start": 410.3,
+      "end": 411.57,
+      "zh": "要有计划",
+      "vi": "Phải có kế hoạch",
+      "en": "There's a plan.",
+      "pinyin": "yào yǒu jì huà"
+    },
+    {
+      "start": 411.9,
+      "end": 414.8,
+      "zh": "我现在每个月都会写一个预算表",
+      "vi": "Hiện tại tháng nào tôi cũng viết một bảng ngân sách",
+      "en": "I write a budget sheet every month.",
+      "pinyin": "wǒ xiàn zài měi gè yuè dōu huì xiě yí gè yù suàn biǎo"
+    },
+    {
+      "start": 414.9,
+      "end": 417.3,
+      "zh": "真的吗你怎么写",
+      "vi": "Thật à? Bạn viết thế nào?",
+      "en": "Really? How do you write it?",
+      "pinyin": "zhēn de ma nǐ zěn me xiě"
+    },
+    {
+      "start": 417.4,
+      "end": 419.67,
+      "zh": "就是写下房租多少",
+      "vi": "Là ghi ra tiền nhà bao nhiêu",
+      "en": "That's how much the rent is.",
+      "pinyin": "jiù shì xiě xià fáng zū duō shǎo"
+    },
+    {
+      "start": 419.67,
+      "end": 421.97,
+      "zh": "吃饭多少交通费多少",
+      "vi": "tiền ăn bao nhiêu, tiền đi lại bao nhiêu",
+      "en": "We'll have to eat as much as we need.",
+      "pinyin": "chī fàn duō shǎo jiāo tōng fèi duō shǎo"
+    },
+    {
+      "start": 421.97,
+      "end": 424.84,
+      "zh": "然后看看还剩多少可以存",
+      "vi": "rồi xem còn lại bao nhiêu để có thể tiết kiệm",
+      "en": "Let's see how much we have left.",
+      "pinyin": "rán hòu kàn kàn hái shèng duō shǎo kě yǐ cún"
+    },
+    {
+      "start": 425,
+      "end": 426.5,
+      "zh": "这个方法不错",
+      "vi": "Cách này hay đấy",
+      "en": "That's a good idea.",
+      "pinyin": "zhè ge fāng fǎ bú cuò"
+    },
+    {
+      "start": 426.53,
+      "end": 428,
+      "zh": "我也想试试",
+      "vi": "Tôi cũng muốn thử",
+      "en": "I'd like to try.",
+      "pinyin": "wǒ yě xiǎng shì shì"
+    },
+    {
+      "start": 428.07,
+      "end": 430.6,
+      "zh": "管好自己的收入和支出",
+      "vi": "Quản lý tốt thu nhập và chi tiêu của mình",
+      "en": "Take care of your own income and expenditure.",
+      "pinyin": "guǎn hǎo zì jǐ de shōu rù hé zhī chū"
+    },
+    {
+      "start": 430.6,
+      "end": 433.23,
+      "zh": "我们才能慢慢存到更多的钱",
+      "vi": "Thì chúng ta mới dần dần tiết kiệm được nhiều tiền hơn",
+      "en": "We'll be able to save more money slowly.",
+      "pinyin": "wǒ men cái néng màn màn cún dào gèng duō de qián"
+    },
+    {
+      "start": 433.27,
+      "end": 436.9,
+      "zh": "对以前我总是花光工资",
+      "vi": "Đúng vậy, trước đây tôi luôn tiêu hết lương",
+      "en": "I've always spent all my money on old times.",
+      "pinyin": "duì yǐ qián wǒ zǒng shì huā guāng gōng zī"
+    },
+    {
+      "start": 437,
+      "end": 440.63,
+      "zh": "现在开始慢慢学会怎么用钱了",
+      "vi": "Bây giờ bắt đầu dần học được cách dùng tiền rồi",
+      "en": "Now we're learning how to use the money.",
+      "pinyin": "xiàn zài kāi shǐ màn màn xué huì zěn me yòng qián le"
+    },
+    {
+      "start": 441,
+      "end": 443.07,
+      "zh": "其实赚钱很重要",
+      "vi": "Thật ra kiếm tiền rất quan trọng",
+      "en": "It's really important to make money.",
+      "pinyin": "qí shí zhuàn qián hěn zhòng yào"
+    },
+    {
+      "start": 443.1,
+      "end": 445.3,
+      "zh": "会花钱更重要",
+      "vi": "Biết tiêu tiền còn quan trọng hơn",
+      "en": "It's more important to spend money.",
+      "pinyin": "huì huā qián gèng zhòng yào"
+    },
+    {
+      "start": 445.33,
+      "end": 447.36,
+      "zh": "哈哈你说的对",
+      "vi": "Haha bạn nói đúng",
+      "en": "You're right.",
+      "pinyin": "hā hā nǐ shuō de duì"
+    },
+    {
+      "start": 447.4,
+      "end": 450.87,
+      "zh": "那你一个月大概能存多少钱",
+      "vi": "Vậy mỗi tháng bạn tiết kiệm được khoảng bao nhiêu tiền?",
+      "en": "How much do you think you can save in a month?",
+      "pinyin": "nà nǐ yí gè yuè dà gài néng cún duō shǎo qián"
+    },
+    {
+      "start": 451.13,
+      "end": 452.96,
+      "zh": "大概1,000多块吧",
+      "vi": "Khoảng hơn 1.000 tệ",
+      "en": "About a thousand bucks.",
+      "pinyin": "dà gài 1,000 duō kuài ba"
+    },
+    {
+      "start": 452.97,
+      "end": 455.87,
+      "zh": "你呢如果我不乱买东西",
+      "vi": "Còn bạn thì sao? Nếu tôi không mua đồ linh tinh...",
+      "en": "What about you?",
+      "pinyin": "nǐ ne rú guǒ wǒ bú luàn mǎi dōng xī"
+    },
+    {
+      "start": 455.87,
+      "end": 458.3,
+      "zh": "差不多也可以存1,000",
+      "vi": "Thì chắc cũng tiết kiệm được khoảng 1.000",
+      "en": "It's almost 1,000.",
+      "pinyin": "chà bù duō yě kě yǐ cún 1,000"
+    },
+    {
+      "start": 458.33,
+      "end": 459.56,
+      "zh": "那很好啊",
+      "vi": "Vậy thì tốt quá",
+      "en": "That's good.",
+      "pinyin": "nà hěn hǎo a"
+    },
+    {
+      "start": 459.57,
+      "end": 461.04,
+      "zh": "我们继续加油",
+      "vi": "Chúng ta tiếp tục cố gắng nhé",
+      "en": "Let's keep it up.",
+      "pinyin": "wǒ men jì xù jiā yóu"
+    },
+    {
+      "start": 461.47,
+      "end": 462.5,
+      "zh": "努力工作",
+      "vi": "Làm việc chăm chỉ",
+      "en": "Work hard.",
+      "pinyin": "nǔ lì gōng zuò"
+    },
+    {
+      "start": 462.5,
+      "end": 464.07,
+      "zh": "也要努力学中文",
+      "vi": "Cũng phải cố gắng học tiếng Trung",
+      "en": "You have to learn Chinese.",
+      "pinyin": "yě yào nǔ lì xué zhōng wén"
+    },
+    {
+      "start": 464.1,
+      "end": 467.07,
+      "zh": "嗯嗯说到工作和赚钱",
+      "vi": "Ừm, nhắc đến công việc và kiếm tiền...",
+      "en": "Uh-huh. Work and money.",
+      "pinyin": "ǹg ǹg shuō dào gōng zuò hé zhuàn qián"
+    },
+    {
+      "start": 467.07,
+      "end": 469.94,
+      "zh": "我们可以接着聊聊怎么花钱",
+      "vi": "Chúng ta có thể tiếp tục nói về cách tiêu tiền",
+      "en": "We can go on and talk about how to spend money.",
+      "pinyin": "wǒ men kě yǐ jiē zhe liáo liáo zěn me huā qián"
+    },
+    {
+      "start": 469.97,
+      "end": 472.77,
+      "zh": "对了你平时花钱多吗",
+      "vi": "À đúng rồi, bình thường bạn có tiêu nhiều tiền không?",
+      "en": "By the way, do you usually spend more money?",
+      "pinyin": "duì le nǐ píng shí huā qián duō ma"
+    },
+    {
+      "start": 472.77,
+      "end": 475.5,
+      "zh": "嗯我觉得我花的不多",
+      "vi": "Ừ, tôi nghĩ mình tiêu không nhiều",
+      "en": "Well, I don't think I spend much.",
+      "pinyin": "ǹg wǒ jué de wǒ huā de bù duō"
+    },
+    {
+      "start": 475.5,
+      "end": 477.87,
+      "zh": "但有时候控制不住看到",
+      "vi": "Nhưng đôi khi tôi không kiềm chế được, thấy...",
+      "en": "But sometimes I can't help it.",
+      "pinyin": "dàn yǒu shí hòu kòng zhì bú zhù kàn dào"
+    },
+    {
+      "start": 477.87,
+      "end": 479.37,
+      "zh": "喜欢的就想买",
+      "vi": "cái mình thích là muốn mua",
+      "en": "If you like, you want to buy it.",
+      "pinyin": "xǐ huan de jiù xiǎng mǎi"
+    },
+    {
+      "start": 479.37,
+      "end": 480.8,
+      "zh": "哈哈我懂",
+      "vi": "Haha tôi hiểu mà",
+      "en": "Ha-ha. I get it.",
+      "pinyin": "hā hā wǒ dǒng"
+    },
+    {
+      "start": 480.87,
+      "end": 482.44,
+      "zh": "有时候我也是",
+      "vi": "Đôi khi tôi cũng vậy",
+      "en": "Sometimes so do I.",
+      "pinyin": "yǒu shí hòu wǒ yě shì"
+    },
+    {
+      "start": 482.47,
+      "end": 484.7,
+      "zh": "尤其是看到打折的东西",
+      "vi": "Nhất là khi thấy đồ giảm giá",
+      "en": "Especially when you see a discount.",
+      "pinyin": "yóu qí shì kàn dào dǎ zhé de dōng xī"
+    },
+    {
+      "start": 484.7,
+      "end": 487,
+      "zh": "对啊什么买一送一",
+      "vi": "Đúng rồi, nào là mua một tặng một",
+      "en": "Yeah, what do you want to buy for one?",
+      "pinyin": "duì a shén me mǎi yí sòng yī"
+    },
+    {
+      "start": 487,
+      "end": 490.13,
+      "zh": "5折听起来太有诱惑力了",
+      "vi": "Giảm 50% nghe hấp dẫn quá",
+      "en": "A 50% discount sounds too tempting.",
+      "pinyin": "5 zhé tīng qǐ lái tài yǒu yòu huò lì le"
+    },
+    {
+      "start": 490.13,
+      "end": 494.2,
+      "zh": "所以你每个月花最多的钱是在哪里",
+      "vi": "Vậy mỗi tháng bạn tiêu nhiều tiền nhất vào đâu?",
+      "en": "So where do you spend the most money a month?",
+      "pinyin": "suǒ yǐ nǐ měi gè yuè huā zuì duō de qián shì zài nǎ lǐ"
+    },
+    {
+      "start": 494.4,
+      "end": 496.7,
+      "zh": "房租和吃饭最多",
+      "vi": "Tiền nhà và tiền ăn là nhiều nhất",
+      "en": "The rent and dinner are the most.",
+      "pinyin": "fáng zū hé chī fàn zuì duō"
+    },
+    {
+      "start": 496.7,
+      "end": 500.43,
+      "zh": "特别是外卖真的很花钱我也是",
+      "vi": "Nhất là đồ ăn giao tận nơi, thật sự rất tốn tiền, tôi cũng vậy",
+      "en": "Especially when the takeout is really expensive, so am I.",
+      "pinyin": "tè bié shì wài mài zhēn de hěn huā qián wǒ yě shì"
+    },
+    {
+      "start": 500.57,
+      "end": 502.07,
+      "zh": "外卖虽然方便",
+      "vi": "Đồ ăn giao tận nơi tuy tiện",
+      "en": "It's easy to take delivery.",
+      "pinyin": "wài mài suī rán fāng biàn"
+    },
+    {
+      "start": 502.07,
+      "end": 504.67,
+      "zh": "但一个月加起来真的不少",
+      "vi": "Nhưng cộng lại một tháng thì thật sự không ít",
+      "en": "But it's a lot to add up in one month.",
+      "pinyin": "dàn yí gè yuè jiā qǐ lái zhēn de bù shǎo"
+    },
+    {
+      "start": 504.67,
+      "end": 507.07,
+      "zh": "我以前每天点外卖",
+      "vi": "Trước đây ngày nào tôi cũng gọi đồ ăn giao tận nơi",
+      "en": "I used to order every day.",
+      "pinyin": "wǒ yǐ qián měi tiān diǎn wài mài"
+    },
+    {
+      "start": 507.07,
+      "end": 509.27,
+      "zh": "现在开始学着自己做饭了",
+      "vi": "Bây giờ tôi bắt đầu học tự nấu ăn",
+      "en": "Now you're learning to cook your own food.",
+      "pinyin": "xiàn zài kāi shǐ xué zhe zì jǐ zuò fàn le"
+    },
+    {
+      "start": 509.27,
+      "end": 511.87,
+      "zh": "很好耶这样可以省不少钱",
+      "vi": "Hay quá, làm vậy có thể tiết kiệm được khá nhiều tiền",
+      "en": "That's good. It saves a lot of money.",
+      "pinyin": "hěn hǎo yē zhè yàng kě yǐ shěng bù shǎo qián"
+    },
+    {
+      "start": 512.07,
+      "end": 514.77,
+      "zh": "你呢你花钱会不会记账",
+      "vi": "Còn bạn thì sao? Bạn có ghi chép chi tiêu không?",
+      "en": "What about you? Do you pay for it?",
+      "pinyin": "nǐ ne nǐ huā qián huì bu huì jì zhàng"
+    },
+    {
+      "start": 514.77,
+      "end": 518,
+      "zh": "会呀我用一个APP记账",
+      "vi": "Có chứ, tôi dùng một app để ghi chép chi tiêu",
+      "en": "Yeah, I'll keep an APP.",
+      "pinyin": "huì ya wǒ yòng yí gè APP jì zhàng"
+    },
+    {
+      "start": 518.07,
+      "end": 519.97,
+      "zh": "每天花了多少钱",
+      "vi": "Mỗi ngày tiêu bao nhiêu tiền...",
+      "en": "How much does it cost every day?",
+      "pinyin": "měi tiān huā le duō shǎo qián"
+    },
+    {
+      "start": 519.97,
+      "end": 522.4,
+      "zh": "花在什么地方都会写下来",
+      "vi": "Tiêu ở đâu tôi cũng sẽ ghi lại.",
+      "en": "The flowers are written down everywhere.",
+      "pinyin": "huā zài shén me dì fāng dōu huì xiě xià lái"
+    },
+    {
+      "start": 522.4,
+      "end": 524.83,
+      "zh": "哇听起来很专业",
+      "vi": "Wow, nghe chuyên nghiệp thật đấy",
+      "en": "Wow, that sounds professional.",
+      "pinyin": "wā tīng qǐ lái hěn zhuān yè"
+    },
+    {
+      "start": 525.17,
+      "end": 527.33,
+      "zh": "那你觉得这样有用吗",
+      "vi": "Vậy bạn thấy cách này có ích không",
+      "en": "Do you think that's gonna work?",
+      "pinyin": "nà nǐ jué de zhè yàng yǒu yòng ma"
+    },
+    {
+      "start": 527.33,
+      "end": 531,
+      "zh": "有用我以前一个月总是乱花钱",
+      "vi": "Có ích. Trước đây tôi cứ tiêu tiền bừa suốt cả tháng.",
+      "en": "I used to spend money a month ago.",
+      "pinyin": "yǒu yòng wǒ yǐ qián yí gè yuè zǒng shì luàn huā qián"
+    },
+    {
+      "start": 531,
+      "end": 533.4,
+      "zh": "现在至少知道钱都去哪了",
+      "vi": "Giờ ít nhất cũng biết tiền đã đi đâu",
+      "en": "At least now we know where the money is.",
+      "pinyin": "xiàn zài zhì shǎo zhī dào qián dōu qù nǎ le"
+    },
+    {
+      "start": 533.4,
+      "end": 536.27,
+      "zh": "那你觉得存钱难不难",
+      "vi": "Vậy bạn thấy tiết kiệm tiền có khó không",
+      "en": "You think it's hard to save money?",
+      "pinyin": "nà nǐ jué de cún qián nán bu nán"
+    },
+    {
+      "start": 536.37,
+      "end": 538.27,
+      "zh": "一开始很难",
+      "vi": "Lúc đầu thì khó",
+      "en": "It was hard at first.",
+      "pinyin": "yì kāi shǐ hěn nán"
+    },
+    {
+      "start": 538.27,
+      "end": 539.9,
+      "zh": "总是想买东西",
+      "vi": "Lúc nào cũng muốn mua đồ",
+      "en": "Always trying to buy something.",
+      "pinyin": "zǒng shì xiǎng mǎi dōng xī"
+    },
+    {
+      "start": 539.9,
+      "end": 542.87,
+      "zh": "但慢慢习惯之后会有成就感",
+      "vi": "Nhưng khi dần quen rồi sẽ thấy có cảm giác thành tựu",
+      "en": "But you'll get used to it.",
+      "pinyin": "dàn màn màn xí guàn zhī hòu huì yǒu chéng jiù gǎn"
+    },
+    {
+      "start": 542.87,
+      "end": 544.3,
+      "zh": "嗯我也是",
+      "vi": "Ừ, tôi cũng vậy",
+      "en": "Yeah, me too.",
+      "pinyin": "ǹg wǒ yě shì"
+    },
+    {
+      "start": 544.5,
+      "end": 547.4,
+      "zh": "现在看到银行账户的钱越来越多",
+      "vi": "Giờ thấy tiền trong tài khoản ngân hàng ngày càng nhiều",
+      "en": "And now I see more and more money in the bank account.",
+      "pinyin": "xiàn zài kàn dào yín háng zhàng hù de qián yuè lái yuè duō"
+    },
+    {
+      "start": 547.4,
+      "end": 548.87,
+      "zh": "就会觉得很安心",
+      "vi": "là thấy rất yên tâm",
+      "en": "I'll feel relieved.",
+      "pinyin": "jiù huì jué de hěn ān xīn"
+    },
+    {
+      "start": 548.87,
+      "end": 551.4,
+      "zh": "对我现在有一个小目标",
+      "vi": "Đúng, giờ tôi có một mục tiêu nhỏ",
+      "en": "I've got a little goal for me right now.",
+      "pinyin": "duì wǒ xiàn zài yǒu yí gè xiǎo mù biāo"
+    },
+    {
+      "start": 551.4,
+      "end": 553.8,
+      "zh": "希望一年能存1万块",
+      "vi": "Hy vọng một năm tiết kiệm được một vạn tệ",
+      "en": "Hope to save $10,000 a year.",
+      "pinyin": "xī wàng yì nián néng cún 1 wàn kuài"
+    },
+    {
+      "start": 553.8,
+      "end": 556.1,
+      "zh": "好目标我也来设一个",
+      "vi": "Mục tiêu hay đấy, tôi cũng đặt một cái",
+      "en": "I'll set up a good target.",
+      "pinyin": "hǎo mù biāo wǒ yě lái shè yí gè"
+    },
+    {
+      "start": 556.1,
+      "end": 557.9,
+      "zh": "那我们互相监督吧",
+      "vi": "Vậy chúng ta giám sát nhau nhé",
+      "en": "Let's keep an eye on each other.",
+      "pinyin": "nà wǒ men hù xiāng jiān dū ba"
+    },
+    {
+      "start": 558,
+      "end": 561.1,
+      "zh": "不乱花钱不冲动买不借钱",
+      "vi": "Không tiêu bừa, không mua bốc đồng, không vay tiền",
+      "en": "You can't buy or borrow without spending money.",
+      "pinyin": "bú luàn huā qián bù chōng dòng mǎi bú jiè qián"
+    },
+    {
+      "start": 561.1,
+      "end": 562.73,
+      "zh": "哈哈说得好",
+      "vi": "Haha, nói hay lắm",
+      "en": "That's a good one.",
+      "pinyin": "hā hā shuō dé hǎo"
+    },
+    {
+      "start": 562.73,
+      "end": 564.5,
+      "zh": "不借钱很重要",
+      "vi": "Không vay tiền là rất quan trọng",
+      "en": "It's important not to borrow money.",
+      "pinyin": "bú jiè qián hěn zhòng yào"
+    },
+    {
+      "start": 564.5,
+      "end": 567.6,
+      "zh": "以前我有个朋友经常问我借钱",
+      "vi": "Trước đây tôi có một người bạn hay hỏi vay tiền tôi",
+      "en": "I had a friend who used to ask me for money.",
+      "pinyin": "yǐ qián wǒ yǒu gè péng yǒu jīng cháng wèn wǒ jiè qián"
+    },
+    {
+      "start": 567.6,
+      "end": 569.43,
+      "zh": "借了还还吗",
+      "vi": "Vay rồi có trả không",
+      "en": "Do you want me to pay it back?",
+      "pinyin": "jiè le hái hái ma"
+    },
+    {
+      "start": 569.47,
+      "end": 571.7,
+      "zh": "还是还了不过很慢",
+      "vi": "Có trả, nhưng rất chậm",
+      "en": "Still, it's slow.",
+      "pinyin": "hái shì hái le bú guò hěn màn"
+    },
+    {
+      "start": 571.7,
+      "end": 573.57,
+      "zh": "后来我学会了拒绝",
+      "vi": "Sau đó tôi học được cách từ chối",
+      "en": "Then I learned to refuse.",
+      "pinyin": "hòu lái wǒ xué huì le jù jué"
+    },
+    {
+      "start": 573.8,
+      "end": 576.4,
+      "zh": "是的朋友之间可以帮忙",
+      "vi": "Đúng, bạn bè thì có thể giúp nhau",
+      "en": "Yes, a friend can help.",
+      "pinyin": "shì de péng yǒu zhī jiān kě yǐ bāng máng"
+    },
+    {
+      "start": 576.4,
+      "end": 577.73,
+      "zh": "但也要有底线",
+      "vi": "Nhưng cũng phải có giới hạn",
+      "en": "But there must also be a bottom line.",
+      "pinyin": "dàn yě yào yǒu dǐ xiàn"
+    },
+    {
+      "start": 577.73,
+      "end": 580.43,
+      "zh": "对所以我们要学会理财",
+      "vi": "Đúng, nên chúng ta phải học cách quản lý tài chính",
+      "en": "Yeah, that's why we have to learn how to manage money.",
+      "pinyin": "duì suǒ yǐ wǒ men yào xué huì lǐ cái"
+    },
+    {
+      "start": 580.53,
+      "end": 582.16,
+      "zh": "不是有一句话吗",
+      "vi": "Chẳng phải có một câu nói thế này sao",
+      "en": "Isn't there a word?",
+      "pinyin": "bú shì yǒu yí jù huà ma"
+    },
+    {
+      "start": 582.17,
+      "end": 584.33,
+      "zh": "你不理财财不理你",
+      "vi": "Bạn không quản lý tài chính thì tài chính không quản lý bạn",
+      "en": "You don't care about your money.",
+      "pinyin": "nǐ bù lǐ cái cái bù lǐ nǐ"
+    },
+    {
+      "start": 584.33,
+      "end": 586.8,
+      "zh": "哈哈说的太对了",
+      "vi": "Haha, nói quá đúng",
+      "en": "Ha-ha-ha. That's right.",
+      "pinyin": "hā hā shuō de tài duì le"
+    },
+    {
+      "start": 586.97,
+      "end": 589.7,
+      "zh": "我们学中文也要学理财",
+      "vi": "Học tiếng Trung cũng phải học quản lý tài chính",
+      "en": "We also need to learn Chinese.",
+      "pinyin": "wǒ men xué zhōng wén yě yào xué lǐ cái"
+    },
+    {
+      "start": 589.7,
+      "end": 591,
+      "zh": "一起加油吧",
+      "vi": "Cùng cố gắng nhé",
+      "en": "Let's do it together.",
+      "pinyin": "yì qǐ jiā yóu ba"
+    },
+    {
+      "start": 591,
+      "end": 592.9,
+      "zh": "下次我想听听",
+      "vi": "Lần sau tôi muốn nghe",
+      "en": "Next time, I want to hear it.",
+      "pinyin": "xià cì wǒ xiǎng tīng tīng"
+    },
+    {
+      "start": 592.9,
+      "end": 595.2,
+      "zh": "你怎么规划每个月的支出",
+      "vi": "bạn quy hoạch chi tiêu mỗi tháng thế nào",
+      "en": "How do you plan to spend every month?",
+      "pinyin": "nǐ zěn me guī huà měi gè yuè de zhī chū"
+    },
+    {
+      "start": 595.2,
+      "end": 598.3,
+      "zh": "没问题下次我来分享我的预算表",
+      "vi": "Không vấn đề gì, lần sau tôi sẽ chia sẻ bảng ngân sách của mình",
+      "en": "No problem. I'll share my budget next time.",
+      "pinyin": "méi wèn tí xià cì wǒ lái fēn xiǎng wǒ de yù suàn biǎo"
+    },
+    {
+      "start": 598.53,
+      "end": 599.73,
+      "zh": "你也要准备哦",
+      "vi": "Bạn cũng phải chuẩn bị đấy",
+      "en": "You have to get ready too.",
+      "pinyin": "nǐ yě yào zhǔn bèi ò"
+    },
+    {
+      "start": 599.73,
+      "end": 600.66,
+      "zh": "好的好的",
+      "vi": "Được được",
+      "en": "Okay, okay.",
+      "pinyin": "hǎo de hǎo de"
+    },
+    {
+      "start": 600.67,
+      "end": 602.57,
+      "zh": "我们下次见，钱再聊。",
+      "vi": "Hẹn gặp lại, lần sau mình nói tiếp chuyện tiền bạc nhé.",
+      "en": "See you next time. We’ll talk more about money then.",
+      "pinyin": "wǒ men xià cì jiàn ， qián zài liáo 。"
+    },
+    {
+      "start": 602.73,
+      "end": 603.76,
+      "zh": "我发现啊",
+      "vi": "Tôi phát hiện ra này",
+      "en": "I found it.",
+      "pinyin": "wǒ fā xiàn a"
+    },
+    {
+      "start": 603.77,
+      "end": 606.73,
+      "zh": "有时候想存钱真的很难",
+      "vi": "Đôi khi muốn tiết kiệm tiền thật sự rất khó",
+      "en": "Sometimes it's hard to save money.",
+      "pinyin": "yǒu shí hòu xiǎng cún qián zhēn de hěn nán"
+    },
+    {
+      "start": 606.73,
+      "end": 609.46,
+      "zh": "是啊特别是看到新衣服",
+      "vi": "Đúng vậy, nhất là khi thấy quần áo mới",
+      "en": "Yeah, especially seeing new clothes.",
+      "pinyin": "shì a tè bié shì kàn dào xīn yī fu"
+    },
+    {
+      "start": 609.47,
+      "end": 611.27,
+      "zh": "新手机就想买",
+      "vi": "Điện thoại mới là muốn mua",
+      "en": "I want to buy a new phone.",
+      "pinyin": "xīn shǒu jī jiù xiǎng mǎi"
+    },
+    {
+      "start": 611.37,
+      "end": 614.97,
+      "zh": "我以前也是一拿到工资就开始花",
+      "vi": "Trước đây tôi cũng vậy, vừa nhận lương là bắt đầu tiêu",
+      "en": "I used to spend it once I got paid.",
+      "pinyin": "wǒ yǐ qián yě shì yì ná dào gōng zī jiù kāi shǐ huā"
+    },
+    {
+      "start": 614.97,
+      "end": 617.47,
+      "zh": "结果月底什么都没剩",
+      "vi": "Kết quả cuối tháng chẳng còn gì",
+      "en": "And there's nothing left at the end of the month.",
+      "pinyin": "jié guǒ yuè dǐ shén me dōu méi shèng"
+    },
+    {
+      "start": 617.47,
+      "end": 619.9,
+      "zh": "哈哈我懂那种感觉",
+      "vi": "Haha, tôi hiểu cảm giác đó",
+      "en": "Ha-ha, I know how that feels.",
+      "pinyin": "hā hā wǒ dǒng nà zhǒng gǎn jué"
+    },
+    {
+      "start": 619.9,
+      "end": 622.13,
+      "zh": "钱好像一下子就没了",
+      "vi": "Tiền như thể biến mất ngay lập tức",
+      "en": "It's like the money's gone.",
+      "pinyin": "qián hǎo xiàng yí xià zǐ jiù méi le"
+    },
+    {
+      "start": 622.13,
+      "end": 625.16,
+      "zh": "所以后来我给自己定了个规矩",
+      "vi": "Nên sau đó tôi đặt ra một quy tắc cho mình",
+      "en": "So I made a rule for myself.",
+      "pinyin": "suǒ yǐ hòu lái wǒ gěi zì jǐ dìng le gè guī jǔ"
+    },
+    {
+      "start": 625.47,
+      "end": 628.97,
+      "zh": "每个月一发工资就先存一部分",
+      "vi": "Mỗi tháng vừa nhận lương là gửi tiết kiệm một phần trước",
+      "en": "I'll keep a portion of my monthly salary.",
+      "pinyin": "měi gè yuè yī fā gōng zī jiù xiān cún yí bù fen"
+    },
+    {
+      "start": 628.97,
+      "end": 630.6,
+      "zh": "哦你怎么存",
+      "vi": "Ồ, bạn tiết kiệm thế nào",
+      "en": "Oh, how do you save it?",
+      "pinyin": "ò nǐ zěn me cún"
+    },
+    {
+      "start": 630.6,
+      "end": 631.8,
+      "zh": "用银行吗",
+      "vi": "Dùng ngân hàng à?",
+      "en": "In the bank?",
+      "pinyin": "yòng yín háng ma"
+    },
+    {
+      "start": 631.8,
+      "end": 634.6,
+      "zh": "对我设了一个自动转账",
+      "vi": "Ừ, mình đặt chuyển khoản tự động.",
+      "en": "I set up an automatic transfer.",
+      "pinyin": "duì wǒ shè le yí gè zì dòng zhuǎn zhàng"
+    },
+    {
+      "start": 634.6,
+      "end": 635.9,
+      "zh": "每个月一到",
+      "vi": "Mỗi tháng, vừa đến ngày phát lương...",
+      "en": "First of every month.",
+      "pinyin": "měi gè yuè yī dào"
+    },
+    {
+      "start": 635.9,
+      "end": 639.2,
+      "zh": "就把2,000块转进另一个存款账户",
+      "vi": "...là chuyển 2.000 tệ vào một tài khoản tiết kiệm khác.",
+      "en": "I'm going to transfer $2,000 into another deposit account.",
+      "pinyin": "jiù bǎ 2,000 kuài zhuǎn jìn lìng yí gè cún kuǎn zhàng hù"
+    },
+    {
+      "start": 639.2,
+      "end": 641.57,
+      "zh": "哇这样很好耶",
+      "vi": "Oa, vậy hay quá nhỉ.",
+      "en": "Wow, that's good.",
+      "pinyin": "wā zhè yàng hěn hǎo yē"
+    },
+    {
+      "start": 641.73,
+      "end": 644.46,
+      "zh": "自动存钱不用想也不会乱花",
+      "vi": "Tự động để dành tiền, không cần nghĩ cũng không tiêu bừa.",
+      "en": "You can save your money without thinking about it.",
+      "pinyin": "zì dòng cún qián bú yòng xiǎng yě bú huì luàn huā"
+    },
+    {
+      "start": 644.57,
+      "end": 647.57,
+      "zh": "对而且那个账户我不碰",
+      "vi": "Ừ, với lại mình không đụng đến tài khoản đó.",
+      "en": "Yeah, and I don't touch that account.",
+      "pinyin": "duì ér qiě nà ge zhàng hù wǒ bú pèng"
+    },
+    {
+      "start": 647.57,
+      "end": 650.5,
+      "zh": "就当看不到它。——我应该也试试看。",
+      "vi": "Cứ coi như không thấy tài khoản đó. — Mình cũng nên thử.",
+      "en": "I pretend I can’t see it. — I should try that too.",
+      "pinyin": "jiù dāng kàn bú dào tā 。—— wǒ yīng gāi yě shì shì kàn 。"
+    },
+    {
+      "start": 650.57,
+      "end": 653.13,
+      "zh": "现在我都是花完再存",
+      "vi": "Bây giờ mình toàn tiêu hết rồi mới để dành.",
+      "en": "Now I'll spend it all.",
+      "pinyin": "xiàn zài wǒ dōu shì huā wán zài cún"
+    },
+    {
+      "start": 653.13,
+      "end": 654.86,
+      "zh": "结果从来存不下",
+      "vi": "Kết quả là chẳng bao giờ để dành được.",
+      "en": "It never happened.",
+      "pinyin": "jié guǒ cóng lái cún bú xià"
+    },
+    {
+      "start": 654.87,
+      "end": 657.8,
+      "zh": "哈哈那你就是花钱高手",
+      "vi": "Haha, vậy bạn là cao thủ tiêu tiền rồi.",
+      "en": "Ha-ha-ha. You're the money man.",
+      "pinyin": "hā hā nà nǐ jiù shì huā qián gāo shǒu"
+    },
+    {
+      "start": 657.8,
+      "end": 660.57,
+      "zh": "才不是我只是没有计划",
+      "vi": "Đâu có, mình chỉ là không có kế hoạch thôi.",
+      "en": "No, I just don't have a plan.",
+      "pinyin": "cái bú shì wǒ zhǐ shì méi yǒu jì huà"
+    },
+    {
+      "start": 660.9,
+      "end": 664.3,
+      "zh": "你知道吗我有时候花钱完全不理性",
+      "vi": "Bạn biết không, có lúc mình tiêu tiền hoàn toàn thiếu lý trí.",
+      "en": "You know, sometimes I spend money completely irrationally.",
+      "pinyin": "nǐ zhī dào ma wǒ yǒu shí hòu huā qián wán quán bù lǐ xìng"
+    },
+    {
+      "start": 664.3,
+      "end": 665.97,
+      "zh": "比如上次啊",
+      "vi": "Ví dụ như lần trước ấy.",
+      "en": "Like last time.",
+      "pinyin": "bǐ rú shàng cì a"
+    },
+    {
+      "start": 665.97,
+      "end": 668.5,
+      "zh": "我看到一个超级可爱的杯子",
+      "vi": "Mình thấy một cái cốc siêu dễ thương.",
+      "en": "I saw a super cute cup.",
+      "pinyin": "wǒ kàn dào yí gè chāo jí kě ài de bēi zi"
+    },
+    {
+      "start": 668.67,
+      "end": 669.93,
+      "zh": "已经有5个了",
+      "vi": "Mình đã có 5 cái rồi.",
+      "en": "There are five of them.",
+      "pinyin": "yǐ jīng yǒu 5 gè le"
+    },
+    {
+      "start": 669.93,
+      "end": 672.66,
+      "zh": "但我还是买了第6个哈哈",
+      "vi": "Nhưng mình vẫn mua cái thứ sáu, haha.",
+      "en": "But I bought the sixth one.",
+      "pinyin": "dàn wǒ hái shì mǎi le dì 6 gè hā hā"
+    },
+    {
+      "start": 672.67,
+      "end": 674.9,
+      "zh": "你是杯子收集控吧？",
+      "vi": "Bạn mê sưu tầm cốc lắm nhỉ?",
+      "en": "You’re a bit of a mug collector, aren’t you?",
+      "pinyin": "nǐ shì bēi zi shōu jí kòng ba ？"
+    },
+    {
+      "start": 674.9,
+      "end": 676.6,
+      "zh": "我也不知道为什么",
+      "vi": "Mình cũng không biết tại sao.",
+      "en": "I don't know why.",
+      "pinyin": "wǒ yě bù zhī dào wèi shén me"
+    },
+    {
+      "start": 676.6,
+      "end": 679.27,
+      "zh": "就是看到喜欢的就想买",
+      "vi": "Cứ thấy thích là muốn mua.",
+      "en": "I just want to buy what I like.",
+      "pinyin": "jiù shì kàn dào xǐ huan de jiù xiǎng mǎi"
+    },
+    {
+      "start": 679.3,
+      "end": 683.37,
+      "zh": "那你试过写购物清单吗",
+      "vi": "Vậy bạn đã thử viết danh sách mua sắm chưa?",
+      "en": "Did you try to write a shopping list?",
+      "pinyin": "nà nǐ shì guò xiě gòu wù qīng dān ma"
+    },
+    {
+      "start": 683.37,
+      "end": 685.73,
+      "zh": "没有哎这是什么",
+      "vi": "Chưa, đây là gì vậy?",
+      "en": "What's this?",
+      "pinyin": "méi yǒu āi zhè shì shén me"
+    },
+    {
+      "start": 685.73,
+      "end": 686.46,
+      "zh": "就是",
+      "vi": "Tức là...",
+      "en": "Yeah.",
+      "pinyin": "jiù shì"
+    },
+    {
+      "start": 686.47,
+      "end": 690.2,
+      "zh": "出门前写下你真的需要买的东西",
+      "vi": "Trước khi ra ngoài, hãy viết ra những thứ bạn thật sự cần mua.",
+      "en": "Write down what you really need to buy before you go out.",
+      "pinyin": "chū mén qián xiě xià nǐ zhēn de xū yào mǎi de dōng xī"
+    },
+    {
+      "start": 690.2,
+      "end": 692.73,
+      "zh": "去超市只买这些不买别的",
+      "vi": "Đến siêu thị chỉ mua những thứ này, không mua gì khác.",
+      "en": "I'll go to the supermarket and buy nothing else.",
+      "pinyin": "qù chāo shì zhī mǎi zhè xiē bù mǎi bié de"
+    },
+    {
+      "start": 692.73,
+      "end": 695.2,
+      "zh": "哇这个方法不错",
+      "vi": "Oa, cách này hay đấy.",
+      "en": "Wow, that's a good idea.",
+      "pinyin": "wā zhè ge fāng fǎ bú cuò"
+    },
+    {
+      "start": 695.2,
+      "end": 697.87,
+      "zh": "我每次去超市都买多了",
+      "vi": "Mỗi lần đi siêu thị mình đều mua quá nhiều.",
+      "en": "I buy too much every time I go to the supermarket.",
+      "pinyin": "wǒ měi cì qù chāo shì dōu mǎi duō le"
+    },
+    {
+      "start": 697.87,
+      "end": 700.93,
+      "zh": "对还有一个方法就是问自己",
+      "vi": "Ừ, còn một cách nữa là tự hỏi bản thân.",
+      "en": "Yeah, there's another way to ask yourself.",
+      "pinyin": "duì hái yǒu yí gè fāng fǎ jiù shì wèn zì jǐ"
+    },
+    {
+      "start": 700.93,
+      "end": 702.96,
+      "zh": "我真的需要这个吗",
+      "vi": "Mình có thật sự cần cái này không?",
+      "en": "Do I really need this?",
+      "pinyin": "wǒ zhēn de xū yào zhè ge ma"
+    },
+    {
+      "start": 702.97,
+      "end": 704.8,
+      "zh": "嗯好主意",
+      "vi": "Ừm, ý hay đấy.",
+      "en": "Yeah, that's a good idea.",
+      "pinyin": "ǹg hǎo zhǔ yì"
+    },
+    {
+      "start": 704.9,
+      "end": 708.07,
+      "zh": "以后买东西钱我要冷静3秒",
+      "vi": "Sau này trước khi mua đồ, mình sẽ bình tĩnh lại 3 giây.",
+      "en": "I'm gonna have to calm down for three seconds.",
+      "pinyin": "yǐ hòu mǎi dōng xī qián wǒ yào lěng jìng 3 miǎo"
+    },
+    {
+      "start": 708.1,
+      "end": 709.47,
+      "zh": "花钱没错",
+      "vi": "Tiêu tiền không sai.",
+      "en": "The money's right.",
+      "pinyin": "huā qián méi cuò"
+    },
+    {
+      "start": 709.47,
+      "end": 711.3,
+      "zh": "但要花的有价值",
+      "vi": "Nhưng phải tiêu sao cho đáng.",
+      "en": "But it's worth spending.",
+      "pinyin": "dàn yào huā de yǒu jià zhí"
+    },
+    {
+      "start": 711.3,
+      "end": 714.47,
+      "zh": "你说的好像我现在开始做饭",
+      "vi": "Bạn nói cứ như thể mình sắp bắt đầu nấu ăn vậy.",
+      "en": "You're talking like I'm cooking now.",
+      "pinyin": "nǐ shuō de hǎo xiàng wǒ xiàn zài kāi shǐ zuò fàn"
+    },
+    {
+      "start": 714.47,
+      "end": 717.17,
+      "zh": "不仅健康还省钱没错",
+      "vi": "Đúng thế, không chỉ tốt cho sức khỏe mà còn tiết kiệm tiền.",
+      "en": "It's not just healthy, it's saving money.",
+      "pinyin": "bù jǐn jiàn kāng hái shěng qián méi cuò"
+    },
+    {
+      "start": 717.27,
+      "end": 720.6,
+      "zh": "我现在也在练习少花多存",
+      "vi": "Dạo này mình cũng đang tập tiêu ít để dành nhiều.",
+      "en": "I'm also practicing to save more flowers.",
+      "pinyin": "wǒ xiàn zài yě zài liàn xí shǎo huā duō cún"
+    },
+    {
+      "start": 720.6,
+      "end": 724.27,
+      "zh": "希望明年能有存款买一台新电脑",
+      "vi": "Hy vọng sang năm có tiền tiết kiệm để mua một chiếc máy tính mới.",
+      "en": "I hope we'll get a new computer next year.",
+      "pinyin": "xī wàng míng nián néng yǒu cún kuǎn mǎi yì tái xīn diàn nǎo"
+    },
+    {
+      "start": 724.27,
+      "end": 725.47,
+      "zh": "我也有目标",
+      "vi": "Mình cũng có mục tiêu.",
+      "en": "I have a goal, too.",
+      "pinyin": "wǒ yě yǒu mù biāo"
+    },
+    {
+      "start": 725.47,
+      "end": 727.37,
+      "zh": "我想存钱去旅行",
+      "vi": "Mình muốn để dành tiền đi du lịch.",
+      "en": "I want to save money for a trip.",
+      "pinyin": "wǒ xiǎng cún qián qù lǚ xíng"
+    },
+    {
+      "start": 727.37,
+      "end": 728.47,
+      "zh": "好目标",
+      "vi": "Mục tiêu hay đấy.",
+      "en": "Good target.",
+      "pinyin": "hǎo mù biāo"
+    },
+    {
+      "start": 728.5,
+      "end": 732.77,
+      "zh": "那我们互相鼓励存钱不乱买加油",
+      "vi": "Vậy chúng ta cùng động viên nhau tiết kiệm tiền, không mua bừa nhé. Cố lên!",
+      "en": "Then we encourage each other to save money and not buy gas.",
+      "pinyin": "nà wǒ men hù xiāng gǔ lì cún qián bú luàn mǎi jiā yóu"
+    },
+    {
+      "start": 732.93,
+      "end": 734.7,
+      "zh": "我们可以设个小计划",
+      "vi": "Chúng ta có thể lập một kế hoạch nhỏ.",
+      "en": "We could make a little plan.",
+      "pinyin": "wǒ men kě yǐ shè gè xiǎo jì huà"
+    },
+    {
+      "start": 734.7,
+      "end": 738.43,
+      "zh": "每个月看谁花的更少哈哈好行啊",
+      "vi": "Mỗi tháng xem ai tiêu ít hơn nhé. Haha, được đấy!",
+      "en": "Who spends less every month, huh?",
+      "pinyin": "měi gè yuè kàn shuí huā de gèng shǎo hā hā hǎo xíng a"
+    },
+    {
+      "start": 738.47,
+      "end": 741,
+      "zh": "但不能为了省钱不吃饭哦",
+      "vi": "Nhưng không được vì tiết kiệm tiền mà nhịn ăn đâu nhé.",
+      "en": "But you can't save money without eating.",
+      "pinyin": "dàn bù néng wèi le shěng qián bù chī fàn ò"
+    },
+    {
+      "start": 741,
+      "end": 743.8,
+      "zh": "放心我会吃得饱也存得到",
+      "vi": "Yên tâm, mình sẽ ăn no mà vẫn để dành được tiền.",
+      "en": "Don't worry, I'll eat and save.",
+      "pinyin": "fàng xīn wǒ huì chī dé bǎo yě cún dé dào"
+    },
+    {
+      "start": 744.07,
+      "end": 745.8,
+      "zh": "不过你知道吗",
+      "vi": "Nhưng bạn biết không?",
+      "en": "But you know what?",
+      "pinyin": "bú guò nǐ zhī dào ma"
+    },
+    {
+      "start": 745.8,
+      "end": 748.67,
+      "zh": "有时候我真的不想花钱",
+      "vi": "Có những lúc mình thật sự không muốn tiêu tiền.",
+      "en": "Sometimes I really don't want to spend money.",
+      "pinyin": "yǒu shí hòu wǒ zhēn de bù xiǎng huā qián"
+    },
+    {
+      "start": 748.67,
+      "end": 750.4,
+      "zh": "可是也没办法",
+      "vi": "Nhưng cũng chẳng có cách nào.",
+      "en": "But there's nothing I can do.",
+      "pinyin": "kě shì yě méi bàn fǎ"
+    },
+    {
+      "start": 750.4,
+      "end": 754.1,
+      "zh": "怎么了有时候突然有急事",
+      "vi": "Có chuyện gì vậy? Đôi khi đột nhiên có việc gấp.",
+      "en": "Why? Sometimes it's urgent.",
+      "pinyin": "zěn me le yǒu shí hòu tū rán yǒu jí shì"
+    },
+    {
+      "start": 754.1,
+      "end": 756.33,
+      "zh": "比如手机坏了",
+      "vi": "Ví dụ, điện thoại bị hỏng.",
+      "en": "Like the phone's broken.",
+      "pinyin": "bǐ rú shǒu jī huài le"
+    },
+    {
+      "start": 756.33,
+      "end": 758.06,
+      "zh": "房东涨房租",
+      "vi": "Chủ nhà tăng tiền thuê nhà.",
+      "en": "The landlord's rent rises.",
+      "pinyin": "fáng dōng zhǎng fáng zū"
+    },
+    {
+      "start": 758.1,
+      "end": 760.4,
+      "zh": "就只能先付对",
+      "vi": "Thì chỉ có thể trả trước thôi, đúng vậy.",
+      "en": "We'll have to get it right first.",
+      "pinyin": "jiù zhǐ néng xiān fù duì"
+    },
+    {
+      "start": 760.4,
+      "end": 762.3,
+      "zh": "这种情况很常见",
+      "vi": "Tình huống này rất phổ biến.",
+      "en": "This is a common situation.",
+      "pinyin": "zhè zhǒng qíng kuàng hěn cháng jiàn"
+    },
+    {
+      "start": 762.5,
+      "end": 764.9,
+      "zh": "那你会向朋友借钱吗",
+      "vi": "Vậy bạn có vay tiền bạn bè không?",
+      "en": "Will you borrow money from your friends?",
+      "pinyin": "nà nǐ huì xiàng péng yǒu jiè qián ma"
+    },
+    {
+      "start": 764.9,
+      "end": 767.87,
+      "zh": "我以前借过一次不多",
+      "vi": "Trước đây tôi từng vay một lần, không nhiều.",
+      "en": "I've borrowed not much once before.",
+      "pinyin": "wǒ yǐ qián jiè guò yí cì bù duō"
+    },
+    {
+      "start": 767.87,
+      "end": 770.8,
+      "zh": "就500块借钱也没关系",
+      "vi": "Chỉ 500 tệ thôi, vay cũng không sao.",
+      "en": "It doesn't matter if it's $500.",
+      "pinyin": "jiù 500 kuài jiè qián yě méi guān xì"
+    },
+    {
+      "start": 770.8,
+      "end": 773.57,
+      "zh": "重要的是要记得还对",
+      "vi": "Quan trọng là phải nhớ trả lại, đúng vậy.",
+      "en": "It's important to remember.",
+      "pinyin": "zhòng yào de shì yào jì de hái duì"
+    },
+    {
+      "start": 773.57,
+      "end": 777.07,
+      "zh": "我是那种借了就会记得还的人",
+      "vi": "Tôi là kiểu người đã vay thì sẽ nhớ trả.",
+      "en": "I'm the kind of guy who'll remember to repay it if he borrows it.",
+      "pinyin": "wǒ shì nà zhǒng jiè le jiù huì jì de hái de rén"
+    },
+    {
+      "start": 777.07,
+      "end": 778.3,
+      "zh": "你借过吗",
+      "vi": "Bạn từng vay chưa?",
+      "en": "Did you borrow it?",
+      "pinyin": "nǐ jiè guò ma"
+    },
+    {
+      "start": 778.3,
+      "end": 781.8,
+      "zh": "借过大学的时候生活费不够",
+      "vi": "Từng vay rồi. Hồi đại học, tiền sinh hoạt không đủ.",
+      "en": "We don't have enough money to borrow from college.",
+      "pinyin": "jiè guò dà xué de shí hòu shēng huó fèi bú gòu"
+    },
+    {
+      "start": 781.8,
+      "end": 784.1,
+      "zh": "我向同学借了1,000块",
+      "vi": "Tôi vay bạn cùng lớp 1.000 tệ.",
+      "en": "I borrowed $1,000 from my classmates.",
+      "pinyin": "wǒ xiàng tóng xué jiè le 1,000 kuài"
+    },
+    {
+      "start": 784.3,
+      "end": 787.47,
+      "zh": "后来打工赚了钱就还他了",
+      "vi": "Sau đó đi làm kiếm được tiền thì trả lại cho bạn ấy.",
+      "en": "Then I paid him back when I was working.",
+      "pinyin": "hòu lái dǎ gōng zhuàn le qián jiù hái tā le"
+    },
+    {
+      "start": 787.47,
+      "end": 789.4,
+      "zh": "还好你有责任感",
+      "vi": "May mà bạn có tinh thần trách nhiệm.",
+      "en": "I'm glad you have a responsibility.",
+      "pinyin": "hái hǎo nǐ yǒu zé rèn gǎn"
+    },
+    {
+      "start": 789.4,
+      "end": 792.4,
+      "zh": "借钱一定要说清楚什么时候还",
+      "vi": "Vay tiền nhất định phải nói rõ khi nào trả.",
+      "en": "You have to tell me when you'll pay it back.",
+      "pinyin": "jiè qián yí dìng yào shuō qīng chǔ shén me shí hòu hái"
+    },
+    {
+      "start": 792.4,
+      "end": 794.3,
+      "zh": "不能拖对",
+      "vi": "Không thể trì hoãn, đúng vậy.",
+      "en": "We can't drag it right.",
+      "pinyin": "bù néng tuō duì"
+    },
+    {
+      "start": 794.3,
+      "end": 797,
+      "zh": "不然朋友之间会尴尬",
+      "vi": "Nếu không, giữa bạn bè sẽ khó xử.",
+      "en": "Otherwise, friends are embarrassed.",
+      "pinyin": "bù rán péng yǒu zhī jiān huì gān gà"
+    },
+    {
+      "start": 797,
+      "end": 801.87,
+      "zh": "你还记得借钱和还钱怎么说吗",
+      "vi": "Bạn còn nhớ '借钱' và '还钱' nói thế nào không?",
+      "en": "Do you remember what I said about borrowing and paying back money?",
+      "pinyin": "nǐ hái jì de jiè qián hé hái qián zěn me shuō ma"
+    },
+    {
+      "start": 802.1,
+      "end": 805.27,
+      "zh": "借钱是向别人要钱用",
+      "vi": "'借钱' là hỏi mượn tiền của người khác để dùng.",
+      "en": "The loan is for someone else.",
+      "pinyin": "jiè qián shì xiàng bié rén yào qián yòng"
+    },
+    {
+      "start": 805.4,
+      "end": 808.47,
+      "zh": "还钱是把钱还回去",
+      "vi": "'还钱' là trả tiền lại.",
+      "en": "Pay back the money. Give it back.",
+      "pinyin": "hái qián shì bǎ qián hái huí qù"
+    },
+    {
+      "start": 808.53,
+      "end": 812,
+      "zh": "比如我可以借你500块",
+      "vi": "Ví dụ, tôi có thể cho bạn vay 500 tệ.",
+      "en": "Like, I can lend you 500 bucks.",
+      "pinyin": "bǐ rú wǒ kě yǐ jiè nǐ 500 kuài"
+    },
+    {
+      "start": 812,
+      "end": 814.5,
+      "zh": "或者记得还钱哦",
+      "vi": "Hoặc là nhớ trả lại tiền nhé.",
+      "en": "Or pay back the money.",
+      "pinyin": "huò zhě jì de hái qián ò"
+    },
+    {
+      "start": 814.5,
+      "end": 818.5,
+      "zh": "很好那利息你知道是什么吗",
+      "vi": "Tốt lắm. Vậy bạn có biết '利息' là gì không?",
+      "en": "Good. You know what that is?",
+      "pinyin": "hěn hǎo nà lì xī nǐ zhī dào shì shén me ma"
+    },
+    {
+      "start": 818.7,
+      "end": 823.2,
+      "zh": "啊是借钱的时候要多还一点对吧",
+      "vi": "À, là khi vay tiền thì phải trả lại nhiều hơn một chút, đúng không?",
+      "en": "You have to pay more when you borrow money, right?",
+      "pinyin": "a shì jiè qián de shí hòu yào duō hái yì diǎn duì ba"
+    },
+    {
+      "start": 823.2,
+      "end": 827.67,
+      "zh": "比如银行借你1万要还11,000",
+      "vi": "Ví dụ, ngân hàng cho bạn vay 10.000 thì phải trả 11.000.",
+      "en": "Like the bank loaning you $10,000 for 11,000.",
+      "pinyin": "bǐ rú yín háng jiè nǐ 1 wàn yào hái 11,000"
+    },
+    {
+      "start": 827.67,
+      "end": 831.4,
+      "zh": "没错，银行一般都会收利息。",
+      "vi": "Đúng vậy, ngân hàng thường tính lãi.",
+      "en": "Right, banks usually charge interest.",
+      "pinyin": "méi cuò ， yín háng yì bān dōu huì shōu lì xī 。"
+    },
+    {
+      "start": 831.73,
+      "end": 835.3,
+      "zh": "但朋友之间最好不要谈利息",
+      "vi": "Nhưng giữa bạn bè tốt nhất đừng nói đến lãi.",
+      "en": "But it's best not to talk about interest among friends.",
+      "pinyin": "dàn péng yǒu zhī jiān zuì hǎo bú yào tán lì xī"
+    },
+    {
+      "start": 835.37,
+      "end": 839.17,
+      "zh": "对呀说利息就像做生意了",
+      "vi": "Đúng vậy, nói đến lãi thì cứ như làm kinh doanh.",
+      "en": "Yeah, it's like doing business.",
+      "pinyin": "duì ya shuō lì xī jiù xiàng zuò shēng yì le"
+    },
+    {
+      "start": 839.17,
+      "end": 840.97,
+      "zh": "关系就变了",
+      "vi": "Quan hệ sẽ thay đổi.",
+      "en": "The relationship has changed.",
+      "pinyin": "guān xì jiù biàn le"
+    },
+    {
+      "start": 841,
+      "end": 843.27,
+      "zh": "所以借钱要小心",
+      "vi": "Vì vậy vay tiền phải cẩn thận.",
+      "en": "That's why you have to be careful with the money.",
+      "pinyin": "suǒ yǐ jiè qián yào xiǎo xīn"
+    },
+    {
+      "start": 843.33,
+      "end": 845.56,
+      "zh": "有些人借了就不还",
+      "vi": "Có người vay rồi không trả.",
+      "en": "Some people don't pay when they borrow it.",
+      "pinyin": "yǒu xiē rén jiè le jiù bù hái"
+    },
+    {
+      "start": 845.57,
+      "end": 847.27,
+      "zh": "让人很难受",
+      "vi": "Khiến người ta rất khó chịu.",
+      "en": "It's very painful.",
+      "pinyin": "ràng rén hěn nán shòu"
+    },
+    {
+      "start": 847.3,
+      "end": 852.4,
+      "zh": "是啊我以前借给一个老同学2,000块",
+      "vi": "Đúng vậy, trước đây tôi từng cho một bạn học cũ vay 2.000 tệ.",
+      "en": "Yeah, I lent an old classmate $2,000.",
+      "pinyin": "shì a wǒ yǐ qián jiè gěi yí gè lǎo tóng xué 2,000 kuài"
+    },
+    {
+      "start": 852.5,
+      "end": 854.67,
+      "zh": "他说一个月还",
+      "vi": "Bạn ấy nói một tháng sẽ trả.",
+      "en": "He said he'd be back in a month.",
+      "pinyin": "tā shuō yí gè yuè hái"
+    },
+    {
+      "start": 854.87,
+      "end": 859.67,
+      "zh": "结果一年了还没还哇",
+      "vi": "Kết quả một năm rồi vẫn chưa trả.",
+      "en": "It turns out it's been a year.",
+      "pinyin": "jié guǒ yì nián le hái méi hái wā"
+    },
+    {
+      "start": 859.8,
+      "end": 862.03,
+      "zh": "那你还会借给别人吗",
+      "vi": "Vậy bạn vẫn sẽ cho người khác vay chứ?",
+      "en": "Will you still lend it to someone else?",
+      "pinyin": "nà nǐ hái huì jiè gěi bié rén ma"
+    },
+    {
+      "start": 862.3,
+      "end": 865.3,
+      "zh": "从那以后我都很小心",
+      "vi": "Từ đó về sau tôi đều rất cẩn thận.",
+      "en": "I've been careful ever since.",
+      "pinyin": "cóng nà yǐ hòu wǒ dōu hěn xiǎo xīn"
+    },
+    {
+      "start": 865.4,
+      "end": 869.27,
+      "zh": "现在我只借我真的信得过的人",
+      "vi": "Bây giờ tôi chỉ cho những người tôi thực sự tin tưởng vay.",
+      "en": "Now I only lend to someone I can really trust.",
+      "pinyin": "xiàn zài wǒ zhī jiè wǒ zhēn de xìn dé guò de rén"
+    },
+    {
+      "start": 869.27,
+      "end": 870.4,
+      "zh": "你做的对",
+      "vi": "Bạn làm đúng rồi.",
+      "en": "You did the right thing.",
+      "pinyin": "nǐ zuò de duì"
+    },
+    {
+      "start": 870.5,
+      "end": 872.33,
+      "zh": "钱不是最重要",
+      "vi": "Tiền không phải là quan trọng nhất.",
+      "en": "Money is not the most important thing.",
+      "pinyin": "qián bú shì zuì zhòng yào"
+    },
+    {
+      "start": 872.33,
+      "end": 876.36,
+      "zh": "但因为钱伤了感情就不值得了",
+      "vi": "Nhưng vì tiền mà làm tổn thương tình cảm thì không đáng.",
+      "en": "But it's not worth it because of the money.",
+      "pinyin": "dàn yīn wèi qián shāng le gǎn qíng jiù bù zhí dé le"
+    },
+    {
+      "start": 876.7,
+      "end": 880.47,
+      "zh": "所以我觉得能自己解决最好",
+      "vi": "Vì vậy tôi nghĩ tự mình giải quyết được là tốt nhất.",
+      "en": "That's why I think it's best to handle this on my own.",
+      "pinyin": "suǒ yǐ wǒ jué de néng zì jǐ jiě jué zuì hǎo"
+    },
+    {
+      "start": 880.5,
+      "end": 882.8,
+      "zh": "不要常常借对",
+      "vi": "Đừng vay mượn thường xuyên, đúng vậy.",
+      "en": "Don't borrow it often.",
+      "pinyin": "bú yào cháng cháng jiè duì"
+    },
+    {
+      "start": 882.8,
+      "end": 884.2,
+      "zh": "宁可少花",
+      "vi": "Thà tiêu ít đi.",
+      "en": "I'd rather have less flowers.",
+      "pinyin": "nìng kě shǎo huā"
+    },
+    {
+      "start": 884.27,
+      "end": 885.9,
+      "zh": "也不欠别人",
+      "vi": "Còn hơn nợ người khác.",
+      "en": "And no one else.",
+      "pinyin": "yě bú qiàn bié rén"
+    },
+    {
+      "start": 885.9,
+      "end": 888.13,
+      "zh": "不过如果你有困难",
+      "vi": "Nhưng nếu bạn gặp khó khăn.",
+      "en": "But if you're in trouble,",
+      "pinyin": "bú guò rú guǒ nǐ yǒu kùn nán"
+    },
+    {
+      "start": 888.13,
+      "end": 890.3,
+      "zh": "我还是会借你一点啦",
+      "vi": "Tôi vẫn sẽ cho bạn vay một ít.",
+      "en": "I'll still lend you some.",
+      "pinyin": "wǒ hái shì huì jiè nǐ yì diǎn lā"
+    },
+    {
+      "start": 890.3,
+      "end": 891.87,
+      "zh": "哈你真好",
+      "vi": "Ha, bạn thật tốt bụng.",
+      "en": "That's very kind of you.",
+      "pinyin": "hā nǐ zhēn hǎo"
+    },
+    {
+      "start": 891.93,
+      "end": 895,
+      "zh": "但是我希望永远不要用到这一步",
+      "vi": "Nhưng tôi hy vọng sẽ không bao giờ phải dùng đến bước này.",
+      "en": "But I hope it never comes to this.",
+      "pinyin": "dàn shì wǒ xī wàng yǒng yuǎn bú yào yòng dào zhè yí bù"
+    },
+    {
+      "start": 895,
+      "end": 896.5,
+      "zh": "哈哈是的",
+      "vi": "Haha đúng rồi.",
+      "en": "Ha-ha-ha. Yeah.",
+      "pinyin": "hā hā shì de"
+    },
+    {
+      "start": 896.5,
+      "end": 897.9,
+      "zh": "我们一起努力",
+      "vi": "Chúng ta cùng cố gắng nhé.",
+      "en": "Let's work together.",
+      "pinyin": "wǒ men yì qǐ nǔ lì"
+    },
+    {
+      "start": 897.9,
+      "end": 899.6,
+      "zh": "不当月光族",
+      "vi": "Không làm người tiêu hết sạch lương.",
+      "en": "Bad Moons.",
+      "pinyin": "bù dāng yuè guāng zú"
+    },
+    {
+      "start": 899.6,
+      "end": 902.67,
+      "zh": "没错要当存钱族",
+      "vi": "Đúng vậy, phải làm người biết tiết kiệm.",
+      "en": "That's right. Be a depositor.",
+      "pinyin": "méi cuò yào dāng cún qián zú"
+    },
+    {
+      "start": 903,
+      "end": 904.33,
+      "zh": "说到花钱我最",
+      "vi": "Nói đến chuyện tiêu tiền, dạo gần đây tôi",
+      "en": "Speaking of which, I'm the most expensive.",
+      "pinyin": "shuō dào huā qián wǒ zuì"
+    },
+    {
+      "start": 904.33,
+      "end": 906.9,
+      "zh": "近真的觉得生活费越来越贵了",
+      "vi": "thật sự thấy chi phí sinh hoạt ngày càng đắt đỏ.",
+      "en": "I really feel like living is getting more expensive.",
+      "pinyin": "jìn zhēn de jué de shēng huó fèi yuè lái yuè guì le"
+    },
+    {
+      "start": 906.9,
+      "end": 909.6,
+      "zh": "我也是什么都在涨价",
+      "vi": "Tôi cũng vậy, cái gì cũng tăng giá.",
+      "en": "I've been up everything, too.",
+      "pinyin": "wǒ yě shì shén me dōu zài zhǎng jià"
+    },
+    {
+      "start": 909.6,
+      "end": 912.27,
+      "zh": "吃一顿饭就要三四十块了",
+      "vi": "Ăn một bữa cơm đã phải ba bốn chục tệ rồi.",
+      "en": "It'll cost 30 or 40 bucks for a meal.",
+      "pinyin": "chī yí dùn fàn jiù yào sān sì shí kuài le"
+    },
+    {
+      "start": 912.33,
+      "end": 913.83,
+      "zh": "尤其是外食",
+      "vi": "Đặc biệt là ăn ngoài.",
+      "en": "Especially the food.",
+      "pinyin": "yóu qí shì wài shí"
+    },
+    {
+      "start": 913.87,
+      "end": 915.4,
+      "zh": "每天都吃外面",
+      "vi": "Ngày nào cũng ăn ngoài,",
+      "en": "I eat outside everyday.",
+      "pinyin": "měi tiān dōu chī wài miàn"
+    },
+    {
+      "start": 915.4,
+      "end": 917.93,
+      "zh": "一个月吃饭的钱快1,000了",
+      "vi": "một tháng tiền ăn gần 1.000 tệ rồi.",
+      "en": "It's almost 1,000 dollars a month for dinner.",
+      "pinyin": "yí gè yuè chī fàn de qián kuài 1,000 liǎo"
+    },
+    {
+      "start": 917.93,
+      "end": 920.6,
+      "zh": "所以我现在开始带饭去公司",
+      "vi": "Nên giờ tôi bắt đầu mang cơm đến công ty.",
+      "en": "That's why I'm taking the food to the company now.",
+      "pinyin": "suǒ yǐ wǒ xiàn zài kāi shǐ dài fàn qù gōng sī"
+    },
+    {
+      "start": 920.6,
+      "end": 922.7,
+      "zh": "自己做便当省很多",
+      "vi": "Tự làm cơm hộp tiết kiệm được nhiều lắm.",
+      "en": "It's a lot to save yourself from lunch.",
+      "pinyin": "zì jǐ zuò biàn dāng shěng hěn duō"
+    },
+    {
+      "start": 922.97,
+      "end": 927.24,
+      "zh": "我也想学可是我早上起不来哈哈哈",
+      "vi": "Tôi cũng muốn học, nhưng buổi sáng tôi không dậy nổi hahaha.",
+      "en": "I want to learn, but I can't get up in the morning.",
+      "pinyin": "wǒ yě xiǎng xué kě shì wǒ zǎo shàng qǐ bù lái hā hā hā"
+    },
+    {
+      "start": 927.3,
+      "end": 929.8,
+      "zh": "那你平时最大的花销是什么",
+      "vi": "Thế bình thường khoản chi lớn nhất của bạn là gì?",
+      "en": "So what's your biggest expense?",
+      "pinyin": "nà nǐ píng shí zuì dà de huā xiāo shì shén me"
+    },
+    {
+      "start": 929.8,
+      "end": 932.57,
+      "zh": "吃饭然后是日用品",
+      "vi": "Tiền ăn, rồi đến đồ dùng hằng ngày.",
+      "en": "Eating food and making goods.",
+      "pinyin": "chī fàn rán hòu shì rì yòng pǐn"
+    },
+    {
+      "start": 932.57,
+      "end": 936.6,
+      "zh": "比如洗发水纸巾洗衣液这些",
+      "vi": "Như dầu gội, khăn giấy, nước giặt này nọ.",
+      "en": "Like shampoo towels and laundry fluids.",
+      "pinyin": "bǐ rú xǐ fā shuǐ zhǐ jīn xǐ yī yè zhè xiē"
+    },
+    {
+      "start": 936.73,
+      "end": 939.26,
+      "zh": "对生活用品看起来便宜",
+      "vi": "Đúng, đồ dùng sinh hoạt trông thì rẻ,",
+      "en": "It looks cheap on the living goods.",
+      "pinyin": "duì shēng huó yòng pǐn kàn qǐ lái pián yi"
+    },
+    {
+      "start": 939.27,
+      "end": 941.17,
+      "zh": "但买起来也不少钱",
+      "vi": "nhưng mua nhiều cũng tốn không ít tiền.",
+      "en": "But it's a lot of money.",
+      "pinyin": "dàn mǎi qǐ lái yě bù shǎo qián"
+    },
+    {
+      "start": 941.17,
+      "end": 944.27,
+      "zh": "我每次去超市都不小心多买一点",
+      "vi": "Mỗi lần đi siêu thị tôi đều vô tình mua thêm một chút.",
+      "en": "Every time I go to the supermarket, I buy more.",
+      "pinyin": "wǒ měi cì qù chāo shì dōu bù xiǎo xīn duō mǎi yì diǎn"
+    },
+    {
+      "start": 944.27,
+      "end": 947,
+      "zh": "哈哈所以要有购入清单啊",
+      "vi": "Haha thế thì phải có danh sách mua sắm chứ.",
+      "en": "That's why we need a list of purchases.",
+      "pinyin": "hā hā suǒ yǐ yào yǒu gòu rù qīng dān a"
+    },
+    {
+      "start": 947.1,
+      "end": 949.47,
+      "zh": "是啦我下次一定记得写",
+      "vi": "Đúng rồi, lần sau tôi nhất định sẽ nhớ viết.",
+      "en": "Yeah, I'll do it next time.",
+      "pinyin": "shì lā wǒ xià cì yí dìng jì de xiě"
+    },
+    {
+      "start": 949.5,
+      "end": 952.43,
+      "zh": "你呢你常去超市买东西吗",
+      "vi": "Còn bạn? Bạn có thường đi siêu thị mua đồ không?",
+      "en": "Do you often go shopping in supermarkets?",
+      "pinyin": "nǐ ne nǐ cháng qù chāo shì mǎi dōng xī ma"
+    },
+    {
+      "start": 952.6,
+      "end": 954.7,
+      "zh": "差不多每个星期去一次",
+      "vi": "Khoảng mỗi tuần một lần.",
+      "en": "Almost once a week.",
+      "pinyin": "chà bù duō měi gè xīng qī qù yí cì"
+    },
+    {
+      "start": 954.77,
+      "end": 957.93,
+      "zh": "买菜水果米鸡蛋这些",
+      "vi": "Mua rau, trái cây, gạo, trứng này nọ.",
+      "en": "Buying fruit and rice and eggs.",
+      "pinyin": "mǎi cài shuǐ guǒ mǐ jī dàn zhè xiē"
+    },
+    {
+      "start": 957.93,
+      "end": 959.73,
+      "zh": "你买东西会比价格吗",
+      "vi": "Bạn mua đồ có so sánh giá không?",
+      "en": "Do you buy anything at a price?",
+      "pinyin": "nǐ mǎi dōng xī huì bǐ jià gé ma"
+    },
+    {
+      "start": 959.73,
+      "end": 962.3,
+      "zh": "会啊我都会看一下哪个便宜",
+      "vi": "Có chứ, tôi đều xem cái nào rẻ hơn.",
+      "en": "Yeah, I'll see which ones are cheap.",
+      "pinyin": "huì a wǒ dōu huì kàn yí xià nǎ gè pián yi"
+    },
+    {
+      "start": 962.57,
+      "end": 964.8,
+      "zh": "现在用APP还可以领优惠券",
+      "vi": "Giờ dùng app còn có thể nhận phiếu giảm giá.",
+      "en": "You can still get coupons with an APP.",
+      "pinyin": "xiàn zài yòng APP hái kě yǐ lǐng yōu huì quàn"
+    },
+    {
+      "start": 964.9,
+      "end": 968.77,
+      "zh": "哇哦你好会过日子我都没注意这些",
+      "vi": "Oa, bạn giỏi chi tiêu quá, tôi chẳng để ý mấy chuyện này.",
+      "en": "Wow, I didn't even notice how you're doing.",
+      "pinyin": "wā ò nǐ hǎo huì guò rì zi wǒ dōu méi zhù yì zhè xiē"
+    },
+    {
+      "start": 968.77,
+      "end": 971.6,
+      "zh": "其实省钱的小方法很多啊",
+      "vi": "Thật ra có nhiều cách nhỏ để tiết kiệm tiền lắm.",
+      "en": "There are a lot of small ways to save money.",
+      "pinyin": "qí shí shěng qián de xiǎo fāng fǎ hěn duō a"
+    },
+    {
+      "start": 971.6,
+      "end": 972.97,
+      "zh": "只要有心",
+      "vi": "Chỉ cần để tâm thôi.",
+      "en": "Just have a heart.",
+      "pinyin": "zhǐ yào yǒu xīn"
+    },
+    {
+      "start": 972.97,
+      "end": 976.7,
+      "zh": "对比如买衣服的时候我都选打折的",
+      "vi": "Đúng vậy, ví dụ khi mua quần áo tôi đều chọn đồ giảm giá.",
+      "en": "For example, when I buy clothes, I choose a discount.",
+      "pinyin": "duì bǐ rú mǎi yī fu de shí hòu wǒ dōu xuǎn dǎ zhé de"
+    },
+    {
+      "start": 976.8,
+      "end": 979.13,
+      "zh": "穿的舒服就好我也是",
+      "vi": "Mặc thoải mái là được, tôi cũng vậy.",
+      "en": "It's nice to wear it. So am I.",
+      "pinyin": "chuān de shū fú jiù hǎo wǒ yě shì"
+    },
+    {
+      "start": 979.13,
+      "end": 980.46,
+      "zh": "我不追品牌",
+      "vi": "Tôi không chạy theo thương hiệu.",
+      "en": "I don't pursue brand names.",
+      "pinyin": "wǒ bù zhuī pǐn pái"
+    },
+    {
+      "start": 980.47,
+      "end": 982.17,
+      "zh": "便宜实用就行",
+      "vi": "Rẻ và thiết thực là được.",
+      "en": "It's just cheap and practical.",
+      "pinyin": "pián yi shí yòng jiù xíng"
+    },
+    {
+      "start": 982.37,
+      "end": 984.4,
+      "zh": "我有时候也会买一些不太",
+      "vi": "Đôi khi tôi cũng mua một vài thứ",
+      "en": "I buy a few things sometimes.",
+      "pinyin": "wǒ yǒu shí hòu yě huì mǎi yì xiē bú tài"
+    },
+    {
+      "start": 984.4,
+      "end": 985.63,
+      "zh": "需要的东西",
+      "vi": "không thật sự cần thiết.",
+      "en": "Something I need.",
+      "pinyin": "xū yào de dōng xī"
+    },
+    {
+      "start": 985.9,
+      "end": 988.57,
+      "zh": "比如看到漂亮的本子杯子",
+      "vi": "Ví dụ thấy sổ tay, cốc xinh là mua.",
+      "en": "Like seeing a beautiful book cup.",
+      "pinyin": "bǐ rú kàn dào piào liang de běn zi bēi zi"
+    },
+    {
+      "start": 988.57,
+      "end": 991.67,
+      "zh": "哈哈你好像很喜欢这些小东西",
+      "vi": "Haha bạn có vẻ rất thích mấy món nhỏ nhỏ này nhỉ.",
+      "en": "You seem to like these little things.",
+      "pinyin": "hā hā nǐ hǎo xiàng hěn xǐ huan zhè xiē xiǎo dōng xī"
+    },
+    {
+      "start": 991.77,
+      "end": 993.8,
+      "zh": "对啊他们虽然便宜",
+      "vi": "Đúng vậy, chúng tuy rẻ",
+      "en": "Yeah, they're cheap.",
+      "pinyin": "duì a tā men suī rán pián yi"
+    },
+    {
+      "start": 993.8,
+      "end": 996,
+      "zh": "但买多了也是一笔开销",
+      "vi": "nhưng mua nhiều cũng thành một khoản chi.",
+      "en": "But buying too much is a cost.",
+      "pinyin": "dàn mǎi duō le yě shì yì bǐ kāi xiāo"
+    },
+    {
+      "start": 996,
+      "end": 999.2,
+      "zh": "所以我们都要学会管理生活费",
+      "vi": "Nên chúng ta đều phải học cách quản lý chi phí sinh hoạt.",
+      "en": "That's why we all have to learn how to manage our living expenses.",
+      "pinyin": "suǒ yǐ wǒ men dōu yào xué huì guǎn lǐ shēng huó fèi"
+    },
+    {
+      "start": 999.33,
+      "end": 1001.56,
+      "zh": "对生活费真的很重要",
+      "vi": "Đúng, chi phí sinh hoạt thật sự rất quan trọng.",
+      "en": "It's really important for maintenance.",
+      "pinyin": "duì shēng huó fèi zhēn de hěn zhòng yào"
+    },
+    {
+      "start": 1001.57,
+      "end": 1004.13,
+      "zh": "是我们每个月都要计划好的钱",
+      "vi": "Đó là khoản tiền chúng ta phải lên kế hoạch mỗi tháng.",
+      "en": "It's the money we plan every month.",
+      "pinyin": "shì wǒ men měi gè yuè dōu yào jì huà hǎo de qián"
+    },
+    {
+      "start": 1004.13,
+      "end": 1006.4,
+      "zh": "我现在每个月给自己设限",
+      "vi": "Giờ mỗi tháng tôi tự đặt giới hạn cho mình.",
+      "en": "I'm setting my own limits every month.",
+      "pinyin": "wǒ xiàn zài měi gè yuè gěi zì jǐ shè xiàn"
+    },
+    {
+      "start": 1006.47,
+      "end": 1010.67,
+      "zh": "比如吃饭不超过1000日用品不超过500",
+      "vi": "Ví dụ tiền ăn không quá 1.000, đồ dùng hằng ngày không quá 500.",
+      "en": "For example, food does not exceed 1,000 days and supplies do not exceed 500.",
+      "pinyin": "bǐ rú chī fàn bù chāo guò 1000 rì yòng pǐn bù chāo guò 500"
+    },
+    {
+      "start": 1010.8,
+      "end": 1011.97,
+      "zh": "这个方法不错",
+      "vi": "Cách này hay đấy.",
+      "en": "That's a good idea.",
+      "pinyin": "zhè ge fāng fǎ bú cuò"
+    },
+    {
+      "start": 1011.97,
+      "end": 1013.17,
+      "zh": "我要学起来",
+      "vi": "Mình phải học theo mới được.",
+      "en": "I need to learn.",
+      "pinyin": "wǒ yào xué qǐ lái"
+    },
+    {
+      "start": 1013.17,
+      "end": 1016.37,
+      "zh": "管理好生活费日子才不会那么紧张",
+      "vi": "Quản lý tốt chi phí sinh hoạt thì cuộc sống mới không quá căng thẳng.",
+      "en": "You can't be so nervous when you manage your living days.",
+      "pinyin": "guǎn lǐ hǎo shēng huó fèi rì zi cái bú huì nà me jǐn zhāng"
+    },
+    {
+      "start": 1016.37,
+      "end": 1020.07,
+      "zh": "对也比较安心不怕月底没钱",
+      "vi": "Đúng vậy, cũng yên tâm hơn, không sợ cuối tháng hết tiền.",
+      "en": "Yeah, it's easier not to worry about the end of the month.",
+      "pinyin": "duì yě bǐ jiào ān xīn bú pà yuè dǐ méi qián"
+    },
+    {
+      "start": 1020.3,
+      "end": 1021.5,
+      "zh": "那你有没有用APP",
+      "vi": "Thế bạn có dùng app không?",
+      "en": "So did you use the APP?",
+      "pinyin": "nà nǐ yǒu méi yǒu yòng APP"
+    },
+    {
+      "start": 1021.5,
+      "end": 1023.67,
+      "zh": "记录每个月花了多少钱",
+      "vi": "Ghi lại mỗi tháng đã tiêu bao nhiêu tiền.",
+      "en": "How much does it cost every month?",
+      "pinyin": "jì lù měi gè yuè huā le duō shǎo qián"
+    },
+    {
+      "start": 1023.67,
+      "end": 1025.9,
+      "zh": "有啊我用一个记账APP",
+      "vi": "Có chứ, mình dùng một app ghi chép chi tiêu.",
+      "en": "Yeah, I'll keep an APP.",
+      "pinyin": "yǒu a wǒ yòng yí gè jì zhàng APP"
+    },
+    {
+      "start": 1025.9,
+      "end": 1028.6,
+      "zh": "每天输进去今天花了多少钱",
+      "vi": "Mỗi ngày nhập vào số tiền hôm nay đã tiêu.",
+      "en": "How much did it cost to lose every day?",
+      "pinyin": "měi tiān shū jìn qù jīn tiān huā le duō shǎo qián"
+    },
+    {
+      "start": 1028.6,
+      "end": 1030.4,
+      "zh": "太好了这样月底",
+      "vi": "Tốt quá, như vậy đến cuối tháng...",
+      "en": "That's great. At the end of the month.",
+      "pinyin": "tài hǎo le zhè yàng yuè dǐ"
+    },
+    {
+      "start": 1030.4,
+      "end": 1033.07,
+      "zh": "就能清楚看到自己的消费习惯",
+      "vi": "...là có thể thấy rõ thói quen tiêu dùng của mình.",
+      "en": "You can see your consumption habits clearly.",
+      "pinyin": "jiù néng qīng chǔ kàn dào zì jǐ de xiāo fèi xí guàn"
+    },
+    {
+      "start": 1033.17,
+      "end": 1035.2,
+      "zh": "嗯而且看到数字",
+      "vi": "Ừ, hơn nữa khi nhìn thấy các con số...",
+      "en": "Yeah, and see the numbers.",
+      "pinyin": "ǹg ér qiě kàn dào shù zì"
+    },
+    {
+      "start": 1035.2,
+      "end": 1037.57,
+      "zh": "就会提醒自己不能乱花",
+      "vi": "...thì sẽ tự nhắc mình không được tiêu bừa.",
+      "en": "You'll remind yourself not to play with flowers.",
+      "pinyin": "jiù huì tí xǐng zì jǐ bù néng luàn huā"
+    },
+    {
+      "start": 1037.6,
+      "end": 1040.2,
+      "zh": "所以说买东西没错",
+      "vi": "Vậy nên mua đồ không có gì sai...",
+      "en": "That's why it's right to buy.",
+      "pinyin": "suǒ yǐ shuō mǎi dōng xī méi cuò"
+    },
+    {
+      "start": 1040.2,
+      "end": 1043.83,
+      "zh": "但要买的有计划有节制没错",
+      "vi": "...nhưng mua có kế hoạch, có chừng mực thì đúng.",
+      "en": "But it's a plan to buy with restraint.",
+      "pinyin": "dàn yào mǎi de yǒu jì huà yǒu jié zhì méi cuò"
+    },
+    {
+      "start": 1043.87,
+      "end": 1045.47,
+      "zh": "便宜不是重点",
+      "vi": "Rẻ không phải là điểm quan trọng.",
+      "en": "Cheap isn't the point.",
+      "pinyin": "pián yi bú shì zhòng diǎn"
+    },
+    {
+      "start": 1045.47,
+      "end": 1046.54,
+      "zh": "需要才重要",
+      "vi": "Cần thiết mới quan trọng.",
+      "en": "That's what matters when you need it.",
+      "pinyin": "xū yào cái zhòng yào"
+    },
+    {
+      "start": 1046.67,
+      "end": 1049.5,
+      "zh": "对了你有没有想过除了存钱",
+      "vi": "À, bạn có từng nghĩ, ngoài việc tiết kiệm...",
+      "en": "By the way, have you ever thought about saving money?",
+      "pinyin": "duì le nǐ yǒu méi yǒu xiǎng guò chú le cún qián"
+    },
+    {
+      "start": 1049.5,
+      "end": 1050.97,
+      "zh": "还可以试着投资",
+      "vi": "...còn có thể thử đầu tư không?",
+      "en": "I can still try to invest.",
+      "pinyin": "hái kě yǐ shì zhe tóu zī"
+    },
+    {
+      "start": 1050.97,
+      "end": 1053.77,
+      "zh": "投资听起来有点复杂",
+      "vi": "Đầu tư nghe có vẻ hơi phức tạp.",
+      "en": "Investments sound a little complicated.",
+      "pinyin": "tóu zī tīng qǐ lái yǒu diǎn fù zá"
+    },
+    {
+      "start": 1053.77,
+      "end": 1054.87,
+      "zh": "我不太懂",
+      "vi": "Mình không hiểu lắm.",
+      "en": "I don't get it.",
+      "pinyin": "wǒ bú tài dǒng"
+    },
+    {
+      "start": 1054.93,
+      "end": 1056.26,
+      "zh": "我以前也不懂",
+      "vi": "Trước đây mình cũng không hiểu.",
+      "en": "I didn't understand.",
+      "pinyin": "wǒ yǐ qián yě bù dǒng"
+    },
+    {
+      "start": 1056.27,
+      "end": 1058.93,
+      "zh": "但后来我慢慢看书看视频",
+      "vi": "Nhưng sau đó mình từ từ đọc sách, xem video.",
+      "en": "But then I read the book and watched the video.",
+      "pinyin": "dàn hòu lái wǒ màn màn kàn shū kàn shì pín"
+    },
+    {
+      "start": 1058.93,
+      "end": 1060.1,
+      "zh": "学到了一点点",
+      "vi": "Học được một chút.",
+      "en": "I learned a little bit.",
+      "pinyin": "xué dào le yì diǎn diǎn"
+    },
+    {
+      "start": 1060.3,
+      "end": 1062.47,
+      "zh": "哦你都投资什么",
+      "vi": "Ồ, bạn đầu tư những gì vậy?",
+      "en": "Oh, what do you invest in?",
+      "pinyin": "ò nǐ dōu tóu zī shén me"
+    },
+    {
+      "start": 1062.53,
+      "end": 1065.26,
+      "zh": "我先从最简单的理财产品开始",
+      "vi": "Mình bắt đầu từ sản phẩm tài chính đơn giản nhất.",
+      "en": "I'll start with the simplest property.",
+      "pinyin": "wǒ xiān cóng zuì jiǎn dān de lǐ cái chǎn pǐn kāi shǐ"
+    },
+    {
+      "start": 1065.3,
+      "end": 1067.17,
+      "zh": "比如银行的定期理财",
+      "vi": "Ví dụ như sản phẩm quản lý tài chính kỳ hạn cố định của ngân hàng.",
+      "en": "Like regular bank money management.",
+      "pinyin": "bǐ rú yín háng de dìng qī lǐ cái"
+    },
+    {
+      "start": 1067.6,
+      "end": 1070.83,
+      "zh": "是不是那种保本低风险的",
+      "vi": "Có phải loại bảo toàn vốn, rủi ro thấp đó không?",
+      "en": "Isn't it the kind of low-risk job that saves money?",
+      "pinyin": "shì bu shì nà zhǒng bǎo běn dī fēng xiǎn de"
+    },
+    {
+      "start": 1070.87,
+      "end": 1073.27,
+      "zh": "对就是那种收益不高",
+      "vi": "Đúng, chính là loại lợi nhuận không cao đó.",
+      "en": "Yeah, that's the kind of thing that doesn't make much money.",
+      "pinyin": "duì jiù shì nà zhǒng shōu yì bù gāo"
+    },
+    {
+      "start": 1073.27,
+      "end": 1074.93,
+      "zh": "但比存钱多一点",
+      "vi": "Nhưng cao hơn gửi tiết kiệm một chút.",
+      "en": "But a little more than saving money.",
+      "pinyin": "dàn bǐ cún qián duō yì diǎn"
+    },
+    {
+      "start": 1074.93,
+      "end": 1076.26,
+      "zh": "听起来不错",
+      "vi": "Nghe hay đấy.",
+      "en": "Sounds good.",
+      "pinyin": "tīng qǐ lái bú cuò"
+    },
+    {
+      "start": 1076.5,
+      "end": 1079.17,
+      "zh": "那你每个月拿出多少钱来投资",
+      "vi": "Thế mỗi tháng bạn lấy bao nhiêu tiền để đầu tư?",
+      "en": "So how much do you spend every month?",
+      "pinyin": "nà nǐ měi gè yuè ná chū duō shǎo qián lái tóu zī"
+    },
+    {
+      "start": 1079.2,
+      "end": 1080.73,
+      "zh": "大概1,000块左右",
+      "vi": "Khoảng 1.000 tệ.",
+      "en": "About $1,000.",
+      "pinyin": "dà gài 1,000 kuài zuǒ yòu"
+    },
+    {
+      "start": 1080.73,
+      "end": 1083.63,
+      "zh": "不多呃但坚持每个月投一点",
+      "vi": "Không nhiều, nhưng kiên trì mỗi tháng đầu tư một chút.",
+      "en": "Not much, but a little more every month.",
+      "pinyin": "bù duō è dàn jiān chí měi gè yuè tóu yì diǎn"
+    },
+    {
+      "start": 1083.9,
+      "end": 1085.27,
+      "zh": "会不会亏欠啊",
+      "vi": "Có bị lỗ không đấy?",
+      "en": "Do you think you're in debt?",
+      "pinyin": "huì bu huì kuī qiàn a"
+    },
+    {
+      "start": 1085.37,
+      "end": 1086.67,
+      "zh": "我有点怕",
+      "vi": "Mình hơi sợ.",
+      "en": "I'm a little scared.",
+      "pinyin": "wǒ yǒu diǎn pà"
+    },
+    {
+      "start": 1086.73,
+      "end": 1088.06,
+      "zh": "一开始我也怕",
+      "vi": "Lúc đầu mình cũng sợ.",
+      "en": "I was scared at first.",
+      "pinyin": "yì kāi shǐ wǒ yě pà"
+    },
+    {
+      "start": 1088.07,
+      "end": 1090.5,
+      "zh": "所以我选择风险小的产品",
+      "vi": "Vì vậy mình chọn sản phẩm rủi ro thấp.",
+      "en": "That's why I chose a product that was less risky.",
+      "pinyin": "suǒ yǐ wǒ xuǎn zé fēng xiǎn xiǎo de chǎn pǐn"
+    },
+    {
+      "start": 1090.77,
+      "end": 1091.77,
+      "zh": "能了解更多",
+      "vi": "Để hiểu biết thêm.",
+      "en": "I can learn more.",
+      "pinyin": "néng liǎo jiě gèng duō"
+    },
+    {
+      "start": 1091.77,
+      "end": 1093.3,
+      "zh": "再慢慢试其他的",
+      "vi": "Rồi từ từ thử những loại khác.",
+      "en": "Try the rest slowly.",
+      "pinyin": "zài màn màn shì qí tā de"
+    },
+    {
+      "start": 1093.3,
+      "end": 1096.2,
+      "zh": "嗯感觉还是要先学习",
+      "vi": "Ừ, mình thấy vẫn phải học trước đã.",
+      "en": "Well, it feels like you have to learn first.",
+      "pinyin": "ǹg gǎn jué hái shì yào xiān xué xí"
+    },
+    {
+      "start": 1096.2,
+      "end": 1098.03,
+      "zh": "不能乱投对",
+      "vi": "Không được đầu tư bừa, đúng vậy.",
+      "en": "You can't throw the right thing.",
+      "pinyin": "bù néng luàn tóu duì"
+    },
+    {
+      "start": 1098.1,
+      "end": 1099.73,
+      "zh": "投资不是买彩票",
+      "vi": "Đầu tư không phải mua vé số.",
+      "en": "The investment is not a lottery ticket.",
+      "pinyin": "tóu zī bú shì mǎi cǎi piào"
+    },
+    {
+      "start": 1099.73,
+      "end": 1100.86,
+      "zh": "要有计划",
+      "vi": "Phải có kế hoạch.",
+      "en": "There's a plan.",
+      "pinyin": "yào yǒu jì huà"
+    },
+    {
+      "start": 1100.87,
+      "end": 1102.17,
+      "zh": "也要了解市场",
+      "vi": "Cũng phải hiểu thị trường.",
+      "en": "You have to know the market.",
+      "pinyin": "yě yào liǎo jiě shì chǎng"
+    },
+    {
+      "start": 1102.3,
+      "end": 1104.4,
+      "zh": "那你有没有买过股票",
+      "vi": "Thế bạn đã từng mua cổ phiếu chưa?",
+      "en": "Have you ever bought a stock?",
+      "pinyin": "nà nǐ yǒu méi yǒu mǎi guò gǔ piào"
+    },
+    {
+      "start": 1104.67,
+      "end": 1106.04,
+      "zh": "有试过一点点",
+      "vi": "Có, đã thử một chút.",
+      "en": "I tried a little bit.",
+      "pinyin": "yǒu shì guò yì diǎn diǎn"
+    },
+    {
+      "start": 1106.17,
+      "end": 1108.1,
+      "zh": "但我买的是长期的",
+      "vi": "Nhưng mình mua loại dài hạn.",
+      "en": "But I'm buying it for a long time.",
+      "pinyin": "dàn wǒ mǎi de shì cháng qī de"
+    },
+    {
+      "start": 1108.1,
+      "end": 1110.1,
+      "zh": "不是每天看涨跌那种",
+      "vi": "Không phải kiểu ngày nào cũng theo dõi tăng giảm.",
+      "en": "It's not the kind of thing that looks up and down every day.",
+      "pinyin": "bú shì měi tiān kàn zhǎng diē nà zhǒng"
+    },
+    {
+      "start": 1110.2,
+      "end": 1112.3,
+      "zh": "股票我更不懂了",
+      "vi": "Còn cổ phiếu thì mình càng không hiểu.",
+      "en": "I don't understand the stock.",
+      "pinyin": "gǔ piào wǒ gèng bù dǒng le"
+    },
+    {
+      "start": 1112.47,
+      "end": 1115.33,
+      "zh": "你觉得我现在开始学晚吗",
+      "vi": "Bạn có thấy bây giờ mình bắt đầu học là muộn không?",
+      "en": "Do you think I'm going to learn late?",
+      "pinyin": "nǐ jué de wǒ xiàn zài kāi shǐ xué wǎn ma"
+    },
+    {
+      "start": 1115.33,
+      "end": 1117.9,
+      "zh": "不会什么时候开始都不晚",
+      "vi": "Không đâu, bắt đầu lúc nào cũng không muộn.",
+      "en": "It won't start any time soon.",
+      "pinyin": "bú huì shén me shí hòu kāi shǐ dōu bù wǎn"
+    },
+    {
+      "start": 1117.93,
+      "end": 1119.3,
+      "zh": "先学技术知识",
+      "vi": "Trước hết học kiến thức kỹ thuật.",
+      "en": "Initial technical knowledge",
+      "pinyin": "xiān xué jì shù zhī shi"
+    },
+    {
+      "start": 1119.3,
+      "end": 1120.9,
+      "zh": "然后慢慢试一点点",
+      "vi": "Rồi từ từ thử từng chút một.",
+      "en": "And then try a little bit.",
+      "pinyin": "rán hòu màn màn shì yì diǎn diǎn"
+    },
+    {
+      "start": 1121.1,
+      "end": 1123.03,
+      "zh": "那你建议从哪里学",
+      "vi": "Vậy bạn gợi ý nên học từ đâu?",
+      "en": "So where do you suggest we learn?",
+      "pinyin": "nà nǐ jiàn yì cóng nǎ lǐ xué"
+    },
+    {
+      "start": 1123.1,
+      "end": 1125.37,
+      "zh": "可以从看一些理财的书开始",
+      "vi": "Có thể bắt đầu từ việc đọc vài cuốn sách về quản lý tài chính.",
+      "en": "We could start with a few books on money management.",
+      "pinyin": "kě yǐ cóng kàn yì xiē lǐ cái de shū kāi shǐ"
+    },
+    {
+      "start": 1125.37,
+      "end": 1127.57,
+      "zh": "或者找免费的入门课程",
+      "vi": "Hoặc tìm các khóa nhập môn miễn phí.",
+      "en": "Or a free introductory course.",
+      "pinyin": "huò zhě zhǎo miǎn fèi de rù mén kè chéng"
+    },
+    {
+      "start": 1127.8,
+      "end": 1129.87,
+      "zh": "好我回去看看",
+      "vi": "Được, mình về sẽ xem thử.",
+      "en": "Okay, I'll go check it out.",
+      "pinyin": "hǎo wǒ huí qù kàn kàn"
+    },
+    {
+      "start": 1130.1,
+      "end": 1132.3,
+      "zh": "女生也要会投资才行",
+      "vi": "Con gái cũng phải biết đầu tư mới được.",
+      "en": "Girls have to invest too.",
+      "pinyin": "nǚ shēng yě yào huì tóu zī cái xíng"
+    },
+    {
+      "start": 1132.3,
+      "end": 1134.13,
+      "zh": "对呀不管男女",
+      "vi": "Đúng vậy, bất kể nam hay nữ.",
+      "en": "Yeah, men and women.",
+      "pinyin": "duì ya bù guǎn nán nǚ"
+    },
+    {
+      "start": 1134.13,
+      "end": 1136.76,
+      "zh": "学会理财和投资都很重要",
+      "vi": "Học cách quản lý tài chính và đầu tư đều rất quan trọng.",
+      "en": "It's important to learn to manage money and investment.",
+      "pinyin": "xué huì lǐ cái hé tóu zī dōu hěn zhòng yào"
+    },
+    {
+      "start": 1136.87,
+      "end": 1138.97,
+      "zh": "投资除了赚钱",
+      "vi": "Đầu tư, ngoài việc kiếm tiền...",
+      "en": "I'm making money for it.",
+      "pinyin": "tóu zī chú le zhuàn qián"
+    },
+    {
+      "start": 1138.97,
+      "end": 1139.53,
+      "zh": "好像",
+      "vi": "dường như...",
+      "en": "It's like",
+      "pinyin": "hǎo xiàng"
+    },
+    {
+      "start": 1139.53,
+      "end": 1142.3,
+      "zh": "也能让我们更了解自己的消费习惯",
+      "vi": "còn có thể giúp chúng ta hiểu rõ hơn thói quen tiêu dùng của mình.",
+      "en": "It also gives us a better understanding of our consumption habits.",
+      "pinyin": "yě néng ràng wǒ men gèng liǎo jiě zì jǐ de xiāo fèi xí guàn"
+    },
+    {
+      "start": 1142.4,
+      "end": 1145.17,
+      "zh": "是的而且学会理财之后",
+      "vi": "Đúng vậy, và sau khi biết quản lý tài chính...",
+      "en": "Yes, and after learning how to manage money,",
+      "pinyin": "shì de ér qiě xué huì lǐ cái zhī hòu"
+    },
+    {
+      "start": 1145.17,
+      "end": 1147.07,
+      "zh": "花钱也会更有节制",
+      "vi": "việc tiêu tiền cũng sẽ có chừng mực hơn.",
+      "en": "It'll be more modest.",
+      "pinyin": "huā qián yě huì gèng yǒu jié zhì"
+    },
+    {
+      "start": 1147.3,
+      "end": 1149.17,
+      "zh": "那你有没有设一个目标",
+      "vi": "Vậy bạn đã đặt ra mục tiêu nào chưa?",
+      "en": "Did you set a target?",
+      "pinyin": "nà nǐ yǒu méi yǒu shè yí gè mù biāo"
+    },
+    {
+      "start": 1149.17,
+      "end": 1151.33,
+      "zh": "比如几年后想",
+      "vi": "Ví dụ, muốn sau vài năm...",
+      "en": "Like a few years later.",
+      "pinyin": "bǐ rú jǐ nián hòu xiǎng"
+    },
+    {
+      "start": 1151.33,
+      "end": 1152.76,
+      "zh": "要存多少钱",
+      "vi": "tiết kiệm được bao nhiêu tiền.",
+      "en": "How much is it gonna cost?",
+      "pinyin": "yào cún duō shǎo qián"
+    },
+    {
+      "start": 1152.77,
+      "end": 1156.84,
+      "zh": "有啊我希望三年后能存够5万块",
+      "vi": "Có chứ, mình hy vọng ba năm sau có thể tiết kiệm đủ 50.000 tệ.",
+      "en": "Yeah, I'd like to save $50,000 in three years.",
+      "pinyin": "yǒu a wǒ xī wàng sān nián hòu néng cún gòu 5 wàn kuài"
+    },
+    {
+      "start": 1156.9,
+      "end": 1159.23,
+      "zh": "用来旅游或者做点小生意",
+      "vi": "để đi du lịch hoặc làm chút kinh doanh nhỏ.",
+      "en": "For a trip or a little business.",
+      "pinyin": "yòng lái lǚ yóu huò zhě zuò diǎn xiǎo shēng yì"
+    },
+    {
+      "start": 1159.47,
+      "end": 1160.6,
+      "zh": "好棒的目标",
+      "vi": "Mục tiêu hay quá.",
+      "en": "That's a great target.",
+      "pinyin": "hǎo bàng de mù biāo"
+    },
+    {
+      "start": 1160.67,
+      "end": 1162.04,
+      "zh": "我也要设一个",
+      "vi": "Mình cũng phải đặt một cái.",
+      "en": "I'm gonna have one too.",
+      "pinyin": "wǒ yě yào shè yí gè"
+    },
+    {
+      "start": 1162.07,
+      "end": 1165.13,
+      "zh": "比如一年内存2万",
+      "vi": "Ví dụ, trong một năm tiết kiệm 20.000 tệ.",
+      "en": "Like 20,000 a year.",
+      "pinyin": "bǐ rú yī nián nèi cún 2 wàn"
+    },
+    {
+      "start": 1165.13,
+      "end": 1167.96,
+      "zh": "然后拿5,000去尝试投资",
+      "vi": "Rồi lấy 5.000 tệ để thử đầu tư.",
+      "en": "Then I'll take 5,000 and try to invest.",
+      "pinyin": "rán hòu ná 5,000 qù cháng shì tóu zī"
+    },
+    {
+      "start": 1168.2,
+      "end": 1170.3,
+      "zh": "太好了我们互相鼓励",
+      "vi": "Hay quá, chúng ta cùng động viên nhau.",
+      "en": "That's great. We encourage each other.",
+      "pinyin": "tài hǎo le wǒ men hù xiāng gǔ lì"
+    },
+    {
+      "start": 1170.3,
+      "end": 1172.23,
+      "zh": "一起学习一起进步",
+      "vi": "Cùng học, cùng tiến bộ.",
+      "en": "Learn together and move forward.",
+      "pinyin": "yì qǐ xué xí yì qǐ jìn bù"
+    },
+    {
+      "start": 1172.27,
+      "end": 1174.2,
+      "zh": "嗯说不定哪天",
+      "vi": "Ừ, biết đâu một ngày nào đó...",
+      "en": "Well, maybe someday.",
+      "pinyin": "ǹg shuō bú dìng nǎ tiān"
+    },
+    {
+      "start": 1174.2,
+      "end": 1176.3,
+      "zh": "我们可以一起开个小公司",
+      "vi": "chúng ta có thể cùng mở một công ty nhỏ.",
+      "en": "We could start a small company together.",
+      "pinyin": "wǒ men kě yǐ yì qǐ kāi gè xiǎo gōng sī"
+    },
+    {
+      "start": 1176.3,
+      "end": 1177.67,
+      "zh": "哈哈哈哈",
+      "vi": "Ha ha ha ha.",
+      "en": "Ha ha ha ha!",
+      "pinyin": "hā hā hā hā"
+    },
+    {
+      "start": 1177.67,
+      "end": 1179.4,
+      "zh": "好啊说不定真有机会",
+      "vi": "Được đấy, biết đâu thật sự có cơ hội.",
+      "en": "Well, maybe there's a chance.",
+      "pinyin": "hǎo a shuō bú dìng zhēn yǒu jī huì"
+    },
+    {
+      "start": 1179.5,
+      "end": 1181.23,
+      "zh": "不过你有没有发现",
+      "vi": "Nhưng bạn có để ý không...",
+      "en": "But you didn't find out.",
+      "pinyin": "bú guò nǐ yǒu méi yǒu fā xiàn"
+    },
+    {
+      "start": 1181.27,
+      "end": 1183.37,
+      "zh": "现在有些人很节省",
+      "vi": "Bây giờ có người rất tiết kiệm.",
+      "en": "Now some people are saving.",
+      "pinyin": "xiàn zài yǒu xiē rén hěn jié shěng"
+    },
+    {
+      "start": 1183.37,
+      "end": 1186.1,
+      "zh": "有些人却花钱完全不看",
+      "vi": "Có người lại tiêu tiền chẳng thèm nhìn giá.",
+      "en": "Some people don't even look at it.",
+      "pinyin": "yǒu xiē rén què huā qián wán quán bú kàn"
+    },
+    {
+      "start": 1186.1,
+      "end": 1188.37,
+      "zh": "对我有个朋友就是那种",
+      "vi": "Đúng, mình có một người bạn đúng kiểu...",
+      "en": "It's like having a friend to me.",
+      "pinyin": "duì wǒ yǒu gè péng yǒu jiù shì nà zhǒng"
+    },
+    {
+      "start": 1188.37,
+      "end": 1190.04,
+      "zh": "大手大脚的类型",
+      "vi": "tiêu tiền hoang phí.",
+      "en": "Type of big hands and feet",
+      "pinyin": "dà shǒu dà jiǎo de lèi xíng"
+    },
+    {
+      "start": 1190.1,
+      "end": 1191.63,
+      "zh": "看到什么都买",
+      "vi": "thấy gì cũng mua.",
+      "en": "I'll buy anything.",
+      "pinyin": "kàn dào shén me dōu mǎi"
+    },
+    {
+      "start": 1191.8,
+      "end": 1195,
+      "zh": "哈哈哈我以前也有点像他",
+      "vi": "Ha ha ha, hồi trước mình cũng hơi giống cậu ấy.",
+      "en": "I used to look a little like him.",
+      "pinyin": "hā hā hā wǒ yǐ qián yě yǒu diǎn xiàng tā"
+    },
+    {
+      "start": 1195,
+      "end": 1197.67,
+      "zh": "喜欢就买不管用不用得上",
+      "vi": "thích là mua, mặc kệ có dùng được hay không.",
+      "en": "It doesn't matter if you like it.",
+      "pinyin": "xǐ huan jiù mǎi bù guǎn yòng bu yòng dé shàng"
+    },
+    {
+      "start": 1197.67,
+      "end": 1199.77,
+      "zh": "那现在呢你变了吗",
+      "vi": "Thế bây giờ thì sao, bạn đã thay đổi chưa?",
+      "en": "What about now? Have you changed?",
+      "pinyin": "nà xiàn zài ne nǐ biàn le ma"
+    },
+    {
+      "start": 1199.77,
+      "end": 1204.47,
+      "zh": "有改变我现在开始慢慢变节省了",
+      "vi": "Có thay đổi, bây giờ mình bắt đầu dần dần tiết kiệm hơn.",
+      "en": "I'm starting to save a lot of money.",
+      "pinyin": "yǒu gǎi biàn wǒ xiàn zài kāi shǐ màn màn biàn jié shěng le"
+    },
+    {
+      "start": 1204.5,
+      "end": 1205.8,
+      "zh": "不是因为穷",
+      "vi": "Không phải vì nghèo.",
+      "en": "It's not poverty.",
+      "pinyin": "bú shì yīn wèi qióng"
+    },
+    {
+      "start": 1205.8,
+      "end": 1208.27,
+      "zh": "而是想要过得更有计划",
+      "vi": "mà là muốn sống có kế hoạch hơn.",
+      "en": "It's about having a better life.",
+      "pinyin": "ér shì xiǎng yào guò dé gèng yǒu jì huà"
+    },
+    {
+      "start": 1208.27,
+      "end": 1211.47,
+      "zh": "很好啊我觉得节省不是抠门",
+      "vi": "Hay đấy, mình nghĩ tiết kiệm không phải là keo kiệt.",
+      "en": "That's good. I don't think saving is a trick.",
+      "pinyin": "hěn hǎo a wǒ jué de jié shěng bú shì kōu mén"
+    },
+    {
+      "start": 1211.47,
+      "end": 1212.9,
+      "zh": "是聪明的用钱",
+      "vi": "mà là dùng tiền một cách thông minh.",
+      "en": "It's smart money.",
+      "pinyin": "shì cōng ming de yòng qián"
+    },
+    {
+      "start": 1212.9,
+      "end": 1214.87,
+      "zh": "对而且我发现",
+      "vi": "Đúng, và mình phát hiện ra...",
+      "en": "Yes, and I found out.",
+      "pinyin": "duì ér qiě wǒ fā xiàn"
+    },
+    {
+      "start": 1214.87,
+      "end": 1218.33,
+      "zh": "有时候简单的生活反而更舒服",
+      "vi": "đôi khi cuộc sống đơn giản lại dễ chịu hơn.",
+      "en": "Sometimes a simple life is more comfortable.",
+      "pinyin": "yǒu shí hòu jiǎn dān de shēng huó fǎn ér gèng shū fú"
+    },
+    {
+      "start": 1218.33,
+      "end": 1221.2,
+      "zh": "没错有些人工资很高",
+      "vi": "Đúng vậy, có những người lương rất cao.",
+      "en": "Yeah, some people pay a lot.",
+      "pinyin": "méi cuò yǒu xiē rén gōng zī hěn gāo"
+    },
+    {
+      "start": 1221.2,
+      "end": 1223.57,
+      "zh": "但每个月还是月光族",
+      "vi": "Nhưng tháng nào vẫn tiêu sạch lương.",
+      "en": "But every month it's the Moonlights.",
+      "pinyin": "dàn měi gè yuè hái shì yuè guāng zú"
+    },
+    {
+      "start": 1223.57,
+      "end": 1226.9,
+      "zh": "是啊赚的多不代表存的多",
+      "vi": "Đúng vậy, kiếm nhiều không có nghĩa là để dành được nhiều.",
+      "en": "Yeah, it doesn't mean it's saved.",
+      "pinyin": "shì a zhuàn de duō bú dài biǎo cún de duō"
+    },
+    {
+      "start": 1226.93,
+      "end": 1229.13,
+      "zh": "重点是会不会管理",
+      "vi": "Quan trọng là có biết quản lý hay không.",
+      "en": "The point is whether to manage it.",
+      "pinyin": "zhòng diǎn shì huì bu huì guǎn lǐ"
+    },
+    {
+      "start": 1229.13,
+      "end": 1232.2,
+      "zh": "对你记得我刚开始工作的时候",
+      "vi": "Đúng rồi, bạn còn nhớ hồi mình mới đi làm không?",
+      "en": "Remember when I started working.",
+      "pinyin": "duì nǐ jì de wǒ gāng kāi shǐ gōng zuò de shí hòu"
+    },
+    {
+      "start": 1232.2,
+      "end": 1233.37,
+      "zh": "工资不高",
+      "vi": "Lương không cao.",
+      "en": "Low pay.",
+      "pinyin": "gōng zī bù gāo"
+    },
+    {
+      "start": 1233.37,
+      "end": 1235.5,
+      "zh": "但我每个月都能存一点",
+      "vi": "Nhưng tháng nào mình cũng để dành được một chút.",
+      "en": "But I can save a little every month.",
+      "pinyin": "dàn wǒ měi gè yuè dōu néng cún yì diǎn"
+    },
+    {
+      "start": 1235.5,
+      "end": 1237.8,
+      "zh": "那时候你是怎么做到的",
+      "vi": "Hồi đó bạn làm thế nào vậy?",
+      "en": "How did you do that?",
+      "pinyin": "nà shí hòu nǐ shì zěn me zuò dào de"
+    },
+    {
+      "start": 1237.8,
+      "end": 1240.17,
+      "zh": "很简单只买需要的",
+      "vi": "Rất đơn giản: chỉ mua những thứ cần thiết.",
+      "en": "It's simple to buy only what you need.",
+      "pinyin": "hěn jiǎn dān zhī mǎi xū yào de"
+    },
+    {
+      "start": 1240.17,
+      "end": 1241.57,
+      "zh": "不冲动购物",
+      "vi": "Không mua sắm bốc đồng.",
+      "en": "No rush shopping.",
+      "pinyin": "bù chōng dòng gòu wù"
+    },
+    {
+      "start": 1241.6,
+      "end": 1244.17,
+      "zh": "还有尽量不欠信用卡",
+      "vi": "Ngoài ra, cố gắng đừng để nợ thẻ tín dụng.",
+      "en": "And try not to owe credit cards.",
+      "pinyin": "hái yǒu jǐn liàng bú qiàn xìn yòng kǎ"
+    },
+    {
+      "start": 1244.17,
+      "end": 1247.7,
+      "zh": "哇我以前就吃过信用卡的亏",
+      "vi": "Trời ơi, hồi trước mình từng khổ vì thẻ tín dụng rồi.",
+      "en": "Wow, I've had credit cards before.",
+      "pinyin": "wā wǒ yǐ qián jiù chī guò xìn yòng kǎ de kuī"
+    },
+    {
+      "start": 1248.1,
+      "end": 1249.67,
+      "zh": "看起来没多少钱",
+      "vi": "Nhìn qua thì tưởng không đáng bao nhiêu.",
+      "en": "Doesn't look like much.",
+      "pinyin": "kàn qǐ lái méi duō shǎo qián"
+    },
+    {
+      "start": 1249.67,
+      "end": 1252.2,
+      "zh": "其实每个月还很痛苦",
+      "vi": "Thực ra tháng nào cũng rất khổ.",
+      "en": "It's really hard every month.",
+      "pinyin": "qí shí měi gè yuè hái hěn tòng kǔ"
+    },
+    {
+      "start": 1252.2,
+      "end": 1254.67,
+      "zh": "所以我一直不办信用卡",
+      "vi": "Nên mình không bao giờ mở thẻ tín dụng.",
+      "en": "That's why I don't do credit cards.",
+      "pinyin": "suǒ yǐ wǒ yì zhí bú bàn xìn yòng kǎ"
+    },
+    {
+      "start": 1254.67,
+      "end": 1256.4,
+      "zh": "用多少付多少",
+      "vi": "Dùng bao nhiêu trả bấy nhiêu.",
+      "en": "I'll pay you as much as I can.",
+      "pinyin": "yòng duō shǎo fù duō shǎo"
+    },
+    {
+      "start": 1256.4,
+      "end": 1257.37,
+      "zh": "看得清楚",
+      "vi": "Thấy rõ ràng từng khoản.",
+      "en": "See clearly.",
+      "pinyin": "kàn dé qīng chǔ"
+    },
+    {
+      "start": 1257.37,
+      "end": 1261,
+      "zh": "对我现在也是只用储蓄卡",
+      "vi": "Đúng, giờ mình cũng chỉ dùng thẻ ghi nợ.",
+      "en": "Yeah, I'm just using a savings card.",
+      "pinyin": "duì wǒ xiàn zài yě shì zhī yòng chǔ xù kǎ"
+    },
+    {
+      "start": 1261,
+      "end": 1262.2,
+      "zh": "花的安心",
+      "vi": "Tiêu mà thấy yên tâm.",
+      "en": "The comfort of the flowers.",
+      "pinyin": "huā de ān xīn"
+    },
+    {
+      "start": 1262.27,
+      "end": 1264.6,
+      "zh": "有些人觉得节省很辛苦",
+      "vi": "Có người thấy tiết kiệm rất vất vả.",
+      "en": "Some people find it hard to save.",
+      "pinyin": "yǒu xiē rén jué de jié shěng hěn xīn kǔ"
+    },
+    {
+      "start": 1264.6,
+      "end": 1267.4,
+      "zh": "但其实是为了将来更轻松",
+      "vi": "Nhưng thực ra là để sau này nhẹ nhàng hơn.",
+      "en": "But it's for the future.",
+      "pinyin": "dàn qí shí shì wèi le jiāng lái gèng qīng sōng"
+    },
+    {
+      "start": 1267.4,
+      "end": 1270.5,
+      "zh": "我现在每个月都会安排一部分钱",
+      "vi": "Giờ tháng nào mình cũng trích ra một khoản tiền.",
+      "en": "I've got some money every month.",
+      "pinyin": "wǒ xiàn zài měi gè yuè dōu huì ān pái yí bù fen qián"
+    },
+    {
+      "start": 1270.5,
+      "end": 1272.07,
+      "zh": "当自由花费",
+      "vi": "Coi như khoản chi tiêu tự do.",
+      "en": "When freedom costs",
+      "pinyin": "dāng zì yóu huā fèi"
+    },
+    {
+      "start": 1272.1,
+      "end": 1274.53,
+      "zh": "其他都存起来很好",
+      "vi": "Còn lại đều đem gửi tiết kiệm, rất tốt.",
+      "en": "Everything else is fine.",
+      "pinyin": "qí tā dōu cún qǐ lái hěn hǎo"
+    },
+    {
+      "start": 1274.53,
+      "end": 1276.4,
+      "zh": "有规划才有安全感",
+      "vi": "Có kế hoạch mới có cảm giác an toàn.",
+      "en": "It's safe to have a plan.",
+      "pinyin": "yǒu guī huà cái yǒu ān quán gǎn"
+    },
+    {
+      "start": 1276.4,
+      "end": 1279.47,
+      "zh": "你有没有遇过那种什么都不买",
+      "vi": "Bạn đã từng gặp kiểu người không mua gì cả,",
+      "en": "Have you ever seen anything like that?",
+      "pinyin": "nǐ yǒu méi yǒu yù guò nà zhǒng shén me dōu bù mǎi"
+    },
+    {
+      "start": 1279.47,
+      "end": 1281.2,
+      "zh": "只会存的人",
+      "vi": "chỉ biết để dành tiền chưa?",
+      "en": "The only one left.",
+      "pinyin": "zhī huì cún de rén"
+    },
+    {
+      "start": 1281.2,
+      "end": 1283.5,
+      "zh": "有啊有人太节省",
+      "vi": "Có chứ, có người tiết kiệm quá mức.",
+      "en": "Yeah, someone's saving too much.",
+      "pinyin": "yǒu a yǒu rén tài jié shěng"
+    },
+    {
+      "start": 1283.5,
+      "end": 1286.87,
+      "zh": "了连朋友聚餐都不来说太贵",
+      "vi": "Đến cả buổi tụ tập ăn uống với bạn bè cũng không đến, bảo là đắt quá.",
+      "en": "Not even a friend's dinner is too expensive.",
+      "pinyin": "liǎo lián péng yǒu jù cān dōu bù lái shuō tài guì"
+    },
+    {
+      "start": 1286.87,
+      "end": 1289.84,
+      "zh": "哈哈哈那样也不太好",
+      "vi": "Hahaha như vậy cũng không tốt lắm.",
+      "en": "That's not good either.",
+      "pinyin": "hā hā hā nà yàng yě bú tài hǎo"
+    },
+    {
+      "start": 1289.9,
+      "end": 1292.87,
+      "zh": "生活还是要有一点乐趣对",
+      "vi": "Cuộc sống vẫn cần có chút niềm vui, đúng không?",
+      "en": "Life has to have a little fun, right?",
+      "pinyin": "shēng huó hái shì yào yǒu yì diǎn lè qù duì"
+    },
+    {
+      "start": 1292.9,
+      "end": 1294.57,
+      "zh": "所以要找到平衡",
+      "vi": "Nên phải tìm được sự cân bằng.",
+      "en": "That's why we need to find balance.",
+      "pinyin": "suǒ yǐ yào zhǎo dào píng héng"
+    },
+    {
+      "start": 1294.67,
+      "end": 1295.77,
+      "zh": "不能太省",
+      "vi": "Không thể tiết kiệm quá mức.",
+      "en": "Don't be too careful.",
+      "pinyin": "bù néng tài shěng"
+    },
+    {
+      "start": 1295.77,
+      "end": 1296.93,
+      "zh": "也不能乱花",
+      "vi": "Cũng không thể tiêu hoang.",
+      "en": "You can't do that.",
+      "pinyin": "yě bù néng luàn huā"
+    },
+    {
+      "start": 1296.93,
+      "end": 1301.26,
+      "zh": "没错我现在的目标就是聪明花钱",
+      "vi": "Đúng vậy, mục tiêu hiện tại của mình là tiêu tiền thông minh.",
+      "en": "Yes, I'm aiming at smart money.",
+      "pinyin": "méi cuò wǒ xiàn zài de mù biāo jiù shì cōng ming huā qián"
+    },
+    {
+      "start": 1301.27,
+      "end": 1302.6,
+      "zh": "开心生活",
+      "vi": "Sống vui vẻ.",
+      "en": "Happy life.",
+      "pinyin": "kāi xīn shēng huó"
+    },
+    {
+      "start": 1302.6,
+      "end": 1305.2,
+      "zh": "好目标只要有规划",
+      "vi": "Mục tiêu hay, chỉ cần có kế hoạch.",
+      "en": "A good target only if it's planned.",
+      "pinyin": "hǎo mù biāo zhǐ yào yǒu guī huà"
+    },
+    {
+      "start": 1305.2,
+      "end": 1307.87,
+      "zh": "就能慢慢实现自己想要的生活",
+      "vi": "là có thể dần dần có được cuộc sống mình muốn.",
+      "en": "You'll be able to live the life you want.",
+      "pinyin": "jiù néng màn màn shí xiàn zì jǐ xiǎng yào de shēng huó"
+    },
+    {
+      "start": 1307.87,
+      "end": 1308.67,
+      "zh": "嗯",
+      "vi": "Ừm.",
+      "en": "Yeah.",
+      "pinyin": "ǹg"
+    },
+    {
+      "start": 1308.7,
+      "end": 1312,
+      "zh": "我们已经比以前更会用钱了对吧",
+      "vi": "Chúng ta đã biết dùng tiền giỏi hơn trước rồi, đúng không?",
+      "en": "We're good at money now, aren't we?",
+      "pinyin": "wǒ men yǐ jīng bǐ yǐ qián gèng huì yòng qián le duì ba"
+    },
+    {
+      "start": 1312,
+      "end": 1315.53,
+      "zh": "当然了而且中文也进步了不少",
+      "vi": "Tất nhiên rồi, hơn nữa tiếng Trung cũng tiến bộ không ít.",
+      "en": "Of course, and Chinese has improved a lot.",
+      "pinyin": "dāng rán le ér qiě zhōng wén yě jìn bù le bù shǎo"
+    },
+    {
+      "start": 1315.53,
+      "end": 1319.13,
+      "zh": "哈哈哈一起成长真不错",
+      "vi": "Hahaha cùng nhau trưởng thành thật tuyệt.",
+      "en": "It's nice to grow up together.",
+      "pinyin": "hā hā hā yì qǐ chéng zhǎng zhēn bú cuò"
+    },
+    {
+      "start": 1319.2,
+      "end": 1320.2,
+      "zh": "你有没有觉得",
+      "vi": "Bạn có thấy...",
+      "en": "Do you think...",
+      "pinyin": "nǐ yǒu méi yǒu jué de"
+    },
+    {
+      "start": 1320.2,
+      "end": 1323.33,
+      "zh": "我们今天聊了好多关于钱的中文",
+      "vi": "Hôm nay chúng ta nói rất nhiều tiếng Trung về chuyện tiền bạc.",
+      "en": "We talked a lot about money in Chinese today.",
+      "pinyin": "wǒ men jīn tiān liáo le hǎo duō guān yú qián de zhōng wén"
+    },
+    {
+      "start": 1323.33,
+      "end": 1328.8,
+      "zh": "对啊，从“钱”、“块”、“元”到“收入”，",
+      "vi": "Ừ, từ 钱, 块, 元 cho đến 收入, nghĩa là thu nhập,",
+      "en": "Right, from money and the units kuai and yuan to income,",
+      "pinyin": "duì a ， cóng “ qián ”、“ kuài ”、“ yuán ” dào “ shōu rù ”，"
+    },
+    {
+      "start": 1328.8,
+      "end": 1331.67,
+      "zh": "存钱投资都讲到了",
+      "vi": "Chuyện tiết kiệm tiền, đầu tư đều nói đến rồi.",
+      "en": "I've already told you about the savings.",
+      "pinyin": "cún qián tóu zī dōu jiǎng dào le"
+    },
+    {
+      "start": 1331.67,
+      "end": 1336.47,
+      "zh": "而且我们还学了怎么说借钱还钱",
+      "vi": "Và chúng ta còn học cách nói '借钱' (vay tiền), '还钱' (trả tiền).",
+      "en": "And we've learned how to borrow money and repay it.",
+      "pinyin": "ér qiě wǒ men hái xué le zěn me shuō jiè qián hái qián"
+    },
+    {
+      "start": 1336.6,
+      "end": 1338.13,
+      "zh": "生活费这些",
+      "vi": "cả '生活费' (chi phí sinh hoạt) nữa.",
+      "en": "It's a living.",
+      "pinyin": "shēng huó fèi zhè xiē"
+    },
+    {
+      "start": 1338.13,
+      "end": 1339.86,
+      "zh": "我觉得特别实用",
+      "vi": "Tôi thấy rất thiết thực",
+      "en": "I think it's very practical.",
+      "pinyin": "wǒ jué de tè bié shí yòng"
+    },
+    {
+      "start": 1339.9,
+      "end": 1342.3,
+      "zh": "下次去超市点外卖",
+      "vi": "Lần sau đến siêu thị gọi đồ ăn ngoài",
+      "en": "Next time, we'll go to the supermarket.",
+      "pinyin": "xià cì qù chāo shì diǎn wài mài"
+    },
+    {
+      "start": 1342.3,
+      "end": 1345.8,
+      "zh": "付房租就可以用上这些词了对",
+      "vi": "Trả tiền thuê nhà là có thể dùng được những từ này rồi, đúng không",
+      "en": "That's the word for paying rent.",
+      "pinyin": "fù fáng zū jiù kě yǐ yòng shàng zhè xiē cí le duì"
+    },
+    {
+      "start": 1345.8,
+      "end": 1348.9,
+      "zh": "还有多少钱太贵了",
+      "vi": "Còn bao nhiêu tiền, đắt quá",
+      "en": "How much more is too much?",
+      "pinyin": "hái yǒu duō shǎo qián tài guì le"
+    },
+    {
+      "start": 1348.9,
+      "end": 1352.17,
+      "zh": "便宜点这些句子也都很常用",
+      "vi": "Rẻ chút đi, những câu này cũng đều rất thường dùng",
+      "en": "It's a lot of cheap sentences.",
+      "pinyin": "pián yi diǎn zhè xiē jù zi yě dōu hěn cháng yòng"
+    },
+    {
+      "start": 1352.2,
+      "end": 1355.07,
+      "zh": "我最喜欢的句子是我想存钱",
+      "vi": "Câu tôi thích nhất là \"tôi muốn tiết kiệm tiền\"",
+      "en": "My favorite sentence is that I want to save money.",
+      "pinyin": "wǒ zuì xǐ huan de jù zi shì wǒ xiǎng cún qián"
+    },
+    {
+      "start": 1355.07,
+      "end": 1356.4,
+      "zh": "不想乱花",
+      "vi": "Không muốn tiêu hoang",
+      "en": "I don't want to do that.",
+      "pinyin": "bù xiǎng luàn huā"
+    },
+    {
+      "start": 1356.4,
+      "end": 1358.2,
+      "zh": "哈哈哈哈",
+      "vi": "Ha ha ha ha",
+      "en": "Ha ha ha ha!",
+      "pinyin": "hā hā hā hā"
+    },
+    {
+      "start": 1358.2,
+      "end": 1360.3,
+      "zh": "我也是你说的很对",
+      "vi": "Tôi cũng vậy, bạn nói rất đúng",
+      "en": "You're right, too.",
+      "pinyin": "wǒ yě shì nǐ shuō de hěn duì"
+    },
+    {
+      "start": 1360.3,
+      "end": 1361.67,
+      "zh": "不过讲真的",
+      "vi": "Nhưng nói thật đấy",
+      "en": "But seriously...",
+      "pinyin": "bú guò jiǎng zhēn de"
+    },
+    {
+      "start": 1361.67,
+      "end": 1364.67,
+      "zh": "我觉得学会用中文谈钱",
+      "vi": "Tôi thấy học được cách dùng tiếng Trung để nói về tiền",
+      "en": "I thought I learned to talk about money in Chinese.",
+      "pinyin": "wǒ jué de xué huì yòng zhōng wén tán qián"
+    },
+    {
+      "start": 1364.67,
+      "end": 1367.27,
+      "zh": "是一个很大的进步嗯",
+      "vi": "là một bước tiến rất lớn, ừm",
+      "en": "It's a big step forward, huh?",
+      "pinyin": "shì yí gè hěn dà de jìn bù ǹg"
+    },
+    {
+      "start": 1367.27,
+      "end": 1370.47,
+      "zh": "因为钱是生活的一部分",
+      "vi": "Vì tiền là một phần của cuộc sống",
+      "en": "Because money is part of life.",
+      "pinyin": "yīn wèi qián shì shēng huó de yí bù fen"
+    },
+    {
+      "start": 1370.67,
+      "end": 1374.3,
+      "zh": "会说这些才能在中国生活更轻松",
+      "vi": "Biết nói những câu này thì sống ở Trung Quốc mới nhẹ nhàng hơn",
+      "en": "It's easier to live in China.",
+      "pinyin": "huì shuō zhè xiē cái néng zài zhōng guó shēng huó gèng qīng sōng"
+    },
+    {
+      "start": 1374.33,
+      "end": 1375.1,
+      "zh": "对啊",
+      "vi": "Đúng vậy",
+      "en": "Yeah.",
+      "pinyin": "duì a"
+    },
+    {
+      "start": 1375.1,
+      "end": 1379.07,
+      "zh": "而且这也是语言考试常出现的内容",
+      "vi": "Hơn nữa đây cũng là nội dung thường xuất hiện trong các kỳ thi ngôn ngữ",
+      "en": "And that's what language tests often do.",
+      "pinyin": "ér qiě zhè yě shì yǔ yán kǎo shì cháng chū xiàn de nèi róng"
+    },
+    {
+      "start": 1379.3,
+      "end": 1384.33,
+      "zh": "比如HSK四级就常考“收入”、“工资”。",
+      "vi": "Ví dụ đề HSK 4 thường có từ “thu nhập” và “tiền lương”.",
+      "en": "For example, HSK Level 4 often tests “income” and “salary.”",
+      "pinyin": "bǐ rú HSK sì jí jiù cháng kǎo “ shōu rù ”、“ gōng zī ”。"
+    },
+    {
+      "start": 1384.33,
+      "end": 1387.36,
+      "zh": "对对对我记得还有理财",
+      "vi": "Đúng đúng đúng, tôi nhớ còn có quản lý tài chính nữa",
+      "en": "Yeah, yeah, yeah. I remember money.",
+      "pinyin": "duì duì duì wǒ jì de hái yǒu lǐ cái"
+    },
+    {
+      "start": 1387.37,
+      "end": 1390.1,
+      "zh": "消费投资这些词",
+      "vi": "Những từ như tiêu dùng, đầu tư",
+      "en": "The word \"consumption investment\"",
+      "pinyin": "xiāo fèi tóu zī zhè xiē cí"
+    },
+    {
+      "start": 1390.2,
+      "end": 1393.53,
+      "zh": "所以今天这段对话不只是聊天",
+      "vi": "Nên đoạn hội thoại hôm nay không chỉ là trò chuyện",
+      "en": "So this conversation today is more than just a chat.",
+      "pinyin": "suǒ yǐ jīn tiān zhè duàn duì huà bù zhǐ shì liáo tiān"
+    },
+    {
+      "start": 1393.53,
+      "end": 1394.8,
+      "zh": "也是在练习",
+      "vi": "mà còn là đang luyện tập",
+      "en": "I'm practicing.",
+      "pinyin": "yě shì zài liàn xí"
+    },
+    {
+      "start": 1394.8,
+      "end": 1396.87,
+      "zh": "没错边说边学",
+      "vi": "Đúng vậy, vừa nói vừa học",
+      "en": "That's right, you're talking and learning.",
+      "pinyin": "méi cuò biān shuō biān xué"
+    },
+    {
+      "start": 1396.87,
+      "end": 1398.4,
+      "zh": "记得也特别牢。",
+      "vi": "nên nhớ rất lâu.",
+      "en": "so it really sticks.",
+      "pinyin": "jì de yě tè bié láo 。"
+    },
+    {
+      "start": 1398.7,
+      "end": 1401.83,
+      "zh": "那你记得我们今天学的哪些词",
+      "vi": "Vậy bạn có nhớ hôm nay chúng ta học những từ nào không",
+      "en": "Then remember what we learned today.",
+      "pinyin": "nà nǐ jì de wǒ men jīn tiān xué de nǎ xiē cí"
+    },
+    {
+      "start": 1401.9,
+      "end": 1404.3,
+      "zh": "嗯让我想想啊",
+      "vi": "Ừm, để tôi nghĩ chút đã",
+      "en": "Well, let me think about it.",
+      "pinyin": "ǹg ràng wǒ xiǎng xiǎng a"
+    },
+    {
+      "start": 1404.3,
+      "end": 1408.8,
+      "zh": "有钱人民币收入",
+      "vi": "Có tiền, nhân dân tệ, thu nhập",
+      "en": "Rich yuan.",
+      "pinyin": "yǒu qián rén mín bì shōu rù"
+    },
+    {
+      "start": 1408.93,
+      "end": 1411.56,
+      "zh": "花钱存钱",
+      "vi": "Tiêu tiền, tiết kiệm tiền",
+      "en": "Save money.",
+      "pinyin": "huā qián cún qián"
+    },
+    {
+      "start": 1411.6,
+      "end": 1414.27,
+      "zh": "理财借钱",
+      "vi": "Quản lý tài chính, vay tiền",
+      "en": "I'm borrowing money.",
+      "pinyin": "lǐ cái jiè qián"
+    },
+    {
+      "start": 1414.4,
+      "end": 1417.17,
+      "zh": "生活费啊好多对",
+      "vi": "Chi phí sinh hoạt, ừ, nhiều thật, đúng",
+      "en": "There's a lot of living to do.",
+      "pinyin": "shēng huó fèi a hǎo duō duì"
+    },
+    {
+      "start": 1417.17,
+      "end": 1418.8,
+      "zh": "还有打折",
+      "vi": "Còn có giảm giá",
+      "en": "And a discount.",
+      "pinyin": "hái yǒu dǎ zhé"
+    },
+    {
+      "start": 1418.8,
+      "end": 1420.47,
+      "zh": "便宜贵",
+      "vi": "Rẻ, đắt",
+      "en": "Cheap.",
+      "pinyin": "pián yi guì"
+    },
+    {
+      "start": 1420.47,
+      "end": 1424.44,
+      "zh": "预算风险哇我们真的学了不少",
+      "vi": "Ngân sách, rủi ro, wow, chúng ta thật sự học được kha khá",
+      "en": "We've learned a lot about budget risks.",
+      "pinyin": "yù suàn fēng xiǎn wā wǒ men zhēn de xué le bù shǎo"
+    },
+    {
+      "start": 1424.9,
+      "end": 1427.3,
+      "zh": "所以如果你正在学中文",
+      "vi": "Nên nếu bạn đang học tiếng Trung",
+      "en": "So if you're learning Chinese,",
+      "pinyin": "suǒ yǐ rú guǒ nǐ zhèng zài xué zhōng wén"
+    },
+    {
+      "start": 1427.3,
+      "end": 1429.2,
+      "zh": "一定要多开口说",
+      "vi": "nhất định phải nói nhiều hơn",
+      "en": "You have to tell me more.",
+      "pinyin": "yí dìng yào duō kāi kǒu shuō"
+    },
+    {
+      "start": 1429.2,
+      "end": 1430.83,
+      "zh": "多练习这些词",
+      "vi": "luyện tập nhiều hơn những từ này",
+      "en": "Practice with these words.",
+      "pinyin": "duō liàn xí zhè xiē cí"
+    },
+    {
+      "start": 1430.9,
+      "end": 1431.9,
+      "zh": "嗯",
+      "vi": "Ừm",
+      "en": "Yeah.",
+      "pinyin": "ǹg"
+    },
+    {
+      "start": 1431.93,
+      "end": 1436.1,
+      "zh": "也可以跟朋友聊聊理财省钱的话题",
+      "vi": "Cũng có thể nói chuyện với bạn bè về chủ đề quản lý tài chính, tiết kiệm tiền",
+      "en": "You can talk to your friends about money management.",
+      "pinyin": "yě kě yǐ gēn péng yǒu liáo liáo lǐ cái shěng qián de huà tí"
+    },
+    {
+      "start": 1436.1,
+      "end": 1437.87,
+      "zh": "很自然你也可",
+      "vi": "Rất tự nhiên, bạn cũng có thể",
+      "en": "Naturally, you can do it.",
+      "pinyin": "hěn zì rán nǐ yě kě"
+    },
+    {
+      "start": 1437.87,
+      "end": 1439.73,
+      "zh": "以写一个购物对话",
+      "vi": "viết một đoạn hội thoại mua sắm",
+      "en": "To write a shopping conversation.",
+      "pinyin": "yǐ xiě yí gè gòu wù duì huà"
+    },
+    {
+      "start": 1439.73,
+      "end": 1444.13,
+      "zh": "练习用上多少钱打折这些句子",
+      "vi": "luyện tập dùng những câu như \"bao nhiêu tiền\", \"giảm giá\"",
+      "en": "How much do you use to discount these sentences?",
+      "pinyin": "liàn xí yòng shàng duō shǎo qián dǎ zhé zhè xiē jù zi"
+    },
+    {
+      "start": 1444.13,
+      "end": 1446.86,
+      "zh": "或者记录一下你每天的花费",
+      "vi": "Hoặc ghi lại chi tiêu mỗi ngày của bạn",
+      "en": "Or to record your daily expenses.",
+      "pinyin": "huò zhě jì lù yí xià nǐ měi tiān de huā fèi"
+    },
+    {
+      "start": 1446.9,
+      "end": 1450.77,
+      "zh": "然后用中文描述我今天花了30块",
+      "vi": "rồi dùng tiếng Trung mô tả \"hôm nay tôi tiêu 30 tệ\"",
+      "en": "And then in Chinese, I spent $30 today.",
+      "pinyin": "rán hòu yòng zhōng wén miáo shù wǒ jīn tiān huā le 30 kuài"
+    },
+    {
+      "start": 1451,
+      "end": 1452.27,
+      "zh": "很棒的方法",
+      "vi": "Cách rất hay",
+      "en": "It's a great way.",
+      "pinyin": "hěn bàng de fāng fǎ"
+    },
+    {
+      "start": 1452.27,
+      "end": 1454.53,
+      "zh": "语言就是用出来的哎",
+      "vi": "Ngôn ngữ là phải dùng mới được",
+      "en": "Words are spoken.",
+      "pinyin": "yǔ yán jiù shì yòng chū lái de āi"
+    },
+    {
+      "start": 1454.53,
+      "end": 1456.96,
+      "zh": "对了如果你喜欢今天的内容",
+      "vi": "À đúng rồi, nếu bạn thích nội dung hôm nay",
+      "en": "That's right. If you like what we have today,",
+      "pinyin": "duì le rú guǒ nǐ xǐ huan jīn tiān de nèi róng"
+    },
+    {
+      "start": 1457,
+      "end": 1458.87,
+      "zh": "记得订阅我们的频道哦",
+      "vi": "nhớ đăng ký kênh của chúng tôi nhé",
+      "en": "Remember to subscribe to our channel.",
+      "pinyin": "jì de dìng yuè wǒ men de pín dào ò"
+    },
+    {
+      "start": 1459,
+      "end": 1460.67,
+      "zh": "还有留言告诉我们",
+      "vi": "Và để lại bình luận cho chúng tôi biết",
+      "en": "And the message told us.",
+      "pinyin": "hái yǒu liú yán gào sù wǒ men"
+    },
+    {
+      "start": 1460.67,
+      "end": 1463.77,
+      "zh": "你一个月的生活费大概是多少",
+      "vi": "Chi phí sinh hoạt một tháng của bạn khoảng bao nhiêu",
+      "en": "What's your living cost for a month?",
+      "pinyin": "nǐ yí gè yuè de shēng huó fèi dà gài shì duō shǎo"
+    },
+    {
+      "start": 1463.77,
+      "end": 1465.13,
+      "zh": "你怎么存钱",
+      "vi": "Bạn tiết kiệm tiền bằng cách nào?",
+      "en": "How do you save money?",
+      "pinyin": "nǐ zěn me cún qián"
+    },
+    {
+      "start": 1465.13,
+      "end": 1466.96,
+      "zh": "我们会在留言里回复你",
+      "vi": "Chúng tôi sẽ trả lời bạn trong phần bình luận.",
+      "en": "We'll get back to you in a message.",
+      "pinyin": "wǒ men huì zài liú yán lǐ huí fù nǐ"
+    },
+    {
+      "start": 1466.97,
+      "end": 1469.13,
+      "zh": "也欢迎你写中文来练习",
+      "vi": "Cũng hoan nghênh bạn viết tiếng Trung để luyện tập nhé.",
+      "en": "You're welcome to write Chinese for practice.",
+      "pinyin": "yě huān yíng nǐ xiě zhōng wén lái liàn xí"
+    },
+    {
+      "start": 1469.13,
+      "end": 1470.26,
+      "zh": "一起进步",
+      "vi": "Cùng nhau tiến bộ.",
+      "en": "Let's move on together.",
+      "pinyin": "yì qǐ jìn bù"
+    },
+    {
+      "start": 1470.27,
+      "end": 1472.17,
+      "zh": "一起管理好我们的钱",
+      "vi": "Cùng nhau quản lý tốt tiền của chúng ta.",
+      "en": "We'll manage our money together.",
+      "pinyin": "yì qǐ guǎn lǐ hǎo wǒ men de qián"
+    },
+    {
+      "start": 1472.17,
+      "end": 1474.27,
+      "zh": "也管理好我们的中文啊",
+      "vi": "Và quản lý tốt cả tiếng Trung của chúng ta nữa nhé.",
+      "en": "And manage our Chinese.",
+      "pinyin": "yě guǎn lǐ hǎo wǒ men de zhōng wén a"
+    },
+    {
+      "start": 1474.27,
+      "end": 1475.07,
+      "zh": "说得好",
+      "vi": "Nói hay lắm.",
+      "en": "That's good.",
+      "pinyin": "shuō dé hǎo"
+    },
+    {
+      "start": 1475.2,
+      "end": 1477.47,
+      "zh": "下次我们聊别的有趣话题吧",
+      "vi": "Lần sau chúng ta cùng nói về chủ đề thú vị khác nhé.",
+      "en": "Next time, let's talk about something interesting.",
+      "pinyin": "xià cì wǒ men liáo bié de yǒu qù huà tí ba"
+    },
+    {
+      "start": 1477.47,
+      "end": 1480.37,
+      "zh": "好的记得回来继续学中文哦",
+      "vi": "Được rồi, nhớ quay lại tiếp tục học tiếng Trung nhé.",
+      "en": "All right, come back and learn Chinese.",
+      "pinyin": "hǎo de jì de huí lái jì xù xué zhōng wén ò"
+    }
+  ]
+}

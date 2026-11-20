@@ -1,0 +1,3961 @@
+{
+  "id": "KJE33Ved7Ns",
+  "youtubeId": "KJE33Ved7Ns",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 1-2 | Everyday Chinese at the Supermarket - 超市日常中文 | Chinese Listening Practice",
+  "durationSec": 1101,
+  "cues": [
+    {
+      "start": 8.67,
+      "end": 12.63,
+      "zh": "🕺大家好，欢迎收听 Learn Chinese Podcast",
+      "vi": "🕺Xin chào mọi người, chào mừng đến với Learn Chinese Podcast.",
+      "en": "Hello, everyone. Welcome to Learn Chinse Podcast.",
+      "pinyin": "🕺 dà jiā hǎo ， huān yíng shōu tīng Learn Chinese Podcast"
+    },
+    {
+      "start": 12.63,
+      "end": 13.93,
+      "zh": "🕺我是李明。",
+      "vi": "🕺Tôi là Lý Minh.",
+      "en": "I'm Lee Myung.",
+      "pinyin": "🕺 wǒ shì lǐ míng 。"
+    },
+    {
+      "start": 13.97,
+      "end": 16.23,
+      "zh": "💃大家好，我是小雨。",
+      "vi": "💃Xin chào mọi người, tôi là Tiểu Vũ.",
+      "en": "Hello, everyone. I'm Ame.",
+      "pinyin": "💃 dà jiā hǎo ， wǒ shì xiǎo yǔ 。"
+    },
+    {
+      "start": 16.23,
+      "end": 19.5,
+      "zh": "💃今天很高兴和大家在这里见面。",
+      "vi": "💃Hôm nay rất vui được gặp mọi người ở đây.",
+      "en": "It's a pleasure to meet you here today.",
+      "pinyin": "💃 jīn tiān hěn gāo xìng hé dà jiā zài zhè lǐ jiàn miàn 。"
+    },
+    {
+      "start": 19.63,
+      "end": 22.93,
+      "zh": "🕺我们的节目叫 Learn Chinese Podcast",
+      "vi": "🕺Chương trình của chúng tôi có tên là Learn Chinese Podcast.",
+      "en": "Our show is called Learn Chinise Podcast.",
+      "pinyin": "🕺 wǒ men de jié mù jiào Learn Chinese Podcast"
+    },
+    {
+      "start": 22.93,
+      "end": 23.66,
+      "zh": "🕺每一期",
+      "vi": "🕺Mỗi tập.",
+      "en": "Every issue.",
+      "pinyin": "🕺 měi yì qī"
+    },
+    {
+      "start": 23.67,
+      "end": 27.17,
+      "zh": "🕺我们都会用简单的中文和大家聊天。",
+      "vi": "🕺Chúng tôi đều trò chuyện với mọi người bằng tiếng Trung đơn giản.",
+      "en": "We all talk to you in simple Chinese.",
+      "pinyin": "🕺 wǒ men dōu huì yòng jiǎn dān de zhōng wén hé dà jiā liáo tiān 。"
+    },
+    {
+      "start": 27.17,
+      "end": 29.07,
+      "zh": "💃是的，我们说得慢",
+      "vi": "💃Đúng vậy, chúng tôi nói chậm.",
+      "en": "Yeah, we're slow.",
+      "pinyin": "💃 shì de ， wǒ men shuō dé màn"
+    },
+    {
+      "start": 29.07,
+      "end": 30.2,
+      "zh": "💃说得清楚",
+      "vi": "💃Nói rõ ràng.",
+      "en": "I'll make it clear.",
+      "pinyin": "💃 shuō dé qīng chǔ"
+    },
+    {
+      "start": 30.2,
+      "end": 31.97,
+      "zh": "💃让大家都能听懂",
+      "vi": "💃Để mọi người đều có thể nghe hiểu.",
+      "en": "I'll make sure everyone understands.",
+      "pinyin": "💃 ràng dà jiā dōu néng tīng dǒng"
+    },
+    {
+      "start": 31.97,
+      "end": 33.57,
+      "zh": "💃也能跟着学。",
+      "vi": "💃Và cũng có thể học theo.",
+      "en": "I'll learn from it.",
+      "pinyin": "💃 yě néng gēn zhe xué 。"
+    },
+    {
+      "start": 33.57,
+      "end": 35.53,
+      "zh": "🕺我们的目标很简单",
+      "vi": "🕺Mục tiêu của chúng tôi rất đơn giản.",
+      "en": "Our goal is simple.",
+      "pinyin": "🕺 wǒ men de mù biāo hěn jiǎn dān"
+    },
+    {
+      "start": 35.53,
+      "end": 39.53,
+      "zh": "🕺就是帮助你一步一步学好中文。",
+      "vi": "🕺Đó là giúp bạn học tốt tiếng Trung từng bước một.",
+      "en": "I'm just helping you learn Chinese one by one.",
+      "pinyin": "🕺 jiù shì bāng zhù nǐ yí bù yi bù xué hǎo zhōng wén 。"
+    },
+    {
+      "start": 39.53,
+      "end": 41.93,
+      "zh": "💃对，我们希望大家听我们的节目",
+      "vi": "💃Đúng vậy, chúng tôi mong mọi người nghe chương trình của chúng tôi.",
+      "en": "Yes, we want everyone to listen to our show.",
+      "pinyin": "💃 duì ， wǒ men xī wàng dà jiā tīng wǒ men de jié mù"
+    },
+    {
+      "start": 41.93,
+      "end": 43.43,
+      "zh": "💃可以感觉轻松",
+      "vi": "💃Có thể cảm thấy thoải mái.",
+      "en": "It's easy to feel like a rooster.",
+      "pinyin": "💃 kě yǐ gǎn jué qīng sōng"
+    },
+    {
+      "start": 43.43,
+      "end": 45.9,
+      "zh": "💃也可以学到一些新单词。",
+      "vi": "💃Cũng có thể học được vài từ mới.",
+      "en": "A few new words can also be learned.",
+      "pinyin": "💃 yě kě yǐ xué dào yì xiē xīn dān cí 。"
+    },
+    {
+      "start": 46.2,
+      "end": 49.37,
+      "zh": "🕺今天我们的主题是“在超市”。",
+      "vi": "🕺Chủ đề hôm nay là “在超市” – trong siêu thị.",
+      "en": "Our theme today is “In the supermarket”.",
+      "pinyin": "🕺 jīn tiān wǒ men de zhǔ tí shì “ zài chāo shì ”。"
+    },
+    {
+      "start": 49.37,
+      "end": 52.93,
+      "zh": "💃在中国，很多人喜欢去超市买东西",
+      "vi": "💃Ở Trung Quốc, nhiều người thích đi siêu thị mua đồ.",
+      "en": "In China, a lot of people like to go shopping in supermarkets.",
+      "pinyin": "💃 zài zhōng guó ， hěn duō rén xǐ huan qù chāo shì mǎi dōng xī"
+    },
+    {
+      "start": 52.93,
+      "end": 54.86,
+      "zh": "💃买米，买水果",
+      "vi": "💃Mua gạo, mua trái cây.",
+      "en": "We'll buy rice and fruit.",
+      "pinyin": "💃 mǎi mǐ ， mǎi shuǐ guǒ"
+    },
+    {
+      "start": 54.87,
+      "end": 56.73,
+      "zh": "💃买蔬菜，很方便。",
+      "vi": "💃Mua rau, rất tiện.",
+      "en": "It's easy to buy vegetables.",
+      "pinyin": "💃 mǎi shū cài ， hěn fāng biàn 。"
+    },
+    {
+      "start": 56.73,
+      "end": 59.4,
+      "zh": "🕺没错，超市里什么都有",
+      "vi": "🕺Đúng vậy, trong siêu thị có đủ thứ.",
+      "en": "That's right. There's everything in the supermarket.",
+      "pinyin": "🕺 méi cuò ， chāo shì lǐ shén me dōu yǒu"
+    },
+    {
+      "start": 59.4,
+      "end": 61.93,
+      "zh": "🕺你可以找到你需要的东西。",
+      "vi": "🕺Bạn có thể tìm thấy những gì mình cần.",
+      "en": "You can find what you need.",
+      "pinyin": "🕺 nǐ kě yǐ zhǎo dào nǐ xū yào de dōng xī 。"
+    },
+    {
+      "start": 62.07,
+      "end": 64.4,
+      "zh": "💃今天我们会和大家聊一聊",
+      "vi": "💃Hôm nay chúng tôi sẽ cùng mọi người nói về",
+      "en": "We'll talk to you today.",
+      "pinyin": "💃 jīn tiān wǒ men huì hé dà jiā liáo yi liáo"
+    },
+    {
+      "start": 64.4,
+      "end": 66.67,
+      "zh": "💃在超市里常用的中文。",
+      "vi": "💃những câu tiếng Trung thường dùng trong siêu thị.",
+      "en": "Chinese used in supermarkets.",
+      "pinyin": "💃 zài chāo shì lǐ cháng yòng de zhōng wén 。"
+    },
+    {
+      "start": 66.67,
+      "end": 69.83,
+      "zh": "🕺我们会给大家一些简单的对话。",
+      "vi": "🕺Chúng tôi sẽ đưa ra cho mọi người vài đoạn hội thoại đơn giản.",
+      "en": "We'll give you a few simple conversations.",
+      "pinyin": "🕺 wǒ men huì gěi dà jiā yì xiē jiǎn dān de duì huà 。"
+    },
+    {
+      "start": 69.83,
+      "end": 71.23,
+      "zh": "💃比如问价钱",
+      "vi": "💃Ví dụ như hỏi giá.",
+      "en": "Like asking for money.",
+      "pinyin": "💃 bǐ rú wèn jià qián"
+    },
+    {
+      "start": 71.23,
+      "end": 72.6,
+      "zh": "💃比如买水果",
+      "vi": "💃Ví dụ như mua trái cây.",
+      "en": "Like buying fruit.",
+      "pinyin": "💃 bǐ rú mǎi shuǐ guǒ"
+    },
+    {
+      "start": 72.6,
+      "end": 74.33,
+      "zh": "💃比如去收银台。",
+      "vi": "💃Ví dụ như đi đến quầy thu ngân.",
+      "en": "Like going to a cashier's.",
+      "pinyin": "💃 bǐ rú qù shōu yín tái 。"
+    },
+    {
+      "start": 74.33,
+      "end": 77.86,
+      "zh": "🕺这些都是我们生活中常见的场景。",
+      "vi": "🕺Đây đều là những tình huống thường gặp trong cuộc sống của chúng ta.",
+      "en": "These are the scenes of our lives.",
+      "pinyin": "🕺 zhè xiē dōu shì wǒ men shēng huó zhōng cháng jiàn de chǎng jǐng 。"
+    },
+    {
+      "start": 77.87,
+      "end": 79.67,
+      "zh": "💃对，所以很有用。",
+      "vi": "💃Đúng vậy, nên rất hữu ích.",
+      "en": "Yeah, so it's useful.",
+      "pinyin": "💃 duì ， suǒ yǐ hěn yǒu yòng 。"
+    },
+    {
+      "start": 79.67,
+      "end": 80.83,
+      "zh": "💃你学会以后",
+      "vi": "💃Sau khi bạn học xong",
+      "en": "When you learn,",
+      "pinyin": "💃 nǐ xué huì yǐ hòu"
+    },
+    {
+      "start": 80.83,
+      "end": 82.63,
+      "zh": "💃下次去中国的超市",
+      "vi": "💃lần sau đến siêu thị Trung Quốc",
+      "en": "Next time we go to China's supermarket.",
+      "pinyin": "💃 xià cì qù zhōng guó de chāo shì"
+    },
+    {
+      "start": 82.63,
+      "end": 84.53,
+      "zh": "💃你就可以说中文了。",
+      "vi": "💃thì bạn có thể nói tiếng Trung rồi.",
+      "en": "You can speak Chinese.",
+      "pinyin": "💃 nǐ jiù kě yǐ shuō zhōng wén le 。"
+    },
+    {
+      "start": 84.53,
+      "end": 86.36,
+      "zh": "🕺我们会一步一步来",
+      "vi": "🕺Chúng tôi sẽ làm từng bước một.",
+      "en": "We'll take it one step at a time.",
+      "pinyin": "🕺 wǒ men huì yí bù yi bù lái"
+    },
+    {
+      "start": 86.37,
+      "end": 88.17,
+      "zh": "🕺从进超市开始",
+      "vi": "🕺Bắt đầu từ lúc bước vào siêu thị",
+      "en": "We've been in the supermarket since.",
+      "pinyin": "🕺 cóng jìn chāo shì kāi shǐ"
+    },
+    {
+      "start": 88.17,
+      "end": 89.9,
+      "zh": "🕺到最后买单。",
+      "vi": "🕺cho đến cuối cùng là thanh toán.",
+      "en": "I'll pay for it last.",
+      "pinyin": "🕺 dào zuì hòu mǎi dān 。"
+    },
+    {
+      "start": 89.97,
+      "end": 91.33,
+      "zh": "💃大家不用担心",
+      "vi": "💃Mọi người không cần lo lắng.",
+      "en": "Don't worry.",
+      "pinyin": "💃 dà jiā bú yòng dān xīn"
+    },
+    {
+      "start": 91.33,
+      "end": 93.53,
+      "zh": "💃我们用的词都很简单。",
+      "vi": "💃Những từ chúng tôi dùng đều rất đơn giản.",
+      "en": "The words we use are simple.",
+      "pinyin": "💃 wǒ men yòng de cí dōu hěn jiǎn dān 。"
+    },
+    {
+      "start": 93.53,
+      "end": 96.36,
+      "zh": "🕺对，有的词你可能已经学过",
+      "vi": "🕺Đúng vậy, có những từ bạn có thể đã học rồi.",
+      "en": "Yes, there are words you might have learned.",
+      "pinyin": "🕺 duì ， yǒu de cí nǐ kě néng yǐ jīng xué guò"
+    },
+    {
+      "start": 96.37,
+      "end": 97.87,
+      "zh": "🕺比如“苹果”。",
+      "vi": "🕺Ví dụ như “苹果” (quả táo).",
+      "en": "The apples, for example.",
+      "pinyin": "🕺 bǐ rú “ píng guǒ ”。"
+    },
+    {
+      "start": 97.87,
+      "end": 99.47,
+      "zh": "💃还有一些新的词",
+      "vi": "💃Ngoài ra còn có một số từ mới.",
+      "en": "There are some new words.",
+      "pinyin": "💃 hái yǒu yì xiē xīn de cí"
+    },
+    {
+      "start": 99.47,
+      "end": 101.07,
+      "zh": "💃我们会重复几次",
+      "vi": "💃Chúng tôi sẽ lặp lại vài lần.",
+      "en": "We'll repeat it a few times.",
+      "pinyin": "💃 wǒ men huì chóng fù jǐ cì"
+    },
+    {
+      "start": 101.07,
+      "end": 102.87,
+      "zh": "💃让你记得更清楚。",
+      "vi": "💃Để bạn nhớ rõ hơn.",
+      "en": "You remember better than that.",
+      "pinyin": "💃 ràng nǐ jì de gèng qīng chǔ 。"
+    },
+    {
+      "start": 102.87,
+      "end": 105.47,
+      "zh": "🕺我们希望大家在听的同时",
+      "vi": "🕺Chúng tôi mong rằng trong khi mọi người nghe",
+      "en": "We want everyone to listen while we're listening.",
+      "pinyin": "🕺 wǒ men xī wàng dà jiā zài tīng de tóng shí"
+    },
+    {
+      "start": 105.47,
+      "end": 108.03,
+      "zh": "🕺也能大声跟着读。",
+      "vi": "🕺cũng có thể đọc to theo.",
+      "en": "I can read it out loud.",
+      "pinyin": "🕺 yě néng dà shēng gēn zhe dú 。"
+    },
+    {
+      "start": 108.03,
+      "end": 110.43,
+      "zh": "💃对，这样你的中文会更好。",
+      "vi": "💃Đúng vậy, như thế tiếng Trung của bạn sẽ tốt hơn.",
+      "en": "Right, so your Chinese would be better.",
+      "pinyin": "💃 duì ， zhè yàng nǐ de zhōng wén huì gèng hǎo 。"
+    },
+    {
+      "start": 110.43,
+      "end": 112.46,
+      "zh": "🕺如果你喜欢我们的节目",
+      "vi": "🕺Nếu bạn thích chương trình của chúng tôi",
+      "en": "If you like our show,",
+      "pinyin": "🕺 rú guǒ nǐ xǐ huan wǒ men de jié mù"
+    },
+    {
+      "start": 112.47,
+      "end": 113.93,
+      "zh": "🕺可以关注我们。",
+      "vi": "🕺thì có thể theo dõi chúng tôi.",
+      "en": "Xiang can watch us.",
+      "pinyin": "🕺 kě yǐ guān zhù wǒ men 。"
+    },
+    {
+      "start": 113.93,
+      "end": 115.2,
+      "zh": "💃也可以留言",
+      "vi": "💃Bạn cũng có thể để lại tin nhắn",
+      "en": "You can also leave a message.",
+      "pinyin": "💃 yě kě yǐ liú yán"
+    },
+    {
+      "start": 115.2,
+      "end": 117.67,
+      "zh": "💃告诉我们你想学什么内容。",
+      "vi": "💃Cho chúng tôi biết bạn muốn học nội dung gì.",
+      "en": "I'll tell you what you want to learn.",
+      "pinyin": "💃 gào sù wǒ men nǐ xiǎng xué shén me nèi róng 。"
+    },
+    {
+      "start": 117.67,
+      "end": 121.17,
+      "zh": "🕺好了，现在我们开始今天的主题吧。",
+      "vi": "🕺Được rồi, bây giờ chúng ta bắt đầu chủ đề hôm nay nhé.",
+      "en": "All right, let's get to the theme for today.",
+      "pinyin": "🕺 hǎo le ， xiàn zài wǒ men kāi shǐ jīn tiān de zhǔ tí ba 。"
+    },
+    {
+      "start": 121.17,
+      "end": 122.97,
+      "zh": "💃一起走进超市",
+      "vi": "💃Cùng bước vào siêu thị",
+      "en": "We went into the supermarket together.",
+      "pinyin": "💃 yì qǐ zǒu jìn chāo shì"
+    },
+    {
+      "start": 122.97,
+      "end": 125.17,
+      "zh": "💃开始我们的中文学习。",
+      "vi": "💃Bắt đầu việc học tiếng Trung của chúng ta.",
+      "en": "We started our Chinese studies.",
+      "pinyin": "💃 kāi shǐ wǒ men de zhōng wén xué xí 。"
+    },
+    {
+      "start": 127.47,
+      "end": 130.33,
+      "zh": "🕺小雨，你常常去超市吗？",
+      "vi": "🕺Tiểu Vũ, bạn có thường đi siêu thị không?",
+      "en": "Xiaoyu, do you go to the supermarket often?",
+      "pinyin": "🕺 xiǎo yǔ ， nǐ cháng cháng qù chāo shì ma ？"
+    },
+    {
+      "start": 130.33,
+      "end": 133,
+      "zh": "💃我经常去。超市很方便",
+      "vi": "💃Tôi thường đi. Siêu thị rất tiện lợi",
+      "en": "I've been there a lot. It's easy at the supermarket.",
+      "pinyin": "💃 wǒ jīng cháng qù 。 chāo shì hěn fāng biàn"
+    },
+    {
+      "start": 133,
+      "end": 134.17,
+      "zh": "💃什么都有。",
+      "vi": "💃Cái gì cũng có.",
+      "en": "I've got everything.",
+      "pinyin": "💃 shén me dōu yǒu 。"
+    },
+    {
+      "start": 134.17,
+      "end": 135.44,
+      "zh": "🕺我也觉得。",
+      "vi": "🕺Tôi cũng thấy vậy.",
+      "en": "I think so too.",
+      "pinyin": "🕺 wǒ yě jué de 。"
+    },
+    {
+      "start": 135.57,
+      "end": 136.93,
+      "zh": "🕺进超市的时候",
+      "vi": "🕺Khi vào siêu thị",
+      "en": "When I got into the supermarket,",
+      "pinyin": "🕺 jìn chāo shì de shí hòu"
+    },
+    {
+      "start": 136.93,
+      "end": 139.86,
+      "zh": "🕺你会先拿购物车还是篮子？",
+      "vi": "🕺Bạn sẽ lấy xe đẩy hay giỏ trước?",
+      "en": "Do you get a shopping car or basket first?",
+      "pinyin": "🕺 nǐ huì xiān ná gòu wù chē hái shì lán zi ？"
+    },
+    {
+      "start": 139.87,
+      "end": 142,
+      "zh": "💃如果我要买很多东西",
+      "vi": "💃Nếu tôi mua nhiều thứ",
+      "en": "If I had to buy a lot of things,",
+      "pinyin": "💃 rú guǒ wǒ yào mǎi hěn duō dōng xī"
+    },
+    {
+      "start": 142,
+      "end": 143.87,
+      "zh": "💃我会拿购物车。",
+      "vi": "💃Tôi sẽ lấy xe đẩy.",
+      "en": "I'll get the shopping car.",
+      "pinyin": "💃 wǒ huì ná gòu wù chē 。"
+    },
+    {
+      "start": 143.87,
+      "end": 145.67,
+      "zh": "🕺对，如果只买一点点",
+      "vi": "🕺Đúng, nếu chỉ mua một chút",
+      "en": "Yes, if only a little.",
+      "pinyin": "🕺 duì ， rú guǒ zhī mǎi yì diǎn diǎn"
+    },
+    {
+      "start": 145.67,
+      "end": 147.63,
+      "zh": "🕺就拿一个篮子就好了。",
+      "vi": "🕺thì lấy một cái giỏ là được.",
+      "en": "Just grab a basket.",
+      "pinyin": "🕺 jiù ná yí gè lán zi jiù hǎo le 。"
+    },
+    {
+      "start": 147.63,
+      "end": 148.23,
+      "zh": "💃是的。",
+      "vi": "💃Đúng vậy.",
+      "en": "Yeah.",
+      "pinyin": "💃 shì de 。"
+    },
+    {
+      "start": 148.23,
+      "end": 151.76,
+      "zh": "💃有时候我只买一瓶牛奶和一包面包",
+      "vi": "💃Có lúc tôi chỉ mua một chai sữa và một gói bánh mì",
+      "en": "Sometimes I buy only a bottle of milk and a bag of bread.",
+      "pinyin": "💃 yǒu shí hòu wǒ zhī mǎi yì píng niú nǎi hé yì bāo miàn bāo"
+    },
+    {
+      "start": 151.77,
+      "end": 152.83,
+      "zh": "💃我就拿篮子。",
+      "vi": "💃thì tôi lấy giỏ.",
+      "en": "I'll take the basket.",
+      "pinyin": "💃 wǒ jiù ná lán zi 。"
+    },
+    {
+      "start": 152.83,
+      "end": 156,
+      "zh": "🕺我记得有一次，我去超市买水果",
+      "vi": "🕺Tôi nhớ có lần tôi đi siêu thị mua trái cây",
+      "en": "I remember one time, I went to the supermarket to buy fruit.",
+      "pinyin": "🕺 wǒ jì de yǒu yí cì ， wǒ qù chāo shì mǎi shuǐ guǒ"
+    },
+    {
+      "start": 156,
+      "end": 157.57,
+      "zh": "🕺可是买了太多",
+      "vi": "🕺nhưng mua quá nhiều",
+      "en": "I've bought too much.",
+      "pinyin": "🕺 kě shì mǎi le tài duō"
+    },
+    {
+      "start": 157.57,
+      "end": 159.14,
+      "zh": "🕺篮子太小了。",
+      "vi": "🕺giỏ nhỏ quá.",
+      "en": "The basket is too small.",
+      "pinyin": "🕺 lán zi tài xiǎo le 。"
+    },
+    {
+      "start": 159.17,
+      "end": 161.63,
+      "zh": "💃那下次你要记得拿购物车。",
+      "vi": "💃Vậy lần sau bạn nhớ lấy xe đẩy nhé.",
+      "en": "Next time you have to get a shopping car.",
+      "pinyin": "💃 nà xià cì nǐ yào jì de ná gòu wù chē 。"
+    },
+    {
+      "start": 161.63,
+      "end": 163.6,
+      "zh": "💃购物车比较大。",
+      "vi": "💃Xe đẩy thì lớn hơn.",
+      "en": "The shopping cart is bigger.",
+      "pinyin": "💃 gòu wù chē bǐ jiào dà 。"
+    },
+    {
+      "start": 163.6,
+      "end": 165.67,
+      "zh": "🕺对。那我们现在假想一下",
+      "vi": "🕺Ừ. Vậy bây giờ chúng ta thử tưởng tượng nhé",
+      "en": "Right. So let's imagine it now.",
+      "pinyin": "🕺 duì 。 nà wǒ men xiàn zài jiǎ xiǎng yí xià"
+    },
+    {
+      "start": 165.67,
+      "end": 168.27,
+      "zh": "🕺我们一起走进超市。",
+      "vi": "🕺Chúng ta cùng bước vào siêu thị.",
+      "en": "We went into the supermarket together.",
+      "pinyin": "🕺 wǒ men yì qǐ zǒu jìn chāo shì 。"
+    },
+    {
+      "start": 168.27,
+      "end": 170.27,
+      "zh": "💃好，我们推着购物车进去。",
+      "vi": "💃Được, chúng ta đẩy xe vào trong.",
+      "en": "Okay, let's push the shopping car in.",
+      "pinyin": "💃 hǎo ， wǒ men tuī zhe gòu wù chē jìn qù 。"
+    },
+    {
+      "start": 170.27,
+      "end": 171.87,
+      "zh": "🕺你想先买什么？",
+      "vi": "🕺Bạn muốn mua gì trước?",
+      "en": "What do you want to buy first?",
+      "pinyin": "🕺 nǐ xiǎng xiān mǎi shén me ？"
+    },
+    {
+      "start": 171.87,
+      "end": 173.67,
+      "zh": "💃我想先去水果区。",
+      "vi": "💃Tôi muốn đến khu trái cây trước.",
+      "en": "I want to go first to the fruit area.",
+      "pinyin": "💃 wǒ xiǎng xiān qù shuǐ guǒ qū 。"
+    },
+    {
+      "start": 173.67,
+      "end": 175.47,
+      "zh": "💃我很喜欢吃苹果。",
+      "vi": "💃Tôi rất thích ăn táo.",
+      "en": "I love apples.",
+      "pinyin": "💃 wǒ hěn xǐ huan chī píng guǒ 。"
+    },
+    {
+      "start": 175.47,
+      "end": 177.83,
+      "zh": "🕺好的，我也喜欢吃香蕉。",
+      "vi": "🕺Được, tôi cũng thích ăn chuối.",
+      "en": "I like bananas, too.",
+      "pinyin": "🕺 hǎo de ， wǒ yě xǐ huan chī xiāng jiāo 。"
+    },
+    {
+      "start": 177.83,
+      "end": 179.83,
+      "zh": "🕺那我们先去水果区。",
+      "vi": "🕺Vậy chúng ta đến khu trái cây trước nhé.",
+      "en": "Let's go to the fruit area first.",
+      "pinyin": "🕺 nà wǒ men xiān qù shuǐ guǒ qū 。"
+    },
+    {
+      "start": 179.83,
+      "end": 182.56,
+      "zh": "💃看，这里有很多水果",
+      "vi": "💃Nhìn này, ở đây có rất nhiều trái cây",
+      "en": "Look, there's a lot of fruit here.",
+      "pinyin": "💃 kàn ， zhè lǐ yǒu hěn duō shuǐ guǒ"
+    },
+    {
+      "start": 182.57,
+      "end": 184.4,
+      "zh": "💃有苹果，香蕉",
+      "vi": "💃Có táo, chuối",
+      "en": "They have apples and bananas.",
+      "pinyin": "💃 yǒu píng guǒ ， xiāng jiāo"
+    },
+    {
+      "start": 184.4,
+      "end": 185.57,
+      "zh": "💃还有西瓜。",
+      "vi": "💃còn có cả dưa hấu.",
+      "en": "And a watermelon.",
+      "pinyin": "💃 hái yǒu xī guā 。"
+    },
+    {
+      "start": 185.6,
+      "end": 187.53,
+      "zh": "🕺苹果看起来很新鲜。",
+      "vi": "🕺Táo trông rất tươi.",
+      "en": "The apples look fresh.",
+      "pinyin": "🕺 píng guǒ kàn qǐ lái hěn xīn xiān 。"
+    },
+    {
+      "start": 187.53,
+      "end": 188.86,
+      "zh": "🕺你要买几个？",
+      "vi": "🕺Bạn muốn mua mấy quả?",
+      "en": "How many do you want?",
+      "pinyin": "🕺 nǐ yào mǎi jǐ gè ？"
+    },
+    {
+      "start": 188.87,
+      "end": 191.03,
+      "zh": "💃我想买四个苹果。",
+      "vi": "💃Tôi muốn mua bốn quả táo.",
+      "en": "I want to buy four apples.",
+      "pinyin": "💃 wǒ xiǎng mǎi sì gè píng guǒ 。"
+    },
+    {
+      "start": 191.03,
+      "end": 193.06,
+      "zh": "🕺好，我来帮你放进购物车。",
+      "vi": "🕺Được, để tôi giúp bạn bỏ vào xe đẩy.",
+      "en": "Okay, let me help you put it in the shopping car.",
+      "pinyin": "🕺 hǎo ， wǒ lái bāng nǐ fàng jìn gòu wù chē 。"
+    },
+    {
+      "start": 193.07,
+      "end": 194.93,
+      "zh": "💃谢谢。你要买什么？",
+      "vi": "💃Cảm ơn. Bạn muốn mua gì?",
+      "en": "Thank you. What do you want?",
+      "pinyin": "💃 xiè xiè 。 nǐ yào mǎi shén me ？"
+    },
+    {
+      "start": 194.93,
+      "end": 196.96,
+      "zh": "🕺我想买两斤香蕉。",
+      "vi": "🕺Tôi muốn mua hai cân chuối.",
+      "en": "I want to buy two pounds of bananas.",
+      "pinyin": "🕺 wǒ xiǎng mǎi liǎng jīn xiāng jiāo 。"
+    },
+    {
+      "start": 197.07,
+      "end": 198.4,
+      "zh": "🕺香蕉很好吃",
+      "vi": "🕺Chuối rất ngon",
+      "en": "Bananas are delicious.",
+      "pinyin": "🕺 xiāng jiāo hěn hǎo chī"
+    },
+    {
+      "start": 198.4,
+      "end": 200,
+      "zh": "🕺也很便宜。",
+      "vi": "🕺mà còn rất rẻ.",
+      "en": "It's cheap too.",
+      "pinyin": "🕺 yě hěn pián yi 。"
+    },
+    {
+      "start": 200,
+      "end": 201.4,
+      "zh": "💃对，我也喜欢香蕉。",
+      "vi": "💃Đúng, tôi cũng thích chuối.",
+      "en": "Yeah, I like bananas too.",
+      "pinyin": "💃 duì ， wǒ yě xǐ huan xiāng jiāo 。"
+    },
+    {
+      "start": 201.4,
+      "end": 202.87,
+      "zh": "💃那我们一起买吧。",
+      "vi": "💃Vậy chúng ta cùng mua nhé.",
+      "en": "Let's buy it together.",
+      "pinyin": "💃 nà wǒ men yì qǐ mǎi ba 。"
+    },
+    {
+      "start": 202.87,
+      "end": 204.53,
+      "zh": "🕺旁边还有葡萄。",
+      "vi": "🕺Bên cạnh còn có nho nữa.",
+      "en": "There's grapes next to the twig.",
+      "pinyin": "🕺 páng biān hái yǒu pú táo 。"
+    },
+    {
+      "start": 204.53,
+      "end": 205.56,
+      "zh": "🕺你喜欢吗？",
+      "vi": "🕺Bạn có thích không?",
+      "en": "Do you like it?",
+      "pinyin": "🕺 nǐ xǐ huan ma ？"
+    },
+    {
+      "start": 205.57,
+      "end": 208.17,
+      "zh": "💃我喜欢，但是今天我不买。",
+      "vi": "💃Tôi thích, nhưng hôm nay tôi không mua.",
+      "en": "I love it, but I don't buy it today.",
+      "pinyin": "💃 wǒ xǐ huan ， dàn shì jīn tiān wǒ bù mǎi 。"
+    },
+    {
+      "start": 208.17,
+      "end": 209.8,
+      "zh": "💃买太多吃不完。",
+      "vi": "💃Mua nhiều quá thì ăn không hết.",
+      "en": "I can't afford to buy too much.",
+      "pinyin": "💃 mǎi tài duō chī bù wán 。"
+    },
+    {
+      "start": 209.8,
+      "end": 213.37,
+      "zh": "🕺也是。水果买多了会坏掉。",
+      "vi": "🕺Cũng đúng. Mua nhiều trái cây quá sẽ bị hỏng.",
+      "en": "So is the fruit. It's broken if you buy more fruit.",
+      "pinyin": "🕺 yě shì 。 shuǐ guǒ mǎi duō le huì huài diào 。"
+    },
+    {
+      "start": 213.37,
+      "end": 215.4,
+      "zh": "💃对，所以我们只买需要的。",
+      "vi": "💃Đúng vậy, nên chúng ta chỉ mua những thứ cần thôi.",
+      "en": "Right, so we only buy what we need.",
+      "pinyin": "💃 duì ， suǒ yǐ wǒ men zhī mǎi xū yào de 。"
+    },
+    {
+      "start": 215.4,
+      "end": 217.6,
+      "zh": "🕺那我们去蔬菜区看看。",
+      "vi": "🕺Vậy chúng ta đến khu rau xem một chút.",
+      "en": "Let's go to the vegetable area.",
+      "pinyin": "🕺 nà wǒ men qù shū cài qū kàn kàn 。"
+    },
+    {
+      "start": 217.6,
+      "end": 219.77,
+      "zh": "💃好，蔬菜也很重要。",
+      "vi": "💃Được, rau cũng rất quan trọng.",
+      "en": "It's good. Vegetables are important.",
+      "pinyin": "💃 hǎo ， shū cài yě hěn zhòng yào 。"
+    },
+    {
+      "start": 219.77,
+      "end": 221.53,
+      "zh": "💃每天都要吃蔬菜。",
+      "vi": "💃Ngày nào cũng phải ăn rau.",
+      "en": "They eat vegetables every day.",
+      "pinyin": "💃 měi tiān dōu yào chī shū cài 。"
+    },
+    {
+      "start": 221.53,
+      "end": 223.53,
+      "zh": "🕺你喜欢吃什么蔬菜？",
+      "vi": "🕺Bạn thích ăn rau gì?",
+      "en": "What kind of vegetables do you like?",
+      "pinyin": "🕺 nǐ xǐ huan chī shén me shū cài ？"
+    },
+    {
+      "start": 223.57,
+      "end": 226,
+      "zh": "💃我喜欢吃西红柿和黄瓜。",
+      "vi": "💃Tôi thích ăn cà chua và dưa chuột.",
+      "en": "I love tomatoes and cucumbers.",
+      "pinyin": "💃 wǒ xǐ huan chī xī hóng shì hé huáng guā 。"
+    },
+    {
+      "start": 226,
+      "end": 228.4,
+      "zh": "🕺我喜欢吃土豆和白菜。",
+      "vi": "🕺Tôi thích ăn khoai tây và bắp cải.",
+      "en": "I love potatoes and cabbage.",
+      "pinyin": "🕺 wǒ xǐ huan chī tǔ dòu hé bái cài 。"
+    },
+    {
+      "start": 228.4,
+      "end": 230.6,
+      "zh": "🕺炒土豆丝很好吃。",
+      "vi": "🕺Khoai tây xào sợi rất ngon.",
+      "en": "Fried potato silk is delicious.",
+      "pinyin": "🕺 chǎo tǔ dòu sī hěn hǎo chī 。"
+    },
+    {
+      "start": 230.6,
+      "end": 232.6,
+      "zh": "💃是的，土豆很方便",
+      "vi": "💃Đúng vậy, khoai tây rất tiện.",
+      "en": "Yes, the potatoes are convenient.",
+      "pinyin": "💃 shì de ， tǔ dòu hěn fāng biàn"
+    },
+    {
+      "start": 232.6,
+      "end": 234.43,
+      "zh": "💃可以炒，可以煮。",
+      "vi": "💃Có thể xào, có thể luộc.",
+      "en": "You can fry it, you can cook it.",
+      "pinyin": "💃 kě yǐ chǎo ， kě yǐ zhǔ 。"
+    },
+    {
+      "start": 234.43,
+      "end": 237,
+      "zh": "🕺看，这里的西红柿很红。",
+      "vi": "🕺Nhìn kìa, cà chua ở đây đỏ quá.",
+      "en": "Look, the tomatoes are red here.",
+      "pinyin": "🕺 kàn ， zhè lǐ de xī hóng shì hěn hóng 。"
+    },
+    {
+      "start": 237,
+      "end": 237.87,
+      "zh": "🕺你要买吗？",
+      "vi": "🕺Bạn có mua không?",
+      "en": "Do you want to buy?",
+      "pinyin": "🕺 nǐ yào mǎi ma ？"
+    },
+    {
+      "start": 237.87,
+      "end": 240.73,
+      "zh": "💃我要买一些。做西红柿鸡蛋汤",
+      "vi": "💃Tôi sẽ mua một ít, để nấu canh cà chua trứng.",
+      "en": "I'm gonna buy some. Tomato egg soup.",
+      "pinyin": "💃 wǒ yào mǎi yì xiē 。 zuò xī hóng shì jī dàn tāng"
+    },
+    {
+      "start": 240.73,
+      "end": 242.13,
+      "zh": "💃很好喝。",
+      "vi": "💃Rất ngon.",
+      "en": "It's delicious.",
+      "pinyin": "💃 hěn hǎo hē 。"
+    },
+    {
+      "start": 242.13,
+      "end": 243.66,
+      "zh": "🕺好，我帮你拿一袋。",
+      "vi": "🕺Được, tôi lấy giúp bạn một túi.",
+      "en": "Okay, I'll get you a bag.",
+      "pinyin": "🕺 hǎo ， wǒ bāng nǐ ná yí dài 。"
+    },
+    {
+      "start": 243.67,
+      "end": 246.03,
+      "zh": "💃谢谢。那你要不要买白菜？",
+      "vi": "💃Cảm ơn. Thế bạn có muốn mua bắp cải không?",
+      "en": "Thank you. Do you want some cabbage?",
+      "pinyin": "💃 xiè xiè 。 nà nǐ yào bu yào mǎi bái cài ？"
+    },
+    {
+      "start": 246.03,
+      "end": 247.8,
+      "zh": "🕺我要买一棵白菜",
+      "vi": "🕺Tôi muốn mua một cây bắp cải.",
+      "en": "I'm buying a cabbage.",
+      "pinyin": "🕺 wǒ yào mǎi yì kē bái cài"
+    },
+    {
+      "start": 247.8,
+      "end": 249.97,
+      "zh": "🕺可以做炒白菜。",
+      "vi": "🕺Có thể xào bắp cải.",
+      "en": "The casserole can make cabbage.",
+      "pinyin": "🕺 kě yǐ zuò chǎo bái cài 。"
+    },
+    {
+      "start": 249.97,
+      "end": 251.67,
+      "zh": "💃好，我们放进购物车。",
+      "vi": "💃Được, chúng ta bỏ vào xe đẩy.",
+      "en": "Okay, let's put it in the shopping car.",
+      "pinyin": "💃 hǎo ， wǒ men fàng jìn gòu wù chē 。"
+    },
+    {
+      "start": 251.73,
+      "end": 254.56,
+      "zh": "🕺现在我们的购物车里有苹果",
+      "vi": "🕺Bây giờ trong xe đẩy của chúng ta có táo,",
+      "en": "Now we have apples in our shopping cart.",
+      "pinyin": "🕺 xiàn zài wǒ men de gòu wù chē lǐ yǒu píng guǒ"
+    },
+    {
+      "start": 254.57,
+      "end": 257.43,
+      "zh": "🕺香蕉，西红柿和白菜。",
+      "vi": "🕺chuối, cà chua và bắp cải.",
+      "en": "Bananas, tomatoes and cabbage.",
+      "pinyin": "🕺 xiāng jiāo ， xī hóng shì hé bái cài 。"
+    },
+    {
+      "start": 257.43,
+      "end": 258.46,
+      "zh": "💃对，还有土豆。",
+      "vi": "💃Đúng, còn cả khoai tây nữa.",
+      "en": "Yeah, and potatoes.",
+      "pinyin": "💃 duì ， hái yǒu tǔ dòu 。"
+    },
+    {
+      "start": 258.47,
+      "end": 261.03,
+      "zh": "💃我们今天买的东西挺多的。",
+      "vi": "💃Hôm nay chúng ta mua cũng khá nhiều rồi.",
+      "en": "We got a lot of stuff today.",
+      "pinyin": "💃 wǒ men jīn tiān mǎi de dōng xī tǐng duō de 。"
+    },
+    {
+      "start": 261.03,
+      "end": 262.6,
+      "zh": "🕺你还想买米吗？",
+      "vi": "🕺Bạn còn muốn mua gạo không?",
+      "en": "Do you still want to buy rice?",
+      "pinyin": "🕺 nǐ hái xiǎng mǎi mǐ ma ？"
+    },
+    {
+      "start": 262.6,
+      "end": 265.03,
+      "zh": "💃对，我家里的米快没有了。",
+      "vi": "💃Có, gạo ở nhà tôi sắp hết rồi.",
+      "en": "Yeah, I'm running out of rice.",
+      "pinyin": "💃 duì ， wǒ jiā lǐ de mǐ kuài méi yǒu le 。"
+    },
+    {
+      "start": 265.03,
+      "end": 266.36,
+      "zh": "💃我们去米区吧。",
+      "vi": "💃Chúng ta đến khu bán gạo đi.",
+      "en": "Let's go to the rice district.",
+      "pinyin": "💃 wǒ men qù mǐ qū ba 。"
+    },
+    {
+      "start": 266.37,
+      "end": 267.93,
+      "zh": "🕺好的，米很重要。",
+      "vi": "🕺Được, gạo rất quan trọng.",
+      "en": "Okay, it's important.",
+      "pinyin": "🕺 hǎo de ， mǐ hěn zhòng yào 。"
+    },
+    {
+      "start": 267.93,
+      "end": 270.03,
+      "zh": "🕺每天都要吃米饭。",
+      "vi": "🕺Ngày nào cũng phải ăn cơm.",
+      "en": "The rice is eaten every day.",
+      "pinyin": "🕺 měi tiān dōu yào chī mǐ fàn 。"
+    },
+    {
+      "start": 270.03,
+      "end": 272.56,
+      "zh": "💃看，这里有大米和小米。",
+      "vi": "💃Nhìn kìa, ở đây có gạo và kê.",
+      "en": "Look, here's rice and millet.",
+      "pinyin": "💃 kàn ， zhè lǐ yǒu dà mǐ hé xiǎo mǐ 。"
+    },
+    {
+      "start": 272.57,
+      "end": 273.74,
+      "zh": "💃你要哪个？",
+      "vi": "💃Bạn muốn loại nào?",
+      "en": "Which one do you want?",
+      "pinyin": "💃 nǐ yào nǎ gè ？"
+    },
+    {
+      "start": 273.8,
+      "end": 275.93,
+      "zh": "🕺我一般买大米。",
+      "vi": "🕺Tôi thường mua gạo.",
+      "en": "I usually buy rice.",
+      "pinyin": "🕺 wǒ yì bān mǎi dà mǐ 。"
+    },
+    {
+      "start": 275.93,
+      "end": 277.73,
+      "zh": "🕺煮饭很好吃。",
+      "vi": "🕺Nấu cơm rất ngon.",
+      "en": "The rice is delicious.",
+      "pinyin": "🕺 zhǔ fàn hěn hǎo chī 。"
+    },
+    {
+      "start": 277.73,
+      "end": 280.06,
+      "zh": "💃我也是。那我们买一袋大米吧。",
+      "vi": "💃Tôi cũng vậy. Vậy chúng ta mua một túi gạo đi.",
+      "en": "So do I. Let's buy a bag of rice.",
+      "pinyin": "💃 wǒ yě shì 。 nà wǒ men mǎi yí dài dà mǐ ba 。"
+    },
+    {
+      "start": 280.07,
+      "end": 281.93,
+      "zh": "🕺好，这一袋大米十斤",
+      "vi": "🕺Được, túi gạo này mười cân.",
+      "en": "All right, this bag of rice is ten pounds.",
+      "pinyin": "🕺 hǎo ， zhè yí dài dà mǐ shí jīn"
+    },
+    {
+      "start": 281.93,
+      "end": 283.23,
+      "zh": "🕺够吃很久。",
+      "vi": "🕺Đủ ăn được lâu lắm.",
+      "en": "Long enough to eat.",
+      "pinyin": "🕺 gòu chī hěn jiǔ 。"
+    },
+    {
+      "start": 283.23,
+      "end": 285.76,
+      "zh": "💃是的。我们放到购物车里。",
+      "vi": "💃Đúng. Chúng ta bỏ vào xe đẩy.",
+      "en": "Yeah. We put it in the shopping car.",
+      "pinyin": "💃 shì de 。 wǒ men fàng dào gòu wù chē lǐ 。"
+    },
+    {
+      "start": 285.8,
+      "end": 287.73,
+      "zh": "🕺我们已经买了很多东西。",
+      "vi": "🕺Chúng ta đã mua rất nhiều thứ rồi.",
+      "en": "We've bought a lot of stuff.",
+      "pinyin": "🕺 wǒ men yǐ jīng mǎi le hěn duō dōng xī 。"
+    },
+    {
+      "start": 287.73,
+      "end": 289.03,
+      "zh": "🕺你还要买吗？",
+      "vi": "🕺Bạn còn muốn mua nữa không?",
+      "en": "Do you want to buy more?",
+      "pinyin": "🕺 nǐ hái yào mǎi ma ？"
+    },
+    {
+      "start": 289.03,
+      "end": 290.66,
+      "zh": "💃我还想买一点肉。",
+      "vi": "💃Tôi còn muốn mua một ít thịt.",
+      "en": "I'd like to buy some meat.",
+      "pinyin": "💃 wǒ hái xiǎng mǎi yì diǎn ròu 。"
+    },
+    {
+      "start": 290.67,
+      "end": 293.57,
+      "zh": "💃做饭的时候需要肉和菜。",
+      "vi": "💃Khi nấu ăn cần có thịt và rau.",
+      "en": "We need meat and vegetables to cook.",
+      "pinyin": "💃 zuò fàn de shí hòu xū yào ròu hé cài 。"
+    },
+    {
+      "start": 293.57,
+      "end": 295.23,
+      "zh": "🕺对，我们去肉区看看。",
+      "vi": "🕺Đúng, chúng ta đến khu bán thịt xem sao.",
+      "en": "Right, let's go to the meat section.",
+      "pinyin": "🕺 duì ， wǒ men qù ròu qū kàn kàn 。"
+    },
+    {
+      "start": 295.23,
+      "end": 298.2,
+      "zh": "💃这里有猪肉，牛肉，还有鸡肉。",
+      "vi": "💃Ở đây có thịt lợn, thịt bò, cả thịt gà nữa.",
+      "en": "There's pork here, beef and chicken.",
+      "pinyin": "💃 zhè lǐ yǒu zhū ròu ， niú ròu ， hái yǒu jī ròu 。"
+    },
+    {
+      "start": 298.2,
+      "end": 299.87,
+      "zh": "🕺你喜欢吃哪个？",
+      "vi": "🕺Bạn thích ăn loại nào?",
+      "en": "Which one do you like?",
+      "pinyin": "🕺 nǐ xǐ huan chī nǎ gè ？"
+    },
+    {
+      "start": 299.87,
+      "end": 301.37,
+      "zh": "💃我比较喜欢鸡肉。",
+      "vi": "💃Tôi thích thịt gà hơn.",
+      "en": "I prefer chicken.",
+      "pinyin": "💃 wǒ bǐ jiào xǐ huan jī ròu 。"
+    },
+    {
+      "start": 301.37,
+      "end": 302.67,
+      "zh": "💃鸡肉容易做。",
+      "vi": "💃Thịt gà dễ làm.",
+      "en": "The chicken is easy to make.",
+      "pinyin": "💃 jī ròu róng yì zuò 。"
+    },
+    {
+      "start": 302.67,
+      "end": 304.13,
+      "zh": "🕺我喜欢牛肉。",
+      "vi": "🕺Tôi thích thịt bò.",
+      "en": "I love beef.",
+      "pinyin": "🕺 wǒ xǐ huan niú ròu 。"
+    },
+    {
+      "start": 304.13,
+      "end": 306.43,
+      "zh": "🕺牛肉炒洋葱很好吃。",
+      "vi": "🕺Thịt bò xào hành tây rất ngon.",
+      "en": "The roasted onions are delicious.",
+      "pinyin": "🕺 niú ròu chǎo yáng cōng hěn hǎo chī 。"
+    },
+    {
+      "start": 306.43,
+      "end": 309.36,
+      "zh": "💃那我们买一些鸡肉和一些牛肉吧。",
+      "vi": "💃Vậy chúng ta mua một ít thịt gà và một ít thịt bò nhé.",
+      "en": "Let's buy some chicken and some beef.",
+      "pinyin": "💃 nà wǒ men mǎi yì xiē jī ròu hé yì xiē niú ròu ba 。"
+    },
+    {
+      "start": 309.37,
+      "end": 312.57,
+      "zh": "🕺好。今天买的东西真不少。",
+      "vi": "🕺Được. Hôm nay mua nhiều thứ thật.",
+      "en": "That's good. I bought a lot today.",
+      "pinyin": "🕺 hǎo 。 jīn tiān mǎi de dōng xī zhēn bù shǎo 。"
+    },
+    {
+      "start": 312.57,
+      "end": 314.63,
+      "zh": "💃对，我们的购物车快满了。",
+      "vi": "💃Đúng vậy, xe đẩy của chúng ta sắp đầy rồi.",
+      "en": "Yeah, we're almost full of shopping carts.",
+      "pinyin": "💃 duì ， wǒ men de gòu wù chē kuài mǎn le 。"
+    },
+    {
+      "start": 314.63,
+      "end": 316.73,
+      "zh": "🕺买完了水果，蔬菜",
+      "vi": "🕺Mua xong trái cây, rau củ",
+      "en": "I've bought fruit and vegetables.",
+      "pinyin": "🕺 mǎi wán le shuǐ guǒ ， shū cài"
+    },
+    {
+      "start": 316.73,
+      "end": 320.4,
+      "zh": "🕺米和肉，我们差不多可以买单了。",
+      "vi": "🕺gạo và thịt, chúng ta gần như có thể thanh toán rồi.",
+      "en": "Rice and meat, we're almost paid for.",
+      "pinyin": "🕺 mǐ hé ròu ， wǒ men chà bù duō kě yǐ mǎi dān le 。"
+    },
+    {
+      "start": 320.4,
+      "end": 323.13,
+      "zh": "💃对，不过我还想买一瓶牛奶。",
+      "vi": "💃Đúng, nhưng tôi vẫn muốn mua một chai sữa.",
+      "en": "Yeah, but I'd like to buy a bottle of milk.",
+      "pinyin": "💃 duì ， bú guò wǒ hái xiǎng mǎi yì píng niú nǎi 。"
+    },
+    {
+      "start": 323.13,
+      "end": 325.23,
+      "zh": "🕺好，那我们去牛奶区。",
+      "vi": "🕺Được, vậy chúng ta đến khu sữa.",
+      "en": "Okay, let's go to the milk area.",
+      "pinyin": "🕺 hǎo ， nà wǒ men qù niú nǎi qū 。"
+    },
+    {
+      "start": 325.23,
+      "end": 326.83,
+      "zh": "💃看，这里有很多牛奶。",
+      "vi": "💃Nhìn kìa, ở đây có nhiều sữa.",
+      "en": "Look, there's plenty of milk here.",
+      "pinyin": "💃 kàn ， zhè lǐ yǒu hěn duō niú nǎi 。"
+    },
+    {
+      "start": 326.83,
+      "end": 328.16,
+      "zh": "💃我买两瓶。",
+      "vi": "💃Tôi mua hai chai.",
+      "en": "I'll buy two bottles.",
+      "pinyin": "💃 wǒ mǎi liǎng píng 。"
+    },
+    {
+      "start": 328.17,
+      "end": 329.97,
+      "zh": "🕺好的，我也买一瓶。",
+      "vi": "🕺Được, tôi cũng mua một chai.",
+      "en": "Okay, I'll buy one too.",
+      "pinyin": "🕺 hǎo de ， wǒ yě mǎi yì píng 。"
+    },
+    {
+      "start": 329.97,
+      "end": 332.77,
+      "zh": "🕺每天喝牛奶对身体好。",
+      "vi": "🕺Uống sữa mỗi ngày tốt cho sức khỏe.",
+      "en": "It's good for you to drink milk every day.",
+      "pinyin": "🕺 měi tiān hē niú nǎi duì shēn tǐ hǎo 。"
+    },
+    {
+      "start": 332.77,
+      "end": 335.33,
+      "zh": "💃对。好了，现在真的可以买单了。",
+      "vi": "💃Đúng. Được rồi, bây giờ thực sự có thể thanh toán rồi.",
+      "en": "Right. Okay, now we can really get the bill.",
+      "pinyin": "💃 duì 。 hǎo le ， xiàn zài zhēn de kě yǐ mǎi dān le 。"
+    },
+    {
+      "start": 335.33,
+      "end": 337,
+      "zh": "🕺我们去收银台吧。",
+      "vi": "🕺Chúng ta đến quầy thu ngân吧.",
+      "en": "Let's go to the cashier.",
+      "pinyin": "🕺 wǒ men qù shōu yín tái ba 。"
+    },
+    {
+      "start": 337,
+      "end": 338.4,
+      "zh": "💃好的，走吧。",
+      "vi": "💃Được, đi thôi.",
+      "en": "Okay, let's go.",
+      "pinyin": "💃 hǎo de ， zǒu ba 。"
+    },
+    {
+      "start": 340.67,
+      "end": 341.43,
+      "zh": "🕺小雨",
+      "vi": "🕺Tiểu Vũ",
+      "en": "Xiaoyu.",
+      "pinyin": "🕺 xiǎo yǔ"
+    },
+    {
+      "start": 341.43,
+      "end": 344.36,
+      "zh": "🕺你看我们的购物车，东西好多啊。",
+      "vi": "🕺Em xem xe đẩy của chúng ta này, nhiều đồ quá.",
+      "en": "Look at our shopping car. There's a lot of stuff.",
+      "pinyin": "🕺 nǐ kàn wǒ men de gòu wù chē ， dōng xī hǎo duō a 。"
+    },
+    {
+      "start": 344.37,
+      "end": 345.23,
+      "zh": "💃是啊",
+      "vi": "💃Đúng vậy",
+      "en": "Yeah.",
+      "pinyin": "💃 shì a"
+    },
+    {
+      "start": 345.23,
+      "end": 350.06,
+      "zh": "💃水果，蔬菜，米，肉，还有牛奶，都买到了。",
+      "vi": "💃Trái cây, rau củ, gạo, thịt, và cả sữa, đều mua được rồi.",
+      "en": "The fruit, the vegetables, the rice, the meat, and the milk.",
+      "pinyin": "💃 shuǐ guǒ ， shū cài ， mǐ ， ròu ， hái yǒu niú nǎi ， dōu mǎi dào le 。"
+    },
+    {
+      "start": 350.07,
+      "end": 350.67,
+      "zh": "🕺对",
+      "vi": "🕺Đúng",
+      "en": "Right.",
+      "pinyin": "🕺 duì"
+    },
+    {
+      "start": 350.67,
+      "end": 354.04,
+      "zh": "🕺不过我们还要知道这些东西多少钱。",
+      "vi": "🕺Nhưng chúng ta còn phải biết những thứ này bao nhiêu tiền.",
+      "en": "But we still need to know how much it costs.",
+      "pinyin": "🕺 bú guò wǒ men hái yào zhī dào zhè xiē dōng xī duō shǎo qián 。"
+    },
+    {
+      "start": 354.13,
+      "end": 357.53,
+      "zh": "💃没错，在超市里，常常要问价钱。",
+      "vi": "💃Đúng vậy, trong siêu thị thường phải hỏi giá.",
+      "en": "You're right. In supermarkets, they often ask for money.",
+      "pinyin": "💃 méi cuò ， zài chāo shì lǐ ， cháng cháng yào wèn jià qián 。"
+    },
+    {
+      "start": 357.53,
+      "end": 359.56,
+      "zh": "🕺比如，你想买苹果",
+      "vi": "🕺Ví dụ, bạn muốn mua táo",
+      "en": "For example, you want to buy apples.",
+      "pinyin": "🕺 bǐ rú ， nǐ xiǎng mǎi píng guǒ"
+    },
+    {
+      "start": 359.57,
+      "end": 362.77,
+      "zh": "🕺你就可以问：这个多少钱？",
+      "vi": "🕺bạn có thể hỏi: Cái này bao nhiêu tiền?",
+      "en": "You can ask: How much is this?",
+      "pinyin": "🕺 nǐ jiù kě yǐ wèn ： zhè ge duō shǎo qián ？"
+    },
+    {
+      "start": 362.77,
+      "end": 365.73,
+      "zh": "💃对，然后别人会说：五块钱一斤。",
+      "vi": "💃Đúng, sau đó người ta sẽ nói: Năm tệ một cân.",
+      "en": "Yeah, and then they say, \"Five bucks a pound.\"",
+      "pinyin": "💃 duì ， rán hòu bié rén huì shuō ： wǔ kuài qián yì jīn 。"
+    },
+    {
+      "start": 365.73,
+      "end": 367.83,
+      "zh": "🕺一斤就是五百克。",
+      "vi": "🕺Một cân là năm trăm gam.",
+      "en": "A pound is 500 grams.",
+      "pinyin": "🕺 yì jīn jiù shì wǔ bǎi kè 。"
+    },
+    {
+      "start": 367.83,
+      "end": 371.16,
+      "zh": "🕺很多外国朋友第一次听觉得有点难。",
+      "vi": "🕺Nhiều bạn nước ngoài lần đầu nghe thấy hơi khó.",
+      "en": "It's a little hard to get a lot of foreign friends for the first time.",
+      "pinyin": "🕺 hěn duō wài guó péng yǒu dì yī cì tīng jué de yǒu diǎn nán 。"
+    },
+    {
+      "start": 371.17,
+      "end": 373.83,
+      "zh": "💃是的，但是很快就会习惯。",
+      "vi": "💃Đúng, nhưng sẽ nhanh quen thôi.",
+      "en": "Yeah, but it'll get used to it soon.",
+      "pinyin": "💃 shì de ， dàn shì hěn kuài jiù huì xí guàn 。"
+    },
+    {
+      "start": 373.83,
+      "end": 376.26,
+      "zh": "🕺我记得我第一次去买香蕉",
+      "vi": "🕺Tôi nhớ lần đầu tôi đi mua chuối",
+      "en": "I remember the first time I went to buy bananas.",
+      "pinyin": "🕺 wǒ jì de wǒ dì yī cì qù mǎi xiāng jiāo"
+    },
+    {
+      "start": 376.27,
+      "end": 378.47,
+      "zh": "🕺我问：香蕉多少钱？",
+      "vi": "🕺tôi hỏi: Chuối bao nhiêu tiền?",
+      "en": "I said, \"How much for bananas?\"",
+      "pinyin": "🕺 wǒ wèn ： xiāng jiāo duō shǎo qián ？"
+    },
+    {
+      "start": 378.47,
+      "end": 381.94,
+      "zh": "💃然后呢？店员说：三块钱一斤。",
+      "vi": "💃Sau đó thì sao? Nhân viên nói: Ba tệ một cân.",
+      "en": "And then what? The clerk says, \"Three dollars a pound.\"",
+      "pinyin": "💃 rán hòu ne ？ diàn yuán shuō ： sān kuài qián yì jīn 。"
+    },
+    {
+      "start": 381.97,
+      "end": 383.03,
+      "zh": "🕺我听懂了",
+      "vi": "🕺Tôi hiểu rồi",
+      "en": "I understand.",
+      "pinyin": "🕺 wǒ tīng dǒng le"
+    },
+    {
+      "start": 383.03,
+      "end": 385.23,
+      "zh": "🕺可是我不知道要买多少。",
+      "vi": "🕺nhưng tôi không biết nên mua bao nhiêu.",
+      "en": "But I don't know how much to buy.",
+      "pinyin": "🕺 kě shì wǒ bù zhī dào yào mǎi duō shǎo 。"
+    },
+    {
+      "start": 385.23,
+      "end": 386.63,
+      "zh": "💃那你买了多少？",
+      "vi": "💃Vậy bạn đã mua bao nhiêu?",
+      "en": "How much did you buy?",
+      "pinyin": "💃 nà nǐ mǎi le duō shǎo ？"
+    },
+    {
+      "start": 386.63,
+      "end": 388.16,
+      "zh": "🕺我买了两斤。",
+      "vi": "🕺Tôi mua hai cân.",
+      "en": "I bought two pounds.",
+      "pinyin": "🕺 wǒ mǎi le liǎng jīn 。"
+    },
+    {
+      "start": 388.17,
+      "end": 391.17,
+      "zh": "🕺回家以后，发现香蕉太多了。",
+      "vi": "🕺Về nhà mới phát hiện chuối quá nhiều.",
+      "en": "And when he came home, he found too many bananas.",
+      "pinyin": "🕺 huí jiā yǐ hòu ， fā xiàn xiāng jiāo tài duō le 。"
+    },
+    {
+      "start": 391.17,
+      "end": 394.43,
+      "zh": "💃哈，那下次你可以买一斤就好。",
+      "vi": "💃Ha, vậy lần sau bạn chỉ cần mua một cân là được.",
+      "en": "Well, next time you can buy a pound.",
+      "pinyin": "💃 hā ， nà xià cì nǐ kě yǐ mǎi yì jīn jiù hǎo 。"
+    },
+    {
+      "start": 394.43,
+      "end": 395.83,
+      "zh": "🕺对。那小雨",
+      "vi": "🕺Đúng. Vậy Tiểu Vũ",
+      "en": "That's right. The rain.",
+      "pinyin": "🕺 duì 。 nà xiǎo yǔ"
+    },
+    {
+      "start": 395.83,
+      "end": 398.76,
+      "zh": "💃你买西红柿的时候，一般怎么买？",
+      "vi": "💃Khi bạn mua cà chua, thường mua thế nào?",
+      "en": "How do you usually buy tomatoes when you buy them?",
+      "pinyin": "💃 nǐ mǎi xī hóng shì de shí hòu ， yì bān zěn me mǎi ？"
+    },
+    {
+      "start": 398.77,
+      "end": 399.67,
+      "zh": "💃我会先问",
+      "vi": "💃Tôi sẽ hỏi trước",
+      "en": "I'll ask first.",
+      "pinyin": "💃 wǒ huì xiān wèn"
+    },
+    {
+      "start": 399.67,
+      "end": 403.07,
+      "zh": "💃价钱，比如：西红柿多少钱一斤？",
+      "vi": "💃giá cả, ví dụ: Cà chua bao nhiêu tiền một cân?",
+      "en": "For example, how much is a tomato?",
+      "pinyin": "💃 jià qián ， bǐ rú ： xī hóng shì duō shǎo qián yì jīn ？"
+    },
+    {
+      "start": 403.07,
+      "end": 405.63,
+      "zh": "🕺然后你会挑一挑吗？",
+      "vi": "🕺Sau đó bạn có chọn không?",
+      "en": "And then you'll pick one?",
+      "pinyin": "🕺 rán hòu nǐ huì tiāo yi tiāo ma ？"
+    },
+    {
+      "start": 405.63,
+      "end": 407.56,
+      "zh": "💃会，我喜欢挑红一点的",
+      "vi": "💃Có, tôi thích chọn quả đỏ hơn",
+      "en": "I like to pick red ones.",
+      "pinyin": "💃 huì ， wǒ xǐ huan tiāo hóng yì diǎn de"
+    },
+    {
+      "start": 407.57,
+      "end": 408.8,
+      "zh": "💃看起来新鲜。",
+      "vi": "💃trông có vẻ tươi.",
+      "en": "The twilight looks fresh.",
+      "pinyin": "💃 kàn qǐ lái xīn xiān 。"
+    },
+    {
+      "start": 408.8,
+      "end": 412.73,
+      "zh": "🕺我也是。买土豆的时候，我会看大小",
+      "vi": "🕺Tôi cũng vậy. Khi mua khoai tây, tôi sẽ xem kích thước",
+      "en": "So do I. When I buy potatoes, I see the size.",
+      "pinyin": "🕺 wǒ yě shì 。 mǎi tǔ dòu de shí hòu ， wǒ huì kàn dà xiǎo"
+    },
+    {
+      "start": 412.73,
+      "end": 415.63,
+      "zh": "🕺不要太大，也不要太小。",
+      "vi": "🕺không quá to, cũng không quá nhỏ.",
+      "en": "Not too big, not too small.",
+      "pinyin": "🕺 bú yào tài dà ， yě bú yào tài xiǎo 。"
+    },
+    {
+      "start": 415.63,
+      "end": 417.63,
+      "zh": "💃对，买菜也要学会看。",
+      "vi": "💃Đúng, mua rau cũng phải học cách nhìn.",
+      "en": "Yeah, you should learn to watch.",
+      "pinyin": "💃 duì ， mǎi cài yě yào xué huì kàn 。"
+    },
+    {
+      "start": 417.63,
+      "end": 420.2,
+      "zh": "🕺你觉得白菜一般多少钱？",
+      "vi": "🕺Bạn nghĩ cải thảo thường bao nhiêu tiền?",
+      "en": "How much do you think cabbage is?",
+      "pinyin": "🕺 nǐ jué de bái cài yì bān duō shǎo qián ？"
+    },
+    {
+      "start": 420.2,
+      "end": 423.17,
+      "zh": "💃有时候一块钱一斤，很便宜。",
+      "vi": "💃Có khi một tệ một cân, rất rẻ.",
+      "en": "Sometimes a dollar a pound, cheap.",
+      "pinyin": "💃 yǒu shí hòu yí kuài qián yì jīn ， hěn pián yi 。"
+    },
+    {
+      "start": 423.2,
+      "end": 426.17,
+      "zh": "🕺是的，我也觉得白菜很便宜。",
+      "vi": "🕺Đúng vậy, tôi cũng thấy bắp cải rất rẻ.",
+      "en": "Yeah, I think cabbage is cheap too.",
+      "pinyin": "🕺 shì de ， wǒ yě jué de bái cài hěn pián yi 。"
+    },
+    {
+      "start": 426.17,
+      "end": 429.2,
+      "zh": "💃我买白菜经常做汤或者炒菜",
+      "vi": "💃Tôi hay mua bắp cải về nấu canh hoặc xào.",
+      "en": "I buy cabbage. I make soup or fried food.",
+      "pinyin": "💃 wǒ mǎi bái cài jīng cháng zuò tāng huò zhě chǎo cài"
+    },
+    {
+      "start": 429.2,
+      "end": 430.8,
+      "zh": "💃很好吃。",
+      "vi": "💃Rất ngon.",
+      "en": "It's delicious.",
+      "pinyin": "💃 hěn hǎo chī 。"
+    },
+    {
+      "start": 430.8,
+      "end": 432.73,
+      "zh": "🕺对。那我们再说说米吧。",
+      "vi": "🕺Đúng. Vậy giờ nói tiếp về gạo nhé.",
+      "en": "Right. Let's talk about rice again.",
+      "pinyin": "🕺 duì 。 nà wǒ men zài shuō shuō mǐ ba 。"
+    },
+    {
+      "start": 432.83,
+      "end": 434.43,
+      "zh": "🕺大米多少钱一斤？",
+      "vi": "🕺Gạo bao nhiêu tiền một cân (500g)?",
+      "en": "How much for rice?",
+      "pinyin": "🕺 dà mǐ duō shǎo qián yì jīn ？"
+    },
+    {
+      "start": 434.43,
+      "end": 436.63,
+      "zh": "💃大米一般两块多一斤。",
+      "vi": "💃Gạo thường khoảng hơn hai tệ một cân (500g).",
+      "en": "The rice is usually two pieces more than a pound.",
+      "pinyin": "💃 dà mǐ yì bān liǎng kuài duō yì jīn 。"
+    },
+    {
+      "start": 436.63,
+      "end": 440.46,
+      "zh": "🕺那一袋十斤，就是二十多块钱。",
+      "vi": "🕺Vậy một túi mười cân (5kg) thì hơn hai mươi tệ.",
+      "en": "That bag of ten pounds, that's more than twenty dollars.",
+      "pinyin": "🕺 nà yí dài shí jīn ， jiù shì èr shí duō kuài qián 。"
+    },
+    {
+      "start": 440.47,
+      "end": 443.07,
+      "zh": "💃对，米买一次，可以吃很久。",
+      "vi": "💃Đúng, gạo mua một lần là ăn được lâu.",
+      "en": "Yeah, I'll buy it once and eat it for a long time.",
+      "pinyin": "💃 duì ， mǐ mǎi yí cì ， kě yǐ chī hěn jiǔ 。"
+    },
+    {
+      "start": 443.07,
+      "end": 445.37,
+      "zh": "🕺你知道牛肉多少钱吗？",
+      "vi": "🕺Bạn có biết thịt bò bao nhiêu tiền không?",
+      "en": "Do you know how much beef it costs?",
+      "pinyin": "🕺 nǐ zhī dào niú ròu duō shǎo qián ma ？"
+    },
+    {
+      "start": 445.37,
+      "end": 446.73,
+      "zh": "💃牛肉比较贵",
+      "vi": "💃Thịt bò khá đắt.",
+      "en": "It's more expensive.",
+      "pinyin": "💃 niú ròu bǐ jiào guì"
+    },
+    {
+      "start": 446.73,
+      "end": 449.26,
+      "zh": "💃大概三十块钱一斤。",
+      "vi": "💃Khoảng ba mươi tệ một cân (500g).",
+      "en": "I'm about 30 bucks a pound.",
+      "pinyin": "💃 dà gài sān shí kuài qián yì jīn 。"
+    },
+    {
+      "start": 449.27,
+      "end": 451.73,
+      "zh": "🕺对，所以牛肉不是天天吃。",
+      "vi": "🕺Đúng, nên không phải ngày nào cũng ăn thịt bò.",
+      "en": "Yeah, so beef doesn't eat every day.",
+      "pinyin": "🕺 duì ， suǒ yǐ niú ròu bú shì tiān tiān chī 。"
+    },
+    {
+      "start": 451.73,
+      "end": 453.26,
+      "zh": "💃鸡肉便宜一些",
+      "vi": "💃Thịt gà rẻ hơn một chút.",
+      "en": "Chicken chicken is cheaper.",
+      "pinyin": "💃 jī ròu pián yi yì xiē"
+    },
+    {
+      "start": 453.27,
+      "end": 455,
+      "zh": "💃大概十块钱一斤。",
+      "vi": "💃Khoảng mười tệ một cân (500g).",
+      "en": "I'm about ten bucks a pound.",
+      "pinyin": "💃 dà gài shí kuài qián yì jīn 。"
+    },
+    {
+      "start": 455,
+      "end": 458.07,
+      "zh": "🕺是的，所以很多人喜欢买鸡肉。",
+      "vi": "🕺Đúng, nên nhiều người thích mua thịt gà.",
+      "en": "Yeah, so a lot of people like to buy chicken.",
+      "pinyin": "🕺 shì de ， suǒ yǐ hěn duō rén xǐ huan mǎi jī ròu 。"
+    },
+    {
+      "start": 458.07,
+      "end": 460.17,
+      "zh": "💃你看，我们的购物车里",
+      "vi": "💃Bạn xem, trong xe đẩy của chúng ta",
+      "en": "Look, we're in the shopping car.",
+      "pinyin": "💃 nǐ kàn ， wǒ men de gòu wù chē lǐ"
+    },
+    {
+      "start": 460.17,
+      "end": 462.6,
+      "zh": "💃有鸡肉，也有牛肉。",
+      "vi": "💃có thịt gà, cũng có thịt bò.",
+      "en": "There's chicken and beef.",
+      "pinyin": "💃 yǒu jī ròu ， yě yǒu niú ròu 。"
+    },
+    {
+      "start": 462.6,
+      "end": 464.13,
+      "zh": "🕺对，我们买一些贵的",
+      "vi": "🕺Đúng, chúng ta mua một ít đồ đắt",
+      "en": "Yeah, we'll buy some expensive ones.",
+      "pinyin": "🕺 duì ， wǒ men mǎi yì xiē guì de"
+    },
+    {
+      "start": 464.13,
+      "end": 465.76,
+      "zh": "🕺也买一些便宜的",
+      "vi": "🕺cũng mua một ít đồ rẻ",
+      "en": "I'll buy some cheap ones too.",
+      "pinyin": "🕺 yě mǎi yì xiē pián yi de"
+    },
+    {
+      "start": 465.77,
+      "end": 466.87,
+      "zh": "🕺比较平衡。",
+      "vi": "🕺như vậy khá cân bằng.",
+      "en": "It's more balanced.",
+      "pinyin": "🕺 bǐ jiào píng héng 。"
+    },
+    {
+      "start": 466.87,
+      "end": 468.97,
+      "zh": "💃没错。买东西的时候",
+      "vi": "💃Đúng vậy. Khi mua đồ",
+      "en": "You're right. When you buy things,",
+      "pinyin": "💃 méi cuò 。 mǎi dōng xī de shí hòu"
+    },
+    {
+      "start": 468.97,
+      "end": 471.27,
+      "zh": "💃也要看看便宜的和贵的。",
+      "vi": "💃cũng nên xem cả đồ rẻ lẫn đồ đắt.",
+      "en": "I'd like to see the cheap and the expensive.",
+      "pinyin": "💃 yě yào kàn kàn pián yi de hé guì de 。"
+    },
+    {
+      "start": 471.27,
+      "end": 472.17,
+      "zh": "🕺有时候",
+      "vi": "🕺Có khi",
+      "en": "♪ Some days ♪",
+      "pinyin": "🕺 yǒu shí hòu"
+    },
+    {
+      "start": 472.17,
+      "end": 475.63,
+      "zh": "🕺我会比较一下两个超市的价钱。",
+      "vi": "🕺tôi sẽ so sánh giá của hai siêu thị.",
+      "en": "I'll compare the prices of two supermarkets.",
+      "pinyin": "🕺 wǒ huì bǐ jiào yí xià liǎng gè chāo shì de jià qián 。"
+    },
+    {
+      "start": 475.63,
+      "end": 478,
+      "zh": "💃对，不同超市的价钱不一样。",
+      "vi": "💃Đúng, mỗi siêu thị giá một khác.",
+      "en": "Yeah, different supermarkets are priced differently.",
+      "pinyin": "💃 duì ， bù tóng chāo shì de jià qián bù yí yàng 。"
+    },
+    {
+      "start": 478,
+      "end": 480.63,
+      "zh": "🕺上次我在一个超市买苹果",
+      "vi": "🕺Lần trước tôi mua táo ở một siêu thị",
+      "en": "Last time I bought apples in a supermarket,",
+      "pinyin": "🕺 shàng cì wǒ zài yí gè chāo shì mǎi píng guǒ"
+    },
+    {
+      "start": 480.63,
+      "end": 482.23,
+      "zh": "🕺是五块钱一斤。",
+      "vi": "🕺là năm tệ một cân (500g).",
+      "en": "The platinum is five bucks a pound.",
+      "pinyin": "🕺 shì wǔ kuài qián yì jīn 。"
+    },
+    {
+      "start": 482.23,
+      "end": 485.2,
+      "zh": "💃可是另一个超市只要四块钱一斤",
+      "vi": "💃Nhưng một siêu thị khác chỉ bốn tệ một cân (500g).",
+      "en": "It's only four bucks a pound for another supermarket.",
+      "pinyin": "💃 kě shì lìng yí gè chāo shì zhǐ yào sì kuài qián yì jīn"
+    },
+    {
+      "start": 485.2,
+      "end": 486.33,
+      "zh": "💃对吗？",
+      "vi": "💃Đúng không?",
+      "en": "Isn't that right?",
+      "pinyin": "💃 duì ma ？"
+    },
+    {
+      "start": 486.33,
+      "end": 488.43,
+      "zh": "🕺对，我发现差别挺大的。",
+      "vi": "🕺Đúng, tôi thấy chênh lệch khá lớn.",
+      "en": "Yeah, I see a big difference.",
+      "pinyin": "🕺 duì ， wǒ fā xiàn chā bié tǐng dà de 。"
+    },
+    {
+      "start": 488.43,
+      "end": 491.46,
+      "zh": "💃所以买东西之前，可以多看看",
+      "vi": "💃Vì vậy, trước khi mua đồ, có thể xem thêm",
+      "en": "You can look more before you buy something.",
+      "pinyin": "💃 suǒ yǐ mǎi dōng xī zhī qián ， kě yǐ duō kàn kàn"
+    },
+    {
+      "start": 491.47,
+      "end": 492.83,
+      "zh": "💃多比较。",
+      "vi": "💃so sánh thêm.",
+      "en": "More comparison.",
+      "pinyin": "💃 duō bǐ jiào 。"
+    },
+    {
+      "start": 492.83,
+      "end": 494.63,
+      "zh": "🕺对，这样可以省钱。",
+      "vi": "🕺Đúng, như vậy có thể tiết kiệm tiền.",
+      "en": "That's right, it saves money.",
+      "pinyin": "🕺 duì ， zhè yàng kě yǐ shěng qián 。"
+    },
+    {
+      "start": 494.63,
+      "end": 498.13,
+      "zh": "💃不过有时候便宜的东西不一定好。",
+      "vi": "💃Nhưng đôi khi đồ rẻ chưa chắc đã tốt.",
+      "en": "But sometimes cheap things are not always good.",
+      "pinyin": "💃 bú guò yǒu shí hòu pián yi de dōng xī bù yí dìng hǎo 。"
+    },
+    {
+      "start": 498.13,
+      "end": 500.4,
+      "zh": "🕺是的，新鲜很重要。",
+      "vi": "🕺Đúng, đồ tươi rất quan trọng.",
+      "en": "Yes, fresh is important.",
+      "pinyin": "🕺 shì de ， xīn xiān hěn zhòng yào 。"
+    },
+    {
+      "start": 500.4,
+      "end": 501.07,
+      "zh": "💃没错",
+      "vi": "💃Đúng vậy.",
+      "en": "That's right.",
+      "pinyin": "💃 méi cuò"
+    },
+    {
+      "start": 501.07,
+      "end": 504.53,
+      "zh": "💃我宁愿多花一点钱，也要买新鲜的。",
+      "vi": "💃Tôi thà bỏ thêm chút tiền để mua đồ tươi.",
+      "en": "I'd rather spend a little more money and buy something fresh.",
+      "pinyin": "💃 wǒ nìng yuàn duō huā yì diǎn qián ， yě yào mǎi xīn xiān de 。"
+    },
+    {
+      "start": 504.53,
+      "end": 507.4,
+      "zh": "🕺我也是。吃的东西，要健康",
+      "vi": "🕺Tôi cũng vậy. Đồ ăn phải lành mạnh",
+      "en": "So do I. Eat something healthy.",
+      "pinyin": "🕺 wǒ yě shì 。 chī de dōng xī ， yào jiàn kāng"
+    },
+    {
+      "start": 507.4,
+      "end": 508.83,
+      "zh": "🕺要安全。",
+      "vi": "🕺phải an toàn.",
+      "en": "Be safe.",
+      "pinyin": "🕺 yào ān quán 。"
+    },
+    {
+      "start": 508.83,
+      "end": 510.53,
+      "zh": "💃对，这样对身体好。",
+      "vi": "💃Đúng, như vậy tốt cho sức khỏe.",
+      "en": "Yeah, it's good for the body.",
+      "pinyin": "💃 duì ， zhè yàng duì shēn tǐ hǎo 。"
+    },
+    {
+      "start": 510.53,
+      "end": 513.33,
+      "zh": "🕺现在我们知道了水果、蔬菜",
+      "vi": "🕺Bây giờ chúng ta đã biết về trái cây, rau củ",
+      "en": "Now we know about fruit and vegetables.",
+      "pinyin": "🕺 xiàn zài wǒ men zhī dào le shuǐ guǒ 、 shū cài"
+    },
+    {
+      "start": 513.33,
+      "end": 515.6,
+      "zh": "🕺米和肉的大概价钱。",
+      "vi": "🕺cùng giá khoảng chừng của gạo và thịt.",
+      "en": "The price of rice and meat.",
+      "pinyin": "🕺 mǐ hé ròu de dà gài jià qián 。"
+    },
+    {
+      "start": 515.6,
+      "end": 519.13,
+      "zh": "💃是的，这些句子也很简单，很实用。",
+      "vi": "💃Đúng, những câu này cũng rất đơn giản và rất hữu ích.",
+      "en": "Yes, these sentences are simple and practical.",
+      "pinyin": "💃 shì de ， zhè xiē jù zi yě hěn jiǎn dān ， hěn shí yòng 。"
+    },
+    {
+      "start": 519.13,
+      "end": 521.43,
+      "zh": "🕺比如：这个多少钱？",
+      "vi": "🕺Ví dụ: “这个多少钱?” — Cái này bao nhiêu tiền?",
+      "en": "For example: How much is this?",
+      "pinyin": "🕺 bǐ rú ： zhè ge duō shǎo qián ？"
+    },
+    {
+      "start": 521.47,
+      "end": 524.83,
+      "zh": "🕺太贵了。有没有便宜一点的？",
+      "vi": "🕺“太贵了。有没有便宜一点的?” — Đắt quá. Có loại rẻ hơn không?",
+      "en": "It's too expensive. Any cheaper ones?",
+      "pinyin": "🕺 tài guì le 。 yǒu méi yǒu pián yi yì diǎn de ？"
+    },
+    {
+      "start": 524.83,
+      "end": 526.83,
+      "zh": "💃对，还有：我买两斤。",
+      "vi": "💃Đúng, còn câu: “我买两斤.” — Tôi mua hai cân (1kg).",
+      "en": "Yeah, and I'll buy two pounds.",
+      "pinyin": "💃 duì ， hái yǒu ： wǒ mǎi liǎng jīn 。"
+    },
+    {
+      "start": 526.83,
+      "end": 529.56,
+      "zh": "🕺这些句子大家可以多练习。",
+      "vi": "🕺Mọi người có thể luyện tập những câu này nhiều hơn.",
+      "en": "You can practice more about these sentences.",
+      "pinyin": "🕺 zhè xiē jù zi dà jiā kě yǐ duō liàn xí 。"
+    },
+    {
+      "start": 529.57,
+      "end": 531.37,
+      "zh": "💃如果下次你去超市",
+      "vi": "💃Nếu lần sau bạn đi siêu thị",
+      "en": "If you go to the supermarket next time,",
+      "pinyin": "💃 rú guǒ xià cì nǐ qù chāo shì"
+    },
+    {
+      "start": 531.37,
+      "end": 533.54,
+      "zh": "💃你就可以直接用。",
+      "vi": "💃Bạn có thể dùng luôn.",
+      "en": "You can use it directly.",
+      "pinyin": "💃 nǐ jiù kě yǐ zhí jiē yòng 。"
+    },
+    {
+      "start": 533.57,
+      "end": 535.97,
+      "zh": "🕺对，说多了，就会越来越自然。",
+      "vi": "🕺Đúng vậy, nói nhiều rồi sẽ ngày càng tự nhiên.",
+      "en": "That's right. More and more, it gets natural.",
+      "pinyin": "🕺 duì ， shuō duō le ， jiù huì yuè lái yuè zì rán 。"
+    },
+    {
+      "start": 535.97,
+      "end": 536.63,
+      "zh": "💃好了",
+      "vi": "💃Được rồi.",
+      "en": "Here we go.",
+      "pinyin": "💃 hǎo le"
+    },
+    {
+      "start": 536.63,
+      "end": 539.43,
+      "zh": "💃现在我们买的东西价钱都差不多",
+      "vi": "💃Bây giờ giá những thứ chúng ta mua đều gần như nhau.",
+      "en": "The price of what we buy is the same now.",
+      "pinyin": "💃 xiàn zài wǒ men mǎi de dōng xī jià qián dōu chà bù duō"
+    },
+    {
+      "start": 539.43,
+      "end": 543,
+      "zh": "💃知道了。那我们去收银台结账吧。",
+      "vi": "💃Hiểu rồi. Vậy chúng ta đến quầy thu ngân thanh toán nhé.",
+      "en": "We know. Let's go to the cashier's.",
+      "pinyin": "💃 zhī dào le 。 nà wǒ men qù shōu yín tái jié zhàng ba 。"
+    },
+    {
+      "start": 543,
+      "end": 544.23,
+      "zh": "🕺一起去吧。",
+      "vi": "🕺Cùng đi nhé.",
+      "en": "Let's go together.",
+      "pinyin": "🕺 yì qǐ qù ba 。"
+    },
+    {
+      "start": 546.43,
+      "end": 549.66,
+      "zh": "🕺小雨，我们现在到收银台了。",
+      "vi": "🕺Tiểu Vũ, chúng ta đến quầy thu ngân rồi.",
+      "en": "Little Rain, we're at the cashier now.",
+      "pinyin": "🕺 xiǎo yǔ ， wǒ men xiàn zài dào shōu yín tái le 。"
+    },
+    {
+      "start": 549.67,
+      "end": 551.77,
+      "zh": "💃对，我们把东西放在这里吧。",
+      "vi": "💃Đúng vậy, chúng ta để đồ ở đây nhé.",
+      "en": "Yeah, let's put it here.",
+      "pinyin": "💃 duì ， wǒ men bǎ dōng xī fàng zài zhè lǐ ba 。"
+    },
+    {
+      "start": 551.77,
+      "end": 556.47,
+      "zh": "🕺购物车里有水果、蔬菜、米、肉，还有牛奶。",
+      "vi": "🕺Trong xe đẩy có trái cây, rau củ, gạo, thịt và cả sữa.",
+      "en": "Fruits, vegetables, rice, meat and milk are available in the shopping carts.",
+      "pinyin": "🕺 gòu wù chē lǐ yǒu shuǐ guǒ 、 shū cài 、 mǐ 、 ròu ， hái yǒu niú nǎi 。"
+    },
+    {
+      "start": 556.47,
+      "end": 557.6,
+      "zh": "🕺东西不少。",
+      "vi": "🕺Cũng khá nhiều đấy.",
+      "en": "There's a lot of stuff.",
+      "pinyin": "🕺 dōng xī bù shǎo 。"
+    },
+    {
+      "start": 557.6,
+      "end": 559.8,
+      "zh": "💃是的，我们买了很多。",
+      "vi": "💃Đúng vậy, chúng ta mua nhiều thật.",
+      "en": "Yeah, we bought a lot.",
+      "pinyin": "💃 shì de ， wǒ men mǎi le hěn duō 。"
+    },
+    {
+      "start": 559.8,
+      "end": 561.43,
+      "zh": "💃现在要结账了。",
+      "vi": "💃Bây giờ phải thanh toán rồi.",
+      "en": "The bill is now closed.",
+      "pinyin": "💃 xiàn zài yào jié zhàng le 。"
+    },
+    {
+      "start": 561.47,
+      "end": 564.2,
+      "zh": "🕺你平时用现金还是用手机？",
+      "vi": "🕺Bạn thường dùng tiền mặt hay điện thoại?",
+      "en": "Do you usually use cash or cell phones?",
+      "pinyin": "🕺 nǐ píng shí yòng xiàn jīn hái shì yòng shǒu jī ？"
+    },
+    {
+      "start": 564.2,
+      "end": 566.13,
+      "zh": "💃我一般用手机支付",
+      "vi": "💃Mình thường thanh toán bằng điện thoại.",
+      "en": "I usually pay on my cell phone.",
+      "pinyin": "💃 wǒ yì bān yòng shǒu jī zhī fù"
+    },
+    {
+      "start": 566.13,
+      "end": 567.56,
+      "zh": "💃很快，很方便。",
+      "vi": "💃Rất nhanh, rất tiện.",
+      "en": "Quick, easy.",
+      "pinyin": "💃 hěn kuài ， hěn fāng biàn 。"
+    },
+    {
+      "start": 567.57,
+      "end": 571.33,
+      "zh": "🕺我也是。用手机扫一扫，就可以了。",
+      "vi": "🕺Mình cũng vậy. Dùng điện thoại quét một cái là được.",
+      "en": "So am I. Clean it up with your cell phone, that's all.",
+      "pinyin": "🕺 wǒ yě shì 。 yòng shǒu jī sǎo yi sǎo ， jiù kě yǐ le 。"
+    },
+    {
+      "start": 571.33,
+      "end": 572.23,
+      "zh": "💃对，在中国",
+      "vi": "💃Đúng vậy, ở Trung Quốc",
+      "en": "Yes, in China.",
+      "pinyin": "💃 duì ， zài zhōng guó"
+    },
+    {
+      "start": 572.23,
+      "end": 575.2,
+      "zh": "💃很多人喜欢用微信支付或者支付宝。",
+      "vi": "💃nhiều người thích dùng WeChat Pay hoặc Alipay.",
+      "en": "A lot of people like to pay in micromails or treasures.",
+      "pinyin": "💃 hěn duō rén xǐ huan yòng wēi xìn zhī fù huò zhě zhī fù bǎo 。"
+    },
+    {
+      "start": 575.2,
+      "end": 577.2,
+      "zh": "🕺现金现在用得少了。",
+      "vi": "🕺Bây giờ tiền mặt ít được dùng hơn.",
+      "en": "There's less use for cash.",
+      "pinyin": "🕺 xiàn jīn xiàn zài yòng dé shǎo le 。"
+    },
+    {
+      "start": 577.2,
+      "end": 578.03,
+      "zh": "💃是的",
+      "vi": "💃Đúng vậy.",
+      "en": "Yeah.",
+      "pinyin": "💃 shì de"
+    },
+    {
+      "start": 578.07,
+      "end": 580.87,
+      "zh": "💃不过有时候我还是带一点现金",
+      "vi": "💃Nhưng đôi khi mình vẫn mang theo một ít tiền mặt.",
+      "en": "But sometimes I bring some cash.",
+      "pinyin": "💃 bú guò yǒu shí hòu wǒ hái shì dài yì diǎn xiàn jīn"
+    },
+    {
+      "start": 580.87,
+      "end": 582.33,
+      "zh": "💃以防手机没电。",
+      "vi": "💃Phòng khi điện thoại hết pin.",
+      "en": "In case there's no power on the phone.",
+      "pinyin": "💃 yǐ fáng shǒu jī méi diàn 。"
+    },
+    {
+      "start": 582.33,
+      "end": 585.13,
+      "zh": "🕺很对。那我们现在看看多少钱。",
+      "vi": "🕺Đúng lắm. Vậy bây giờ chúng ta xem là bao nhiêu tiền.",
+      "en": "That's right. So let's see how much money we have.",
+      "pinyin": "🕺 hěn duì 。 nà wǒ men xiàn zài kàn kàn duō shǎo qián 。"
+    },
+    {
+      "start": 585.13,
+      "end": 588.63,
+      "zh": "💃你看，屏幕上写着：一共一百二十块。",
+      "vi": "💃Bạn xem, trên màn hình ghi: tổng cộng một trăm hai mươi tệ.",
+      "en": "Look, it says on the screen: 120 bucks.",
+      "pinyin": "💃 nǐ kàn ， píng mù shàng xiě zhe ： yí gòng yì bǎi èr shí kuài 。"
+    },
+    {
+      "start": 588.63,
+      "end": 589.73,
+      "zh": "🕺买了这么多",
+      "vi": "🕺Mua nhiều thế này.",
+      "en": "That's how much she bought.",
+      "pinyin": "🕺 mǎi le zhè me duō"
+    },
+    {
+      "start": 589.73,
+      "end": 593.06,
+      "zh": "🕺其实还可以。",
+      "vi": "🕺Thực ra cũng ổn.",
+      "en": "It's okay.",
+      "pinyin": "🕺 qí shí hái kě yǐ 。"
+    },
+    {
+      "start": 593.23,
+      "end": 594.6,
+      "zh": "💃水果蔬菜不贵。",
+      "vi": "💃Trái cây rau củ không đắt.",
+      "en": "The fruit and vegetables are not expensive.",
+      "pinyin": "💃 shuǐ guǒ shū cài bú guì 。"
+    },
+    {
+      "start": 594.6,
+      "end": 595.93,
+      "zh": "💃牛肉贵一些",
+      "vi": "💃Thịt bò đắt hơn một chút.",
+      "en": "It's more expensive.",
+      "pinyin": "💃 niú ròu guì yì xiē"
+    },
+    {
+      "start": 595.93,
+      "end": 598.8,
+      "zh": "💃不过鸡肉、白菜都比较便宜。",
+      "vi": "💃Nhưng thịt gà, bắp cải đều khá rẻ.",
+      "en": "It's cheaper than chicken and cabbage.",
+      "pinyin": "💃 bú guò jī ròu 、 bái cài dōu bǐ jiào pián yi 。"
+    },
+    {
+      "start": 598.8,
+      "end": 601.03,
+      "zh": "🕺没错。那你来付钱吗？",
+      "vi": "🕺Đúng rồi. Vậy bạn thanh toán nhé?",
+      "en": "That's right. Are you paying for it?",
+      "pinyin": "🕺 méi cuò 。 nà nǐ lái fù qián ma ？"
+    },
+    {
+      "start": 601.03,
+      "end": 602.86,
+      "zh": "🕺好，我用手机支付。",
+      "vi": "🕺Được, mình thanh toán bằng điện thoại.",
+      "en": "Okay, I'll pay with the phone.",
+      "pinyin": "🕺 hǎo ， wǒ yòng shǒu jī zhī fù 。"
+    },
+    {
+      "start": 602.87,
+      "end": 605.6,
+      "zh": "💃你点开付款码，扫一扫。",
+      "vi": "💃Bạn mở mã thanh toán ra, quét một cái.",
+      "en": "I want you to open the payment code and clean it up.",
+      "pinyin": "💃 nǐ diǎn kāi fù kuǎn mǎ ， sǎo yi sǎo 。"
+    },
+    {
+      "start": 605.6,
+      "end": 606.57,
+      "zh": "🕺好了，支付成功。",
+      "vi": "🕺Rồi, thanh toán thành công.",
+      "en": "All right, pay for success.",
+      "pinyin": "🕺 hǎo le ， zhī fù chéng gōng 。"
+    },
+    {
+      "start": 606.57,
+      "end": 608.73,
+      "zh": "💃真快，几秒钟就好了。",
+      "vi": "💃Nhanh thật, chỉ vài giây là xong.",
+      "en": "That's fast. Just a few seconds.",
+      "pinyin": "💃 zhēn kuài ， jǐ miǎo zhōng jiù hǎo le 。"
+    },
+    {
+      "start": 608.73,
+      "end": 611.66,
+      "zh": "🕺对啊，现在买东西越来越方便了。",
+      "vi": "🕺Đúng vậy, bây giờ mua đồ ngày càng tiện.",
+      "en": "Yeah, it's getting easier to buy.",
+      "pinyin": "🕺 duì a ， xiàn zài mǎi dōng xī yuè lái yuè fāng biàn le 。"
+    },
+    {
+      "start": 611.67,
+      "end": 614.97,
+      "zh": "💃我记得以前很多人排队用现金",
+      "vi": "💃Mình nhớ trước đây nhiều người xếp hàng dùng tiền mặt.",
+      "en": "I remember a lot of people lined up for cash.",
+      "pinyin": "💃 wǒ jì de yǐ qián hěn duō rén pái duì yòng xiàn jīn"
+    },
+    {
+      "start": 614.97,
+      "end": 617.37,
+      "zh": "💃一个一个找零钱，很慢。",
+      "vi": "💃Từng người một loay hoay tìm tiền lẻ, rất chậm.",
+      "en": "One by one for change, very slow.",
+      "pinyin": "💃 yí gè yi gè zhǎo líng qián ， hěn màn 。"
+    },
+    {
+      "start": 617.37,
+      "end": 620.3,
+      "zh": "🕺是的，有时候收银员要找零",
+      "vi": "🕺Đúng vậy, đôi khi thu ngân phải trả lại tiền thừa.",
+      "en": "Yeah, sometimes the cashier's looking for zero.",
+      "pinyin": "🕺 shì de ， yǒu shí hòu shōu yín yuán yào zhǎo líng"
+    },
+    {
+      "start": 620.33,
+      "end": 621.43,
+      "zh": "🕺排队很长。",
+      "vi": "🕺Hàng đợi rất dài.",
+      "en": "Long line.",
+      "pinyin": "🕺 pái duì hěn cháng 。"
+    },
+    {
+      "start": 621.43,
+      "end": 623.16,
+      "zh": "💃现在只要扫一扫",
+      "vi": "💃Bây giờ chỉ cần quét một cái.",
+      "en": "All you have to do now is clean up.",
+      "pinyin": "💃 xiàn zài zhǐ yào sǎo yi sǎo"
+    },
+    {
+      "start": 623.17,
+      "end": 624.53,
+      "zh": "💃很快就完成了。",
+      "vi": "💃Rất nhanh là xong.",
+      "en": "It's done soon.",
+      "pinyin": "💃 hěn kuài jiù wán chéng le 。"
+    },
+    {
+      "start": 624.53,
+      "end": 627.43,
+      "zh": "🕺我觉得这对外国朋友也很有意思。",
+      "vi": "🕺Mình nghĩ điều này cũng rất thú vị với bạn bè nước ngoài.",
+      "en": "I think it's also interesting for foreign friends.",
+      "pinyin": "🕺 wǒ jué de zhè duì wài guó péng yǒu yě hěn yǒu yì sī 。"
+    },
+    {
+      "start": 627.43,
+      "end": 629.06,
+      "zh": "💃对，他们来中国",
+      "vi": "💃Đúng vậy, khi họ đến Trung Quốc",
+      "en": "They're in China.",
+      "pinyin": "💃 duì ， tā men lái zhōng guó"
+    },
+    {
+      "start": 629.07,
+      "end": 632.27,
+      "zh": "💃第一次看到手机支付，都觉得很新鲜。",
+      "vi": "💃lần đầu thấy thanh toán bằng điện thoại, ai cũng thấy mới lạ.",
+      "en": "The first time he saw a phone pay, it was fresh.",
+      "pinyin": "💃 dì yī cì kàn dào shǒu jī zhī fù ， dōu jué de hěn xīn xiān 。"
+    },
+    {
+      "start": 632.27,
+      "end": 633.83,
+      "zh": "🕺有的外国朋友说",
+      "vi": "🕺Có người bạn nước ngoài nói",
+      "en": "Some foreign friends say,",
+      "pinyin": "🕺 yǒu de wài guó péng yǒu shuō"
+    },
+    {
+      "start": 633.83,
+      "end": 636,
+      "zh": "🕺在他们国家还不能这样。",
+      "vi": "🕺ở nước họ vẫn chưa thể làm như vậy.",
+      "en": "Not yet in their country.",
+      "pinyin": "🕺 zài tā men guó jiā hái bù néng zhè yàng 。"
+    },
+    {
+      "start": 636,
+      "end": 636.8,
+      "zh": "💃是的",
+      "vi": "💃Đúng vậy.",
+      "en": "Yeah.",
+      "pinyin": "💃 shì de"
+    },
+    {
+      "start": 636.8,
+      "end": 640,
+      "zh": "💃中国的超市里几乎人人用手机支付。",
+      "vi": "💃Trong siêu thị ở Trung Quốc, gần như ai cũng thanh toán bằng điện thoại.",
+      "en": "Almost everyone in China's supermarkets pays on their mobile phones.",
+      "pinyin": "💃 zhōng guó de chāo shì lǐ jī hū rén rén yòng shǒu jī zhī fù 。"
+    },
+    {
+      "start": 640,
+      "end": 643.2,
+      "zh": "🕺那小雨，你平时会不会用银行卡？",
+      "vi": "🕺Vậy Tiểu Vũ, bình thường bạn có dùng thẻ ngân hàng không?",
+      "en": "Do you usually use a bank card?",
+      "pinyin": "🕺 nà xiǎo yǔ ， nǐ píng shí huì bu huì yòng yín háng kǎ ？"
+    },
+    {
+      "start": 643.2,
+      "end": 645.43,
+      "zh": "💃会，不过我用得不多。",
+      "vi": "💃Có, nhưng mình không dùng nhiều.",
+      "en": "I don't have much to use.",
+      "pinyin": "💃 huì ， bú guò wǒ yòng dé bù duō 。"
+    },
+    {
+      "start": 645.43,
+      "end": 646.66,
+      "zh": "💃手机最方便。",
+      "vi": "💃Điện thoại là tiện nhất.",
+      "en": "The phone is the most convenient.",
+      "pinyin": "💃 shǒu jī zuì fāng biàn 。"
+    },
+    {
+      "start": 646.67,
+      "end": 649.37,
+      "zh": "🕺我也是。银行卡要插进去",
+      "vi": "🕺Mình cũng vậy. Thẻ ngân hàng phải cắm vào...",
+      "en": "So do I. The bank card is going to be inserted.",
+      "pinyin": "🕺 wǒ yě shì 。 yín háng kǎ yào chā jìn qù"
+    },
+    {
+      "start": 649.37,
+      "end": 650.47,
+      "zh": "🕺还要输密码",
+      "vi": "🕺Còn phải nhập mật khẩu nữa",
+      "en": "I've got a code to lose.",
+      "pinyin": "🕺 hái yào shū mì mǎ"
+    },
+    {
+      "start": 650.47,
+      "end": 651.83,
+      "zh": "🕺比较慢。",
+      "vi": "🕺nên khá chậm.",
+      "en": "It's a little slow.",
+      "pinyin": "🕺 bǐ jiào màn 。"
+    },
+    {
+      "start": 651.83,
+      "end": 653.56,
+      "zh": "💃对，手机一放，就好了。",
+      "vi": "💃Đúng, chỉ cần đặt điện thoại lên là xong.",
+      "en": "Yeah, once the phone's on, it's fine.",
+      "pinyin": "💃 duì ， shǒu jī yí fàng ， jiù hǎo le 。"
+    },
+    {
+      "start": 653.57,
+      "end": 655.43,
+      "zh": "🕺现在我们付完钱了。",
+      "vi": "🕺Giờ chúng ta đã thanh toán xong rồi.",
+      "en": "We're done paying now.",
+      "pinyin": "🕺 xiàn zài wǒ men fù wán qián le 。"
+    },
+    {
+      "start": 655.43,
+      "end": 656.86,
+      "zh": "🕺你要不要顺便买点",
+      "vi": "🕺Bạn có muốn tiện thể mua một ít...",
+      "en": "Do you want to buy some?",
+      "pinyin": "🕺 nǐ yào bu yào shùn biàn mǎi diǎn"
+    },
+    {
+      "start": 656.87,
+      "end": 658.23,
+      "zh": "💃饮料？",
+      "vi": "💃Đồ uống không?",
+      "en": "A drink?",
+      "pinyin": "💃 yǐn liào ？"
+    },
+    {
+      "start": 658.23,
+      "end": 660,
+      "zh": "💃不用了，今天买的已经够多了。",
+      "vi": "💃Không cần đâu, hôm nay mua đủ nhiều rồi.",
+      "en": "No, we've got enough for today.",
+      "pinyin": "💃 bú yòng le ， jīn tiān mǎi de yǐ jīng gòu duō le 。"
+    },
+    {
+      "start": 660,
+      "end": 662.57,
+      "zh": "🕺也是，购物车都满了。",
+      "vi": "🕺Cũng phải, giỏ hàng đầy rồi.",
+      "en": "Yeah, the shopping carts are full.",
+      "pinyin": "🕺 yě shì ， gòu wù chē dōu mǎn le 。"
+    },
+    {
+      "start": 662.57,
+      "end": 665.27,
+      "zh": "💃对。你看，我们买的东西挺健康的",
+      "vi": "💃Đúng. Bạn xem này, đồ chúng ta mua khá tốt cho sức khỏe",
+      "en": "That's right. Look, we bought something healthy.",
+      "pinyin": "💃 duì 。 nǐ kàn ， wǒ men mǎi de dōng xī tǐng jiàn kāng de"
+    },
+    {
+      "start": 665.27,
+      "end": 667.03,
+      "zh": "💃有水果，有蔬菜",
+      "vi": "💃Có trái cây, có rau củ",
+      "en": "There's fruit and vegetables.",
+      "pinyin": "💃 yǒu shuǐ guǒ ， yǒu shū cài"
+    },
+    {
+      "start": 667.03,
+      "end": 668.36,
+      "zh": "💃还有肉和米。",
+      "vi": "💃còn có thịt và gạo.",
+      "en": "There's meat and rice.",
+      "pinyin": "💃 hái yǒu ròu hé mǐ 。"
+    },
+    {
+      "start": 668.37,
+      "end": 669.97,
+      "zh": "🕺是的，很均衡。",
+      "vi": "🕺Đúng, rất cân bằng.",
+      "en": "Yeah, it's balanced.",
+      "pinyin": "🕺 shì de ， hěn jūn héng 。"
+    },
+    {
+      "start": 670.03,
+      "end": 672.8,
+      "zh": "🕺这样做饭的时候就有很多选择。",
+      "vi": "🕺Như vậy khi nấu ăn sẽ có nhiều lựa chọn.",
+      "en": "There's a lot of choice when you do it.",
+      "pinyin": "🕺 zhè yàng zuò fàn de shí hòu jiù yǒu hěn duō xuǎn zé 。"
+    },
+    {
+      "start": 672.8,
+      "end": 674.73,
+      "zh": "💃我觉得去超市买菜",
+      "vi": "💃Mình thấy đi siêu thị mua đồ ăn",
+      "en": "I think we're going to the supermarket.",
+      "pinyin": "💃 wǒ jué de qù chāo shì mǎi cài"
+    },
+    {
+      "start": 674.73,
+      "end": 677,
+      "zh": "💃也是一个学习中文的好机会。",
+      "vi": "💃cũng là cơ hội tốt để học tiếng Trung.",
+      "en": "It's also a good opportunity to learn Chinese.",
+      "pinyin": "💃 yě shì yí gè xué xí zhōng wén de hǎo jī huì 。"
+    },
+    {
+      "start": 677,
+      "end": 679.4,
+      "zh": "🕺没错，可以学会问价钱",
+      "vi": "🕺Đúng vậy, có thể học cách hỏi giá",
+      "en": "You're right. You can learn to ask for money.",
+      "pinyin": "🕺 méi cuò ， kě yǐ xué huì wèn jià qián"
+    },
+    {
+      "start": 679.4,
+      "end": 680.77,
+      "zh": "🕺学会说数量",
+      "vi": "🕺học cách nói số lượng",
+      "en": "Quantities.",
+      "pinyin": "🕺 xué huì shuō shù liàng"
+    },
+    {
+      "start": 680.77,
+      "end": 683.17,
+      "zh": "🕺还能练习支付的句子。",
+      "vi": "🕺còn có thể luyện các câu về thanh toán.",
+      "en": "I can also practice paid sentences.",
+      "pinyin": "🕺 hái néng liàn xí zhī fù de jù zi 。"
+    },
+    {
+      "start": 683.17,
+      "end": 685.3,
+      "zh": "💃对，比如说“我要两斤”",
+      "vi": "💃Đúng, ví dụ như “我要两斤” (tôi muốn hai jin, khoảng một ký)",
+      "en": "Yeah, like, \"I want two pounds.\"",
+      "pinyin": "💃 duì ， bǐ rú shuō “ wǒ yào liǎng jīn ”"
+    },
+    {
+      "start": 685.33,
+      "end": 686.63,
+      "zh": "💃“一共多少钱”",
+      "vi": "💃“一共多少钱” (tổng cộng bao nhiêu tiền)",
+      "en": "\"How much is it?\"",
+      "pinyin": "💃“ yí gòng duō shǎo qián ”"
+    },
+    {
+      "start": 686.63,
+      "end": 688.13,
+      "zh": "💃“我用手机支付”。",
+      "vi": "💃“我用手机支付” (tôi thanh toán bằng điện thoại).",
+      "en": "\"I'll pay with my cell phone.\"",
+      "pinyin": "💃“ wǒ yòng shǒu jī zhī fù ”。"
+    },
+    {
+      "start": 688.13,
+      "end": 690.26,
+      "zh": "🕺这些句子简单又实用。",
+      "vi": "🕺Những câu này vừa đơn giản vừa thực dụng.",
+      "en": "These sentences are simple and practical.",
+      "pinyin": "🕺 zhè xiē jù zi jiǎn dān yòu shí yòng 。"
+    },
+    {
+      "start": 690.27,
+      "end": 691.73,
+      "zh": "💃如果多说几次",
+      "vi": "💃Nếu nói vài lần",
+      "en": "If you say it a few more times,",
+      "pinyin": "💃 rú guǒ duō shuō jǐ cì"
+    },
+    {
+      "start": 691.73,
+      "end": 693.23,
+      "zh": "💃就会越来越自然。",
+      "vi": "💃sẽ ngày càng tự nhiên.",
+      "en": "It'll become more natural.",
+      "pinyin": "💃 jiù huì yuè lái yuè zì rán 。"
+    },
+    {
+      "start": 693.23,
+      "end": 695.53,
+      "zh": "🕺我觉得今天的练习很好。",
+      "vi": "🕺Mình thấy buổi luyện tập hôm nay rất tốt.",
+      "en": "I think today's practice is good.",
+      "pinyin": "🕺 wǒ jué de jīn tiān de liàn xí hěn hǎo 。"
+    },
+    {
+      "start": 695.57,
+      "end": 698.6,
+      "zh": "🕺我们从进超市到结账，都说了一遍。",
+      "vi": "🕺Từ lúc vào siêu thị đến lúc thanh toán, chúng ta đều nói qua một lượt rồi.",
+      "en": "We've been talking about it since we went to the supermarket.",
+      "pinyin": "🕺 wǒ men cóng jìn chāo shì dào jié zhàng ， dōu shuō le yí biàn 。"
+    },
+    {
+      "start": 698.6,
+      "end": 699.27,
+      "zh": "💃是的",
+      "vi": "💃Đúng vậy",
+      "en": "Yeah.",
+      "pinyin": "💃 shì de"
+    },
+    {
+      "start": 699.27,
+      "end": 702.2,
+      "zh": "💃大家听了以后，也可以自己练习。",
+      "vi": "💃Mọi người nghe xong cũng có thể tự luyện tập.",
+      "en": "If you listen to me, you can practice yourself.",
+      "pinyin": "💃 dà jiā tīng le yǐ hòu ， yě kě yǐ zì jǐ liàn xí 。"
+    },
+    {
+      "start": 702.2,
+      "end": 704.13,
+      "zh": "🕺现在我们把东西装好",
+      "vi": "🕺Bây giờ chúng ta thu dọn đồ đạc",
+      "en": "Let's get this thing packed.",
+      "pinyin": "🕺 xiàn zài wǒ men bǎ dōng xī zhuāng hǎo"
+    },
+    {
+      "start": 704.13,
+      "end": 705.63,
+      "zh": "🕺准备回家。",
+      "vi": "🕺chuẩn bị về nhà.",
+      "en": "Get ready to go home.",
+      "pinyin": "🕺 zhǔn bèi huí jiā 。"
+    },
+    {
+      "start": 705.63,
+      "end": 706.9,
+      "zh": "💃好，我们一起回家。",
+      "vi": "💃Được, mình cùng về nhà.",
+      "en": "Okay, let's go home together.",
+      "pinyin": "💃 hǎo ， wǒ men yì qǐ huí jiā 。"
+    },
+    {
+      "start": 709.2,
+      "end": 711.87,
+      "zh": "🕺小雨，我们把东西都装好了",
+      "vi": "🕺Tiểu Vũ, chúng ta xếp đồ xong cả rồi.",
+      "en": "We've packed everything.",
+      "pinyin": "🕺 xiǎo yǔ ， wǒ men bǎ dōng xī dōu zhuāng hǎo le"
+    },
+    {
+      "start": 711.87,
+      "end": 713.13,
+      "zh": "🕺真不少啊。",
+      "vi": "🕺Nhiều thật đấy.",
+      "en": "That's a lot.",
+      "pinyin": "🕺 zhēn bù shǎo a 。"
+    },
+    {
+      "start": 713.13,
+      "end": 715.6,
+      "zh": "💃是的，今天买了很多。",
+      "vi": "💃Đúng, hôm nay mua nhiều thật.",
+      "en": "Yeah, a lot today.",
+      "pinyin": "💃 shì de ， jīn tiān mǎi le hěn duō 。"
+    },
+    {
+      "start": 715.6,
+      "end": 718.67,
+      "zh": "💃回家以后要好好整理。",
+      "vi": "💃Về nhà phải sắp xếp cẩn thận.",
+      "en": "You have to clean it up when you get home.",
+      "pinyin": "💃 huí jiā yǐ hòu yào hǎo hǎo zhěng lǐ 。"
+    },
+    {
+      "start": 718.73,
+      "end": 721.93,
+      "zh": "🕺对，米很重，我们先把米放到厨房。",
+      "vi": "🕺Ừ, gạo nặng lắm, mình đưa gạo vào bếp trước nhé.",
+      "en": "Yeah, it's heavy. Let's put it in the kitchen first.",
+      "pinyin": "🕺 duì ， mǐ hěn zhòng ， wǒ men xiān bǎ mǐ fàng dào chú fáng 。"
+    },
+    {
+      "start": 722.07,
+      "end": 723.77,
+      "zh": "💃水果要洗一洗",
+      "vi": "💃Trái cây phải rửa qua",
+      "en": "I'll wash the fruit.",
+      "pinyin": "💃 shuǐ guǒ yào xǐ yi xǐ"
+    },
+    {
+      "start": 723.77,
+      "end": 726.73,
+      "zh": "💃放在桌子上，看起来也很漂亮。",
+      "vi": "💃đặt lên bàn, nhìn cũng đẹp.",
+      "en": "It looks beautiful on the table.",
+      "pinyin": "💃 fàng zài zhuō zi shàng ， kàn qǐ lái yě hěn piào liang 。"
+    },
+    {
+      "start": 726.73,
+      "end": 728.56,
+      "zh": "🕺苹果可以放几天",
+      "vi": "🕺Táo có thể để được mấy ngày",
+      "en": "The apples can be put on for a few days.",
+      "pinyin": "🕺 píng guǒ kě yǐ fàng jǐ tiān"
+    },
+    {
+      "start": 728.57,
+      "end": 730.67,
+      "zh": "🕺不过香蕉要早点吃。",
+      "vi": "🕺nhưng chuối phải ăn sớm.",
+      "en": "Bananas have to eat early.",
+      "pinyin": "🕺 bú guò xiāng jiāo yào zǎo diǎn chī 。"
+    },
+    {
+      "start": 730.67,
+      "end": 732.57,
+      "zh": "💃对，香蕉容易坏",
+      "vi": "💃Đúng, chuối dễ hỏng",
+      "en": "Bananas are always bad.",
+      "pinyin": "💃 duì ， xiāng jiāo róng yì huài"
+    },
+    {
+      "start": 732.57,
+      "end": 734.24,
+      "zh": "💃我们先吃香蕉。",
+      "vi": "💃mình ăn chuối trước nhé.",
+      "en": "Let's eat bananas first.",
+      "pinyin": "💃 wǒ men xiān chī xiāng jiāo 。"
+    },
+    {
+      "start": 734.33,
+      "end": 736.03,
+      "zh": "🕺蔬菜也要放冰箱",
+      "vi": "🕺Rau củ cũng phải cho vào tủ lạnh",
+      "en": "And the veggies in the fridge.",
+      "pinyin": "🕺 shū cài yě yào fàng bīng xiāng"
+    },
+    {
+      "start": 736.03,
+      "end": 737.43,
+      "zh": "🕺不然会不新鲜。",
+      "vi": "🕺không thì sẽ không còn tươi.",
+      "en": "It's not gonna be fresh.",
+      "pinyin": "🕺 bù rán huì bù xīn xiān 。"
+    },
+    {
+      "start": 737.43,
+      "end": 739.23,
+      "zh": "💃没错，西红柿",
+      "vi": "💃Đúng rồi, cà chua",
+      "en": "That's right, tomatoes.",
+      "pinyin": "💃 méi cuò ， xī hóng shì"
+    },
+    {
+      "start": 739.23,
+      "end": 742.06,
+      "zh": "💃黄瓜和白菜都要放进冰箱。",
+      "vi": "💃Dưa chuột và cải thảo đều phải cho vào tủ lạnh.",
+      "en": "Both cucumbers and cabbage are put in the fridge.",
+      "pinyin": "💃 huáng guā hé bái cài dōu yào fàng jìn bīng xiāng 。"
+    },
+    {
+      "start": 742.07,
+      "end": 744.37,
+      "zh": "🕺鸡肉和牛肉也要冷冻",
+      "vi": "🕺Thịt gà và thịt bò cũng phải trữ đông.",
+      "en": "Chicken and beef are frozen too.",
+      "pinyin": "🕺 jī ròu hé niú ròu yě yào lěng dòng"
+    },
+    {
+      "start": 744.37,
+      "end": 746.73,
+      "zh": "🕺这样可以放久一点。",
+      "vi": "🕺Như vậy có thể để được lâu hơn.",
+      "en": "It'll take a little longer.",
+      "pinyin": "🕺 zhè yàng kě yǐ fàng jiǔ yì diǎn 。"
+    },
+    {
+      "start": 746.73,
+      "end": 749.03,
+      "zh": "💃对，我们可以把鸡肉分开放",
+      "vi": "💃Đúng, chúng ta có thể chia thịt gà ra để riêng.",
+      "en": "Yes, we can split the chicken.",
+      "pinyin": "💃 duì ， wǒ men kě yǐ bǎ jī ròu fēn kāi fàng"
+    },
+    {
+      "start": 749.03,
+      "end": 751.56,
+      "zh": "💃做饭的时候拿一块就可以。",
+      "vi": "💃Khi nấu ăn chỉ cần lấy một miếng là được.",
+      "en": "Take a piece of it when you cook.",
+      "pinyin": "💃 zuò fàn de shí hòu ná yí kuài jiù kě yǐ 。"
+    },
+    {
+      "start": 751.57,
+      "end": 754.43,
+      "zh": "🕺很方便。那牛奶你放哪？",
+      "vi": "🕺Rất tiện. Thế bạn để sữa ở đâu?",
+      "en": "It's easy. Where do you put the milk?",
+      "pinyin": "🕺 hěn fāng biàn 。 nà niú nǎi nǐ fàng nǎ ？"
+    },
+    {
+      "start": 754.43,
+      "end": 757.03,
+      "zh": "💃牛奶要放在冰箱的门上。",
+      "vi": "💃Sữa phải để ở cánh cửa tủ lạnh.",
+      "en": "The milk is on the door of the fridge.",
+      "pinyin": "💃 niú nǎi yào fàng zài bīng xiāng de mén shàng 。"
+    },
+    {
+      "start": 757.03,
+      "end": 758.63,
+      "zh": "💃每天早上喝一杯，很健康。",
+      "vi": "💃Mỗi sáng uống một cốc, rất tốt cho sức khỏe.",
+      "en": "Every morning, a drink. It's healthy.",
+      "pinyin": "💃 měi tiān zǎo shàng hē yì bēi ， hěn jiàn kāng 。"
+    },
+    {
+      "start": 758.63,
+      "end": 760.53,
+      "zh": "🕺好主意。",
+      "vi": "🕺Ý hay đấy.",
+      "en": "Good idea.",
+      "pinyin": "🕺 hǎo zhǔ yì 。"
+    },
+    {
+      "start": 760.53,
+      "end": 763.13,
+      "zh": "🕺我每天也喜欢早上喝牛奶。",
+      "vi": "🕺Tôi cũng thích uống sữa vào mỗi buổi sáng.",
+      "en": "I like to drink milk every morning.",
+      "pinyin": "🕺 wǒ měi tiān yě xǐ huan zǎo shàng hē niú nǎi 。"
+    },
+    {
+      "start": 763.17,
+      "end": 764.07,
+      "zh": "💃你知道吗？",
+      "vi": "💃Bạn biết không?",
+      "en": "You know what?",
+      "pinyin": "💃 nǐ zhī dào ma ？"
+    },
+    {
+      "start": 764.07,
+      "end": 767.57,
+      "zh": "💃我觉得在超市买东西，不只是买食物",
+      "vi": "💃Tôi nghĩ mua đồ ở siêu thị không chỉ là mua thực phẩm",
+      "en": "I think buying at the supermarket is more than just food.",
+      "pinyin": "💃 wǒ jué de zài chāo shì mǎi dōng xī ， bù zhǐ shì mǎi shí wù"
+    },
+    {
+      "start": 767.57,
+      "end": 769.87,
+      "zh": "💃也是一个练习中文的机会。",
+      "vi": "💃mà còn là cơ hội để luyện tiếng Trung.",
+      "en": "It's also an opportunity to practice Chinese.",
+      "pinyin": "💃 yě shì yí gè liàn xí zhōng wén de jī huì 。"
+    },
+    {
+      "start": 769.87,
+      "end": 772.13,
+      "zh": "🕺对啊，你可以问价钱",
+      "vi": "🕺Đúng vậy, bạn có thể hỏi giá",
+      "en": "That's right. You can ask for money.",
+      "pinyin": "🕺 duì a ， nǐ kě yǐ wèn jià qián"
+    },
+    {
+      "start": 772.13,
+      "end": 773.36,
+      "zh": "🕺可以说数量",
+      "vi": "🕺có thể nói số lượng",
+      "en": "I'll tell you the numbers.",
+      "pinyin": "🕺 kě yǐ shuō shù liàng"
+    },
+    {
+      "start": 773.37,
+      "end": 775.03,
+      "zh": "🕺还可以学一些新词。",
+      "vi": "🕺còn có thể học một số từ mới.",
+      "en": "I can learn some new words.",
+      "pinyin": "🕺 hái kě yǐ xué yì xiē xīn cí 。"
+    },
+    {
+      "start": 775.03,
+      "end": 777.86,
+      "zh": "💃比如今天我们学了“购物车”",
+      "vi": "💃Ví dụ hôm nay chúng ta học từ \"xe đẩy hàng\"",
+      "en": "Like today we learned \"shopping car.\"",
+      "pinyin": "💃 bǐ rú jīn tiān wǒ men xué le “ gòu wù chē ”"
+    },
+    {
+      "start": 777.97,
+      "end": 781.4,
+      "zh": "💃“一共”，“手机支付”，这些词都很实用。",
+      "vi": "💃\"tổng cộng\", \"thanh toán bằng điện thoại\", những từ này đều rất thực dụng.",
+      "en": "\"Total,\" \"Cell phone payments\", which are practical.",
+      "pinyin": "💃“ yí gòng ”，“ shǒu jī zhī fù ”， zhè xiē cí dōu hěn shí yòng 。"
+    },
+    {
+      "start": 781.4,
+      "end": 783.43,
+      "zh": "🕺是的，你下次去超市",
+      "vi": "🕺Đúng vậy, lần sau bạn đi siêu thị",
+      "en": "Yes, next time you go to the supermarket.",
+      "pinyin": "🕺 shì de ， nǐ xià cì qù chāo shì"
+    },
+    {
+      "start": 783.43,
+      "end": 784.63,
+      "zh": "🕺就可以用上。",
+      "vi": "🕺là có thể dùng được.",
+      "en": "The gin can be used on.",
+      "pinyin": "🕺 jiù kě yǐ yòng shàng 。"
+    },
+    {
+      "start": 784.63,
+      "end": 785.86,
+      "zh": "💃我记得有一次",
+      "vi": "💃Tôi nhớ có một lần",
+      "en": "I remember once.",
+      "pinyin": "💃 wǒ jì de yǒu yí cì"
+    },
+    {
+      "start": 785.87,
+      "end": 788.27,
+      "zh": "💃一个外国朋友跟我去超市",
+      "vi": "💃một người bạn nước ngoài đi siêu thị cùng tôi",
+      "en": "A foreign friend and I are going to the supermarket.",
+      "pinyin": "💃 yí gè wài guó péng yǒu gēn wǒ qù chāo shì"
+    },
+    {
+      "start": 788.27,
+      "end": 790.97,
+      "zh": "💃他只会说“这个多少钱”。",
+      "vi": "💃anh ấy chỉ biết nói \"cái này bao nhiêu tiền\".",
+      "en": "He'll only say, \"How much is this?\"",
+      "pinyin": "💃 tā zhī huì shuō “ zhè ge duō shǎo qián ”。"
+    },
+    {
+      "start": 790.97,
+      "end": 792.73,
+      "zh": "🕺那他买到东西了吗？",
+      "vi": "🕺Thế anh ấy có mua được đồ không?",
+      "en": "Did he buy anything?",
+      "pinyin": "🕺 nà tā mǎi dào dōng xī le ma ？"
+    },
+    {
+      "start": 792.73,
+      "end": 795.33,
+      "zh": "🕺买到了，不过他很紧张。",
+      "vi": "🕺Mua được, nhưng anh ấy rất căng thẳng.",
+      "en": "I bought it, but he's nervous.",
+      "pinyin": "🕺 mǎi dào le ， bú guò tā hěn jǐn zhāng 。"
+    },
+    {
+      "start": 795.37,
+      "end": 798.6,
+      "zh": "🕺后来他多练习，就说得很好了。",
+      "vi": "🕺Sau đó anh ấy luyện tập nhiều hơn, nói rất tốt.",
+      "en": "Then he practiced a lot, and he said it very well.",
+      "pinyin": "🕺 hòu lái tā duō liàn xí ， jiù shuō dé hěn hǎo le 。"
+    },
+    {
+      "start": 798.6,
+      "end": 800.47,
+      "zh": "💃说多了就会自然。",
+      "vi": "💃Nói nhiều rồi sẽ tự nhiên thôi.",
+      "en": "If you say more, it'll be natural.",
+      "pinyin": "💃 shuō duō le jiù huì zì rán 。"
+    },
+    {
+      "start": 800.47,
+      "end": 802.6,
+      "zh": "🕺超市的对话其实很简单。",
+      "vi": "🕺Hội thoại ở siêu thị thật ra rất đơn giản.",
+      "en": "It's really easy to talk about a supermarket.",
+      "pinyin": "🕺 chāo shì de duì huà qí shí hěn jiǎn dān 。"
+    },
+    {
+      "start": 802.6,
+      "end": 804.73,
+      "zh": "🕺比如：这个多少钱？",
+      "vi": "🕺Ví dụ: Cái này bao nhiêu tiền?",
+      "en": "For example: How much is this?",
+      "pinyin": "🕺 bǐ rú ： zhè ge duō shǎo qián ？"
+    },
+    {
+      "start": 804.73,
+      "end": 805.96,
+      "zh": "🕺我要两斤。",
+      "vi": "🕺Tôi muốn hai cân.",
+      "en": "I'll take two pounds.",
+      "pinyin": "🕺 wǒ yào liǎng jīn 。"
+    },
+    {
+      "start": 806,
+      "end": 807.93,
+      "zh": "🕺可以便宜一点吗？",
+      "vi": "🕺Có thể rẻ hơn một chút không?",
+      "en": "Can you make it cheaper?",
+      "pinyin": "🕺 kě yǐ pián yi yì diǎn ma ？"
+    },
+    {
+      "start": 807.93,
+      "end": 809.6,
+      "zh": "💃对，还有：“我用现金”",
+      "vi": "💃Đúng, còn có: \"Tôi dùng tiền mặt\"",
+      "en": "And, \"I use cash.\"",
+      "pinyin": "💃 duì ， hái yǒu ：“ wǒ yòng xiàn jīn ”"
+    },
+    {
+      "start": 809.6,
+      "end": 811.13,
+      "zh": "💃“我用手机支付”。",
+      "vi": "💃\"Tôi thanh toán bằng điện thoại\".",
+      "en": "\"I'll pay with my cell phone.\"",
+      "pinyin": "💃“ wǒ yòng shǒu jī zhī fù ”。"
+    },
+    {
+      "start": 811.13,
+      "end": 813.23,
+      "zh": "🕺大家只要记住这些句子",
+      "vi": "🕺Mọi người chỉ cần nhớ những câu này",
+      "en": "All you have to do is remember these sentences.",
+      "pinyin": "🕺 dà jiā zhǐ yào jì zhù zhè xiē jù zi"
+    },
+    {
+      "start": 813.23,
+      "end": 815.3,
+      "zh": "🕺就能应付大部分情况。",
+      "vi": "🕺là có thể ứng phó được phần lớn tình huống.",
+      "en": "We can deal with most of the situation.",
+      "pinyin": "🕺 jiù néng yìng fù dà bù fen qíng kuàng 。"
+    },
+    {
+      "start": 815.37,
+      "end": 815.97,
+      "zh": "💃是的",
+      "vi": "💃Đúng vậy",
+      "en": "Yeah.",
+      "pinyin": "💃 shì de"
+    },
+    {
+      "start": 815.97,
+      "end": 819.2,
+      "zh": "💃还有一个很常用的句子：“不要塑料袋”。",
+      "vi": "💃Còn một câu rất hay dùng nữa: \"Không lấy túi ni lông\".",
+      "en": "There's another very common sentence: \"No plastic bags.\"",
+      "pinyin": "💃 hái yǒu yí gè hěn cháng yòng de jù zi ：“ bú yào sù liào dài ”。"
+    },
+    {
+      "start": 819.2,
+      "end": 822.77,
+      "zh": "🕺对，现在很多人自己带袋子去超市。",
+      "vi": "🕺Đúng, bây giờ nhiều người tự mang túi đến siêu thị.",
+      "en": "Yes, a lot of people now bring bags to the supermarket themselves.",
+      "pinyin": "🕺 duì ， xiàn zài hěn duō rén zì jǐ dài dài zǐ qù chāo shì 。"
+    },
+    {
+      "start": 822.77,
+      "end": 825.07,
+      "zh": "💃这样很环保，也很方便。",
+      "vi": "💃Như vậy rất thân thiện với môi trường, cũng rất tiện.",
+      "en": "It's very environmentally friendly and convenient.",
+      "pinyin": "💃 zhè yàng hěn huán bǎo ， yě hěn fāng biàn 。"
+    },
+    {
+      "start": 825.07,
+      "end": 827.07,
+      "zh": "🕺我今天忘记带袋子了。",
+      "vi": "🕺Hôm nay tôi quên mang túi rồi.",
+      "en": "I forgot my bag today.",
+      "pinyin": "🕺 wǒ jīn tiān wàng jì dài dài zǐ le 。"
+    },
+    {
+      "start": 827.07,
+      "end": 828,
+      "zh": "💃没关系",
+      "vi": "💃Không sao đâu",
+      "en": "It doesn't matter.",
+      "pinyin": "💃 méi guān xì"
+    },
+    {
+      "start": 828,
+      "end": 830.8,
+      "zh": "💃我们买的超市袋子也可以用几次。",
+      "vi": "💃Túi siêu thị chúng ta mua cũng có thể dùng vài lần.",
+      "en": "We can buy supermarket bags a couple of times.",
+      "pinyin": "💃 wǒ men mǎi de chāo shì dài zǐ yě kě yǐ yòng jǐ cì 。"
+    },
+    {
+      "start": 830.8,
+      "end": 832.83,
+      "zh": "🕺下次我一定要记得。",
+      "vi": "🕺Lần sau tôi nhất định sẽ nhớ.",
+      "en": "Next time I'll remember.",
+      "pinyin": "🕺 xià cì wǒ yí dìng yào jì de 。"
+    },
+    {
+      "start": 832.83,
+      "end": 834.4,
+      "zh": "💃好啊，这样更好。",
+      "vi": "💃Được đó, như vậy càng tốt.",
+      "en": "That's good, that's better.",
+      "pinyin": "💃 hǎo a ， zhè yàng gèng hǎo 。"
+    },
+    {
+      "start": 834.4,
+      "end": 835.17,
+      "zh": "🕺小雨",
+      "vi": "🕺Tiểu Vũ",
+      "en": "Xiaoyu.",
+      "pinyin": "🕺 xiǎo yǔ"
+    },
+    {
+      "start": 835.17,
+      "end": 838.17,
+      "zh": "💃你觉得今天买的东西可以吃几天？",
+      "vi": "💃Bạn thấy đồ mua hôm nay có thể ăn được mấy ngày?",
+      "en": "Do you think today's food can be eaten for a few days?",
+      "pinyin": "💃 nǐ jué de jīn tiān mǎi de dōng xī kě yǐ chī jǐ tiān ？"
+    },
+    {
+      "start": 838.17,
+      "end": 840.44,
+      "zh": "💃我觉得可以吃一个星期。",
+      "vi": "💃Tôi nghĩ có thể ăn được một tuần.",
+      "en": "I think we can eat for a week.",
+      "pinyin": "💃 wǒ jué de kě yǐ chī yí gè xīng qī 。"
+    },
+    {
+      "start": 840.73,
+      "end": 844.56,
+      "zh": "💃水果和蔬菜差不多七天就要吃完。",
+      "vi": "💃Trái cây và rau củ thì khoảng bảy ngày là phải ăn hết.",
+      "en": "The fruit and vegetables are about seven days away.",
+      "pinyin": "💃 shuǐ guǒ hé shū cài chà bù duō qī tiān jiù yào chī wán 。"
+    },
+    {
+      "start": 844.57,
+      "end": 846.27,
+      "zh": "🕺对，米可以放很久。",
+      "vi": "🕺Đúng, gạo có thể để được lâu.",
+      "en": "Yeah, the rice can be long.",
+      "pinyin": "🕺 duì ， mǐ kě yǐ fàng hěn jiǔ 。"
+    },
+    {
+      "start": 846.27,
+      "end": 848.67,
+      "zh": "🕺肉放冰箱也能放很久。",
+      "vi": "🕺Thịt để trong tủ lạnh cũng để được lâu.",
+      "en": "The meat can be in the fridge for a long time.",
+      "pinyin": "🕺 ròu fàng bīng xiāng yě néng fàng hěn jiǔ 。"
+    },
+    {
+      "start": 848.67,
+      "end": 851.53,
+      "zh": "💃所以买东西的时候，要计划好。",
+      "vi": "💃Nên khi mua đồ, phải lên kế hoạch cho tốt.",
+      "en": "So when you buy something, you have to plan it.",
+      "pinyin": "💃 suǒ yǐ mǎi dōng xī de shí hòu ， yào jì huà hǎo 。"
+    },
+    {
+      "start": 851.53,
+      "end": 853.63,
+      "zh": "🕺没错，不然容易浪费。",
+      "vi": "🕺Đúng vậy, không thì dễ lãng phí.",
+      "en": "That's right, otherwise it's easy to waste.",
+      "pinyin": "🕺 méi cuò ， bù rán róng yì làng fèi 。"
+    },
+    {
+      "start": 853.63,
+      "end": 856.16,
+      "zh": "💃我觉得学中文和买东西一样",
+      "vi": "💃Tôi thấy học tiếng Trung cũng giống như mua đồ.",
+      "en": "I think Chinese is the same as shopping.",
+      "pinyin": "💃 wǒ jué de xué zhōng wén hé mǎi dōng xī yí yàng"
+    },
+    {
+      "start": 856.17,
+      "end": 857.97,
+      "zh": "💃也要有计划。",
+      "vi": "💃Cũng phải có kế hoạch.",
+      "en": "There's also a plan.",
+      "pinyin": "💃 yě yào yǒu jì huà 。"
+    },
+    {
+      "start": 857.97,
+      "end": 859.67,
+      "zh": "🕺对，要一点一点来",
+      "vi": "🕺Đúng, phải từng bước một.",
+      "en": "Yes, a little bit.",
+      "pinyin": "🕺 duì ， yào yì diǎn yi diǎn lái"
+    },
+    {
+      "start": 859.67,
+      "end": 862.03,
+      "zh": "🕺先学简单的，再学难的。",
+      "vi": "🕺Học cái đơn giản trước, rồi học cái khó sau.",
+      "en": "It's hard to learn first.",
+      "pinyin": "🕺 xiān xué jiǎn dān de ， zài xué nán de 。"
+    },
+    {
+      "start": 862.03,
+      "end": 864.83,
+      "zh": "💃每天学一点，就会越来越好。",
+      "vi": "💃Mỗi ngày học một chút, sẽ ngày càng giỏi hơn.",
+      "en": "You learn a little each day, you get better.",
+      "pinyin": "💃 měi tiān xué yì diǎn ， jiù huì yuè lái yuè hǎo 。"
+    },
+    {
+      "start": 864.83,
+      "end": 866.6,
+      "zh": "🕺是的，就像今天",
+      "vi": "🕺Đúng thế, giống như hôm nay.",
+      "en": "Yeah, it's like today.",
+      "pinyin": "🕺 shì de ， jiù xiàng jīn tiān"
+    },
+    {
+      "start": 866.6,
+      "end": 869.6,
+      "zh": "🕺我们学的都是生活中常用的句子。",
+      "vi": "🕺Những câu chúng ta học đều là câu thường dùng trong cuộc sống.",
+      "en": "We're all learning the usual sentences in life.",
+      "pinyin": "🕺 wǒ men xué de dōu shì shēng huó zhōng cháng yòng de jù zi 。"
+    },
+    {
+      "start": 869.6,
+      "end": 873.03,
+      "zh": "💃大家听了以后，可以跟朋友一起练习。",
+      "vi": "💃Mọi người nghe xong có thể luyện tập cùng bạn bè.",
+      "en": "If you listen, you can practice with your friends.",
+      "pinyin": "💃 dà jiā tīng le yǐ hòu ， kě yǐ gēn péng yǒu yì qǐ liàn xí 。"
+    },
+    {
+      "start": 873.03,
+      "end": 876.63,
+      "zh": "🕺或者自己去超市的时候，大声说出来。",
+      "vi": "🕺Hoặc khi tự đi siêu thị, hãy nói to lên.",
+      "en": "Say it out loud when you go to the supermarket yourself.",
+      "pinyin": "🕺 huò zhě zì jǐ qù chāo shì de shí hòu ， dà shēng shuō chū lái 。"
+    },
+    {
+      "start": 876.63,
+      "end": 879.2,
+      "zh": "💃对，说出来才是真的学会了。",
+      "vi": "💃Đúng, nói ra được mới là thật sự học được.",
+      "en": "Yes, it's true.",
+      "pinyin": "💃 duì ， shuō chū lái cái shì zhēn de xué huì le 。"
+    },
+    {
+      "start": 879.2,
+      "end": 881.77,
+      "zh": "🕺我觉得今天的练习很有意思。",
+      "vi": "🕺Tôi thấy buổi luyện tập hôm nay rất thú vị.",
+      "en": "I think today's practice is interesting.",
+      "pinyin": "🕺 wǒ jué de jīn tiān de liàn xí hěn yǒu yì sī 。"
+    },
+    {
+      "start": 881.77,
+      "end": 882.83,
+      "zh": "💃我也觉得",
+      "vi": "💃Tôi cũng thấy vậy.",
+      "en": "I think so too.",
+      "pinyin": "💃 wǒ yě jué de"
+    },
+    {
+      "start": 882.83,
+      "end": 885.36,
+      "zh": "💃买东西的同时，也能学中文。",
+      "vi": "💃Vừa mua đồ, vừa có thể học tiếng Trung.",
+      "en": "You can learn Chinese while buying.",
+      "pinyin": "💃 mǎi dōng xī de tóng shí ， yě néng xué zhōng wén 。"
+    },
+    {
+      "start": 885.37,
+      "end": 887.03,
+      "zh": "🕺真是一举两得。",
+      "vi": "🕺Đúng là một công đôi việc.",
+      "en": "It's a double-dip.",
+      "pinyin": "🕺 zhēn shì yì jǔ liǎng dé 。"
+    },
+    {
+      "start": 887.03,
+      "end": 888.2,
+      "zh": "💃对。好了",
+      "vi": "💃Đúng. Được rồi.",
+      "en": "All right.",
+      "pinyin": "💃 duì 。 hǎo le"
+    },
+    {
+      "start": 888.2,
+      "end": 890.27,
+      "zh": "🕺现在我们把东西都收好",
+      "vi": "🕺Bây giờ chúng ta cất hết đồ đi.",
+      "en": "We'll put everything away now.",
+      "pinyin": "🕺 xiàn zài wǒ men bǎ dōng xī dōu shōu hǎo"
+    },
+    {
+      "start": 890.27,
+      "end": 891.83,
+      "zh": "🕺可以休息了。",
+      "vi": "🕺Có thể nghỉ ngơi rồi.",
+      "en": "The gin can rest now.",
+      "pinyin": "🕺 kě yǐ xiū xi le 。"
+    },
+    {
+      "start": 891.83,
+      "end": 893.3,
+      "zh": "💃好，我们准备做饭吧。",
+      "vi": "💃Được, chúng ta chuẩn bị nấu ăn thôi.",
+      "en": "All right, let's get ready to cook.",
+      "pinyin": "💃 hǎo ， wǒ men zhǔn bèi zuò fàn ba 。"
+    },
+    {
+      "start": 895.57,
+      "end": 899.33,
+      "zh": "🕺小雨，今天我们从进超市到结账",
+      "vi": "🕺Tiểu Vũ, hôm nay chúng ta từ lúc vào siêu thị đến lúc thanh toán",
+      "en": "Xiaoyu, today we'll go to the supermarket and pay our bills.",
+      "pinyin": "🕺 xiǎo yǔ ， jīn tiān wǒ men cóng jìn chāo shì dào jié zhàng"
+    },
+    {
+      "start": 899.33,
+      "end": 900.93,
+      "zh": "🕺再到回家整理",
+      "vi": "🕺Rồi đến lúc về nhà sắp xếp",
+      "en": "Let's go home and clean up.",
+      "pinyin": "🕺 zài dào huí jiā zhěng lǐ"
+    },
+    {
+      "start": 900.93,
+      "end": 902.76,
+      "zh": "🕺过程都说了一遍。",
+      "vi": "🕺Cả quá trình đều nói qua một lượt.",
+      "en": "The whole process has been said.",
+      "pinyin": "🕺 guò chéng dōu shuō le yí biàn 。"
+    },
+    {
+      "start": 902.83,
+      "end": 905.03,
+      "zh": "💃对呀，我们买了水果",
+      "vi": "💃Đúng vậy, chúng ta đã mua trái cây.",
+      "en": "Yes, we bought fruit.",
+      "pinyin": "💃 duì ya ， wǒ men mǎi le shuǐ guǒ"
+    },
+    {
+      "start": 905.03,
+      "end": 906.4,
+      "zh": "💃蔬菜，米",
+      "vi": "💃Rau củ, gạo",
+      "en": "Vegetables, rice.",
+      "pinyin": "💃 shū cài ， mǐ"
+    },
+    {
+      "start": 906.4,
+      "end": 907.77,
+      "zh": "💃肉和牛奶",
+      "vi": "💃Thịt và sữa",
+      "en": "Steam and milk.",
+      "pinyin": "💃 ròu hé niú nǎi"
+    },
+    {
+      "start": 907.77,
+      "end": 909.73,
+      "zh": "💃还练习了很多句子。",
+      "vi": "💃Còn luyện tập rất nhiều câu nữa.",
+      "en": "I've also practiced a lot of sentences.",
+      "pinyin": "💃 hái liàn xí le hěn duō jù zi 。"
+    },
+    {
+      "start": 909.73,
+      "end": 912.43,
+      "zh": "🕺我觉得这些句子特别实用",
+      "vi": "🕺Tôi thấy những câu này đặc biệt hữu dụng.",
+      "en": "I think these sentences are particularly useful.",
+      "pinyin": "🕺 wǒ jué de zhè xiē jù zi tè bié shí yòng"
+    },
+    {
+      "start": 912.43,
+      "end": 915,
+      "zh": "🕺大家下次去超市就可以用。",
+      "vi": "🕺Lần sau mọi người đi siêu thị là có thể dùng được.",
+      "en": "The next time you go to the supermarket, you can use it.",
+      "pinyin": "🕺 dà jiā xià cì qù chāo shì jiù kě yǐ yòng 。"
+    },
+    {
+      "start": 915,
+      "end": 917.73,
+      "zh": "💃没错，比如“这个多少钱”",
+      "vi": "💃Đúng vậy, ví dụ “这个多少钱”",
+      "en": "That's right. Like, \"How much is this?\"",
+      "pinyin": "💃 méi cuò ， bǐ rú “ zhè ge duō shǎo qián ”"
+    },
+    {
+      "start": 917.73,
+      "end": 919.03,
+      "zh": "💃“我要两斤”",
+      "vi": "💃“我要两斤”",
+      "en": "\"I want two pounds.\"",
+      "pinyin": "💃“ wǒ yào liǎng jīn ”"
+    },
+    {
+      "start": 919.07,
+      "end": 922.17,
+      "zh": "💃“太贵了，有没有便宜一点的？”",
+      "vi": "💃“太贵了，有没有便宜一点的？”",
+      "en": "\"Too expensive. Is there a cheaper one?\"",
+      "pinyin": "💃“ tài guì le ， yǒu méi yǒu pián yi yì diǎn de ？”"
+    },
+    {
+      "start": 922.17,
+      "end": 925.87,
+      "zh": "🕺对，还有“我用手机支付”，“一共多少钱”。",
+      "vi": "🕺Đúng, còn có “我用手机支付”, “一共多少钱”。",
+      "en": "Yes, and \"I'm paying on my cell phone,\" \"How much is it?\"",
+      "pinyin": "🕺 duì ， hái yǒu “ wǒ yòng shǒu jī zhī fù ”，“ yí gòng duō shǎo qián ”。"
+    },
+    {
+      "start": 925.87,
+      "end": 928.37,
+      "zh": "💃这些词和句子很重要。",
+      "vi": "💃Những từ và câu này rất quan trọng.",
+      "en": "These words and sentences are important.",
+      "pinyin": "💃 zhè xiē cí hé jù zi hěn zhòng yào 。"
+    },
+    {
+      "start": 928.37,
+      "end": 930.8,
+      "zh": "🕺今天我们还学到一些新词",
+      "vi": "🕺Hôm nay chúng ta còn học được một số từ mới.",
+      "en": "We learned some new words today.",
+      "pinyin": "🕺 jīn tiān wǒ men hái xué dào yì xiē xīn cí"
+    },
+    {
+      "start": 930.8,
+      "end": 932.33,
+      "zh": "🕺比如“购物车”",
+      "vi": "🕺Ví dụ “购物车”",
+      "en": "It's like a shopping car.",
+      "pinyin": "🕺 bǐ rú “ gòu wù chē ”"
+    },
+    {
+      "start": 932.33,
+      "end": 934.63,
+      "zh": "🕺“收银台”，“支付”。",
+      "vi": "🕺“收银台”, “支付”。",
+      "en": "“Bank counter”, “payment”.",
+      "pinyin": "🕺“ shōu yín tái ”，“ zhī fù ”。"
+    },
+    {
+      "start": 934.63,
+      "end": 936.16,
+      "zh": "💃对，还有“塑料袋”。",
+      "vi": "💃Đúng, còn có “塑料袋” nữa.",
+      "en": "Yeah, and \"plastic bags.\"",
+      "pinyin": "💃 duì ， hái yǒu “ sù liào dài ”。"
+    },
+    {
+      "start": 936.2,
+      "end": 938.67,
+      "zh": "💃这些在生活中经常用到。",
+      "vi": "💃Những cái này thường dùng trong cuộc sống.",
+      "en": "These are often used in life.",
+      "pinyin": "💃 zhè xiē zài shēng huó zhōng jīng cháng yòng dào 。"
+    },
+    {
+      "start": 938.67,
+      "end": 941.77,
+      "zh": "🕺小雨，你觉得在学习中文的时候",
+      "vi": "🕺Tiểu Vũ, bạn thấy khi học tiếng Trung",
+      "en": "Xiaoyu, do you feel like learning Chinese?",
+      "pinyin": "🕺 xiǎo yǔ ， nǐ jué de zài xué xí zhōng wén de shí hòu"
+    },
+    {
+      "start": 941.77,
+      "end": 943.9,
+      "zh": "🕺怎么才能记住这些词？",
+      "vi": "🕺làm sao mới nhớ được những từ này?",
+      "en": "How can you remember these words?",
+      "pinyin": "🕺 zěn me cái néng jì zhù zhè xiē cí ？"
+    },
+    {
+      "start": 943.97,
+      "end": 945.6,
+      "zh": "💃我觉得要多听",
+      "vi": "💃Tôi nghĩ phải nghe nhiều.",
+      "en": "I think we should listen more.",
+      "pinyin": "💃 wǒ jué de yào duō tīng"
+    },
+    {
+      "start": 945.6,
+      "end": 947.67,
+      "zh": "💃多说，多用。",
+      "vi": "💃Nói nhiều, dùng nhiều.",
+      "en": "Say more, use more.",
+      "pinyin": "💃 duō shuō ， duō yòng 。"
+    },
+    {
+      "start": 947.67,
+      "end": 951.2,
+      "zh": "🕺对，听几次，自己也说几次，就会记住。",
+      "vi": "🕺Đúng, nghe vài lần, tự mình nói vài lần, là sẽ nhớ.",
+      "en": "Yes, listen to it a few times and say it yourself.",
+      "pinyin": "🕺 duì ， tīng jǐ cì ， zì jǐ yě shuō jǐ cì ， jiù huì jì zhù 。"
+    },
+    {
+      "start": 951.2,
+      "end": 953.23,
+      "zh": "💃而且要在生活里用。",
+      "vi": "💃Và phải dùng trong cuộc sống.",
+      "en": "Quake and use it in life.",
+      "pinyin": "💃 ér qiě yào zài shēng huó lǐ yòng 。"
+    },
+    {
+      "start": 953.23,
+      "end": 956.93,
+      "zh": "💃比如去超市，就真的用中文问价钱。",
+      "vi": "💃Ví dụ, khi đến siêu thị, cứ thật sự dùng tiếng Trung để hỏi giá.",
+      "en": "If you go to a supermarket, you can really ask for money in Chinese.",
+      "pinyin": "💃 bǐ rú qù chāo shì ， jiù zhēn de yòng zhōng wén wèn jià qián 。"
+    },
+    {
+      "start": 956.93,
+      "end": 957.76,
+      "zh": "🕺没错",
+      "vi": "🕺Đúng vậy.",
+      "en": "That's right.",
+      "pinyin": "🕺 méi cuò"
+    },
+    {
+      "start": 957.8,
+      "end": 960.87,
+      "zh": "🕺学习语言要和生活联系在一起。",
+      "vi": "🕺Học ngôn ngữ phải gắn liền với cuộc sống.",
+      "en": "To learn language is to be linked to life.",
+      "pinyin": "🕺 xué xí yǔ yán yào hé shēng huó lián xì zài yì qǐ 。"
+    },
+    {
+      "start": 960.87,
+      "end": 963.13,
+      "zh": "💃今天的对话很生活化",
+      "vi": "💃Cuộc hội thoại hôm nay rất đời thường.",
+      "en": "Today's conversation is very lively.",
+      "pinyin": "💃 jīn tiān de duì huà hěn shēng huó huà"
+    },
+    {
+      "start": 963.13,
+      "end": 964.76,
+      "zh": "💃所以很好练习。",
+      "vi": "💃Nên rất tốt để luyện tập.",
+      "en": "So good practice.",
+      "pinyin": "💃 suǒ yǐ hěn hǎo liàn xí 。"
+    },
+    {
+      "start": 964.77,
+      "end": 966.97,
+      "zh": "🕺我们总结一下吧。",
+      "vi": "🕺Chúng ta tóm tắt lại nhé.",
+      "en": "Let's wrap it up.",
+      "pinyin": "🕺 wǒ men zǒng jié yí xià ba 。"
+    },
+    {
+      "start": 966.97,
+      "end": 969.27,
+      "zh": "💃好。第一，我们进超市的时候",
+      "vi": "💃Được. Thứ nhất, khi chúng ta vào siêu thị",
+      "en": "Okay. First of all, when we went to the supermarket,",
+      "pinyin": "💃 hǎo 。 dì yī ， wǒ men jìn chāo shì de shí hòu"
+    },
+    {
+      "start": 969.27,
+      "end": 972,
+      "zh": "💃要学会说“我要一个购物车”",
+      "vi": "💃phải biết nói “我要一个购物车” (Tôi muốn một chiếc xe đẩy hàng).",
+      "en": "\"I want a shopping car.\"",
+      "pinyin": "💃 yào xué huì shuō “ wǒ yào yí gè gòu wù chē ”"
+    },
+    {
+      "start": 972,
+      "end": 974.1,
+      "zh": "💃或者“我要一个篮子”。",
+      "vi": "💃hoặc “我要一个篮子” (Tôi muốn một cái giỏ).",
+      "en": "\"I want a basket.\"",
+      "pinyin": "💃 huò zhě “ wǒ yào yí gè lán zi ”。"
+    },
+    {
+      "start": 974.17,
+      "end": 974.73,
+      "zh": "🕺第二",
+      "vi": "🕺Thứ hai,",
+      "en": "Second.",
+      "pinyin": "🕺 dì èr"
+    },
+    {
+      "start": 974.73,
+      "end": 978.36,
+      "zh": "🕺我们买东西时要会说“苹果在哪里”",
+      "vi": "🕺khi mua đồ, chúng ta phải biết nói “苹果在哪里” (Táo ở đâu).",
+      "en": "\"Where's the apple?\"",
+      "pinyin": "🕺 wǒ men mǎi dōng xī shí yào huì shuō “ píng guǒ zài nǎ lǐ ”"
+    },
+    {
+      "start": 978.37,
+      "end": 979.77,
+      "zh": "🕺“我要买香蕉”。",
+      "vi": "🕺“我要买香蕉” (Tôi muốn mua chuối).",
+      "en": "\"I want to buy bananas.\"",
+      "pinyin": "🕺“ wǒ yào mǎi xiāng jiāo ”。"
+    },
+    {
+      "start": 979.77,
+      "end": 983.83,
+      "zh": "💃第三，我们问价钱，要说“这个多少钱”。",
+      "vi": "💃Thứ ba, khi hỏi giá, phải nói “这个多少钱” (Cái này bao nhiêu tiền).",
+      "en": "Third, we ask for money and say, \"How much is this?\"",
+      "pinyin": "💃 dì sān ， wǒ men wèn jià qián ， yào shuō “ zhè ge duō shǎo qián ”。"
+    },
+    {
+      "start": 983.83,
+      "end": 985.86,
+      "zh": "🕺第四，学会说数量",
+      "vi": "🕺Thứ tư, học cách nói số lượng.",
+      "en": "And fourth, the Society says numbers.",
+      "pinyin": "🕺 dì sì ， xué huì shuō shù liàng"
+    },
+    {
+      "start": 985.87,
+      "end": 987.13,
+      "zh": "🕺比如“一斤”",
+      "vi": "🕺Ví dụ “一斤” (một cân, khoảng 500 gram).",
+      "en": "Like, \"one pound.\"",
+      "pinyin": "🕺 bǐ rú “ yì jīn ”"
+    },
+    {
+      "start": 987.13,
+      "end": 988.63,
+      "zh": "🕺“两斤”。",
+      "vi": "🕺“两斤” (hai cân, khoảng 1 kg).",
+      "en": "Two pounds.",
+      "pinyin": "🕺“ liǎng jīn ”。"
+    },
+    {
+      "start": 988.63,
+      "end": 992.43,
+      "zh": "💃第五，在结账的时候，要会说“我用手机支付”",
+      "vi": "💃Thứ năm, khi thanh toán, phải biết nói “我用手机支付” (Tôi thanh toán bằng điện thoại).",
+      "en": "Fifth, when you're closing the check, say, \"I'll pay on my cell phone.\"",
+      "pinyin": "💃 dì wǔ ， zài jié zhàng de shí hòu ， yào huì shuō “ wǒ yòng shǒu jī zhī fù ”"
+    },
+    {
+      "start": 992.43,
+      "end": 994.13,
+      "zh": "💃或者“我用现金”。",
+      "vi": "💃hoặc “我用现金” (Tôi dùng tiền mặt).",
+      "en": "Or \"I use cash.\"",
+      "pinyin": "💃 huò zhě “ wǒ yòng xiàn jīn ”。"
+    },
+    {
+      "start": 994.13,
+      "end": 997.13,
+      "zh": "🕺最后，还可以说“不要塑料袋”，很实用。",
+      "vi": "🕺Cuối cùng, còn có thể nói “不要塑料袋” (Không cần túi ni lông), rất thiết thực.",
+      "en": "Finally, it's useful to say “no plastic bags”.",
+      "pinyin": "🕺 zuì hòu ， hái kě yǐ shuō “ bú yào sù liào dài ”， hěn shí yòng 。"
+    },
+    {
+      "start": 997.13,
+      "end": 998.6,
+      "zh": "💃对",
+      "vi": "💃Đúng.",
+      "en": "Right.",
+      "pinyin": "💃 duì"
+    },
+    {
+      "start": 998.6,
+      "end": 1001.27,
+      "zh": "💃这些都是今天的重要内容。",
+      "vi": "💃Đây đều là những nội dung quan trọng của hôm nay.",
+      "en": "These are all important elements today.",
+      "pinyin": "💃 zhè xiē dōu shì jīn tiān de zhòng yào nèi róng 。"
+    },
+    {
+      "start": 1001.27,
+      "end": 1003,
+      "zh": "🕺我觉得大家听了以后",
+      "vi": "🕺Tôi nghĩ sau khi mọi người nghe xong",
+      "en": "I think we've heard it before.",
+      "pinyin": "🕺 wǒ jué de dà jiā tīng le yǐ hòu"
+    },
+    {
+      "start": 1003,
+      "end": 1005.53,
+      "zh": "🕺可以跟我们一起重复。",
+      "vi": "🕺có thể cùng chúng tôi nhắc lại.",
+      "en": "I can repeat it with us.",
+      "pinyin": "🕺 kě yǐ gēn wǒ men yì qǐ chóng fù 。"
+    },
+    {
+      "start": 1005.53,
+      "end": 1007.56,
+      "zh": "💃重复是最好的方法。",
+      "vi": "💃Nhắc lại là cách tốt nhất.",
+      "en": "Repeating is the best way.",
+      "pinyin": "💃 chóng fù shì zuì hǎo de fāng fǎ 。"
+    },
+    {
+      "start": 1007.57,
+      "end": 1009.4,
+      "zh": "💃多说，就不会忘。",
+      "vi": "💃Nói nhiều thì sẽ không quên.",
+      "en": "If you say so, you won't forget.",
+      "pinyin": "💃 duō shuō ， jiù bú huì wàng 。"
+    },
+    {
+      "start": 1009.4,
+      "end": 1012.17,
+      "zh": "🕺小雨，你觉得今天学的难吗？",
+      "vi": "🕺Xiaoyu, bạn thấy bài học hôm nay khó không?",
+      "en": "You think it's hard to learn today?",
+      "pinyin": "🕺 xiǎo yǔ ， nǐ jué de jīn tiān xué de nán ma ？"
+    },
+    {
+      "start": 1012.17,
+      "end": 1013.4,
+      "zh": "💃我觉得不难",
+      "vi": "💃Tôi thấy không khó.",
+      "en": "I don't think it's hard.",
+      "pinyin": "💃 wǒ jué de bù nán"
+    },
+    {
+      "start": 1013.4,
+      "end": 1015.77,
+      "zh": "💃都是简单的词和句子。",
+      "vi": "💃Đều là những từ và câu đơn giản.",
+      "en": "It's simple words and sentences.",
+      "pinyin": "💃 dōu shì jiǎn dān de cí hé jù zi 。"
+    },
+    {
+      "start": 1015.8,
+      "end": 1018.63,
+      "zh": "🕺对，适合刚开始学中文的朋友。",
+      "vi": "🕺Đúng, phù hợp với những bạn mới bắt đầu học tiếng Trung.",
+      "en": "Yes, for a friend who's just started learning Chinese.",
+      "pinyin": "🕺 duì ， shì hé gāng kāi shǐ xué zhōng wén de péng yǒu 。"
+    },
+    {
+      "start": 1018.63,
+      "end": 1021.73,
+      "zh": "💃而且我们说得很慢，也很清楚。",
+      "vi": "💃Hơn nữa chúng tôi nói rất chậm và rất rõ.",
+      "en": "And we're slow and clear.",
+      "pinyin": "💃 ér qiě wǒ men shuō dé hěn màn ， yě hěn qīng chǔ 。"
+    },
+    {
+      "start": 1021.73,
+      "end": 1024.4,
+      "zh": "🕺是的，这样大家都能听懂。",
+      "vi": "🕺Vâng, như vậy mọi người đều có thể hiểu được.",
+      "en": "Yes, so everyone can understand.",
+      "pinyin": "🕺 shì de ， zhè yàng dà jiā dōu néng tīng dǒng 。"
+    },
+    {
+      "start": 1024.4,
+      "end": 1027.77,
+      "zh": "💃如果有不懂的地方，可以多听几遍。",
+      "vi": "💃Nếu có chỗ nào không hiểu, có thể nghe lại vài lần.",
+      "en": "If there's anything you don't understand, you can listen a few more times.",
+      "pinyin": "💃 rú guǒ yǒu bù dǒng de dì fāng ， kě yǐ duō tīng jǐ biàn 。"
+    },
+    {
+      "start": 1027.77,
+      "end": 1030.27,
+      "zh": "🕺也可以把学到的词写下来",
+      "vi": "🕺Cũng có thể viết ra những từ đã học",
+      "en": "You can write down what you've learned.",
+      "pinyin": "🕺 yě kě yǐ bǎ xué dào de cí xiě xià lái"
+    },
+    {
+      "start": 1030.27,
+      "end": 1032.47,
+      "zh": "🕺回家自己练习。",
+      "vi": "🕺về nhà tự luyện tập.",
+      "en": "Let's go home and practice.",
+      "pinyin": "🕺 huí jiā zì jǐ liàn xí 。"
+    },
+    {
+      "start": 1032.47,
+      "end": 1034.63,
+      "zh": "💃对，还可以找朋友一起练习",
+      "vi": "💃Đúng, còn có thể tìm bạn bè cùng luyện tập",
+      "en": "You can practice with your friends.",
+      "pinyin": "💃 duì ， hái kě yǐ zhǎo péng yǒu yì qǐ liàn xí"
+    },
+    {
+      "start": 1034.63,
+      "end": 1036.13,
+      "zh": "💃互相问价钱",
+      "vi": "💃hỏi giá nhau",
+      "en": "We ask each other's money.",
+      "pinyin": "💃 hù xiāng wèn jià qián"
+    },
+    {
+      "start": 1036.13,
+      "end": 1037.96,
+      "zh": "💃扮演买东西的场景。",
+      "vi": "💃đóng vai tình huống mua đồ.",
+      "en": "I'm just playing the shopping scene.",
+      "pinyin": "💃 bàn yǎn mǎi dōng xī de chǎng jǐng 。"
+    },
+    {
+      "start": 1037.97,
+      "end": 1040.27,
+      "zh": "🕺这样学习就更有意思了。",
+      "vi": "🕺Học như vậy sẽ thú vị hơn.",
+      "en": "It's more interesting to learn like that.",
+      "pinyin": "🕺 zhè yàng xué xí jiù gèng yǒu yì sī le 。"
+    },
+    {
+      "start": 1040.27,
+      "end": 1043.33,
+      "zh": "💃没错，学中文不只是背单词",
+      "vi": "💃Đúng vậy, học tiếng Trung không chỉ là học thuộc từ vựng",
+      "en": "That's right. Chinese is more than a word.",
+      "pinyin": "💃 méi cuò ， xué zhōng wén bù zhǐ shì bèi dān cí"
+    },
+    {
+      "start": 1043.33,
+      "end": 1044.56,
+      "zh": "💃更要会用。",
+      "vi": "💃mà còn phải biết dùng.",
+      "en": "It's better to use it.",
+      "pinyin": "💃 gèng yào huì yòng 。"
+    },
+    {
+      "start": 1044.57,
+      "end": 1046.57,
+      "zh": "🕺我们希望大家听了以后",
+      "vi": "🕺Chúng tôi hy vọng sau khi mọi người nghe xong",
+      "en": "We want you to hear it.",
+      "pinyin": "🕺 wǒ men xī wàng dà jiā tīng le yǐ hòu"
+    },
+    {
+      "start": 1046.57,
+      "end": 1048.43,
+      "zh": "🕺可以去超市试一试。",
+      "vi": "🕺có thể đến siêu thị thử một lần.",
+      "en": "I can go to the supermarket and try.",
+      "pinyin": "🕺 kě yǐ qù chāo shì shì yi shì 。"
+    },
+    {
+      "start": 1048.43,
+      "end": 1052.06,
+      "zh": "💃你去买水果的时候，就试着用中文说。",
+      "vi": "💃Khi bạn đi mua trái cây, hãy thử nói bằng tiếng Trung.",
+      "en": "When you go shopping for fruit, try to say it in Chinese.",
+      "pinyin": "💃 nǐ qù mǎi shuǐ guǒ de shí hòu ， jiù shì zhe yòng zhōng wén shuō 。"
+    },
+    {
+      "start": 1052.07,
+      "end": 1055.07,
+      "zh": "🕺你去买米的时候，也可以用中文说。",
+      "vi": "🕺Khi bạn đi mua gạo, cũng có thể nói bằng tiếng Trung.",
+      "en": "You can also say it in Chinese when you go to buy rice.",
+      "pinyin": "🕺 nǐ qù mǎi mǐ de shí hòu ， yě kě yǐ yòng zhōng wén shuō 。"
+    },
+    {
+      "start": 1055.07,
+      "end": 1057.23,
+      "zh": "💃一开始可能有点紧张",
+      "vi": "💃Lúc đầu có thể hơi căng thẳng",
+      "en": "It's probably a little nervous at first.",
+      "pinyin": "💃 yì kāi shǐ kě néng yǒu diǎn jǐn zhāng"
+    },
+    {
+      "start": 1057.23,
+      "end": 1059.93,
+      "zh": "💃但说多了就会自然。",
+      "vi": "💃nhưng nói nhiều sẽ tự nhiên.",
+      "en": "But it's natural to say more.",
+      "pinyin": "💃 dàn shuō duō le jiù huì zì rán 。"
+    },
+    {
+      "start": 1059.93,
+      "end": 1061.96,
+      "zh": "🕺对，勇敢开口很重要。",
+      "vi": "🕺Đúng, dám mở lời rất quan trọng.",
+      "en": "Yeah, it's important to be brave.",
+      "pinyin": "🕺 duì ， yǒng gǎn kāi kǒu hěn zhòng yào 。"
+    },
+    {
+      "start": 1061.97,
+      "end": 1063.83,
+      "zh": "💃今天的对话很实用",
+      "vi": "💃Cuộc hội thoại hôm nay rất thiết thực.",
+      "en": "Today's conversation is very useful.",
+      "pinyin": "💃 jīn tiān de duì huà hěn shí yòng"
+    },
+    {
+      "start": 1063.83,
+      "end": 1065.43,
+      "zh": "💃希望大家喜欢。",
+      "vi": "💃Hy vọng mọi người thích.",
+      "en": "I hope you like it.",
+      "pinyin": "💃 xī wàng dà jiā xǐ huan 。"
+    },
+    {
+      "start": 1065.43,
+      "end": 1067.96,
+      "zh": "🕺如果你喜欢，可以多听几遍。",
+      "vi": "🕺Nếu mọi người thấy thích thì có thể nghe thêm vài lần.",
+      "en": "If you like, you can listen a few more times.",
+      "pinyin": "🕺 rú guǒ nǐ xǐ huan ， kě yǐ duō tīng jǐ biàn 。"
+    },
+    {
+      "start": 1067.97,
+      "end": 1069.6,
+      "zh": "💃也可以关注我们",
+      "vi": "💃Cũng có thể theo dõi chúng tôi.",
+      "en": "You can watch us, too.",
+      "pinyin": "💃 yě kě yǐ guān zhù wǒ men"
+    },
+    {
+      "start": 1069.6,
+      "end": 1071.03,
+      "zh": "💃下次继续学习",
+      "vi": "💃Lần sau chúng ta tiếp tục học.",
+      "en": "Let's study next time.",
+      "pinyin": "💃 xià cì jì xù xué xí"
+    },
+    {
+      "start": 1071.03,
+      "end": 1072.46,
+      "zh": "🕺新的主题。",
+      "vi": "🕺Chủ đề mới.",
+      "en": "New themes.",
+      "pinyin": "🕺 xīn de zhǔ tí 。"
+    },
+    {
+      "start": 1072.47,
+      "end": 1075.27,
+      "zh": "🕺我们会带来更多生活中的中文。",
+      "vi": "🕺Chúng tôi sẽ mang đến nhiều nội dung tiếng Trung gần gũi với đời sống hơn.",
+      "en": "We'll bring more Chinese to life.",
+      "pinyin": "🕺 wǒ men huì dài lái gèng duō shēng huó zhōng de zhōng wén 。"
+    },
+    {
+      "start": 1075.37,
+      "end": 1078.53,
+      "zh": "💃大家可以留言，告诉我们你想学什么。",
+      "vi": "💃Mọi người có thể để lại bình luận và cho chúng tôi biết mọi người muốn học gì.",
+      "en": "You can leave a message and tell us what you want to learn.",
+      "pinyin": "💃 dà jiā kě yǐ liú yán ， gào sù wǒ men nǐ xiǎng xué shén me 。"
+    },
+    {
+      "start": 1078.53,
+      "end": 1081.63,
+      "zh": "🕺我们会准备新的主题，一起练习。",
+      "vi": "🕺Chúng tôi sẽ chuẩn bị chủ đề mới để cùng nhau luyện tập.",
+      "en": "We'll prepare new themes and practice together.",
+      "pinyin": "🕺 wǒ men huì zhǔn bèi xīn de zhǔ tí ， yì qǐ liàn xí 。"
+    },
+    {
+      "start": 1081.63,
+      "end": 1083.46,
+      "zh": "💃学中文要慢慢来",
+      "vi": "💃Học tiếng Trung phải từ từ.",
+      "en": "You must learn Chinese slowly.",
+      "pinyin": "💃 xué zhōng wén yào màn màn lái"
+    },
+    {
+      "start": 1083.47,
+      "end": 1085.63,
+      "zh": "💃每天进步一点点。",
+      "vi": "💃Mỗi ngày tiến bộ một chút.",
+      "en": "Every day a little bit.",
+      "pinyin": "💃 měi tiān jìn bù yì diǎn diǎn 。"
+    },
+    {
+      "start": 1085.63,
+      "end": 1088.6,
+      "zh": "🕺对，坚持下去，就会越来越好。",
+      "vi": "🕺Đúng vậy, kiên trì thì sẽ ngày càng tốt hơn.",
+      "en": "Yeah, hang on, it'll get better.",
+      "pinyin": "🕺 duì ， jiān chí xià qù ， jiù huì yuè lái yuè hǎo 。"
+    },
+    {
+      "start": 1088.6,
+      "end": 1091.13,
+      "zh": "💃好了，今天的内容到这里。",
+      "vi": "💃Được rồi, nội dung hôm nay đến đây là hết.",
+      "en": "Okay, here's what we're talking about today.",
+      "pinyin": "💃 hǎo le ， jīn tiān de nèi róng dào zhè lǐ 。"
+    },
+    {
+      "start": 1091.13,
+      "end": 1093.53,
+      "zh": "🕺下次我们再一起学习中文。",
+      "vi": "🕺Lần sau chúng ta lại cùng học tiếng Trung nhé.",
+      "en": "Next time we'll learn Chinese together.",
+      "pinyin": "🕺 xià cì wǒ men zài yì qǐ xué xí zhōng wén 。"
+    },
+    {
+      "start": 1093.53,
+      "end": 1094.9,
+      "zh": "💃我们下次见。",
+      "vi": "💃Hẹn gặp lại mọi người lần sau.",
+      "en": "I'll see you next time.",
+      "pinyin": "💃 wǒ men xià cì jiàn 。"
+    }
+  ]
+}

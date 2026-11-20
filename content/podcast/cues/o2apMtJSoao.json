@@ -3,315 +3,679 @@
   "youtubeId": "o2apMtJSoao",
   "channelHandle": "@LearnChineseThroughPodcast",
   "title": "HSK 2 - 4 | Does Loving Someone Change Who You Are? | Chinese Listening Practice",
-  "titleVi": "HSK 2-4: Yêu một người có khiến bạn thay đổi? Luyện nghe tiếng Trung",
-  "topic": "Podcast Luyện nghe HSK",
-  "level": "HSK 2–4",
-  "levelGroup": "hsk1-2",
   "durationSec": 735,
   "cues": [
     {
       "start": 6,
       "end": 6.93,
-      "en": "Have you ever noticed,",
+      "en": "You haven't found anything.",
       "zh": "你有没有发现，",
       "pinyin": "Nǐ yǒu méi yǒu fā xiàn，",
-      "vi": "Bạn có từng nhận ra,"
+      "vi": "Bạn có nhận thấy rằng"
     },
     {
       "start": 7.93,
+      "end": 9.8,
+      "en": "Like someone else after that.",
+      "zh": "喜欢上一个人以后，",
+      "pinyin": "Xǐ huan shàng yí gè rén yǐ hòu，",
+      "vi": "sau khi yêu một ai đó,"
+    },
+    {
+      "start": 9.8,
       "end": 12.9,
-      "en": "after falling for someone, you seem to gradually become different?",
-      "zh": "喜欢上一个人以后，自己好像慢慢变得不一样了？",
-      "pinyin": "Xǐ huan shàng yí gè rén yǐ hòu， zì jǐ hǎo xiàng màn màn biàn de bù yí yàng le？",
-      "vi": "sau khi thích một người, bản thân mình dường như dần trở nên khác đi?"
+      "en": "You seem to be slowly different?",
+      "zh": "自己好像慢慢变得不一样了？",
+      "pinyin": "Zì jǐ hǎo xiàng màn màn biàn de bù yí yàng le？",
+      "vi": "bạn dường như dần dần thay đổi không?"
     },
     {
       "start": 13,
+      "end": 15.27,
+      "en": "I don't like early risers before.",
+      "zh": "以前不喜欢早起的人，",
+      "pinyin": "Yǐ qián bù xǐ huan zǎo qǐ de rén，",
+      "vi": "Một người từng không thích dậy sớm"
+    },
+    {
+      "start": 15.27,
+      "end": 18.7,
+      "en": "It'll be about half an hour ahead of the day for a \"good morning\".",
+      "zh": "会因为一句“早安”，每天提前半小时",
+      "pinyin": "Huì yīn wèi yí jù “ zǎo ān ”， měi tiān tí qián bàn xiǎo shí",
+      "vi": "có thể thức dậy sớm hơn nửa tiếng mỗi ngày chỉ vì một lời \"chào buổi sáng"
+    },
+    {
+      "start": 18.77,
       "end": 21.53,
-      "en": "Someone who used to dislike getting up early will, because of a “good morning,” wake up half an hour earlier every day. Someone who used to be quiet,",
-      "zh": "以前不喜欢早起的人，会因为一句“早安”，每天提前半小时，醒来。以前不爱说话的人，",
-      "pinyin": "Yǐ qián bù xǐ huan zǎo qǐ de rén， huì yīn wèi yí jù “ zǎo ān ”， měi tiān tí qián bàn xiǎo shí， xǐng lái。 yǐ qián bú ài shuō huà de rén，",
-      "vi": "Người trước đây không thích dậy sớm, vì một câu “chào buổi sáng”, mỗi ngày thức dậy sớm nửa tiếng. Người trước đây ít nói,"
+      "en": "Wake up. People who didn't like to talk before,",
+      "zh": "醒来。以前不爱说话的人，",
+      "pinyin": "Xǐng lái。 yǐ qián bú ài shuō huà de rén，",
+      "vi": "\". Một người từng ít nói"
     },
     {
       "start": 21.53,
-      "end": 26.77,
-      "en": "will seriously think of many topics, only hoping to chat with that person a little longer.",
-      "zh": "会认真想很多话题，只希望和那个人多聊一会儿。",
-      "pinyin": "Huì rèn zhēn xiǎng hěn duō huà tí， zhī xī wàng hé nà ge rén duō liáo yí huì er。",
-      "vi": "sẽ nghiêm túc nghĩ ra nhiều chủ đề, chỉ mong được nói chuyện với người đó thêm một chút."
+      "end": 23.93,
+      "en": "I'm not sure how much of this is going to happen.",
+      "zh": "会认真想很多话题，",
+      "pinyin": "Huì rèn zhēn xiǎng hěn duō huà tí，",
+      "vi": "có thể nghiêm túc suy nghĩ về nhiều chủ đề,"
+    },
+    {
+      "start": 23.93,
+      "end": 26.76,
+      "en": "I just want to talk to that guy for a little while.",
+      "zh": "只希望和那个人多聊一会儿。",
+      "pinyin": "Zhī xī wàng hé nà ge rén duō liáo yí huì er。",
+      "vi": "chỉ mong được trò chuyện với người đó lâu hơn một chút."
     },
     {
       "start": 27.13,
+      "end": 30,
+      "en": "I'm not sure what the future is like.",
+      "zh": "以前觉得未来很遥远的人，",
+      "pinyin": "Yǐ qián jué de wèi lái hěn yáo yuǎn de rén，",
+      "vi": "Một người từng nghĩ tương lai còn xa vời"
+    },
+    {
+      "start": 30,
+      "end": 32.07,
+      "en": "And I started to think of it.",
+      "zh": "也开始偷偷想象，",
+      "pinyin": "Yě kāi shǐ tōu tōu xiǎng xiàng，",
+      "vi": "có thể bắt đầu thầm tưởng tượng"
+    },
+    {
+      "start": 32.37,
       "end": 34.9,
-      "en": "Someone who used to feel the future was far away also begins secretly imagining where the two of them will live,",
-      "zh": "以前觉得未来很遥远的人，也开始偷偷想象，两个人以后会住在哪里，",
-      "pinyin": "Yǐ qián jué de wèi lái hěn yáo yuǎn de rén， yě kāi shǐ tōu tōu xiǎng xiàng， liǎng gè rén yǐ hòu huì zhù zài nǎ lǐ，",
-      "vi": "Người trước đây thấy tương lai còn rất xa, cũng bắt đầu lặng lẽ tưởng tượng hai người sau này sẽ sống ở đâu,"
+      "en": "Where will the two of us live?",
+      "zh": "两个人以后会住在哪里，",
+      "pinyin": "Liǎng gè rén yǐ hòu huì zhù zài nǎ lǐ，",
+      "vi": "về nơi hai người sẽ sống và"
     },
     {
       "start": 34.9,
       "end": 36.97,
-      "en": "what kind of life they will live.",
+      "en": "What a life to live.",
       "zh": "会过怎样的生活。",
       "pinyin": "Huì guò zěn yàng de shēng huó。",
-      "vi": "sẽ sống cuộc sống như thế nào."
+      "vi": "cuộc sống sẽ như thế nào."
     },
     {
       "start": 37,
+      "end": 41.43,
+      "en": "Hello. Welcome to \"The Daily Podcast of Mandarin.\"",
+      "zh": "大家好，欢迎收听“普通话每日播客”，",
+      "pinyin": "Dà jiā hǎo， huān yíng shōu tīng “ pǔ tōng huà měi rì bō kè ”，",
+      "vi": "Xin chào mọi người, chào mừng đến với \"Podcast tiếng Hoa hàng ngày\","
+    },
+    {
+      "start": 41.47,
       "end": 42.6,
-      "en": "Hello everyone, welcome to “Mandarin Daily Podcast,” I’m Zihan.",
-      "zh": "大家好，欢迎收听“普通话每日播客”，我是子涵。",
-      "pinyin": "Dà jiā hǎo， huān yíng shōu tīng “ pǔ tōng huà měi rì bō kè ”， wǒ shì zǐ hán。",
-      "vi": "Xin chào mọi người, chào mừng nghe “Podcast tiếng Phổ thông mỗi ngày”, tôi là Tử Hàm."
+      "en": "I'm a child.",
+      "zh": "我是子涵。",
+      "pinyin": "Wǒ shì zǐ hán。",
+      "vi": "tôi là Zihan."
     },
     {
       "start": 42.97,
+      "end": 43.87,
+      "en": "A few days ago,",
+      "zh": "前几天，",
+      "pinyin": "Qián jǐ tiān，",
+      "vi": "Vài ngày trước,"
+    },
+    {
+      "start": 43.87,
+      "end": 46.67,
+      "en": "My friend Ame asked me a question:",
+      "zh": "我的朋友小雨问了我一个问题：",
+      "pinyin": "Wǒ de péng yǒu xiǎo yǔ wèn le wǒ yí gè wèn tí：",
+      "vi": "bạn tôi, Xiaoyu, đã hỏi tôi một câu hỏi:"
+    },
+    {
+      "start": 47.13,
+      "end": 48.6,
+      "en": "\"I love someone.",
+      "zh": "“爱上一个人，",
+      "pinyin": "“ ài shàng yí gè rén，",
+      "vi": "\"Yêu một ai đó có"
+    },
+    {
+      "start": 48.7,
       "end": 50.83,
-      "en": "A few days ago, my friend Xiaoyu asked me a question: “Does falling in love with someone really change us?”",
-      "zh": "前几天，我的朋友小雨问了我一个问题：“爱上一个人，真的会让我们改变吗？”",
-      "pinyin": "Qián jǐ tiān， wǒ de péng yǒu xiǎo yǔ wèn le wǒ yí gè wèn tí：“ ài shàng yí gè rén， zhēn de huì ràng wǒ men gǎi biàn ma？”",
-      "vi": "Mấy hôm trước, bạn tôi Tiểu Vũ hỏi tôi một câu: “Yêu một người, thật sự sẽ khiến chúng ta thay đổi sao?”"
+      "en": "Will it really change us?\"",
+      "zh": "真的会让我们改变吗？”",
+      "pinyin": "Zhēn de huì ràng wǒ men gǎi biàn ma？”",
+      "vi": "thực sự thay đổi chúng ta không?\""
     },
     {
       "start": 50.93,
-      "end": 54.67,
-      "en": "She said she met a guy named Chen An.",
+      "end": 54.66,
+      "en": "She said she knew a boy named Chen An.",
       "zh": "她说，自己认识了一位叫陈安的男生。",
       "pinyin": "Tā shuō， zì jǐ rèn shi le yí wèi jiào chén ān de nán shēng。",
-      "vi": "Cô ấy nói rằng mình quen một chàng trai tên Trần An."
+      "vi": ". Cô ấy nói rằng cô ấy đã gặp một chàng trai tên là Chen An."
     },
     {
       "start": 54.77,
+      "end": 56.4,
+      "en": "Chen An likes to read.",
+      "zh": "陈安喜欢读书，",
+      "pinyin": "Chén ān xǐ huan dú shū，",
+      "vi": "Chen An thích đọc sách và"
+    },
+    {
+      "start": 56.4,
       "end": 58.57,
-      "en": "Chen An likes reading and also likes taking walks in the park on weekends.",
-      "zh": "陈安喜欢读书，也喜欢周末去公园散步。",
-      "pinyin": "Chén ān xǐ huan dú shū， yě xǐ huan zhōu mò qù gōng yuán sàn bù。",
-      "vi": "Trần An thích đọc sách, cũng thích đi dạo trong công viên vào cuối tuần."
+      "en": "He also likes to go for a walk in the park on weekends.",
+      "zh": "也喜欢周末去公园散步。",
+      "pinyin": "Yě xǐ huan zhōu mò qù gōng yuán sàn bù。",
+      "vi": "cũng thích đi dạo trong công viên vào cuối tuần."
     },
     {
       "start": 59.3,
+      "end": 61.17,
+      "en": "After Ame left work,",
+      "zh": "小雨以前下班以后",
+      "pinyin": "Xiǎo yǔ yǐ qián xià bān yǐ hòu",
+      "vi": "Xiaoyu từng"
+    },
+    {
+      "start": 61.17,
+      "end": 63.84,
+      "en": "I just want to lie on the couch and watch my cell phone.",
+      "zh": "只想躺在沙发上看手机，",
+      "pinyin": "Zhī xiǎng tǎng zài shā fā shàng kàn shǒu jī，",
+      "vi": "chỉ muốn nằm dài trên ghế sofa và nhìn điện thoại"
+    },
+    {
+      "start": 63.93,
       "end": 65.93,
-      "en": "In the past, after getting off work, Xiaoyu only wanted to lie on the sofa and look at her phone, but after meeting Chen An,",
-      "zh": "小雨以前下班以后，只想躺在沙发上看手机，可是认识陈安以后，",
-      "pinyin": "Xiǎo yǔ yǐ qián xià bān yǐ hòu， zhī xiǎng tǎng zài shā fā shàng kàn shǒu jī， kě shì rèn shi chén ān yǐ hòu，",
-      "vi": "Trước đây, sau khi tan làm, Tiểu Vũ chỉ muốn nằm trên sofa xem điện thoại, nhưng sau khi quen Trần An,"
+      "en": "But after knowing Chen An,",
+      "zh": "可是认识陈安以后，",
+      "pinyin": "Kě shì rèn shi chén ān yǐ hòu，",
+      "vi": "sau giờ làm , nhưng sau khi gặp Chen An,"
     },
     {
       "start": 65.93,
-      "end": 69.63,
-      "en": "she started buying books, and was also willing to go out and take a walk.",
-      "zh": "她开始买书，也愿意出门走一走。",
-      "pinyin": "Tā kāi shǐ mǎi shū， yě yuàn yì chū mén zǒu yi zǒu。",
-      "vi": "cô ấy bắt đầu mua sách, và cũng sẵn lòng ra ngoài đi dạo một chút."
+      "end": 67.36,
+      "en": "She started buying books.",
+      "zh": "她开始买书，",
+      "pinyin": "Tā kāi shǐ mǎi shū，",
+      "vi": "cô ấy bắt đầu mua sách"
+    },
+    {
+      "start": 67.37,
+      "end": 69.64,
+      "en": "I'm willing to go out for a while.",
+      "zh": "也愿意出门走一走。",
+      "pinyin": "Yě yuàn yì chū mén zǒu yi zǒu。",
+      "vi": "và sẵn sàng đi dạo."
     },
     {
       "start": 69.8,
+      "end": 70.9,
+      "en": "At first,",
+      "zh": "一开始，",
+      "pinyin": "Yì kāi shǐ，",
+      "vi": "Lúc đầu,"
+    },
+    {
+      "start": 70.9,
       "end": 74.4,
-      "en": "At first, she felt this was progress that love had brought her.",
-      "zh": "一开始，她觉得这是爱情带给自己的进步。",
-      "pinyin": "Yì kāi shǐ， tā jué de zhè shì ài qíng dài gěi zì jǐ de jìn bù。",
-      "vi": "Ban đầu, cô ấy cảm thấy đây là sự tiến bộ mà tình yêu mang lại cho mình."
+      "en": "She thinks it's the progress that love brings to herself.",
+      "zh": "她觉得这是爱情带给自己的进步。",
+      "pinyin": "Tā jué de zhè shì ài qíng dài gěi zì jǐ de jìn bù。",
+      "vi": "cô ấy nghĩ rằng đây là sự tiến bộ do tình yêu mang lại."
     },
     {
       "start": 74.4,
+      "end": 75.7,
+      "en": "But then,",
+      "zh": "可是后来，",
+      "pinyin": "Kě shì hòu lái，",
+      "vi": "Nhưng sau đó,"
+    },
+    {
+      "start": 75.73,
       "end": 79.3,
-      "en": "But later, she found that she cared more and more about Chen An's opinions.",
-      "zh": "可是后来，她发现自己越来越在意陈安的看法。",
-      "pinyin": "Kě shì hòu lái， tā fā xiàn zì jǐ yuè lái yuè zài yì chén ān de kàn fǎ。",
-      "vi": "Nhưng về sau, cô phát hiện mình ngày càng để tâm đến suy nghĩ của Trần An."
+      "en": "She found herself increasingly concerned about Chen An's views.",
+      "zh": "她发现自己越来越在意陈安的看法。",
+      "pinyin": "Tā fā xiàn zì jǐ yuè lái yuè zài yì chén ān de kàn fǎ。",
+      "vi": "cô ấy thấy mình ngày càng quan tâm đến ý kiến ​​của Chen An."
     },
     {
       "start": 79.47,
+      "end": 81.1,
+      "en": "When she buys clothes, she thinks:",
+      "zh": "买衣服时，她会想",
+      "pinyin": "Mǎi yī fu shí， tā huì xiǎng",
+      "vi": "Khi mua quần áo, cô ấy sẽ nghĩ xem"
+    },
+    {
+      "start": 81.2,
+      "end": 84.3,
+      "en": "Chen Anxie didn't like it; when he met his friends,",
+      "zh": "陈安喜不喜欢；和朋友见面时，",
+      "pinyin": "Chén ān xǐ bu xǐ huan； hé péng yǒu jiàn miàn shí，",
+      "vi": "Chen An có thích chúng không; khi gặp gỡ bạn bè,"
+    },
+    {
+      "start": 84.3,
       "end": 86.5,
-      "en": "When buying clothes, she would wonder whether Chen An liked them; when meeting friends, she would worry that Chen An would be unhappy;",
-      "zh": "买衣服时，她会想，陈安喜不喜欢；和朋友见面时，她会担心陈安不高兴；",
-      "pinyin": "Mǎi yī fu shí， tā huì xiǎng， chén ān xǐ bu xǐ huan； hé péng yǒu jiàn miàn shí， tā huì dān xīn chén ān bù gāo xìng；",
-      "vi": "Khi mua quần áo, cô sẽ nghĩ, Trần An có thích không; khi gặp bạn bè, cô sẽ lo Trần An không vui;"
+      "en": "She would be worried about Chen An's unhappiness.",
+      "zh": "她会担心陈安不高兴；",
+      "pinyin": "Tā huì dān xīn chén ān bù gāo xìng；",
+      "vi": "cô ấy sẽ lo lắng Chen An sẽ không vui;"
     },
     {
       "start": 86.5,
-      "end": 92.27,
-      "en": "She would even try to change her way of speaking into the style Chen An liked.",
-      "zh": "甚至连说话的方式，她也会努力变成陈安喜欢的样子。",
-      "pinyin": "Shèn zhì lián shuō huà de fāng shì， tā yě huì nǔ lì biàn chéng chén ān xǐ huan de yàng zi。",
-      "vi": "Thậm chí cả cách nói chuyện, cô cũng cố gắng trở thành kiểu mà Trần An thích."
+      "end": 88.73,
+      "en": "Even the way they talk,",
+      "zh": "甚至连说话的方式，",
+      "pinyin": "Shèn zhì lián shuō huà de fāng shì，",
+      "vi": "thậm chí cả cách nói chuyện,"
+    },
+    {
+      "start": 88.73,
+      "end": 92.26,
+      "en": "She's also trying to be like Chen An.",
+      "zh": "她也会努力变成陈安喜欢的样子。",
+      "pinyin": "Tā yě huì nǔ lì biàn chéng chén ān xǐ huan de yàng zi。",
+      "vi": "cô ấy cũng cố gắng trở nên giống Chen An."
     },
     {
       "start": 92.73,
-      "end": 101.03,
-      "en": "So Xiaoyu began to wonder: is changing for love growth, or is it slowly losing",
-      "zh": "于是，小雨开始困惑：为了爱而改变，到底是成长，还是慢慢失去了",
-      "pinyin": "Yú shì， xiǎo yǔ kāi shǐ kùn huò： wèi le ài ér gǎi biàn， dào dǐ shì chéng zhǎng， hái shì màn màn shī qù le",
-      "vi": "Vì vậy, Tiểu Vũ bắt đầu bối rối: thay đổi vì tình yêu rốt cuộc là trưởng thành, hay là dần dần đánh mất"
+      "end": 95.23,
+      "en": "So the rain began to be confused:",
+      "zh": "于是，小雨开始困惑：",
+      "pinyin": "Yú shì， xiǎo yǔ kāi shǐ kùn huò：",
+      "vi": "Vì vậy, Xiaoyu bắt đầu tự hỏi:"
+    },
+    {
+      "start": 95.57,
+      "end": 97.47,
+      "en": "Change for love.",
+      "zh": "为了爱而改变，",
+      "pinyin": "Wèi le ài ér gǎi biàn，",
+      "vi": "Thay đổi vì tình yêu là"
+    },
+    {
+      "start": 97.67,
+      "end": 101.04,
+      "en": "Did you grow up or did you lose it?",
+      "zh": "到底是成长，还是慢慢失去了",
+      "pinyin": "Dào dǐ shì chéng zhǎng， hái shì màn màn shī qù le",
+      "vi": "sự trưởng thành, hay là dần dần đánh mất"
     },
     {
       "start": 101.1,
       "end": 101.87,
-      "en": "herself?",
+      "en": "Self?",
       "zh": "自己？",
       "pinyin": "Zì jǐ？",
       "vi": "chính mình?"
     },
     {
       "start": 101.87,
+      "end": 105.67,
+      "en": "Today, let's talk about this very gentle.",
+      "zh": "今天，我们就来聊一聊这个很温柔，",
+      "pinyin": "Jīn tiān， wǒ men jiù lái liáo yi liáo zhè ge hěn wēn róu，",
+      "vi": "Hôm nay, chúng ta hãy cùng bàn về"
+    },
+    {
+      "start": 105.67,
+      "end": 107.84,
+      "en": "But it's also an important topic:",
+      "zh": "却也很重要的话题：",
+      "pinyin": "Què yě hěn zhòng yào de huà tí：",
+      "vi": "chủ đề nhẹ nhàng nhưng quan trọng này:"
+    },
+    {
+      "start": 107.93,
       "end": 110.4,
-      "en": "Today, let's talk about this very gentle yet very important topic: does loving someone change you?",
-      "zh": "今天，我们就来聊一聊这个很温柔，却也很重要的话题：爱一个人，会不会让你改变？",
-      "pinyin": "Jīn tiān， wǒ men jiù lái liáo yi liáo zhè ge hěn wēn róu， què yě hěn zhòng yào de huà tí： ài yí gè rén， huì bu huì ràng nǐ gǎi biàn？",
-      "vi": "Hôm nay, chúng ta hãy cùng bàn về một chủ đề rất dịu dàng nhưng cũng rất quan trọng: yêu một người, liệu có khiến bạn thay đổi không?"
+      "en": "Love someone, won't it make you change?",
+      "zh": "爱一个人，会不会让你改变？",
+      "pinyin": "Ài yí gè rén， huì bu huì ràng nǐ gǎi biàn？",
+      "vi": "Yêu một người có làm thay đổi bạn không?"
     },
     {
       "start": 111.13,
+      "end": 113.9,
+      "en": "What kind of change should be valued?",
+      "zh": "什么样的改变值得珍惜，",
+      "pinyin": "Shén me yàng de gǎi biàn zhí dé zhēn xī，",
+      "vi": "Những thay đổi nào đáng trân trọng,"
+    },
+    {
+      "start": 114.07,
       "end": 118.07,
-      "en": "What kind of changes are worth cherishing, and what kind of changes require us to be more vigilant?",
-      "zh": "什么样的改变值得珍惜，什么样的改变又需要我们提高警惕？",
-      "pinyin": "Shén me yàng de gǎi biàn zhí dé zhēn xī， shén me yàng de gǎi biàn yòu xū yào wǒ men tí gāo jǐng tì？",
-      "vi": "Thay đổi như thế nào đáng trân trọng, thay đổi như thế nào lại cần chúng ta đề cao cảnh giác?"
+      "en": "What kind of change would require us to be vigilant?",
+      "zh": "什么样的改变又需要我们提高警惕？",
+      "pinyin": "Shén me yàng de gǎi biàn yòu xū yào wǒ men tí gāo jǐng tì？",
+      "vi": "và những thay đổi nào chúng ta nên cảnh giác?"
     },
     {
       "start": 118.37,
+      "end": 120.13,
+      "en": "After falling in love with someone,",
+      "zh": "爱上一个人以后，",
+      "pinyin": "Ài shàng yí gè rén yǐ hòu，",
+      "vi": "Sau khi yêu một người,"
+    },
+    {
+      "start": 120.13,
       "end": 123.23,
-      "en": "After falling in love with someone, we will almost certainly undergo some changes.",
-      "zh": "爱上一个人以后，我们几乎一定会发生一些变化。",
-      "pinyin": "Ài shàng yí gè rén yǐ hòu， wǒ men jī hū yí dìng huì fā shēng yì xiē biàn huà。",
-      "vi": "Sau khi yêu một người, gần như chắc chắn chúng ta sẽ có một số thay đổi."
+      "en": "We're almost sure to have some change.",
+      "zh": "我们几乎一定会发生一些变化。",
+      "pinyin": "Wǒ men jī hū yí dìng huì fā shēng yì xiē biàn huà。",
+      "vi": "chúng ta gần như chắc chắn sẽ trải qua một số thay đổi."
     },
     {
       "start": 123.57,
+      "end": 126.57,
+      "en": "It's because two people get close to each other.",
+      "zh": "这是因为两个人走近以后，",
+      "pinyin": "Zhè shì yīn wèi liǎng gè rén zǒu jìn yǐ hòu，",
+      "vi": "Điều này là bởi vì khi hai người trở nên thân thiết hơn,"
+    },
+    {
+      "start": 126.57,
+      "end": 129.97,
+      "en": "Life is no longer just \"What do I want?\"",
+      "zh": "生活不再只是“我想怎么样”，",
+      "pinyin": "Shēng huó bú zài zhǐ shì “ wǒ xiǎng zěn me yàng ”，",
+      "vi": "cuộc sống không còn chỉ là \"tôi muốn gì\","
+    },
+    {
+      "start": 130.07,
       "end": 131.47,
-      "en": "This is because after two people grow closer, life is no longer just \"how do I want things to be\" — there is an additional question:",
-      "zh": "这是因为两个人走近以后，生活不再只是“我想怎么样”，还会多出一个问题：",
-      "pinyin": "Zhè shì yīn wèi liǎng gè rén zǒu jìn yǐ hòu， shēng huó bú zài zhǐ shì “ wǒ xiǎng zěn me yàng ”， hái huì duō chū yí gè wèn tí：",
-      "vi": "Điều này là bởi vì sau khi hai người đến gần nhau hơn, cuộc sống không còn chỉ là \"tôi muốn thế nào\", mà còn có thêm một câu hỏi:"
+      "en": "There's one more problem:",
+      "zh": "还会多出一个问题：",
+      "pinyin": "Hái huì duō chū yí gè wèn tí：",
+      "vi": "mà còn đặt ra câu hỏi:"
     },
     {
       "start": 132.1,
+      "end": 135.03,
+      "en": "“How can we get along better?”",
+      "zh": "“我们怎样才能相处得更好？”",
+      "pinyin": "“ wǒ men zěn yàng cái néng xiāng chǔ dé gèng hǎo？”",
+      "vi": "\"Làm thế nào để chúng ta hòa hợp hơn?\""
+    },
+    {
+      "start": 135.27,
+      "end": 138.67,
+      "en": "For example, you used to eat alone.",
+      "zh": "比如，你以前习惯一个人吃饭，",
+      "pinyin": "Bǐ rú， nǐ yǐ qián xí guàn yí gè rén chī fàn，",
+      "vi": ". Ví dụ, trước đây bạn thường ăn một mình,"
+    },
+    {
+      "start": 138.73,
       "end": 141.2,
-      "en": "\"How can we get along better?\" For example, you used to be used to eating alone, eating whatever you wanted.",
-      "zh": "“我们怎样才能相处得更好？”，比如，你以前习惯一个人吃饭，想吃什么就吃什么。",
-      "pinyin": "“ wǒ men zěn yàng cái néng xiāng chǔ dé gèng hǎo？”， bǐ rú， nǐ yǐ qián xí guàn yí gè rén chī fàn， xiǎng chī shén me jiù chī shén me。",
-      "vi": "\"Chúng ta làm thế nào để hòa hợp với nhau tốt hơn?\", ví dụ, trước đây bạn quen ăn cơm một mình, muốn ăn gì thì ăn nấy."
+      "en": "Eat whatever you want.",
+      "zh": "想吃什么就吃什么。",
+      "pinyin": "Xiǎng chī shén me jiù chī shén me。",
+      "vi": "ăn bất cứ thứ gì bạn muốn."
     },
     {
       "start": 141.47,
-      "end": 147.27,
-      "en": "Later, you began to remember that the other person doesn't eat spicy food, and you also know they like hot soup.",
-      "zh": "后来，你开始记得对方不吃辣，也知道对方喜欢热汤。",
-      "pinyin": "Hòu lái， nǐ kāi shǐ jì de duì fāng bù chī là， yě zhī dào duì fāng xǐ huan rè tāng。",
-      "vi": "Sau đó, bạn bắt đầu nhớ rằng đối phương không ăn cay, và cũng biết đối phương thích canh nóng."
+      "end": 144.7,
+      "en": "And then you started to remember that they didn't eat hot.",
+      "zh": "后来，你开始记得对方不吃辣，",
+      "pinyin": "Hòu lái， nǐ kāi shǐ jì de duì fāng bù chī là，",
+      "vi": "Sau đó, bạn bắt đầu nhớ rằng người kia không ăn cay"
+    },
+    {
+      "start": 144.73,
+      "end": 147.26,
+      "en": "And you know each other like hot soup.",
+      "zh": "也知道对方喜欢热汤。",
+      "pinyin": "Yě zhī dào duì fāng xǐ huan rè tāng。",
+      "vi": "và biết họ thích canh nóng."
     },
     {
       "start": 147.73,
+      "end": 149.76,
+      "en": "You didn't like explaining it before.",
+      "zh": "你以前不喜欢解释，",
+      "pinyin": "Nǐ yǐ qián bù xǐ huan jiě shì，",
+      "vi": "Trước đây bạn không thích giải thích và"
+    },
+    {
+      "start": 150.07,
       "end": 152.5,
-      "en": "You used to dislike explaining yourself; when angry, you just wanted to stay silent.",
-      "zh": "你以前不喜欢解释，生气时只想沉默。",
-      "pinyin": "Nǐ yǐ qián bù xǐ huan jiě shì， shēng qì shí zhī xiǎng chén mò。",
-      "vi": "Trước đây bạn không thích giải thích, khi tức giận chỉ muốn im lặng."
+      "en": "I just want to be silent when I'm angry.",
+      "zh": "生气时只想沉默。",
+      "pinyin": "Shēng qì shí zhī xiǎng chén mò。",
+      "vi": "chỉ muốn im lặng khi tức giận."
     },
     {
       "start": 152.57,
+      "end": 155.47,
+      "en": "But I don't want to get the wrong idea.",
+      "zh": "可是因为不希望对方误会，",
+      "pinyin": "Kě shì yīn wèi bù xī wàng duì fāng wù huì，",
+      "vi": "Nhưng vì không muốn người kia hiểu lầm,"
+    },
+    {
+      "start": 155.47,
       "end": 159.07,
-      "en": "But because you don't want the other person to misunderstand, you began to learn to express your feelings.",
-      "zh": "可是因为不希望对方误会，你开始学习把自己的感受说出来。",
-      "pinyin": "Kě shì yīn wèi bù xī wàng duì fāng wù huì， nǐ kāi shǐ xué xí bǎ zì jǐ de gǎn shòu shuō chū lái。",
-      "vi": "Nhưng vì không muốn đối phương hiểu lầm, bạn bắt đầu học cách nói ra cảm nhận của mình."
+      "en": "You're learning to say what you feel.",
+      "zh": "你开始学习把自己的感受说出来。",
+      "pinyin": "Nǐ kāi shǐ xué xí bǎ zì jǐ de gǎn shòu shuō chū lái。",
+      "vi": "bạn bắt đầu học cách bày tỏ cảm xúc của mình."
     },
     {
       "start": 159.2,
+      "end": 161.83,
+      "en": "These changes don't necessarily mean you.",
+      "zh": "这些变化并不一定代表你",
+      "pinyin": "Zhè xiē biàn huà bìng bù yí dìng dài biǎo nǐ",
+      "vi": "Những thay đổi này không nhất thiết có nghĩa là bạn"
+    },
+    {
+      "start": 161.9,
       "end": 163.27,
-      "en": "These changes don't necessarily mean you have lost yourself.",
-      "zh": "这些变化并不一定代表你，失去了自己。",
-      "pinyin": "Zhè xiē biàn huà bìng bù yí dìng dài biǎo nǐ， shī qù le zì jǐ。",
-      "vi": "Những thay đổi này không nhất định có nghĩa là bạn đã đánh mất chính mình."
+      "en": "Lose yourself.",
+      "zh": "失去了自己。",
+      "pinyin": "Shī qù le zì jǐ。",
+      "vi": "đã đánh mất chính mình."
     },
     {
       "start": 163.33,
+      "end": 164.2,
+      "en": "I don't know.",
+      "zh": "相反，",
+      "pinyin": "Xiāng fǎn，",
+      "vi": "Ngược lại,"
+    },
+    {
+      "start": 164.33,
+      "end": 168.26,
+      "en": "They might mean you're learning to care.",
+      "zh": "它们可能说明你正在学习关心、",
+      "pinyin": "Tā men kě néng shuō míng nǐ zhèng zài xué xí guān xīn、",
+      "vi": "những điều đó có thể cho thấy bạn đang học cách quan tâm,"
+    },
+    {
+      "start": 168.27,
       "end": 170.5,
-      "en": "On the contrary, they may show that you are learning to care, to understand, and to take responsibility.",
-      "zh": "相反，它们可能说明你正在学习关心、理解和承担责任。",
-      "pinyin": "Xiāng fǎn， tā men kě néng shuō míng nǐ zhèng zài xué xí guān xīn、 lǐ jiě hé chéng dān zé rèn。",
-      "vi": "Ngược lại, chúng có thể cho thấy bạn đang học cách quan tâm, thấu hiểu và chịu trách nhiệm."
+      "en": "Understand and assume responsibility.",
+      "zh": "理解和承担责任。",
+      "pinyin": "Lǐ jiě hé chéng dān zé rèn。",
+      "vi": "thấu hiểu và chịu trách nhiệm."
     },
     {
       "start": 170.57,
       "end": 173.8,
-      "en": "I know a young man named Lin Hao.",
+      "en": "I know a young man named Lin Ho.",
       "zh": "我认识一位叫林浩的年轻人。",
       "pinyin": "Wǒ rèn shi yí wèi jiào lín hào de nián qīng rén。",
-      "vi": "Tôi quen một người trẻ tên là Lâm Hạo."
+      "vi": "Tôi biết một chàng trai tên là Lin Hao."
     },
     {
       "start": 173.97,
+      "end": 176.57,
+      "en": "He used to do things casually.",
+      "zh": "他以前做事比较随意，",
+      "pinyin": "Tā yǐ qián zuò shì bǐ jiào suí yì，",
+      "vi": "Trước đây, cậu ấy khá tùy tiện trong hành động"
+    },
+    {
+      "start": 176.57,
       "end": 179.87,
-      "en": "He used to do things quite casually, and when he made appointments with others, he would often be late.",
-      "zh": "他以前做事比较随意，和别人约好时间，也常常迟到。",
-      "pinyin": "Tā yǐ qián zuò shì bǐ jiào suí yì， hé bié rén yuē hǎo shí jiān， yě cháng cháng chí dào。",
-      "vi": "Trước đây anh ấy làm việc khá tùy tiện, hẹn thời gian với người khác cũng thường xuyên đến muộn."
+      "en": "You're too late to make appointments with others.",
+      "zh": "和别人约好时间，也常常迟到。",
+      "pinyin": "Hé bié rén yuē hǎo shí jiān， yě cháng cháng chí dào。",
+      "vi": "Cậu ấy thường đến muộn dù đã hẹn giờ với người khác."
     },
     {
       "start": 180.07,
-      "end": 185.73,
-      "en": "His girlfriend Zhou Ning places great importance on time; every time she waits, she feels uneasy.",
-      "zh": "他的女朋友周宁非常重视时间，每次等待都会感到不安。",
-      "pinyin": "Tā de nǚ péng yǒu zhōu níng fēi cháng zhòng shì shí jiān， měi cì děng dài dōu huì gǎn dào bù ān。",
-      "vi": "Bạn gái của anh ấy là Chu Ninh rất coi trọng thời gian, mỗi lần chờ đợi đều cảm thấy bất an."
+      "end": 183.4,
+      "en": "His girlfriend Zhou Ning takes time very seriously.",
+      "zh": "他的女朋友周宁非常重视时间，",
+      "pinyin": "Tā de nǚ péng yǒu zhōu níng fēi cháng zhòng shì shí jiān，",
+      "vi": "Bạn gái cậu ấy là Châu Ninh. Cô rất coi trọng giờ giấc"
+    },
+    {
+      "start": 183.57,
+      "end": 185.74,
+      "en": "Every time I wait, I'm upset.",
+      "zh": "每次等待都会感到不安。",
+      "pinyin": "Měi cì děng dài dōu huì gǎn dào bù ān。",
+      "vi": "và mỗi lần phải chờ, cô đều thấy bồn chồn."
     },
     {
       "start": 186.4,
+      "end": 187.33,
+      "en": "It's just the beginning.",
+      "zh": "刚开始，",
+      "pinyin": "Gāng kāi shǐ，",
+      "vi": "Lúc đầu,"
+    },
+    {
+      "start": 187.33,
+      "end": 190.96,
+      "en": "According to Lin Ho, \"What's the matter with being a few minutes late?\"",
+      "zh": "林浩认为：“迟到几分钟有什么关系？”",
+      "pinyin": "Lín hào rèn wéi：“ chí dào jǐ fēn zhōng yǒu shén me guān xì？”",
+      "vi": "Lin Hao nghĩ, \"Trễ vài phút thì có sao?\""
+    },
+    {
+      "start": 191.17,
       "end": 193.9,
-      "en": "At first, Lin Hao thought: \"What does being a few minutes late matter?\" The two of them argued many times because of this.",
-      "zh": "刚开始，林浩认为：“迟到几分钟有什么关系？”，两个人因此吵过很多次。",
-      "pinyin": "Gāng kāi shǐ， lín hào rèn wéi：“ chí dào jǐ fēn zhōng yǒu shén me guān xì？”， liǎng gè rén yīn cǐ chǎo guò hěn duō cì。",
-      "vi": "Lúc đầu, Lâm Hạo cho rằng: \"Muộn vài phút thì có quan hệ gì?\", hai người vì thế đã cãi nhau rất nhiều lần."
+      "en": "Two people argued a lot about it.",
+      "zh": "两个人因此吵过很多次。",
+      "pinyin": "Liǎng gè rén yīn cǐ chǎo guò hěn duō cì。",
+      "vi": "Hai người đã tranh cãi về điều này nhiều lần."
     },
     {
       "start": 194,
+      "end": 195.67,
+      "en": "But then he realized,",
+      "zh": "后来他才明白，",
+      "pinyin": "Hòu lái tā cái míng bái，",
+      "vi": "Sau đó, cậu ấy nhận ra rằng"
+    },
+    {
+      "start": 195.67,
+      "end": 198.77,
+      "en": "Cho Ning doesn't care about those minutes.",
+      "zh": "周宁在意的并不是那几分钟，",
+      "pinyin": "Zhōu níng zài yì de bìng bú shì nà jǐ fēn zhōng，",
+      "vi": "Zhou Ning không quan tâm đến vài phút đó,"
+    },
+    {
+      "start": 198.93,
       "end": 202.4,
-      "en": "Later he realized that what Zhou Ning cared about was not those few minutes, but whether he seriously treated their promises to each other.",
-      "zh": "后来他才明白，周宁在意的并不是那几分钟，而是自己有没有认真对待彼此的约",
-      "pinyin": "Hòu lái tā cái míng bái， zhōu níng zài yì de bìng bú shì nà jǐ fēn zhōng， ér shì zì jǐ yǒu méi yǒu rèn zhēn duì dài bǐ cǐ de yuē",
-      "vi": "Sau đó anh ấy mới hiểu ra, Chu Ninh để ý không phải là mấy phút đó, mà là việc mình có nghiêm túc đối待 lời hẹn của hai người hay không."
+      "en": "It's about whether you take each other seriously.",
+      "zh": "而是自己有没有认真对待彼此的约",
+      "pinyin": "Ér shì zì jǐ yǒu méi yǒu rèn zhēn duì dài bǐ cǐ de yuē",
+      "vi": "mà là liệu cậu ấy có coi trọng lời hứa của họ hay không"
     },
     {
       "start": 202.4,
+      "end": 204.6,
+      "en": "Done. Since then,",
+      "zh": "定。从那以后，",
+      "pinyin": "Dìng。 cóng nà yǐ hòu，",
+      "vi": ". Từ đó trở đi,"
+    },
+    {
+      "start": 204.6,
+      "end": 206.53,
+      "en": "Lin Ho started leaving early.",
+      "zh": "林浩开始提前出门，",
+      "pinyin": "Lín hào kāi shǐ tí qián chū mén，",
+      "vi": "Lin Hao bắt đầu đi sớm hơn và"
+    },
+    {
+      "start": 206.53,
       "end": 210.1,
-      "en": "From then on, Lin Hao began to leave home earlier, and when he might be late, he would proactively tell the other person.",
-      "zh": "定。从那以后，林浩开始提前出门，也会在可能迟到时主动告诉对方。",
-      "pinyin": "Dìng。 cóng nà yǐ hòu， lín hào kāi shǐ tí qián chū mén， yě huì zài kě néng chí dào shí zhǔ dòng gào sù duì fāng。",
-      "vi": "Từ đó về sau, Lâm Hạo bắt đầu ra khỏi nhà sớm hơn, và khi có thể đến muộn cũng sẽ chủ động nói với đối phương."
+      "en": "They also tell each other at their own initiative when they may be late.",
+      "zh": "也会在可能迟到时主动告诉对方。",
+      "pinyin": "Yě huì zài kě néng chí dào shí zhǔ dòng gào sù duì fāng。",
+      "vi": "chủ động thông báo cho cô ấy nếu cậu ấy có thể đến muộn."
     },
     {
       "start": 210.17,
+      "end": 211.4,
+      "en": "# Slowly, #",
+      "zh": "慢慢地，",
+      "pinyin": "Màn màn dì，",
+      "vi": "Dần dần,"
+    },
+    {
+      "start": 211.47,
+      "end": 214.4,
+      "en": "Not only did he get along better with Zhou Ning.",
+      "zh": "他不仅和周宁相处得更好了，",
+      "pinyin": "Tā bù jǐn hé zhōu níng xiāng chǔ dé gèng hǎo le，",
+      "vi": "cậu ấy không chỉ hòa hợp hơn với Zhou Ning"
+    },
+    {
+      "start": 214.4,
       "end": 217.37,
-      "en": "Gradually, not only did he get along better with Zhou Ning, but he also became more reliable at work.",
-      "zh": "慢慢地，他不仅和周宁相处得更好了，在工作中也变得更加可靠。",
-      "pinyin": "Màn màn dì， tā bù jǐn hé zhōu níng xiāng chǔ dé gèng hǎo le， zài gōng zuò zhōng yě biàn de gèng jiā kě kào。",
-      "vi": "Dần dần, anh ấy không chỉ hòa hợp với Chu Ninh tốt hơn, mà trong công việc cũng trở nên đáng tin cậy hơn."
+      "en": "It has also become more reliable in its work.",
+      "zh": "在工作中也变得更加可靠。",
+      "pinyin": "Zài gōng zuò zhōng yě biàn de gèng jiā kě kào。",
+      "vi": "mà còn trở nên đáng tin cậy hơn trong công việc."
     },
     {
       "start": 217.7,
       "end": 220.27,
-      "en": "This is a kind of positive change.",
+      "en": "That is a positive change.",
       "zh": "这就是一种积极的改变。",
       "pinyin": "Zhè jiù shì yì zhǒng jī jí de gǎi biàn。",
-      "vi": "Đây chính là một sự thay đổi tích cực."
+      "vi": "Đây là một sự thay đổi tích cực."
     },
     {
       "start": 220.5,
+      "end": 223.9,
+      "en": "It does not require a person to give up his or her original character.",
+      "zh": "它不是要求一个人放弃原来的性格，",
+      "pinyin": "Tā bú shì yāo qiú yí gè rén fàng qì yuán lái de xìng gé，",
+      "vi": "Nó không đòi hỏi ai đó phải từ bỏ tính cách ban đầu của mình,"
+    },
+    {
+      "start": 224,
       "end": 226.03,
-      "en": "It doesn't require a person to give up their original personality, but helps them see",
-      "zh": "它不是要求一个人放弃原来的性格，而是帮助他看见自己",
-      "pinyin": "Tā bú shì yāo qiú yí gè rén fàng qì yuán lái de xìng gé， ér shì bāng zhù tā kàn jiàn zì jǐ",
-      "vi": "Nó không phải yêu cầu một người từ bỏ tính cách ban đầu, mà là giúp anh ấy nhìn thấy"
+      "en": "It's helping him to see himself.",
+      "zh": "而是帮助他看见自己",
+      "pinyin": "Ér shì bāng zhù tā kàn jiàn zì jǐ",
+      "vi": "mà giúp họ nhìn thấy"
     },
     {
       "start": 226.1,
       "end": 228.57,
-      "en": "problems they hadn't noticed before.",
+      "en": "Issues that have not been noted in the past.",
       "zh": "过去没有注意到的问题。",
       "pinyin": "Guò qù méi yǒu zhù yì dào de wèn tí。",
-      "vi": "những vấn đề mà trước đây mình không để ý."
+      "vi": "những vấn đề mà trước đây họ chưa nhận ra."
     },
     {
       "start": 228.67,
@@ -323,147 +687,307 @@
     },
     {
       "start": 231.37,
+      "end": 232.8,
+      "en": "When you're alone,",
+      "zh": "一个人的时候，",
+      "pinyin": "Yí gè rén de shí hòu，",
+      "vi": "Khi ở một mình,"
+    },
+    {
+      "start": 232.8,
+      "end": 234.2,
+      "en": "It's hard to find out.",
+      "zh": "我们很难发现",
+      "pinyin": "Wǒ men hěn nán fā xiàn",
+      "vi": "chúng ta khó có thể thấy"
+    },
+    {
+      "start": 234.2,
       "end": 237.6,
-      "en": "When we are alone, it's hard to discover what feelings our habits bring to others.",
-      "zh": "一个人的时候，我们很难发现，自己的习惯会给别人带来什么感受。",
-      "pinyin": "Yí gè rén de shí hòu， wǒ men hěn nán fā xiàn， zì jǐ de xí guàn huì gěi bié rén dài lái shén me gǎn shòu。",
-      "vi": "Khi chỉ có một mình, chúng ta rất khó phát hiện thói quen của mình sẽ mang lại cảm giác gì cho người khác."
+      "en": "How does it feel to have a habit of your own?",
+      "zh": "自己的习惯会给别人带来什么感受。",
+      "pinyin": "Zì jǐ de xí guàn huì gěi bié rén dài lái shén me gǎn shòu。",
+      "vi": "thói quen của mình ảnh hưởng đến người khác như thế nào."
     },
     {
       "start": 237.77,
-      "end": 243.37,
-      "en": "Once we enter a relationship, the other person's reactions can make us re-examine ourselves.",
-      "zh": "进入一段关系以后，对方的反应会让我们重新认识自己。",
-      "pinyin": "Jìn rù yí duàn guān xì yǐ hòu， duì fāng de fǎn yìng huì ràng wǒ men chóng xīn rèn shi zì jǐ。",
-      "vi": "Sau khi bước vào một mối quan hệ, phản ứng của đối phương sẽ khiến chúng ta nhìn nhận lại bản thân."
+      "end": 239.73,
+      "en": "After entering into a relationship,",
+      "zh": "进入一段关系以后，",
+      "pinyin": "Jìn rù yí duàn guān xì yǐ hòu，",
+      "vi": "Sau khi bước vào một mối quan hệ,"
+    },
+    {
+      "start": 239.73,
+      "end": 243.36,
+      "en": "The reaction of the other side will lead us to rediscover ourselves.",
+      "zh": "对方的反应会让我们重新认识自己。",
+      "pinyin": "Duì fāng de fǎn yìng huì ràng wǒ men chóng xīn rèn shi zì jǐ。",
+      "vi": "phản ứng của người kia cho phép chúng ta khám phá lại chính mình."
     },
     {
       "start": 243.4,
+      "end": 246.47,
+      "en": "However, there is an important question here:",
+      "zh": "不过，这里有一个重要的问题：",
+      "pinyin": "Bú guò， zhè lǐ yǒu yí gè zhòng yào de wèn tí：",
+      "vi": "Tuy nhiên, có một câu hỏi quan trọng ở đây:"
+    },
+    {
+      "start": 246.5,
       "end": 248.07,
-      "en": "However, there is an important question here: why are you changing?",
-      "zh": "不过，这里有一个重要的问题：你为什么改变？",
-      "pinyin": "Bú guò， zhè lǐ yǒu yí gè zhòng yào de wèn tí： nǐ wèi shén me gǎi biàn？",
-      "vi": "Tuy nhiên, ở đây có một câu hỏi quan trọng: bạn thay đổi vì điều gì?"
+      "en": "Why did you change?",
+      "zh": "你为什么改变？",
+      "pinyin": "Nǐ wèi shén me gǎi biàn？",
+      "vi": "Tại sao bạn lại thay đổi?"
     },
     {
       "start": 248.33,
-      "end": 255.57,
-      "en": "If you change because you understand the other person and also believe that this change can make you more mature,",
-      "zh": "如果你改变，是因为你理解了对方，也认为这种改变，能让自己变得更成熟，",
-      "pinyin": "Rú guǒ nǐ gǎi biàn， shì yīn wèi nǐ lǐ jiě le duì fāng， yě rèn wéi zhè zhǒng gǎi biàn， néng ràng zì jǐ biàn de gèng chéng shú，",
-      "vi": "Nếu bạn thay đổi vì bạn hiểu đối phương, và cũng cho rằng sự thay đổi này có thể khiến mình trở nên trưởng thành hơn,"
+      "end": 251.6,
+      "en": "If you change because you understand each other,",
+      "zh": "如果你改变，是因为你理解了对方，",
+      "pinyin": "Rú guǒ nǐ gǎi biàn， shì yīn wèi nǐ lǐ jiě le duì fāng，",
+      "vi": "Nếu bạn thay đổi vì hiểu người kia"
+    },
+    {
+      "start": 251.67,
+      "end": 253.33,
+      "en": "And I think it's a change.",
+      "zh": "也认为这种改变",
+      "pinyin": "Yě rèn wéi zhè zhǒng gǎi biàn",
+      "vi": "và tin rằng sự thay đổi này"
+    },
+    {
+      "start": 253.33,
+      "end": 255.56,
+      "en": "It's not the only thing that makes you mature.",
+      "zh": "能让自己变得更成熟，",
+      "pinyin": "Néng ràng zì jǐ biàn de gèng chéng shú，",
+      "vi": "sẽ giúp bạn trưởng thành hơn,"
     },
     {
       "start": 255.6,
       "end": 258.1,
-      "en": "then it is usually growth.",
+      "en": "Then it's usually growing.",
       "zh": "那么它通常是成长。",
       "pinyin": "Nà me tā tōng cháng shì chéng zhǎng。",
       "vi": "thì đó thường là sự trưởng thành."
     },
     {
       "start": 258.1,
+      "end": 261.77,
+      "en": "If you change, it's just because you're afraid to be hated.",
+      "zh": "如果你改变，只是因为害怕被讨厌、",
+      "pinyin": "Rú guǒ nǐ gǎi biàn， zhǐ shì yīn wéi hài pà bèi tǎo yàn、",
+      "vi": "Nếu bạn thay đổi chỉ vì sợ bị ghét bỏ,"
+    },
+    {
+      "start": 261.9,
+      "end": 264.5,
+      "en": "He was blamed or left.",
+      "zh": "被责怪或者被离开，",
+      "pinyin": "Bèi zé guài huò zhě bèi lí kāi，",
+      "vi": "bị trách móc hoặc bị bỏ rơi,"
+    },
+    {
+      "start": 264.6,
       "end": 267.03,
-      "en": "If you change only because you are afraid of being disliked, blamed, or left, then you need to think about it seriously.",
-      "zh": "如果你改变，只是因为害怕被讨厌、被责怪或者被离开，那就需要认真想一想了。",
-      "pinyin": "Rú guǒ nǐ gǎi biàn， zhǐ shì yīn wéi hài pà bèi tǎo yàn、 bèi zé guài huò zhě bèi lí kāi， nà jiù xū yào rèn zhēn xiǎng yi xiǎng le。",
-      "vi": "Nếu bạn thay đổi chỉ vì sợ bị ghét, bị trách móc hoặc bị rời bỏ, thì bạn cần nghiêm túc suy nghĩ lại."
+      "en": "That would require serious thinking.",
+      "zh": "那就需要认真想一想了。",
+      "pinyin": "Nà jiù xū yào rèn zhēn xiǎng yi xiǎng le。",
+      "vi": "thì bạn cần suy nghĩ kỹ."
     },
     {
       "start": 267.3,
+      "end": 270.2,
+      "en": "Some people would say, \"If you really love me,",
+      "zh": "有些人会说：“如果你真的爱我，",
+      "pinyin": "Yǒu xiē rén huì shuō：“ rú guǒ nǐ zhēn de ài wǒ，",
+      "vi": "Có người nói, \"Nếu em thực sự yêu anh,"
+    },
+    {
+      "start": 270.2,
+      "end": 272.07,
+      "en": "It's for me to change.\"",
+      "zh": "就应该为我改变。”",
+      "pinyin": "Jiù yīng gāi wèi wǒ gǎi biàn。”",
+      "vi": "em nên thay đổi vì anh.\""
+    },
+    {
+      "start": 272.13,
       "end": 275,
-      "en": "Some people say, \"If you really love me, you should change for me.\" This sentence sounds quite reasonable,",
-      "zh": "有些人会说：“如果你真的爱我，就应该为我改变。”，这句话听起来好像很有道理，",
-      "pinyin": "Yǒu xiē rén huì shuō：“ rú guǒ nǐ zhēn de ài wǒ， jiù yīng gāi wèi wǒ gǎi biàn。”， zhè jù huà tīng qǐ lái hǎo xiàng hěn yǒu dào lǐ，",
-      "vi": "Có người sẽ nói: “Nếu bạn thật sự yêu tôi, thì nên thay đổi vì tôi.” Câu này nghe có vẻ rất có lý,"
+      "en": "It sounds like a good point.",
+      "zh": "这句话听起来好像很有道理，",
+      "pinyin": "Zhè jù huà tīng qǐ lái hǎo xiàng hěn yǒu dào lǐ，",
+      "vi": "Điều này nghe có vẻ hợp lý,"
     },
     {
       "start": 275,
       "end": 278.2,
-      "en": "but it can also put a lot of pressure on people.",
+      "en": "But it can also put a lot of pressure on people.",
       "zh": "但它也可能给人带来很大的压力。",
       "pinyin": "Dàn tā yě kě néng gěi rén dài lái hěn dà de yā lì。",
-      "vi": "nhưng nó cũng có thể mang lại áp lực rất lớn cho người khác."
+      "vi": "nhưng nó cũng có thể tạo ra rất nhiều áp lực cho người khác."
     },
     {
       "start": 278.4,
+      "end": 281.27,
+      "en": "When Ame and Chen had just met,",
+      "zh": "小雨和陈安刚认识的时候，",
+      "pinyin": "Xiǎo yǔ hé chén ān gāng rèn shi de shí hòu，",
+      "vi": "Khi Xiaoyu và Chen An mới quen,"
+    },
+    {
+      "start": 281.33,
       "end": 284.93,
-      "en": "When Xiaoyu and Chen An first met, Chen An often praised her for being lively and cheerful.",
-      "zh": "小雨和陈安刚认识的时候，陈安常常称赞她活泼、开朗。",
-      "pinyin": "Xiǎo yǔ hé chén ān gāng rèn shi de shí hòu， chén ān cháng cháng chēng zàn tā huó pō、 kāi lǎng。",
-      "vi": "Khi Tiểu Vũ và Trần An mới quen nhau, Trần An thường khen cô ấy hoạt bát, vui vẻ."
+      "en": "Chen An has often praised her for being lively and open.",
+      "zh": "陈安常常称赞她活泼、开朗。",
+      "pinyin": "Chén ān cháng cháng chēng zàn tā huó pō、 kāi lǎng。",
+      "vi": "Chen An thường khen cô ấy hoạt bát và vui vẻ."
     },
     {
       "start": 284.93,
+      "end": 287.7,
+      "en": "But after a while,",
+      "zh": "可是相处一段时间以后，",
+      "pinyin": "Kě shì xiāng chǔ yí duàn shí jiān yǐ hòu，",
+      "vi": "Nhưng sau khi dành thời gian bên nhau,"
+    },
+    {
+      "start": 287.77,
       "end": 290.87,
-      "en": "But after they had been together for a while, Chen An began to dislike her meeting up with friends.",
-      "zh": "可是相处一段时间以后，陈安开始不喜欢她和朋友聚会。",
-      "pinyin": "Kě shì xiāng chǔ yí duàn shí jiān yǐ hòu， chén ān kāi shǐ bù xǐ huan tā hé péng yǒu jù huì。",
-      "vi": "Nhưng sau một thời gian ở bên nhau, Trần An bắt đầu không thích việc cô ấy tụ tập với bạn bè."
+      "en": "Chen An didn't like her party with friends.",
+      "zh": "陈安开始不喜欢她和朋友聚会。",
+      "pinyin": "Chén ān kāi shǐ bù xǐ huan tā hé péng yǒu jù huì。",
+      "vi": "Chen An bắt đầu không thích việc cô ấy đi dự tiệc với bạn bè."
     },
     {
       "start": 291,
+      "end": 293.93,
+      "en": "He'd say, \"You already have me.",
+      "zh": "他会问：“你已经有我了，",
+      "pinyin": "Tā huì wèn：“ nǐ yǐ jīng yǒu wǒ le，",
+      "vi": "Anh ấy thường hỏi, \"Em đã có anh rồi,"
+    },
+    {
+      "start": 293.93,
+      "end": 296.46,
+      "en": "Why do you go out more often?\"",
+      "zh": "为什么还要经常出去？”",
+      "pinyin": "Wèi shén me hái yào jīng cháng chū qù？”",
+      "vi": "sao em vẫn đi chơi thường xuyên thế?\""
+    },
+    {
+      "start": 296.67,
       "end": 298.27,
-      "en": "He would ask, \"You already have me, so why do you still go out so often?\" To avoid arguments,",
-      "zh": "他会问：“你已经有我了，为什么还要经常出去？”，为了避免争吵，",
-      "pinyin": "Tā huì wèn：“ nǐ yǐ jīng yǒu wǒ le， wèi shén me hái yào jīng cháng chū qù？”， wèi le bì miǎn zhēng chǎo，",
-      "vi": "Anh ấy sẽ hỏi: “Em đã có anh rồi, tại sao vẫn thường xuyên ra ngoài?” Để tránh cãi vã,"
+      "en": "In order to avoid an argument,",
+      "zh": "为了避免争吵，",
+      "pinyin": "Wèi le bì miǎn zhēng chǎo，",
+      "vi": "Để tránh tranh cãi,"
     },
     {
       "start": 298.27,
       "end": 301.47,
-      "en": "Xiaoyu cut down on how often she met her friends.",
+      "en": "The rain has reduced the number of meetings with friends.",
       "zh": "小雨减少了和朋友见面的次数。",
       "pinyin": "Xiǎo yǔ jiǎn shǎo le hé péng yǒu jiàn miàn de cì shù。",
-      "vi": "Tiểu Vũ giảm số lần gặp gỡ bạn bè."
+      "vi": "Xiaoyu đã giảm số lần gặp gỡ bạn bè."
     },
     {
       "start": 301.9,
+      "end": 305.67,
+      "en": "Later, Chen An thought she was dressed too bright.",
+      "zh": "后来，陈安又觉得她穿得太鲜艳，",
+      "pinyin": "Hòu lái， chén ān yòu jué de tā chuān dé tài xiān yàn，",
+      "vi": "Sau đó, Chen An cảm thấy cô ấy ăn mặc quá sặc sỡ và"
+    },
+    {
+      "start": 305.93,
       "end": 308.4,
-      "en": "Later, Chen An felt she dressed too brightly and hoped she would change into simpler clothes.",
-      "zh": "后来，陈安又觉得她穿得太鲜艳，希望她换成简单的衣服。",
-      "pinyin": "Hòu lái， chén ān yòu jué de tā chuān dé tài xiān yàn， xī wàng tā huàn chéng jiǎn dān de yī fu。",
-      "vi": "Sau đó, Trần An lại thấy cô ăn mặc quá sặc sỡ, mong cô thay sang quần áo đơn giản hơn."
+      "en": "I hope she changed to simple clothes.",
+      "zh": "希望她换成简单的衣服。",
+      "pinyin": "Xī wàng tā huàn chéng jiǎn dān de yī fu。",
+      "vi": "mong cô ấy thay đổi sang những bộ quần áo đơn giản hơn."
     },
     {
       "start": 308.5,
       "end": 310.23,
-      "en": "Xiaoyu agreed as well.",
+      "en": "Ame promised.",
       "zh": "小雨也答应了。",
       "pinyin": "Xiǎo yǔ yě dā ying le。",
-      "vi": "Tiểu Vũ cũng đồng ý."
+      "vi": "Xiaoyu đã đồng ý."
     },
     {
       "start": 310.4,
+      "end": 311.33,
+      "en": "And then later,",
+      "zh": "再后来，",
+      "pinyin": "Zài hòu lái，",
+      "vi": "Sau này nữa,"
+    },
+    {
+      "start": 311.33,
+      "end": 314.53,
+      "en": "Even Ame wants to be part of a new job project.",
+      "zh": "就连小雨想参加新的工作项目，",
+      "pinyin": "Jiù lián xiǎo yǔ xiǎng cān jiā xīn de gōng zuò xiàng mù，",
+      "vi": "ngay cả khi Xiaoyu muốn tham gia một dự án công việc mới,"
+    },
+    {
+      "start": 314.53,
       "end": 317.2,
-      "en": "Even later, when Xiaoyu wanted to join a new work project, Chen An said, \"It's too tiring,",
-      "zh": "再后来，就连小雨想参加新的工作项目，陈安也说：“太辛苦了，",
-      "pinyin": "Zài hòu lái， jiù lián xiǎo yǔ xiǎng cān jiā xīn de gōng zuò xiàng mù， chén ān yě shuō：“ tài xīn kǔ le，",
-      "vi": "Sau đó nữa, ngay cả khi Tiểu Vũ muốn tham gia một dự án công việc mới, Trần An cũng nói: \"Vất vả lắm,"
+      "en": "Chen An also said, \"It's too hard.",
+      "zh": "陈安也说：“太辛苦了，",
+      "pinyin": "Chén ān yě shuō：“ tài xīn kǔ le，",
+      "vi": "Chen An lại nói, \"Quá vất vả,"
     },
     {
       "start": 317.2,
+      "end": 319.2,
+      "en": "You'd better not be in it.\"",
+      "zh": "你还是不要参加吧。”",
+      "pinyin": "Nǐ hái shì bú yào cān jiā ba。”",
+      "vi": "em không nên tham gia.\""
+    },
+    {
+      "start": 319.53,
       "end": 322.23,
-      "en": "you'd better not join.\" Xiaoyu gave in again and again.",
-      "zh": "你还是不要参加吧。”，小雨一次又一次地退让。",
-      "pinyin": "Nǐ hái shì bú yào cān jiā ba。”， xiǎo yǔ yí cì yòu yí cì dì tuì ràng。",
-      "vi": "bạn vẫn là đừng tham gia thì hơn.\", Tiểu Vũ hết lần này đến lần khác nhượng bộ."
+      "en": "The rain is retreating again and again.",
+      "zh": "小雨一次又一次地退让。",
+      "pinyin": "Xiǎo yǔ yí cì yòu yí cì dì tuì ràng。",
+      "vi": "Xiaoyu đã nhượng bộ hết lần này đến lần khác."
     },
     {
       "start": 322.33,
+      "end": 325.46,
+      "en": "She thought that as long as she changed enough,",
+      "zh": "她以为，只要自己改变得足够多，",
+      "pinyin": "Tā yǐ wéi， zhǐ yào zì jǐ gǎi biàn de zú gòu duō，",
+      "vi": "Cô ấy nghĩ rằng chỉ cần cô ấy thay đổi đủ,"
+    },
+    {
+      "start": 325.47,
       "end": 328,
-      "en": "She thought that as long as she changed enough, the two of them would never have conflicts.",
-      "zh": "她以为，只要自己改变得足够多，两个人就不会发生矛盾。",
-      "pinyin": "Tā yǐ wéi， zhǐ yào zì jǐ gǎi biàn de zú gòu duō， liǎng gè rén jiù bú huì fā shēng máo dùn。",
-      "vi": "Cô tưởng rằng chỉ cần mình thay đổi đủ nhiều, hai người sẽ không xảy ra mâu thuẫn."
+      "en": "There will be no contradiction between the two.",
+      "zh": "两个人就不会发生矛盾。",
+      "pinyin": "Liǎng gè rén jiù bú huì fā shēng máo dùn。",
+      "vi": "hai người sẽ không còn mâu thuẫn."
     },
     {
       "start": 328.1,
+      "end": 331.2,
+      "en": "But she didn't get any easier.",
+      "zh": "可是她没有变得更轻松，",
+      "pinyin": "Kě shì tā méi yǒu biàn de gèng qīng sōng，",
+      "vi": "Nhưng cô ấy không trở nên thoải mái hơn;"
+    },
+    {
+      "start": 331.27,
       "end": 333.67,
-      "en": "But she did not become more relaxed; instead, she grew more and more unhappy.",
-      "zh": "可是她没有变得更轻松，反而越来越不快乐。",
-      "pinyin": "Kě shì tā méi yǒu biàn de gèng qīng sōng， fǎn ér yuè lái yuè bú kuài lè。",
-      "vi": "Nhưng cô không thấy nhẹ nhõm hơn, mà ngược lại ngày càng không vui."
+      "en": "It's getting less and less happy.",
+      "zh": "反而越来越不快乐。",
+      "pinyin": "Fǎn ér yuè lái yuè bú kuài lè。",
+      "vi": "ngược lại, cô ấy ngày càng bất hạnh."
     },
     {
       "start": 333.87,
@@ -475,291 +999,635 @@
     },
     {
       "start": 335.53,
+      "end": 339.23,
+      "en": "Because healthy love allows people to adjust their lives.",
+      "zh": "因为健康的爱可以让人调整生活，",
+      "pinyin": "Yīn wèi jiàn kāng de ài kě yǐ ràng rén tiáo zhěng shēng huó，",
+      "vi": "Bởi vì tình yêu lành mạnh cho phép con người điều chỉnh cuộc sống của mình,"
+    },
+    {
+      "start": 339.57,
       "end": 343.67,
-      "en": "Because healthy love can lead a person to adjust their life, but it should not make a person lose the right to choose.",
-      "zh": "因为健康的爱可以让人调整生活，却不应该让一个人失去选择的权利。",
-      "pinyin": "Yīn wèi jiàn kāng de ài kě yǐ ràng rén tiáo zhěng shēng huó， què bú yīng gāi ràng yí gè rén shī qù xuǎn zé de quán lì。",
-      "vi": "Bởi vì tình yêu lành mạnh có thể khiến người ta điều chỉnh cuộc sống, nhưng không nên khiến một người mất đi quyền lựa chọn."
+      "en": "But one should not be denied the right to choose.",
+      "zh": "却不应该让一个人失去选择的权利。",
+      "pinyin": "Què bú yīng gāi ràng yí gè rén shī qù xuǎn zé de quán lì。",
+      "vi": "nhưng không nên tước đoạt quyền lựa chọn của mỗi người."
     },
     {
       "start": 343.87,
+      "end": 346.6,
+      "en": "We can learn patience for each other.",
+      "zh": "我们可以为了对方学习耐心，",
+      "pinyin": "Wǒ men kě yǐ wéi le duì fāng xué xí nài xīn，",
+      "vi": "Chúng ta có thể học cách kiên nhẫn với nhau,"
+    },
+    {
+      "start": 346.6,
       "end": 349.6,
-      "en": "We can learn patience for the other person's sake, but we do not need to suppress all our true feelings.",
-      "zh": "我们可以为了对方学习耐心，却不需要压住所有真实的感受。",
-      "pinyin": "Wǒ men kě yǐ wéi le duì fāng xué xí nài xīn， què bù xū yào yā zhù suǒ yǒu zhēn shí de gǎn shòu。",
-      "vi": "Chúng ta có thể vì đối phương mà học sự kiên nhẫn, nhưng không cần phải kìm nén mọi cảm xúc chân thật."
+      "en": "But they don't have to hold on to all the real feelings.",
+      "zh": "却不需要压住所有真实的感受。",
+      "pinyin": "Què bù xū yào yā zhù suǒ yǒu zhēn shí de gǎn shòu。",
+      "vi": "nhưng không cần phải kìm nén tất cả cảm xúc thật của mình."
     },
     {
       "start": 349.73,
+      "end": 352.66,
+      "en": "We can reduce some bad habits.",
+      "zh": "我们可以减少一些不好的习惯，",
+      "pinyin": "Wǒ men kě yǐ jiǎn shǎo yì xiē bù hǎo de xí guàn，",
+      "vi": "Chúng ta có thể giảm bớt một số thói quen xấu,"
+    },
+    {
+      "start": 352.7,
       "end": 355.87,
-      "en": "We can reduce some bad habits, but we shouldn't cut off normal friendships.",
-      "zh": "我们可以减少一些不好的习惯，却不应该切断正常的朋友关系。",
-      "pinyin": "Wǒ men kě yǐ jiǎn shǎo yì xiē bù hǎo de xí guàn， què bú yīng gāi qiē duàn zhèng cháng de péng yǒu guān xì。",
-      "vi": "Chúng ta có thể giảm bớt một số thói quen không tốt, nhưng không nên cắt đứt những mối quan hệ bạn bè bình thường."
+      "en": "But it should not be cut off from normal friends.",
+      "zh": "却不应该切断正常的朋友关系。",
+      "pinyin": "Què bú yīng gāi qiē duàn zhèng cháng de péng yǒu guān xì。",
+      "vi": "nhưng không nên cắt đứt những tình bạn bình thường."
     },
     {
       "start": 356.27,
+      "end": 357.7,
+      "en": "We can refer to each other.",
+      "zh": "我们可以参考对方",
+      "pinyin": "Wǒ men kě yǐ cān kǎo duì fāng",
+      "vi": "Chúng ta có thể xem xét"
+    },
+    {
+      "start": 357.7,
+      "end": 358.57,
+      "en": "I'm not sure what you're doing.",
+      "zh": "的意见，",
+      "pinyin": "De yì jiàn，",
+      "vi": "ý kiến của nhau,"
+    },
+    {
+      "start": 358.67,
+      "end": 361.87,
+      "en": "But he still has the right to decide his own clothes.",
+      "zh": "却仍然有权决定自己的衣服、",
+      "pinyin": "Què réng rán yǒu quán jué dìng zì jǐ de yī fu、",
+      "vi": "nhưng vẫn có quyền tự chọn cách ăn mặc,"
+    },
+    {
+      "start": 361.9,
       "end": 364.3,
-      "en": "We can consider the other person's opinions, yet we still have the right to decide our own clothes, work, and life direction.",
-      "zh": "我们可以参考对方，的意见，却仍然有权决定自己的衣服、工作和人生方向。",
-      "pinyin": "Wǒ men kě yǐ cān kǎo duì fāng， de yì jiàn， què réng rán yǒu quán jué dìng zì jǐ de yī fu、 gōng zuò hé rén shēng fāng xiàng。",
-      "vi": "Chúng ta có thể tham khảo ý kiến của đối phương, nhưng vẫn có quyền quyết định quần áo, công việc và hướng đi cuộc đời của chính mình."
+      "en": "Work and life direction.",
+      "zh": "工作和人生方向。",
+      "pinyin": "Gōng zuò hé rén shēng fāng xiàng。",
+      "vi": "công việc và hướng đi của mình."
     },
     {
       "start": 364.37,
+      "end": 366.97,
+      "en": "In a post titled \"A change in health\" , the blogger says:",
+      "zh": "判断一段改变是否健康，",
+      "pinyin": "Pàn duàn yí duàn gǎi biàn shì fǒu jiàn kāng，",
+      "vi": "Để đánh giá xem một sự thay đổi có lành mạnh hay không,"
+    },
+    {
+      "start": 366.97,
       "end": 369.77,
-      "en": "To judge whether a change is healthy, you can ask yourself three simple questions.",
-      "zh": "判断一段改变是否健康，可以问自己三个简单的问题。",
-      "pinyin": "Pàn duàn yí duàn gǎi biàn shì fǒu jiàn kāng， kě yǐ wèn zì jǐ sān gè jiǎn dān de wèn tí。",
-      "vi": "Để đánh giá một sự thay đổi có lành mạnh hay không, bạn có thể tự hỏi mình ba câu hỏi đơn giản."
+      "en": "You can ask yourself three simple questions.",
+      "zh": "可以问自己三个简单的问题。",
+      "pinyin": "Kě yǐ wèn zì jǐ sān gè jiǎn dān de wèn tí。",
+      "vi": "hãy tự hỏi mình ba câu hỏi đơn giản."
     },
     {
       "start": 369.77,
       "end": 373.67,
-      "en": "First question: Is this a choice I made on my own initiative?",
+      "en": "The first question: Is this my choice?",
       "zh": "第一个问题：这是我主动选择的吗？",
       "pinyin": "Dì yī gè wèn tí： zhè shì wǒ zhǔ dòng xuǎn zé de ma？",
-      "vi": "Câu hỏi thứ nhất: Đây có phải là lựa chọn chủ động của tôi không?"
+      "vi": "Câu hỏi đầu tiên: Tôi có chủ động lựa chọn điều này không?"
     },
     {
       "start": 374.07,
+      "end": 376.37,
+      "en": "If you understand the reason for this change,",
+      "zh": "如果你理解改变的原因，",
+      "pinyin": "Rú guǒ nǐ lǐ jiě gǎi biàn de yuán yīn，",
+      "vi": "Nếu bạn hiểu lý do của sự thay đổi"
+    },
+    {
+      "start": 376.37,
+      "end": 378.17,
+      "en": "And they are willing to try.",
+      "zh": "并且愿意尝试，",
+      "pinyin": "Bìng qiě yuàn yì cháng shì，",
+      "vi": "và sẵn sàng thử,"
+    },
+    {
+      "start": 378.33,
       "end": 381.63,
-      "en": "If you understand the reason for the change and are willing to try, then you still hold your own right to decide.",
-      "zh": "如果你理解改变的原因，并且愿意尝试，那么你仍然拥有自己的决定权。",
-      "pinyin": "Rú guǒ nǐ lǐ jiě gǎi biàn de yuán yīn， bìng qiě yuàn yì cháng shì， nà me nǐ réng rán yōng yǒu zì jǐ de jué dìng quán。",
-      "vi": "Nếu bạn hiểu lý do của sự thay đổi và sẵn lòng thử, thì bạn vẫn giữ quyền quyết định của chính mình."
+      "en": "Then you still have your own decision.",
+      "zh": "那么你仍然拥有自己的决定权。",
+      "pinyin": "Nà me nǐ réng rán yōng yǒu zì jǐ de jué dìng quán。",
+      "vi": "thì bạn vẫn có quyền quyết định của riêng mình."
     },
     {
       "start": 381.97,
+      "end": 384.07,
+      "en": "If they're angry,",
+      "zh": "如果对方用生气、",
+      "pinyin": "Rú guǒ duì fāng yòng shēng qì、",
+      "vi": "Nếu người kia đe dọa bạn bằng sự tức giận,"
+    },
+    {
+      "start": 384.07,
+      "end": 387.3,
+      "en": "I'm not sure if I've ever been in a state of indifference or when I have left.",
+      "zh": "冷漠或者离开来威胁你，",
+      "pinyin": "Lěng mò huò zhě lí kāi lái wēi xié nǐ，",
+      "vi": "thờ ơ hoặc bỏ đi,"
+    },
+    {
+      "start": 387.3,
       "end": 389.57,
-      "en": "If the other person uses anger, coldness, or leaving to threaten you, then that is not equal communication.",
-      "zh": "如果对方用生气、冷漠或者离开来威胁你，那就不是平等的沟通。",
-      "pinyin": "Rú guǒ duì fāng yòng shēng qì、 lěng mò huò zhě lí kāi lái wēi xié nǐ， nà jiù bú shì píng děng de gōu tōng。",
-      "vi": "Nếu đối phương dùng sự tức giận, lạnh nhạt hoặc rời đi để đe dọa bạn, thì đó không phải là giao tiếp bình đẳng."
+      "en": "That's not equal communication.",
+      "zh": "那就不是平等的沟通。",
+      "pinyin": "Nà jiù bú shì píng děng de gōu tōng。",
+      "vi": "thì đó không phải là giao tiếp bình đẳng."
     },
     {
       "start": 389.7,
-      "end": 394.57,
-      "en": "Second question: After the change, do I like myself more?",
-      "zh": "第二个问题：改变以后，我更喜欢自己了吗？",
-      "pinyin": "Dì èr gè wèn tí： gǎi biàn yǐ hòu， wǒ gèng xǐ huan zì jǐ le ma？",
-      "vi": "Câu hỏi thứ hai: Sau khi thay đổi, tôi có thích bản thân mình hơn không?"
+      "end": 391.2,
+      "en": "The second question:",
+      "zh": "第二个问题：",
+      "pinyin": "Dì èr gè wèn tí：",
+      "vi": "Câu hỏi thứ hai:"
+    },
+    {
+      "start": 391.33,
+      "end": 394.56,
+      "en": "Did I like myself more when I changed?",
+      "zh": "改变以后，我更喜欢自己了吗？",
+      "pinyin": "Gǎi biàn yǐ hòu， wǒ gèng xǐ huan zì jǐ le ma？",
+      "vi": "Sau những thay đổi, tôi có yêu bản thân mình hơn không?"
     },
     {
       "start": 394.67,
+      "end": 395.3,
+      "en": "Okay, fine.",
+      "zh": "好的改",
+      "pinyin": "Hǎo de gǎi",
+      "vi": "Những thay đổi tốt"
+    },
+    {
+      "start": 395.37,
+      "end": 397.2,
+      "en": "It may not be easy to change.",
+      "zh": "变可能并不轻松，",
+      "pinyin": "Biàn kě néng bìng bù qīng sōng，",
+      "vi": "có thể không dễ dàng,"
+    },
+    {
+      "start": 397.4,
+      "end": 400.37,
+      "en": "But it'll make you confident and stable.",
+      "zh": "但它会让你逐渐变得自信、稳定",
+      "pinyin": "Dàn tā huì ràng nǐ zhú jiàn biàn de zì xìn、 wěn dìng",
+      "vi": "nhưng chúng sẽ dần dần giúp bạn tự tin hơn, ổn định hơn"
+    },
+    {
+      "start": 400.67,
       "end": 401.67,
-      "en": "A good change may not be easy, but it will gradually make you more confident, stable, and mature.",
-      "zh": "好的改，变可能并不轻松，但它会让你逐渐变得自信、稳定，和成熟。",
-      "pinyin": "Hǎo de gǎi， biàn kě néng bìng bù qīng sōng， dàn tā huì ràng nǐ zhú jiàn biàn de zì xìn、 wěn dìng， hé chéng shú。",
-      "vi": "Một sự thay đổi tốt có thể không hề dễ dàng, nhưng nó sẽ khiến bạn dần trở nên tự tin, ổn định và trưởng thành."
+      "en": "And mature.",
+      "zh": "和成熟。",
+      "pinyin": "Hé chéng shú。",
+      "vi": "và trưởng thành hơn."
     },
     {
       "start": 401.87,
+      "end": 405.64,
+      "en": "Ignorance change will make you more nervous.",
+      "zh": "不健康的改变却会让你越来越紧张，",
+      "pinyin": "Bú jiàn kāng de gǎi biàn què huì ràng nǐ yuè lái yuè jǐn zhāng，",
+      "vi": "Ngược lại, những thay đổi không lành mạnh sẽ khiến bạn ngày càng lo lắng,"
+    },
+    {
+      "start": 405.73,
+      "end": 407.33,
+      "en": "Before doing anything.",
+      "zh": "做任何事情之前",
+      "pinyin": "Zuò rèn hé shì qíng zhī qián",
+      "vi": "tự hỏi liệu người kia có không vui"
+    },
+    {
+      "start": 407.33,
       "end": 410.43,
-      "en": "An unhealthy change, however, will make you more and more tense—before doing anything, you first have to guess whether the other person will be unhappy.",
-      "zh": "不健康的改变却会让你越来越紧张，做任何事情之前，都先猜测对方会不会不高兴。",
-      "pinyin": "Bú jiàn kāng de gǎi biàn què huì ràng nǐ yuè lái yuè jǐn zhāng， zuò rèn hé shì qíng zhī qián， dōu xiān cāi cè duì fāng huì bu huì bù gāo xìng。",
-      "vi": "Còn sự thay đổi không lành mạnh sẽ khiến bạn ngày càng căng thẳng, trước khi làm bất cứ việc gì đều phải đoán xem đối phương có vui hay không."
+      "en": "We'll start by guessing if the other side isn't happy.",
+      "zh": "都先猜测对方会不会不高兴。",
+      "pinyin": "Dōu xiān cāi cè duì fāng huì bu huì bù gāo xìng。",
+      "vi": "trước khi làm bất cứ điều gì ."
     },
     {
       "start": 410.57,
+      "end": 412.1,
+      "en": "The third question:",
+      "zh": "第三个问题：",
+      "pinyin": "Dì sān gè wèn tí：",
+      "vi": "Câu hỏi thứ ba:"
+    },
+    {
+      "start": 412.13,
       "end": 415.63,
-      "en": "Third question: Is the other person also willing to make adjustments for the relationship?",
-      "zh": "第三个问题：对方也愿意为关系作出调整吗？",
-      "pinyin": "Dì sān gè wèn tí： duì fāng yě yuàn yì wèi guān xì zuò chū tiáo zhěng ma？",
-      "vi": "Câu hỏi thứ ba: Đối phương cũng sẵn lòng điều chỉnh vì mối quan hệ này chứ?"
+      "en": "Will the other side be willing to adjust the relationship?",
+      "zh": "对方也愿意为关系作出调整吗？",
+      "pinyin": "Duì fāng yě yuàn yì wèi guān xì zuò chū tiáo zhěng ma？",
+      "vi": "Người kia có sẵn lòng điều chỉnh cho phù hợp với mối quan hệ không?"
     },
     {
       "start": 415.87,
       "end": 419.1,
-      "en": "A relationship requires two people to work hard together.",
+      "en": "A relationship requires two people working together.",
       "zh": "一段关系需要两个人一起努力。",
       "pinyin": "Yí duàn guān xì xū yào liǎng gè rén yì qǐ nǔ lì。",
-      "vi": "Một mối quan hệ cần hai người cùng nỗ lực."
+      "vi": "Một mối quan hệ cần sự nỗ lực từ cả hai phía."
     },
     {
       "start": 419.2,
+      "end": 422,
+      "en": "If only one person ever changed,",
+      "zh": "如果永远只有一个人在改变，",
+      "pinyin": "Rú guǒ yǒng yuǎn zhǐ yǒu yí gè rén zài gǎi biàn，",
+      "vi": "Nếu chỉ một người thay đổi,"
+    },
+    {
+      "start": 422,
+      "end": 425,
+      "en": "Another person is responsible only for making a request.",
+      "zh": "另一个人只负责提出要求，",
+      "pinyin": "Lìng yí gè rén zhī fù zé tí chū yāo qiú，",
+      "vi": "và người kia chỉ đưa ra yêu cầu,"
+    },
+    {
+      "start": 425,
       "end": 428.37,
-      "en": "If only one person is always changing while the other only makes demands, then this relationship can easily lose its balance.",
-      "zh": "如果永远只有一个人在改变，另一个人只负责提出要求，那么这段关系很容易失去平衡。",
-      "pinyin": "Rú guǒ yǒng yuǎn zhǐ yǒu yí gè rén zài gǎi biàn， lìng yí gè rén zhī fù zé tí chū yāo qiú， nà me zhè duàn guān xì hěn róng yì shī qù píng héng。",
-      "vi": "Nếu mãi chỉ có một người thay đổi, còn người kia chỉ chịu trách nhiệm đưa ra yêu cầu, thì mối quan hệ này rất dễ mất cân bằng."
+      "en": "So it's easy to lose balance.",
+      "zh": "那么这段关系很容易失去平衡。",
+      "pinyin": "Nà me zhè duàn guān xì hěn róng yì shī qù píng héng。",
+      "vi": "mối quan hệ sẽ dễ dàng trở nên mất cân bằng."
     },
     {
       "start": 428.6,
+      "end": 428.9,
+      "en": "Love.",
+      "zh": "爱",
+      "pinyin": "Ài",
+      "vi": "Có."
+    },
+    {
+      "start": 428.9,
+      "end": 432.1,
+      "en": "It's not about changing a person to his own satisfaction.",
+      "zh": "不是把一个人修改成自己满意的样",
+      "pinyin": "Bú shì bǎ yí gè rén xiū gǎi chéng zì jǐ mǎn yì de yàng",
+      "vi": "Tình yêu không phải là việc biến người khác thành phiên bản lý tưởng của bạn"
+    },
+    {
+      "start": 432.1,
+      "end": 433.9,
+      "en": "Son. True love.",
+      "zh": "子。真正的爱，",
+      "pinyin": "Zǐ。 zhēn zhèng de ài，",
+      "vi": ". Tình yêu đích thực"
+    },
+    {
+      "start": 433.93,
       "end": 437.5,
-      "en": "Love is not about modifying a person into the version you are satisfied with. True love is two people with different personalities coming together,",
-      "zh": "爱，不是把一个人修改成自己满意的样，子。真正的爱，是两个人带着不同的性格走到一起，",
-      "pinyin": "Ài， bú shì bǎ yí gè rén xiū gǎi chéng zì jǐ mǎn yì de yàng， zǐ。 zhēn zhèng de ài， shì liǎng gè rén dài zhe bù tóng de xìng gé zǒu dào yì qǐ，",
-      "vi": "Tình yêu không phải là sửa đổi một người thành hình mẫu mà mình hài lòng. Tình yêu đích thực là hai người với những tính cách khác nhau đến với nhau,"
+      "en": "It was two people who came together with different personalities.",
+      "zh": "是两个人带着不同的性格走到一起，",
+      "pinyin": "Shì liǎng gè rén dài zhe bù tóng de xìng gé zǒu dào yì qǐ，",
+      "vi": "là hai người có tính cách khác nhau đến với nhau và"
     },
     {
       "start": 437.57,
+      "end": 439.73,
+      "en": "On the basis of respect for each other.",
+      "zh": "在尊重彼此的基础上",
+      "pinyin": "Zài zūn zhòng bǐ cǐ de jī chǔ shàng",
+      "vi": "tìm ra cách hòa hợp phù hợp với cả hai"
+    },
+    {
+      "start": 439.73,
       "end": 442.6,
-      "en": "On the basis of mutual respect, finding a way of getting along that suits both people.",
-      "zh": "在尊重彼此的基础上，寻找适合双方的相处方式。",
-      "pinyin": "Zài zūn zhòng bǐ cǐ de jī chǔ shàng， xún zhǎo shì hé shuāng fāng de xiāng chǔ fāng shì。",
-      "vi": "Trên cơ sở tôn trọng lẫn nhau, tìm ra cách chung sống phù hợp với cả hai."
+      "en": "To find a way to live with each other.",
+      "zh": "寻找适合双方的相处方式。",
+      "pinyin": "Xún zhǎo shì hé shuāng fāng de xiāng chǔ fāng shì。",
+      "vi": "dựa trên sự tôn trọng lẫn nhau ."
     },
     {
       "start": 442.73,
+      "end": 444.03,
+      "en": "So, what's up?",
+      "zh": "那么，怎",
+      "pinyin": "Nà me， zěn",
+      "vi": "Vậy làm sao để"
+    },
+    {
+      "start": 444.13,
       "end": 447.83,
-      "en": "So then, how can you grow in love without losing yourself?",
-      "zh": "那么，怎，样才能在爱里成长，又不失去自己呢？",
-      "pinyin": "Nà me， zěn， yàng cái néng zài ài lǐ chéng zhǎng， yòu bù shī qù zì jǐ ne？",
-      "vi": "Vậy thì, làm thế nào để trưởng thành trong tình yêu mà không đánh mất chính mình?"
+      "en": "What if you grow up in love and don't lose yourself?",
+      "zh": "样才能在爱里成长，又不失去自己呢？",
+      "pinyin": "Yàng cái néng zài ài lǐ chéng zhǎng， yòu bù shī qù zì jǐ ne？",
+      "vi": "trưởng thành trong tình yêu mà vẫn là chính mình?"
     },
     {
       "start": 448,
       "end": 451.6,
-      "en": "First, you need to keep a life that belongs to you.",
+      "en": "First of all, we must preserve our own lives.",
       "zh": "首先，要保留属于自己的生活。",
       "pinyin": "Shǒu xiān， yào bǎo liú shǔ yú zì jǐ de shēng huó。",
-      "vi": "Trước hết, hãy giữ lại cuộc sống thuộc về chính mình."
+      "vi": "Trước hết, hãy giữ một phần cuộc sống cho riêng mình."
     },
     {
       "start": 451.6,
-      "end": 458.17,
-      "en": "After falling in love, you can share a lot of time with your partner, but you still need your own friends,",
-      "zh": "恋爱以后，你可以和对方分享很多时间，但仍然需要自己的朋友、",
-      "pinyin": "Liàn ài yǐ hòu， nǐ kě yǐ hé duì fāng fēn xiǎng hěn duō shí jiān， dàn réng rán xū yào zì jǐ de péng yǒu、",
-      "vi": "Sau khi yêu, bạn có thể chia sẻ rất nhiều thời gian với đối phương, nhưng vẫn cần những người bạn của riêng mình,"
+      "end": 452.77,
+      "en": "After love,",
+      "zh": "恋爱以后，",
+      "pinyin": "Liàn ài yǐ hòu，",
+      "vi": "Sau khi yêu,"
+    },
+    {
+      "start": 452.77,
+      "end": 455.7,
+      "en": "You can share a lot of time with each other.",
+      "zh": "你可以和对方分享很多时间，",
+      "pinyin": "Nǐ kě yǐ hé duì fāng fēn xiǎng hěn duō shí jiān，",
+      "vi": "bạn có thể dành nhiều thời gian cho người yêu,"
+    },
+    {
+      "start": 455.73,
+      "end": 458.16,
+      "en": "But they still need their friends.",
+      "zh": "但仍然需要自己的朋友、",
+      "pinyin": "Dàn réng rán xū yào zì jǐ de péng yǒu、",
+      "vi": "nhưng bạn vẫn cần bạn bè,"
     },
     {
       "start": 458.17,
-      "end": 460.83,
-      "en": "interests, and quiet space of your own.",
+      "end": 460.84,
+      "en": "Interest and quiet space.",
       "zh": "兴趣和安静的空间。",
       "pinyin": "Xìng qù hé ān jìng de kōng jiān。",
-      "vi": "sở thích và không gian yên tĩnh cho riêng mình."
+      "vi": "sở thích và không gian yên tĩnh riêng."
     },
     {
       "start": 461.07,
+      "end": 463.64,
+      "en": "A man has a life of his own.",
+      "zh": "一个人拥有自己的生活，",
+      "pinyin": "Yí gè rén yōng yǒu zì jǐ de shēng huó，",
+      "vi": "Có cuộc sống riêng"
+    },
+    {
+      "start": 463.7,
       "end": 466.37,
-      "en": "A person having their own life does not mean they do not value love.",
-      "zh": "一个人拥有自己的生活，并不代表他不重视爱情。",
-      "pinyin": "Yí gè rén yōng yǒu zì jǐ de shēng huó， bìng bú dài biǎo tā bú zhòng shì ài qíng。",
-      "vi": "Một người có cuộc sống của riêng mình không có nghĩa là họ không coi trọng tình yêu."
+      "en": "Doesn't mean he doesn't value love.",
+      "zh": "并不代表他不重视爱情。",
+      "pinyin": "Bìng bú dài biǎo tā bú zhòng shì ài qíng。",
+      "vi": "không có nghĩa là bạn không coi trọng tình yêu."
     },
     {
       "start": 466.47,
+      "end": 467.64,
+      "en": "Quite the contrary.",
+      "zh": "恰恰相反，",
+      "pinyin": "Qià qià xiāng fǎn，",
+      "vi": "Ngược lại,"
+    },
+    {
+      "start": 467.77,
+      "end": 469.87,
+      "en": "People who are able to live independently.",
+      "zh": "能够独立生活的人，",
+      "pinyin": "Néng gòu dú lì shēng huó de rén，",
+      "vi": "những người có thể sống độc lập"
+    },
+    {
+      "start": 469.87,
       "end": 472.87,
-      "en": "On the contrary, people who can live independently usually have more strength to love others.",
-      "zh": "恰恰相反，能够独立生活的人，通常更有力量去爱别人。",
-      "pinyin": "Qià qià xiāng fǎn， néng gòu dú lì shēng huó de rén， tōng cháng gèng yǒu lì liàng qù ài bié rén。",
-      "vi": "Ngược lại, những người có thể sống độc lập thường có nhiều sức mạnh hơn để yêu người khác."
+      "en": "Usually more powerful to love people.",
+      "zh": "通常更有力量去爱别人。",
+      "pinyin": "Tōng cháng gèng yǒu lì liàng qù ài bié rén。",
+      "vi": "thường có khả năng yêu thương người khác tốt hơn."
     },
     {
       "start": 473.07,
       "end": 476.57,
-      "en": "Second, learn to express your feelings.",
+      "en": "Secondly, we must learn to express our feelings.",
       "zh": "其次，要学会表达自己的感受。",
       "pinyin": "Qí cì， yào xué huì biǎo dá zì jǐ de gǎn shòu。",
-      "vi": "Thứ hai, cần học cách bày tỏ cảm xúc của mình."
+      "vi": "Thứ hai, hãy học cách bày tỏ cảm xúc của mình."
     },
     {
       "start": 476.67,
+      "end": 478.77,
+      "en": "A lot of people are afraid of conflict.",
+      "zh": "很多人害怕发生冲突，",
+      "pinyin": "Hěn duō rén hài pà fā shēng chōng tū，",
+      "vi": "Nhiều người sợ xung đột,"
+    },
+    {
+      "start": 478.93,
       "end": 481.5,
-      "en": "Many people are afraid of conflict, so they habitually say \"it's okay.\"",
-      "zh": "很多人害怕发生冲突，所以习惯说“没关系”。",
-      "pinyin": "Hěn duō rén hài pà fā shēng chōng tū， suǒ yǐ xí guàn shuō “ méi guān xì ”。",
-      "vi": "Nhiều người sợ xảy ra xung đột, nên quen nói \"không sao đâu\"."
+      "en": "So it's customary to say, \"It doesn't matter.\"",
+      "zh": "所以习惯说“没关系”。",
+      "pinyin": "Suǒ yǐ xí guàn shuō “ méi guān xì ”。",
+      "vi": "vì vậy họ thường nói \"Không sao đâu\"."
     },
     {
       "start": 481.67,
+      "end": 484.2,
+      "en": "But it doesn't matter.",
+      "zh": "可是嘴上说没关系，",
+      "pinyin": "Kě shì zuǐ shàng shuō méi guān xì，",
+      "vi": "Nhưng nói \"Không sao đâu \""
+    },
+    {
+      "start": 484.2,
       "end": 487.5,
-      "en": "But saying \"it's okay\" out loud doesn't make the hurt in your heart disappear automatically.",
-      "zh": "可是嘴上说没关系，心里的委屈并不会自动消失。",
-      "pinyin": "Kě shì zuǐ shàng shuō méi guān xì， xīn lǐ de wěi qu bìng bú huì zì dòng xiāo shī。",
-      "vi": "Nhưng miệng nói không sao, nỗi uất ức trong lòng sẽ không tự nhiên biến mất."
+      "en": "The grievances of the heart do not automatically disappear.",
+      "zh": "心里的委屈并不会自动消失。",
+      "pinyin": "Xīn lǐ de wěi qu bìng bú huì zì dòng xiāo shī。",
+      "vi": "không tự động làm cho những nỗi ấm ức trong lòng bạn biến mất."
     },
     {
       "start": 487.8,
-      "end": 494.03,
-      "en": "They may accumulate little by little, and finally erupt suddenly over a trivial matter.",
-      "zh": "它们可能一点一点积累，最后因为一件小事突然爆发。",
-      "pinyin": "Tā men kě néng yì diǎn yi diǎn jī lěi， zuì hòu yīn wèi yí jiàn xiǎo shì tū rán bào fā。",
-      "vi": "Chúng có thể tích tụ từng chút một, cuối cùng bùng nổ đột ngột chỉ vì một chuyện nhỏ."
+      "end": 490.5,
+      "en": "They may accumulate a little bit.",
+      "zh": "它们可能一点一点积累，",
+      "pinyin": "Tā men kě néng yì diǎn yi diǎn jī lěi，",
+      "vi": "Những cảm xúc này có thể tích tụ dần dần"
+    },
+    {
+      "start": 490.77,
+      "end": 494.04,
+      "en": "Finally, a small incident erupted.",
+      "zh": "最后因为一件小事突然爆发。",
+      "pinyin": "Zuì hòu yīn wèi yí jiàn xiǎo shì tū rán bào fā。",
+      "vi": "và cuối cùng bùng nổ vì một chuyện nhỏ nhặt."
     },
     {
       "start": 494.13,
+      "end": 497.56,
+      "en": "You can say, \"I know you're worried about me.",
+      "zh": "你可以平静地说：“我知道你担心我，",
+      "pinyin": "Nǐ kě yǐ píng jìng dì shuō：“ wǒ zhī dào nǐ dān xīn wǒ，",
+      "vi": "Bạn có thể bình tĩnh nói, \"Tôi biết bạn lo lắng cho tôi,"
+    },
+    {
+      "start": 497.57,
       "end": 500.1,
-      "en": "You can calmly say, \"I know you're worried about me, but this matter is very important to me,\"",
-      "zh": "你可以平静地说：“我知道你担心我，但是这件事对我很重要，",
-      "pinyin": "Nǐ kě yǐ píng jìng dì shuō：“ wǒ zhī dào nǐ dān xīn wǒ， dàn shì zhè jiàn shì duì wǒ hěn zhòng yào，",
-      "vi": "Bạn có thể bình tĩnh nói: \"Tôi biết bạn lo cho tôi, nhưng chuyện này rất quan trọng với tôi,"
+      "en": "But it's important to me.",
+      "zh": "但是这件事对我很重要，",
+      "pinyin": "Dàn shì zhè jiàn shì duì wǒ hěn zhòng yào，",
+      "vi": "nhưng điều này rất quan trọng với tôi,"
     },
     {
       "start": 500.2,
+      "end": 502.97,
+      "en": "I want you to hear what I think.\"",
+      "zh": "我希望你能听听我的想法。”",
+      "pinyin": "Wǒ xī wàng nǐ néng tīng tīng wǒ de xiǎng fǎ。”",
+      "vi": "và tôi hy vọng bạn có thể lắng nghe suy nghĩ của tôi.\""
+    },
+    {
+      "start": 503.2,
       "end": 507.33,
-      "en": "\"I hope you can listen to my thoughts.\" You can also say, \"When you ask me in this way,\"",
-      "zh": "我希望你能听听我的想法。”，也可以说：“当你用这种方式要求我时，",
-      "pinyin": "Wǒ xī wàng nǐ néng tīng tīng wǒ de xiǎng fǎ。”， yě kě yǐ shuō：“ dāng nǐ yòng zhè zhǒng fāng shì yāo qiú wǒ shí，",
-      "vi": "tôi hy vọng bạn có thể lắng nghe suy nghĩ của tôi.\" Cũng có thể nói: \"Khi bạn yêu cầu tôi bằng cách này,"
+      "en": "And you can say, \"When you ask me in this way,",
+      "zh": "也可以说：“当你用这种方式要求我时，",
+      "pinyin": "Yě kě yǐ shuō：“ dāng nǐ yòng zhè zhǒng fāng shì yāo qiú wǒ shí，",
+      "vi": "Hoặc bạn có thể nói, \"Khi bạn yêu cầu tôi làm điều này,"
     },
     {
       "start": 507.33,
-      "end": 514.07,
-      "en": "\"I will feel that my choices are not respected.\" Expressing feelings is not attacking the other person,",
-      "zh": "我会觉得自己的选择没有被尊重。”，表达，感受不是攻击对方，",
-      "pinyin": "Wǒ huì jué de zì jǐ de xuǎn zé méi yǒu bèi zūn zhòng。”， biǎo dá， gǎn shòu bú shì gōng jī duì fāng，",
-      "vi": "tôi sẽ cảm thấy lựa chọn của mình không được tôn trọng.\" Bày tỏ cảm xúc không phải là tấn công đối phương,"
+      "end": 511.03,
+      "en": "I'll feel that my choice is not respected.”",
+      "zh": "我会觉得自己的选择没有被尊重。”",
+      "pinyin": "Wǒ huì jué de zì jǐ de xuǎn zé méi yǒu bèi zūn zhòng。”",
+      "vi": "tôi cảm thấy như những lựa chọn của mình không được tôn trọng.\""
+    },
+    {
+      "start": 511.27,
+      "end": 511.64,
+      "en": "Expression",
+      "zh": "表达",
+      "pinyin": "Biǎo dá",
+      "vi": "Thể hiện"
+    },
+    {
+      "start": 511.73,
+      "end": 514.06,
+      "en": "It's not like they attacked each other.",
+      "zh": "感受不是攻击对方，",
+      "pinyin": "Gǎn shòu bú shì gōng jī duì fāng，",
+      "vi": "cảm xúc của bạn không phải là tấn công người khác,"
     },
     {
       "start": 514.1,
       "end": 517.77,
-      "en": "but letting the other person know where your boundaries are.",
+      "en": "It's about letting each other know where your border is.",
       "zh": "而是让对方知道你的边界在哪里。",
       "pinyin": "Ér shì ràng duì fāng zhī dào nǐ de biān jiè zài nǎ lǐ。",
-      "vi": "mà là để đối phương biết ranh giới của bạn ở đâu."
+      "vi": "mà là cho họ biết giới hạn của bạn ở đâu."
     },
     {
       "start": 517.87,
-      "end": 521.03,
-      "en": "\"Boundary\" is a very important word today.",
+      "end": 521.04,
+      "en": "The term “border” is a very important word today.",
       "zh": "“边界”是今天非常重要的一个词。",
       "pinyin": "“ biān jiè ” shì jīn tiān fēi cháng zhòng yào de yí gè cí。",
-      "vi": "\"Ranh giới\" là một từ rất quan trọng trong ngày hôm nay."
+      "vi": "\"Giới hạn\" là một từ quan trọng ngày nay. Chúng đề cập đến"
     },
     {
       "start": 521.1,
-      "end": 527.03,
-      "en": "It refers to the range of what we can and cannot accept in interpersonal relationships.",
-      "zh": "它指的是我们在人际关系中，可以接受和不能接受的范围。",
-      "pinyin": "Tā zhǐ de shì wǒ men zài rén jì guān xì zhōng， kě yǐ jiē shòu hé bù néng jiē shòu de fàn wéi。",
-      "vi": "Nó chỉ phạm vi những gì chúng ta có thể chấp nhận và không thể chấp nhận trong các mối quan hệ."
+      "end": 523.97,
+      "en": "It means we're in human relationships.",
+      "zh": "它指的是我们在人际关系中",
+      "pinyin": "Tā zhǐ de shì wǒ men zài rén jì guān xì zhōng",
+      "vi": "phạm vi chấp nhận được và không chấp nhận được"
+    },
+    {
+      "start": 523.97,
+      "end": 527.04,
+      "en": "Acceptable and unacceptable scope.",
+      "zh": "可以接受和不能接受的范围。",
+      "pinyin": "Kě yǐ jiē shòu hé bù néng jiē shòu de fàn wéi。",
+      "vi": "trong các mối quan hệ của chúng ta ."
     },
     {
       "start": 527.2,
+      "end": 530.27,
+      "en": "The clear border is not a cold wall.",
+      "zh": "清楚的边界不是一堵冰冷的墙，",
+      "pinyin": "Qīng chǔ de biān jiè bú shì yì dǔ bīng lěng de qiáng，",
+      "vi": "Giới hạn rõ ràng không phải là một bức tường lạnh lẽo,"
+    },
+    {
+      "start": 530.37,
       "end": 532.8,
-      "en": "Clear boundaries are not a cold wall, but a house with a door.",
-      "zh": "清楚的边界不是一堵冰冷的墙，而是一扇有门的房子。",
-      "pinyin": "Qīng chǔ de biān jiè bú shì yì dǔ bīng lěng de qiáng， ér shì yí shàn yǒu mén de fáng zi。",
-      "vi": "Ranh giới rõ ràng không phải là một bức tường lạnh lẽo, mà là một ngôi nhà có cửa."
+      "en": "It's a house with doors.",
+      "zh": "而是一扇有门的房子。",
+      "pinyin": "Ér shì yí shàn yǒu mén de fáng zi。",
+      "vi": "mà là một ngôi nhà có cửa."
     },
     {
       "start": 532.87,
+      "end": 534.4,
+      "en": "We welcome others to come closer.",
+      "zh": "我们欢迎别人靠近，",
+      "pinyin": "Wǒ men huān yíng bié rén kào jìn，",
+      "vi": "Chúng ta chào đón người khác đến gần,"
+    },
+    {
+      "start": 534.9,
       "end": 538.1,
-      "en": "We welcome others to come close, but we also need them to respect the owner of the house.",
-      "zh": "我们欢迎别人靠近，但也需要对方尊重房子的主人。",
-      "pinyin": "Wǒ men huān yíng bié rén kào jìn， dàn yě xū yào duì fāng zūn zhòng fáng zi de zhǔ rén。",
-      "vi": "Chúng ta chào đón người khác đến gần, nhưng cũng cần họ tôn trọng chủ nhân của ngôi nhà."
+      "en": "But it also requires respect for the owner of the house.",
+      "zh": "但也需要对方尊重房子的主人。",
+      "pinyin": "Dàn yě xū yào duì fāng zūn zhòng fáng zi de zhǔ rén。",
+      "vi": "nhưng chúng ta cũng cần họ tôn trọng người bên trong."
     },
     {
       "start": 538.13,
+      "end": 539.2,
+      "en": "In the end,",
+      "zh": "最后，",
+      "pinyin": "Zuì hòu，",
+      "vi": "Cuối cùng,"
+    },
+    {
+      "start": 539.27,
       "end": 542.9,
-      "en": "Finally, don't leave every change up to love.",
-      "zh": "最后，不要把所有改变都交给爱情决定。",
-      "pinyin": "Zuì hòu， bú yào bǎ suǒ yǒu gǎi biàn dōu jiāo gěi ài qíng jué dìng。",
-      "vi": "Cuối cùng, đừng giao phó mọi thay đổi cho tình yêu quyết định."
+      "en": "Don't leave everything to love.",
+      "zh": "不要把所有改变都交给爱情决定。",
+      "pinyin": "Bú yào bǎ suǒ yǒu gǎi biàn dōu jiāo gěi ài qíng jué dìng。",
+      "vi": "đừng để mọi thay đổi chỉ vì tình yêu."
     },
     {
       "start": 542.93,
+      "end": 544.5,
+      "en": "If you want to exercise,",
+      "zh": "如果你想运动、",
+      "pinyin": "Rú guǒ nǐ xiǎng yùn dòng、",
+      "vi": "Nếu bạn muốn tập thể dục,"
+    },
+    {
+      "start": 544.5,
+      "end": 547.83,
+      "en": "I don't know. I don’t know if it's a good idea to read or learn to control emotions.",
+      "zh": "读书或者学习控制情绪，",
+      "pinyin": "Dú shū huò zhě xué xí kòng zhì qíng xù，",
+      "vi": "đọc sách, hoặc học cách kiểm soát cảm xúc của mình,"
+    },
+    {
+      "start": 547.9,
       "end": 551,
-      "en": "If you want to exercise, read, or learn to control your emotions, don't do it only because the other person likes that version of you.",
-      "zh": "如果你想运动、读书或者学习控制情绪，不要只因为对方喜欢这样的你。",
-      "pinyin": "Rú guǒ nǐ xiǎng yùn dòng、 dú shū huò zhě xué xí kòng zhì qíng xù， bú yào zhī yīn wèi duì fāng xǐ huan zhè yàng de nǐ。",
-      "vi": "Nếu bạn muốn tập thể dục, đọc sách hoặc học cách kiểm soát cảm xúc, đừng chỉ vì đối phương thích bạn như vậy."
+      "en": "Don't just because each other like you.",
+      "zh": "不要只因为对方喜欢这样的你。",
+      "pinyin": "Bú yào zhī yīn wèi duì fāng xǐ huan zhè yàng de nǐ。",
+      "vi": "đừng làm điều đó chỉ vì người kia thích bạn như vậy."
     },
     {
       "start": 551.27,
@@ -767,68 +1635,140 @@
       "en": "Try to find your own reason.",
       "zh": "试着找到属于自己的理由。",
       "pinyin": "Shì zhe zhǎo dào shǔ yú zì jǐ de lǐ yóu。",
-      "vi": "Hãy thử tìm lý do thuộc về chính mình."
+      "vi": "Hãy cố gắng tìm ra lý do của riêng bạn."
     },
     {
       "start": 554,
+      "end": 557.5,
+      "en": "Even if the relationship changes one day,",
+      "zh": "即使有一天这段关系发生变化，",
+      "pinyin": "Jí shǐ yǒu yì tiān zhè duàn guān xì fā shēng biàn huà，",
+      "vi": "Ngay cả khi mối quan hệ thay đổi một ngày nào đó,"
+    },
+    {
+      "start": 557.5,
+      "end": 558.8,
+      "en": "It's a habit.",
+      "zh": "这些好习惯",
+      "pinyin": "Zhè xiē hǎo xí guàn",
+      "vi": "những thói quen tốt này"
+    },
+    {
+      "start": 558.8,
       "end": 561.63,
-      "en": "Even if one day this relationship changes, these good habits can still remain in your life.",
-      "zh": "即使有一天这段关系发生变化，这些好习惯，也依然可以留在你的生活里。",
-      "pinyin": "Jí shǐ yǒu yì tiān zhè duàn guān xì fā shēng biàn huà， zhè xiē hǎo xí guàn， yě yī rán kě yǐ liú zài nǐ de shēng huó lǐ。",
-      "vi": "Kể cả một ngày nào đó mối quan hệ này thay đổi, những thói quen tốt này vẫn có thể ở lại trong cuộc sống của bạn."
+      "en": "And you can still stay in your life.",
+      "zh": "也依然可以留在你的生活里。",
+      "pinyin": "Yě yī rán kě yǐ liú zài nǐ de shēng huó lǐ。",
+      "vi": "vẫn có thể tồn tại trong cuộc sống của bạn."
     },
     {
       "start": 561.9,
       "end": 565.57,
-      "en": "Later, Xiaoyu had a serious talk with Chen An.",
+      "en": "Later, Ame had a serious conversation with Chen An.",
       "zh": "后来，小雨认真地和陈安谈了一次。",
       "pinyin": "Hòu lái， xiǎo yǔ rèn zhēn dì hé chén ān tán le yí cì。",
-      "vi": "Sau đó, Tiểu Vũ đã nghiêm túc nói chuyện với Trần An một lần."
+      "vi": "Sau đó, Xiaoyu đã có một cuộc nói chuyện nghiêm túc với Chen An."
     },
     {
       "start": 565.57,
+      "end": 567.04,
+      "en": "She told Chen An,",
+      "zh": "她告诉陈安，",
+      "pinyin": "Tā gào sù chén ān，",
+      "vi": "Cô ấy nói với anh rằng"
+    },
+    {
+      "start": 567.07,
+      "end": 570.53,
+      "en": "I'm not going to be able to learn how to run a relationship.",
+      "zh": "自己愿意学习更好地经营感情，",
+      "pinyin": "Zì jǐ yuàn yì xué xí gèng hǎo dì jīng yíng gǎn qíng，",
+      "vi": "cô ấy sẵn sàng học cách quản lý các mối quan hệ tốt hơn,"
+    },
+    {
+      "start": 570.53,
       "end": 572.5,
-      "en": "She told Chen An that she was willing to learn to manage their relationship better, but she would not give up her friends,",
-      "zh": "她告诉陈安，自己愿意学习更好地经营感情，但不会放弃朋友，",
-      "pinyin": "Tā gào sù chén ān， zì jǐ yuàn yì xué xí gèng hǎo dì jīng yíng gǎn qíng， dàn bú huì fàng qì péng yǒu，",
-      "vi": "Cô nói với Trần An rằng mình sẵn lòng học cách vun đắp tình cảm tốt hơn, nhưng sẽ không từ bỏ bạn bè,"
+      "en": "But they don't give up on friends.",
+      "zh": "但不会放弃朋友，",
+      "pinyin": "Dàn bú huì fàng qì péng yǒu，",
+      "vi": "nhưng cô ấy sẽ không bỏ rơi bạn bè"
     },
     {
       "start": 572.5,
       "end": 575.6,
-      "en": "nor would she let the other person decide her job for her.",
+      "en": "And they won't let each other decide to work for themselves.",
       "zh": "也不会让对方替自己决定工作。",
       "pinyin": "Yě bú huì ràng duì fāng tì zì jǐ jué dìng gōng zuò。",
-      "vi": "cũng sẽ không để đối phương quyết định công việc thay mình."
+      "vi": "hoặc để anh quyết định con đường sự nghiệp của mình."
     },
     {
       "start": 575.9,
+      "end": 578.3,
+      "en": "Chen An was a little upset at first.",
+      "zh": "陈安一开始有些不高兴，",
+      "pinyin": "Chén ān yì kāi shǐ yǒu xiē bù gāo xìng，",
+      "vi": "Ban đầu Chen An không vui,"
+    },
+    {
+      "start": 578.4,
+      "end": 580.7,
+      "en": "But he also slowly realized that it was not possible to do so.",
+      "zh": "不过他也慢慢认识到，",
+      "pinyin": "Bú guò tā yě màn màn rèn shi dào，",
+      "vi": "nhưng dần dần anh nhận ra rằng"
+    },
+    {
+      "start": 580.77,
       "end": 584.37,
-      "en": "At first Chen An was a little unhappy, but he also gradually realized that his worry came from a lack of security. He",
-      "zh": "陈安一开始有些不高兴，不过他也慢慢认识到，自己的担心来自缺乏安全感。他",
-      "pinyin": "Chén ān yì kāi shǐ yǒu xiē bù gāo xīng， bú guò tā yě màn màn rèn shi dào， zì jǐ de dān xīn lái zì quē fá ān quán gǎn。 tā",
-      "vi": "Ban đầu Trần An có chút không vui, nhưng anh cũng dần nhận ra rằng nỗi lo của mình đến từ việc thiếu cảm giác an toàn. Anh"
+      "en": "His fears come from a lack of security.",
+      "zh": "自己的担心来自缺乏安全感。他",
+      "pinyin": "Zì jǐ de dān xīn lái zì quē fá ān quán gǎn。 tā",
+      "vi": "những lo lắng của mình bắt nguồn từ sự thiếu an toàn. Anh"
     },
     {
       "start": 584.47,
+      "end": 586.9,
+      "en": "In the past few years, many of them have been able to learn to express their concerns directly.",
+      "zh": "开始学习直接表达不安，",
+      "pinyin": "Kāi shǐ xué xí zhí jiē biǎo dá bù ān，",
+      "vi": "bắt đầu bày tỏ nỗi lo lắng của mình một cách trực tiếp,"
+    },
+    {
+      "start": 586.97,
       "end": 590.57,
-      "en": "Begin to learn to express insecurity directly, rather than gaining peace of mind by restricting Xiaoyu.",
-      "zh": "开始学习直接表达不安，而不是通过限制小雨来获得安心。",
-      "pinyin": "Kāi shǐ xué xí zhí jiē biǎo dá bù ān， ér bú shì tōng guò xiàn zhì xiǎo yǔ lái huò dé ān xīn。",
-      "vi": "Bắt đầu học cách trực tiếp bày tỏ sự bất an, thay vì thông qua việc hạn chế Tiểu Vũ để có được sự an tâm."
+      "en": "Instead of being reassured by limiting the rain.",
+      "zh": "而不是通过限制小雨来获得安心。",
+      "pinyin": "Ér bú shì tōng guò xiàn zhì xiǎo yǔ lái huò dé ān xīn。",
+      "vi": "thay vì cố gắng trấn an Xiaoyu bằng cách hạn chế cô ấy."
     },
     {
       "start": 590.67,
+      "end": 592.6,
+      "en": "They've all changed.",
+      "zh": "他们都发生了改变，",
+      "pinyin": "Tā men dōu fā shēng le gǎi biàn，",
+      "vi": "Cả hai đều thay đổi,"
+    },
+    {
+      "start": 592.6,
+      "end": 596.3,
+      "en": "But this time, it's not one man who keeps shrinking himself.",
+      "zh": "但这一次，不是一个人不断缩小自己，",
+      "pinyin": "Dàn zhè yí cì， bú shì yí gè rén bú duàn suō xiǎo zì jǐ，",
+      "vi": "nhưng lần này, không phải một người thu mình lại,"
+    },
+    {
+      "start": 596.3,
       "end": 597.27,
-      "en": "They both changed, but this time, it wasn't one person constantly shrinking themselves, but two people",
-      "zh": "他们都发生了改变，但这一次，不是一个人不断缩小自己，而是两个人",
-      "pinyin": "Tā men dōu fā shēng le gǎi biàn， dàn zhè yí cì， bú shì yí gè rén bú duàn suō xiǎo zì jǐ， ér shì liǎng gè rén",
-      "vi": "Cả hai đều đã thay đổi, nhưng lần này, không phải một người không ngừng thu nhỏ bản thân, mà là hai người"
+      "en": "It's two people.",
+      "zh": "而是两个人",
+      "pinyin": "Ér shì liǎng gè rén",
+      "vi": "mà cả hai"
     },
     {
       "start": 597.6,
       "end": 600.63,
-      "en": "learning together how to respect and trust.",
+      "en": "Learn together how to respect and trust.",
       "zh": "一起学习如何尊重和信任。",
       "pinyin": "Yì qǐ xué xí rú hé zūn zhòng hé xìn rèn。",
       "vi": "cùng nhau học cách tôn trọng và tin tưởng."
@@ -836,178 +1776,378 @@
     {
       "start": 600.8,
       "end": 604.1,
-      "en": "Perhaps this is the best form of love.",
+      "en": "That's probably the best thing about love.",
       "zh": "这或许就是爱情最好的样子。",
       "pinyin": "Zhè huò xǔ jiù shì ài qíng zuì hǎo de yàng zi。",
-      "vi": "Có lẽ đây chính là dáng vẻ đẹp nhất của tình yêu."
+      "vi": "Đây có lẽ là hình thức tình yêu tốt đẹp nhất."
     },
     {
       "start": 604.13,
+      "end": 607,
+      "en": "It won't turn you into another stranger.",
+      "zh": "它不会把你变成另一个陌生人，",
+      "pinyin": "Tā bú huì bǎ nǐ biàn chéng lìng yí gè mò shēng rén，",
+      "vi": "Nó không biến bạn thành người xa lạ,"
+    },
+    {
+      "start": 607,
       "end": 609.77,
-      "en": "It won't turn you into another stranger, but rather, while understanding others,",
-      "zh": "它不会把你变成另一个陌生人，而是让你在理解别人的同时，",
-      "pinyin": "Tā bú huì bǎ nǐ biàn chéng lìng yí gè mò shēng rén， ér shì ràng nǐ zài lǐ jiě bié rén de tóng shí，",
-      "vi": "Nó sẽ không biến bạn thành một người xa lạ khác, mà khiến bạn, trong lúc hiểu người khác,"
+      "en": "It's about understanding people while you understand them.",
+      "zh": "而是让你在理解别人的同时，",
+      "pinyin": "Ér shì ràng nǐ zài lǐ jiě bié rén de tóng shí，",
+      "vi": "mà cho phép bạn nhìn nhận bản thân rõ ràng hơn"
     },
     {
       "start": 609.77,
       "end": 611.87,
-      "en": "lets you see yourself more clearly.",
+      "en": "See yourself more clearly.",
       "zh": "更清楚地看见自己。",
       "pinyin": "Gèng qīng chǔ dì kàn jiàn zì jǐ。",
-      "vi": "nhìn thấy chính mình rõ ràng hơn."
+      "vi": "đồng thời thấu hiểu người khác ."
     },
     {
       "start": 612.07,
+      "end": 614.84,
+      "en": "Today, we have discussed one issue:",
+      "zh": "今天，我们讨论了一个问题：",
+      "pinyin": "Jīn tiān， wǒ men tǎo lùn le yí gè wèn tí：",
+      "vi": "Hôm nay, chúng ta đã thảo luận về một câu hỏi:"
+    },
+    {
+      "start": 614.93,
       "end": 618.93,
-      "en": "Today, we discussed a question: does loving someone change you? The answer is,",
-      "zh": "今天，我们讨论了一个问题：爱一个人，会让你改变吗？答案是，",
-      "pinyin": "Jīn tiān， wǒ men tǎo lùn le yí gè wèn tí： ài yí gè rén， huì ràng nǐ gǎi biàn ma？ dá àn shì，",
-      "vi": "Hôm nay, chúng ta đã thảo luận một vấn đề: yêu một người, liệu có khiến bạn thay đổi không? Câu trả lời là,"
+      "en": "Love someone. Will it change you? The answer is,",
+      "zh": "爱一个人，会让你改变吗？答案是，",
+      "pinyin": "Ài yí gè rén， huì ràng nǐ gǎi biàn ma？ dá àn shì，",
+      "vi": "Yêu một người có làm thay đổi bạn không? Câu trả lời là"
     },
     {
       "start": 619.33,
+      "end": 622.56,
+      "en": "Yes. After a real relationship,",
+      "zh": "会。真正走进一段关系以后，",
+      "pinyin": "Huì。 zhēn zhèng zǒu jìn yí duàn guān xì yǐ hòu，",
+      "vi": "có. Khi bạn thực sự bước vào một mối quan hệ,"
+    },
+    {
+      "start": 622.57,
+      "end": 624.37,
+      "en": "We'll get used to it.",
+      "zh": "我们会调整习惯，",
+      "pinyin": "Wǒ men huì tiáo zhěng xí guàn，",
+      "vi": "bạn sẽ điều chỉnh thói quen,"
+    },
+    {
+      "start": 624.37,
+      "end": 626.13,
+      "en": "Learning to communicate,",
+      "zh": "学习沟通，",
+      "pinyin": "Xué xí gōu tōng，",
+      "vi": "học cách giao tiếp"
+    },
+    {
+      "start": 626.13,
       "end": 628.23,
-      "en": "yes. After truly entering a relationship, we adjust our habits, learn to communicate, and also come to know ourselves anew.",
-      "zh": "会。真正走进一段关系以后，我们会调整习惯，学习沟通，也会重新认识自己。",
-      "pinyin": "Huì。 zhēn zhèng zǒu jìn yí duàn guān xì yǐ hòu， wǒ men huì tiáo zhěng xí guàn， xué xí gōu tōng， yě huì chóng xīn rèn shi zì jǐ。",
-      "vi": "có. Sau khi thực sự bước vào một mối quan hệ, chúng ta sẽ điều chỉnh thói quen, học cách giao tiếp, và cũng sẽ nhận thức lại chính mình."
+      "en": "I'm going to get a new look at myself.",
+      "zh": "也会重新认识自己。",
+      "pinyin": "Yě huì chóng xīn rèn shi zì jǐ。",
+      "vi": "và khám phá lại chính mình."
     },
     {
       "start": 628.6,
       "end": 632.4,
-      "en": "But change does not mean giving up yourself.",
+      "en": "But change does not amount to giving up on itself.",
       "zh": "但是，改变并不等于放弃自己。",
       "pinyin": "Dàn shì， gǎi biàn bìng bù děng yú fàng qì zì jǐ。",
-      "vi": "Nhưng, thay đổi không có nghĩa là từ bỏ chính mình."
+      "vi": "Tuy nhiên, thay đổi không có nghĩa là từ bỏ bản thân."
     },
     {
       "start": 632.5,
+      "end": 635,
+      "en": "Health change comes from understanding.",
+      "zh": "健康的改变来自理解、",
+      "pinyin": "Jiàn kāng de gǎi biàn lái zì lǐ jiě、",
+      "vi": "Sự thay đổi lành mạnh đến từ sự thấu hiểu,"
+    },
+    {
+      "start": 635,
       "end": 637.27,
-      "en": "Healthy change comes from understanding, respect, and active choice.",
-      "zh": "健康的改变来自理解、尊重和主动选择。",
-      "pinyin": "Jiàn kāng de gǎi biàn lái zì lǐ jiě、 zūn zhòng hé zhǔ dòng xuǎn zé。",
-      "vi": "Sự thay đổi lành mạnh đến từ sự hiểu biết, tôn trọng và lựa chọn chủ động."
+      "en": "Respect and active choice.",
+      "zh": "尊重和主动选择。",
+      "pinyin": "Zūn zhòng hé zhǔ dòng xuǎn zé。",
+      "vi": "tôn trọng và lựa chọn chủ động."
     },
     {
       "start": 637.5,
+      "end": 639.57,
+      "en": "It'll make you more mature.",
+      "zh": "它会让你变得更成熟，",
+      "pinyin": "Tā huì ràng nǐ biàn de gèng chéng shú，",
+      "vi": "Nó giúp bạn trưởng thành hơn"
+    },
+    {
+      "start": 639.57,
       "end": 642.57,
-      "en": "It will make you more mature, and it will also make the relationship between the two of you more equal.",
-      "zh": "它会让你变得更成熟，也会让双方的关系更加平等。",
-      "pinyin": "Tā huì ràng nǐ biàn de gèng chéng shú， yě huì ràng shuāng fāng de guān xì gèng jiā píng děng。",
-      "vi": "Nó sẽ khiến bạn trở nên trưởng thành hơn, và cũng làm cho mối quan hệ của cả hai bên trở nên bình đẳng hơn."
+      "en": "It would also make relations between the two more equal.",
+      "zh": "也会让双方的关系更加平等。",
+      "pinyin": "Yě huì ràng shuāng fāng de guān xì gèng jiā píng děng。",
+      "vi": "và nuôi dưỡng một mối quan hệ bình đẳng hơn."
     },
     {
       "start": 642.87,
+      "end": 646.77,
+      "en": "Ill health change often comes from fear and stress.",
+      "zh": "不健康的改变往往来自恐惧和压力，",
+      "pinyin": "Bú jiàn kāng de gǎi biàn wǎng wǎng lái zì kǒng jù hé yā lì，",
+      "vi": "Sự thay đổi không lành mạnh thường bắt nguồn từ nỗi sợ hãi và áp lực;"
+    },
+    {
+      "start": 646.97,
       "end": 649.6,
-      "en": "Unhealthy changes usually come from fear and pressure; they will make you increasingly afraid to express yourself,",
-      "zh": "不健康的改变往往来自恐惧和压力，它会让你越来越不敢表达，",
-      "pinyin": "Bú jiàn kāng de gǎi biàn wǎng wǎng lái zì kǒng jù hé yā lì， tā huì ràng nǐ yuè lái yuè bù gǎn biǎo dá，",
-      "vi": "Những thay đổi không lành mạnh thường đến từ nỗi sợ hãi và áp lực, nó sẽ khiến bạn ngày càng không dám bày tỏ,"
+      "en": "It'll make you less and less afraid to express.",
+      "zh": "它会让你越来越不敢表达，",
+      "pinyin": "Tā huì ràng nǐ yuè lái yuè bù gǎn biǎo dá，",
+      "vi": "nó khiến bạn ngày càng ngần ngại thể hiện bản thân"
     },
     {
       "start": 649.6,
       "end": 652.8,
-      "en": "and you may even gradually forget what you originally were like.",
+      "en": "Even slowly forget what it looks like.",
       "zh": "甚至慢慢忘记自己原来的样子。",
       "pinyin": "Shèn zhì màn màn wàng jì zì jǐ yuán lái de yàng zi。",
-      "vi": "thậm chí dần dần quên đi hình ảnh ban đầu của chính mình."
+      "vi": "và thậm chí khiến bạn dần quên mất mình là ai trước đây."
     },
     {
       "start": 653.1,
       "end": 655.07,
-      "en": "Let's review three words again.",
+      "en": "Let's review three more words.",
       "zh": "我们再复习三个词。",
       "pinyin": "Wǒ men zài fù xí sān gè cí。",
-      "vi": "Chúng ta hãy ôn lại ba từ."
+      "vi": "Hãy cùng xem lại ba từ."
     },
     {
       "start": 655.1,
+      "end": 657.3,
+      "en": "The first word is \"growing.\"",
+      "zh": "第一个词是“成长”，",
+      "pinyin": "Dì yī gè cí shì “ chéng zhǎng ”，",
+      "vi": "Từ đầu tiên là \"trưởng thành\","
+    },
+    {
+      "start": 657.47,
+      "end": 660.73,
+      "en": "It means a person who goes through things,",
+      "zh": "意思是一个人在经历事情以后，",
+      "pinyin": "Yì sī shì yí gè rén zài jīng lì shì qíng yǐ hòu，",
+      "vi": "nghĩa là trở nên trưởng thành hơn sau khi trải nghiệm mọi thứ"
+    },
+    {
+      "start": 660.73,
       "end": 662.4,
-      "en": "The first word is \"growth,\" which means that after going through something, a person becomes more mature.",
-      "zh": "第一个词是“成长”，意思是一个人在经历事情以后，变得更加成熟。",
-      "pinyin": "Dì yī gè cí shì “ chéng zhǎng ”， yì sī shì yí gè rén zài jīng lì shì qíng yǐ hòu， biàn de gèng jiā chéng shú。",
-      "vi": "Từ đầu tiên là \"trưởng thành\", nghĩa là sau khi trải qua một việc gì đó, một người trở nên trưởng thành hơn."
+      "en": "More mature.",
+      "zh": "变得更加成熟。",
+      "pinyin": "Biàn de gèng jiā chéng shú。",
+      "vi": "Giờ thì trưởng thành hơn rồi."
     },
     {
       "start": 662.47,
+      "end": 664.57,
+      "en": "The second word is \"boundary.\"",
+      "zh": "第二个词是“边界”，",
+      "pinyin": "Dì èr gè cí shì “ biān jiè ”，",
+      "vi": "Từ thứ hai là \"giới hạn\","
+    },
+    {
+      "start": 664.57,
+      "end": 667.17,
+      "en": "It means that people get along with people.",
+      "zh": "意思是人与人相处时，",
+      "pinyin": "Yì sī shì rén yǔ rén xiāng chǔ shí，",
+      "vi": "nghĩa là"
+    },
+    {
+      "start": 667.17,
       "end": 670.17,
-      "en": "The second word is \"boundary,\" which means the range of what can and cannot be accepted when people interact with each other.",
-      "zh": "第二个词是“边界”，意思是人与人相处时，可以接受和不能接受的范围。",
-      "pinyin": "Dì èr gè cí shì “ biān jiè ”， yì sī shì rén yǔ rén xiāng chǔ shí， kě yǐ jiē shòu hé bù néng jiē shòu de fàn wéi。",
-      "vi": "Từ thứ hai là \"ranh giới\", nghĩa là phạm vi có thể chấp nhận và không thể chấp nhận khi người ta giao tiếp với nhau."
+      "en": "Acceptable and unacceptable scope.",
+      "zh": "可以接受和不能接受的范围。",
+      "pinyin": "Kě yǐ jiē shòu hé bù néng jiē shòu de fàn wéi。",
+      "vi": "những giới hạn được chấp nhận và không được chấp nhận trong các mối quan hệ giữa người với người."
     },
     {
       "start": 670.87,
+      "end": 673.2,
+      "en": "The third word is \"equality\".",
+      "zh": "第三个词是“平等”，",
+      "pinyin": "Dì sān gè cí shì “ píng děng ”，",
+      "vi": "Từ thứ ba là \"bình đẳng\","
+    },
+    {
+      "start": 673.27,
+      "end": 676.87,
+      "en": "It means that two people have the same respect.",
+      "zh": "意思是两个人拥有同样被尊重",
+      "pinyin": "Yì sī shì liǎng gè rén yōng yǒu tóng yàng bèi zūn zhòng",
+      "vi": "nghĩa là hai người có"
+    },
+    {
+      "start": 676.87,
       "end": 678.9,
-      "en": "The third word is \"equality,\" which means that two people have equal rights to be respected and to express their opinions.",
-      "zh": "第三个词是“平等”，意思是两个人拥有同样被尊重，和表达意见的权利。",
-      "pinyin": "Dì sān gè cí shì “ píng děng ”， yì sī shì liǎng gè rén yōng yǒu tóng yàng bèi zūn zhòng， hé biǎo dá yì jiàn de quán lì。",
-      "vi": "Từ thứ ba là \"bình đẳng\", nghĩa là hai người có quyền được tôn trọng như nhau và được bày tỏ ý kiến như nhau."
+      "en": "And the right to be heard.",
+      "zh": "和表达意见的权利。",
+      "pinyin": "Hé biǎo dá yì jiàn de quán lì。",
+      "vi": "quyền bình đẳng được tôn trọng và được bày tỏ ý kiến ​​của mình."
     },
     {
       "start": 679,
+      "end": 681.9,
+      "en": "Finally, I would like you to ask yourself:",
+      "zh": "最后，我想请你问问自己：",
+      "pinyin": "Zuì hòu， wǒ xiǎng qǐng nǐ wèn wèn zì jǐ：",
+      "vi": "Cuối cùng, tôi muốn các bạn tự hỏi bản thân:"
+    },
+    {
+      "start": 681.97,
+      "end": 683.9,
+      "en": "After falling in love with someone,",
+      "zh": "爱上一个人以后，",
+      "pinyin": "Ài shàng yí gè rén yǐ hòu，",
+      "vi": "Sau khi yêu một người,"
+    },
+    {
+      "start": 683.9,
       "end": 686.4,
-      "en": "Finally, I'd like you to ask yourself: after falling in love with someone, do you like yourself more?",
-      "zh": "最后，我想请你问问自己：爱上一个人以后，你变得更喜欢自己了吗？",
-      "pinyin": "Zuì hòu， wǒ xiǎng qǐng nǐ wèn wèn zì jǐ： ài shàng yí gè rén yǐ hòu， nǐ biàn de gèng xǐ huan zì jǐ le ma？",
-      "vi": "Cuối cùng, tôi muốn bạn hỏi chính mình: sau khi yêu một người, bạn có thích bản thân mình hơn không?"
+      "en": "Have you become more like yourself?",
+      "zh": "你变得更喜欢自己了吗？",
+      "pinyin": "Nǐ biàn de gèng xǐ huan zì jǐ le ma？",
+      "vi": "liệu bạn có yêu quý bản thân mình hơn không?"
     },
     {
       "start": 686.9,
+      "end": 688.97,
+      "en": "If the answer is yes,",
+      "zh": "如果答案是肯定的，",
+      "pinyin": "Rú guǒ dá àn shì kěn dìng de，",
+      "vi": "Nếu câu trả lời là có,"
+    },
+    {
+      "start": 688.97,
       "end": 692.57,
-      "en": "If the answer is yes, please cherish this relationship of growing together.",
-      "zh": "如果答案是肯定的，请珍惜这份共同成长的感情。",
-      "pinyin": "Rú guǒ dá àn shì kěn dìng de， qǐng zhēn xī zhè fèn gòng tóng chéng zhǎng de gǎn qíng。",
-      "vi": "Nếu câu trả lời là có, hãy trân trọng tình cảm cùng nhau trưởng thành này."
+      "en": "Please cherish this feeling of shared growth.",
+      "zh": "请珍惜这份共同成长的感情。",
+      "pinyin": "Qǐng zhēn xī zhè fèn gòng tóng chéng zhǎng de gǎn qíng。",
+      "vi": "hãy trân trọng mối quan hệ cùng phát triển này."
     },
     {
       "start": 692.93,
+      "end": 695.06,
+      "en": "If the answer is no,",
+      "zh": "如果答案是否定的，",
+      "pinyin": "Rú guǒ dá àn shì fǒu dìng de，",
+      "vi": "Nếu câu trả lời là không,"
+    },
+    {
+      "start": 695.07,
       "end": 697.27,
-      "en": "If the answer is no, don't rush to blame yourself either.",
-      "zh": "如果答案是否定的，也不要急着责怪自己。",
-      "pinyin": "Rú guǒ dá àn shì fǒu dìng de， yě bú yào jí zhe zé guài zì jǐ。",
-      "vi": "Nếu câu trả lời là không, cũng đừng vội trách bản thân."
+      "en": "And don't rush to blame yourself.",
+      "zh": "也不要急着责怪自己。",
+      "pinyin": "Yě bú yào jí zhe zé guài zì jǐ。",
+      "vi": "đừng vội tự trách mình."
     },
     {
       "start": 697.9,
+      "end": 701.47,
+      "en": "Stop, listen to the real voice.",
+      "zh": "停下来，听一听内心真实的声音，",
+      "pinyin": "Tíng xià lái， tīng yi tīng nèi xīn zhēn shí de shēng yīn，",
+      "vi": "Hãy dừng lại, lắng nghe tiếng nói nội tâm;"
+    },
+    {
+      "start": 701.6,
+      "end": 703.7,
+      "en": "Maybe it's a change of direction.",
+      "zh": "也许改变方向，",
+      "pinyin": "Yě xǔ gǎi biàn fāng xiàng，",
+      "vi": "có lẽ thay đổi hướng đi"
+    },
+    {
+      "start": 703.73,
       "end": 706.83,
-      "en": "Stop, listen to the true voice inside you; perhaps changing direction is the gentlest choice you can make for yourself.",
-      "zh": "停下来，听一听内心真实的声音，也许改变方向，才是对自己最温柔的选择。",
-      "pinyin": "Tíng xià lái， tīng yi tīng nèi xīn zhēn shí de shēng yīn， yě xǔ gǎi biàn fāng xiàng， cái shì duì zì jǐ zuì wēn róu de xuǎn zé。",
-      "vi": "Dừng lại, lắng nghe tiếng nói thật sự trong lòng, có lẽ thay đổi hướng đi mới là lựa chọn dịu dàng nhất dành cho chính mình."
+      "en": "It's the softest choice for yourself.",
+      "zh": "才是对自己最温柔的选择。",
+      "pinyin": "Cái shì duì zì jǐ zuì wēn róu de xuǎn zé。",
+      "vi": "là lựa chọn nhẹ nhàng nhất dành cho chính bạn."
     },
     {
       "start": 706.93,
+      "end": 709.36,
+      "en": "This is Mandarin Daily Podcast.",
+      "zh": "这里是“普通话每日播客”，",
+      "pinyin": "Zhè lǐ shì “ pǔ tōng huà měi rì bō kè ”，",
+      "vi": "Đây là \"Podcast tiếng Hoa hàng ngày\","
+    },
+    {
+      "start": 709.37,
       "end": 710.47,
-      "en": "This is the \"Daily Mandarin Podcast,\" and I'm Zihan.",
-      "zh": "这里是“普通话每日播客”，我是子涵。",
-      "pinyin": "Zhè lǐ shì “ pǔ tōng huà měi rì bō kè ”， wǒ shì zǐ hán。",
-      "vi": "Đây là \"Podcast tiếng Phổ thông mỗi ngày\", tôi là Tử Hàm."
+      "en": "I'm a child.",
+      "zh": "我是子涵。",
+      "pinyin": "Wǒ shì zǐ hán。",
+      "vi": "tôi là Zihan."
     },
     {
       "start": 710.67,
+      "end": 713.6,
+      "en": "If today's topic reminds you of something,",
+      "zh": "如果今天的话题让你想起了某段",
+      "pinyin": "Rú guǒ jīn tiān de huà tí ràng nǐ xiǎng qǐ le mǒu duàn",
+      "vi": "Nếu chủ đề hôm nay gợi nhớ đến bất kỳ"
+    },
+    {
+      "start": 713.6,
       "end": 716.37,
-      "en": "If today's topic reminded you of some experience, feel free to leave a comment and tell me about it.",
-      "zh": "如果今天的话题让你想起了某段，经历，欢迎留言告诉我。",
-      "pinyin": "Rú guǒ jīn tiān de huà tí ràng nǐ xiǎng qǐ le mǒu duàn， jīng lì， huān yíng liú yán gào sù wǒ。",
-      "vi": "Nếu chủ đề hôm nay khiến bạn nhớ đến một trải nghiệm nào đó, hãy để lại bình luận kể cho tôi nghe nhé."
+      "en": "Experience, welcome message to me.",
+      "zh": "经历，欢迎留言告诉我。",
+      "pinyin": "Jīng lì， huān yíng liú yán gào sù wǒ。",
+      "vi": "trải nghiệm cụ thể nào, hãy để lại bình luận và cho tôi biết nhé."
     },
     {
       "start": 716.53,
-      "end": 725.77,
-      "en": "Also don't forget to subscribe to the show; next time we'll once again use simple Mandarin to chat about those important little things in life.",
-      "zh": "也别忘了订阅节目，我们下次再一起用简单的普通话，聊一聊生活里那些重要的小事。",
-      "pinyin": "Yě bié wàng le dìng yuè jié mù， wǒ men xià cì zài yì qǐ yòng jiǎn dān de pǔ tōng huà， liáo yi liáo shēng huó lǐ nà xiē zhòng yào de xiǎo shì。",
-      "vi": "Cũng đừng quên đăng ký kênh nhé, lần sau chúng ta lại cùng nhau dùng tiếng Phổ thông đơn giản để nói về những điều nhỏ bé mà quan trọng trong cuộc sống."
+      "end": 718.7,
+      "en": "And don't forget to subscribe to the program.",
+      "zh": "也别忘了订阅节目，",
+      "pinyin": "Yě bié wàng le dìng yuè jié mù，",
+      "vi": "Cũng đừng quên đăng ký theo dõi chương trình."
+    },
+    {
+      "start": 718.77,
+      "end": 722.13,
+      "en": "We'll use simple Mandarin again next time.",
+      "zh": "我们下次再一起用简单的普通话，",
+      "pinyin": "Wǒ men xià cì zài yì qǐ yòng jiǎn dān de pǔ tōng huà，",
+      "vi": "Hẹn gặp lại lần sau. Chúng ta sẽ tiếp tục dùng tiếng Phổ thông đơn giản"
+    },
+    {
+      "start": 722.13,
+      "end": 725.76,
+      "en": "Talk about the important little things in life.",
+      "zh": "聊一聊生活里那些重要的小事。",
+      "pinyin": "Liáo yi liáo shēng huó lǐ nà xiē zhòng yào de xiǎo shì。",
+      "vi": "để trò chuyện về những điều nhỏ mà quan trọng trong cuộc sống."
     },
     {
       "start": 725.8,
+      "end": 727.37,
+      "en": "Thank you for your company.",
+      "zh": "感谢你的陪伴，",
+      "pinyin": "Gǎn xiè nǐ de péi bàn，",
+      "vi": "Cảm ơn các bạn đã theo dõi,"
+    },
+    {
+      "start": 727.37,
       "end": 728.67,
-      "en": "Thank you for keeping me company, and see you next time.",
-      "zh": "感谢你的陪伴，我们下次见。",
-      "pinyin": "Gǎn xiè nǐ de péi bàn， wǒ men xià cì jiàn。",
-      "vi": "Cảm ơn bạn đã đồng hành cùng tôi, hẹn gặp lại lần sau."
+      "en": "I'll see you next time.",
+      "zh": "我们下次见。",
+      "pinyin": "Wǒ men xià cì jiàn。",
+      "vi": "và hẹn gặp lại lần sau."
     }
   ]
 }
