@@ -4741,15 +4741,24 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     line-height:1.25 !important;
     margin:0 !important;
   }
-  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head button{
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head h3{
+    color:#a5b4fc !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head button:not(:active):not(:focus-visible){
     white-space:nowrap !important;
     flex:0 0 auto !important;
     min-height:36px !important;
     height:36px !important;
     padding:0 10px !important;
-    border-radius:10px !important;
+    border-radius:12px !important;
     font-size:12.5px !important;
     line-height:1 !important;
+    background:transparent !important;
+    border-color:transparent !important;
+    color:var(--rd-ink) !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head button:not(:active):not(:focus-visible){
+    color:var(--palette-dark-ink) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-row{
     display:flex !important;
@@ -4815,7 +4824,10 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     color:var(--legacy-hex-c9c0ff) !important;
   }
 
-  /* 4. Mobile Home: Hero card single-line goal action & cohesive surface rhythm */
+  /* 4. Mobile Home: Hero card single-line goal action & Light/Dark parity */
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 #mobileTodayHero{
+    background-color:#4338ca !important;
+  }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #mobileTodayHero .mobile-hero-top{
     display:flex !important;
     align-items:center !important;
@@ -4829,27 +4841,26 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     font-size:19px !important;
     line-height:1.25 !important;
   }
-  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #mobileTodayHero .mobile-hero-top > button{
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 #mobileTodayHero .mobile-hero-top > button:not(:disabled){
     flex:0 0 auto !important;
     max-width:none !important;
     min-height:40px !important;
     padding:0 12px !important;
-    border-radius:10px !important;
+    border-radius:12px !important;
     font-size:12.5px !important;
     font-weight:650 !important;
     white-space:nowrap !important;
     line-height:1.2 !important;
+    background:rgba(20,16,66,0.34) !important;
+    border:1px solid rgba(255,255,255,0.34) !important;
+    color:var(--palette-white) !important;
+    box-shadow:none !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 #mobileTodayHero .mobile-hero-cta:not(:disabled){
     background:var(--palette-white) !important;
     color:#2e2584 !important;
     border:0 !important;
     box-shadow:none !important;
-  }
-  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 #mobileTodayHero .mobile-hero-top > button:not(:disabled){
-    background:rgba(15,17,30,0.38) !important;
-    border:1px solid rgba(255,255,255,0.28) !important;
-    color:var(--palette-white) !important;
   }
 
   /* 5. Mobile Learn (Flashcards): fix focus-bar close collision & competing Next CTA */
@@ -4954,5 +4965,47 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   html body:not(#_rd).studio-enabled.mobile-ux #accountSettingsView > p.hint,
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #mobileTodayHero > p:not(.overview-lesson){
     display:none !important;
+  }
+
+  /* 11. Unified Mobile Corner-Radius System (12px interactive controls & disclosures; 16px cards) */
+  html body:not(#_rd).studio-enabled.mobile-ux button:not(#headerInfo):not(#aiQaSend):not(.qa-chat-attach):not(.mobile-passive-toggle):not(.music-transport-play):not(.music-pill):not(.podcast-speed-btn):not(.podcast-shelf-nav):not([data-search-scope]),
+  html body:not(#_rd).studio-enabled.mobile-ux :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select:not(.qa-thinking),textarea){
+    border-radius:12px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux details:is(#homePlanSettings,#planSetup,.ps-disclosure,.hub-group,.dictionary-row,.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel,.update-push-settings,.push-settings,.lesson-vocab,.clean-disclosure,.overview-search){
+    border-radius:12px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux details:is(#homePlanSettings,#planSetup,.ps-disclosure,.hub-group,.dictionary-row,.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel,.update-push-settings,.push-settings,.lesson-vocab,.clean-disclosure,.overview-search) > summary,
+  html body:not(#_rd).studio-enabled.mobile-ux :is(#homePlanSettings,#planSetup,.overview-search,.clean-disclosure) > summary:focus-visible{
+    border-radius:12px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux details:is(#homePlanSettings,#planSetup,.ps-disclosure,.hub-group,.dictionary-row,.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel,.update-push-settings,.push-settings,.lesson-vocab,.clean-disclosure,.overview-search)[open] > summary,
+  html body:not(#_rd).studio-enabled.mobile-ux :is(#homePlanSettings,#planSetup,.overview-search,.clean-disclosure)[open] > summary:focus-visible{
+    border-bottom-left-radius:0 !important;
+    border-bottom-right-radius:0 !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux :is(#homeDailyWord,#mobileTodayHero,.lesson-course-progress,.podcast-player-col,#flashcard,.account-version,.account-detail,.account-metric,.about-card,.hub-card){
+    border-radius:16px !important;
+  }
+
+  /* 12. Dark Mode Parity with Light Mode (remove dark-only extra panel boxes, sync accents & badges) */
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux :is(.panel-box,.activity-panel,.hub-panel):not(#aiQaPanel){
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .account-version .offline-bar{
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .account-badge{
+    background:rgba(34,197,94,0.16) !important;
+    border:1px solid rgba(34,197,94,0.34) !important;
+    color:#86efac !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #searchForm button[type="submit"],
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .studio-search-tabs button.active{
+    box-shadow:none !important;
   }
 }

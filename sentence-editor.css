@@ -1616,6 +1616,13 @@ html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"
 
   #sentenceEditor .sentence-filters button {
     min-height: 40px;
+    border-radius: 12px !important;
+  }
+
+  html[data-theme="dark"] body.studio-enabled #sentenceEditor .sentence-filters button[aria-pressed="true"] {
+    background: var(--button-active-bg) !important;
+    color: var(--button-active-text) !important;
+    border-color: var(--button-active-bg) !important;
   }
 
   #sentenceEditor .sentence-rail {
