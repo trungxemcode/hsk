@@ -432,3 +432,63 @@ test('profile-level interview blueprint is not reused as lesson content in anoth
   assert.equal(plan.sessions.some(session => session.steps.some(item => item.aiAuthored)), false);
   assert.equal(JSON.stringify(plan).includes('旅游'), false);
 });
+
+test('custom micro-interval & hybrid schedule splits 60m into 5-10m micro-sessions instead of 2 large 36m/24m blocks', () => {
+  const hsk3Lesson1 = {
+    id: 'standard-3-01',
+    number: 1,
+    title: '周末你有什么打算',
+    vi: 'Cuối tuần bạn có dự định gì?',
+    words: Array.from({ length: 17 }, (_, i) => ({
+      han: `词${i + 1}`,
+      pin: `cí${i + 1}`,
+      mean: `từ ${i + 1}`
+    })),
+    content: {
+      grammar: [{ title: '打算', pattern: 'S + 打算 + V', usage: 'Dự định làm gì' }],
+      dialogues: [{ lines: [{ speaker: 'A', cn: '周末你有什么打算？', pin: 'Zhōumò nǐ yǒu shénme dǎsuàn?', vi: 'Cuối tuần bạn có dự định gì?' }] }]
+    }
+  };
+
+  // 1. Exact user scenario from screenshot: saved as focused_block with hybrid morning 5-10m + evening 30m context
+  const hybridProfile = C.createProfile({
+    hsk: 3,
+    minutes: 60,
+    days: 5,
+    focusChoice: 'vocab_heavy',
+    style: 'focused_block',
+    goal: 'reading_comprehension',
+    aiGenerated: true,
+    learnerContextVi: 'Người học HSK 3, có 60 phút/ngày, 5 ngày/tuần; muốn 55-65% là từ vựng; thích học tranh thủ buổi sáng theo nhịp 5-10 phút và buổi tối tập trung khoảng 30 phút; mục tiêu bao quát tất cả kỹ năng.'
+  }, now);
+
+  assert.equal(hybridProfile.style, 'spare_time', 'focused_block is normalized to spare_time when learnerContextVi requests 5-10m intervals');
+  const hybridPlan = C.buildLessonPlan(hybridProfile, hsk3Lesson1, {}, { dayKey: '2026-11-20', now });
+  assert.equal(hybridPlan.totalMinutes, 60);
+  assert.equal(hybridPlan.sessions.reduce((sum, s) => sum + s.minutes, 0), 60);
+  assert.equal(hybridPlan.sessions.length, 5, '30m morning split into four 7-8m micro-sessions + one 30m evening session');
+  assert.deepEqual(hybridPlan.sessions.map(s => s.minutes), [8, 8, 7, 7, 30]);
+  assert.match(hybridPlan.styleLabel, /5–10p\/phiên/);
+  for (let i = 0; i < 4; i++) {
+    assert.ok(hybridPlan.sessions[i].minutes >= 5 && hybridPlan.sessions[i].minutes <= 10);
+    assert.match(hybridPlan.sessions[i].label, /^Phiên sáng \d+ · [78] phút$/);
+    assert.equal(hybridPlan.sessions[i].steps.length, 1);
+  }
+  // 17 vocab words must be chunked into 3 bite-sized groups (6, 6, 5) with non-overlapping wordOffset
+  assert.equal(hybridPlan.sessions[0].steps[0].wordLimit, 6);
+  assert.equal(hybridPlan.sessions[0].steps[0].wordOffset, 0);
+  assert.equal(hybridPlan.sessions[1].steps[0].wordLimit, 6);
+  assert.equal(hybridPlan.sessions[1].steps[0].wordOffset, 6);
+  assert.equal(hybridPlan.sessions[2].steps[0].wordLimit, 5);
+  assert.equal(hybridPlan.sessions[2].steps[0].wordOffset, 12);
+
+  // 2. Pure daytime 5-10m micro-interval request (60m/day -> eight 7-8m micro-sessions)
+  const pureMicroPlan = C.buildLessonPlan(hybridProfile, hsk3Lesson1, {}, {
+    dayKey: '2026-11-20',
+    now,
+    customPrompt: 'Ban ngày tôi muốn học theo kiểu ngắt quãng nhỏ kiểu 5-10p một lần'
+  });
+  assert.equal(pureMicroPlan.sessions.length, 8);
+  assert.equal(pureMicroPlan.sessions.reduce((sum, s) => sum + s.minutes, 0), 60);
+  assert.ok(pureMicroPlan.sessions.every(s => s.minutes >= 5 && s.minutes <= 10));
+});

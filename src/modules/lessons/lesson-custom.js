@@ -312,6 +312,7 @@
     const timer = setTimeout(() => controller.abort(), 95000);
     try {
       const token = await account.getIdToken();
+      const scheduleSpec = C.extractCustomSchedule?.(profile, { customPrompt }) || null;
       const reqBody = {
         hsk,
         mode: 'design',
@@ -320,11 +321,12 @@
           focusChoice: profile.focusChoice,
           minutes: profile.minutes,
           days: profile.days,
-          style: profile.style,
+          style: scheduleSpec?.isMicro ? 'spare_time' : profile.style,
           goal: profile.goal,
           weights: profile.weights,
           summaryVi: profile.summaryVi,
-          learnerContextVi: profile.learnerContextVi || ''
+          learnerContextVi: profile.learnerContextVi || '',
+          scheduleTargets: scheduleSpec?.sessions?.map(s => `${s.labelPrefix} (${s.minutes} phút)`) || undefined
         },
         lesson: compactLessonPayload(lesson, words)
       };
@@ -995,7 +997,8 @@
     // 3. AI-curated vocabulary coach OR standard vocab cards
     if (step.action === 'ai_vocab_coach' || step.action === 'vocab_cards') {
       const aiFocus = Array.isArray(step.focusWords) && step.focusWords.length ? step.focusWords : null;
-      const slice = aiFocus || words.slice(0, step.wordLimit || 8);
+      const offset = Number(step.wordOffset) > 0 ? Number(step.wordOffset) : 0;
+      const slice = aiFocus || words.slice(offset, offset + (step.wordLimit || 8));
       if (!slice.length) {
         stageEl.append(el('p', 'Chưa có từ vựng trong bài này.'), btn('Đánh dấu xong', onDone, 'lesson-custom-primary'));
         return;
@@ -1210,10 +1213,24 @@
     aiForm.onsubmit = async e => {
       e.preventDefault();
       if (lessonDesignBusy) return;
+      const customText = promptInput.value.trim();
+      if (customText && C.hasExplicitMicroText?.(customText)) {
+        const prevCtx = String(profile.learnerContextVi || '').trim();
+        const nextCtx = prevCtx.includes(customText)
+          ? prevCtx
+          : [prevCtx, `Yêu cầu nhịp học: ${customText}`].filter(Boolean).join(' · ').slice(0, 500);
+        profile = saveProfile({
+          ...profile,
+          style: 'spare_time',
+          learnerContextVi: nextCtx
+        });
+        activeSessionIndex = 0;
+        activeStepStage = null;
+      }
       lessonDesignBusy = true;
       lessonDesignStatus = '✨ AI đang đọc từ vựng, ngữ pháp của bài và thiết kế các bước + bài tập riêng cho bạn...';
       mountLessonRunner(rootEl, lesson, words, hooks);
-      const res = await requestAiLessonDesign(profile, lesson, words, promptInput.value.trim());
+      const res = await requestAiLessonDesign(profile, lesson, words, customText);
       lessonDesignBusy = false;
       if (res.ok) {
         lessonDesignStatus = `✨ AI (${formatProviderName(res.provider)}) đã thiết kế xong giáo án & bài tập riêng cho Bài ${lesson.number}!`;

@@ -158,9 +158,9 @@
     if (stepId === 'style') {
       if (STYLES.includes(raw)) return raw;
       if (/rảnh tay|ranh tay|đi đường|di duong|xe buýt|xe buyt|thụ động|thu dong|hands|nghe nhiều/i.test(low)) return 'hands_free';
-      if (/trước khi ngủ|truoc khi ngu|buổi tối|buoi toi|ôn nhẹ|on nhe|bedtime|ngủ/i.test(low)) return 'bedtime_review';
       if (/cuối tuần|cuoi tuan|dồn|don|weekend/i.test(low)) return 'weekend_sprint';
-      if (/giờ trống|gio trong|giờ nghỉ|gio nghi|tranh thủ|tranh thu|ngắn|ngan|chia nhỏ|chia nho|micro|rảnh/i.test(low)) return 'spare_time';
+      if (/\b\d{1,2}\s*[-–~đến]+\s*\d{1,2}\s*(?:p\b|phút|phut)|ngắt quãng|ngat quang|giờ trống|gio trong|giờ nghỉ|gio nghi|tranh thủ|tranh thu|ngắn|ngan|chia nhỏ|chia nho|nhiều lần|nhieu lan|mỗi lần|moi lan|lắt nhắt|micro|rảnh/i.test(low)) return 'spare_time';
+      if (/trước khi ngủ|truoc khi ngu|buổi tối|buoi toi|ôn nhẹ|on nhe|bedtime|ngủ/i.test(low)) return 'bedtime_review';
       return 'focused_block';
     }
     if (stepId === 'days') {
@@ -332,17 +332,31 @@
     return step;
   }
 
+  function hasExplicitMicroText(text) {
+    const low = String(text || '').toLowerCase();
+    if (!low) return false;
+    const rangeMatch = low.match(/\b(\d{1,2})\s*[-–~đến]+\s*(\d{1,2})\s*(?:p\b|phút|phut)/i);
+    if (rangeMatch && Number(rangeMatch[2]) <= 15) return true;
+    if (/(?:ngắt quãng|ngat quang|chia nhỏ|chia nho|nhiều lần|nhieu lan|lắt nhắt|mỗi lần|moi lan|mỗi phiên|moi phien|tranh thủ|tranh thu|nhịp|nhip)/i.test(low)) {
+      if (/ngắt quãng|ngat quang|chia nhỏ|chia nho|lắt nhắt|\b(?:4|5|6|7|8|9|10|12|15)\s*(?:p\b|phút|phut)/i.test(low)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function sanitizeAiSessions(rawSessions, totalMinutes = 20, allowedWords = null) {
     if (!Array.isArray(rawSessions) || !rawSessions.length) return [];
     const targetTotal = clamp(Math.round(Number(totalMinutes) || 20), 10, 180);
     const cleaned = [];
-    for (let i = 0; i < Math.min(rawSessions.length, 4); i++) {
+    for (let i = 0; i < Math.min(rawSessions.length, 10); i++) {
       const session = rawSessions[i];
       if (!session || typeof session !== 'object' || Array.isArray(session)) continue;
       const steps = Array.isArray(session.steps)
         ? session.steps.map((step, idx) => sanitizeAiStep(step, idx, allowedWords)).filter(Boolean).slice(0, 4)
         : [];
-      if (steps.length < 2) continue;
+      const minSteps = (rawSessions.length > 4 || Number(session.minutes) <= 12) ? 1 : 2;
+      if (steps.length < minSteps) continue;
       cleaned.push({
         label: String(session.label || `Phiên ${cleaned.length + 1}`).trim().slice(0, 100),
         goalVi: String(session.goalVi || '').trim().slice(0, 220),
@@ -354,11 +368,14 @@
 
     // Every step needs at least one minute. Keep the AI's 2–4-step session shape
     // while ensuring the total step count can fit inside the learner's daily budget.
-    cleaned.length = Math.min(cleaned.length, Math.floor(targetTotal / 2));
+    const minPerSession = cleaned.every(session => session.steps.length >= 2) ? 2 : 1;
+    cleaned.length = Math.min(cleaned.length, Math.max(1, Math.floor(targetTotal / minPerSession)));
     let totalSteps = cleaned.reduce((sum, session) => sum + session.steps.length, 0);
     while (totalSteps > targetTotal) {
       const candidate = cleaned.reduce((best, session) =>
-        session.steps.length > 2 && (!best || session.steps.length > best.steps.length) ? session : best, null);
+        session.steps.length > 2 && (!best || session.steps.length > best.steps.length) ? session : best, null)
+        || cleaned.reduce((best, session) =>
+          session.steps.length > 1 && (!best || session.steps.length > best.steps.length) ? session : best, null);
       if (!candidate) break;
       candidate.steps.pop();
       totalSteps--;
@@ -421,7 +438,11 @@
     const minutes = clamp(Math.round(Number(input.minutes) || 20), 10, 180);
     const days = clamp(Math.round(Number(input.days) || 6), 3, 7);
     const hsk = clamp(Math.round(Number(input.hsk) || 1), 1, 6);
-    const style = STYLES.includes(input.style) ? input.style : 'spare_time';
+    const rawStyle = STYLES.includes(input.style) ? input.style : 'spare_time';
+    const microHintText = [input.learnerContextVi, input.aiGenerated ? input.summaryVi : ''].filter(Boolean).join(' ');
+    const style = (rawStyle === 'focused_block' && hasExplicitMicroText(microHintText))
+      ? 'spare_time'
+      : rawStyle;
     const goal = GOALS.includes(input.goal) ? input.goal : 'conversation';
     const weights = normalizeWeights(input.weights, focusChoice);
     const id = typeof input.id === 'string' && input.id.trim()
@@ -534,12 +555,305 @@
   }
 
   function pickSessionCount(profile, options = {}) {
+    const customSchedule = extractCustomSchedule(profile, options);
+    if (customSchedule?.sessions?.length) return customSchedule.sessions.length;
     if (profile.style === 'spare_time') return clamp(Math.round(profile.minutes / 8), 2, 5);
     if (profile.style === 'focused_block') return profile.minutes <= 45 ? 1 : 2;
     if (profile.style === 'hands_free') return clamp(Math.round(profile.minutes / 12), 1, 3);
     if (profile.style === 'bedtime_review') return profile.minutes <= 25 ? 1 : 2;
     if (profile.style === 'weekend_sprint') return options.isWeekend ? (profile.minutes <= 45 ? 1 : 2) : (profile.minutes >= 20 ? 2 : 1);
     return 1;
+  }
+
+  function extractCustomSchedule(profile, options = {}) {
+    const totalMinutes = clamp(Math.round(Number(profile?.minutes) || 20), 10, 180);
+    const defaultSum = defaultSummaryVi({
+      focusChoice: profile?.focusChoice || 'balanced',
+      minutes: totalMinutes,
+      style: profile?.style || 'spare_time',
+      goal: profile?.goal || 'conversation'
+    });
+    const customSummary = profile?.summaryVi && profile.summaryVi !== defaultSum ? profile.summaryVi : '';
+    const customPrompt = String(options.customPrompt || '').trim();
+    const rawText = [customPrompt, profile?.learnerContextVi, customSummary].filter(Boolean).join(' ');
+    const low = rawText.toLowerCase();
+    const explicitMicro = hasExplicitMicroText(rawText);
+
+    if (!explicitMicro && !(profile?.style === 'spare_time' && totalMinutes > 30)) {
+      return null;
+    }
+
+    let minMicro = 5;
+    let maxMicro = 10;
+    let targetMicro = 8;
+    const rangeMatch = low.match(/\b(\d{1,2})\s*[-–~đến]+\s*(\d{1,2})\s*(?:p\b|phút|phut)/i);
+    if (rangeMatch && Number(rangeMatch[2]) <= 15) {
+      minMicro = clamp(Number(rangeMatch[1]), 3, 12);
+      maxMicro = clamp(Number(rangeMatch[2]), minMicro + 1, 15);
+      targetMicro = Math.round((minMicro + maxMicro) / 2);
+    } else {
+      const singleMatch = low.match(/(?:ngắt quãng|ngat quang|chia nhỏ|chia nho|mỗi lần|moi lan|mỗi phiên|moi phien|nhịp|nhip|tranh thủ|tranh thu)[^.;,\n]{0,25}?\b(\d{1,2})\s*(?:p\b|phút|phut)/i);
+      if (singleMatch && Number(singleMatch[1]) >= 4 && Number(singleMatch[1]) <= 15) {
+        targetMicro = Number(singleMatch[1]);
+        minMicro = Math.max(4, targetMicro - 2);
+        maxMicro = Math.min(15, targetMicro + 2);
+      }
+    }
+
+    const promptOverridesToPureMicro = hasExplicitMicroText(customPrompt) &&
+      !/(?:buổi tối|buoi toi|\btối\b|\bđêm\b)[^.;,\n]{0,30}?(?:tập trung|tap trung|liền mạch|lien mach|\d{2}\s*(?:p\b|phút|phut))/i.test(customPrompt.toLowerCase());
+
+    let eveningMins = 0;
+    if (!promptOverridesToPureMicro) {
+      const eveningMatch = low.match(/(?:buổi tối|buoi toi|\btối\b|\bđêm\b)[^.;,\n]{0,35}?(?:tập trung|tap trung|liền mạch|lien mach|khoảng|khoang|thêm|them)?[^.;,\n]{0,20}?\b(\d{2,3})\s*(?:p\b|phút|phut)/i);
+      if (eveningMatch) {
+        const candidate = Number(eveningMatch[1]);
+        if (candidate >= 15 && candidate <= totalMinutes - 10) {
+          eveningMins = candidate;
+        }
+      }
+    }
+
+    const hasMorning = /buổi sáng|buoi sang|\bsáng\b/i.test(low);
+    const hasDaytime = /ban ngày|ban ngay|buổi trưa|buoi trua|trong ngày/i.test(low);
+    const microPrefix = hasMorning ? 'Phiên sáng' : (hasDaytime || explicitMicro) ? 'Phiên ngắn' : 'Phiên trống';
+
+    if (eveningMins > 0) {
+      const daytimeMins = totalMinutes - eveningMins;
+      const minCount = Math.max(2, Math.ceil(daytimeMins / maxMicro));
+      const maxCount = Math.min(9, Math.max(minCount, Math.floor(daytimeMins / minMicro)));
+      const microCount = clamp(Math.round(daytimeMins / targetMicro), minCount, maxCount);
+      const microBudgets = distributeMinutes(daytimeMins, Array.from({ length: microCount }, () => ({ weight: 1 })));
+      const sessions = microBudgets.map((mins, idx) => ({
+        labelPrefix: `${microPrefix} ${idx + 1}`,
+        minutes: mins,
+        isMicro: true
+      }));
+      sessions.push({
+        labelPrefix: 'Phiên tối tập trung',
+        minutes: eveningMins,
+        isMicro: false
+      });
+      const dayLabel = hasMorning ? 'Sáng' : 'Ban ngày';
+      return {
+        isMicro: true,
+        isHybrid: true,
+        explicitMicro,
+        minMicro,
+        maxMicro,
+        targetMicro,
+        eveningMins,
+        styleLabel: `${dayLabel} ${minMicro}–${maxMicro}p/phiên · Tối tập trung ${eveningMins}p`,
+        sessions
+      };
+    }
+
+    const minCount = Math.max(2, Math.ceil(totalMinutes / maxMicro));
+    const maxCount = Math.min(10, Math.max(minCount, Math.floor(totalMinutes / minMicro)));
+    const microCount = clamp(Math.round(totalMinutes / targetMicro), minCount, maxCount);
+    const microBudgets = distributeMinutes(totalMinutes, Array.from({ length: microCount }, () => ({ weight: 1 })));
+    const sessions = microBudgets.map((mins, idx) => ({
+      labelPrefix: `${microPrefix} ${idx + 1}`,
+      minutes: mins,
+      isMicro: true
+    }));
+    return {
+      isMicro: true,
+      isHybrid: false,
+      explicitMicro,
+      minMicro,
+      maxMicro,
+      targetMicro,
+      eveningMins: 0,
+      styleLabel: explicitMicro ? `Ngắt quãng ${minMicro}–${maxMicro} phút/phiên` : STYLE_LABELS.spare_time,
+      sessions
+    };
+  }
+
+  function buildSessionsFromCustomSchedule(blueprints, customSchedule, profile) {
+    const specs = customSchedule.sessions;
+    const targetStepCounts = specs.map(spec => spec.isMicro ? 1 : clamp(Math.round(spec.minutes / 10), 2, 3));
+    const desiredTotalSteps = targetStepCounts.reduce((sum, count) => sum + count, 0);
+
+    const expanded = [];
+    for (const item of blueprints) {
+      if (item.action === 'vocab_cards' && Number(item.wordLimit) > 7) {
+        const totalWords = Number(item.wordLimit);
+        const chunkCount = clamp(Math.ceil(totalWords / 6), 2, 3);
+        const wordShares = distributeMinutes(totalWords, Array.from({ length: chunkCount }, () => ({ weight: 1 })));
+        let wordOffset = 0;
+        for (let idx = 0; idx < chunkCount; idx++) {
+          const share = wordShares[idx];
+          expanded.push({
+            ...item,
+            id: idx === 0 ? 'vocab_cards' : `vocab_cards_${idx + 1}`,
+            wordOffset,
+            wordLimit: share,
+            titleVi: `Thẻ từ trọng tâm · Nhóm ${idx + 1} (${share} từ)`,
+            detailVi: `Học nhanh ${share} từ khóa trong phiên ngắn 5–10 phút: lật thẻ, nghe phát âm và nhớ nghĩa.`,
+            weight: Math.max(8, Math.round(item.weight / chunkCount))
+          });
+          wordOffset += share;
+        }
+      } else if (item.action === 'vocab_quiz' && Number(item.wordLimit) > 8) {
+        expanded.push({
+          ...item,
+          wordLimit: 8,
+          titleVi: 'Kiểm tra phản xạ từ vựng (8 từ)'
+        });
+      } else {
+        expanded.push({ ...item });
+      }
+    }
+
+    const extraCandidates = [
+      {
+        id: 'vocab_srs',
+        skill: 'vocab',
+        action: 'vocab_srs',
+        titleVi: 'Ôn nhanh từ đến hạn (SRS)',
+        detailVi: 'Củng cố nhanh các từ vừa học bằng nhịp lặp lại ngắt quãng 5–10 phút.',
+        weight: Math.max(8, Math.round(profile.weights.vocab * 0.35))
+      },
+      {
+        id: 'passive_listen',
+        skill: 'listening',
+        action: 'passive_listen',
+        titleVi: 'Nghe nhanh hội thoại & câu mẫu',
+        detailVi: 'Nghe đoạn hội thoại ngắn để quen ngữ điệu tự nhiên của bài.',
+        weight: Math.max(8, profile.weights.listening)
+      },
+      {
+        id: 'practice_check',
+        skill: 'grammar',
+        action: 'practice_check',
+        titleVi: 'Bài tập kiểm tra nhanh',
+        detailVi: 'Làm nhanh vài câu trắc nghiệm hiểu bài & cấu trúc câu.',
+        weight: Math.max(8, profile.weights.grammar)
+      },
+      {
+        id: 'vocab_quiz_2',
+        skill: 'vocab',
+        action: 'vocab_quiz',
+        wordLimit: 6,
+        titleVi: 'Trắc nghiệm chốt từ dễ nhầm',
+        detailVi: 'Kiểm tra phản xạ nhanh 6 từ khóa quan trọng trong bài.',
+        weight: Math.max(8, Math.round(profile.weights.vocab * 0.35))
+      }
+    ];
+    let extraIdx = 0;
+    while (expanded.length < desiredTotalSteps) {
+      const template = extraCandidates[extraIdx % extraCandidates.length];
+      const existingIds = new Set(expanded.map(step => step.id));
+      const uniqueId = existingIds.has(template.id) ? `${template.id}_${extraIdx + 1}` : template.id;
+      expanded.push({ ...template, id: uniqueId });
+      extraIdx++;
+    }
+
+    // For hybrid schedules, route bite-sized vocab/listening steps to micro-sessions
+    // and deeper grammar/reading/comprehensive steps to the evening focused session.
+    let orderedSteps = expanded;
+    if (customSchedule.isHybrid) {
+      const microCount = specs.filter(spec => spec.isMicro).reduce((sum, _, idx) => sum + targetStepCounts[idx], 0);
+      const microPreferred = [];
+      const focusedPreferred = [];
+      for (const step of expanded) {
+        if (step.action === 'vocab_cards' || step.action === 'vocab_quiz' || step.action === 'vocab_srs' || step.action === 'passive_listen') {
+          microPreferred.push(step);
+        } else {
+          focusedPreferred.push(step);
+        }
+      }
+      while (microPreferred.length < microCount && focusedPreferred.length) {
+        microPreferred.push(focusedPreferred.shift());
+      }
+      while (microPreferred.length > microCount) {
+        focusedPreferred.unshift(microPreferred.pop());
+      }
+      orderedSteps = [...microPreferred, ...focusedPreferred];
+    }
+
+    const grouped = specs.map(() => []);
+    let cursor = 0;
+    for (let i = 0; i < specs.length; i++) {
+      const count = targetStepCounts[i];
+      for (let c = 0; c < count && cursor < orderedSteps.length; c++) {
+        grouped[i].push(orderedSteps[cursor++]);
+      }
+    }
+    while (cursor < orderedSteps.length) {
+      const targetIdx = specs.findIndex(spec => !spec.isMicro);
+      grouped[targetIdx >= 0 ? targetIdx : (cursor % specs.length)].push(orderedSteps[cursor++]);
+    }
+    return grouped;
+  }
+
+  function reshapeAiSessionsToCustomSchedule(aiSessions, customSchedule) {
+    if (!Array.isArray(aiSessions) || !aiSessions.length || !customSchedule?.explicitMicro) return aiSessions;
+    const specs = customSchedule.sessions;
+    const expectedMicroCount = specs.filter(spec => spec.isMicro).length;
+    const actualMicroCount = aiSessions.filter(sess => Number(sess.minutes) <= customSchedule.maxMicro + 2).length;
+    const hasFocusedMatch = !customSchedule.isHybrid || aiSessions.some(sess => Number(sess.minutes) >= customSchedule.eveningMins - 5);
+    if (aiSessions.length >= specs.length - 1 && actualMicroCount >= expectedMicroCount - 1 && hasFocusedMatch) {
+      return aiSessions;
+    }
+
+    const flatSteps = [];
+    for (const sess of aiSessions) {
+      for (const step of (sess.steps || [])) {
+        if (Array.isArray(step.focusWords) && step.focusWords.length > 4) {
+          const mid = Math.ceil(step.focusWords.length / 2);
+          const firstHalf = step.focusWords.slice(0, mid);
+          const secondHalf = step.focusWords.slice(mid);
+          flatSteps.push({
+            ...step,
+            id: step.id,
+            titleVi: `${step.titleVi} · Nhóm 1`,
+            focusWords: firstHalf
+          });
+          flatSteps.push({
+            ...step,
+            id: `${step.id}_2`,
+            titleVi: `${step.titleVi} · Nhóm 2`,
+            focusWords: secondHalf
+          });
+        } else {
+          flatSteps.push({ ...step });
+        }
+      }
+    }
+    while (flatSteps.length < specs.length && flatSteps.length > 0) {
+      const base = flatSteps[flatSteps.length % flatSteps.length];
+      flatSteps.push({
+        ...base,
+        id: `${base.id}_r${flatSteps.length + 1}`,
+        titleVi: `${base.titleVi} (Củng cố nhanh)`
+      });
+    }
+
+    const grouped = specs.map(() => []);
+    for (let i = 0; i < specs.length; i++) {
+      grouped[i].push(flatSteps[i]);
+    }
+    let extraCursor = specs.length;
+    const nonMicroIdx = specs.findIndex(spec => !spec.isMicro);
+    while (extraCursor < flatSteps.length) {
+      const targetIdx = nonMicroIdx >= 0 && grouped[nonMicroIdx].length < 3
+        ? nonMicroIdx
+        : (extraCursor % specs.length);
+      grouped[targetIdx].push(flatSteps[extraCursor++]);
+    }
+
+    return specs.map((spec, idx) => {
+      const stepsRaw = grouped[idx];
+      const stepMins = distributeMinutes(spec.minutes, stepsRaw.map(step => ({ weight: step.minutes || 5 })));
+      return {
+        label: `${spec.labelPrefix} · ${spec.minutes} phút`,
+        goalVi: spec.isMicro ? 'Phiên ngắn 5–10 phút' : 'Phiên tối tập trung',
+        minutes: spec.minutes,
+        steps: stepsRaw.map((step, sIdx) => ({ ...step, minutes: stepMins[sIdx] }))
+      };
+    });
   }
 
   function buildSkillBlueprints(profile, lesson, progressRecord = {}) {
@@ -702,8 +1016,15 @@
 
     // A lesson-specific design must never leak its vocabulary or drills into another lesson.
     const lessonAiDesign = profile.aiLessonDesigns?.[targetLesson.id] || null;
-    const aiSessionsSource = lessonAiDesign?.sessions?.length
+    const customSchedule = extractCustomSchedule(profile, {
+      ...planOptions,
+      customPrompt: lessonAiDesign?.customPrompt || options.customPrompt || ''
+    });
+    const rawAiSessions = lessonAiDesign?.sessions?.length
       ? sanitizeAiSessions(lessonAiDesign.sessions, profile.minutes)
+      : null;
+    const aiSessionsSource = rawAiSessions?.length
+      ? (customSchedule?.explicitMicro ? reshapeAiSessionsToCustomSchedule(rawAiSessions, customSchedule) : rawAiSessions)
       : null;
 
     const sessions = [];
@@ -737,6 +1058,36 @@
           steps,
           completed: steps.every(step => step.completed),
           aiAuthored: true
+        });
+      }
+    } else if (customSchedule?.sessions?.length) {
+      const blueprints = buildSkillBlueprints(profile, targetLesson, progressRecord);
+      const grouped = buildSessionsFromCustomSchedule(blueprints, customSchedule, profile);
+      for (let i = 0; i < customSchedule.sessions.length; i++) {
+        const spec = customSchedule.sessions[i];
+        const stepsRaw = grouped[i];
+        const sessionMinutes = spec.minutes;
+        const stepMins = distributeMinutes(sessionMinutes, stepsRaw.map(step => ({ weight: step.weight })));
+        const steps = stepsRaw.map((step, j) => {
+          const stepId = `${targetLesson.id}:${step.id}:s${i + 1}`;
+          const completed = doneSet.has(stepId);
+          totalSteps++;
+          if (completed) completedSteps++;
+          return {
+            ...step,
+            stepId,
+            minutes: stepMins[j],
+            skillLabel: SKILL_LABELS[step.skill] || step.skill,
+            completed
+          };
+        });
+        sessions.push({
+          index: i + 1,
+          id: `session-${i + 1}`,
+          label: `${spec.labelPrefix} · ${sessionMinutes} phút`,
+          minutes: sessionMinutes,
+          steps,
+          completed: steps.every(step => step.completed)
         });
       }
     } else {
@@ -800,7 +1151,7 @@
       totalMinutes: profile.minutes,
       days: profile.days,
       style: profile.style,
-      styleLabel: STYLE_LABELS[profile.style],
+      styleLabel: customSchedule?.styleLabel || STYLE_LABELS[profile.style],
       goal: profile.goal,
       goalLabel: GOAL_LABELS[profile.goal],
       weights: { ...profile.weights },
@@ -906,6 +1257,8 @@
     ALLOWED_STEP_ACTIONS,
     normalizeWeights,
     parseNaturalReply,
+    hasExplicitMicroText,
+    extractCustomSchedule,
     sanitizeAiSessions,
     sanitizeAiLessonDesign,
     saveLessonDesign,
