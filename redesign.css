@@ -4728,13 +4728,13 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord{
     margin:0 0 10px !important;
-    padding:10px 14px !important;
+    padding:10px 14px 8px !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head{
     align-items:center !important;
     gap:8px !important;
-    padding:0 0 6px !important;
-    margin:0 0 2px !important;
+    padding:0 0 8px !important;
+    margin:0 !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head h3{
     font-size:14.5px !important;
@@ -4765,7 +4765,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     align-items:center !important;
     gap:8px !important;
     margin:0 !important;
-    padding:0 !important;
+    padding:8px 0 0 !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-row summary{
     display:grid !important;
@@ -4863,7 +4863,53 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     box-shadow:none !important;
   }
 
-  /* 5. Mobile Learn (Flashcards): fix focus-bar close collision & competing Next CTA */
+  /* 4b. Mobile Home: tighten Custom Lesson card text-to-button spacing */
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-custom-lesson{
+    padding:14px !important;
+    gap:10px !important;
+    border-radius:16px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-custom-lesson .lesson-custom-head p{
+    margin:0 !important;
+  }
+
+  /* 5. Mobile Learn (Flashcards): fix focus-bar close collision, top dead space, double card border & competing Next CTA */
+  html body:not(#_rd).studio-enabled.mobile-ux.mobile-card-mode main.workspace{
+    padding-top:10px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux.mobile-card-mode .flash-screen,
+  html body:not(#_rd).studio-enabled.mobile-ux.mobile-card-mode #learnPanel,
+  html body:not(#_rd).studio-enabled.mobile-ux.mobile-card-mode .flash-layout{
+    padding-top:0 !important;
+    margin-top:0 !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux.mobile-card-mode #learnPanel > .activity-intro{
+    display:none !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux.mobile-card-mode #passiveDisclosure{
+    margin:0 0 10px !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .mobile-card-actions button:nth-child(1):not(:active):not(:focus-visible){
+    background:rgba(244,63,94,0.16) !important;
+    border-color:rgba(244,63,94,0.34) !important;
+    color:#fda4af !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .mobile-card-actions button:nth-child(2):not(:active):not(:focus-visible){
+    background:rgba(16,185,129,0.16) !important;
+    border-color:rgba(16,185,129,0.34) !important;
+    color:#6ee7b7 !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #flashcard{
+    border:1px solid var(--rd-line) !important;
+    border-radius:16px !important;
+    overflow:hidden !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #flashcard .inner,
+  html body:not(#_rd).studio-enabled.mobile-ux #flashcard .face{
+    border:0 !important;
+    border-radius:15px !important;
+    box-shadow:none !important;
+  }
   html body:not(#_rd).studio-enabled.mobile-ux .mobile-focus-bar:not([hidden]){
     display:grid !important;
     grid-template-columns:44px minmax(0,1fr) !important;
