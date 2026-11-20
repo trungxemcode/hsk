@@ -30116,6 +30116,53 @@
           vi: 'Xin chào mọi người! Tôi là Lý Minh. Rất vui lại được gặp mọi người.'
         }
       ]
+    },
+    {
+      id: 'ep-cdp-jum04yrkis0',
+      youtubeId: 'JUM04yRkIS0',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '房宽万间，卧榻三尺 | Ancient Chinese Wisdom for Sleep & Stress | Chinese Daily Podcast',
+      titleVi: 'Phòng rộng vạn gian, giường nằm ba thước',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 909,
+      durationLabel: '15:09',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 166 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/JUM04yRkIS0.json',
+      cuesCount: 166,
+      cues: [
+        {
+          start: 6.4,
+          end: 10.33,
+          en: 'Good evening, dear friends, welcome to Chinese Daily.',
+          zh: '晚上好，亲爱的朋友们，欢迎收听每天中文。',
+          pinyin: 'Wǎn shàng hǎo， qīn ài de péng yǒu men， huān yíng shōu tīng měi tiān zhōng wén。',
+          vi: 'Xin chào buổi tối, các bạn thân mến, chào mừng đến với Tiếng Trung Mỗi Ngày.'
+        },
+        {
+          start: 10.33,
+          end: 11.47,
+          en: 'I am Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì lǐ míng。',
+          vi: 'Tôi là Lý Minh.'
+        },
+        {
+          start: 11.5,
+          end: 13.63,
+          en: 'Good evening everyone, I am Wang Yu.',
+          zh: '大家晚上好，我是王雨。',
+          pinyin: 'Dà jiā wǎn shàng hǎo， wǒ shì wáng yǔ。',
+          vi: 'Xin chào buổi tối mọi người, tôi là Vương Vũ.'
+        }
+      ]
     }
   ];
 
