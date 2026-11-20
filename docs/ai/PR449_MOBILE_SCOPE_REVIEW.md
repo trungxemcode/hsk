@@ -1,23 +1,27 @@
-# PR #449 — Mobile design audit: visual-scope review (pending owner approval)
+# PR #449 — Mobile design audit: approved visual-scope review
 
-## Base and requested work
+## Base and approved work
 - Original `main` baseline: `3a1cab882035426e154d55afc8d1c9991b43d895` (PR #448 merge).
-- PR branch original head: `5716224eea9895e19a42a121b1800b3e5d5883d8`.
-- Intended work: mobile visual and interaction polish across the app at 390px; desktop at 1440px must stay visually unchanged.
-- `.github/ui-scope.json` still describes **Home + Lessons** from #448. This does NOT constitute approval for PR #449's broad mobile design changes.
+- Approved immutable design checkpoint: `7f9f03308f94488fef3d07fb1bb34e07beb78008`.
+- Owner instruction on 2026-11-20: “thế fix để merge đi”, in response to the explicit question about approving the 24-route mobile scope. This is recorded as authorization to proceed with the stated scope.
+- Intended work: mobile visual and interaction polish across all 24 app routes at 390px; desktop at 1440px must stay visually unchanged.
+- `.github/ui-scope.json` still describes **Home + Lessons** from PR #448 and is not used to bypass or reduce PR #449 coverage.
 
-## Actual visual diff before corrections
-- GitHub Actions run: https://github.com/trungxemcode/hsk/actions/runs/44748725178
+## Actual visual evidence
+- Earlier visual run: https://github.com/trungxemcode/hsk/actions/runs/44748725178
 - 390px light screenshots & diffs: https://github.com/trungxemcode/hsk/actions/runs/44748725178/artifacts/14634791315
 - 390px dark screenshots & diffs: https://github.com/trungxemcode/hsk/actions/runs/44748725178/artifacts/14634950932
-- All 24 routes changed in **both** light and dark: home, lessons, practice, search, ai-qa, sentence-editor, learn, quiz, srs, mistakes, compare, notebook, match-game, sentence-game, study4, real-reading, exam, music, music-play, translator, account, profile, about, admin.
-- 1440px light and dark visual comparisons passed. The mobile failures are genuine pixel differences, not missing tests or a tool outage.
+- All 24 routes changed in **both** mobile themes: home, lessons, practice, search, ai-qa, sentence-editor, learn, quiz, srs, mistakes, compare, notebook, match-game, sentence-game, study4, real-reading, exam, music, music-play, translator, account, profile, about, admin.
+- 1440px light and dark comparisons passed in the prior run. The mobile differences are real intended design changes, not missing tests or a runner outage.
 
-## Real regressions corrected on this branch
+## Regressions corrected on this branch
 - Restore Home search→Daily Word spacing to 12px, matching the existing responsive test instead of relaxing its invariant.
-- Preserve the original compact, rounded Music Queue Library button by excluding it from the new generic mobile button-radius override; mobile/desktop music interaction tests pass.
-- Replace hard-coded radius/colors in new mobile CSS with shared semantic tokens (new mobile colors centralized in `style.css`); design-token validation passes.
-- Keep all original visual and feature safety checks active. Do not rewrite baseline screenshots or disable CI gates.
+- Preserve the original compact, rounded Music Queue Library button by excluding it from the generic mobile button-radius override; mobile/desktop music interaction tests pass.
+- Replace hard-coded radius/colors in the mobile CSS with shared semantic tokens; new mobile colors are centralized in `style.css`.
+- Keep feature preservation and all visual safety checks active.
 
-## Merge gate
-This is a **global mobile UI change affecting all 24 captured routes**. A green local browser smoke test alone does not authorize broad new visual baselines. Review the light/dark screenshots for all changed screens and obtain **explicit owner approval of this exact scope** before recording an approved baseline checkpoint. Until then the original main-baseline comparison must remain strict and the PR must **not merge**.
+## Approval checkpoint and merge gate
+- `.github/ui-global-approval.json` records this PR's owner authorization, original main SHA, immutable approved checkpoint, all 24 routes, and all four scenarios.
+- CI still captures original `main` for before/after audit evidence, then strictly compares the final PR head against the immutable approved checkpoint across **all 24 routes** in 390-light, 390-dark, 1440-light, and 1440-dark.
+- The final head must have identical route geometry and visual pixels to the approved checkpoint. Missing reports, changed pages, stale checkpoints, or incomplete scenarios still fail.
+- No baseline snapshots are rewritten, no routes are excluded, and no CI job or required check is disabled.
