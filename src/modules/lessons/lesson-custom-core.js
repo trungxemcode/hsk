@@ -869,7 +869,7 @@
   }
 
   function sessionsFitCustomSchedule(sessions, customSchedule) {
-    if (!customSchedule?.isMicro) return true;
+    if (!customSchedule?.explicitMicro) return true;
     if (!Array.isArray(sessions) || !sessions.length) return false;
     const expectedMicroCount = customSchedule.sessions.filter(session => session.isMicro).length;
     const actualMicroCount = sessions.filter(session =>
