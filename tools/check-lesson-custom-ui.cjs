@@ -107,8 +107,24 @@ const http = require('node:http');
       // 4. Open Custom Lesson Runner and complete a step
       await page.locator('#lessonCustomStartSession').click();
       await page.locator('#lessonCustomRunner').waitFor({ state: 'visible' });
+      const topBtnStats = await page.evaluate(() => [...document.querySelectorAll('#lessonCustomRunner > .lesson-custom-actions > button')].map(b => ({
+        h: Math.round(b.getBoundingClientRect().height),
+        mb: getComputedStyle(b).marginBottom
+      })));
+      assert.equal(topBtnStats.length, 2);
+      assert.ok(Math.abs(topBtnStats[0].h - topBtnStats[1].h) <= 1, 'Top runner buttons height mismatch: ' + JSON.stringify(topBtnStats));
+      assert.ok(topBtnStats.every(x => x.mb === '0px'), 'Top runner buttons marginBottom must be 0px: ' + JSON.stringify(topBtnStats));
+
       const firstStep = page.locator('[data-custom-step]').first();
       await firstStep.waitFor({ state: 'visible' });
+      const stepBtnStats = await firstStep.evaluate(card => [...card.querySelectorAll('.lesson-custom-actions > button')].map(b => ({
+        h: Math.round(b.getBoundingClientRect().height),
+        mb: getComputedStyle(b).marginBottom
+      })));
+      if (stepBtnStats.length >= 2) {
+        assert.ok(Math.abs(stepBtnStats[0].h - stepBtnStats[1].h) <= 1, 'Step action buttons height mismatch: ' + JSON.stringify(stepBtnStats));
+        assert.ok(stepBtnStats.every(x => x.mb === '0px'), 'Step action buttons marginBottom must be 0px: ' + JSON.stringify(stepBtnStats));
+      }
       await firstStep.getByRole('button', { name: 'Đánh dấu xong', exact: true }).click();
       assert.match(await firstStep.innerText(), /Đã hoàn thành/);
 
