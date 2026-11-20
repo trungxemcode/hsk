@@ -1564,6 +1564,67 @@ html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"
 }
 
 @media (max-width: 720px) {
+  #sentenceEditor .sentence-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  #sentenceEditor .sentence-footer-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+  }
+
+  #sentenceEditor .sentence-undo,
+  #sentenceEditor .sentence-example {
+    min-height: 38px;
+    padding: 6px 12px;
+    font-size: 13px;
+    white-space: nowrap;
+    border-style: solid;
+  }
+
+  #sentenceEditor .sentence-ai-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  #sentenceEditor .sentence-ai-actions .qa-provider-btn,
+  #sentenceEditor .sentence-ai-actions .qa-effort-btn {
+    min-height: 38px;
+    height: 38px;
+    padding: 0 12px;
+  }
+
+  html body.studio-enabled #sentenceEditor button.sentence-check-btn {
+    flex: 1 0 100%;
+    width: 100%;
+    min-height: 44px;
+    background: var(--button-active-bg) !important;
+    color: var(--button-active-text) !important;
+    border-color: var(--button-active-bg) !important;
+    box-shadow: none !important;
+    font-weight: 700;
+  }
+
+  #sentenceEditor .sentence-filters button {
+    min-height: 40px;
+    border-radius:var(--radius-btn) !important;
+  }
+
+  html[data-theme="dark"] body.studio-enabled #sentenceEditor .sentence-filters button[aria-pressed="true"] {
+    background: var(--button-active-bg) !important;
+    color: var(--button-active-text) !important;
+    border-color: var(--button-active-bg) !important;
+  }
+
   #sentenceEditor .sentence-rail {
     order: 2;
     border-left: 0;
@@ -1576,10 +1637,12 @@ html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"
     flex-direction: row;
     width: 100%;
     overflow-x: auto;
-    padding: 4px;
+    padding: 4px 20px 4px 4px;
     gap: 6px;
     justify-content: flex-start;
     scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, var(--ink) 88%, var(--palette-clear) 100%);
+    mask-image: linear-gradient(to right, var(--ink) 88%, var(--palette-clear) 100%);
   }
 
   #sentenceEditor .sentence-rail-dock::-webkit-scrollbar {
@@ -1588,8 +1651,8 @@ html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"
 
   html body.studio-enabled #sentenceEditor .sentence-rail-item {
     width: auto;
-    min-height: 38px;
-    height: 38px;
+    min-height: 40px;
+    height: 40px;
     padding: 0 12px;
     gap: 6px;
     flex: none;
@@ -1604,7 +1667,7 @@ html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"
     box-shadow: none;
     border: 0;
     padding: 0;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: inherit;
     white-space: nowrap;

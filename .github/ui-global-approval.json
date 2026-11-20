@@ -1,9 +1,9 @@
 {
-  "request": "Owner explicitly approved full PR #423 global UI design at immutable commit 86ce51e on 2026-11-14. Original main snapshots and strict complete route comparisons retained; no baseline changes or exclusions.",
-  "pullRequest": 423,
+  "request": "Owner instruction on 2026-11-20: “thế fix để merge đi”, given in response to the explicit question about PR #449's 24-route mobile scope. Interpreted as authorization to proceed with this exact global mobile design scope. Immutable checkpoint retained; original main snapshots and strict complete route comparisons remain enabled; no baseline rewrites or route exclusions.",
+  "pullRequest": 449,
   "ownerApproved": true,
-  "baseSHA": "fdc2d360ad50458721f3349e79484da2c818e48a",
-  "approvedSHA": "86ce51e29f3e6f22ac43293aa5de712806fa1605",
+  "baseSHA": "3a1cab882035426e154d55afc8d1c9991b43d895",
+  "approvedSHA": "7f9f03308f94488fef3d07fb1bb34e07beb78008",
   "routes": [
     "home",
     "lessons",
@@ -36,5 +36,5 @@
     "1440-light",
     "1440-dark"
   ],
-  "evidence": "docs/ai/PR423_VISUAL_SCOPE_REVIEW.md"
+  "evidence": "docs/ai/PR449_MOBILE_SCOPE_REVIEW.md"
 }
