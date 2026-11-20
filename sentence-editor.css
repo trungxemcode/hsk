@@ -458,42 +458,6 @@ html[data-theme="dark"] #sentenceEditor.is-ai-highlight .sentence-mirror {
   #sentenceEditor .sentence-footer {
     padding: 10px 16px;
   }
-  #sentenceEditor .sentence-rail {
-    order: 2;
-    border-left: 0;
-    border-top: 1px solid var(--se-edge);
-    padding: 8px 12px;
-    justify-content: flex-start;
-  }
-  #sentenceEditor .sentence-rail-dock {
-    flex-direction: row;
-    width: 100%;
-    overflow-x: auto;
-    padding: 4px;
-    gap: 6px;
-    justify-content: flex-start;
-    scrollbar-width: none;
-  }
-  #sentenceEditor .sentence-rail-item {
-    width: auto;
-    height: 36px;
-    padding: 0 11px;
-    gap: 6px;
-    flex: none;
-  }
-  #sentenceEditor .sentence-rail-label {
-    position: static;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-    background: var(--palette-clear);
-    box-shadow: none;
-    border: 0;
-    padding: 0;
-    font-size: 0.78rem;
-    color: inherit;
-    white-space: nowrap;
-  }
   #sentenceEditor .sentence-review {
     order: 3;
     border-left: 0;
@@ -1596,6 +1560,59 @@ html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"
     color: var(--palette-white) !important;
     font-weight: 700;
     border-color: var(--se-green) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  #sentenceEditor .sentence-rail {
+    order: 2;
+    border-left: 0;
+    border-top: 1px solid var(--se-edge);
+    padding: 8px 12px;
+    justify-content: flex-start;
+  }
+
+  #sentenceEditor .sentence-rail-dock {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+    padding: 4px;
+    gap: 6px;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+
+  #sentenceEditor .sentence-rail-dock::-webkit-scrollbar {
+    display: none;
+  }
+
+  html body.studio-enabled #sentenceEditor .sentence-rail-item {
+    width: auto;
+    min-height: 38px;
+    height: 38px;
+    padding: 0 12px;
+    gap: 6px;
+    flex: none;
+  }
+
+  html body.studio-enabled #sentenceEditor .sentence-rail-label {
+    position: static;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    background: var(--palette-clear);
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: inherit;
+    white-space: nowrap;
+  }
+
+  html body.studio-enabled #sentenceEditor .sentence-rail-badge {
+    position: static;
+    margin-left: 2px;
   }
 }
 
