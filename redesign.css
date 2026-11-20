@@ -4863,14 +4863,21 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     box-shadow:none !important;
   }
 
-  /* 4b. Mobile Home: tighten Custom Lesson card text-to-button spacing */
+  /* 4b. Mobile Home: tighten Custom Lesson card text-to-button spacing (identical in light & dark) */
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-custom-lesson{
     padding:14px !important;
-    gap:10px !important;
+    gap:8px !important;
     border-radius:16px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-custom-lesson .lesson-custom-head{
+    gap:4px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-custom-lesson .lesson-custom-head h3{
+    margin:0 0 4px !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-custom-lesson .lesson-custom-head p{
     margin:0 !important;
+    line-height:1.45 !important;
   }
 
   /* 5. Mobile Learn (Flashcards): fix focus-bar close collision, top dead space, double card border & competing Next CTA */
