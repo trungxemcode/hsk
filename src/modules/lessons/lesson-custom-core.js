@@ -456,11 +456,16 @@
   function buildLessonPlan(profileInput, lesson, progressRecord = {}, options = {}) {
     const profile = validProfile(profileInput) ? profileInput : createProfile(profileInput);
     const targetLesson = lesson || { id: `standard-${profile.hsk}-01`, number: 1, vi: `Bài 1 · HSK ${profile.hsk}`, words: [] };
-    const dayKey = options.dayKey || vnDayKey(options.now || Date.now());
+    const now = Number.isFinite(options.now) ? options.now : Date.now();
+    const isWeekend = typeof options.isWeekend === 'boolean'
+      ? options.isWeekend
+      : [0, 6].includes(new Date(now + 7 * 3600000).getUTCDay());
+    const planOptions = { ...options, now, isWeekend };
+    const dayKey = options.dayKey || vnDayKey(now);
     const doneSet = new Set(profile.sessionsDone?.[dayKey] || []);
     const blueprints = buildSkillBlueprints(profile, targetLesson, progressRecord);
 
-    const sessionCount = Math.min(pickSessionCount(profile, options), Math.max(1, blueprints.length));
+    const sessionCount = Math.min(pickSessionCount(profile, planOptions), Math.max(1, blueprints.length));
     const sessionMinuteBudgets = distributeMinutes(
       profile.minutes,
       Array.from({ length: sessionCount }, (_, idx) => ({
@@ -485,10 +490,10 @@
       const stepMins = distributeMinutes(sessionMinutes, stepsRaw.map(s => ({ weight: s.weight })));
       const steps = stepsRaw.map((s, j) => {
         const stepId = `${targetLesson.id}:${s.id}:s${i + 1}`;
-        const completed = doneSet.has(stepId) || Boolean(
-          (s.id === 'practice_check' && progressRecord?.read) ||
-          (s.id === 'reading_dialogue' && progressRecord?.read)
-        );
+        // A lesson's general "read" flag does not prove that this custom step
+        // was completed. External activities are marked only after the learner
+        // returns and explicitly confirms the step.
+        const completed = doneSet.has(stepId);
         totalSteps++;
         if (completed) completedSteps++;
         return {
@@ -516,7 +521,7 @@
       });
     }
 
-    const subtitleNote = profile.style === 'weekend_sprint' && options.isWeekend === false
+    const subtitleNote = profile.style === 'weekend_sprint' && planOptions.isWeekend === false
       ? 'Ngày thường học gọn nhẹ; cuối tuần tăng cường tổng hợp.'
       : profile.followUpVi;
 

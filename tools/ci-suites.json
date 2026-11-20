@@ -19,6 +19,7 @@
     "node tools/check-notebook-factory-dom.cjs",
     "node tools/check-planner-dom.cjs",
     "node tools/check-study-sync-dom.cjs",
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-lesson-custom-ui.cjs",
     "python3 tools/check-pwa-release.py",
     "python3 -m unittest discover -s tools -p 'test_pwa_release*.py'",
     "node tools/check-update-dom.cjs",

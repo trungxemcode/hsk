@@ -38,7 +38,7 @@
   font-size:.82rem;
   line-height:1.35;
   padding:4px 10px;
-  border-radius:999px;
+  border-radius:var(--radius-pill);
   border:1px solid var(--line);
   background:var(--paper);
   color:var(--ink);
@@ -71,7 +71,7 @@
 }
 .lesson-custom-primary{
   background:var(--accent);
-  color:#fff;
+  color:var(--button-active-text);
   border:1px solid var(--accent);
   font-weight:600;
 }
@@ -105,7 +105,7 @@
 }
 .custom-chat-bubble{
   padding:10px 12px;
-  border-radius:12px;
+  border-radius:var(--radius-btn);
   max-width:90%;
   line-height:1.45;
   font-size:.93rem;
@@ -116,7 +116,7 @@
   justify-self:start;
 }
 .custom-chat-bubble.is-user{
-  background:var(--accent-light, rgba(37, 99, 235, 0.14));
+  background:var(--accent-light);
   border:1px solid var(--accent);
   justify-self:end;
 }
@@ -133,7 +133,7 @@
 }
 .custom-chip[aria-pressed="true"]{
   background:var(--accent);
-  color:#fff;
+  color:var(--button-active-text);
   border-color:var(--accent);
 }
 .custom-chat-compose{
@@ -185,7 +185,7 @@
 }
 .custom-session-tabs button[aria-pressed="true"]{
   background:var(--accent);
-  color:#fff;
+  color:var(--button-active-text);
   border-color:var(--accent);
 }
 .custom-step-list{
@@ -226,7 +226,7 @@
 .overview-custom-sessions span{
   font-size:.8rem;
   padding:3px 9px;
-  border-radius:999px;
+  border-radius:var(--radius-pill);
   border:1px solid var(--line);
   background:var(--paper);
 }

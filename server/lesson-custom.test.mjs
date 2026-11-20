@@ -78,6 +78,10 @@ test('HSKLessonCustomCore normalizes weights to 100 and validates profiles stric
   assert.equal(C.validProfile({ ...p, minutes: 3 }), false);
   assert.equal(C.validProfile({ ...p, weights: { ...p.weights, vocab: 99 } }), false);
   assert.equal(C.validProfile({ ...p, style: 'unknown_style' }), false);
+  assert.equal(S.validCustom(p), true);
+  assert.equal(S.validCustom({ ...p, style: 'unknown_style' }), false);
+  assert.equal(S.validCustom({ ...p, extraPayload: 'not allowed' }), false);
+  assert.equal(S.validCustom({ ...p, sessionsDone: { invalid: ['step-1'] } }), false);
 });
 
 test('HSKLessonCustomCore parses free-text Vietnamese interview answers accurately', () => {
@@ -112,6 +116,17 @@ test('buildLessonPlan restructures lessons by focus, time budget and study style
   const planC = C.buildLessonPlan(handsFree, sampleLesson, {}, { dayKey: '2026-11-20', now });
   assert.ok(planC.sessions[0].steps[0].skill === 'listening');
   assert.equal(planC.sessions.reduce((acc, s) => acc + s.minutes, 0), 30);
+
+  const previouslyRead = C.buildLessonPlan(focusedGrammar, sampleLesson, { read: true }, { dayKey: '2026-11-20', now });
+  assert.equal(previouslyRead.completedSteps, 0, 'general lesson read state must not auto-complete custom activities');
+
+  const weekendSprint = C.createProfile({ hsk: 2, focusChoice: 'balanced', minutes: 30, style: 'weekend_sprint', days: 5, goal: 'exam' }, now);
+  const saturday = C.buildLessonPlan(weekendSprint, sampleLesson, {}, { now: Date.parse('2026-11-21T03:00:00Z') });
+  const monday = C.buildLessonPlan(weekendSprint, sampleLesson, {}, { now: Date.parse('2026-11-23T03:00:00Z') });
+  assert.equal(saturday.sessions.length, 1, 'weekend sprint consolidates a 30-minute Saturday into one session');
+  assert.equal(monday.sessions.length, 2, 'weekend sprint splits a 30-minute weekday into two sessions');
+  assert.match(monday.noteVi, /Ngày thường học gọn nhẹ/);
+  assert.doesNotMatch(saturday.noteVi, /Ngày thường học gọn nhẹ/);
 });
 
 test('markStepCompleted and adaptProfileWeekly track progress cleanly and rebalance weak skills', () => {

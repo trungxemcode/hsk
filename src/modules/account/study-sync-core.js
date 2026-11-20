@@ -7,7 +7,27 @@ function row(x={}){const r={};for(const k of counts)r[k]=Math.max(0,Number.isFin
 function aggregate(parts){const result={};for(const p of Object.values(parts||{})){if(!p||!/^\d{4}-\d{2}-\d{2}$/.test(p.day))continue;const slot=result[p.day]||(result[p.day]={base:row(),live:row()});const target=p.legacy?slot.base:slot.live,r=row(p.row);for(const k of counts)target[k]=p.legacy?Math.max(target[k],r[k]):target[k]+r[k];for(const k of arrays)target[k]=[...new Set([...target[k],...r[k]])];}return Object.fromEntries(Object.entries(result).map(([d,{base,live}])=>{for(const k of counts)live[k]+=base[k];for(const k of arrays)live[k]=[...new Set([...live[k],...base[k]])];return [d,live];}));}
 function plan(state){if(!state.plan)return null;const p=clone(state.plan);p.journal=aggregate(Object.fromEntries(Object.entries(state.parts||{}).filter(([,v])=>v.planId===p.id)));return p;}
 const VALID_CUSTOM_SKILLS=['vocab','grammar','reading','listening','writing'];
-function validCustom(v){if(!v||typeof v!=='object'||Array.isArray(v)||v.version!==1)return false;if(typeof v.id!=='string'||!v.id.trim()||v.id.length>80)return false;if(!Number.isInteger(v.hsk)||v.hsk<1||v.hsk>6)return false;if(!Number.isInteger(v.minutes)||v.minutes<10||v.minutes>180)return false;if(!Number.isInteger(v.days)||v.days<3||v.days>7)return false;if(!v.weights||typeof v.weights!=='object'||Array.isArray(v.weights))return false;if(!VALID_CUSTOM_SKILLS.every(k=>Number.isInteger(v.weights[k])&&v.weights[k]>=5&&v.weights[k]<=70))return false;if(VALID_CUSTOM_SKILLS.reduce((n,k)=>n+v.weights[k],0)!==100)return false;return true;}
+const VALID_CUSTOM_FOCUS=['vocab_heavy','grammar_heavy','listening_speaking','reading_heavy','balanced'];
+const VALID_CUSTOM_STYLES=['spare_time','focused_block','hands_free','bedtime_review','weekend_sprint'];
+const VALID_CUSTOM_GOALS=['exam','conversation','reading_comprehension','work_travel'];
+const VALID_CUSTOM_FIELDS=['version','id','hsk','focusChoice','minutes','days','style','goal','weights','summaryVi','followUpVi','sessionsDone','updatedAt'];
+function validCustom(v){
+ if(!v||typeof v!=='object'||Array.isArray(v)||v.version!==1||Object.keys(v).some(k=>!VALID_CUSTOM_FIELDS.includes(k)))return false;
+ if(typeof v.id!=='string'||!v.id.trim()||v.id.length>80)return false;
+ if(!Number.isInteger(v.hsk)||v.hsk<1||v.hsk>6)return false;
+ if(!VALID_CUSTOM_FOCUS.includes(v.focusChoice)||!VALID_CUSTOM_STYLES.includes(v.style)||!VALID_CUSTOM_GOALS.includes(v.goal))return false;
+ if(!Number.isInteger(v.minutes)||v.minutes<10||v.minutes>180)return false;
+ if(!Number.isInteger(v.days)||v.days<3||v.days>7)return false;
+ if(!v.weights||typeof v.weights!=='object'||Array.isArray(v.weights)||Object.keys(v.weights).some(k=>!VALID_CUSTOM_SKILLS.includes(k)))return false;
+ if(!VALID_CUSTOM_SKILLS.every(k=>Number.isInteger(v.weights[k])&&v.weights[k]>=5&&v.weights[k]<=70))return false;
+ if(VALID_CUSTOM_SKILLS.reduce((n,k)=>n+v.weights[k],0)!==100)return false;
+ if(typeof v.summaryVi!=='string'||!v.summaryVi.trim()||v.summaryVi.length>500)return false;
+ if(typeof v.followUpVi!=='string'||!v.followUpVi.trim()||v.followUpVi.length>400)return false;
+ if(!Number.isFinite(v.updatedAt)||!v.sessionsDone||typeof v.sessionsDone!=='object'||Array.isArray(v.sessionsDone))return false;
+ const days=Object.keys(v.sessionsDone);if(days.length>14)return false;
+ for(const day of days){const ids=v.sessionsDone[day];if(!/^\d{4}-\d{2}-\d{2}$/.test(day)||!Array.isArray(ids)||ids.length>60||ids.some(id=>typeof id!=='string'||id.length>80)||new Set(ids).size!==ids.length)return false;}
+ return true;
+}
 function customLesson(state){return validCustom(state?.customLesson)?clone(state.customLesson):null;}
 function saveCustomLesson(state,value){const s=clone(state);if(value===null){delete s.customLesson;return s;}if(!validCustom(value))return s;s.customLesson=clone(value);return s;}
 function seed(owner,oldPlan,oldActivity,current){const s=current?.owner===owner?clone(current):empty(owner);s.parts=s.parts||{};s.activity=s.activity||{};
