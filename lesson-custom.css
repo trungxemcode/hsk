@@ -50,12 +50,19 @@
 .overview-custom-actions{
   display:flex;
   flex-wrap:wrap;
+  align-items:stretch;
   gap:8px;
 }
 .lesson-custom-banner button,
 .overview-custom-lesson button,
 .lesson-custom-runner button{
+  box-sizing:border-box;
   min-height:44px;
+  margin:0!important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
   border-radius:var(--radius-btn);
   padding:9px 14px;
   white-space:normal;
@@ -231,5 +238,10 @@
   }
   .custom-chat-compose{
     grid-template-columns:1fr;
+  }
+  .lesson-custom-actions>button,
+  .overview-custom-actions>button,
+  .custom-session-tabs>button{
+    flex:1 1 135px;
   }
 }

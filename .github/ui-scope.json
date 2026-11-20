@@ -1,7 +1,8 @@
 {
-  "request": "Add Custom HSK Lesson feature: entry button and 'Bài học của tôi' section on the Lessons page plus 'Bài học của tôi hôm nay' card on Home (PC + mobile), with AI interview chat, fixed-form fallback, account sync, and deterministic time-boxed session runner.",
+  "request": "Add Custom HSK Lesson feature (Home + Lessons, PC + mobile) and fix #sentenceEditor .sentence-rail mobile horizontal tool rail layout.",
   "excludedRoutes": [
     "home",
-    "lessons"
+    "lessons",
+    "sentence-editor"
   ]
 }

@@ -280,6 +280,22 @@ const server=http.createServer((req,res)=>{
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'editor with right rail must not overflow horizontally on desktop');
     await page.setViewportSize({width:390,height:844});
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'editor with right rail must not overflow horizontally on mobile');
+    const mobileRailMetrics=await page.evaluate(()=>{
+      const rail=document.querySelector('#sentenceEditor .sentence-rail');
+      const dock=document.querySelector('#sentenceEditor .sentence-rail-dock');
+      const items=Array.from(document.querySelectorAll('#sentenceEditor .sentence-rail-item'));
+      return {
+        dockDirection:dock?getComputedStyle(dock).flexDirection:'',
+        railRect:rail?rail.getBoundingClientRect().toJSON():null,
+        items:items.map(el=>({tool:el.dataset.sentenceTool||'',width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height}))
+      };
+    });
+    assert.equal(mobileRailMetrics.dockDirection,'row','mobile tool rail dock must flow horizontally');
+    assert.ok(mobileRailMetrics.railRect&&mobileRailMetrics.railRect.height<=80,`mobile tool rail height must stay compact, got ${mobileRailMetrics.railRect?.height}`);
+    assert.ok(mobileRailMetrics.items.length>=4,'mobile tool rail must render tool buttons');
+    for(const item of mobileRailMetrics.items){
+      assert.ok(item.width>=65&&item.height>=36,`mobile tool rail button ${item.tool} must fit icon+label cleanly, got ${item.width}x${item.height}`);
+    }
 
     console.log('PASS AI sentence editor: login/offline states, manual requests, stale result rejection, provider, apply/undo and responsive layout');
   }finally{await browser.close();server.close();}
