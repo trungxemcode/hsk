@@ -94,6 +94,12 @@ const http = require('node:http');
       const savedMinutes = await page.evaluate(() => window.HSKStudyStore.customLesson?.minutes);
       assert.equal(savedMinutes, 25);
 
+      // Editing an existing profile must reopen the interview, not only show the saved preview.
+      await page.locator('#lessonCustomEditBtn').click();
+      await page.locator('#lessonCustomChatInput').waitFor({ state: 'visible' });
+      assert.match(await page.locator('#lessonCustomInterview').innerText(), /Bạn muốn bài học HSK tập trung nhiều nhất/);
+      await page.locator('#lessonCustomInterview').getByRole('button', { name: 'Đóng', exact: true }).click();
+
       // 3. Test offline fixed-form fallback
       await page.locator('#lessonCustomEditBtn').click();
       await page.locator('#lessonCustomToggleForm').click();
@@ -111,6 +117,17 @@ const http = require('node:http');
       await firstStep.waitFor({ state: 'visible' });
       await firstStep.getByRole('button', { name: 'Đánh dấu xong', exact: true }).click();
       assert.match(await firstStep.innerText(), /Đã hoàn thành/);
+
+      // Opening a quiz is not completion; the learner marks it done after returning.
+      const quizStep = page.locator('[data-custom-step*="vocab_quiz"]').first();
+      await quizStep.waitFor({ state: 'visible' });
+      const quizStepId = await quizStep.getAttribute('data-custom-step');
+      await quizStep.getByRole('button', { name: 'Thực hiện bước này', exact: true }).click();
+      const quizWasPremarked = await page.evaluate(id =>
+        Object.values(window.HSKStudyStore.customLesson?.sessionsDone || {}).some(ids => ids.includes(id)),
+        quizStepId
+      );
+      assert.equal(quizWasPremarked, false, 'opening an external quiz must not mark its custom step complete');
 
       // 5. Check Home card reflects saved profile without horizontal overflow
       await page.evaluate(() => window.HSKStudio.navigate('home'));

@@ -111,12 +111,12 @@
   }
 
   function resetInterview(hsk) {
-    const existing = getSavedProfile();
     interviewStep = 0;
     collectedAnswers = [];
     interviewBusy = false;
     interviewStatus = '';
-    draftProfile = existing ? C.createProfile({ ...existing, hsk }) : null;
+    formMode = false;
+    draftProfile = null;
     const first = C.INTERVIEW_STEPS[0];
     chatHistory = [
       { role: 'ai', text: 'Chào bạn! Mình sẽ hỏi nhanh 5 câu để xếp lại bài học HSK ' + hsk + ' đúng theo cách bạn thích.', hint: first.hintVi },
@@ -170,16 +170,23 @@
     const toggleBtn = btn(
       formMode ? 'Chuyển sang hỏi đáp AI' : 'Chọn nhanh bằng bảng',
       () => {
-        formMode = !formMode;
-        if (formMode && !draftProfile) {
-          const base = getSavedProfile();
-          draftProfile = base
-            ? C.createProfile({ ...base, hsk })
-            : C.createProfile({
-                hsk,
-                minutes: window.HSKPlanner?.plan?.minutes || 20,
-                days: window.HSKPlanner?.plan?.days || 6
-              });
+        if (!formMode) {
+          if (!draftProfile) {
+            const base = getSavedProfile();
+            draftProfile = collectedAnswers.length
+              ? seedFromAnswers(hsk, collectedAnswers)
+              : (base
+                ? C.createProfile({ ...base, hsk })
+                : C.createProfile({
+                    hsk,
+                    minutes: window.HSKPlanner?.plan?.minutes || 20,
+                    days: window.HSKPlanner?.plan?.days || 6
+                  }));
+          }
+          formMode = true;
+        } else {
+          resetInterview(hsk);
+          formMode = false;
         }
         rerender();
       },
@@ -556,7 +563,7 @@
         row.append(
           btn(revealed ? 'Ẩn pinyin & nghĩa' : 'Hiện pinyin & nghĩa', () => { revealed = !revealed; drawCard(); }, 'lesson-custom-secondary'),
           btn('Từ tiếp theo →', () => { idx = (idx + 1) % slice.length; revealed = false; drawCard(); }, 'lesson-custom-secondary'),
-          btn('Hoàn thành bước từ vựng', () => { hooks.markRead?.(); onDone(); }, 'lesson-custom-primary')
+          btn('Hoàn thành bước từ vựng', onDone, 'lesson-custom-primary')
         );
         card.append(row);
         stageEl.append(card);
@@ -730,32 +737,26 @@
       const row = el('div', undefined, 'lesson-custom-actions');
       const runBtn = btn(step.completed ? 'Luyện lại bước này' : 'Thực hiện bước này', () => {
         if (step.action === 'vocab_quiz') {
-          completeStep(step.stepId);
           hooks.startQuiz?.(words.slice(0, step.wordLimit || words.length));
           return;
         }
         if (step.action === 'vocab_srs') {
-          completeStep(step.stepId);
           hooks.startSrs?.(words.slice(0, step.wordLimit || words.length));
           return;
         }
         if (step.action === 'guided_auto') {
-          completeStep(step.stepId);
           hooks.openSection?.('guided');
           return;
         }
         if (step.action === 'practice_mini') {
-          completeStep(step.stepId);
           hooks.openSection?.('practice', 'mini');
           return;
         }
         if (step.action === 'practice_check') {
-          completeStep(step.stepId);
           hooks.openSection?.('practice', 'check');
           return;
         }
         if (step.action === 'real_reading' && window.HSKRealReading?.openFromLesson) {
-          completeStep(step.stepId);
           window.HSKRealReading.openFromLesson({
             id: lesson.id,
             hsk,
