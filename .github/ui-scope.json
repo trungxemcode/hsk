@@ -1,6 +1,4 @@
 {
-  "request": "PR #436: update Podcast video/subtitle shelf and 13 Chinese cue packs, preserve Admin YouTube bulk channel import from main, update Admin Podcast description for the third channel. Admin UI is reviewed by dedicated Admin browser tests; all 23 other visual-scope routes remain protected.",
-  "excludedRoutes": [
-    "admin"
-  ]
+  "request": "PR #445: add 191 Learn Chinese Through Podcast episodes and 1 Chinese Daily Podcast episode with their four-layer cue packs. The Podcast panel is opened from the Home shortcut and is not a standalone route in the visual-scope inventory; its behavior/layout is covered by tools/check-podcast-ui.cjs. Keep every inventoried route protected, including Home and Admin.",
+  "excludedRoutes": []
 }
