@@ -259,6 +259,29 @@ const MIME = {
         { timeout: 10000 }
       );
       assert.equal(await page.locator('#podcastTranscriptList .podcast-cue-item').count(), 353);
+
+      const newCdpCard = page.locator('.podcast-ep-card[data-yt-id="JUM04yRkIS0"]').first();
+      await newCdpCard.scrollIntoViewIfNeeded();
+      await newCdpCard.click();
+      await page.waitForFunction(
+        () => document.querySelectorAll('#podcastTranscriptList .podcast-cue-item').length === 166,
+        null,
+        { timeout: 10000 }
+      );
+      assert.equal(await page.locator('#podcastTranscriptList .podcast-cue-item').count(), 166, 'New Chinese Daily Podcast episode JUM04yRkIS0 loads all 166 cues');
+
+      const lctpChip = page.locator('#podcastChannelBar .podcast-channel-chip[data-handle="@LearnChineseThroughPodcast"]');
+      await lctpChip.click();
+      const newLctpCard = page.locator('.podcast-ep-card[data-yt-id="-ezLM4RT68M"]').first();
+      await newLctpCard.scrollIntoViewIfNeeded();
+      await newLctpCard.click();
+      await page.waitForFunction(
+        () => document.querySelectorAll('#podcastTranscriptList .podcast-cue-item').length === 123,
+        null,
+        { timeout: 10000 }
+      );
+      assert.equal(await page.locator('#podcastTranscriptList .podcast-cue-item').count(), 123, 'New Learn Chinese Through Podcast episode -ezLM4RT68M loads all 123 cues');
+
       await page.locator('#podcastChannelBar .podcast-channel-chip').first().click();
 
       // 6. Import English SRT subtitles via drawer & Quick Load
