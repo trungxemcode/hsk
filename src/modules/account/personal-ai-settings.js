@@ -269,7 +269,7 @@
     stored.providers=stored.providers||{};
     stored.providers[data.provider]={...data};
    }
-   window.HSKAiProviderPicker?.syncPersonal?.(user.uid,data,op==='remove'?{remove:true,provider:settings?.provider}:settings);
+   await window.HSKAiProviderPicker?.syncPersonal?.(user.uid,data,op==='remove'?{remove:true,provider:settings?.provider}:settings);
   }catch(error){
    if(!error?.isAborted&&id===requestId)status.textContent=error.message||'Chưa kết nối được máy chủ.';
   }finally{if(id===requestId)lock(false);}

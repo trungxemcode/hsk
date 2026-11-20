@@ -146,12 +146,13 @@
   async function saveEncryptedDirectCred(targetUid,cred){
     const key=cleanUid(targetUid);
     if(!cred||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider)){
-      directKeys.delete(key);
+      for(const cacheKey of directKeys.keys())if(cacheKey===key||cacheKey.startsWith(key+':'))directKeys.delete(cacheKey);
       try{localStorage.removeItem(cipherKey(targetUid));sessionStorage.removeItem(cipherKey(targetUid));}catch{}
       return;
     }
     const clean={provider:cred.provider,model:cred.model,enabled:Boolean(cred.enabled),apiKey:cred.apiKey};
     directKeys.set(key,clean);
+    directKeys.set(key+':'+clean.provider,clean);
     try{
       const aes=await getDeviceCryptoKey();
       if(!aes)return;
@@ -179,6 +180,7 @@
       if(!apiKey)return null;
       const cred={provider:raw.provider,model:String(raw.model||''),enabled:Boolean(raw.enabled),apiKey};
       directKeys.set(memKey,cred);
+      if(!prov)directKeys.set(cleanUid(targetUid),cred);
       return cred;
     }catch{return null;}
   }
