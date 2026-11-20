@@ -4714,28 +4714,90 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
   }
 
-  /* 3. Mobile Home: Daily Word clean audio target & single-line Swap button */
+  /* 3. Mobile Home: Compact Quick Search bar & Daily Word horizontal layout */
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 .overview-search{
+    margin:0 0 10px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-search > summary{
+    min-height:44px !important;
+    padding:10px 14px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    line-height:1.25 !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord{
+    margin:0 0 10px !important;
+    padding:10px 14px !important;
+  }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head{
     align-items:center !important;
     gap:8px !important;
-    padding-bottom:10px !important;
+    padding:0 0 6px !important;
+    margin:0 0 2px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head h3{
+    font-size:14.5px !important;
+    line-height:1.25 !important;
+    margin:0 !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head button{
     white-space:nowrap !important;
     flex:0 0 auto !important;
-    min-height:40px !important;
+    min-height:36px !important;
+    height:36px !important;
     padding:0 10px !important;
     border-radius:10px !important;
+    font-size:12.5px !important;
+    line-height:1 !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-row{
     display:flex !important;
     align-items:center !important;
-    gap:10px !important;
+    gap:8px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-row summary{
+    display:grid !important;
+    grid-template-columns:auto minmax(0,1fr) !important;
+    grid-template-rows:auto auto !important;
+    column-gap:12px !important;
+    row-gap:2px !important;
+    align-items:stretch !important;
+    padding:8px 12px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-row summary strong{
+    grid-column:1 !important;
+    grid-row:1 / 3 !important;
+    align-self:center !important;
+    font-size:clamp(32px, 9.5vw, 40px) !important;
+    line-height:1.05 !important;
+    margin:0 !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-row summary span:first-of-type{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    align-self:start !important;
+    font-size:13.5px !important;
+    line-height:1.2 !important;
+    margin:0 !important;
+    padding-top:1px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-row summary span:last-of-type{
+    grid-column:2 !important;
+    grid-row:2 !important;
+    align-self:end !important;
+    font-size:14.5px !important;
+    line-height:1.25 !important;
+    margin:0 !important;
+    padding-bottom:1px !important;
+    overflow-wrap:anywhere;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-sound{
     border-left:0 !important;
     flex:0 0 auto !important;
-    padding-right:4px;
+    padding-right:0 !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-sound button{
     width:44px !important;
@@ -4871,5 +4933,26 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   }
   html body:not(#_rd).studio-enabled.mobile-ux #lessonsPanel .lesson-course-progress .lesson-resume:not(:disabled) strong{
     color:var(--button-active-text) !important;
+  }
+
+  /* 10. Mobile Declutter: hide verbose filler explanatory paragraphs across mobile screens
+     (DOM & desktop remain 100% preserved; real status/stats elements remain visible). */
+  html body:not(#_rd).studio-enabled.mobile-ux #realReadingPanel .rr-subtitle,
+  html body:not(#_rd).studio-enabled.mobile-ux #lessonsPanel > p.hint,
+  html body:not(#_rd).studio-enabled.mobile-ux #quizPanel > p.hint,
+  html body:not(#_rd).studio-enabled.mobile-ux #quizCombinedTypes > p.hint,
+  html body:not(#_rd).studio-enabled.mobile-ux #quizForm .adaptive-option + p.hint,
+  html body:not(#_rd).studio-enabled.mobile-ux #srsPanel > p.hint,
+  html body:not(#_rd).studio-enabled.mobile-ux #mistakesPanel > p.hint:not(#mistakeSummary),
+  html body:not(#_rd).studio-enabled.mobile-ux #comparePanel #compareIntro,
+  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel #dictionaryModeHint,
+  html body:not(#_rd).studio-enabled.mobile-ux #translatorPanel > p.hint,
+  html body:not(#_rd).studio-enabled.mobile-ux #matchGamePanel .pg-subtitle,
+  html body:not(#_rd).studio-enabled.mobile-ux #sentenceGamePanel .pg-subtitle,
+  html body:not(#_rd).studio-enabled.mobile-ux .s4-head > p,
+  html body:not(#_rd).studio-enabled.mobile-ux #podcastPanel .podcast-subtitle,
+  html body:not(#_rd).studio-enabled.mobile-ux #accountSettingsView > p.hint,
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #mobileTodayHero > p:not(.overview-lesson){
+    display:none !important;
   }
 }
