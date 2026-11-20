@@ -162,10 +162,10 @@
       : [];
 
     const question = mode === 'design'
-      ? 'Hãy thiết kế giáo án AI cá nhân hóa cho bài học này theo lesson.content.aiCustomSpec. Chỉ trả về chuỗi JSON thuần {"coachIntroVi":"...","sessions":[{"label":"...","minutes":10,"goalVi":"...","steps":[{"id":"s1","skill":"vocab","action":"ai_vocab_coach","minutes":5,"titleVi":"...","detailVi":"...","coachTipVi":"...","focusWords":[{"han":"...","pin":"...","mean":"...","mnemonicVi":"...","exampleCn":"...","examplePin":"...","exampleVi":"..."}],"drills":[{"promptVi":"...","questionCn":"...","options":["A","B","C","D"],"answerIndex":0,"explanationVi":"..."}]}]}]}.'
+      ? 'Hãy thiết kế giáo án AI cá nhân hóa cho bài học này theo lesson.content.aiCustomSpec. Bạn có toàn quyền can thiệp, tách/gộp/đặt tên và chỉnh sửa số phiên (sessions: 1..10 phiên, mỗi phiên 1..4 bước, tổng số phút khớp quỹ thời gian hoặc yêu cầu trong customPrompt/learnerContextVi; nếu học viên muốn học ngắt quãng 5-10p/lần thì bắt buộc chia thành các phiên 5-10 phút). Chỉ trả về chuỗi JSON thuần {"coachIntroVi":"...","sessions":[{"label":"...","minutes":8,"goalVi":"...","steps":[{"id":"s1","skill":"vocab","action":"ai_vocab_coach","minutes":8,"titleVi":"...","detailVi":"...","coachTipVi":"...","focusWords":[{"han":"...","pin":"...","mean":"...","mnemonicVi":"...","exampleCn":"...","examplePin":"...","exampleVi":"..."}],"drills":[{"promptVi":"...","questionCn":"...","options":["A","B","C","D"],"answerIndex":0,"explanationVi":"..."}]}]}]}.'
       : mode === 'interview'
-        ? 'Đọc lesson.content.aiCustomSpec. Nếu học viên chưa nêu đủ trọng tâm + thời gian/kiểu học (và dưới 3 lượt), trả JSON {"ready":false,"replyVi":"câu hỏi tiếp theo bằng tiếng Việt","suggestedReplies":["gợi ý 1","gợi ý 2","gợi ý 3"]}. Nếu đã đủ, trả JSON {"ready":true,"replyVi":"tổng kết","profile":{"focusChoice":"vocab_heavy","minutes":25,"days":6,"style":"spare_time","goal":"conversation","weights":{"vocab":50,"grammar":15,"reading":15,"listening":15,"writing":5},"summaryVi":"...","followUpVi":"...","learnerContextVi":"..."}}.'
-        : 'Đọc lesson.content.aiCustomSpec và thiết kế hồ sơ học HSK cá nhân hóa. Chỉ trả về JSON thuần {"focusChoice":"vocab_heavy|grammar_heavy|listening_speaking|reading_heavy|balanced","minutes":25,"days":6,"style":"spare_time|focused_block|hands_free|bedtime_review|weekend_sprint","goal":"exam|conversation|reading_comprehension|work_travel","weights":{"vocab":50,"grammar":15,"reading":15,"listening":15,"writing":5},"summaryVi":"...","followUpVi":"...","learnerContextVi":"..."}.';
+        ? 'Đọc lesson.content.aiCustomSpec. Nếu học viên chưa nêu đủ trọng tâm + thời gian/kiểu học (và dưới 3 lượt), trả JSON {"ready":false,"replyVi":"câu hỏi tiếp theo bằng tiếng Việt","suggestedReplies":["gợi ý 1","gợi ý 2","gợi ý 3"]}. Nếu đã đủ, bạn toàn quyền tự thiết kế cách chia phiên trong aiBlueprint (1..10 phiên tùy mục đích & nhịp sinh hoạt của học viên, VD: chia nhiều phiên ngắn 5-10p ban ngày + phiên tối 30p, hoặc các phiên chuyên biệt), trả JSON {"ready":true,"replyVi":"tổng kết","profile":{"focusChoice":"vocab_heavy","minutes":25,"days":6,"style":"spare_time","goal":"conversation","weights":{"vocab":50,"grammar":15,"reading":15,"listening":15,"writing":5},"summaryVi":"...","followUpVi":"...","learnerContextVi":"...","aiBlueprint":[{"label":"Phiên 1","minutes":8,"goalVi":"...","steps":[{"id":"s1","skill":"vocab","action":"vocab_cards","minutes":8,"titleVi":"...","detailVi":"...","coachTipVi":"..."}]}]}}.'
+        : 'Đọc lesson.content.aiCustomSpec và thiết kế hồ sơ học HSK cá nhân hóa kèm cấu trúc chia phiên aiBlueprint (1..10 phiên do bạn tự chia linh hoạt theo mục đích học viên). Chỉ trả về JSON thuần {"focusChoice":"vocab_heavy|grammar_heavy|listening_speaking|reading_heavy|balanced","minutes":25,"days":6,"style":"spare_time|focused_block|hands_free|bedtime_review|weekend_sprint","goal":"exam|conversation|reading_comprehension|work_travel","weights":{"vocab":50,"grammar":15,"reading":15,"listening":15,"writing":5},"summaryVi":"...","followUpVi":"...","learnerContextVi":"...","aiBlueprint":[{"label":"Phiên 1","minutes":8,"goalVi":"...","steps":[{"id":"s1","skill":"vocab","action":"vocab_cards","minutes":8,"titleVi":"...","detailVi":"...","coachTipVi":"..."}]}]}.';
 
     const askRes = await fetch(askUrl, {
       method: 'POST',
@@ -312,6 +312,7 @@
     const timer = setTimeout(() => controller.abort(), 95000);
     try {
       const token = await account.getIdToken();
+      const scheduleSpec = C.extractCustomSchedule?.(profile, { customPrompt }) || null;
       const reqBody = {
         hsk,
         mode: 'design',
@@ -320,11 +321,12 @@
           focusChoice: profile.focusChoice,
           minutes: profile.minutes,
           days: profile.days,
-          style: profile.style,
+          style: scheduleSpec?.isMicro ? 'spare_time' : profile.style,
           goal: profile.goal,
           weights: profile.weights,
           summaryVi: profile.summaryVi,
-          learnerContextVi: profile.learnerContextVi || ''
+          learnerContextVi: profile.learnerContextVi || '',
+          scheduleTargets: scheduleSpec?.sessions?.map(s => `${s.labelPrefix} (${s.minutes} phút)`) || undefined
         },
         lesson: compactLessonPayload(lesson, words)
       };
@@ -995,7 +997,8 @@
     // 3. AI-curated vocabulary coach OR standard vocab cards
     if (step.action === 'ai_vocab_coach' || step.action === 'vocab_cards') {
       const aiFocus = Array.isArray(step.focusWords) && step.focusWords.length ? step.focusWords : null;
-      const slice = aiFocus || words.slice(0, step.wordLimit || 8);
+      const offset = Number(step.wordOffset) > 0 ? Number(step.wordOffset) : 0;
+      const slice = aiFocus || words.slice(offset, offset + (step.wordLimit || 8));
       if (!slice.length) {
         stageEl.append(el('p', 'Chưa có từ vựng trong bài này.'), btn('Đánh dấu xong', onDone, 'lesson-custom-primary'));
         return;
@@ -1196,27 +1199,39 @@
     promptInput.maxLength = 300;
     promptInput.value = plan.customPrompt || '';
     promptInput.disabled = lessonDesignBusy;
-    promptInput.placeholder = 'Yêu cầu riêng cho AI ở bài này (VD: tạo thêm bài tập từ dễ nhầm, rút gọn 15p, hội thoại công việc)…';
+    promptInput.placeholder = 'Yêu cầu AI can thiệp chia lại phiên hoặc thiết kế bài tập (VD: chia sáng 4 phiên 7-8p + tối 30p, tách 6 phiên 10p)…';
     const designBtn = el(
       'button',
       lessonDesignBusy
         ? '✨ AI đang thiết kế bài này…'
-        : (plan.hasLessonAiDesign ? '✨ Nhờ AI thiết kế lại bài này' : '✨ Nhờ AI thiết kế giáo án & bài tập bài này'),
+        : (plan.hasLessonAiDesign ? '✨ Nhờ AI chia lại phiên & thiết kế bài này' : '✨ Nhờ AI thiết kế giáo án & chia phiên bài này'),
       'lesson-custom-primary'
     );
     designBtn.id = 'lessonCustomAiDesignBtn';
     designBtn.type = 'submit';
     designBtn.disabled = lessonDesignBusy;
-    aiForm.onsubmit = async e => {
-      e.preventDefault();
+    const runAiArchitect = async customText => {
       if (lessonDesignBusy) return;
+      if (customText && C.hasExplicitMicroText?.(customText)) {
+        const prevCtx = String(profile.learnerContextVi || '').trim();
+        const nextCtx = prevCtx.includes(customText)
+          ? prevCtx
+          : [prevCtx, `Yêu cầu nhịp học: ${customText}`].filter(Boolean).join(' · ').slice(0, 500);
+        profile = saveProfile({
+          ...profile,
+          style: 'spare_time',
+          learnerContextVi: nextCtx
+        });
+        activeSessionIndex = 0;
+        activeStepStage = null;
+      }
       lessonDesignBusy = true;
-      lessonDesignStatus = '✨ AI đang đọc từ vựng, ngữ pháp của bài và thiết kế các bước + bài tập riêng cho bạn...';
+      lessonDesignStatus = '✨ AI đang can thiệp chia lại cấu trúc phiên học và biên soạn bài tập riêng cho bạn...';
       mountLessonRunner(rootEl, lesson, words, hooks);
-      const res = await requestAiLessonDesign(profile, lesson, words, promptInput.value.trim());
+      const res = await requestAiLessonDesign(profile, lesson, words, customText);
       lessonDesignBusy = false;
       if (res.ok) {
-        lessonDesignStatus = `✨ AI (${formatProviderName(res.provider)}) đã thiết kế xong giáo án & bài tập riêng cho Bài ${lesson.number}!`;
+        lessonDesignStatus = `✨ AI (${formatProviderName(res.provider)}) đã tùy chỉnh cấu trúc phiên & bài tập riêng cho Bài ${lesson.number}!`;
         activeSessionIndex = 0;
         activeStepStage = null;
       } else {
@@ -1224,8 +1239,26 @@
       }
       mountLessonRunner(rootEl, lesson, words, hooks);
     };
+    aiForm.onsubmit = async e => {
+      e.preventDefault();
+      await runAiArchitect(promptInput.value.trim());
+    };
     aiForm.append(promptInput, designBtn);
-    aiBox.append(aiForm);
+    const sessionPresets = el('div', undefined, 'custom-chip-list');
+    const presetItems = [
+      ['⚡ Chia nhỏ 5–10p/phiên', 'Hãy chia lại toàn bộ bài này thành các phiên ngắn 5-10 phút mỗi lần, mỗi phiên 1 nhiệm vụ gọn vừa sức'],
+      ['🌅 Sáng 5–10p · Tối 30p', 'Hãy chia ban ngày thành các phiên tranh thủ 5-10 phút học từ vựng và buổi tối 1 phiên tập trung 30 phút ôn ngữ pháp, đọc, nghe'],
+      ['🎯 Gộp 2 phiên chuyên sâu', 'Hãy cấu trúc lại bài này thành 2 phiên chuyên sâu: phiên 1 nắm từ vựng + ngữ pháp, phiên 2 luyện đọc + phản xạ tình huống']
+    ];
+    for (const [chipLabel, chipPrompt] of presetItems) {
+      const chipBtn = btn(chipLabel, () => {
+        promptInput.value = chipPrompt;
+        runAiArchitect(chipPrompt);
+      }, 'custom-chip');
+      chipBtn.disabled = lessonDesignBusy;
+      sessionPresets.append(chipBtn);
+    }
+    aiBox.append(aiForm, sessionPresets);
     wrap.append(aiBox);
 
     if (interviewOpen) {
