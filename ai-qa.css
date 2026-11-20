@@ -783,8 +783,68 @@ html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaS
 #aiQaPanel .qa-provider-item[aria-disabled="true"]{opacity:.55;cursor:not-allowed;}
 #aiQaPanel .qa-provider-item[aria-disabled="true"]:hover{background:var(--palette-clear);}
 @media(max-width:720px){
-  #aiQaPanel .qa-provider-btn{width:28px;padding:0;justify-content:center;}
-  #aiQaPanel .qa-provider-btn :is(.qa-provider-label,.qa-provider-caret){display:none;}
+  /* Two-row mobile composer: full-width unclipped textarea on top, crisp action bar below. */
+  html body.studio-enabled[data-studio-hub="ai-qa"]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel :is(#aiQaForm,#qaProjectChatForm).qa-chat-composer{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:6px 8px;
+    padding:10px 10px 8px!important;
+    border-radius:18px!important;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel .qa-chat-composer :is(#aiQaInput,#qaProjectQuestion){
+    order:-1;
+    flex:1 0 100%;
+    width:100%;
+    min-height:36px;
+    padding:2px 6px 4px;
+    line-height:1.45;
+    box-sizing:border-box;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel .qa-chat-composer .qa-chat-file-preview{
+    order:-2;
+  }
+  #aiQaPanel .qa-chat-composer .qa-chat-attach{
+    flex:0 0 38px;
+    width:38px;
+    height:38px;
+    min-height:38px;
+  }
+  #aiQaPanel .qa-chat-composer :is(#aiQaSend,button[type=submit]){
+    margin-left:auto;
+    flex:0 0 40px;
+    width:40px;
+    height:40px;
+    min-height:40px;
+    padding:0!important;
+  }
+  #aiQaPanel .qa-provider-btn{
+    width:auto;
+    min-width:38px;
+    height:36px;
+    min-height:36px;
+    max-width:132px;
+    padding:0 10px;
+    justify-content:center;
+    border:1px solid var(--qa-input-border);
+  }
+  #aiQaPanel .qa-provider-btn .qa-provider-label{display:inline;font-size:12px;}
+  #aiQaPanel .qa-provider-btn .qa-provider-caret{display:inline;}
+  #aiQaPanel .qa-effort-btn{
+    height:36px;
+    min-height:36px;
+    padding:0 10px;
+    border:1px solid var(--qa-input-border);
+  }
+  /* Distinguish inner chat-history trigger from the global app hamburger. */
+  body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel .ai-qa-chatbar{
+    min-height:52px;
+    padding:8px 12px;
+    border-bottom:1px solid var(--qa-input-border);
+  }
 }
 
 /* Hiệu ứng suy luận trực quan của Gia sư AI (ChatGPT / Gemini style) */

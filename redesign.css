@@ -2130,8 +2130,8 @@ body.studio-enabled .mobile-focus-bar progress{
 body.studio-enabled .mobile-focus-bar progress::-webkit-progress-bar{ background:var(--rd-line-soft) !important; }
 body.studio-enabled .mobile-focus-bar progress::-webkit-progress-value{ background:var(--rd-brand) !important; }
 body.studio-enabled .mobile-focus-bar > button{
-  width:2.75em;height:2.75em;min-height:44px;min-width:44px;
-  line-height:1;
+  width:44px;height:44px;min-height:44px;min-width:44px;
+  font-size:20px;line-height:1;
   border-radius:var(--radius-rd-003) !important;
   border:1px solid var(--rd-line) !important;
   background:var(--rd-surface) !important;
@@ -4663,4 +4663,213 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .ratings button[data-ratin
 html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-icon.indigo{
   background:var(--legacy-hex-363050) !important;
   color:var(--rd-static-color-111) !important;
+}
+
+/* ==========================================================================
+   MOBILE DESIGN SYSTEM POLISH (strictly <=720px / mobile-ux; PC 1440px untouched)
+   ========================================================================== */
+@media (max-width:720px), (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  /* 1. Shared Mobile Header: unify control heights, radii, and dark-mode streak token */
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHeader .topbar-actions .level-pill{
+    height:40px !important;
+    min-height:40px !important;
+    padding:0 12px !important;
+    border-radius:var(--radius-btn) !important;
+    white-space:nowrap !important;
+    box-shadow:none !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHeader #homeStreak{
+    height:40px !important;
+    min-height:40px !important;
+    min-width:44px !important;
+    padding:0 10px !important;
+    border-radius:var(--radius-btn) !important;
+    white-space:nowrap !important;
+    box-shadow:none !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHeader #homeStreak{
+    background:rgba(245,158,11,0.16) !important;
+    border:1px solid rgba(245,158,11,0.34) !important;
+    color:#fde68a !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHeader #headerInfo{
+    box-shadow:none !important;
+    border:1px solid var(--rd-line) !important;
+  }
+
+  /* 2. Native <select> affordance: crisp chevron + ellipsis on all mobile screens */
+  html body:not(#_rd).studio-enabled.mobile-ux select:not(.qa-thinking){
+    appearance:none;
+    -webkit-appearance:none;
+    padding-right:36px !important;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+    background-repeat:no-repeat !important;
+    background-position:right 12px center !important;
+    background-size:16px 16px !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux select:not(.qa-thinking){
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  }
+
+  /* 3. Mobile Home: Daily Word clean audio target & single-line Swap button */
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head{
+    align-items:center !important;
+    gap:8px !important;
+    padding-bottom:10px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head button{
+    white-space:nowrap !important;
+    flex:0 0 auto !important;
+    min-height:40px !important;
+    padding:0 10px !important;
+    border-radius:10px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-row{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-sound{
+    border-left:0 !important;
+    flex:0 0 auto !important;
+    padding-right:4px;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-sound button{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    border-radius:12px !important;
+    background:var(--rd-brand-soft) !important;
+    border:1px solid var(--rd-line) !important;
+    color:var(--rd-brand) !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-sound button{
+    background:var(--palette-dark-violet-soft) !important;
+    border-color:var(--legacy-hex-44405c) !important;
+    color:var(--legacy-hex-c9c0ff) !important;
+  }
+
+  /* 4. Mobile Home: Hero card single-line goal action & cohesive surface rhythm */
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #mobileTodayHero .mobile-hero-top{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    flex-wrap:nowrap !important;
+    gap:10px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #mobileTodayHero .mobile-hero-top h2{
+    flex:1 1 auto !important;
+    min-width:0 !important;
+    font-size:19px !important;
+    line-height:1.25 !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #studioHome #mobileTodayHero .mobile-hero-top > button{
+    flex:0 0 auto !important;
+    max-width:none !important;
+    min-height:40px !important;
+    padding:0 12px !important;
+    border-radius:10px !important;
+    font-size:12.5px !important;
+    font-weight:650 !important;
+    white-space:nowrap !important;
+    line-height:1.2 !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 #mobileTodayHero .mobile-hero-cta:not(:disabled){
+    background:var(--palette-white) !important;
+    color:#2e2584 !important;
+    border:0 !important;
+    box-shadow:none !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 #mobileTodayHero .mobile-hero-top > button:not(:disabled){
+    background:rgba(15,17,30,0.38) !important;
+    border:1px solid rgba(255,255,255,0.28) !important;
+    color:var(--palette-white) !important;
+  }
+
+  /* 5. Mobile Learn (Flashcards): fix focus-bar close collision & competing Next CTA */
+  html body:not(#_rd).studio-enabled.mobile-ux .mobile-focus-bar:not([hidden]){
+    display:grid !important;
+    grid-template-columns:44px minmax(0,1fr) !important;
+    align-items:center !important;
+    gap:6px 12px !important;
+    padding:8px 16px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux .mobile-focus-bar > button{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    font-size:20px !important;
+    padding:0 !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux.mobile-card-mode #progress{
+    display:none !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux.mobile-card-mode .flash-focus > .buttons #next:not(:active):not(:focus-visible){
+    background:var(--button-bg) !important;
+    color:var(--button-text) !important;
+    border-color:var(--button-border) !important;
+    box-shadow:none !important;
+  }
+
+  /* 6. Mobile Search: demote secondary scope toggle so it doesn't compete with top tabs & Search CTA */
+  html body:not(#_rd).studio-enabled.mobile-ux:not([data-search-tool="handwriting"]) #searchPanel .dictionary-modes:not([hidden]){
+    gap:4px !important;
+    padding:3px !important;
+    border-radius:12px !important;
+    background:var(--rd-surface) !important;
+    border:1px solid var(--rd-line) !important;
+    margin-bottom:8px !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel .dictionary-modes button{
+    min-height:36px !important;
+    padding:6px 12px !important;
+    border-radius:9px !important;
+    border-color:transparent !important;
+    font-size:13px !important;
+    font-weight:600 !important;
+    white-space:nowrap !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel .dictionary-modes button[aria-pressed="true"]:not(:active):not(:focus-visible){
+    background:var(--rd-brand-soft) !important;
+    color:var(--rd-brand) !important;
+    border-color:transparent !important;
+  }
+  html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #searchPanel .dictionary-modes button[aria-pressed="true"]:not(:active):not(:focus-visible){
+    background:var(--palette-dark-violet-soft) !important;
+    color:var(--legacy-hex-c9c0ff) !important;
+  }
+
+  /* 7. Mobile Translator: give #translationStatus clean breathing room below primary button */
+  html body:not(#_rd).studio-enabled.mobile-ux #translatorPanel #translationStatus{
+    margin:12px 0 6px !important;
+    line-height:1.5;
+  }
+
+  /* 8. Mobile Notebook: make "+ Thêm từ" full-width primary action instead of isolated right-floating chip */
+  html body:not(#_rd).studio-enabled.mobile-ux #notebookPanel > .mobile-add-word{
+    align-self:stretch !important;
+    width:100% !important;
+    min-height:46px !important;
+    font-weight:700 !important;
+    background:var(--button-active-bg) !important;
+    color:var(--button-active-text) !important;
+    border-color:var(--button-active-bg) !important;
+  }
+
+  /* 9. Mobile Lessons: highlight primary resume CTA cleanly */
+  html body:not(#_rd).studio-enabled.mobile-ux #lessonsPanel .lesson-course-progress .lesson-resume:not(:disabled){
+    background:var(--button-active-bg) !important;
+    color:var(--button-active-text) !important;
+    border-color:var(--button-active-bg) !important;
+    font-weight:700 !important;
+    box-shadow:none !important;
+  }
+  html body:not(#_rd).studio-enabled.mobile-ux #lessonsPanel .lesson-course-progress .lesson-resume:not(:disabled) strong{
+    color:var(--button-active-text) !important;
+  }
 }

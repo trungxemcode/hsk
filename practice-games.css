@@ -45,15 +45,20 @@
 .pg-finish p{color:var(--muted);margin:0}
 @media(max-width:720px){
  .pg-panel{width:100%}
- .pg-content{gap:13px}
- .pg-controls{align-items:stretch}
- .pg-config{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px}
+ .pg-content{gap:12px}
+ .pg-intro h2{font-size:21px;line-height:1.25}
+ .pg-controls{align-items:stretch;gap:10px}
+ .pg-config{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
  .pg-config .pg-restart{grid-column:1/-1}
+ .pg-summary{padding:11px 14px}
+ .pg-summary strong{font-size:14px}
+ .pg-visibility{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .pg-visibility .pg-toggle{width:100%;padding:8px 6px;font-size:12.5px;white-space:nowrap}
  .pg-grid-head,.pg-match-grid{gap:6px}
  .pg-match-column{gap:7px}
- .pg-match-tile{min-height:73px;padding:8px 4px;border-radius:var(--radius-btn);font-size:12px}
- .pg-match-column[data-column=han] .pg-match-tile{font-size:20px}
- .pg-sentence-prompt{padding:17px 13px}
+ .pg-match-tile{min-height:68px;padding:8px 6px;border-radius:var(--radius-btn);font-size:12px;line-height:1.32;box-shadow:none}
+ .pg-match-column[data-column=han] .pg-match-tile{font-size:19px;line-height:1.2}
+ .pg-sentence-prompt{padding:16px 14px}
  .pg-actions .pg-primary{flex:1}
  .pg-actions .pg-restart{flex:1}
 }

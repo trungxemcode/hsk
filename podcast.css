@@ -1563,6 +1563,82 @@ html[data-theme="dark"] body.studio-enabled #podcastPanel button.podcast-channel
   }
 }
 
+@media (max-width: 720px) {
+  /* Keep episode poster title clearly above the subtitle mask on narrow phones. */
+  #podcastPanel .podcast-video-shell {
+    aspect-ratio: auto;
+    min-height: 256px;
+  }
+  #podcastPanel .podcast-poster-fallback {
+    padding: 12px 14px;
+    gap: 5px;
+  }
+  #podcastPanel .podcast-poster-badge {
+    font-size: 10.5px;
+    padding: 3px 9px;
+  }
+  #podcastPanel .podcast-poster-title {
+    font-size: 14.5px;
+    line-height: 1.3;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #podcastPanel .podcast-poster-sub {
+    display: none;
+  }
+  #podcastPanel .podcast-sub-mask {
+    left: 10px;
+    right: 10px;
+    bottom: var(--podcast-mask-bottom, 10px);
+    padding: 8px 12px;
+    border-radius: 12px;
+  }
+  /* Structured mobile playback controls: transport row + clean 2-col utilities + full-width speed bar. */
+  #podcastPanel .podcast-transport-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  #podcastPanel .podcast-transport-group {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+  }
+  html body.studio-enabled #podcastPanel button#podcastPrevCueBtn,
+  html body.studio-enabled #podcastPanel button#podcastPlayBtn,
+  html body.studio-enabled #podcastPanel button#podcastNextCueBtn {
+    grid-column: span 2;
+    min-height: 44px !important;
+    padding: 8px 10px !important;
+    width: 100%;
+  }
+  html body.studio-enabled #podcastPanel button#podcastReplayCueBtn,
+  html body.studio-enabled #podcastPanel button#podcastLoopCueBtn {
+    grid-column: span 3;
+    min-height: 40px !important;
+    padding: 7px 10px !important;
+    width: 100%;
+  }
+  #podcastPanel .podcast-speed-group {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    padding: 3px;
+    gap: 3px;
+    box-sizing: border-box;
+  }
+  html body.studio-enabled #podcastPanel button.podcast-speed-btn {
+    width: 100%;
+    min-height: 36px !important;
+    padding: 6px 8px !important;
+    border-radius: 8px !important;
+    font-size: 12.5px !important;
+  }
+}
+
 @media (max-width: 600px) {
   .podcast-yt-host {
     top: -54px;
@@ -1577,20 +1653,20 @@ html[data-theme="dark"] body.studio-enabled #podcastPanel button.podcast-channel
     height: 30px;
   }
   .podcast-sub-mask {
-    left: 1%;
-    right: 1%;
-    padding: 6px 10px 7px;
+    left: 10px;
+    right: 10px;
+    padding: 7px 11px;
   }
   .podcast-mask-zh {
-    font-size: 13px;
-    line-height: 1.32;
+    font-size: 13.5px;
+    line-height: 1.35;
   }
   .podcast-mask-pinyin {
-    font-size: 10.5px;
+    font-size: 11px;
   }
   .podcast-mask-vi {
-    font-size: 12px;
-    line-height: 1.32;
+    font-size: 12.5px;
+    line-height: 1.35;
   }
   .podcast-mask-group .podcast-group-lbl,
   .podcast-layer-group .podcast-group-lbl {
