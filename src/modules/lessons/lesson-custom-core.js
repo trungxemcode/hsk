@@ -868,6 +868,24 @@
     });
   }
 
+  function sessionsFitCustomSchedule(sessions, customSchedule) {
+    if (!customSchedule?.isMicro) return true;
+    if (!Array.isArray(sessions) || !sessions.length) return false;
+    const expectedMicroCount = customSchedule.sessions.filter(session => session.isMicro).length;
+    const actualMicroCount = sessions.filter(session =>
+      Number(session.minutes) >= customSchedule.minMicro &&
+      Number(session.minutes) <= customSchedule.maxMicro
+    ).length;
+    if (customSchedule.isHybrid) {
+      return actualMicroCount >= Math.max(1, expectedMicroCount - 1) &&
+        sessions.some(session => Math.abs(Number(session.minutes) - customSchedule.eveningMins) <= 5);
+    }
+    return sessions.every(session =>
+      Number(session.minutes) >= customSchedule.minMicro &&
+      Number(session.minutes) <= customSchedule.maxMicro
+    );
+  }
+
   function buildSkillBlueprints(profile, lesson, progressRecord = {}) {
     const w = profile.weights;
     const words = Array.isArray(lesson?.words) ? lesson.words : [];
@@ -1129,29 +1147,16 @@
     const rawAiSessions = lessonAiDesign?.sessions?.length
       ? sanitizeAiSessions(lessonAiDesign.sessions, profile.minutes)
       : null;
-    const aiSessionsSource = rawAiSessions?.length
+    const reshapedAiSessions = rawAiSessions?.length
       ? (customSchedule?.explicitMicro ? reshapeAiSessionsToCustomSchedule(rawAiSessions, customSchedule) : rawAiSessions)
+      : null;
+    const aiSessionsSource = reshapedAiSessions?.length && sessionsFitCustomSchedule(reshapedAiSessions, customSchedule)
+      ? reshapedAiSessions
       : null;
     const blueprintSessions = !aiSessionsSource?.length && Array.isArray(profile.aiBlueprint) && profile.aiBlueprint.length
       ? sanitizeAiSessions(profile.aiBlueprint, profile.minutes)
       : null;
-    const expectedMicroCount = customSchedule?.sessions?.filter(sess => sess.isMicro).length || 0;
-    const actualMicroCount = blueprintSessions?.filter(sess =>
-      Number(sess.minutes) >= (customSchedule?.minMicro || 0) &&
-      Number(sess.minutes) <= (customSchedule?.maxMicro || 180)
-    ).length || 0;
-    const blueprintHasFocusedSession = !customSchedule?.isHybrid || blueprintSessions?.some(sess =>
-      Math.abs(Number(sess.minutes) - customSchedule.eveningMins) <= 5
-    );
-    const blueprintFitsCustomSchedule = !customSchedule?.explicitMicro || (
-      actualMicroCount >= Math.max(1, expectedMicroCount - 1) &&
-      blueprintHasFocusedSession &&
-      (customSchedule.isHybrid || blueprintSessions.every(sess =>
-        Number(sess.minutes) >= customSchedule.minMicro &&
-        Number(sess.minutes) <= customSchedule.maxMicro
-      ))
-    );
-    const useAiBlueprint = Boolean(blueprintSessions?.length && blueprintFitsCustomSchedule);
+    const useAiBlueprint = Boolean(blueprintSessions?.length && sessionsFitCustomSchedule(blueprintSessions, customSchedule));
 
     const sessions = [];
     let completedSteps = 0;
