@@ -791,7 +791,7 @@ html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaS
     align-items:center;
     gap:6px 8px;
     padding:10px 10px 8px!important;
-    border-radius:18px!important;
+    border-radius:var(--radius-18px)!important;
   }
   html body.studio-enabled[data-studio-hub="ai-qa"]
   #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel .qa-chat-composer :is(#aiQaInput,#qaProjectQuestion){
