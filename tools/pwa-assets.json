@@ -28,6 +28,7 @@
     "src/modules/speech/speech.js",
     "speech.css",
     "src/modules/speaking/pitch-core.js",
+    "src/modules/speaking/mandarin-asr-worker.js",
     "src/modules/speaking/speech-recorder.js",
     "src/modules/speaking/shadowing.js",
     "speaking.css",

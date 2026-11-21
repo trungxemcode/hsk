@@ -2739,6 +2739,7 @@
       "name": "Thu âm giọng nói, kiểm tra thanh điệu 4 thanh và shadowing trong bài học",
       "checks": [
         {"kind": "file", "file": "src/modules/speaking/pitch-core.js", "value": ""},
+        {"kind": "file", "file": "src/modules/speaking/mandarin-asr-worker.js", "value": ""},
         {"kind": "file", "file": "src/modules/speaking/speech-recorder.js", "value": ""},
         {"kind": "file", "file": "src/modules/speaking/shadowing.js", "value": ""},
         {"kind": "file", "file": "speaking.css", "value": ""},

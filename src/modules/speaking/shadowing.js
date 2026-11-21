@@ -330,6 +330,7 @@
 
     function loadItem(nextIdx) {
       stopPlayback();
+      recorder?.cancelLocalRecognition?.();
       activeTake = null;
       if (recordingSession) {
         recordingSession.cancel().catch(() => {});
@@ -391,7 +392,7 @@
           packBtn.textContent = `🗑 Xóa gói Offline (${formatBytes(info.bytes)})`;
           packBtn.classList.add('is-installed');
         } else {
-          packBtn.textContent = '⬇ Tải gói nhận diện Offline (~10,8 MiB)';
+          packBtn.textContent = '⬇ Tải gói nhận diện Offline (~53 MiB)';
           packBtn.classList.remove('is-installed');
         }
       } else {
@@ -468,7 +469,8 @@
       if (recording.transcript) {
         const confirmed = scoreResult.syllables.filter(s => s.pronunciationVerified === true).length;
         const matchNote = scoreResult.charMatch ? ` · Xác nhận ${confirmed}/${scoreResult.syllables.length} chữ` : '';
-        resultBox.append(el('p', `Nhận diện giọng nói: “${recording.transcript}”${matchNote}`, 'speaking-transcript'));
+        const label = recording.recognitionSource === 'local' ? 'Nhận diện trên máy' : 'Nhận diện giọng nói';
+        resultBox.append(el('p', `${label}: “${recording.transcript}”${matchNote}`, 'speaking-transcript'));
       }
       if (recording.provisionalTranscript) {
         resultBox.append(el('p', `Nghe tạm: “${recording.provisionalTranscript}” · Chưa xác nhận chữ`, 'speaking-transcript'));
@@ -518,9 +520,17 @@
           })
         : { hasVoice: false, overallScore: 0, syllables: [], summaryVi: 'Thiếu bộ phân tích cao độ.' };
 
-      statusText.textContent = scoreResult.hasVoice
-        ? scoreResult.charMatch ? 'Đã chấm xong. Bấm “⇄ Đối chiếu” để nghe so mẫu.' : 'Đã thu giọng. Trình duyệt chưa chốt chữ để chấm phần từ.'
-        : userAudioUrl ? 'Chưa tách được cao độ. Bấm “Giọng mình” để nghe lại.' : 'Micro chưa trả âm thanh. Bấm “Thu lại” để thử lại.';
+      if (scoreResult.hasVoice && scoreResult.charMatch) {
+        statusText.textContent = 'Đã chấm xong. Bấm “⇄ Đối chiếu” để nghe so mẫu.';
+      } else if (scoreResult.hasVoice && recording.recognitionSource === 'local') {
+        statusText.textContent = recording.localRecognitionFailed
+          ? 'Chưa chạy được gói nhận diện trên máy. Bản thu vẫn có trong “Giọng mình”.'
+          : 'Mô hình chưa nhận ra chữ trong bản thu. Bấm “Giọng mình” để nghe lại.';
+      } else if (scoreResult.hasVoice) {
+        statusText.textContent = 'Trình duyệt chưa nhận ra chữ. Trên điện thoại, bạn có thể dùng gói nhận diện Offline.';
+      } else {
+        statusText.textContent = userAudioUrl ? 'Chưa tách được cao độ. Bấm “Giọng mình” để nghe lại.' : 'Micro chưa trả âm thanh. Bấm “Thu lại” để thử lại.';
+      }
       timerText.textContent = `${(recording.durationMs / 1000).toFixed(1)}s`;
       renderAnalysis(recording, scoreResult);
 
@@ -578,6 +588,13 @@
           },
           onTranscript: txt => {
             if (!closed && activeTake === take && txt) statusText.textContent = `Đang nghe: “${txt}”`;
+          },
+          onLocalRecognition: () => {
+            if (closed || activeTake !== take) return false;
+            recordBtn.disabled = true;
+            meterTrack.hidden = true;
+            statusText.textContent = 'Đang nhận diện bản thu trên máy…';
+            return true;
           },
           onAutoStop: res => {
             if (!closed && activeTake === take && res) finishRecording(res);
@@ -682,7 +699,7 @@
         statusText.textContent = 'Cần kết nối mạng để tải gói nhận diện Offline lần đầu.';
         return;
       }
-      statusText.textContent = 'Đang tải gói nhận diện giọng nói Offline (~10,8 MiB)…';
+      statusText.textContent = 'Đang tải gói nhận diện giọng nói Offline (~53 MiB)…';
       try {
         const res = await pack.install(p => {
           if (closed) return;
@@ -735,6 +752,7 @@
       if (closed) return;
       closed = true;
       stopPlayback();
+      recorder?.releaseLocalRecognition?.();
       if (recordingSession) {
         recordingSession.cancel().catch(() => {});
         recordingSession = null;

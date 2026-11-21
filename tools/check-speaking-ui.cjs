@@ -198,7 +198,7 @@ const MIME = {
         const mockAssetUrl = 'https://cdn.jsdelivr.net/npm/hsk-mock-asr.js';
         await page.route('**/speaking-asr-config.json', r => r.fulfill({
           json: {
-            schema: 1,
+            schema: 2,
             cacheName: 'hsk-speaking-asr-offline-v1',
             assets: { runtime: { url: mockAssetUrl, sha256: assetSha, bytes: assetPayload.length, type: 'text/javascript' } }
           }

@@ -410,6 +410,53 @@ test('iPhone retries naturally finish recognition and clear the previous audio s
   ]);
 });
 
+test('installed Mandarin model handles consecutive phone recordings without browser recognition', async () => {
+  const connectable = { connect() {}, disconnect() {} };
+  const asset = { url: 'https://example.org/test-model' };
+  let processor;
+  let workerStarts = 0;
+  const sent = [];
+  const window = {
+    HSKPitchCore: pitchCore,
+    navigator: { userAgent: 'iPhone', mediaDevices: { async getUserMedia() { return { getTracks: () => [] }; } } },
+    caches: {
+      async has() { return true; },
+      async open() { return {
+        async match() { return { async json() { return { schema: 2, assets: { runtime: asset } }; } }; },
+        async keys() { return [asset]; }
+      }; }
+    },
+    AudioContext: class {
+      createMediaStreamSource() { return connectable; }
+      createScriptProcessor() { processor = { ...connectable }; return processor; }
+      createGain() { return { ...connectable, gain: { value: 1 } }; }
+      async close() {}
+    },
+    webkitSpeechRecognition: class { constructor() { assert.fail('local recognition should have priority on iPhone'); } },
+    Worker: class {
+      constructor() { workerStarts++; }
+      postMessage({ samples }) {
+        sent.push(samples);
+        queueMicrotask(() => this.onmessage({ data: { transcript: sent.length === 1 ? '你好' : '北方' } }));
+      }
+      terminate() {}
+    }
+  };
+  const source = readFileSync(new URL('../src/modules/speaking/speech-recorder.js', import.meta.url), 'utf8');
+  runInNewContext(source, { window, Blob, setTimeout, clearTimeout });
+  for (const [transcript, frequency] of [['你好', 210], ['北方', 240]]) {
+    const samples = concatWithPause([new Float32Array(4000), synthContour(frequency, null, frequency, 0.3)]);
+    const session = await window.HSKRecorder.start();
+    processor.onaudioprocess({ inputBuffer: { getChannelData: () => samples } });
+    const result = await session.stop();
+    assert.equal(result.transcript, transcript);
+    assert.equal(result.recognitionSource, 'local');
+  }
+  assert.equal(workerStarts, 1);
+  assert.notEqual(sent[0][5000], sent[1][5000]);
+  window.HSKRecorder.releaseLocalRecognition();
+});
+
 test('keeps a quieter final syllable confirmed even when its tone is wrong', () => {
   const samples = concatWithPause([
     synthContour(172, 126, 105, 0.3),
