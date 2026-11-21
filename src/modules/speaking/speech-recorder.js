@@ -132,8 +132,52 @@
   }
 
   const OFFLINE_ASR_CACHE = 'hsk-speaking-asr-offline-v1';
+  const OFFLINE_ASR_READY = './speaking-asr-ready-v2.json';
   const ALLOWED_ASSET_HOSTS = ['huggingface.co', 'cdn.jsdelivr.net'];
   let packAbort = null;
+  let localWorker = null;
+  let finishLocalRecognition = null;
+
+  function releaseLocalRecognition() {
+    localWorker?.terminate();
+    localWorker = null;
+    finishLocalRecognition?.(null);
+  }
+
+  async function getReadyOfflinePack(cache) {
+    if (!cache) {
+      if (!root.caches || !await root.caches.has(OFFLINE_ASR_CACHE)) return null;
+      cache = await root.caches.open(OFFLINE_ASR_CACHE);
+    }
+    const config = await (await cache.match(OFFLINE_ASR_READY))?.json();
+    if (config?.schema !== 2) return null;
+    const files = new Set((await cache.keys()).map(request => request.url));
+    return Object.values(config.assets).every(asset => files.has(asset.url)) ? config : null;
+  }
+
+  function recognizeLocalMandarin(samples, config) {
+    try {
+      if (!localWorker) localWorker = new root.Worker('./src/modules/speaking/mandarin-asr-worker.js');
+    } catch { return Promise.resolve(null); }
+    return new Promise(resolve => {
+      const worker = localWorker;
+      const timeout = setTimeout(releaseLocalRecognition, 45000);
+      finishLocalRecognition = transcript => {
+        clearTimeout(timeout);
+        finishLocalRecognition = null;
+        worker.onmessage = worker.onerror = null;
+        resolve(transcript);
+      };
+      worker.onmessage = ({ data }) => {
+        if (data.error) releaseLocalRecognition();
+        else finishLocalRecognition?.(data.transcript);
+      };
+      worker.onerror = releaseLocalRecognition;
+      try {
+        worker.postMessage({ cacheName: OFFLINE_ASR_CACHE, config, samples }, [samples.buffer]);
+      } catch { releaseLocalRecognition(); }
+    });
+  }
 
   function emitPackChanged(detail = {}) {
     try { root.dispatchEvent?.(new CustomEvent('hsk-speaking-pack-changed', { detail })); } catch {}
@@ -155,7 +199,7 @@
           if (Number.isFinite(cl) && cl > 0) bytes += cl;
           else bytes += (await res.arrayBuffer()).byteLength;
         }
-        return { installed: keys.length > 0 && bytes > 0, bytes, busy: Boolean(packAbort) };
+        return { installed: Boolean(await getReadyOfflinePack(cache)), bytes, busy: Boolean(packAbort) };
       } catch {
         return { installed: false, bytes: 0, busy: Boolean(packAbort) };
       }
@@ -174,6 +218,7 @@
         throw Error('Trình duyệt chưa hỗ trợ kho lưu trữ gói ngoại tuyến.');
       }
       cancelInstall();
+      releaseLocalRecognition();
       const controller = new AbortController();
       packAbort = controller;
       emitPackChanged({ installing: true });
@@ -183,7 +228,7 @@
         if (!cfgRes.ok) throw Error('Không tải được cấu hình gói nhận diện offline.');
         const cfg = await cfgRes.json();
         const assets = Object.entries(cfg.assets || {});
-        if (!assets.length) throw Error('Cấu hình gói nhận diện trống.');
+        if (cfg.schema !== 2 || !assets.length) throw Error('Cấu hình gói nhận diện không hợp lệ.');
 
         const cache = await root.caches.open(OFFLINE_ASR_CACHE);
         const total = assets.reduce((sum, [, a]) => sum + Number(a?.bytes || 0), 0);
@@ -223,6 +268,13 @@
           onProgress({ phase: 'download', loaded, total, name });
         }
 
+        if (controller.signal.aborted) throw new DOMException('Đã hủy.', 'AbortError');
+        await cache.put(OFFLINE_ASR_READY, new Response(JSON.stringify(cfg), { headers: { 'Content-Type': 'application/json' } }));
+        const currentFiles = new Set(assets.map(([, asset]) => asset.url));
+        currentFiles.add(new URL(OFFLINE_ASR_READY, root.location.href).href);
+        for (const file of await cache.keys()) {
+          if (!currentFiles.has(file.url)) await cache.delete(file);
+        }
         const status = await downloaded();
         onProgress({ phase: 'done', loaded: total, total });
         emitPackChanged({ installed: status.installed, bytes: status.bytes });
@@ -235,6 +287,7 @@
 
     async function remove() {
       cancelInstall();
+      releaseLocalRecognition();
       if (!root.caches) return { installed: false, bytes: 0 };
       try {
         await root.caches.delete(OFFLINE_ASR_CACHE);
@@ -257,6 +310,7 @@
   root.HSKSpeakingOfflinePack = offlinePack;
   root.addEventListener?.('hsk-storage-cleaned', event => {
     const pkgs = event?.detail?.packages;
+    if (Array.isArray(pkgs) && pkgs.includes(OFFLINE_ASR_CACHE)) releaseLocalRecognition();
     if (Array.isArray(pkgs) && (pkgs.includes(OFFLINE_ASR_CACHE) || pkgs.includes('speaking-recordings'))) {
       emitPackChanged();
     }
@@ -432,7 +486,10 @@
 
     const { audioSession, userAgent = '', platform = '', maxTouchPoints = 0 } = root.navigator;
     const isAppleMobile = /iPhone|iPad|iPod/i.test(userAgent) || (platform === 'MacIntel' && maxTouchPoints > 1);
-    const Recog = root.SpeechRecognition || root.webkitSpeechRecognition;
+    const isMobile = isAppleMobile || /Android/i.test(userAgent);
+    const localConfig = root.Worker && (isMobile || root.navigator.onLine === false)
+      ? await getReadyOfflinePack().catch(() => null) : null;
+    const Recog = localConfig ? null : (root.SpeechRecognition || root.webkitSpeechRecognition);
     if (isAppleMobile && Recog) {
       // Speak the cue before reopening the mic to re-prime WebKit between consecutive turns.
       if (appleRecognitionAttempted) await playAppleRecordingCue();
@@ -569,13 +626,16 @@
       session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
     }, maxMs);
 
-    async function teardownAudio() {
+    let audioRelease;
+    function teardownAudio() {
+      if (audioRelease) return audioRelease;
       clearTimeout(maxTimer);
       try { processor?.disconnect(); } catch {}
       try { source?.disconnect(); } catch {}
       try { silentGain?.disconnect(); } catch {}
       try { stream.getTracks().forEach(t => t.stop()); } catch {}
-      await releaseContext();
+      audioRelease = releaseContext();
+      return audioRelease;
     }
 
     let resolveTeardown;
@@ -624,7 +684,24 @@
           await finalizeTranscript;
           const transcript = finalSegments.join('').trim();
           if (transcript) onTranscript(transcript, true);
-          return buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition), backupBlob, interimTranscript);
+          const result = buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition || localConfig), backupBlob, interimTranscript);
+          if (localConfig && result.wavBytes.length > 44) {
+            const pcm16 = new Int16Array(result.wavBytes.buffer, result.wavBytes.byteOffset + 44, (result.wavBytes.byteLength - 44) / 2);
+            const input = Float32Array.from(pcm16, sample => sample / 32768);
+            if (input.length >= 2400 && root.HSKPitchCore.extractPitchTrack(input, 16000).filter(frame => frame.f0 > 0).length >= 4) {
+              await Promise.all([teardownAudio(), backupResult]);
+              if (opts.onLocalRecognition?.() !== false) {
+                const peak = input.reduce((max, sample) => Math.max(max, Math.abs(sample)), 0);
+                const gain = Math.max(1, Math.min(12, 0.65 / peak));
+                for (let i = 0; i < input.length; i++) input[i] *= gain;
+                result.recognitionSource = 'local';
+                const heard = await recognizeLocalMandarin(input, localConfig);
+                result.localRecognitionFailed = heard === null;
+                result.transcript = heard || '';
+              }
+            }
+          }
+          return result;
         } finally {
           if (recognition) recognition.onresult = recognition.onend = null;
           await Promise.all([teardownAudio(), backupResult]);
@@ -658,10 +735,15 @@
     clearRecordings,
     usage,
     offlinePack,
+    cancelLocalRecognition: () => { if (finishLocalRecognition) releaseLocalRecognition(); },
+    releaseLocalRecognition,
     stopActive: () => activeSession?.cancel?.()
   };
 
   root.HSKRecorder = api;
-  root.addEventListener?.('pagehide', () => { activeSession?.cancel?.(); });
+  root.addEventListener?.('pagehide', () => {
+    releaseLocalRecognition();
+    activeSession?.cancel?.();
+  });
   if (typeof module === 'object' && module.exports) module.exports = api;
 })(typeof window === 'object' ? window : globalThis);
