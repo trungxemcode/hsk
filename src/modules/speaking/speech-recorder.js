@@ -8,6 +8,7 @@
   const MAX_RECORDINGS = 25;
 
   let activeSession = null;
+  let openingMicrophone = false;
   let mockProvider = null;
 
   function openDb() {
@@ -293,10 +294,10 @@
     return merged;
   }
 
-  function buildResult(pcm, sampleRate, durationMs, transcript, recognitionSupported) {
+  function buildResult(pcm, sampleRate, durationMs, transcript, recognitionSupported, backupBlob = null) {
     const core = root.HSKPitchCore;
     const wavBytes = core ? core.encodeWav16k(pcm, sampleRate) : new Uint8Array(44);
-    const wavBlob = new Blob([wavBytes], { type: 'audio/wav' });
+    const wavBlob = backupBlob || new Blob([wavBytes], { type: 'audio/wav' });
     return {
       pcm,
       sampleRate,
@@ -306,6 +307,30 @@
       transcript: String(transcript || '').trim(),
       recognitionSupported: Boolean(recognitionSupported)
     };
+  }
+
+  function createBackupCapture(stream) {
+    if (!root.MediaRecorder) return null;
+    try {
+      const recorder = new root.MediaRecorder(stream);
+      const chunks = [];
+      const finished = new Promise(resolve => {
+        recorder.ondataavailable = event => { if (event.data?.size) chunks.push(event.data); };
+        recorder.onstop = () => resolve(chunks.length ? new Blob(chunks, { type: recorder.mimeType || chunks[0].type }) : null);
+      });
+      recorder.start();
+      return {
+        stop() {
+          try { if (recorder.state !== 'inactive') recorder.stop(); } catch { return Promise.resolve(null); }
+          return new Promise(resolve => {
+            const timeout = setTimeout(() => resolve(null), 1200);
+            finished.then(blob => { clearTimeout(timeout); resolve(blob); });
+          });
+        }
+      };
+    } catch {
+      return null;
+    }
   }
 
   function isSupported() {
@@ -324,6 +349,16 @@
   }
 
   async function start(opts = {}) {
+    if (openingMicrophone) throw Error('Micro đang khởi động. Hãy đợi rồi thử lại.');
+    openingMicrophone = true;
+    try {
+      return await startCapture(opts);
+    } finally {
+      openingMicrophone = false;
+    }
+  }
+
+  async function startCapture(opts) {
     if (activeSession) {
       await activeSession.cancel().catch(() => {});
     }
@@ -373,46 +408,50 @@
       throw Error('Trình duyệt hiện chưa hỗ trợ thu âm qua Web Audio API.');
     }
 
+    const ctx = new AC();
+    const audioSession = root.navigator.audioSession;
+    const previousAudioType = audioSession?.type;
+    try { if (audioSession) audioSession.type = 'play-and-record'; } catch {}
+    if (ctx.state === 'suspended' || ctx.state === 'interrupted') {
+      void ctx.resume().catch(() => {});
+    }
+    const releaseContext = () => {
+      try { ctx.close().catch(() => {}); } catch {}
+      try { if (audioSession?.type === 'play-and-record') audioSession.type = previousAudioType; } catch {}
+    };
     let stream;
     try {
       stream = await root.navigator.mediaDevices.getUserMedia({
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
-          autoGainControl: false,
+          autoGainControl: true,
           channelCount: 1
         }
       });
     } catch (err) {
+      releaseContext();
       throw friendlyMicError(err);
     }
 
-    const ctx = new AC();
-    if (ctx.state === 'suspended') {
-      await ctx.resume().catch(() => {});
-    }
-
-    const source = ctx.createMediaStreamSource(stream);
-    const processor = ctx.createScriptProcessor(2048, 1, 1);
-    const silentGain = ctx.createGain();
-    silentGain.gain.value = 0;
-
-    // Vocal band-pass (72 Hz .. 3600 Hz) strips fan/AC hum and high-frequency room hiss before MPM/VAD.
-    let hpFilter = null;
-    let lpFilter = null;
-    if (typeof ctx.createBiquadFilter === 'function') {
-      try {
-        hpFilter = ctx.createBiquadFilter();
-        hpFilter.type = 'highpass';
-        hpFilter.frequency.value = 72;
-        hpFilter.Q.value = 0.707;
-        lpFilter = ctx.createBiquadFilter();
-        lpFilter.type = 'lowpass';
-        lpFilter.frequency.value = 3600;
-        lpFilter.Q.value = 0.707;
-      } catch {
-        hpFilter = null;
-        lpFilter = null;
+    const backup = createBackupCapture(stream);
+    let source;
+    let processor;
+    let silentGain;
+    try {
+      source = ctx.createMediaStreamSource(stream);
+      processor = ctx.createScriptProcessor(2048, 1, 1);
+      silentGain = ctx.createGain();
+      silentGain.gain.value = 0;
+      source.connect(processor);
+      processor.connect(silentGain);
+      silentGain.connect(ctx.destination);
+      if (ctx.state === 'suspended' || ctx.state === 'interrupted') void ctx.resume().catch(() => {});
+    } catch (err) {
+      if (!backup) {
+        stream.getTracks().forEach(track => track.stop());
+        releaseContext();
+        throw friendlyMicError(err);
       }
     }
 
@@ -421,8 +460,9 @@
     const startedAt = Date.now();
     let stopped = false;
     const autoSilenceMs = opts.autoSilenceMs === 0 ? 0 : Math.max(650, Number(opts.autoSilenceMs) || 950);
-    let noiseFloor = 0.008;
+    let noiseFloor = 0.001;
     let peakRms = 0;
+    let capturePeakRms = 0;
     let hasSpoken = false;
     let lastSpeechAt = 0;
     let autoStopped = false;
@@ -462,7 +502,7 @@
       }
     }
 
-    processor.onaudioprocess = event => {
+    if (processor) processor.onaudioprocess = event => {
       if (stopped) return;
       const input = event.inputBuffer.getChannelData(0);
       const copy = new Float32Array(input.length);
@@ -472,86 +512,102 @@
       let sq = 0;
       for (let i = 0; i < copy.length; i++) sq += copy[i] * copy[i];
       const rms = Math.sqrt(sq / copy.length);
+      capturePeakRms = Math.max(capturePeakRms, rms);
       const now = Date.now();
       const elapsed = now - startedAt;
 
       const core = root.HSKPitchCore;
       const clarity = core?.quickVoicedClarity ? core.quickVoicedClarity(copy, ctx.sampleRate || 16000) : 1;
-      if ((elapsed < 250 || clarity < 0.45) && rms > 0) {
+      if (clarity < 0.45) {
         noiseFloor = Math.min(0.08, noiseFloor * 0.75 + rms * 0.25);
       }
       if (clarity >= 0.54 && rms > peakRms) peakRms = rms;
 
-      const gate = Math.max(0.014, noiseFloor * 1.75, peakRms * 0.16);
+      const gate = Math.max(0.0018, noiseFloor * 1.6, peakRms * 0.16);
       const isVoicedFrame = rms >= gate && clarity >= 0.56;
       if (isVoicedFrame) {
         hasSpoken = true;
         lastSpeechAt = now;
       }
       onLevel(isVoicedFrame ? rms : Math.min(rms * 0.35, noiseFloor), elapsed);
-      if (autoSilenceMs > 0 && !autoStopped && hasSpoken && peakRms >= 0.018 && elapsed >= 1250 && now - lastSpeechAt >= autoSilenceMs) {
+      if (autoSilenceMs > 0 && !autoStopped && hasSpoken && elapsed >= 1500 && now - lastSpeechAt >= autoSilenceMs) {
         autoStopped = true;
         session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
       }
     };
 
-    if (hpFilter && lpFilter) {
-      source.connect(hpFilter);
-      hpFilter.connect(lpFilter);
-      lpFilter.connect(processor);
-    } else {
-      source.connect(processor);
-    }
-    processor.connect(silentGain);
-    silentGain.connect(ctx.destination);
-
-    let maxTimer = setTimeout(() => {
+    const maxTimer = setTimeout(() => {
       session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
     }, maxMs);
 
     function teardownAudio() {
       clearTimeout(maxTimer);
-      try { processor.disconnect(); } catch {}
-      try { lpFilter?.disconnect(); } catch {}
-      try { hpFilter?.disconnect(); } catch {}
-      try { source.disconnect(); } catch {}
-      try { silentGain.disconnect(); } catch {}
+      try { processor?.disconnect(); } catch {}
+      try { source?.disconnect(); } catch {}
+      try { silentGain?.disconnect(); } catch {}
       try { stream.getTracks().forEach(t => t.stop()); } catch {}
-      try { ctx.close().catch(() => {}); } catch {}
+      releaseContext();
     }
 
+    let resolveTeardown;
+    const teardownDone = new Promise(resolve => { resolveTeardown = resolve; });
     const session = {
       async stop() {
         if (stopped) return null;
         stopped = true;
-        if (activeSession === session) activeSession = null;
+        clearTimeout(maxTimer);
         const durationMs = Date.now() - startedAt;
-        const sampleRate = ctx.sampleRate || 16000;
-        teardownAudio();
+        let sampleRate = ctx.sampleRate || 16000;
+        const pcmDurationMs = totalSamples / sampleRate * 1000;
+        const needsBackup = capturePeakRms < 0.0008 || pcmDurationMs < durationMs * 0.7;
+        const backupResult = backup?.stop();
+        let pcm = concatFloat32(chunks, totalSamples);
+        let backupBlob = null;
 
-        if (recognition && !recognitionEnded) {
-          await new Promise(resolve => {
-            const timeout = setTimeout(() => resolveRecognitionStop(), 750);
+        const finalizeTranscript = recognition && !recognitionEnded
+          ? new Promise(resolve => {
+            const timeout = setTimeout(() => {
+              resolveRecognitionStop?.();
+              try { recognition.abort(); } catch {}
+            }, 1800);
             resolveRecognitionStop = () => {
               clearTimeout(timeout);
               resolveRecognitionStop = undefined;
               resolve();
             };
             try { recognition.stop(); } catch { resolveRecognitionStop?.(); }
-          });
+          }) : null;
+        try {
+          if (needsBackup) {
+            backupBlob = await backupResult;
+            if (backupBlob) {
+              try {
+                const decoded = await ctx.decodeAudioData(await backupBlob.arrayBuffer());
+                pcm = decoded.getChannelData(0);
+                sampleRate = decoded.sampleRate;
+                backupBlob = null;
+              } catch {}
+            }
+          }
+          await finalizeTranscript;
+          const transcript = finalTranscript.trim();
+          if (transcript) onTranscript(transcript, true);
+          return buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition), backupBlob);
+        } finally {
+          if (recognition) recognition.onresult = null;
+          teardownAudio();
+          if (activeSession === session) activeSession = null;
+          resolveTeardown();
         }
-
-        const pcm = concatFloat32(chunks, totalSamples);
-        const transcript = finalTranscript.trim();
-        if (transcript) onTranscript(transcript, true);
-        return buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition));
       },
       async cancel() {
-        if (stopped) return;
+        if (stopped) return teardownDone;
         stopped = true;
         if (activeSession === session) activeSession = null;
+        void backup?.stop();
         teardownAudio();
         try { recognition?.abort?.(); } catch {}
+        resolveTeardown();
       }
     };
 
