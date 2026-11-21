@@ -1,5 +1,5 @@
 {
-  "request": "Improve the custom HSK lesson flow (AI interview, skill and schedule sliders, Home card, and lesson runner) on Home and Lessons, desktop and mobile.",
+  "request": "Separate the custom HSK lesson template slider configurator from the real AI chat design mode on Home and Lessons, desktop and mobile. Preserve the existing lesson runner and all unrelated routes.",
   "excludedRoutes": [
     "home",
     "lessons"

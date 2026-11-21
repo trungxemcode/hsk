@@ -41,8 +41,14 @@ const http = require('node:http');
       await page.route('https://**/*', r => r.abort());
       await page.route('**/account-config.json', r => r.fulfill({ contentType: 'application/json', body: '{"enabled":false}' }));
       await page.route('**/translation-config.json', r => r.fulfill({ json: { enabled: true, endpoint: 'https://custom-test.invalid/translate' } }));
+      let forceProfileError = false;
+      let profileRequestCount = 0;
       await page.route('https://custom-test.invalid/custom-lesson-profile', async route => {
         const body = route.request().postDataJSON();
+        if (body.mode !== 'design') profileRequestCount++;
+        if (forceProfileError && body.mode !== 'design') {
+          return route.fulfill({ status: 503, json: { error: 'Lỗi AI thử nghiệm' } });
+        }
         if (body.mode === 'design') {
           return route.fulfill({
             json: {
@@ -157,10 +163,10 @@ const http = require('node:http');
       await page.locator('#lessonCustomBanner').waitFor({ state: 'visible' });
       await page.locator('#lessonCustomInterview').waitFor({ state: 'visible' });
 
-      // 2. Answer 5 questions in chat UI with 100% weight sliders, range sliders, 1-row compact chips & free-text input
+      // 2. Configure template using unified sliders (no fake chat box) & preview/apply, plus test real AI chat tab
+      assert.equal(await page.locator('#lessonCustomInterview .custom-chat-log').count(), 0, 'Template configurator must not show chat log');
       await page.locator('#lessonCustomWeightCard').waitFor({ state: 'visible' });
-      const vocabSlider = page.locator('#lessonCustomWeightCard input[data-skill="vocab"]');
-      await vocabSlider.evaluate(el => {
+      await page.locator('#lessonCustomWeightCard input[data-skill="vocab"]').evaluate(el => {
         el.value = '50';
         el.dispatchEvent(new Event('input', { bubbles: true }));
       });
@@ -168,22 +174,27 @@ const http = require('node:http');
         inputs => inputs.reduce((s, inp) => s + Number(inp.value), 0)
       );
       assert.equal(weightSum, 100, 'Skill weight sliders must always rebalance to 100%');
-      await page.locator('#lessonCustomWeightsConfirm').click(); // focus
 
-      await page.locator('#lessonCustomMinutesCard').waitFor({ state: 'visible' });
-      await page.locator('#lessonCustomChatInput').fill('25 phút mỗi ngày');
-      await page.locator('#lessonCustomChatSend').click(); // minutes via chat
-
-      await page.locator('.custom-chip-row-compact .custom-chip').first().click(); // style: spare_time
-
-      await page.locator('#lessonCustomDaysCard').waitFor({ state: 'visible' });
+      await page.locator('#lessonCustomMinutesRange').evaluate(el => {
+        el.value = '25';
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+      });
       await page.locator('#lessonCustomDaysRange').evaluate(el => {
         el.value = '5';
         el.dispatchEvent(new Event('input', { bubbles: true }));
       });
-      await page.locator('#lessonCustomDaysConfirm').click(); // days slider
-
-      await page.locator('.custom-chip-row-compact .custom-chip').first().click(); // goal
+      assert.match(await page.locator('#lessonCustomLiveSummary').innerText(), /5 ngày\/tuần/, 'Live summary must reflect weekly frequency changes');
+      await page.locator('#lessonCustomStyleCard').waitFor({ state: 'visible' });
+      await page.locator('#lessonCustomStyleRange').evaluate(el => {
+        el.value = '0';
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      await page.locator('#lessonCustomGoalCard').waitFor({ state: 'visible' });
+      await page.locator('#lessonCustomGoalRange').evaluate(el => {
+        el.value = '1';
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      await page.locator('#lessonCustomPreviewBtn').click();
 
       await page.locator('#lessonCustomPreview').waitFor({ state: 'visible' });
       assert.match(await page.locator('#lessonCustomPreview').innerText(), /Từ vựng:\s*50%/);
@@ -203,21 +214,43 @@ const http = require('node:http');
       await detailsToggle.click();
       assert.equal(await detailsBody.isVisible(), false);
 
-      // Editing an existing profile must reopen the interview, not only show the saved preview.
+      // 3. Switch to AI Chat tab to verify conversational AI design mode
       await page.locator('#lessonCustomEditBtn').click();
-      await page.locator('#lessonCustomChatInput').waitFor({ state: 'visible' });
-      assert.match(await page.locator('#lessonCustomInterview').innerText(), /Bạn muốn bài học HSK tập trung nhiều nhất/);
-      await page.locator('#lessonCustomInterview').getByRole('button', { name: 'Đóng', exact: true }).click();
+      await page.locator('#lessonCustomModeAi').click();
+      await page.locator('#lessonCustomInterview .custom-chat-log').waitFor({ state: 'visible' });
+      await page.locator('#lessonCustomChatInput').fill('30 phút mỗi ngày, học tập trung từ vựng và ngữ pháp HSK');
+      await page.locator('#lessonCustomChatSend').click();
+      await page.locator('#lessonCustomPreview').waitFor({ state: 'visible' });
+      await page.locator('#lessonCustomApplyBtn').click();
+      assert.equal(await page.evaluate(() => window.HSKStudyStore.customLesson?.minutes), 25);
 
-      // 3. Test offline fixed-form fallback
+      // A failed AI turn must show a usable fallback profile without issuing a duplicate request.
       await page.locator('#lessonCustomEditBtn').click();
-      await page.locator('#lessonCustomToggleForm').click();
-      await page.locator('#lessonCustomForm select[name="focus"]').selectOption('grammar_heavy');
-      await page.locator('#lessonCustomForm select[name="minutes"]').selectOption('30');
-      await page.locator('#lessonCustomForm select[name="style"]').selectOption('focused_block');
+      await page.locator('#lessonCustomModeAi').click();
+      forceProfileError = true;
+      const requestsBeforeFallback = profileRequestCount;
+      await page.locator('#lessonCustomChatInput').fill('Tôi muốn học 40 phút mỗi ngày, ưu tiên đọc hiểu');
+      await page.locator('#lessonCustomChatSend').click();
+      await page.locator('#lessonCustomPreview').waitFor({ state: 'visible' });
+      assert.equal(profileRequestCount - requestsBeforeFallback, 1, 'AI failure must not trigger a duplicate profile request');
+      assert.match(await page.locator('#lessonCustomInterview').innerText(), /Lỗi AI thử nghiệm/);
+      await page.locator('#lessonCustomApplyBtn').click();
+      forceProfileError = false;
+
+      // Verify template mode also works cleanly for switching back to focused_block / 30m
+      await page.locator('#lessonCustomEditBtn').click();
+      await page.locator('#lessonCustomModeTemplate').click();
+      await page.locator('#lessonCustomMinutesRange').evaluate(el => {
+        el.value = '30';
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      await page.locator('#lessonCustomStyleRange').evaluate(el => {
+        el.value = '1'; // focused_block
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+      });
       await page.locator('#lessonCustomApplyBtn').click();
       assert.equal(await page.evaluate(() => window.HSKStudyStore.customLesson?.minutes), 30);
-      assert.equal(await page.evaluate(() => window.HSKStudyStore.customLesson?.focusChoice), 'grammar_heavy');
+      assert.equal(await page.evaluate(() => window.HSKStudyStore.customLesson?.style), 'focused_block');
 
       // 4. Open Custom Lesson Runner, trigger AI Lesson Architect design, and complete an AI drill step
       await page.locator('#lessonCustomStartSession').click();
