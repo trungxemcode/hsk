@@ -620,7 +620,7 @@
     return start <= end ? list.slice(start, end + 1) : [];
   }
 
-  function findSyllableRanges(track, expectedCount, maxRms = 0) {
+  function findSyllableRanges(track, expectedCount, maxRms = 0, requireBoundaryForSplit = false) {
     if (!expectedCount || !track.length) return [];
     const peakTrackRms = maxRms || Math.max(0.001, ...track.map(f => f.rms || 0));
 
@@ -835,7 +835,7 @@
           if (lo <= hi) {
             let bestMetric = Infinity;
             for (let j = lo; j <= hi; j++) {
-              if (islands.length === 1) {
+              if (islands.length === 1 || requireBoundaryForSplit) {
                 // A sustained vowel needs an acoustic boundary before it can count as two syllables.
                 const before = track[Math.max(prev, j - 5)];
                 const after = track[Math.min(isl.end - 1, j + 5)];
@@ -852,7 +852,7 @@
             }
           }
           if (bestSplit < 0) {
-            if (islands.length === 1) break;
+            if (islands.length === 1 || requireBoundaryForSplit) break;
             bestSplit = Math.max(prev + 1, Math.min(isl.end - 1, ideal));
           }
           ranges.push([prev, bestSplit]);
@@ -1093,16 +1093,26 @@
     };
   }
 
+  function mergeTranscriptText(prev, next) {
+    const a = String(prev || '').trim();
+    const b = String(next || '').trim();
+    if (!a) return b;
+    if (!b) return a;
+    if (b.length > a.length && b.startsWith(a)) return b;
+    if (a.startsWith(b) || a.endsWith(b)) return a;
+    return a + b;
+  }
+
   /**
    * Segments audio into expected syllables and scores Mandarin tones + optional ASR transcript.
    */
-  function segmentAndScore({ samples, sampleRate = 16000, text = '', pinyin = '', transcript = '' } = {}) {
+  function segmentAndScore({ samples, sampleRate = 16000, text = '', pinyin = '', transcript = '', provisionalTranscript = '', retryFallbackTranscript = '' } = {}) {
     const parsed = parseSyllables(text, pinyin);
     const track = sampleRate > 16000 && samples?.length
       ? extractPitchTrack(resample16k(samples, sampleRate), 16000)
       : extractPitchTrack(samples, sampleRate);
     const voicedFrames = track.filter(f => f.f0 > 0);
-    const charMatch = computeCharMatch(text, transcript, parsed);
+    let charMatch = computeCharMatch(text, transcript, parsed);
 
     if (!parsed.length) {
       return {
@@ -1138,6 +1148,54 @@
     }
 
     const peakTrackRms = Math.max(0.001, ...track.map(f => f.rms || 0));
+    const strictRanges = findSyllableRanges(track, parsed.length, peakTrackRms, true);
+    const hasAllAcousticSyllables = strictRanges.length === parsed.length && strictRanges.every(([lo, hi]) => hi > lo);
+
+    if (hasAllAcousticSyllables) {
+      const strictSegs = parsed.map((meta, idx) => {
+        const [lo, hi] = strictRanges[idx] || [0, 0];
+        const segFrames = hi > lo ? track.slice(lo, hi) : [];
+        const voiced = trimUnvoicedEdges(segFrames).filter(f => f.f0 > 0);
+        const voicedCount = voiced.length;
+        const segMeanRms = voicedCount ? voiced.reduce((s, f) => s + (f.rms || 0), 0) / voicedCount : 0;
+        const segMeanClarity = voicedCount ? voiced.reduce((s, f) => s + (f.clarity || 0), 0) / voicedCount : 0;
+        return { meta, segFrames, voiced, voicedCount, segMeanRms, segMeanClarity };
+      });
+      const strictPeakRms = Math.max(0, ...strictSegs.map(d => d.segMeanRms));
+      const strictAnalyses = strictSegs.map(d =>
+        analyzeToneSegment(d.voiced, d.meta.spokenTone, d.meta.isFinal, d.meta.optionalNeutral, strictPeakRms)
+      );
+      const allSyllablesClearlySpoken = strictSegs.every((d, idx) => {
+        const a = strictAnalyses[idx];
+        const isSoft = d.meta.spokenTone === 5 || d.meta.optionalNeutral;
+        if (isSoft && idx > 0 && idx < parsed.length - 1) {
+          return d.voicedCount >= 2 || d.segFrames.some(f => (f.rms || 0) >= strictPeakRms * 0.15);
+        }
+        return d.voicedCount >= (isSoft ? 3 : 4)
+          && d.segMeanClarity >= (isSoft ? 0.64 : 0.70)
+          && (strictPeakRms <= 0 || d.segMeanRms >= strictPeakRms * (isSoft ? 0.12 : 0.35))
+          && a.score >= 70;
+      });
+
+      if (provisionalTranscript && allSyllablesClearlySpoken) {
+        const mergedText = mergeTranscriptText(transcript, provisionalTranscript);
+        const mergedMatch = computeCharMatch(text, mergedText, parsed);
+        if (mergedMatch && (!charMatch || mergedMatch.matchRatio >= charMatch.matchRatio)) {
+          charMatch = mergedMatch;
+        }
+      } else if (!charMatch && retryFallbackTranscript && allSyllablesClearlySpoken) {
+        charMatch = computeCharMatch(text, retryFallbackTranscript, parsed);
+      } else if (
+        charMatch
+        && charMatch.heardCount > 0
+        && charMatch.heardCount < parsed.length
+        && charMatch.perChar.filter(Boolean).length === charMatch.heardCount
+        && allSyllablesClearlySpoken
+      ) {
+        charMatch = computeCharMatch(text, parsed.map(p => p.han).join(''), parsed);
+      }
+    }
+
     const ranges = findSyllableRanges(track, charMatch?.heardCount ?? parsed.length, peakTrackRms);
     const heardChars = Array.from(charMatch?.heardText || '');
     const segData = parsed.map((meta, idx) => {

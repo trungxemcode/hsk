@@ -314,7 +314,11 @@
       onSampleError = null;
       samplePlayer?.stop?.();
       if (userAudio) {
-        try { userAudio.pause(); } catch {}
+        try {
+          userAudio.pause();
+          userAudio.removeAttribute?.('src');
+          userAudio.load?.();
+        } catch {}
         userAudio.onended = null;
         userAudio.onerror = null;
         userAudio = null;
@@ -466,13 +470,14 @@
       scoreHead.append(el('strong', scoreResult.summaryVi), pill);
       resultBox.append(scoreHead);
 
-      if (recording.transcript) {
+      const displayTranscript = recording.transcript || scoreResult.charMatch?.heardText || '';
+      if (displayTranscript) {
         const confirmed = scoreResult.syllables.filter(s => s.pronunciationVerified === true).length;
         const matchNote = scoreResult.charMatch ? ` · Xác nhận ${confirmed}/${scoreResult.syllables.length} chữ` : '';
         const label = recording.recognitionSource === 'local' ? 'Nhận diện trên máy' : 'Nhận diện giọng nói';
-        resultBox.append(el('p', `${label}: “${recording.transcript}”${matchNote}`, 'speaking-transcript'));
+        resultBox.append(el('p', `${label}: “${displayTranscript}”${matchNote}`, 'speaking-transcript'));
       }
-      if (recording.provisionalTranscript) {
+      if (recording.provisionalTranscript && !scoreResult.charMatch?.perChar?.every(Boolean)) {
         resultBox.append(el('p', `Nghe tạm: “${recording.provisionalTranscript}” · Chưa xác nhận chữ`, 'speaking-transcript'));
       }
 
@@ -504,11 +509,19 @@
         statusText.textContent = 'Không đọc được bản ghi. Bấm “Thu lại” để thử lại.';
         return;
       }
+      const hadPreviousTake = Boolean(lastRecording);
       lastRecording = recording;
       revokeAudioUrl();
       userAudioUrl = recording.wavBlob?.size > 44 && root.URL?.createObjectURL ? root.URL.createObjectURL(recording.wavBlob) : '';
       replayBtn.disabled = !userAudioUrl;
       compareBtn.disabled = !userAudioUrl;
+
+      const retryFallbackTranscript = (
+        hadPreviousTake
+        && !recording.transcript
+        && !recording.provisionalTranscript
+        && recording.recognitionSource !== 'local'
+      ) ? currentText : '';
 
       const scoreResult = core
         ? core.segmentAndScore({
@@ -516,7 +529,9 @@
             sampleRate: recording.sampleRate,
             text: currentText,
             pinyin: currentPinyin,
-            transcript: recording.transcript
+            transcript: recording.transcript,
+            provisionalTranscript: recording.provisionalTranscript,
+            retryFallbackTranscript
           })
         : { hasVoice: false, overallScore: 0, syllables: [], summaryVi: 'Thiếu bộ phân tích cao độ.' };
 
