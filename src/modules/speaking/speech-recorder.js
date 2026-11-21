@@ -600,6 +600,7 @@
     let peakRms = 0;
     let capturePeakRms = 0;
     let hasSpoken = false;
+    let voicedStreak = 0;
     let lastSpeechAt = 0;
     let autoStopped = false;
 
@@ -686,13 +687,18 @@
       if (clarity >= 0.54) peakRms = Math.max(peakRms, rms);
 
       const gate = Math.max(0.0009, noiseFloor * 1.45, peakRms * 0.08);
-      const isVoicedFrame = rms >= gate && clarity >= 0.56;
-      if (isVoicedFrame) {
-        hasSpoken = true;
+      const isVoicedOnset = elapsed >= 160 && rms >= gate && clarity >= 0.50;
+      if (!hasSpoken) {
+        voicedStreak = isVoicedOnset ? voicedStreak + 1 : 0;
+        if (voicedStreak >= 2) {
+          hasSpoken = true;
+          lastSpeechAt = now;
+        }
+      } else if (rms >= gate * 0.8 && (clarity >= 0.40 || rms >= Math.max(0.0022, noiseFloor * 2.2))) {
         lastSpeechAt = now;
       }
       onLevel(rms, elapsed);
-      if (autoSilenceMs > 0 && !autoStopped && hasSpoken && elapsed >= 1500 && now - lastSpeechAt >= autoSilenceMs) {
+      if (autoSilenceMs > 0 && !autoStopped && hasSpoken && elapsed >= 1750 && now - lastSpeechAt >= autoSilenceMs) {
         autoStopped = true;
         session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
       }
@@ -775,14 +781,26 @@
           if (transcript) onTranscript(transcript, true);
           const result = buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition || localConfig), backupBlob, interimTranscript);
           if (localConfig && result.wavBytes.length > 44) {
-            const pcm16 = new Int16Array(result.wavBytes.buffer, result.wavBytes.byteOffset + 44, (result.wavBytes.byteLength - 44) / 2);
-            const input = Float32Array.from(pcm16, sample => sample / 32768);
-            if (input.length >= 2400 && root.HSKPitchCore.extractPitchTrack(input, 16000).filter(frame => frame.f0 > 0).length >= 4) {
+            const core = root.HSKPitchCore;
+            const input = core?.prepareAsrAudio
+              ? core.prepareAsrAudio(pcm, sampleRate)
+              : (() => {
+                const pcm16 = new Int16Array(result.wavBytes.buffer, result.wavBytes.byteOffset + 44, (result.wavBytes.byteLength - 44) / 2);
+                const arr = Float32Array.from(pcm16, sample => sample / 32768);
+                const peak = arr.reduce((max, sample) => Math.max(max, Math.abs(sample)), 0);
+                const gain = peak > 0 ? Math.max(1, Math.min(20, 0.55 / peak)) : 1;
+                for (let i = 0; i < arr.length; i++) arr[i] *= gain;
+                return arr;
+              })();
+            let sumSq = 0;
+            for (let i = 0; i < input.length; i++) sumSq += input[i] * input[i];
+            const activeRms = input.length ? Math.sqrt(sumSq / input.length) : 0;
+            const voicedFrames = core?.extractPitchTrack
+              ? core.extractPitchTrack(input, 16000).filter(frame => frame.f0 > 0).length
+              : 4;
+            if (input.length >= 1600 && (voicedFrames >= 2 || activeRms >= 0.00035)) {
               await Promise.all([teardownAudio(), backupResult]);
               if (opts.onLocalRecognition?.() !== false) {
-                const peak = input.reduce((max, sample) => Math.max(max, Math.abs(sample)), 0);
-                const gain = Math.max(1, Math.min(12, 0.65 / peak));
-                for (let i = 0; i < input.length; i++) input[i] *= gain;
                 result.recognitionSource = 'local';
                 const heard = await recognizeLocalMandarin(input, localConfig);
                 result.localRecognitionFailed = heard === null;

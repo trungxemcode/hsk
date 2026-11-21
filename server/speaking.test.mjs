@@ -765,3 +765,96 @@ test('drops leading 2-frame breath blip, splits continuous 北方 transition cle
   assert.ok(resWrongTone.syllables[1].detectedTone === 4 && resWrongTone.syllables[1].score < 65);
   assert.ok(resWrongTone.overallScore < 75, `Expected 拜拜 T4+T4 on 北方 < 75, got ${resWrongTone.overallScore}`);
 });
+
+test('quiet 48kHz mobile speech with loud 0.25 tap transient keeps both syllables and boosts ASR audio cleanly', () => {
+  const sampleRate = 48000;
+  const tap = new Float32Array(Math.round(0.004 * sampleRate));
+  for (let i = 0; i < tap.length; i++) tap[i] = 0.25 * (1 - i / tap.length);
+  const leadSilence = new Float32Array(Math.round(0.18 * sampleRate));
+  const bei = synthContour(172, 126, 168, 0.28, sampleRate).map(s => s * 0.003);
+  const gap = new Float32Array(Math.round(0.08 * sampleRate));
+  const fang = synthContour(225, null, 225, 0.30, sampleRate).map(s => s * 0.003);
+  const tailSilence = new Float32Array(Math.round(0.25 * sampleRate));
+  const samples = new Float32Array(tap.length + leadSilence.length + bei.length + gap.length + fang.length + tailSilence.length);
+  let offset = 0;
+  for (const part of [tap, leadSilence, bei, gap, fang, tailSilence]) {
+    samples.set(part, offset);
+    offset += part.length;
+  }
+
+  const wav = pitchCore.encodeWav16k(samples, sampleRate);
+  assert.ok(wav.length > 16000, `Expected full quiet 北方 WAV > 16000 bytes despite 0.25 tap spike, got ${wav.length}`);
+
+  const prepared = pitchCore.prepareAsrAudio(samples, sampleRate);
+  assert.ok(prepared.length >= 10000, `Expected prepared 16kHz audio >= 10000 samples, got ${prepared.length}`);
+  const speechSlice = prepared.subarray(Math.round(prepared.length * 0.2), Math.round(prepared.length * 0.8));
+  let rmsSq = 0;
+  for (const v of speechSlice) rmsSq += v * v;
+  const speechRms = Math.sqrt(rmsSq / speechSlice.length);
+  assert.ok(speechRms >= 0.04 && speechRms <= 0.45, `Expected boosted speech RMS in [0.04, 0.45], got ${speechRms}`);
+  const preparedTrack = pitchCore.extractPitchTrack(prepared, 16000).filter(f => f.f0 > 0);
+  assert.ok(preparedTrack.length >= 30, `Expected strong voiced pitch track in prepared audio, got ${preparedTrack.length}`);
+
+  const res = pitchCore.segmentAndScore({ samples, sampleRate, text: '北方', pinyin: 'běi fāng', transcript: '北方' });
+  assert.equal(res.hasVoice, true);
+  assert.deepEqual(res.syllables.map(s => s.pronunciationVerified), [true, true]);
+  assert.ok(res.syllables[0].score >= 70 && res.syllables[1].score >= 70);
+  assert.ok(res.overallScore >= 78, `Expected quiet 48kHz 北方 score >= 78, got ${res.overallScore}`);
+});
+
+test('partial ASR transcript aligns recognized 1st or 2nd character to its real acoustic syllable', () => {
+  const sr = 16000;
+  const beifang = concatWithPause([
+    synthContour(172, 126, 168, 0.28, sr), // 北 T3
+    synthContour(228, null, 226, 0.28, sr) // 方 T1
+  ], 0.08, sr);
+
+  const onlySecond = pitchCore.segmentAndScore({
+    samples: beifang,
+    sampleRate: sr,
+    text: '北方',
+    pinyin: 'běi fāng',
+    transcript: '方'
+  });
+  assert.deepEqual(onlySecond.syllables.map(s => s.pronunciationVerified), [false, true]);
+  assert.equal(onlySecond.syllables[1].detectedTone, 1, 'Recognized 方 must align to 2nd syllable (T1), not 1st syllable (T3)');
+  assert.ok(onlySecond.syllables[1].score >= 80, `Expected 方 T1 score >= 80, got ${onlySecond.syllables[1].score}`);
+
+  const onlyFirst = pitchCore.segmentAndScore({
+    samples: beifang,
+    sampleRate: sr,
+    text: '北方',
+    pinyin: 'běi fāng',
+    transcript: '北'
+  });
+  assert.deepEqual(onlyFirst.syllables.map(s => s.pronunciationVerified), [true, false]);
+  assert.equal(onlyFirst.syllables[0].detectedTone, 3);
+});
+
+test('buildPinyinLookup reads lexical const words and dictionarySupplement and keeps near-phonetic bounds', () => {
+  const source = readFileSync(new URL('../src/modules/speaking/pitch-core.js', import.meta.url), 'utf8');
+  const ctx = { window: undefined };
+  runInNewContext(
+    `const words = [{ han: '鲲鹏', pin: 'kūnpéng' }];
+     const dictionarySupplement = { entries: { '6|滂沱|pāngtuó': {} } };
+     ${source}
+     globalThis.__core = HSKPitchCore;`,
+    ctx
+  );
+  const core = ctx.__core;
+
+  // Multi-syllable concatenated pinyin from lexical const words & dictionarySupplement
+  const wordMatch = core.computeCharMatch('鲲鹏', '昆朋');
+  assert.deepEqual(Array.from(wordMatch.perChar), [true, true], 'Concatenated pinyin in lexical const words indexes both characters');
+  const suppMatch = core.computeCharMatch('滂沱', '旁托');
+  assert.deepEqual(Array.from(suppMatch.perChar), [true, true], 'Concatenated pinyin in lexical dictionarySupplement indexes both characters');
+
+  // Same-final & sibilant near-phonetic matching while rejecting distinct words
+  const rhymeMatch = core.computeCharMatch('方', '刚');
+  assert.deepEqual(Array.from(rhymeMatch.perChar), [true]);
+  assert.deepEqual(Array.from(rhymeMatch.nearChar), [true]);
+  const sibilantMatch = core.computeCharMatch('习', '诗');
+  assert.deepEqual(Array.from(sibilantMatch.perChar), [true]);
+  assert.deepEqual(Array.from(core.computeCharMatch('我爱你', '我恨你').perChar), [true, false, true]);
+  assert.deepEqual(Array.from(core.computeCharMatch('我爱你', '早上好').perChar), [false, false, false]);
+});

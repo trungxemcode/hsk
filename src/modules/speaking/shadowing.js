@@ -5,6 +5,24 @@
   const MIC_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M9 21h6"/></svg>';
 
   let activeModal = null;
+  let pinyinPromise = null;
+
+  function ensurePinyinReady() {
+    if (root.pinyinPro) return Promise.resolve();
+    if (pinyinPromise) return pinyinPromise;
+    if (typeof document?.createElement !== 'function' || !document.head) return Promise.resolve();
+    pinyinPromise = new Promise(resolve => {
+      const s = document.createElement('script');
+      s.src = './vendor/pinyin-pro/pinyin-pro.js';
+      s.onload = s.onerror = () => {
+        s.remove();
+        resolve();
+      };
+      document.head.append(s);
+      setTimeout(resolve, 5000);
+    });
+    return pinyinPromise;
+  }
 
   function el(tag, text, cls) {
     const n = document.createElement(tag);
@@ -175,6 +193,7 @@
 
   function open(opts = {}) {
     closeActive();
+    void ensurePinyinReady();
 
     const items = normalizeList(opts);
     if (!items.length) return null;
