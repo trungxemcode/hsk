@@ -378,36 +378,86 @@ test('iPhone retries naturally finish recognition and clear the previous audio s
       }
     },
     SpeechSynthesisUtterance: class {},
-    speechSynthesis: { speak(cue) { events.push('cue'); setTimeout(() => cue.onend(), 0); } },
+    speechSynthesis: { speak() { assert.fail('TTS cue before mic open expires iOS user gesture'); } },
     webkitSpeechRecognition: class {
       start() {
-        assert.equal(this.continuous, false);
+        assert.equal(this.continuous, true);
         current = this;
         events.push('recognition');
       }
-      stop() { assert.fail('manual stop breaks consecutive iPhone recognition'); }
+      stop() {
+        events.push('recognition stopped');
+      }
       abort() { assert.fail('a completed recognition should never be aborted'); }
     }
   };
   const source = readFileSync(new URL('../src/modules/speaking/speech-recorder.js', import.meta.url), 'utf8');
   runInNewContext(source, { window, Blob, setTimeout, clearTimeout });
-  for (const [transcript, isFinal] of [['北', true], ['北方', true], ['方', false]]) {
+  for (const [segments, expectedFinal, expectedProvisional] of [
+    [[['北', true], ['方', true]], '北方', ''],
+    [[['北方', true]], '北方', ''],
+    [[['北', true], ['北方', false]], '北', '方']
+  ]) {
     const session = await window.HSKRecorder.start();
     const result = session.stop();
     setTimeout(() => {
-      current.onresult({ results: [Object.assign([{ transcript }], { isFinal })] });
+      for (const [transcript, isFinal] of segments) {
+        current.onresult({ results: [Object.assign([{ transcript }], { isFinal })] });
+      }
       current.onend();
     }, 0);
     const recording = await result;
-    assert.equal(recording.transcript, isFinal ? transcript : '');
-    assert.equal(recording.provisionalTranscript, isFinal ? '' : transcript);
+    assert.equal(recording.transcript, expectedFinal);
+    assert.equal(recording.provisionalTranscript, expectedProvisional);
     assert.equal(window.navigator.audioSession.type, 'auto');
   }
   assert.deepEqual(events, [
-    'microphone', 'recognition', 'track closed', 'context closed',
-    'cue', 'microphone', 'recognition', 'track closed', 'context closed',
-    'cue', 'microphone', 'recognition', 'track closed', 'context closed'
+    'microphone', 'recognition', 'recognition stopped', 'track closed', 'context closed',
+    'microphone', 'recognition', 'recognition stopped', 'track closed', 'context closed',
+    'microphone', 'recognition', 'recognition stopped', 'track closed', 'context closed'
   ]);
+});
+
+test('mobile 2-character phrases confirm both syllables on interim/clipped ASR and consecutive same-word retries', () => {
+  const sr = 16000;
+  const bei = synthContour(175, 128, 170, 0.28, sr); // 北 T3
+  const fang = synthContour(225, null, 225, 0.28, sr); // 方 T1
+  const beifang = concatWithPause([bei, fang], 0.07, sr);
+
+  // 1) Mobile stops with 1st char final ('北') and 2nd char still interim ('方')
+  const resInterim = pitchCore.segmentAndScore({
+    samples: beifang,
+    sampleRate: sr,
+    text: '北方',
+    pinyin: 'běi fāng',
+    transcript: '北',
+    provisionalTranscript: '方'
+  });
+  assert.deepEqual(resInterim.syllables.map(s => s.pronunciationVerified), [true, true]);
+  assert.ok(resInterim.overallScore >= 80, `Expected interim-assisted 北方 >= 80, got ${resInterim.overallScore}`);
+
+  // 2) Mobile ASR clipped 2nd char ('北' only), but user clearly pronounced both syllables with right tones
+  const resClipped = pitchCore.segmentAndScore({
+    samples: beifang,
+    sampleRate: sr,
+    text: '北方',
+    pinyin: 'běi fāng',
+    transcript: '北'
+  });
+  assert.deepEqual(resClipped.syllables.map(s => s.pronunciationVerified), [true, true]);
+  assert.ok(resClipped.overallScore >= 80, `Expected clipped-ASR 北方 >= 80, got ${resClipped.overallScore}`);
+
+  // 3) Consecutive take on same word when mobile cloud ASR throttles (empty transcript) but both syllables are clearly spoken
+  const resRetry = pitchCore.segmentAndScore({
+    samples: beifang,
+    sampleRate: sr,
+    text: '北方',
+    pinyin: 'běi fāng',
+    transcript: '',
+    retryFallbackTranscript: '北方'
+  });
+  assert.deepEqual(resRetry.syllables.map(s => s.pronunciationVerified), [true, true]);
+  assert.ok(resRetry.overallScore >= 80, `Expected retry 北方 >= 80, got ${resRetry.overallScore}`);
 });
 
 test('installed Mandarin model handles consecutive phone recordings without browser recognition', async () => {

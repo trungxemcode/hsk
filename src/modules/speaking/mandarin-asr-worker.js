@@ -26,36 +26,37 @@ async function loadRecognizer(cacheName, config) {
   }
 
   const urls = [];
-  try {
-    for (const asset of [assets.runtime, assets.module, assets.wasm, assets.normalizer]) urls.push(await blobUrl(asset));
-    const [runtime, mjs, wasm, normalizer] = urls;
-    const { env, pipeline } = await import(runtime);
-    const { Converter } = await import(normalizer);
-    const toSimplifiedChinese = Converter({ from: 't', to: 'cn' });
-    env.allowLocalModels = false;
-    env.useBrowserCache = false;
-    env.backends.onnx.wasm.numThreads = 1;
-    env.backends.onnx.wasm.proxy = false;
-    env.backends.onnx.wasm.wasmPaths = { mjs, wasm };
-    const recognizer = await pipeline('automatic-speech-recognition', config.model, {
-      revision: config.revision,
-      device: 'wasm',
-      dtype: 'q8'
+  for (const asset of [assets.runtime, assets.module, assets.wasm, assets.normalizer]) urls.push(await blobUrl(asset));
+  const [runtime, mjs, wasm, normalizer] = urls;
+  const { env, pipeline } = await import(runtime);
+  const { Converter } = await import(normalizer);
+  const toSimplifiedChinese = Converter({ from: 't', to: 'cn' });
+  env.allowLocalModels = false;
+  env.useBrowserCache = false;
+  env.backends.onnx.wasm.numThreads = 1;
+  env.backends.onnx.wasm.proxy = false;
+  env.backends.onnx.wasm.wasmPaths = { mjs, wasm };
+  const recognizer = await pipeline('automatic-speech-recognition', config.model, {
+    revision: config.revision,
+    device: 'wasm',
+    dtype: 'q8'
+  });
+  return async samples => {
+    const { text } = await recognizer(samples, {
+      language: 'zh', task: 'transcribe', do_sample: false, max_new_tokens: 64
     });
-    return async samples => {
-      const { text } = await recognizer(samples, {
-        language: 'zh', task: 'transcribe', do_sample: false, max_new_tokens: 64
-      });
-      return typeof text === 'string' ? toSimplifiedChinese(text.trim()) : '';
-    };
-  } finally {
-    for (const url of urls) URL.revokeObjectURL(url);
-  }
+    return typeof text === 'string' ? toSimplifiedChinese(text.trim()) : '';
+  };
 }
 
 self.onmessage = async ({ data: { cacheName, config, samples } }) => {
   try {
-    if (!loading) loading = loadRecognizer(cacheName, config);
+    if (!loading) {
+      loading = loadRecognizer(cacheName, config).catch(err => {
+        loading = null;
+        throw err;
+      });
+    }
     const recognizer = await loading;
     self.postMessage({ transcript: await recognizer(samples) });
   } catch {

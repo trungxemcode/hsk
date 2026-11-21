@@ -8,8 +8,8 @@
   const MAX_RECORDINGS = 25;
 
   let activeSession = null;
+  let activeRecognition = null;
   let openingMicrophone = false;
-  let appleRecognitionAttempted = false;
   let mockProvider = null;
 
   function openDb() {
@@ -137,6 +137,8 @@
   let packAbort = null;
   let localWorker = null;
   let finishLocalRecognition = null;
+  let cachedOfflineConfig = null;
+  let offlineConfigChecked = false;
 
   function releaseLocalRecognition() {
     localWorker?.terminate();
@@ -145,14 +147,31 @@
   }
 
   async function getReadyOfflinePack(cache) {
-    if (!cache) {
-      if (!root.caches || !await root.caches.has(OFFLINE_ASR_CACHE)) return null;
-      cache = await root.caches.open(OFFLINE_ASR_CACHE);
+    try {
+      if (!cache) {
+        if (!root.caches || !await root.caches.has(OFFLINE_ASR_CACHE)) {
+          cachedOfflineConfig = null;
+          offlineConfigChecked = true;
+          return null;
+        }
+        cache = await root.caches.open(OFFLINE_ASR_CACHE);
+      }
+      const config = await (await cache.match(OFFLINE_ASR_READY))?.json();
+      if (config?.schema !== 2) {
+        cachedOfflineConfig = null;
+        offlineConfigChecked = true;
+        return null;
+      }
+      const files = new Set((await cache.keys()).map(request => request.url));
+      const ready = Object.values(config.assets).every(asset => files.has(asset.url)) ? config : null;
+      cachedOfflineConfig = ready;
+      offlineConfigChecked = true;
+      return ready;
+    } catch {
+      cachedOfflineConfig = null;
+      offlineConfigChecked = true;
+      return null;
     }
-    const config = await (await cache.match(OFFLINE_ASR_READY))?.json();
-    if (config?.schema !== 2) return null;
-    const files = new Set((await cache.keys()).map(request => request.url));
-    return Object.values(config.assets).every(asset => files.has(asset.url)) ? config : null;
   }
 
   function recognizeLocalMandarin(samples, config) {
@@ -185,10 +204,18 @@
 
   function createOfflinePackManager() {
     async function downloaded() {
-      if (!root.caches) return { installed: false, bytes: 0, busy: Boolean(packAbort) };
+      if (!root.caches) {
+        cachedOfflineConfig = null;
+        offlineConfigChecked = true;
+        return { installed: false, bytes: 0, busy: Boolean(packAbort) };
+      }
       try {
         const has = await root.caches.has(OFFLINE_ASR_CACHE);
-        if (!has) return { installed: false, bytes: 0, busy: Boolean(packAbort) };
+        if (!has) {
+          cachedOfflineConfig = null;
+          offlineConfigChecked = true;
+          return { installed: false, bytes: 0, busy: Boolean(packAbort) };
+        }
         const cache = await root.caches.open(OFFLINE_ASR_CACHE);
         const keys = await cache.keys();
         let bytes = 0;
@@ -201,6 +228,8 @@
         }
         return { installed: Boolean(await getReadyOfflinePack(cache)), bytes, busy: Boolean(packAbort) };
       } catch {
+        cachedOfflineConfig = null;
+        offlineConfigChecked = true;
         return { installed: false, bytes: 0, busy: Boolean(packAbort) };
       }
     }
@@ -288,6 +317,8 @@
     async function remove() {
       cancelInstall();
       releaseLocalRecognition();
+      cachedOfflineConfig = null;
+      offlineConfigChecked = true;
       if (!root.caches) return { installed: false, bytes: 0 };
       try {
         await root.caches.delete(OFFLINE_ASR_CACHE);
@@ -310,14 +341,22 @@
   root.HSKSpeakingOfflinePack = offlinePack;
   root.addEventListener?.('hsk-storage-cleaned', event => {
     const pkgs = event?.detail?.packages;
-    if (Array.isArray(pkgs) && pkgs.includes(OFFLINE_ASR_CACHE)) releaseLocalRecognition();
+    if (Array.isArray(pkgs) && pkgs.includes(OFFLINE_ASR_CACHE)) {
+      cachedOfflineConfig = null;
+      offlineConfigChecked = true;
+      releaseLocalRecognition();
+    }
     if (Array.isArray(pkgs) && (pkgs.includes(OFFLINE_ASR_CACHE) || pkgs.includes('speaking-recordings'))) {
       emitPackChanged();
     }
   });
 
   function silenceOtherAudio() {
-    try { root.HSKSpeech?.stop?.(); } catch {}
+    try {
+      if (!root.speechSynthesis || root.speechSynthesis.speaking || root.speechSynthesis.pending) {
+        root.HSKSpeech?.stop?.();
+      }
+    } catch {}
     try {
       for (const el of document.querySelectorAll('audio')) {
         if (!el.paused) el.pause();
@@ -389,24 +428,20 @@
     }
   }
 
-  function playAppleRecordingCue() {
-    const synthesis = root.speechSynthesis;
-    if (!synthesis || !root.SpeechSynthesisUtterance) return Promise.resolve();
-    return new Promise(resolve => {
-      const cue = new root.SpeechSynthesisUtterance('Đọc nhé');
-      cue.lang = 'vi-VN';
-      const finish = () => {
-        clearTimeout(timeout);
-        cue.onend = cue.onerror = null;
-        resolve();
-      };
-      const timeout = setTimeout(() => {
-        finish();
-        try { synthesis.cancel(); } catch {}
-      }, 1600);
-      cue.onend = cue.onerror = finish;
-      try { synthesis.speak(cue); } catch { finish(); }
-    });
+  function joinTranscriptSegments(segments) {
+    let acc = '';
+    for (const raw of segments) {
+      const seg = String(raw || '').trim();
+      if (!seg) continue;
+      if (!acc) {
+        acc = seg;
+      } else if (seg.length > acc.length && seg.startsWith(acc)) {
+        acc = seg;
+      } else {
+        acc += seg;
+      }
+    }
+    return acc.trim();
   }
 
   function isSupported() {
@@ -487,14 +522,14 @@
     const { audioSession, userAgent = '', platform = '', maxTouchPoints = 0 } = root.navigator;
     const isAppleMobile = /iPhone|iPad|iPod/i.test(userAgent) || (platform === 'MacIntel' && maxTouchPoints > 1);
     const isMobile = isAppleMobile || /Android/i.test(userAgent);
-    const localConfig = root.Worker && (isMobile || root.navigator.onLine === false)
-      ? await getReadyOfflinePack().catch(() => null) : null;
-    const Recog = localConfig ? null : (root.SpeechRecognition || root.webkitSpeechRecognition);
-    if (isAppleMobile && Recog) {
-      // Speak the cue before reopening the mic to re-prime WebKit between consecutive turns.
-      if (appleRecognitionAttempted) await playAppleRecordingCue();
-      appleRecognitionAttempted = true;
+    if (!root.caches) {
+      cachedOfflineConfig = null;
+      offlineConfigChecked = true;
     }
+    const localConfig = root.Worker && (isMobile || root.navigator.onLine === false)
+      ? (offlineConfigChecked ? cachedOfflineConfig : await getReadyOfflinePack().catch(() => null))
+      : null;
+    const Recog = localConfig ? null : (root.SpeechRecognition || root.webkitSpeechRecognition);
     const ctx = new AC();
     const previousAudioType = audioSession?.type;
     try { if (audioSession) audioSession.type = 'play-and-record'; } catch {}
@@ -561,28 +596,54 @@
     let interimTranscript = '';
     if (Recog) {
       try {
+        if (activeRecognition) {
+          try {
+            activeRecognition.onresult = activeRecognition.onend = activeRecognition.onerror = null;
+            activeRecognition.abort?.();
+          } catch {}
+          activeRecognition = null;
+        }
         recognition = new Recog();
+        activeRecognition = recognition;
         recognition.lang = opts.lang || 'zh-CN';
-        recognition.continuous = !isAppleMobile;
+        recognition.continuous = true;
         recognition.interimResults = true;
         recognition.maxAlternatives = 1;
         recognition.onresult = event => {
           const interimSegments = [];
           for (let i = 0; i < event.results.length; i++) {
             const res = event.results[i];
-            const txt = res[0]?.transcript || '';
-            if (res.isFinal) finalSegments[i] = txt;
-            else if (!finalSegments[i]) interimSegments.push(txt);
+            const txt = String(res[0]?.transcript || '').trim();
+            if (!txt) continue;
+            const prev = finalSegments[i] || '';
+            if (res.isFinal) {
+              if (!prev || txt === prev || txt.startsWith(prev)) {
+                finalSegments[i] = txt;
+              } else if (!prev.startsWith(txt)) {
+                // Mobile WebKit can reuse result slot 0 for subsequent syllables after a brief pause.
+                finalSegments[i] = prev + txt;
+              }
+            } else if (!prev) {
+              interimSegments.push(txt);
+            } else if (txt.length > prev.length && txt.startsWith(prev)) {
+              const tail = txt.slice(prev.length).trim();
+              if (tail) interimSegments.push(tail);
+            } else if (txt !== prev && !prev.endsWith(txt)) {
+              interimSegments.push(txt);
+            }
           }
-          interimTranscript = interimSegments.join('').trim();
-          onTranscript([...finalSegments, interimTranscript].join('').trim(), false);
+          interimTranscript = joinTranscriptSegments(interimSegments);
+          onTranscript(joinTranscriptSegments([...finalSegments, interimTranscript]), false);
         };
+        recognition.onerror = () => {};
         recognition.onend = () => {
           recognitionEnded = true;
+          if (activeRecognition === recognition) activeRecognition = null;
           resolveRecognitionStop?.();
         };
         recognition.start();
       } catch {
+        if (activeRecognition === recognition) activeRecognition = null;
         recognition = null;
       }
     }
@@ -655,19 +716,24 @@
 
         const finalizeTranscript = recognition && !recognitionEnded
           ? new Promise(resolve => {
+            const trackFlushTimer = setTimeout(() => {
+              if (!recognitionEnded) {
+                try { processor?.disconnect(); } catch {}
+                try { source?.disconnect(); } catch {}
+                try { stream.getTracks().forEach(t => t.stop()); } catch {}
+              }
+            }, 250);
             const timeout = setTimeout(() => {
               resolveRecognitionStop?.();
-              try { recognition.abort(); } catch {}
-            }, isAppleMobile ? 2600 : 1800);
+              try { recognition.abort?.(); } catch {}
+            }, 1200);
             resolveRecognitionStop = () => {
+              clearTimeout(trackFlushTimer);
               clearTimeout(timeout);
               resolveRecognitionStop = undefined;
               resolve();
             };
-            // iOS can leave the next recognition deaf after manually stopping a live session.
-            if (!isAppleMobile) {
-              try { recognition.stop(); } catch { resolveRecognitionStop?.(); }
-            }
+            try { recognition.stop(); } catch { resolveRecognitionStop?.(); }
           }) : null;
         try {
           if (needsBackup) {
@@ -682,7 +748,7 @@
             }
           }
           await finalizeTranscript;
-          const transcript = finalSegments.join('').trim();
+          const transcript = joinTranscriptSegments(finalSegments);
           if (transcript) onTranscript(transcript, true);
           const result = buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition || localConfig), backupBlob, interimTranscript);
           if (localConfig && result.wavBytes.length > 44) {
@@ -703,7 +769,8 @@
           }
           return result;
         } finally {
-          if (recognition) recognition.onresult = recognition.onend = null;
+          if (recognition) recognition.onresult = recognition.onend = recognition.onerror = null;
+          if (activeRecognition === recognition) activeRecognition = null;
           await Promise.all([teardownAudio(), backupResult]);
           if (activeSession === session) activeSession = null;
           resolveTeardown();
@@ -713,7 +780,8 @@
         if (stopped) return teardownDone;
         stopped = true;
         const backupResult = backup?.stop();
-        if (recognition) recognition.onresult = recognition.onend = null;
+        if (recognition) recognition.onresult = recognition.onend = recognition.onerror = null;
+        if (activeRecognition === recognition) activeRecognition = null;
         try { recognition?.abort?.(); } catch {}
         await Promise.all([teardownAudio(), backupResult]);
         if (activeSession === session) activeSession = null;
