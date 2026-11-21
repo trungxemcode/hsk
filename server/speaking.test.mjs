@@ -640,3 +640,85 @@ test('passes 对不起 with soft brief middle 不 and full 6-char sentence even 
   }
   assert.ok(resSentence.overallScore >= 75, `Expected sentence overall >= 75, got ${resSentence.overallScore}`);
 });
+
+test('iPhone avoids concurrent webkitSpeechRecognition mic conflict, opens AudioContext after getUserMedia, and verifies consecutive 北方 takes', async () => {
+  const order = [];
+  let processor;
+  const sr = 16000;
+  const connectable = { connect() {}, disconnect() {} };
+  const beifang = concatWithPause([
+    synthContour(175, 128, 170, 0.28, sr),
+    synthContour(225, null, 225, 0.28, sr)
+  ], 0.08, sr);
+
+  const window = {
+    HSKPitchCore: pitchCore,
+    navigator: {
+      userAgent: 'iPhone',
+      audioSession: { type: 'auto' },
+      mediaDevices: {
+        async getUserMedia() {
+          order.push('getUserMedia');
+          return { getTracks: () => [{ stop() { order.push('track-stop'); } }] };
+        }
+      }
+    },
+    AudioContext: class {
+      constructor() {
+        this.state = 'suspended';
+        order.push('AudioContext');
+      }
+      async resume() {
+        this.state = 'running';
+        order.push('resume');
+      }
+      createMediaStreamSource() { return connectable; }
+      createScriptProcessor() { processor = { ...connectable }; return processor; }
+      createGain() { return { ...connectable, gain: { value: 1 } }; }
+      async close() { order.push('close'); }
+      async decodeAudioData() {
+        // Simulate empty/corrupt backup MediaRecorder blob that must NOT overwrite real captured PCM
+        return { getChannelData: () => new Float32Array(sr), sampleRate: sr };
+      }
+    },
+    MediaRecorder: class {
+      start() { this.state = 'recording'; }
+      stop() {
+        this.state = 'inactive';
+        this.ondataavailable({ data: new Blob(['empty'], { type: 'audio/mp4' }) });
+        this.onstop();
+      }
+    },
+    webkitSpeechRecognition: class {
+      constructor() {
+        assert.fail('iPhone with HSKPitchCore must not run webkitSpeechRecognition concurrently with getUserMedia');
+      }
+    }
+  };
+
+  const source = readFileSync(new URL('../src/modules/speaking/speech-recorder.js', import.meta.url), 'utf8');
+  runInNewContext(source, { window, Blob, setTimeout, clearTimeout });
+
+  for (let take = 1; take <= 2; take++) {
+    order.length = 0;
+    const session = await window.HSKRecorder.start();
+    assert.equal(order[0], 'getUserMedia');
+    assert.equal(order[1], 'AudioContext');
+    assert.equal(order[2], 'resume');
+    processor.onaudioprocess({ inputBuffer: { getChannelData: () => beifang } });
+    const rec = await session.stop();
+    assert.equal(rec.recognitionSupported, false);
+    assert.ok(rec.wavBytes.length > 44);
+    const scored = pitchCore.segmentAndScore({
+      samples: rec.pcm,
+      sampleRate: rec.sampleRate,
+      text: '北方',
+      pinyin: 'běi fāng',
+      transcript: rec.transcript,
+      recognitionSupported: Boolean(rec.recognitionSupported)
+    });
+    assert.equal(scored.hasVoice, true);
+    assert.deepEqual(scored.syllables.map(s => s.pronunciationVerified), [true, true]);
+    assert.ok(scored.overallScore >= 80, `Take ${take} expected overall >= 80, got ${scored.overallScore}`);
+  }
+});

@@ -471,11 +471,14 @@
       resultBox.append(scoreHead);
 
       const displayTranscript = recording.transcript || scoreResult.charMatch?.heardText || '';
-      if (displayTranscript) {
+      if (recording.recognitionSupported !== false && displayTranscript) {
         const confirmed = scoreResult.syllables.filter(s => s.pronunciationVerified === true).length;
         const matchNote = scoreResult.charMatch ? ` · Xác nhận ${confirmed}/${scoreResult.syllables.length} chữ` : '';
         const label = recording.recognitionSource === 'local' ? 'Nhận diện trên máy' : 'Nhận diện giọng nói';
         resultBox.append(el('p', `${label}: “${displayTranscript}”${matchNote}`, 'speaking-transcript'));
+      } else if (recording.recognitionSupported === false && scoreResult.charMatch) {
+        const confirmed = scoreResult.syllables.filter(s => s.pronunciationVerified === true).length;
+        resultBox.append(el('p', `Tách & xác nhận ${confirmed}/${scoreResult.syllables.length} âm tiết trực tiếp trên thiết bị (bạn có thể tải gói Offline bên dưới để nhận diện từng chữ Hán).`, 'speaking-transcript'));
       }
       if (recording.provisionalTranscript && !scoreResult.charMatch?.perChar?.every(Boolean)) {
         resultBox.append(el('p', `Nghe tạm: “${recording.provisionalTranscript}” · Chưa xác nhận chữ`, 'speaking-transcript'));
@@ -531,7 +534,8 @@
             pinyin: currentPinyin,
             transcript: recording.transcript,
             provisionalTranscript: recording.provisionalTranscript,
-            retryFallbackTranscript
+            retryFallbackTranscript,
+            recognitionSupported: Boolean(recording.recognitionSupported)
           })
         : { hasVoice: false, overallScore: 0, syllables: [], summaryVi: 'Thiếu bộ phân tích cao độ.' };
 

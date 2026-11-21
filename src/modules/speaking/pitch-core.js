@@ -1106,7 +1106,11 @@
   /**
    * Segments audio into expected syllables and scores Mandarin tones + optional ASR transcript.
    */
-  function segmentAndScore({ samples, sampleRate = 16000, text = '', pinyin = '', transcript = '', provisionalTranscript = '', retryFallbackTranscript = '' } = {}) {
+  function segmentAndScore({
+    samples, sampleRate = 16000, text = '', pinyin = '',
+    transcript = '', provisionalTranscript = '', retryFallbackTranscript = '',
+    recognitionSupported = true
+  } = {}) {
     const parsed = parseSyllables(text, pinyin);
     const track = sampleRate > 16000 && samples?.length
       ? extractPitchTrack(resample16k(samples, sampleRate), 16000)
@@ -1165,6 +1169,18 @@
       const strictAnalyses = strictSegs.map(d =>
         analyzeToneSegment(d.voiced, d.meta.spokenTone, d.meta.isFinal, d.meta.optionalNeutral, strictPeakRms)
       );
+      const allSyllablesSpokenAcoustically = strictSegs.every((d, idx) => {
+        const a = strictAnalyses[idx];
+        const isSoft = d.meta.spokenTone === 5 || d.meta.optionalNeutral;
+        if (isSoft && idx > 0 && idx < parsed.length - 1) {
+          return d.voicedCount >= 2 || d.segFrames.some(f => (f.rms || 0) >= strictPeakRms * 0.15);
+        }
+        return d.voicedCount >= (isSoft ? 3 : 4)
+          && d.segMeanClarity >= (isSoft ? 0.62 : 0.64)
+          && (strictPeakRms <= 0 || d.segMeanRms >= strictPeakRms * (isSoft ? 0.10 : 0.14))
+          && a.detectedTone > 0
+          && a.score >= 50;
+      });
       const allSyllablesClearlySpoken = strictSegs.every((d, idx) => {
         const a = strictAnalyses[idx];
         const isSoft = d.meta.spokenTone === 5 || d.meta.optionalNeutral;
@@ -1183,6 +1199,8 @@
         if (mergedMatch && (!charMatch || mergedMatch.matchRatio >= charMatch.matchRatio)) {
           charMatch = mergedMatch;
         }
+      } else if (!charMatch && recognitionSupported === false && allSyllablesSpokenAcoustically) {
+        charMatch = computeCharMatch(text, parsed.map(p => p.han).join(''), parsed);
       } else if (!charMatch && retryFallbackTranscript && allSyllablesClearlySpoken) {
         charMatch = computeCharMatch(text, retryFallbackTranscript, parsed);
       } else if (

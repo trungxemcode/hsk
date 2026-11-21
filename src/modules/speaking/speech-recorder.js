@@ -529,15 +529,16 @@
     const localConfig = root.Worker && (isMobile || root.navigator.onLine === false)
       ? (offlineConfigChecked ? cachedOfflineConfig : await getReadyOfflinePack().catch(() => null))
       : null;
-    const Recog = localConfig ? null : (root.SpeechRecognition || root.webkitSpeechRecognition);
-    const ctx = new AC();
+    // On mobile (iOS/Android), concurrent SpeechRecognition + getUserMedia mutates AVAudioSession
+    // and can mute Web Audio capture. Only use single-stream Web Audio unless local offline ASR is used.
+    const Recog = (localConfig || (isMobile && root.HSKPitchCore))
+      ? null
+      : (root.SpeechRecognition || root.webkitSpeechRecognition);
     const previousAudioType = audioSession?.type;
     try { if (audioSession) audioSession.type = 'play-and-record'; } catch {}
-    if (ctx.state === 'suspended' || ctx.state === 'interrupted') {
-      void ctx.resume().catch(() => {});
-    }
+    let ctx = null;
     const releaseContext = async () => {
-      try { await ctx.close(); } catch {}
+      try { if (ctx) { ctx.onstatechange = null; await ctx.close(); } } catch {}
       try { if (audioSession?.type === 'play-and-record') audioSession.type = previousAudioType; } catch {}
     };
     let stream;
@@ -555,10 +556,21 @@
       throw friendlyMicError(err);
     }
 
-    const backup = createBackupCapture(stream);
+    let stopped = false;
+    ctx = new AC();
+    ctx.onstatechange = () => {
+      if (!stopped && (ctx.state === 'suspended' || ctx.state === 'interrupted')) {
+        void ctx.resume?.().catch(() => {});
+      }
+    };
+    if (ctx.state === 'suspended' || ctx.state === 'interrupted') {
+      await ctx.resume?.().catch(() => {});
+    }
+
     let source;
     let processor;
     let silentGain;
+    let backup = null;
     try {
       source = ctx.createMediaStreamSource(stream);
       processor = ctx.createScriptProcessor(2048, 1, 1);
@@ -567,8 +579,12 @@
       source.connect(processor);
       processor.connect(silentGain);
       silentGain.connect(ctx.destination);
-      if (ctx.state === 'suspended' || ctx.state === 'interrupted') void ctx.resume().catch(() => {});
+      if (ctx.state === 'suspended' || ctx.state === 'interrupted') {
+        await ctx.resume?.().catch(() => {});
+      }
+      backup = createBackupCapture(stream);
     } catch (err) {
+      backup = backup || createBackupCapture(stream);
       if (!backup) {
         stream.getTracks().forEach(track => track.stop());
         await releaseContext();
@@ -579,7 +595,6 @@
     const chunks = [];
     let totalSamples = 0;
     const startedAt = Date.now();
-    let stopped = false;
     const autoSilenceMs = opts.autoSilenceMs === 0 ? 0 : Math.max(650, Number(opts.autoSilenceMs) || 950);
     let noiseFloor = 0.001;
     let peakRms = 0;
@@ -741,8 +756,16 @@
             if (backupBlob) {
               try {
                 const decoded = await ctx.decodeAudioData(await backupBlob.arrayBuffer());
-                pcm = decoded.getChannelData(0);
-                sampleRate = decoded.sampleRate;
+                const decodedChannel = decoded.getChannelData(0);
+                let decodedPeak = 0;
+                for (let i = 0; i < decodedChannel.length; i++) {
+                  const amp = Math.abs(decodedChannel[i]);
+                  if (amp > decodedPeak) decodedPeak = amp;
+                }
+                if (capturePeakRms < 0.0008 || decodedPeak >= capturePeakRms * 0.5) {
+                  pcm = decodedChannel;
+                  sampleRate = decoded.sampleRate;
+                }
                 backupBlob = null;
               } catch {}
             }
