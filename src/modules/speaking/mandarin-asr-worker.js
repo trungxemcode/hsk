@@ -41,14 +41,38 @@ async function loadRecognizer(cacheName, config) {
     device: 'wasm',
     dtype: 'q8'
   });
+  const decodeText = async audio => {
+    const out = await recognizer(audio, {
+      language: 'zh',
+      task: 'transcribe',
+      do_sample: false,
+      condition_on_prev_tokens: false,
+      max_new_tokens: 64
+    });
+    return typeof out?.text === 'string' ? toSimplifiedChinese(out.text.trim()) : '';
+  };
   return async samples => {
     const padSamples = 5600; // 350ms silence padding at 16kHz reduces STFT boundary distortion on short words.
     const padded = new Float32Array(samples.length + padSamples * 2);
     padded.set(samples, padSamples);
-    const { text } = await recognizer(padded, {
-      language: 'zh', task: 'transcribe', do_sample: false, max_new_tokens: 64
-    });
-    return typeof text === 'string' ? toSimplifiedChinese(text.trim()) : '';
+    let transcript = await decodeText(padded);
+    if (!/\p{Script=Han}/u.test(transcript) && samples.length >= 1600 && samples.length <= 48000) {
+      // Short 1-2 syllable clips can hit Whisper's early <|endoftext|> bias against 29s of zero-padding;
+      // repeat once with a 180ms pause so decoder cross-attention locks onto Mandarin articulation.
+      const gap = 2880;
+      const doubled = new Float32Array(padSamples + samples.length + gap + samples.length + padSamples);
+      doubled.set(samples, padSamples);
+      doubled.set(samples, padSamples + samples.length + gap);
+      const retry = await decodeText(doubled);
+      if (/\p{Script=Han}/u.test(retry)) {
+        const chars = Array.from(retry).filter(c => /\p{Script=Han}/u.test(c));
+        const half = Math.ceil(chars.length / 2);
+        const firstHalf = chars.slice(0, half).join('');
+        const secondHalf = chars.slice(half).join('');
+        transcript = firstHalf && secondHalf && firstHalf === secondHalf ? firstHalf : retry;
+      }
+    }
+    return transcript;
   };
 }
 

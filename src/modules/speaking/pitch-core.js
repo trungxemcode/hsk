@@ -103,9 +103,35 @@
   };
 
   let dynamicPinyinMap = null;
+  let indexedWordCount = -1;
+  let indexedSuppCount = -1;
+
+  function resolveGlobalWords() {
+    if (Array.isArray(root.words)) return root.words;
+    try { if (typeof words !== 'undefined' && Array.isArray(words)) return words; } catch {}
+    return null;
+  }
+
+  function resolveGlobalSupplement() {
+    if (root.dictionarySupplement && typeof root.dictionarySupplement === 'object') return root.dictionarySupplement;
+    try {
+      if (typeof dictionarySupplement !== 'undefined' && dictionarySupplement && typeof dictionarySupplement === 'object') {
+        return dictionarySupplement;
+      }
+    } catch {}
+    return null;
+  }
 
   function buildPinyinLookup() {
-    if (dynamicPinyinMap) return dynamicPinyinMap;
+    const wordList = resolveGlobalWords();
+    const suppObj = resolveGlobalSupplement();
+    const suppEntries = suppObj?.entries && typeof suppObj.entries === 'object' ? Object.keys(suppObj.entries) : null;
+    const nextWordCount = wordList ? wordList.length : 0;
+    const nextSuppCount = suppEntries ? suppEntries.length : 0;
+    if (dynamicPinyinMap && nextWordCount === indexedWordCount && nextSuppCount === indexedSuppCount) {
+      return dynamicPinyinMap;
+    }
+
     const map = new Map();
     const add = (han, basePy) => {
       if (!han || !basePy) return;
@@ -113,21 +139,35 @@
       if (!set) { set = new Set(); map.set(han, set); }
       set.add(basePy);
     };
+    const indexWord = (hanText, pinText) => {
+      if (!hanText || !pinText) return;
+      const cleanHan = String(hanText).split(/[（(]/)[0];
+      const hans = Array.from(cleanHan).filter(c => /\p{Script=Han}/u.test(c));
+      if (!hans.length) return;
+      const cleanPin = String(pinText).split(/[（(]/)[0];
+      const tokens = splitConcatPinyin(cleanPin, hans.length);
+      if (tokens.length === hans.length) {
+        for (let k = 0; k < hans.length; k++) {
+          add(hans[k], tonelessPinyin(tokens[k]));
+        }
+      }
+    };
+
     for (const [py, chars] of Object.entries(HOMOPHONE_GROUPS)) {
       for (const ch of Array.from(chars)) add(ch, py);
     }
-    if (Array.isArray(root.words)) {
-      for (const w of root.words) {
-        if (!w?.han || !w?.pin) continue;
-        const hans = Array.from(w.han).filter(c => /\p{Script=Han}/u.test(c));
-        const tokens = String(w.pin).split(/[\s\-·,/]+/).filter(Boolean);
-        if (hans.length && hans.length === tokens.length) {
-          for (let k = 0; k < hans.length; k++) {
-            add(hans[k], tonelessPinyin(tokens[k]));
-          }
-        }
+    if (wordList) {
+      for (const w of wordList) indexWord(w?.han, w?.pin);
+    }
+    if (suppEntries) {
+      for (const key of suppEntries) {
+        const parts = key.split('|');
+        if (parts.length >= 3) indexWord(parts[1], parts[2]);
       }
     }
+
+    indexedWordCount = nextWordCount;
+    indexedSuppCount = nextSuppCount;
     dynamicPinyinMap = map;
     return map;
   }
@@ -328,7 +368,7 @@
     const slice = new Float32Array(downLen);
     let mean = 0;
     for (let i = 0; i < downLen; i++) {
-      slice[i] = samples[i * step];
+      slice[i] = step === 2 ? (samples[i * 2] + samples[i * 2 + 1]) * 0.5 : samples[i];
       mean += slice[i];
     }
     mean /= downLen;
@@ -411,10 +451,11 @@
 
     const sortedRms = allRms.slice().sort((a, b) => a - b);
     const ambientFloor = percentile(sortedRms, 0.18);
+    const refRms = Math.max(percentile(sortedRms, 0.90), maxRms * 0.25);
     const rmsFloor = Math.max(
       opts.minRms || 0.00022,
-      maxRms * (opts.rmsRatio || 0.035),
-      ambientFloor * 1.25 + Math.max(0, maxRms - ambientFloor) * 0.035
+      refRms * (opts.rmsRatio || 0.035),
+      ambientFloor * 1.25 + Math.max(0, refRms - ambientFloor) * 0.035
     );
     const nsdf = new Float64Array(tauMax + 2);
 
@@ -1133,6 +1174,17 @@
       if (mv1 && mv1 === mv2) return true;
       if (p1.final && p1.final === p2.final) return true;
     }
+    if (p1.final && p2.final) {
+      if (p1.final === p2.final && p1.final.length >= 2) return true;
+      if (sameNearFinalGroup(p1.final, p2.final) && (!p1.initial || !p2.initial || sameInitialGroup(p1.initial, p2.initial))) {
+        return true;
+      }
+      const sibilantHighFront = ini => INITIAL_GROUPS[3].includes(ini);
+      const highFrontFinal = fin => ['i', 'v', 'ie', 'ue', 'in', 'ing', 'vn'].includes(fin);
+      if (sibilantHighFront(p1.initial) && sibilantHighFront(p2.initial) && highFrontFinal(p1.final) && highFrontFinal(p2.final)) {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -1279,7 +1331,11 @@
       };
     }
 
-    const peakTrackRms = Math.max(0.001, ...track.map(f => f.rms || 0));
+    const voicedRmsSorted = voicedFrames.map(f => f.rms || 0).sort((a, b) => a - b);
+    const peakTrackRms = Math.max(
+      0.0005,
+      percentile(voicedRmsSorted, 0.92) || (voicedRmsSorted[voicedRmsSorted.length - 1] || 0)
+    );
     const strictRanges = findSyllableRanges(track, parsed.length, peakTrackRms, true);
     const hasAllAcousticSyllables = strictRanges.length === parsed.length && strictRanges.every(([lo, hi]) => hi > lo);
 
@@ -1320,11 +1376,15 @@
       // Never fabricate a full-text ASR match from the expected exercise text.
     }
 
-    const ranges = findSyllableRanges(track, charMatch?.heardCount ?? parsed.length, peakTrackRms);
+    const useFullAcousticRanges = !charMatch || hasAllAcousticSyllables || charMatch.heardCount >= parsed.length;
+    const ranges = findSyllableRanges(track, useFullAcousticRanges ? parsed.length : charMatch.heardCount, peakTrackRms);
     const heardChars = Array.from(charMatch?.heardText || '');
     const segData = parsed.map((meta, idx) => {
       const heardIndex = charMatch?.heardIndices[idx] ?? idx;
-      const [lo, hi] = ranges[heardIndex] || [0, 0];
+      const rangeIndex = charMatch
+        ? (heardIndex >= 0 ? (useFullAcousticRanges ? idx : heardIndex) : -1)
+        : idx;
+      const [lo, hi] = rangeIndex >= 0 ? (ranges[rangeIndex] || [0, 0]) : [0, 0];
       const segFrames = hi > lo ? track.slice(lo, hi) : [];
       const voiced = trimUnvoicedEdges(segFrames).filter(f => f.f0 > 0);
       const voicedCount = voiced.length;
@@ -1481,6 +1541,108 @@
     return result;
   }
 
+  function findSpeechBounds(input, sampleRate = 16000, padStartSec = 0.20, padEndSec = 0.24) {
+    if (!input || !input.length) return [0, 0];
+    const win = Math.max(160, Math.round(sampleRate * 0.02));
+    const count = Math.ceil(input.length / win);
+    if (count < 3) return [0, input.length - 1];
+
+    const winRms = new Array(count);
+    for (let k = 0; k < count; k++) {
+      const s0 = k * win;
+      const s1 = Math.min(input.length, s0 + win);
+      let sq = 0;
+      for (let i = s0; i < s1; i++) sq += input[i] * input[i];
+      winRms[k] = Math.sqrt(sq / Math.max(1, s1 - s0));
+    }
+    const sorted = winRms.slice().sort((a, b) => a - b);
+    const ambientRms = percentile(sorted, 0.20);
+    const p90Rms = percentile(sorted, 0.90);
+    const frameGate = Math.max(0.00025, Math.min(0.0022, ambientRms * 1.75, p90Rms * 0.05));
+    const active = winRms.map(r => r >= frameGate);
+    const paired = active.map((ok, k) => ok && (Boolean(active[k - 1]) || Boolean(active[k + 1])));
+    const picked = paired.some(Boolean) ? paired : (active.some(Boolean) ? active : null);
+    if (!picked) return [0, input.length - 1];
+
+    const firstWin = picked.indexOf(true);
+    const lastWin = picked.lastIndexOf(true);
+    const first = Math.max(0, firstWin * win - Math.round(sampleRate * padStartSec));
+    const last = Math.min(input.length - 1, (lastWin + 1) * win - 1 + Math.round(sampleRate * padEndSec));
+    return [first, last];
+  }
+
+  /** Preprocesses captured audio for local Mandarin ASR (high-pass, windowed trim, smooth AGC). */
+  function prepareAsrAudio(samples, inputSampleRate = 16000) {
+    const raw = samples instanceof Float32Array ? samples : new Float32Array(samples || 0);
+    if (!raw.length) return new Float32Array(0);
+    const resampled = resample16k(raw, inputSampleRate);
+    const n = resampled.length;
+    const hp = new Float32Array(n);
+    let mean = 0;
+    for (let i = 0; i < n; i++) mean += resampled[i];
+    mean /= n;
+    const dt = 1 / 16000;
+    const rc = 1 / (2 * Math.PI * 65);
+    const alpha = rc / (rc + dt);
+    let px = 0;
+    let py = 0;
+    for (let i = 0; i < n; i++) {
+      const x = resampled[i] - mean;
+      py = alpha * (py + x - px);
+      px = x;
+      hp[i] = py;
+    }
+
+    const [first, last] = findSpeechBounds(hp, 16000, 0.20, 0.25);
+    const trimmed = hp.slice(first, last + 1);
+    const m = trimmed.length;
+    const win = 640;
+    const numBlocks = Math.max(1, Math.ceil(m / win));
+    const blockRms = new Float32Array(numBlocks);
+    for (let b = 0; b < numBlocks; b++) {
+      const s0 = b * win;
+      const s1 = Math.min(m, s0 + win);
+      let sq = 0;
+      for (let i = s0; i < s1; i++) sq += trimmed[i] * trimmed[i];
+      blockRms[b] = Math.sqrt(sq / Math.max(1, s1 - s0));
+    }
+
+    const sortedBlocks = Array.from(blockRms).sort((a, b) => a - b);
+    const ambientRms = percentile(sortedBlocks, 0.15);
+    const refSpeechRms = percentile(sortedBlocks, 0.85) || sortedBlocks[sortedBlocks.length - 1] || 0;
+    if (refSpeechRms <= 0) return trimmed;
+
+    const activeThreshold = Math.max(0.00025, ambientRms * 1.8, refSpeechRms * 0.08);
+    const baseGain = Math.min(64, Math.max(1, 0.12 / Math.max(0.00025, refSpeechRms)));
+    const rawGain = new Float32Array(numBlocks);
+    for (let b = 0; b < numBlocks; b++) {
+      const r = blockRms[b];
+      rawGain[b] = r >= activeThreshold
+        ? Math.min(64, Math.max(0.5, 0.12 / r))
+        : Math.min(baseGain, 4);
+    }
+
+    const smoothGain = new Float32Array(numBlocks);
+    for (let b = 0; b < numBlocks; b++) {
+      const prev = rawGain[Math.max(0, b - 1)];
+      const cur = rawGain[b];
+      const next = rawGain[Math.min(numBlocks - 1, b + 1)];
+      smoothGain[b] = prev * 0.25 + cur * 0.5 + next * 0.25;
+    }
+
+    const out = new Float32Array(m);
+    for (let i = 0; i < m; i++) {
+      const pos = (i - win * 0.5) / win;
+      const b0 = Math.max(0, Math.min(numBlocks - 1, Math.floor(pos)));
+      const b1 = Math.max(0, Math.min(numBlocks - 1, b0 + 1));
+      const frac = Math.max(0, Math.min(1, pos - b0));
+      const gain = smoothGain[b0] * (1 - frac) + smoothGain[b1] * frac;
+      const v = trimmed[i] * gain;
+      out[i] = Math.abs(v) > 0.85 ? 0.95 * Math.tanh(v / 0.95) : v;
+    }
+    return out;
+  }
+
   /** Trims edge silence and writes a 16kHz mono PCM16 WAV. */
   function encodeWav16k(samples, inputSampleRate = 16000) {
     const targetRate = 16000;
@@ -1493,15 +1655,8 @@
       return empty;
     }
 
-    // Trim silence with 120ms safety padding.
-    let first = 0;
-    let last = input.length - 1;
-    const gate = Math.min(0.008, peak * 0.15);
-    while (first < last && Math.abs(input[first]) < gate) first++;
-    while (last > first && Math.abs(input[last]) < gate) last--;
-    const pad = Math.round(inputSampleRate * 0.12);
-    first = Math.max(0, first - pad);
-    last = Math.min(input.length - 1, last + pad);
+    // Trim silence with 200ms leading / 240ms trailing safety padding using windowed RMS.
+    const [first, last] = findSpeechBounds(input, inputSampleRate, 0.20, 0.24);
     const trimmed = input.subarray(first, last + 1);
 
     const pcm16k = resample16k(trimmed, inputSampleRate);
@@ -1547,7 +1702,8 @@
     targetContour,
     dtwDistance,
     segmentAndScore,
-    encodeWav16k
+    encodeWav16k,
+    prepareAsrAudio
   };
 
   root.HSKPitchCore = api;
