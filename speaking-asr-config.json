@@ -1,13 +1,14 @@
 {
-  "schema": 2,
-  "model": "Xenova/whisper-tiny",
-  "revision": "5332fcc35e32a33b86612b9a57a89be7906102b1",
+  "schema": 3,
+  "engine": "zipformer2_ctc",
+  "model": "csukuangfj/sherpa-onnx-zipformer-ctc-small-zh-int8-2025-07-16",
+  "revision": "220fccc064f49a904d0db9500e4d7e50a9da2490",
   "cacheName": "hsk-speaking-asr-offline-v1",
   "assets": {
     "runtime": {
-      "url": "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.6/dist/transformers.min.js",
-      "bytes": 876754,
-      "sha256": "13746ae88695b62e431fc5ebe3beb10a080d2081406047670639ce8c10a9ba25",
+      "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0-dev.20250409-89f8206ba4/dist/ort.wasm.min.mjs",
+      "bytes": 48008,
+      "sha256": "0cb5ac5be2c414d5b9e361f857108630c6d6e24a5ab9be3cf5f761de55289e94",
       "type": "text/javascript"
     },
     "module": {
@@ -22,54 +23,18 @@
       "sha256": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b",
       "type": "application/wasm"
     },
-    "config.json": {
-      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/config.json",
-      "bytes": 2248,
-      "sha256": "2b2e4e519084e0ea028b19b153f95202735a971870d6844aa26e559edd292e94",
-      "type": "application/json"
-    },
-    "generation_config.json": {
-      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/generation_config.json",
-      "bytes": 3716,
-      "sha256": "68ac791fcb4999461a313472125042934656240ba1cba7d1c2627fcbb19ac24c",
-      "type": "application/json"
-    },
-    "preprocessor_config.json": {
-      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/preprocessor_config.json",
-      "bytes": 339,
-      "sha256": "a6a76d28c93edb273669eb9e0b0636a2bddbb1272c3261e47b7ca6dfdbac1b8d",
-      "type": "application/json"
-    },
-    "tokenizer.json": {
-      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/tokenizer.json",
-      "bytes": 2480466,
-      "sha256": "27fc476bfe7f17299480be2273fc0608e4d5a99aba2ab5dec5374b4482d1a566",
-      "type": "application/json"
-    },
-    "tokenizer_config.json": {
-      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/tokenizer_config.json",
-      "bytes": 282683,
-      "sha256": "2a4c4281cf9f51ac6ccc406fdc711a087afe6530f671fa7b80953edc498275ce",
-      "type": "application/json"
-    },
-    "onnx/encoder_model_quantized.onnx": {
-      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/onnx/encoder_model_quantized.onnx",
-      "bytes": 10124910,
-      "sha256": "fd9d995b9dcb0520f0dbf6cf68651af639fc385f594d9d876e69ca2802dc438e",
+    "model": {
+      "url": "https://huggingface.co/csukuangfj/sherpa-onnx-zipformer-ctc-small-zh-int8-2025-07-16/resolve/220fccc064f49a904d0db9500e4d7e50a9da2490/model.int8.onnx",
+      "bytes": 62666860,
+      "sha256": "32e5f17cc9a77d480f8d94bda97b7cc7a40965b6651b35385813f561a74129c8",
       "type": "application/octet-stream"
     },
-    "onnx/decoder_model_merged_quantized.onnx": {
-      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/onnx/decoder_model_merged_quantized.onnx",
-      "bytes": 30727765,
-      "sha256": "6c0c125986b007d2e3734bec84c18bda0152071b90b87fadac6d7764499927a0",
-      "type": "application/octet-stream"
-    },
-    "normalizer": {
-      "url": "https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/esm/t2cn.js",
-      "bytes": 68854,
-      "sha256": "477542b4c9e2b64ddfa90c971b29d221216b604165ef2c6b1eb6e929f69d9f23",
-      "type": "text/javascript"
+    "tokens": {
+      "url": "https://huggingface.co/csukuangfj/sherpa-onnx-zipformer-ctc-small-zh-int8-2025-07-16/resolve/220fccc064f49a904d0db9500e4d7e50a9da2490/tokens.txt",
+      "bytes": 13366,
+      "sha256": "6fed8c6c248516f38e7faa19404b57413e8ce259f1cbc1fa4aebc86eac32fdfd",
+      "type": "text/plain"
     }
   },
-  "downloadBytes": 55721998
+  "downloadBytes": 73882497
 }

@@ -132,7 +132,8 @@
   }
 
   const OFFLINE_ASR_CACHE = 'hsk-speaking-asr-offline-v1';
-  const OFFLINE_ASR_READY = './speaking-asr-ready-v2.json';
+  const OFFLINE_ASR_READY = './speaking-asr-ready-v3.json';
+  const OFFLINE_ASR_LEGACY_READY = './speaking-asr-ready-v2.json';
   const ALLOWED_ASSET_HOSTS = ['huggingface.co', 'cdn.jsdelivr.net'];
   let packAbort = null;
   let localWorker = null;
@@ -156,8 +157,13 @@
         }
         cache = await root.caches.open(OFFLINE_ASR_CACHE);
       }
-      const config = await (await cache.match(OFFLINE_ASR_READY))?.json();
-      if (config?.schema !== 2) {
+      let config = await (await cache.match(OFFLINE_ASR_READY))?.json();
+      if (!config) {
+        const legacy = await (await cache.match(OFFLINE_ASR_LEGACY_READY))?.json();
+        if (legacy?.schema === 2 && !legacy?.model) config = legacy;
+      }
+      const supported = config?.schema === 3 || (config?.schema === 2 && !config?.model);
+      if (!supported || !config?.assets) {
         cachedOfflineConfig = null;
         offlineConfigChecked = true;
         return null;
@@ -226,11 +232,13 @@
           if (Number.isFinite(cl) && cl > 0) bytes += cl;
           else bytes += (await res.arrayBuffer()).byteLength;
         }
-        return { installed: Boolean(await getReadyOfflinePack(cache)), bytes, busy: Boolean(packAbort) };
+        const installed = Boolean(await getReadyOfflinePack(cache));
+        const needsUpgrade = !installed && Boolean(await cache.match(OFFLINE_ASR_LEGACY_READY));
+        return { installed, needsUpgrade, bytes, busy: Boolean(packAbort) };
       } catch {
         cachedOfflineConfig = null;
         offlineConfigChecked = true;
-        return { installed: false, bytes: 0, busy: Boolean(packAbort) };
+        return { installed: false, needsUpgrade: false, bytes: 0, busy: Boolean(packAbort) };
       }
     }
 
@@ -257,7 +265,7 @@
         if (!cfgRes.ok) throw Error('Không tải được cấu hình gói nhận diện offline.');
         const cfg = await cfgRes.json();
         const assets = Object.entries(cfg.assets || {});
-        if (cfg.schema !== 2 || !assets.length) throw Error('Cấu hình gói nhận diện không hợp lệ.');
+        if ((cfg.schema !== 3 && cfg.schema !== 2) || !assets.length) throw Error('Cấu hình gói nhận diện không hợp lệ.');
 
         const cache = await root.caches.open(OFFLINE_ASR_CACHE);
         const total = assets.reduce((sum, [, a]) => sum + Number(a?.bytes || 0), 0);
