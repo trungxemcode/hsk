@@ -1,5 +1,5 @@
 {
-  "request": "Upgrade the AI Lesson Architect and custom lesson experience on Home + Lessons, desktop and mobile.",
+  "request": "Improve the custom HSK lesson flow (AI interview, skill and schedule sliders, Home card, and lesson runner) on Home and Lessons, desktop and mobile.",
   "excludedRoutes": [
     "home",
     "lessons"

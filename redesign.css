@@ -4688,9 +4688,9 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     box-shadow:none !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHeader #homeStreak{
-    background:rgba(245,158,11,0.16) !important;
-    border:1px solid rgba(245,158,11,0.34) !important;
-    color:#fde68a !important;
+    background:var(--palette-mobile-streak-soft) !important;
+    border:1px solid var(--palette-mobile-streak-border) !important;
+    color:var(--palette-mobile-streak-text) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHeader #headerInfo{
     box-shadow:none !important;
@@ -4716,7 +4716,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
 
   /* 3. Mobile Home: Compact Quick Search bar & Daily Word horizontal layout */
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 .overview-search{
-    margin:0 0 10px !important;
+    margin:0 0 12px !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-search > summary{
     min-height:44px !important;
@@ -4742,7 +4742,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     margin:0 !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head h3{
-    color:#a5b4fc !important;
+    color:var(--palette-mobile-vocab-heading) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head button:not(:active):not(:focus-visible){
     white-space:nowrap !important;
@@ -4750,11 +4750,11 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     min-height:36px !important;
     height:36px !important;
     padding:0 10px !important;
-    border-radius:12px !important;
+    border-radius:var(--radius-btn) !important;
     font-size:12.5px !important;
     line-height:1 !important;
-    background:transparent !important;
-    border-color:transparent !important;
+    background:var(--palette-clear) !important;
+    border-color:var(--palette-clear) !important;
     color:var(--rd-ink) !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome #homeDailyWord .overview-word-head button:not(:active):not(:focus-visible){
@@ -4813,7 +4813,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     height:44px !important;
     min-width:44px !important;
     min-height:44px !important;
-    border-radius:12px !important;
+    border-radius:var(--radius-btn) !important;
     background:var(--rd-brand-soft) !important;
     border:1px solid var(--rd-line) !important;
     color:var(--rd-brand) !important;
@@ -4826,7 +4826,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
 
   /* 4. Mobile Home: Hero card single-line goal action & Light/Dark parity */
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 #mobileTodayHero{
-    background-color:#4338ca !important;
+    background-color:var(--palette-mobile-hero-surface) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome #mobileTodayHero .mobile-hero-top{
     display:flex !important;
@@ -4846,19 +4846,19 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     max-width:none !important;
     min-height:40px !important;
     padding:0 12px !important;
-    border-radius:12px !important;
+    border-radius:var(--radius-btn) !important;
     font-size:12.5px !important;
     font-weight:650 !important;
     white-space:nowrap !important;
     line-height:1.2 !important;
-    background:rgba(20,16,66,0.34) !important;
-    border:1px solid rgba(255,255,255,0.34) !important;
+    background:var(--palette-mobile-hero-button-soft) !important;
+    border:1px solid var(--palette-mobile-hero-button-border) !important;
     color:var(--palette-white) !important;
     box-shadow:none !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #studioHome.overview-v216 #mobileTodayHero .mobile-hero-cta:not(:disabled){
     background:var(--palette-white) !important;
-    color:#2e2584 !important;
+    color:var(--palette-mobile-hero-button-ink) !important;
     border:0 !important;
     box-shadow:none !important;
   }
@@ -4867,7 +4867,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-custom-lesson{
     padding:14px !important;
     gap:8px !important;
-    border-radius:16px !important;
+    border-radius:var(--radius-16px) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #studioHome .overview-custom-lesson .lesson-custom-head{
     gap:4px !important;
@@ -4897,24 +4897,24 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     margin:0 0 10px !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .mobile-card-actions button:nth-child(1):not(:active):not(:focus-visible){
-    background:rgba(244,63,94,0.16) !important;
-    border-color:rgba(244,63,94,0.34) !important;
-    color:#fda4af !important;
+    background:var(--palette-mobile-wrong-soft) !important;
+    border-color:var(--palette-mobile-wrong-border) !important;
+    color:var(--palette-mobile-wrong-ink) !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .mobile-card-actions button:nth-child(2):not(:active):not(:focus-visible){
-    background:rgba(16,185,129,0.16) !important;
-    border-color:rgba(16,185,129,0.34) !important;
-    color:#6ee7b7 !important;
+    background:var(--palette-mobile-correct-soft) !important;
+    border-color:var(--palette-mobile-correct-border) !important;
+    color:var(--palette-mobile-correct-ink) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #flashcard{
     border:1px solid var(--rd-line) !important;
-    border-radius:16px !important;
+    border-radius:var(--radius-16px) !important;
     overflow:hidden !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux #flashcard .inner,
   html body:not(#_rd).studio-enabled.mobile-ux #flashcard .face{
     border:0 !important;
-    border-radius:15px !important;
+    border-radius:var(--radius-15px) !important;
     box-shadow:none !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux .mobile-focus-bar:not([hidden]){
@@ -4946,7 +4946,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   html body:not(#_rd).studio-enabled.mobile-ux:not([data-search-tool="handwriting"]) #searchPanel .dictionary-modes:not([hidden]){
     gap:4px !important;
     padding:3px !important;
-    border-radius:12px !important;
+    border-radius:var(--radius-btn) !important;
     background:var(--rd-surface) !important;
     border:1px solid var(--rd-line) !important;
     margin-bottom:8px !important;
@@ -4954,8 +4954,8 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   html body:not(#_rd).studio-enabled.mobile-ux #searchPanel .dictionary-modes button{
     min-height:36px !important;
     padding:6px 12px !important;
-    border-radius:9px !important;
-    border-color:transparent !important;
+    border-radius:var(--radius-9px) !important;
+    border-color:var(--palette-clear) !important;
     font-size:13px !important;
     font-weight:600 !important;
     white-space:nowrap !important;
@@ -4963,7 +4963,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   html body:not(#_rd).studio-enabled.mobile-ux #searchPanel .dictionary-modes button[aria-pressed="true"]:not(:active):not(:focus-visible){
     background:var(--rd-brand-soft) !important;
     color:var(--rd-brand) !important;
-    border-color:transparent !important;
+    border-color:var(--palette-clear) !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #searchPanel .dictionary-modes button[aria-pressed="true"]:not(:active):not(:focus-visible){
     background:var(--palette-dark-violet-soft) !important;
@@ -5021,16 +5021,16 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   }
 
   /* 11. Unified Mobile Corner-Radius System (12px interactive controls & disclosures; 16px cards) */
-  html body:not(#_rd).studio-enabled.mobile-ux button:not(#headerInfo):not(#aiQaSend):not(.qa-chat-attach):not(.mobile-passive-toggle):not(.music-transport-play):not(.music-pill):not(.podcast-speed-btn):not(.podcast-shelf-nav):not([data-search-scope]),
+  html body:not(#_rd).studio-enabled.mobile-ux button:not(#headerInfo):not(#musicQueueLibrary):not(#aiQaSend):not(.qa-chat-attach):not(.mobile-passive-toggle):not(.music-transport-play):not(.music-pill):not(.podcast-speed-btn):not(.podcast-shelf-nav):not([data-search-scope]),
   html body:not(#_rd).studio-enabled.mobile-ux :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select:not(.qa-thinking),textarea){
-    border-radius:12px !important;
+    border-radius:var(--radius-btn) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux details:is(#homePlanSettings,#planSetup,.ps-disclosure,.hub-group,.dictionary-row,.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel,.update-push-settings,.push-settings,.lesson-vocab,.clean-disclosure,.overview-search){
-    border-radius:12px !important;
+    border-radius:var(--radius-btn) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux details:is(#homePlanSettings,#planSetup,.ps-disclosure,.hub-group,.dictionary-row,.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel,.update-push-settings,.push-settings,.lesson-vocab,.clean-disclosure,.overview-search) > summary,
   html body:not(#_rd).studio-enabled.mobile-ux :is(#homePlanSettings,#planSetup,.overview-search,.clean-disclosure) > summary:focus-visible{
-    border-radius:12px !important;
+    border-radius:var(--radius-btn) !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux details:is(#homePlanSettings,#planSetup,.ps-disclosure,.hub-group,.dictionary-row,.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel,.update-push-settings,.push-settings,.lesson-vocab,.clean-disclosure,.overview-search)[open] > summary,
   html body:not(#_rd).studio-enabled.mobile-ux :is(#homePlanSettings,#planSetup,.overview-search,.clean-disclosure)[open] > summary:focus-visible{
@@ -5038,24 +5038,24 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     border-bottom-right-radius:0 !important;
   }
   html body:not(#_rd).studio-enabled.mobile-ux :is(#homeDailyWord,#mobileTodayHero,.lesson-course-progress,.podcast-player-col,#flashcard,.account-version,.account-detail,.account-metric,.about-card,.hub-card){
-    border-radius:16px !important;
+    border-radius:var(--radius-16px) !important;
   }
 
   /* 12. Dark Mode Parity with Light Mode (remove dark-only extra panel boxes, sync accents & badges) */
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux :is(.panel-box,.activity-panel,.hub-panel):not(#aiQaPanel){
-    background:transparent !important;
+    background:var(--palette-clear) !important;
     border:0 !important;
     box-shadow:none !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .account-version .offline-bar{
-    background:transparent !important;
+    background:var(--palette-clear) !important;
     border:0 !important;
     box-shadow:none !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .account-badge{
-    background:rgba(34,197,94,0.16) !important;
-    border:1px solid rgba(34,197,94,0.34) !important;
-    color:#86efac !important;
+    background:var(--palette-mobile-status-soft) !important;
+    border:1px solid var(--palette-mobile-status-border) !important;
+    color:var(--palette-mobile-status-ink) !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #searchForm button[type="submit"],
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux .studio-search-tabs button.active{
