@@ -549,6 +549,24 @@ test('custom micro-interval & hybrid schedule splits 60m into 5-10m micro-sessio
   assert.equal(aiDrivenPlan.sessions[1].steps[0].wordLimit, 8);
 });
 
+test('rebalanceWeights locks edited skill and keeps all 5 skills bounded [5, 70] summing to 100%', () => {
+  let weights = { ...C.FOCUS_PRESETS.balanced };
+  weights = C.rebalanceWeights(weights, 'vocab', 60);
+  assert.equal(weights.vocab, 60);
+  assert.equal(C.SKILLS.reduce((s, k) => s + weights[k], 0), 100);
+  assert.ok(C.SKILLS.every(k => weights[k] >= 5 && weights[k] <= 70));
+  assert.equal(C.inferFocusChoice(weights), 'vocab_heavy');
+
+  weights = C.rebalanceWeights(weights, 'vocab', 70);
+  assert.equal(weights.vocab, 70);
+  assert.equal(C.SKILLS.reduce((s, k) => s + weights[k], 0), 100);
+  assert.ok(C.SKILLS.every(k => weights[k] >= 5 && weights[k] <= 70));
+
+  weights = C.rebalanceWeights(weights, 'listening', 35);
+  assert.equal(weights.listening, 35);
+  assert.equal(C.SKILLS.reduce((s, k) => s + weights[k], 0), 100);
+  assert.ok(C.SKILLS.every(k => weights[k] >= 5 && weights[k] <= 70));
+});
 
 test('explicit micro schedule cannot be overridden by a two-block AI interview blueprint', () => {
   const hsk3Lesson1 = {
