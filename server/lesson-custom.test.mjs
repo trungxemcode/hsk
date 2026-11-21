@@ -567,3 +567,50 @@ test('rebalanceWeights locks edited skill and keeps all 5 skills bounded [5, 70]
   assert.equal(C.SKILLS.reduce((s, k) => s + weights[k], 0), 100);
   assert.ok(C.SKILLS.every(k => weights[k] >= 5 && weights[k] <= 70));
 });
+
+test('explicit micro schedule cannot be overridden by a two-block AI interview blueprint', () => {
+  const hsk3Lesson1 = {
+    id: 'standard-3-01',
+    number: 1,
+    vi: 'Cuối tuần bạn có dự định gì?',
+    words: Array.from({ length: 17 }, (_, i) => ({ han: `词${i + 1}`, pin: `cí${i + 1}`, mean: `từ ${i + 1}` })),
+    content: { grammar: [{ title: '打算', pattern: 'S + 打算 + V', usage: 'Dự định làm gì' }] }
+  };
+  const profile = C.createProfile({
+    hsk: 3,
+    minutes: 60,
+    days: 5,
+    focusChoice: 'vocab_heavy',
+    style: 'focused_block',
+    goal: 'reading_comprehension',
+    aiGenerated: true,
+    learnerContextVi: 'Thích học tranh thủ buổi sáng theo nhịp 5-10 phút và buổi tối tập trung khoảng 30 phút.',
+    aiBlueprint: [
+      {
+        label: 'Phiên sáng tập trung',
+        minutes: 30,
+        goalVi: 'Học từ vựng và ngữ pháp',
+        steps: [
+          { id: 'a', skill: 'vocab', action: 'vocab_cards', minutes: 15, titleVi: 'Từ vựng', detailVi: 'Học từ', coachTipVi: 'Đọc to' },
+          { id: 'b', skill: 'grammar', action: 'grammar_focus', minutes: 15, titleVi: 'Ngữ pháp', detailVi: 'Ôn mẫu câu', coachTipVi: 'Đặt câu' }
+        ]
+      },
+      {
+        label: 'Phiên tối tập trung',
+        minutes: 30,
+        goalVi: 'Đọc hiểu và nghe',
+        steps: [
+          { id: 'c', skill: 'reading', action: 'reading_dialogue', minutes: 15, titleVi: 'Đọc hiểu', detailVi: 'Đọc bài', coachTipVi: 'Tóm tắt' },
+          { id: 'd', skill: 'listening', action: 'passive_listen', minutes: 15, titleVi: 'Nghe', detailVi: 'Nghe hội thoại', coachTipVi: 'Bắt từ khóa' }
+        ]
+      }
+    ]
+  }, now);
+
+  const plan = C.buildLessonPlan(profile, hsk3Lesson1, {}, { dayKey: '2026-11-20', now });
+  assert.deepEqual(plan.sessions.map(session => session.minutes), [8, 8, 7, 7, 30]);
+  assert.equal(plan.sessions.reduce((sum, session) => sum + session.minutes, 0), 60);
+  assert.ok(plan.sessions.slice(0, 4).every(session => session.minutes >= 5 && session.minutes <= 10));
+  assert.equal(plan.sessions[4].label, 'Phiên tối tập trung · 30 phút');
+  assert.ok(!plan.sessions.slice(0, 4).some(session => session.minutes > 10));
+});

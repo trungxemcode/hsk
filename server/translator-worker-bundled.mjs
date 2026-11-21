@@ -2243,6 +2243,8 @@ function isValidEndpointUrl(str){
 }
 const PERSONAL_FOSTA_MODELS=new Set([
  'gpt-6.1-sol','gpt-6-astra','gpt-6-luna',
+ 'gpt-6.2-sol','gpt-6.2-sol:low','gpt-6.2-sol:medium','gpt-6.2-sol:high',
+ 'gpt-6.2-astra','gpt-6.2-astra:low','gpt-6.2-astra:medium','gpt-6.2-astra:high','gpt-6.2-astra:xhigh',
  'gpt-6-luna:low','gpt-6-luna:medium','gpt-6-luna:high','gpt-6-luna:xhigh',
  'gpt-6.1-sol:low','gpt-6.1-sol:medium','gpt-6.1-sol:high',
  'gpt-6-astra:low','gpt-6-astra:medium','gpt-6-astra:high','gpt-6-astra:xhigh'
@@ -2452,7 +2454,9 @@ const STATIC_PROVIDER_MODELS={
  fosta:[
   {id:'gpt-6-luna',description:'Luna (Mặc định: Nhẹ, Trung bình, Nâng cao, Chuyên sâu)'},
   {id:'gpt-6-astra',description:'Astra (Mô hình cao cấp nhất)'},
-  {id:'gpt-6.1-sol',description:'Sol (Mô hình cân bằng chi phí)'}
+  {id:'gpt-6.1-sol',description:'Sol (Mô hình cân bằng chi phí)'},
+  {id:'gpt-6.2-sol',description:'GPT-6.2 Sol'},
+  {id:'gpt-6.2-astra',description:'GPT-6.2 Astra'}
  ],
  'chatgpt-cookie':[
   {id:'gpt-6',description:'GPT-6 (Mặc định)'},
@@ -6127,7 +6131,7 @@ QUY TẮC: Tối đa 80 cues theo đúng thứ tự thời gian; có thể gộp
     const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
     if(usePersonalAi&&!usePersonalCookie){
      headers['X-HSK-AI-Provider']=personalAi.provider;
-     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||/^(?:gpt-6-luna|gpt-6-astra|gpt-6\.1-sol)(?::(?:low|medium|high|xhigh))?$/i.test(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;reviewModel=activePersonalModel;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now,sentenceReview:isSentenceMode});}
+     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||/^(?:gpt-6-luna|gpt-6-astra|gpt-6\.1-sol|gpt-6\.2-(?:sol|astra))(?::(?:low|medium|high|xhigh))?$/i.test(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;reviewModel=activePersonalModel;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now,sentenceReview:isSentenceMode});}
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});

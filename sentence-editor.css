@@ -1616,7 +1616,7 @@ html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"
 
   #sentenceEditor .sentence-filters button {
     min-height: 40px;
-    border-radius: 12px !important;
+    border-radius:var(--radius-btn) !important;
   }
 
   html[data-theme="dark"] body.studio-enabled #sentenceEditor .sentence-filters button[aria-pressed="true"] {
@@ -1641,8 +1641,8 @@ html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"
     gap: 6px;
     justify-content: flex-start;
     scrollbar-width: none;
-    -webkit-mask-image: linear-gradient(to right, #000 88%, transparent 100%);
-    mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, var(--ink) 88%, var(--palette-clear) 100%);
+    mask-image: linear-gradient(to right, var(--ink) 88%, var(--palette-clear) 100%);
   }
 
   #sentenceEditor .sentence-rail-dock::-webkit-scrollbar {

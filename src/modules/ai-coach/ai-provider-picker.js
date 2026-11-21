@@ -40,6 +40,8 @@
     'gpt-6-luna':'Luna (gpt-6-luna)',
     'gpt-6-astra':'Astra (gpt-6-astra)',
     'gpt-6.1-sol':'Sol (gpt-6.1-sol)',
+    'gpt-6.2-sol':'GPT-6.2 Sol',
+    'gpt-6.2-astra':'GPT-6.2 Astra',
     'gemini-3.1-flash-lite':'Gemini 3.1 Lite',
     'gemini-3.5-flash':'Gemini 3.5 Flash',
     'gemini-3.8-flash':'Gemini 3.8 Flash',
@@ -48,10 +50,12 @@
   const FOSTA_MODELS=[
     {id:'gpt-6-luna',short:'Luna',label:'Luna (gpt-6-luna)',sub:'Cân bằng, ổn định cho sửa câu & hỏi đáp',hasXhigh:true},
     {id:'gpt-6.1-sol',short:'Sol',label:'Sol (gpt-6.1-sol)',sub:'Nhanh, tối ưu tốc độ & chi phí',hasXhigh:false},
-    {id:'gpt-6-astra',short:'Astra',label:'Astra (gpt-6-astra)',sub:'Mạnh nhất, phân tích ngữ pháp chuyên sâu',hasXhigh:true}
+    {id:'gpt-6-astra',short:'Astra',label:'Astra (gpt-6-astra)',sub:'Phân tích ngữ pháp chuyên sâu',hasXhigh:true},
+    {id:'gpt-6.2-sol',short:'6.2 Sol',label:'GPT-6.2 Sol',sub:'Cân bằng tốc độ và chất lượng',hasXhigh:false},
+    {id:'gpt-6.2-astra',short:'6.2 Astra',label:'GPT-6.2 Astra',sub:'Phân tích ngữ pháp chuyên sâu',hasXhigh:true}
   ];
   const DEFAULT_PROVIDER_MODELS={
-    fosta:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol'],'muse-cookie':['muse-spark-fast','muse-spark','muse-spark-thinking'],
+    fosta:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol','gpt-6.2-sol','gpt-6.2-astra'],'muse-cookie':['muse-spark-fast','muse-spark','muse-spark-thinking'],
     deepseek:['deepseek-chat','deepseek-reasoner'],
     claude:['claude-3-5-haiku-latest','claude-3-7-sonnet-latest','claude-sonnet-4-20250514'],
     openai:['gpt-4o-mini','gpt-4o','o3-mini','gpt-4.1','gpt-4.1-mini'],
@@ -798,7 +802,7 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     const cred=await loadDirectCred(targetUid,info?.kind);
     if(!cred||!cred.enabled||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider))return null;
     const matchedOpt=info?.options?.find(o=>o.value===thinking||o.model===aiModel);
-    const chosenModel=(aiModel&&(cred.provider!=='fosta'||/^(?:gpt-6\.1-sol|gpt-6-astra|gpt-6-luna)(?::(?:low|medium|high|xhigh))?$/i.test(aiModel)))?aiModel:
+    const chosenModel=(aiModel&&(cred.provider!=='fosta'||/^(?:gpt-6\.1-sol|gpt-6\.2-(?:sol|astra)|gpt-6-astra|gpt-6-luna)(?::(?:low|medium|high|xhigh))?$/i.test(aiModel)))?aiModel:
       matchedOpt?.model||cred.model;
     const instruction=buildDirectPrompt({
       hsk,snapshot:lesson?.content?.learning_snapshot,intentInfo:lesson?.content?.intentInfo,

@@ -208,10 +208,12 @@ const server=http.createServer((req,res)=>{
     assert.equal(await sePopover.locator('.qa-effort-strength-value').innerText(),'Chuyên sâu');
     await sePopover.locator('.qa-effort-header-btn').click();
     const modelItems=sePopover.locator('.qa-effort-model-item');
-    assert.equal(await modelItems.count(),3,'danh sách chọn model của Fosta chỉ liệt kê 3 model, không trộn mức mạnh');
-    await modelItems.nth(2).click();
+    const modelIds=await modelItems.evaluateAll(items=>items.map(item=>item.dataset.value));
+    assert.deepEqual(modelIds.sort(),['gpt-6-astra','gpt-6-luna','gpt-6.1-sol','gpt-6.2-astra','gpt-6.2-sol'],
+      'danh sách Fosta hiển thị đủ model và tách riêng mức suy luận');
+    await sePopover.locator('.qa-effort-model-item[data-value="gpt-6.2-astra"]').click();
     assert.equal(await sePopover.isVisible(),false);
-    assert.match(await effortBtn.innerText(),/^Astra · /);
+    assert.match(await effortBtn.innerText(),/^6\.2 Astra · /);
 
     await detector.locator('.sentence-detector-close').click();
     await page.setViewportSize({width:1440,height:900});
@@ -230,9 +232,9 @@ const server=http.createServer((req,res)=>{
     }));
     assert.equal(fostaSent.aiProvider,'personal:fosta');
     assert.equal(fostaSent.personalProvider,'fosta');
-    assert.match(String(fostaSent.aiModel||''),/^gpt-6-astra/);
-    await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'fosta',model:'gpt-6-astra:xhigh'},sentenceReview:{summary:'Đã kiểm tra.',suggestions:[]}}));
-    await status.filter({hasText:'Nguồn: Fosta · gpt-6-astra:xhigh.'}).waitFor();
+    assert.match(String(fostaSent.aiModel||''),/^gpt-6\.2-astra(?::|$)/);
+    await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'fosta',model:'gpt-6.2-astra:xhigh'},sentenceReview:{summary:'Đã kiểm tra.',suggestions:[]}}));
+    await status.filter({hasText:'Nguồn: Fosta · gpt-6.2-astra:xhigh.'}).waitFor();
 
     // Verify Grammarly-style right rail switches across sub-tools without losing pasted draft text or results
     const persistentText='我每天早上都去图书馆学习汉语，因为我非常喜欢中国文化。';

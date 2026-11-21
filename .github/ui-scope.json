@@ -1,7 +1,6 @@
 {
-  "request": "Upgrade the AI Lesson Architect and custom lesson experience on Home + Lessons, desktop and mobile.",
+  "request": "Introduce HSK speaking pronunciation shadowing and four-tone pitch assessment in Lessons, guided and custom lesson flows only. Keep all other routes, Home, global navigation and media layouts unchanged.",
   "excludedRoutes": [
-    "home",
     "lessons"
   ]
 }
