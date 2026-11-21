@@ -260,6 +260,7 @@
     let currentSyllables = [];
     let currentMaxMs = 8000;
     let recordingSession = null;
+    let activeTake = null;
     let lastRecording = null;
     let lastResult = null;
     let userAudio = null;
@@ -329,6 +330,7 @@
 
     function loadItem(nextIdx) {
       stopPlayback();
+      activeTake = null;
       if (recordingSession) {
         recordingSession.cancel().catch(() => {});
         recordingSession = null;
@@ -359,6 +361,7 @@
       sandhiEl.hidden = !sandhiNotes.length;
 
       recordBtn.textContent = '● Bắt đầu thu';
+      recordBtn.disabled = false;
       recordBtn.classList.remove('is-recording');
       recordBtn.setAttribute('aria-pressed', 'false');
       replayBtn.disabled = true;
@@ -482,17 +485,22 @@
     }
 
     function finishRecording(recording) {
+      activeTake = null;
       recordBtn.textContent = '● Thu lại';
+      recordBtn.disabled = false;
       recordBtn.classList.remove('is-recording');
       recordBtn.setAttribute('aria-pressed', 'false');
       meterTrack.hidden = true;
       meterFill.style.width = '0%';
       recordingSession = null;
 
-      if (!recording) return;
+      if (!recording) {
+        statusText.textContent = 'Không đọc được bản ghi. Bấm “Thu lại” để thử lại.';
+        return;
+      }
       lastRecording = recording;
       revokeAudioUrl();
-      userAudioUrl = root.URL?.createObjectURL ? root.URL.createObjectURL(recording.wavBlob) : '';
+      userAudioUrl = recording.wavBlob?.size > 44 && root.URL?.createObjectURL ? root.URL.createObjectURL(recording.wavBlob) : '';
       replayBtn.disabled = !userAudioUrl;
       compareBtn.disabled = !userAudioUrl;
 
@@ -508,7 +516,7 @@
 
       statusText.textContent = scoreResult.hasVoice
         ? 'Đã chấm xong. Bấm "⇄ Đối chiếu" để nghe so mẫu, hoặc "›" sang từ kế tiếp.'
-        : 'Chưa thu đủ tín hiệu giọng nói. Thử thu lại gần micro hơn.';
+        : userAudioUrl ? 'Chưa tách được cao độ. Bấm “Giọng mình” để nghe lại.' : 'Micro chưa trả âm thanh. Bấm “Thu lại” để thử lại.';
       timerText.textContent = `${(recording.durationMs / 1000).toFixed(1)}s`;
       renderAnalysis(recording, scoreResult);
 
@@ -529,12 +537,15 @@
     async function toggleRecording() {
       if (recordingSession) {
         const s = recordingSession;
+        const take = activeTake;
         recordingSession = null;
+        recordBtn.disabled = true;
         statusText.textContent = 'Đang phân tích thanh điệu…';
-        const res = await s.stop().catch(() => null);
-        if (!closed) finishRecording(res);
+        const res = await s.stop().catch(() => undefined);
+        if (!closed && activeTake === take && res !== null) finishRecording(res);
         return;
       }
+      if (activeTake) return;
 
       if (!recorder?.isSupported()) {
         statusText.textContent = 'Trình duyệt này chưa hỗ trợ thu âm Web Audio API.';
@@ -542,31 +553,44 @@
       }
 
       stopPlayback();
+      const take = {};
+      activeTake = take;
       try {
-        statusText.textContent = 'Đang nghe… đọc xong ngừng ~1 giây máy tự chốt.';
+        statusText.textContent = 'Đang bật micro…';
+        recordBtn.disabled = true;
         recordBtn.textContent = '■ Dừng thu';
         recordBtn.classList.add('is-recording');
         recordBtn.setAttribute('aria-pressed', 'true');
         meterTrack.hidden = false;
-        recordingSession = await recorder.start({
+        const session = await recorder.start({
           maxMs: currentMaxMs,
           autoSilenceMs: 950,
           lang: 'zh-CN',
           onLevel: (rms, elapsedMs) => {
-            if (closed) return;
-            const pct = Math.max(4, Math.min(100, Math.round(rms * 420)));
+            if (closed || activeTake !== take) return;
+            const pct = Math.min(100, Math.round(Math.sqrt(rms) * 170));
             meterFill.style.width = pct + '%';
             timerText.textContent = `${(elapsedMs / 1000).toFixed(1)}s / ${(currentMaxMs / 1000).toFixed(0)}s`;
           },
           onTranscript: txt => {
-            if (!closed && txt) statusText.textContent = `Đang nghe: “${txt}”`;
+            if (!closed && activeTake === take && txt) statusText.textContent = `Đang nghe: “${txt}”`;
           },
           onAutoStop: res => {
-            if (!closed && res) finishRecording(res);
+            if (!closed && activeTake === take && res) finishRecording(res);
           }
         });
+        if (closed || activeTake !== take) {
+          await session.cancel();
+          return;
+        }
+        recordingSession = session;
+        recordBtn.disabled = false;
+        if (statusText.textContent === 'Đang bật micro…') statusText.textContent = 'Đang nghe… đọc xong ngừng ~1 giây máy tự chốt.';
       } catch (err) {
+        if (closed || activeTake !== take) return;
+        activeTake = null;
         recordingSession = null;
+        recordBtn.disabled = false;
         recordBtn.textContent = '● Bắt đầu thu';
         recordBtn.classList.remove('is-recording');
         recordBtn.setAttribute('aria-pressed', 'false');
