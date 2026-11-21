@@ -355,6 +355,81 @@ test('recorder scores only final speech recognition results', async () => {
   assert.deepEqual(previews, [['没关系', false], ['没', true]]);
 });
 
+test('finds and keeps both quiet syllables in a 48kHz recording of 北方', () => {
+  const sampleRate = 48000;
+  const samples = concatWithPause([
+    synthContour(172, 126, 105, 0.3, sampleRate),
+    synthContour(220, null, 220, 0.32, sampleRate)
+  ], 0.1, sampleRate).map(sample => sample * 0.003);
+  const result = pitchCore.segmentAndScore({ samples, sampleRate, text: '北方', pinyin: 'běi fāng', transcript: '北方' });
+  assert.equal(result.hasVoice, true);
+  assert.deepEqual(result.syllables.map(syllable => syllable.pronunciationVerified), [true, true]);
+  assert.ok(pitchCore.encodeWav16k(samples, sampleRate).length > 16000, 'quiet speech is kept in the playback WAV');
+  const silence = pitchCore.segmentAndScore({ samples: new Float32Array(sampleRate), sampleRate, text: '北方', pinyin: 'běi fāng' });
+  assert.equal(silence.hasVoice, false);
+});
+
+test('recovers missing Web Audio frames and keeps the microphone open until recognition finalizes', async () => {
+  let stopped = false;
+  let recognition;
+  const pcm = synthContour(220, null, 220, 0.24);
+  const track = { stop() { stopped = true; } };
+  const mediaStream = { getTracks: () => [track] };
+  const connectable = { connect() {}, disconnect() {} };
+  const audioSession = { type: 'auto' };
+  const window = {
+    HSKPitchCore: pitchCore,
+    navigator: {
+      audioSession,
+      mediaDevices: { async getUserMedia(settings) {
+        assert.equal(settings.audio.autoGainControl, true);
+        assert.equal(audioSession.type, 'play-and-record');
+        return mediaStream;
+      } }
+    },
+    AudioContext: class {
+      createMediaStreamSource() { return connectable; }
+      createScriptProcessor() { return { ...connectable }; }
+      createGain() { return { ...connectable, gain: { value: 1 } }; }
+      async close() {}
+      async decodeAudioData(data) {
+        assert.equal(data.byteLength, 14);
+        return { getChannelData: () => pcm, sampleRate: 16000 };
+      }
+    },
+    MediaRecorder: class {
+      constructor(stream) { assert.equal(stream, mediaStream); }
+      start() { this.state = 'recording'; }
+      stop() {
+        assert.equal(stopped, false);
+        this.state = 'inactive';
+        this.ondataavailable({ data: new Blob(['encoded speech'], { type: 'audio/mp4' }) });
+        this.onstop();
+      }
+    },
+    SpeechRecognition: class {
+      start() { recognition = this; }
+      stop() {
+        setTimeout(() => {
+          assert.equal(stopped, false);
+          const result = Object.assign([{ transcript: '北方' }], { isFinal: true });
+          recognition.onresult({ results: [result] });
+          recognition.onend();
+        }, 15);
+      }
+    }
+  };
+  const source = readFileSync(new URL('../src/modules/speaking/speech-recorder.js', import.meta.url), 'utf8');
+  runInNewContext(source, { window, Blob, setTimeout, clearTimeout });
+  const session = await window.HSKRecorder.start();
+  const result = await session.stop();
+  assert.equal(result.pcm, pcm);
+  assert.equal(result.transcript, '北方');
+  assert.equal(result.wavBlob.type, 'audio/wav');
+  assert.equal(stopped, true);
+  assert.equal(audioSession.type, 'auto');
+});
+
 test('passes 对不起 with soft brief middle 不 and full 6-char sentence even without ASR transcript', () => {
   const sr = 16000;
   // Soft brief unstressed middle 不 (~40ms, 30% amplitude) between clear 对 (T4) and 起 (T3)

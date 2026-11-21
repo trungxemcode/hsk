@@ -410,7 +410,7 @@
     const sortedRms = allRms.slice().sort((a, b) => a - b);
     const ambientFloor = percentile(sortedRms, 0.18);
     const rmsFloor = Math.max(
-      opts.minRms || 0.0035,
+      opts.minRms || 0.00035,
       maxRms * (opts.rmsRatio || 0.06),
       ambientFloor * 1.32 + Math.max(0, maxRms - ambientFloor) * 0.10
     );
@@ -1098,7 +1098,9 @@
    */
   function segmentAndScore({ samples, sampleRate = 16000, text = '', pinyin = '', transcript = '' } = {}) {
     const parsed = parseSyllables(text, pinyin);
-    const track = extractPitchTrack(samples, sampleRate);
+    const track = sampleRate > 16000 && samples?.length
+      ? extractPitchTrack(resample16k(samples, sampleRate), 16000)
+      : extractPitchTrack(samples, sampleRate);
     const voicedFrames = track.filter(f => f.f0 > 0);
     const charMatch = computeCharMatch(text, transcript, parsed);
 
@@ -1131,7 +1133,7 @@
         })),
         pitchTrack: track,
         charMatch,
-        summaryVi: 'Chưa nghe rõ giọng nói. Hãy ghé sát micro hơn và nói lại từ đầu.'
+        summaryVi: charMatch ? 'Đã nhận diện được chữ. Tín hiệu cao độ chưa đủ để chấm thanh điệu.' : 'Chưa đủ tín hiệu giọng nói để chấm.'
       };
     }
 
@@ -1277,13 +1279,29 @@
     };
   }
 
-  /**
-   * Trims edge silence, downsamples to 16kHz mono PCM16, and writes a 44-byte RIFF/WAVE header.
-   */
+  function resample16k(samples, sampleRate) {
+    if (sampleRate === 16000) return samples;
+    const ratio = sampleRate / 16000;
+    const result = new Float32Array(Math.max(1, Math.round(samples.length / ratio)));
+    for (let i = 0; i < result.length; i++) {
+      const start = i * ratio;
+      const end = Math.min(samples.length, start + ratio);
+      let sum = 0;
+      for (let j = Math.floor(start); j < end; j++) {
+        sum += samples[j] * (Math.min(j + 1, end) - Math.max(j, start));
+      }
+      result[i] = sum / (end - start);
+    }
+    return result;
+  }
+
+  /** Trims edge silence and writes a 16kHz mono PCM16 WAV. */
   function encodeWav16k(samples, inputSampleRate = 16000) {
     const targetRate = 16000;
     const input = samples instanceof Float32Array ? samples : new Float32Array(samples || 0);
-    if (!input.length) {
+    let peak = 0;
+    for (const sample of input) peak = Math.max(peak, Math.abs(sample));
+    if (!peak) {
       const empty = new Uint8Array(44);
       writeWavHeader(empty, 0, targetRate);
       return empty;
@@ -1292,7 +1310,7 @@
     // Trim silence with 120ms safety padding.
     let first = 0;
     let last = input.length - 1;
-    const gate = 0.008;
+    const gate = Math.min(0.008, peak * 0.15);
     while (first < last && Math.abs(input[first]) < gate) first++;
     while (last > first && Math.abs(input[last]) < gate) last--;
     const pad = Math.round(inputSampleRate * 0.12);
@@ -1300,21 +1318,7 @@
     last = Math.min(input.length - 1, last + pad);
     const trimmed = input.subarray(first, last + 1);
 
-    let pcm16k;
-    if (inputSampleRate === targetRate) {
-      pcm16k = trimmed;
-    } else {
-      const ratio = inputSampleRate / targetRate;
-      const outLen = Math.max(1, Math.round(trimmed.length / ratio));
-      pcm16k = new Float32Array(outLen);
-      for (let i = 0; i < outLen; i++) {
-        const pos = i * ratio;
-        const idx = Math.floor(pos);
-        const next = Math.min(trimmed.length - 1, idx + 1);
-        const frac = pos - idx;
-        pcm16k[i] = trimmed[idx] * (1 - frac) + trimmed[next] * frac;
-      }
-    }
+    const pcm16k = resample16k(trimmed, inputSampleRate);
 
     const dataBytes = pcm16k.length * 2;
     const out = new Uint8Array(44 + dataBytes);
