@@ -724,3 +724,44 @@ test('iPhone records consecutive 北方 takes without simultaneous mic conflict 
     assert.ok(scored.toneScore >= 80, `Take ${take} expected tone score >= 80, got ${scored.toneScore}`);
   }
 });
+
+test('drops leading 2-frame breath blip, splits continuous 北方 transition cleanly, and matches near-phonetic Whisper output 拜拜', () => {
+  const sr = 16000;
+  // Brief 2-frame breath blip (~45ms, weak) before a single merged 北(T3)->方(T1) utterance
+  const blip = synthContour(190, null, 190, 0.045, sr).map(s => s * 0.35);
+  const bei = synthContour(172, 126, 168, 0.24, sr);
+  const fang = synthContour(242, null, 240, 0.24, sr);
+  const merged = new Float32Array(bei.length + fang.length);
+  merged.set(bei, 0);
+  merged.set(fang, bei.length);
+  const audio = concatWithPause([blip, merged], 0.08, sr);
+
+  const res = pitchCore.segmentAndScore({
+    samples: audio,
+    sampleRate: sr,
+    text: '北方',
+    pinyin: 'běi fāng',
+    transcript: '拜拜'
+  });
+  assert.deepEqual(res.syllables.map(s => s.pronunciationVerified), [true, true]);
+  assert.equal(res.syllables[0].detectedTone, 3);
+  assert.equal(res.syllables[1].detectedTone, 1);
+  assert.ok(res.syllables[0].userContour.length >= 4, 'First column 北 must draw learner contour');
+  assert.ok(res.syllables[1].userContour.length >= 4, 'Second column 方 must draw learner contour');
+  assert.ok(res.overallScore >= 80, `Expected near-phonetic 北方 score >= 80, got ${res.overallScore}`);
+
+  // Speaking actual 拜拜 (T4 + T4) when expecting 北方 (T3 + T1) must still fail tone accuracy
+  const baibai = concatWithPause([
+    synthContour(245, null, 140, 0.24, sr),
+    synthContour(245, null, 140, 0.24, sr)
+  ], 0.06, sr);
+  const resWrongTone = pitchCore.segmentAndScore({
+    samples: baibai,
+    sampleRate: sr,
+    text: '北方',
+    pinyin: 'běi fāng',
+    transcript: '拜拜'
+  });
+  assert.ok(resWrongTone.syllables[1].detectedTone === 4 && resWrongTone.syllables[1].score < 65);
+  assert.ok(resWrongTone.overallScore < 75, `Expected 拜拜 T4+T4 on 北方 < 75, got ${resWrongTone.overallScore}`);
+});
