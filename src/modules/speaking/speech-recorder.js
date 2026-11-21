@@ -530,7 +530,7 @@
           await new Promise(resolve => {
             let settled = false;
             const finish = () => { if (!settled) { settled = true; resolve(); } };
-            const t = setTimeout(finish, 450);
+            const t = setTimeout(finish, 750);
             recognition.onend = () => { clearTimeout(t); finish(); };
             try { recognition.stop(); } catch { clearTimeout(t); finish(); }
           });

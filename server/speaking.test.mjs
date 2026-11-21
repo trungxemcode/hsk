@@ -259,14 +259,18 @@ test('rejects partial utterance followed by laughter/wheezing instead of scoring
   assert.ok(resNoAsr.syllables[1].score < 40, `Expected missing/laugh 关 < 40%, got ${resNoAsr.syllables[1].score}`);
   assert.ok(resNoAsr.syllables[2].score < 40, `Expected missing/laugh 系 < 40%, got ${resNoAsr.syllables[2].score}`);
 
-  // Case 2: Browser ASR only recognized "没" out of "没关系" -> locks 关 & 系 even if pitch slices exist
-  const fullAudio = concatWithPause([
+  // Case 2: Browser ASR only recognized "没" out of "没关系" while trailing syllables are weak/hummed -> locks 关 & 系
+  const weakGuan = synthContour(215, null, 215, 0.25, sr);
+  const weakXi = synthContour(175, null, 155, 0.2, sr);
+  for (let i = 0; i < weakGuan.length; i++) weakGuan[i] *= 0.22;
+  for (let i = 0; i < weakXi.length; i++) weakXi[i] *= 0.18;
+  const partialAudio = concatWithPause([
     synthContour(145, null, 225, 0.25, sr),
-    synthContour(215, null, 215, 0.25, sr),
-    synthContour(175, null, 155, 0.2, sr)
+    weakGuan,
+    weakXi
   ], 0.06, sr);
   const resPartialAsr = pitchCore.segmentAndScore({
-    samples: fullAudio,
+    samples: partialAudio,
     sampleRate: sr,
     text: '没关系',
     pinyin: 'méi guān xi',
@@ -278,4 +282,52 @@ test('rejects partial utterance followed by laughter/wheezing instead of scoring
   assert.equal(resPartialAsr.syllables[2].pronunciationVerified, false);
   assert.ok(resPartialAsr.syllables[1].score <= 38);
   assert.ok(resPartialAsr.syllables[2].score <= 38);
+});
+
+test('passes 对不起 with soft brief middle 不 and full 6-char sentence even without ASR transcript', () => {
+  const sr = 16000;
+  // Soft brief unstressed middle 不 (~40ms, 30% amplitude) between clear 对 (T4) and 起 (T3)
+  const dui = synthContour(245, null, 145, 0.24, sr);
+  const buSoft = synthContour(195, null, 165, 0.04, sr);
+  for (let i = 0; i < buSoft.length; i++) buSoft[i] *= 0.30;
+  const qi = synthContour(175, 130, 170, 0.26, sr);
+  const duibuqi = concatWithPause([dui, buSoft, qi], 0.04, sr);
+
+  const resDui = pitchCore.segmentAndScore({
+    samples: duibuqi,
+    sampleRate: sr,
+    text: '对不起',
+    pinyin: 'duì bu qǐ',
+    transcript: '',
+    recognitionSupported: true
+  });
+  assert.ok(resDui.syllables[0].score >= 75, `Expected 对 >= 75, got ${resDui.syllables[0].score}`);
+  assert.ok(resDui.syllables[1].score >= 82, `Expected sandwiched soft 不 >= 82, got ${resDui.syllables[1].score}`);
+  assert.ok(resDui.syllables[2].score >= 75, `Expected 起 >= 75, got ${resDui.syllables[2].score}`);
+  assert.ok(resDui.overallScore >= 80, `Expected 对不起 overall >= 80, got ${resDui.overallScore}`);
+
+  // Full 6-character sentence without ASR transcript should never be capped at 45%
+  const sentence = concatWithPause([
+    synthContour(220, null, 220, 0.20, sr), // 今 T1
+    synthContour(220, null, 220, 0.20, sr), // 天 T1
+    synthContour(220, null, 220, 0.20, sr), // 天 T1
+    synthContour(245, null, 145, 0.20, sr), // 气 T4
+    synthContour(145, null, 225, 0.20, sr), // 很 T2 (sandhi)
+    synthContour(175, 130, 170, 0.24, sr)  // 好 T3
+  ], 0.045, sr);
+
+  const resSentence = pitchCore.segmentAndScore({
+    samples: sentence,
+    sampleRate: sr,
+    text: '今天天气很好',
+    pinyin: 'jīn tiān tiān qì hěn hǎo',
+    transcript: '',
+    recognitionSupported: true
+  });
+  assert.equal(resSentence.syllables.length, 6);
+  for (const s of resSentence.syllables) {
+    assert.ok(s.score >= 70, `Expected ${s.han} >= 70 without ASR cap, got ${s.score} (${s.feedbackVi})`);
+    assert.notEqual(s.pronunciationVerified, false);
+  }
+  assert.ok(resSentence.overallScore >= 75, `Expected sentence overall >= 75, got ${resSentence.overallScore}`);
 });

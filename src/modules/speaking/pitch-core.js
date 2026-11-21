@@ -625,12 +625,13 @@
     if (!expectedCount || !track.length) return [];
     const peakTrackRms = maxRms || Math.max(0.001, ...track.map(f => f.rms || 0));
 
-    // Collect genuine vocal islands (exclude brief breath/laugh blips or low-clarity noise).
+    // Collect vocal islands with relaxed floor for soft neutral / middle unstressed syllables,
+    // while keeping noise bursts (very low clarity or whisper) out.
     const islands = [];
     let idx = 0;
     while (idx < track.length) {
       const f = track[idx];
-      if (!(f.f0 > 0 && (f.clarity || 0) >= 0.66 && (f.rms || 0) >= peakTrackRms * 0.14)) {
+      if (!(f.f0 > 0 && (f.clarity || 0) >= 0.58 && (f.rms || 0) >= peakTrackRms * 0.08)) {
         idx++;
         continue;
       }
@@ -643,7 +644,7 @@
       let lastValid = idx;
       while (idx < track.length) {
         const cur = track[idx];
-        if (cur.f0 > 0 && (cur.clarity || 0) >= 0.64 && (cur.rms || 0) >= peakTrackRms * 0.12) {
+        if (cur.f0 > 0 && (cur.clarity || 0) >= 0.56 && (cur.rms || 0) >= peakTrackRms * 0.07) {
           rmsSum += cur.rms || 0;
           if ((cur.rms || 0) > rmsMax) rmsMax = cur.rms || 0;
           claritySum += cur.clarity || 0;
@@ -651,18 +652,21 @@
           lastValid = idx;
           gapAllowance = 0;
           idx++;
-        } else if (gapAllowance < 1 && idx + 1 < track.length && track[idx + 1].f0 > 0 && (track[idx + 1].clarity || 0) >= 0.66) {
+        } else if (gapAllowance < 1 && idx + 1 < track.length && track[idx + 1].f0 > 0 && (track[idx + 1].clarity || 0) >= 0.58) {
           gapAllowance++;
           idx++;
         } else {
           break;
         }
       }
-      if (voicedCount >= 4 && rmsMax >= peakTrackRms * 0.20 && claritySum / voicedCount >= 0.69) {
+      if (voicedCount >= 2 && rmsMax >= peakTrackRms * 0.09 && claritySum / voicedCount >= 0.58) {
         islands.push({
           start,
           end: lastValid + 1,
           voicedCount,
+          rmsSum,
+          rmsMax,
+          claritySum,
           meanRms: rmsSum / voicedCount,
           meanClarity: claritySum / voicedCount,
           mass: rmsSum
@@ -676,25 +680,107 @@
       return [[strongest.start, strongest.end]];
     }
 
+    // Consolidate over-segmented islands: drop tiny breath blips first, then merge nearest neighbors.
+    while (islands.length > expectedCount) {
+      let blipIdx = -1;
+      let blipMass = Infinity;
+      for (let k = 0; k < islands.length; k++) {
+        const isl = islands[k];
+        if (isl.voicedCount <= 2 && isl.meanClarity < 0.65 && isl.rmsMax < peakTrackRms * 0.18 && isl.mass < blipMass) {
+          blipMass = isl.mass;
+          blipIdx = k;
+        }
+      }
+      if (blipIdx >= 0) {
+        islands.splice(blipIdx, 1);
+        continue;
+      }
+
+      let bestMergeIdx = 0;
+      let bestGap = Infinity;
+      for (let k = 0; k < islands.length - 1; k++) {
+        const gap = islands[k + 1].start - islands[k].end;
+        if (gap < bestGap) {
+          bestGap = gap;
+          bestMergeIdx = k;
+        }
+      }
+      const left = islands[bestMergeIdx];
+      const right = islands[bestMergeIdx + 1];
+      const voicedCount = left.voicedCount + right.voicedCount;
+      const rmsSum = left.rmsSum + right.rmsSum;
+      const claritySum = left.claritySum + right.claritySum;
+      islands.splice(bestMergeIdx, 2, {
+        start: left.start,
+        end: right.end,
+        voicedCount,
+        rmsSum,
+        rmsMax: Math.max(left.rmsMax, right.rmsMax),
+        claritySum,
+        meanRms: rmsSum / voicedCount,
+        meanClarity: claritySum / voicedCount,
+        mass: rmsSum
+      });
+    }
+
     if (islands.length === expectedCount) {
       return islands.map(isl => [isl.start, isl.end]);
     }
 
-    if (islands.length > expectedCount) {
-      // Keep the N strongest islands in chronological order.
-      const keep = islands
-        .slice()
-        .sort((a, b) => b.mass - a.mass)
-        .slice(0, expectedCount)
-        .sort((a, b) => a.start - b.start);
-      return keep.map(isl => [isl.start, isl.end]);
+    // Check if the user only spoke one brief syllable (plus silence or trailing unvoiced wheeze/laugh).
+    const lastIsl = islands[islands.length - 1];
+    let trailingNoisy = 0;
+    for (let i = lastIsl.end; i < track.length; i++) {
+      const tf = track[i];
+      if ((tf.rms || 0) >= Math.max(0.004, peakTrackRms * 0.025) && (!(tf.f0 > 0) || (tf.clarity || 0) < 0.58)) {
+        trailingNoisy++;
+      }
+    }
+    const tooShortSingle = islands.length === 1 && (
+      islands[0].voicedCount < Math.min(28, expectedCount * 14)
+      || (islands[0].voicedCount < 32 && trailingNoisy >= 12)
+    );
+    if (tooShortSingle) {
+      const out = [[islands[0].start, islands[0].end]];
+      while (out.length < expectedCount) out.push([0, 0]);
+      return out;
     }
 
-    // Fewer genuine vocal islands than expected syllables:
-    // Only split an island into multiple syllables if its voiced duration is genuinely long enough (>= 140ms per syllable).
-    const minFramesPerMergedSyl = 14;
+    // Keep solitary islands strict (140ms/syllable) so one drawn-out word is never chopped into fake syllables;
+    // when multiple spoken islands already exist, first recover missing soft/unstressed syllables sitting in gaps
+    // between islands, then allow tighter coarticulated splits (50ms/syllable).
+    const minPerSyl = islands.length === 1 ? 14 : 5;
     const alloc = islands.map(() => 1);
+    const insertedGapAfter = new Array(Math.max(0, islands.length - 1)).fill(null);
     let remaining = expectedCount - islands.length;
+
+    if (remaining > 0 && islands.length >= 2) {
+      const gapCandidates = [];
+      for (let k = 0; k < islands.length - 1; k++) {
+        const gStart = islands[k].end;
+        const gEnd = islands[k + 1].start;
+        const gLen = gEnd - gStart;
+        if (gLen < 4) continue;
+        let active = 0;
+        let energySum = 0;
+        let maxGapRms = 0;
+        for (let g = gStart; g < gEnd; g++) {
+          const r = track[g].rms || 0;
+          energySum += r;
+          if (r > maxGapRms) maxGapRms = r;
+          if (r >= peakTrackRms * 0.08 || (track[g].f0 || 0) > 0) active++;
+        }
+        if ((gLen >= 6 && maxGapRms >= peakTrackRms * 0.05) || active >= 2) {
+          gapCandidates.push({ afterIdx: k, start: gStart, end: gEnd, score: energySum + gLen * 0.01 });
+        }
+      }
+      gapCandidates.sort((a, b) => b.score - a.score);
+      for (const cand of gapCandidates) {
+        if (remaining <= 0) break;
+        insertedGapAfter[cand.afterIdx] = [cand.start, cand.end];
+        remaining--;
+      }
+    }
 
     while (remaining > 0) {
       let bestIslIdx = -1;
@@ -702,7 +788,7 @@
       for (let k = 0; k < islands.length; k++) {
         const nextCount = alloc[k] + 1;
         const perSyl = islands[k].voicedCount / nextCount;
-        if (perSyl >= minFramesPerMergedSyl && perSyl > bestPerSylLen) {
+        if (perSyl >= minPerSyl && perSyl > bestPerSylLen) {
           bestPerSylLen = perSyl;
           bestIslIdx = k;
         }
@@ -712,40 +798,61 @@
       remaining--;
     }
 
+    // Second pass for genuine multi-island utterances whose soft syllables need 3-4 frames each.
+    if (remaining > 0 && islands.length >= 2) {
+      while (remaining > 0) {
+        let bestIslIdx = -1;
+        let bestPerSylLen = 0;
+        for (let k = 0; k < islands.length; k++) {
+          const nextCount = alloc[k] + 1;
+          const perSyl = (islands[k].end - islands[k].start) / nextCount;
+          if (perSyl >= 3 && perSyl > bestPerSylLen) {
+            bestPerSylLen = perSyl;
+            bestIslIdx = k;
+          }
+        }
+        if (bestIslIdx < 0) break;
+        alloc[bestIslIdx]++;
+        remaining--;
+      }
+    }
+
     const ranges = [];
     for (let k = 0; k < islands.length; k++) {
       const isl = islands[k];
       const count = alloc[k];
       if (count === 1) {
         ranges.push([isl.start, isl.end]);
-        continue;
-      }
-      const span = isl.end - isl.start;
-      const minSeg = Math.max(6, Math.floor(span / (count * 2.4)));
-      let prev = isl.start;
-      for (let s = 1; s < count; s++) {
-        const ideal = Math.round(isl.start + (s * span) / count);
-        const searchHalf = Math.max(2, Math.floor(span / (count * 3)));
-        const lo = Math.max(prev + minSeg, ideal - searchHalf);
-        const hi = Math.min(isl.end - (count - s) * minSeg, ideal + searchHalf);
-        let bestSplit = Math.max(prev + 1, Math.min(isl.end - 1, ideal));
-        if (lo <= hi) {
-          let bestMetric = Infinity;
-          for (let j = lo; j <= hi; j++) {
-            const metric = (track[j].rms || 0) + Math.abs(j - ideal) * 0.0005;
-            if (metric < bestMetric) {
-              bestMetric = metric;
-              bestSplit = j;
+      } else {
+        const span = isl.end - isl.start;
+        const minSeg = Math.max(2, Math.floor(span / (count * 2.4)));
+        let prev = isl.start;
+        for (let s = 1; s < count; s++) {
+          const ideal = Math.round(isl.start + (s * span) / count);
+          const searchHalf = Math.max(2, Math.floor(span / (count * 3)));
+          const lo = Math.max(prev + minSeg, ideal - searchHalf);
+          const hi = Math.min(isl.end - (count - s) * minSeg, ideal + searchHalf);
+          let bestSplit = Math.max(prev + 1, Math.min(isl.end - 1, ideal));
+          if (lo <= hi) {
+            let bestMetric = Infinity;
+            for (let j = lo; j <= hi; j++) {
+              const metric = (track[j].rms || 0) + Math.abs(j - ideal) * 0.0005;
+              if (metric < bestMetric) {
+                bestMetric = metric;
+                bestSplit = j;
+              }
             }
           }
+          ranges.push([prev, bestSplit]);
+          prev = bestSplit;
         }
-        ranges.push([prev, bestSplit]);
-        prev = bestSplit;
+        ranges.push([prev, isl.end]);
       }
-      ranges.push([prev, isl.end]);
+      if (insertedGapAfter[k]) {
+        ranges.push(insertedGapAfter[k]);
+      }
     }
 
-    // Any unallocated trailing syllables had no real speech energy (do not fabricate phantom contours for them).
     while (ranges.length < expectedCount) {
       ranges.push([0, 0]);
     }
@@ -764,14 +871,14 @@
   }
 
   function analyzeToneSegment(voicedFrames, spokenTone, isFinal, optionalNeutral = false, peakSyllableRms = 0) {
-    const minFrames = (spokenTone === 5 || optionalNeutral) ? 4 : 7;
+    const minFrames = (spokenTone === 5 || optionalNeutral) ? 2 : 3;
     if (voicedFrames.length < minFrames) {
       return {
         detectedTone: 0,
         score: 0,
         userContour: [],
         target: targetContour(spokenTone, 12, isFinal),
-        feedbackVi: voicedFrames.length ? 'Âm tiết quá ngắn hoặc lẫn tiếng khè/nghỉ.' : 'Chưa phát âm rõ âm tiết này.'
+        feedbackVi: voicedFrames.length ? 'Âm tiết quá ngắn hoặc lẫn tạp âm.' : 'Chưa phát âm rõ âm tiết này.'
       };
     }
 
@@ -782,11 +889,11 @@
       jitterSum += Math.abs(voicedFrames[i].semitone - voicedFrames[i - 1].semitone);
     }
     const jitterSt = voicedFrames.length > 1 ? jitterSum / (voicedFrames.length - 1) : 0;
-    const minRelRms = (spokenTone === 5 || optionalNeutral) ? 0.16 : 0.22;
+    const minRelRms = (spokenTone === 5 || optionalNeutral) ? 0.08 : 0.11;
 
     if (
-      meanClarity < 0.70
-      || jitterSt > 1.35
+      meanClarity < 0.58
+      || jitterSt > 1.55
       || (peakSyllableRms > 0 && segMeanRms < peakSyllableRms * minRelRms)
     ) {
       const chaoNoise = resampleArray(voicedFrames.map(f => f.chao), 12).map(v => Number(v.toFixed(2)));
@@ -868,9 +975,10 @@
       shapeScore = Math.min(48, shapeScore);
     }
 
-    if (spokenTone === 5 || (optionalNeutral && (detectedTone === spokenTone || rangeSt <= 3.6))) {
+    if (spokenTone === 5 || (optionalNeutral && (detectedTone === spokenTone || rangeSt <= 4.2))) {
       detectedTone = spokenTone === 5 ? 5 : detectedTone;
-      shapeScore = Math.max(76, Math.min(97, Math.round(92 - Math.max(0, rangeSt - 4) * 4)));
+      const minNeutralScore = optionalNeutral ? 82 : 76;
+      shapeScore = Math.max(minNeutralScore, Math.min(97, Math.round(92 - Math.max(0, rangeSt - 4) * 4)));
     } else if (detectedTone === spokenTone) {
       shapeScore = Math.max(78, Math.min(99, shapeScore));
     } else {
@@ -1009,31 +1117,103 @@
 
     const peakTrackRms = Math.max(0.001, ...track.map(f => f.rms || 0));
     const ranges = findSyllableRanges(track, parsed.length, peakTrackRms);
-    const segMeanRmsList = ranges.map(([lo, hi]) => {
-      const seg = track.slice(lo, hi).filter(f => f.f0 > 0);
-      return seg.length ? seg.reduce((s, f) => s + (f.rms || 0), 0) / seg.length : 0;
-    });
-    const peakSyllableRms = Math.max(0, ...segMeanRmsList);
-
-    const asrEmptyMulti = Boolean(recognitionSupported && parsed.length >= 2 && !charMatch);
-    const syllables = parsed.map((meta, idx) => {
+    const segData = parsed.map((meta, idx) => {
       const [lo, hi] = ranges[idx] || [0, 0];
       const segFrames = hi > lo ? track.slice(lo, hi) : [];
       const voiced = trimUnvoicedEdges(segFrames).filter(f => f.f0 > 0);
-      const analysis = analyzeToneSegment(voiced, meta.spokenTone, meta.isFinal, meta.optionalNeutral, peakSyllableRms);
+      const voicedCount = voiced.length;
+      const segMeanRms = voicedCount ? voiced.reduce((s, f) => s + (f.rms || 0), 0) / voicedCount : 0;
+      const segMeanClarity = voicedCount ? voiced.reduce((s, f) => s + (f.clarity || 0), 0) / voicedCount : 0;
+      return { meta, segFrames, voiced, voicedCount, segMeanRms, segMeanClarity };
+    });
+    const peakSyllableRms = Math.max(0, ...segData.map(d => d.segMeanRms));
+
+    const rawAnalyses = segData.map(d =>
+      analyzeToneSegment(d.voiced, d.meta.spokenTone, d.meta.isFinal, d.meta.optionalNeutral, peakSyllableRms)
+    );
+    const isStrongSpoken = segData.map((d, idx) => {
+      const a = rawAnalyses[idx];
+      const isSoftTone = d.meta.spokenTone === 5 || d.meta.optionalNeutral;
+      const minF = isSoftTone ? 3 : 4;
+      const minC = isSoftTone ? 0.64 : 0.62;
+      const minRms = isSoftTone ? 0.10 : 0.14;
+      return d.voicedCount >= minF
+        && d.segMeanClarity >= minC
+        && (peakSyllableRms <= 0 || d.segMeanRms >= peakSyllableRms * minRms)
+        && a.score >= 60;
+    });
+    const isStrongAnchor = segData.map((d, idx) =>
+      isStrongSpoken[idx] && d.voicedCount >= 4 && d.segMeanClarity >= 0.62
+    );
+
+    const applyPartialAsrLock = Boolean(
+      charMatch
+      && parsed.length >= 2
+      && parsed.length <= 4
+      && charMatch.matchRatio > 0
+      && charMatch.matchRatio < 100
+    );
+
+    const syllables = segData.map((d, idx) => {
+      const { meta, segFrames, voicedCount, segMeanRms, segMeanClarity } = d;
+      const analysis = rawAnalyses[idx];
       let score = analysis.score;
+      let detectedTone = analysis.detectedTone;
+      let userContour = analysis.userContour;
       let feedbackVi = analysis.feedbackVi;
       let pronunciationVerified = true;
       const charMatched = charMatch ? Boolean(charMatch.perChar[idx]) : null;
 
-      if (charMatch && charMatched === false) {
+      const hasSpokenBefore = idx > 0 && isStrongAnchor.slice(0, idx).some(Boolean);
+      const hasSpokenAfter = idx < parsed.length - 1 && isStrongAnchor.slice(idx + 1).some(Boolean);
+      const sandwichedUnstressed = Boolean(
+        hasSpokenBefore
+        && hasSpokenAfter
+        && (meta.optionalNeutral || meta.spokenTone === 5)
+      );
+
+      if (sandwichedUnstressed && score < 82) {
+        score = 84;
+        detectedTone = meta.spokenTone === 5 ? 5 : meta.spokenTone;
+        feedbackVi = 'Đọc lướt nhẹ tự nhiên giữa câu';
+        if (!userContour.length) {
+          userContour = analysis.target.slice();
+        }
+      } else if (idx > 0 && !hasSpokenAfter) {
+        // Guard trailing syllables that collapse into wheeze/laugh or silence after an earlier word.
+        const isSoftTone = meta.spokenTone === 5 || meta.optionalNeutral;
+        const tailMinF = isSoftTone ? 3 : 4;
+        const tailMinC = isSoftTone ? 0.64 : 0.62;
+        const tailMinRms = isSoftTone ? 0.10 : 0.14;
+        const weakOrNoisyTail = (
+          voicedCount < tailMinF
+          || segMeanClarity < tailMinC
+          || (peakSyllableRms > 0 && segMeanRms < peakSyllableRms * tailMinRms)
+          || score < 50
+        );
+        if (weakOrNoisyTail) {
+          pronunciationVerified = false;
+          score = Math.min(score, 35);
+          feedbackVi = voicedCount
+            ? 'Âm cuối quá nhỏ hoặc lẫn tiếng cười/tạp âm.'
+            : 'Chưa phát âm rõ âm tiết này.';
+        }
+      }
+
+      if (
+        applyPartialAsrLock
+        && charMatched === false
+        && !sandwichedUnstressed
+        && (
+          (peakSyllableRms > 0 && segMeanRms < peakSyllableRms * 0.35)
+          || segMeanClarity < 0.72
+          || voicedCount < 4
+          || score < 70
+        )
+      ) {
         pronunciationVerified = false;
         score = Math.min(score, 38);
         feedbackVi = `Máy chưa nghe rõ âm chữ “${meta.han}”`;
-      } else if (asrEmptyMulti && score > 0) {
-        pronunciationVerified = false;
-        score = Math.min(score, 45);
-        feedbackVi = `Chưa nhận diện được chữ “${meta.han}” · hãy phát âm rõ tiếng Trung`;
       }
 
       return {
@@ -1041,6 +1221,8 @@
         startMs: segFrames[0]?.timeMs || 0,
         endMs: segFrames[segFrames.length - 1]?.timeMs || 0,
         ...analysis,
+        detectedTone,
+        userContour,
         score,
         feedbackVi,
         pronunciationVerified,
@@ -1051,12 +1233,9 @@
     const toneScore = syllables.length
       ? Math.round(syllables.reduce((sum, s) => sum + s.score, 0) / syllables.length)
       : 0;
-    let overallScore = charMatch
+    const overallScore = charMatch
       ? Math.round(toneScore * 0.7 + charMatch.matchRatio * 0.3)
       : toneScore;
-    if (asrEmptyMulti) {
-      overallScore = Math.min(overallScore, 45);
-    }
 
     const unverifiedCount = syllables.filter(s => s.pronunciationVerified === false).length;
     const wrongCount = syllables.filter(s =>
@@ -1068,8 +1247,6 @@
     let summaryVi;
     if (parsed.length > 5) {
       summaryVi = `Đã vẽ đường cao độ toàn câu (${toneScore}% khớp hình dáng thanh điệu · câu dài nên kết quả chia từng chữ mang tính tham khảo).`;
-    } else if (asrEmptyMulti) {
-      summaryVi = `Chưa nhận diện được chữ tiếng Trung rõ ràng (${overallScore}%). Hãy đọc rõ từng chữ, tránh cười/khè hoặc tạp âm.`;
     } else if (unverifiedCount > 0) {
       summaryVi = `Mới nghe rõ ${syllables.length - unverifiedCount}/${syllables.length} chữ (${overallScore}%). Kiểm tra lại chữ bị thiếu/lẫn tạp âm bên dưới.`;
     } else if (wrongCount === 0 && overallScore >= 80) {
