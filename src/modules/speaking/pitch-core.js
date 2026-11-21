@@ -120,10 +120,9 @@
       for (const w of root.words) {
         if (!w?.han || !w?.pin) continue;
         const hans = Array.from(w.han).filter(c => /\p{Script=Han}/u.test(c));
-        const tokens = String(w.pin).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
-          .replace(/ü/g, 'v').split(/[\s\-·,/]+/).filter(Boolean);
+        const tokens = String(w.pin).split(/[\s\-·,/]+/).filter(Boolean);
         if (hans.length === 1 && tokens.length === 1) {
-          add(hans[0], tokens[0].replace(/[^a-z]/g, ''));
+          add(hans[0], tonelessPinyin(tokens[0]));
         }
       }
     }
@@ -132,8 +131,8 @@
   }
 
   function tonelessPinyin(pin) {
-    return String(pin || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase().replace(/ü/g, 'u').replace(/[^a-z]/g, '');
+    return String(pin || '').toLowerCase().normalize('NFD').replace(/u\u0308|u:/g, 'v')
+      .replace(/[^a-z]/g, '');
   }
 
   function stripSpeakerPrefix(text) {
@@ -832,16 +831,29 @@
           const searchHalf = Math.max(2, Math.floor(span / (count * 3)));
           const lo = Math.max(prev + minSeg, ideal - searchHalf);
           const hi = Math.min(isl.end - (count - s) * minSeg, ideal + searchHalf);
-          let bestSplit = Math.max(prev + 1, Math.min(isl.end - 1, ideal));
+          let bestSplit = -1;
           if (lo <= hi) {
             let bestMetric = Infinity;
             for (let j = lo; j <= hi; j++) {
+              if (islands.length === 1) {
+                // A sustained vowel needs an acoustic boundary before it can count as two syllables.
+                const before = track[Math.max(prev, j - 5)];
+                const after = track[Math.min(isl.end - 1, j + 5)];
+                const hasDip = track[j].rms <= Math.min(before.rms, after.rms) * 0.65;
+                const pitchReset = track[j - 1].f0 > 0 && track[j].f0 > 0
+                  && Math.abs(track[j].semitone - track[j - 1].semitone) >= 2.5;
+                if (!hasDip && !pitchReset) continue;
+              }
               const metric = (track[j].rms || 0) + Math.abs(j - ideal) * 0.0005;
               if (metric < bestMetric) {
                 bestMetric = metric;
                 bestSplit = j;
               }
             }
+          }
+          if (bestSplit < 0) {
+            if (islands.length === 1) break;
+            bestSplit = Math.max(prev + 1, Math.min(isl.end - 1, ideal));
           }
           ranges.push([prev, bestSplit]);
           prev = bestSplit;
@@ -1020,63 +1032,71 @@
   }
 
   function computeCharMatch(targetText, transcript, parsedSyllables = []) {
-    const expected = Array.from(stripSpeakerPrefix(targetText)).filter(c => /\p{Script=Han}/u.test(c));
+    const expected = parsedSyllables.length ? parsedSyllables : parseSyllables(targetText);
     const heard = Array.from(String(transcript || '')).filter(c => /\p{Script=Han}/u.test(c));
     if (!expected.length || !heard.length) return null;
 
     const pyMap = buildPinyinLookup();
-    const isHomophone = (expChar, expIdx, heardChar) => {
-      if (expChar === heardChar) return true;
-      const expSet = pyMap.get(expChar) || new Set();
-      const syPin = tonelessPinyin(parsedSyllables[expIdx]?.pinyin || '');
-      if (syPin) expSet.add(syPin);
-      const heardSet = pyMap.get(heardChar);
-      if (!heardSet || !expSet.size) return false;
-      for (const p of heardSet) {
-        if (expSet.has(p)) return true;
-      }
-      return false;
+    const targetReadings = expected.map(({ han, pinyin }) => {
+      const reading = tonelessPinyin(pinyin);
+      return reading ? [reading] : Array.from(pyMap.get(han) || []);
+    });
+    const heardReadings = heard.map(han => pyMap.get(han));
+    const gapCost = 10;
+    const wrongCharCost = 11;
+    const pairCost = (i, j) => {
+      if (expected[i].han === heard[j]) return 0;
+      if (targetReadings[i].some(reading => heardReadings[j]?.has(reading))) return 1;
+      return wrongCharCost;
     };
 
+    // Minimum-edit alignment consumes each recognized character once and preserves spoken order.
+    const costs = Array.from({ length: expected.length + 1 }, () => new Uint32Array(heard.length + 1));
+    for (let i = expected.length; i >= 0; i--) {
+      for (let j = heard.length; j >= 0; j--) {
+        if (i === expected.length) costs[i][j] = (heard.length - j) * gapCost;
+        else if (j === heard.length) costs[i][j] = (expected.length - i) * gapCost;
+        else costs[i][j] = Math.min(
+          pairCost(i, j) + costs[i + 1][j + 1],
+          gapCost + costs[i + 1][j],
+          gapCost + costs[i][j + 1]
+        );
+      }
+    }
+
     let hits = 0;
-    let cursor = 0;
-    const perChar = expected.map((ch, idx) => {
-      const foundAt = heard.indexOf(ch, cursor);
-      if (foundAt >= 0) {
-        cursor = foundAt + 1;
-        hits += 1;
-        return true;
+    const perChar = expected.map(() => false);
+    const heardIndices = expected.map(() => -1);
+    let i = 0;
+    let j = 0;
+    while (i < expected.length && j < heard.length) {
+      const cost = pairCost(i, j);
+      if (costs[i][j] === cost + costs[i + 1][j + 1]) {
+        heardIndices[i] = j;
+        perChar[i] = cost < wrongCharCost;
+        if (perChar[i]) hits += cost === 0 ? 1 : 0.9;
+        i++;
+        j++;
+      } else if (costs[i][j] === gapCost + costs[i + 1][j]) {
+        i++;
+      } else {
+        j++;
       }
-      // Homophone match when noisy room causes browser ASR to pick another same-reading Hanzi.
-      for (let j = cursor; j < heard.length; j++) {
-        if (isHomophone(ch, idx, heard[j])) {
-          cursor = j + 1;
-          hits += 0.9;
-          return true;
-        }
-      }
-      if (heard.includes(ch)) {
-        hits += 0.6;
-        return true;
-      }
-      if (heard.some(h => isHomophone(ch, idx, h))) {
-        hits += 0.5;
-        return true;
-      }
-      return false;
-    });
+    }
     return {
       expectedCount: expected.length,
+      heardCount: heard.length,
       heardText: heard.join(''),
-      matchRatio: Math.min(100, Math.round((hits / expected.length) * 100)),
-      perChar
+      matchRatio: Math.round((hits / Math.max(expected.length, heard.length)) * 100),
+      perChar,
+      heardIndices
     };
   }
 
   /**
    * Segments audio into expected syllables and scores Mandarin tones + optional ASR transcript.
    */
-  function segmentAndScore({ samples, sampleRate = 16000, text = '', pinyin = '', transcript = '', recognitionSupported = false } = {}) {
+  function segmentAndScore({ samples, sampleRate = 16000, text = '', pinyin = '', transcript = '' } = {}) {
     const parsed = parseSyllables(text, pinyin);
     const track = extractPitchTrack(samples, sampleRate);
     const voicedFrames = track.filter(f => f.f0 > 0);
@@ -1116,9 +1136,11 @@
     }
 
     const peakTrackRms = Math.max(0.001, ...track.map(f => f.rms || 0));
-    const ranges = findSyllableRanges(track, parsed.length, peakTrackRms);
+    const ranges = findSyllableRanges(track, charMatch?.heardCount ?? parsed.length, peakTrackRms);
+    const heardChars = Array.from(charMatch?.heardText || '');
     const segData = parsed.map((meta, idx) => {
-      const [lo, hi] = ranges[idx] || [0, 0];
+      const heardIndex = charMatch?.heardIndices[idx] ?? idx;
+      const [lo, hi] = ranges[heardIndex] || [0, 0];
       const segFrames = hi > lo ? track.slice(lo, hi) : [];
       const voiced = trimUnvoicedEdges(segFrames).filter(f => f.f0 > 0);
       const voicedCount = voiced.length;
@@ -1146,23 +1168,14 @@
       isStrongSpoken[idx] && d.voicedCount >= 4 && d.segMeanClarity >= 0.62
     );
 
-    const applyPartialAsrLock = Boolean(
-      charMatch
-      && parsed.length >= 2
-      && parsed.length <= 4
-      && charMatch.matchRatio > 0
-      && charMatch.matchRatio < 100
-    );
-
     const syllables = segData.map((d, idx) => {
       const { meta, segFrames, voicedCount, segMeanRms, segMeanClarity } = d;
       const analysis = rawAnalyses[idx];
       let score = analysis.score;
       let detectedTone = analysis.detectedTone;
-      let userContour = analysis.userContour;
       let feedbackVi = analysis.feedbackVi;
-      let pronunciationVerified = true;
       const charMatched = charMatch ? Boolean(charMatch.perChar[idx]) : null;
+      let pronunciationVerified = detectedTone > 0 ? charMatched : false;
 
       const hasSpokenBefore = idx > 0 && isStrongAnchor.slice(0, idx).some(Boolean);
       const hasSpokenAfter = idx < parsed.length - 1 && isStrongAnchor.slice(idx + 1).some(Boolean);
@@ -1171,14 +1184,17 @@
         && hasSpokenAfter
         && (meta.optionalNeutral || meta.spokenTone === 5)
       );
+      const hasSoftSyllableEnergy = sandwichedUnstressed && segFrames.slice(2, -2).some((frame, k, inner) =>
+        frame.rms >= peakSyllableRms * 0.15
+        && inner[k + 1]?.rms >= peakSyllableRms * 0.15
+        && inner[k + 2]?.rms >= peakSyllableRms * 0.15
+      );
 
-      if (sandwichedUnstressed && score < 82) {
+      if (sandwichedUnstressed && (detectedTone > 0 || hasSoftSyllableEnergy) && charMatched !== false && score < 82) {
         score = 84;
         detectedTone = meta.spokenTone === 5 ? 5 : meta.spokenTone;
+        pronunciationVerified = charMatched;
         feedbackVi = 'Đọc lướt nhẹ tự nhiên giữa câu';
-        if (!userContour.length) {
-          userContour = analysis.target.slice();
-        }
       } else if (idx > 0 && !hasSpokenAfter) {
         // Guard trailing syllables that collapse into wheeze/laugh or silence after an earlier word.
         const isSoftTone = meta.spokenTone === 5 || meta.optionalNeutral;
@@ -1200,20 +1216,11 @@
         }
       }
 
-      if (
-        applyPartialAsrLock
-        && charMatched === false
-        && !sandwichedUnstressed
-        && (
-          (peakSyllableRms > 0 && segMeanRms < peakSyllableRms * 0.35)
-          || segMeanClarity < 0.72
-          || voicedCount < 4
-          || score < 70
-        )
-      ) {
-        pronunciationVerified = false;
-        score = Math.min(score, 38);
-        feedbackVi = `Máy chưa nghe rõ âm chữ “${meta.han}”`;
+      const heardChar = heardChars[charMatch?.heardIndices[idx]] || '';
+      if (charMatched === false) {
+        feedbackVi = heardChar
+          ? `Máy nhận diện “${heardChar}”. Hãy đọc lại âm của chữ “${meta.han}”.`
+          : `Máy chưa nhận ra chữ “${meta.han}”. Hãy đọc đủ cả cụm.`;
       }
 
       return {
@@ -1222,7 +1229,6 @@
         endMs: segFrames[segFrames.length - 1]?.timeMs || 0,
         ...analysis,
         detectedTone,
-        userContour,
         score,
         feedbackVi,
         pronunciationVerified,
@@ -1233,11 +1239,12 @@
     const toneScore = syllables.length
       ? Math.round(syllables.reduce((sum, s) => sum + s.score, 0) / syllables.length)
       : 0;
+    const verified = syllables.filter(s => s.pronunciationVerified === true);
+    const incomplete = verified.length < syllables.length || charMatch?.heardCount > syllables.length;
+    const verifiedToneScore = verified.reduce((sum, s) => sum + s.score, 0) / syllables.length;
     const overallScore = charMatch
-      ? Math.round(toneScore * 0.7 + charMatch.matchRatio * 0.3)
+      ? Math.min(incomplete ? 69 : 100, Math.round(verifiedToneScore * 0.7 + charMatch.matchRatio * 0.3))
       : toneScore;
-
-    const unverifiedCount = syllables.filter(s => s.pronunciationVerified === false).length;
     const wrongCount = syllables.filter(s =>
       s.pronunciationVerified === false
       || s.score < 65
@@ -1245,10 +1252,12 @@
     ).length;
 
     let summaryVi;
-    if (parsed.length > 5) {
-      summaryVi = `Đã vẽ đường cao độ toàn câu (${toneScore}% khớp hình dáng thanh điệu · câu dài nên kết quả chia từng chữ mang tính tham khảo).`;
-    } else if (unverifiedCount > 0) {
-      summaryVi = `Mới nghe rõ ${syllables.length - unverifiedCount}/${syllables.length} chữ (${overallScore}%). Kiểm tra lại chữ bị thiếu/lẫn tạp âm bên dưới.`;
+    if (!charMatch) {
+      summaryVi = 'Chỉ chấm thanh điệu vì chưa có kết quả nhận diện chữ.';
+    } else if (verified.length < syllables.length) {
+      summaryVi = `Xác nhận được ${verified.length}/${syllables.length} chữ. Xem lại những chữ được đánh dấu bên dưới.`;
+    } else if (charMatch.heardCount > syllables.length) {
+      summaryVi = 'Máy nghe thêm chữ ngoài cụm mẫu. Hãy đọc lại đúng cụm.';
     } else if (wrongCount === 0 && overallScore >= 80) {
       summaryVi = `Tuyệt vời! Bạn đọc chuẩn cả ${syllables.length} âm tiết (${overallScore}%).`;
     } else if (wrongCount === 0) {

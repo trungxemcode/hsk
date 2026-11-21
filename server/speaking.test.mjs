@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { runInNewContext } from 'node:vm';
 import pitchCore from '../src/modules/speaking/pitch-core.js';
 
 function synthContour(f0Start, f0Mid, f0End, durationSec, sampleRate = 16000) {
@@ -282,6 +284,75 @@ test('rejects partial utterance followed by laughter/wheezing instead of scoring
   assert.equal(resPartialAsr.syllables[2].pronunciationVerified, false);
   assert.ok(resPartialAsr.syllables[1].score <= 38);
   assert.ok(resPartialAsr.syllables[2].score <= 38);
+});
+
+test('one sustained syllable cannot pass three repeated characters', () => {
+  const silence = new Float32Array(2400);
+  const samples = concatWithPause([silence, synthContour(220, null, 220, 0.85), silence], 0);
+  const input = { samples, text: '妈妈妈', pinyin: 'mā mā mā' };
+  for (const transcript of ['妈', '妈妈妈', '']) {
+    const result = pitchCore.segmentAndScore({ ...input, transcript });
+    assert.deepEqual(result.syllables.map(s => s.pronunciationVerified), [transcript ? true : null, false, false]);
+    assert.deepEqual(result.syllables.slice(1).map(s => s.score), [0, 0]);
+    assert.ok(result.overallScore < 70);
+  }
+});
+
+test('aligns skipped and reordered characters without reusing recognized speech', () => {
+  const { perChar, heardIndices } = pitchCore.computeCharMatch('今天天气很好', '今天很好');
+  assert.deepEqual(perChar, [true, true, false, false, true, true]);
+  assert.deepEqual(heardIndices, [0, 1, -1, -1, 2, 3]);
+  assert.equal(pitchCore.computeCharMatch('你好', '好你').perChar.filter(Boolean).length, 1);
+  assert.equal(pitchCore.computeCharMatch('你好', '你好啊').matchRatio, 67);
+
+  const samples = concatWithPause([synthContour(245, null, 145, 0.24), synthContour(175, 130, 170, 0.26)]);
+  const result = pitchCore.segmentAndScore({ samples, text: '对不起', pinyin: 'duì bu qǐ', transcript: '对起' });
+  assert.deepEqual(result.syllables.map(s => s.pronunciationVerified), [true, false, true]);
+  assert.equal(result.syllables[1].score, 0);
+  assert.match(result.summaryVi, /2\/3/);
+});
+
+test('matching tones alone cannot pass a different initial or final', () => {
+  const samples = concatWithPause([
+    synthContour(175, 115, 168, 0.42),
+    synthContour(245, null, 145, 0.34),
+    synthContour(175, 115, 168, 0.42)
+  ]);
+  const input = { samples, text: '我爱你', pinyin: 'wǒ ài nǐ' };
+  const wrongWord = pitchCore.segmentAndScore({ ...input, transcript: '我恨你' });
+  assert.equal(wrongWord.syllables[1].detectedTone, 4);
+  assert.deepEqual(wrongWord.syllables.map(s => s.pronunciationVerified), [true, false, true]);
+  assert.ok(wrongWord.overallScore < 70);
+  const completelyDifferent = pitchCore.segmentAndScore({ ...input, transcript: '早上好' });
+  assert.deepEqual(completelyDifferent.syllables.map(s => s.pronunciationVerified), [false, false, false]);
+  assert.equal(completelyDifferent.overallScore, 0);
+});
+
+test('recorder scores only final speech recognition results', async () => {
+  let recognition;
+  const connectable = { connect() {}, disconnect() {} };
+  const window = {
+    navigator: { mediaDevices: { async getUserMedia() { return { getTracks: () => [] }; } } },
+    AudioContext: class {
+      createMediaStreamSource() { return connectable; }
+      createScriptProcessor() { return { ...connectable }; }
+      createGain() { return { ...connectable, gain: { value: 1 } }; }
+      async close() {}
+    },
+    SpeechRecognition: class {
+      start() { recognition = this; }
+      stop() { this.onend(); }
+    }
+  };
+  const source = readFileSync(new URL('../src/modules/speaking/speech-recorder.js', import.meta.url), 'utf8');
+  runInNewContext(source, { window, Blob, setTimeout, clearTimeout });
+  const previews = [];
+  const session = await window.HSKRecorder.start({ onTranscript: (text, final) => previews.push([text, final]) });
+  const result = (transcript, isFinal) => Object.assign([{ transcript }], { isFinal });
+  recognition.onresult({ results: [result('没', true), result('关系', false)] });
+  const recording = await session.stop();
+  assert.equal(recording.transcript, '没');
+  assert.deepEqual(previews, [['没关系', false], ['没', true]]);
 });
 
 test('passes 对不起 with soft brief middle 不 and full 6-char sentence even without ASR transcript', () => {

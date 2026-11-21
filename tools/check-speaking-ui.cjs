@@ -170,6 +170,24 @@ const MIME = {
       await modal.getByRole('button', { name: 'Đóng', exact: true }).click();
       await modal.waitFor({ state: 'detached' });
 
+      for (const hasTranscript of [true, false]) {
+        await page.evaluate(transcript => {
+          window.HSKSpeaking.open({ text: '妈妈妈', pinyin: 'mā mā mā' });
+          const sampleRate = 16000;
+          const pcm = new Float32Array(sampleRate);
+          pcm.set(Float32Array.from({ length: 9600 }, (_, i) => 0.5 * Math.sin(2 * Math.PI * 220 * i / sampleRate)), 3200);
+          window.HSKRecorder.setMockProvider(() => ({ pcm, sampleRate, transcript }));
+        }, hasTranscript ? '妈' : '');
+        await recBtn.click();
+        await page.waitForFunction(() => document.querySelector('.speaking-record-btn')?.classList.contains('is-recording'));
+        await recBtn.click();
+        await resultBox.waitFor();
+        assert.equal(await modal.locator('.speaking-syl-chip.is-ok').count(), hasTranscript ? 1 : 0);
+        assert.equal(await modal.locator('.speaking-syl-chip.is-warn').count(), hasTranscript ? 2 : 3);
+        assert.match(await modal.locator('.speaking-score-head').innerText(), hasTranscript ? /1\/3/ : /Chỉ chấm thanh điệu/);
+        await modal.getByRole('button', { name: 'Đóng', exact: true }).click();
+      }
+
       if (viewport.width === 390) {
         const assetPayload = Buffer.from('mock-sherpa-asr-runtime-v1');
         const assetSha = crypto.createHash('sha256').update(assetPayload).digest('hex');

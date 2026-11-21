@@ -23,6 +23,12 @@
       .trim();
   }
 
+  function isCorrectPronunciation(syllable) {
+    return syllable.pronunciationVerified === true
+      && syllable.score >= 70
+      && (syllable.spokenTone === 5 || syllable.optionalNeutral || syllable.detectedTone === syllable.spokenTone);
+  }
+
   function drawPitchChart(canvas, syllables, result) {
     const ctx = canvas.getContext?.('2d');
     if (!ctx || typeof ctx.beginPath !== 'function') return;
@@ -130,9 +136,8 @@
       }
 
       if (col.userContour?.length) {
-        const matched = col.score >= 70 && col.pronunciationVerified !== false && (col.spokenTone === 5 || col.optionalNeutral || col.detectedTone === col.spokenTone);
         ctx.save();
-        ctx.strokeStyle = matched ? okColor : warnColor;
+        ctx.strokeStyle = isCorrectPronunciation(col) ? okColor : warnColor;
         ctx.lineWidth = 3.2;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
@@ -276,10 +281,7 @@
       const source = hasScoredResult ? scoredList : currentSyllables;
       sylStrip.hidden = !source.length;
       for (const s of source) {
-        const ok = hasScoredResult
-          && s.score >= 70
-          && s.pronunciationVerified !== false
-          && (s.spokenTone === 5 || s.optionalNeutral || s.detectedTone === s.spokenTone);
+        const ok = hasScoredResult && isCorrectPronunciation(s);
         const cls = 'speaking-syl-chip'
           + (hasScoredResult ? (ok ? ' is-ok' : ' is-warn') : '')
           + (s.sandhiNote ? ' has-sandhi' : '');
@@ -294,7 +296,7 @@
           const badge = ok
             ? `✓ ${s.score}%`
             : s.pronunciationVerified === false
-              ? `Chưa rõ chữ · ${s.score}%`
+              ? 'Chưa xác nhận chữ'
               : s.detectedTone > 0
                 ? `→ T${s.detectedTone} · ${s.score}%`
                 : 'Chưa rõ · 0%';
@@ -454,16 +456,15 @@
       resultBox.hidden = false;
 
       const scoreHead = el('div', undefined, 'speaking-score-head');
-      const toneClass = !scoreResult.hasVoice ? 'is-warn' : scoreResult.overallScore >= 75 ? 'is-good' : 'is-warn';
-      const pill = el('span', scoreResult.hasVoice ? `Độ khớp: ${scoreResult.overallScore}%` : 'Chưa rõ giọng', 'speaking-score-pill ' + toneClass);
+      const toneClass = scoreResult.charMatch && scoreResult.overallScore >= 75 ? 'is-good' : 'is-warn';
+      const scoreLabel = scoreResult.charMatch ? 'Độ khớp' : 'Thanh điệu';
+      const pill = el('span', scoreResult.hasVoice ? `${scoreLabel}: ${scoreResult.overallScore}%` : 'Chưa rõ giọng', 'speaking-score-pill ' + toneClass);
       scoreHead.append(el('strong', scoreResult.summaryVi), pill);
       resultBox.append(scoreHead);
 
       if (recording.transcript) {
         const matchNote = scoreResult.charMatch ? ` · Khớp chữ: ${scoreResult.charMatch.matchRatio}%` : '';
         resultBox.append(el('p', `Nhận diện giọng nói: “${recording.transcript}”${matchNote}`, 'speaking-transcript'));
-      } else if (!recording.recognitionSupported) {
-        resultBox.append(el('p', 'Đang chấm cao độ 4 thanh offline (trình duyệt không hỗ trợ SpeechRecognition).', 'speaking-transcript'));
       }
 
       const needsFix = (scoreResult.syllables || []).filter(s =>
@@ -501,8 +502,7 @@
             sampleRate: recording.sampleRate,
             text: currentText,
             pinyin: currentPinyin,
-            transcript: recording.transcript,
-            recognitionSupported: Boolean(recording.recognitionSupported && root.navigator?.onLine !== false)
+            transcript: recording.transcript
           })
         : { hasVoice: false, overallScore: 0, syllables: [], summaryVi: 'Thiếu bộ phân tích cao độ.' };
 
