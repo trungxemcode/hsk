@@ -42,6 +42,7 @@
     const n = document.createElement(tag);
     if (text !== undefined && text !== null) n.textContent = text;
     if (cls) n.className = cls;
+    if (tag === 'button') n.dataset.uiOwned = '1';
     return n;
   }
 
@@ -50,6 +51,84 @@
     b.type = 'button';
     b.onclick = fn;
     return b;
+  }
+
+  const DESIGN_IDB_NAME = 'hsk-custom-designs-v1';
+  const DESIGN_IDB_STORE = 'designs';
+  let designIdbPromise = null;
+  const hydratedDesignCache = new Map();
+
+  function currentOwnerId() {
+    try {
+      return window.HSKAccountDashboard?.user?.uid || JSON.parse(localStorage.getItem('hsk-account-meta-v1') || '{}').uid || 'guest';
+    } catch {
+      return 'guest';
+    }
+  }
+
+  function openDesignIdb() {
+    if (typeof indexedDB === 'undefined') return Promise.resolve(null);
+    if (designIdbPromise) return designIdbPromise;
+    designIdbPromise = new Promise(resolve => {
+      try {
+        const req = indexedDB.open(DESIGN_IDB_NAME, 1);
+        req.onupgradeneeded = () => {
+          if (!req.result.objectStoreNames.contains(DESIGN_IDB_STORE)) {
+            req.result.createObjectStore(DESIGN_IDB_STORE);
+          }
+        };
+        req.onsuccess = () => {
+          req.result.onversionchange = () => { req.result.close(); designIdbPromise = null; };
+          resolve(req.result);
+        };
+        req.onerror = () => { designIdbPromise = null; resolve(null); };
+      } catch {
+        designIdbPromise = null;
+        resolve(null);
+      }
+    });
+    return designIdbPromise;
+  }
+
+  function mirrorDesignsToIdb(designs) {
+    if (!designs || typeof designs !== 'object') return;
+    const owner = currentOwnerId();
+    const entries = Object.entries(designs).filter(([id, d]) => id && d && typeof d === 'object');
+    if (!entries.length) return;
+    openDesignIdb().then(db => {
+      if (!db) return;
+      try {
+        const tx = db.transaction(DESIGN_IDB_STORE, 'readwrite');
+        const store = tx.objectStore(DESIGN_IDB_STORE);
+        for (const [lessonId, design] of entries) {
+          const cacheKey = `${owner}::${lessonId}`;
+          hydratedDesignCache.set(cacheKey, design);
+          store.put(design, cacheKey);
+        }
+      } catch {}
+    });
+  }
+
+  function readDesignFromIdb(owner, lessonId) {
+    const cacheKey = `${owner}::${lessonId}`;
+    if (hydratedDesignCache.has(cacheKey)) return Promise.resolve(hydratedDesignCache.get(cacheKey));
+    return openDesignIdb().then(db => {
+      if (!db) return null;
+      return new Promise(resolve => {
+        try {
+          const tx = db.transaction(DESIGN_IDB_STORE, 'readonly');
+          const req = tx.objectStore(DESIGN_IDB_STORE).get(cacheKey);
+          req.onsuccess = () => {
+            const val = req.result || null;
+            hydratedDesignCache.set(cacheKey, val);
+            resolve(val);
+          };
+          req.onerror = () => resolve(null);
+        } catch {
+          resolve(null);
+        }
+      });
+    });
   }
 
   function isAiOnlineReady() {
@@ -73,7 +152,9 @@
 
   function saveProfile(profile) {
     if (!window.HSKStudyStore?.saveCustomLesson) return null;
+    if (profile?.aiLessonDesigns) mirrorDesignsToIdb(profile.aiLessonDesigns);
     const saved = window.HSKStudyStore.saveCustomLesson(C.createProfile(profile));
+    if (saved?.aiLessonDesigns) mirrorDesignsToIdb(saved.aiLessonDesigns);
     return saved;
   }
 
@@ -1361,6 +1442,23 @@
     }
 
     profile = C.createProfile({ ...profile, hsk });
+    const ownerId = currentOwnerId();
+    const idbKey = `${ownerId}::${lesson.id}`;
+    if (!profile.aiLessonDesigns?.[lesson.id]) {
+      const cachedDesign = hydratedDesignCache.get(idbKey);
+      if (cachedDesign) {
+        profile = C.createProfile({
+          ...profile,
+          aiLessonDesigns: { ...(profile.aiLessonDesigns || {}), [lesson.id]: cachedDesign }
+        });
+      } else if (!hydratedDesignCache.has(idbKey)) {
+        readDesignFromIdb(ownerId, lesson.id).then(found => {
+          if (found && currentOwnerId() === ownerId && rootEl.isConnected && document.getElementById('lessonCustomRunner')) {
+            mountLessonRunner(rootEl, lesson, words, hooks);
+          }
+        });
+      }
+    }
     const progressRecord = hooks.progress?.() || {};
     const plan = C.buildLessonPlan(profile, lesson, progressRecord);
     if (activeSessionIndex >= plan.sessions.length) activeSessionIndex = 0;

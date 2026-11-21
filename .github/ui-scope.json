@@ -1,5 +1,5 @@
 {
-  "request": "Separate the custom HSK lesson template slider configurator from the real AI chat design mode on Home and Lessons, desktop and mobile. Preserve the existing lesson runner and all unrelated routes.",
+  "request": "Optimize AI lesson Firestore synchronization (<100 KB per design) and IndexedDB persistence; enforce generated Worker parity; introduce opt-in CSS layers for lesson custom and buttons. Preserve every unrelated page, route, menu and mobile dock.",
   "excludedRoutes": [
     "home",
     "lessons"

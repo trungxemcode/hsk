@@ -1,3 +1,5 @@
+@layer hsk-reset, hsk-base, hsk-components, hsk-modules, hsk-overrides;
+
 /* Shared design tokens. New components use semantic tokens below.
    Legacy palette entries preserve existing feature-specific shades during migration. */
 :root{
@@ -1206,7 +1208,7 @@ html[data-theme="dark"]{
       gap: 8px;
       margin-bottom: 12px;
     }
-    button {
+    button:where(:not([data-ui-owned]):not(.ui-btn)) {
       padding: 8px 14px;
       border: none;
       border-radius:var(--radius-8px);
@@ -1216,11 +1218,11 @@ html[data-theme="dark"]{
       cursor: pointer;
       transition: all 0.25s;
     }
-    button:hover {
+    button:where(:not([data-ui-owned]):not(.ui-btn)):hover {
       background: var(--button-active-bg, var(--palette-violet));
       transform: translateY(-1px);
     }
-    button:disabled {
+    button:where(:not([data-ui-owned]):not(.ui-btn)):disabled {
         background-color: var(--legacy-hex-bdc3c7);
         cursor: not-allowed;
     }

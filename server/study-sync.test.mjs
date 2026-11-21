@@ -17,5 +17,46 @@ test('plans split large word lists below Firestore payload limit and preserve ol
 test('journal saves cannot revive an older goal or overwrite unrelated remote schedule fields',()=>{
  const first=S.savePlan(S.empty('u'),plan,'one'),before={[S.KEY]:JSON.stringify(first)};let records=capture(first);records['study-plan:current'].value.end=200000000;const next={...first,plan:{...first.plan,lastAttempt:200}};const result=A.capture(records,before,{[S.KEY]:JSON.stringify(next)},300,'phone');assert.equal(result.items['study-plan:current'].value.end,200000000);assert.equal(result.items['study-plan:current'].value.lastAttempt,200);
  records['study-plan:current'].value.id='new-goal';const stale=A.capture(records,before,{[S.KEY]:JSON.stringify(next)},400,'phone');assert.equal(stale.items['study-plan:current'].value.id,'new-goal');
- for(const id of ['exam:q','exam-draft:q','open-word:q','study-plan:current','study-activity:day'])assert.equal(A.supportedId(id),true);assert.equal(A.supportedId('secret:unknown'),false);
+ for(const id of ['exam:q','exam-draft:q','open-word:q','study-plan:current','study-custom-design:standard-3-01','study-activity:day'])assert.equal(A.supportedId(id),true);assert.equal(A.supportedId('secret:unknown'),false);
+});
+test('customLesson splits each aiLessonDesign into its own Firestore item below 100 KB and reassembles cleanly',()=>{
+ const C=require('../src/modules/lessons/lesson-custom-core.js');
+ const makeDesign=(lessonId,idx)=>({
+  lessonId,
+  coachIntroVi:'Giáo án AI chi tiết bài '+idx+' · '+'tối ưu lộ trình '.repeat(20),
+  customPrompt:'Chia phiên ngắn 5-10p cho bài '+idx,
+  aiProvider:'gemini',
+  aiModel:'gemini-3.5-flash',
+  updatedAt:1000+idx,
+  sessions:Array.from({length:4},(_,sIdx)=>({
+   label:`Phiên ${sIdx+1}`,
+   minutes:15,
+   goalVi:'Mục tiêu phiên '+(sIdx+1)+' · '+'luyện tập '.repeat(12),
+   steps:[
+    {id:`v_${sIdx}`,skill:'vocab',action:'vocab_cards',minutes:8,titleVi:'Từ vựng trọng tâm',detailVi:'Học nhanh '.repeat(15),coachTipVi:'Đọc to '.repeat(15)},
+    {id:`g_${sIdx}`,skill:'grammar',action:'grammar_focus',minutes:7,titleVi:'Ngữ pháp bài',detailVi:'Luyện câu '.repeat(15),coachTipVi:'Chú ý cấu trúc '.repeat(15)}
+   ]
+  }))
+ });
+ let prof=C.createProfile({hsk:3,minutes:60,days:5,style:'spare_time',goal:'exam',aiGenerated:true},1000);
+ const designs={};
+ for(let i=1;i<=10;i++){const id=`standard-3-0${i}`;designs[id]=makeDesign(id,i);}
+ const state=S.saveCustomLesson(S.empty('u'),{...prof,aiLessonDesigns:designs});
+ const flat=S.flatten(state);
+ assert.ok(flat['study-plan:custom-lesson'],'base profile record exists');
+ assert.equal(flat['study-plan:custom-lesson'].aiLessonDesigns,undefined,'heavy aiLessonDesigns must not be embedded in base sync item');
+ assert.ok(JSON.stringify(flat['study-plan:custom-lesson']).length<100000,'base custom lesson stays well under 100 KB Firestore rule');
+ for(let i=1;i<=10;i++){
+  const key=`study-custom-design:standard-3-0${i}`;
+  assert.ok(flat[key],`independent sync document exists for ${key}`);
+  assert.ok(JSON.stringify(flat[key]).length<100000,`${key} stays under 100 KB Firestore rule`);
+ }
+ const records=capture(state);
+ for(const item of Object.values(records))assert.ok(JSON.stringify(item.value).length<100000);
+ const restored=JSON.parse(A.materialize(records,'u')[S.KEY]);
+ assert.equal(Object.keys(restored.customLesson.aiLessonDesigns||{}).length,10,'all 10 independent designs reassemble cleanly');
+ // Rotating an old design out of localStorage must not delete it on cloud while customLesson still exists
+ const trimmedLocal=S.saveCustomLesson(state,{...prof,aiLessonDesigns:{'standard-3-010':designs['standard-3-010']}});
+ const afterTrim=A.capture(records,{[S.KEY]:JSON.stringify(state)},{[S.KEY]:JSON.stringify(trimmedLocal)},2000,'phone');
+ assert.equal(afterTrim.items['study-custom-design:standard-3-01'].deleted,false,'LRU local trim preserves remote design');
 });

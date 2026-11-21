@@ -235,9 +235,9 @@ renderIcons();
  window.addEventListener('scroll',event=>{if(activeFlyout&&!activeFlyout.flyout.contains(event.target))closeActiveFlyout();},true);
  function decorateControls(root=main){
   if(root.nodeType!==1)return;
-  const mark=b=>{if(b.closest('.panel-box')&&!b.matches('.speech-button,.mastery-btn,.studio-action'))b.classList.add('studio-action');};
+  const mark=b=>{if(b.closest('.panel-box')&&!b.matches('.speech-button,.mastery-btn,.studio-action,[data-ui-owned],.ui-btn'))b.classList.add('studio-action');};
   if(root.matches('button'))mark(root);
-  root.querySelectorAll('button:not(.speech-button):not(.mastery-btn):not(.studio-action)').forEach(mark);
+  root.querySelectorAll('button:not(.speech-button):not(.mastery-btn):not(.studio-action):not([data-ui-owned]):not(.ui-btn)').forEach(mark);
  }
  decorateControls();new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)decorateControls(node);}).observe(main,{subtree:true,childList:true});
   const labels={'sentence-editor':'Sửa câu tiếng Trung',writing:'Học viết',placement:'Đánh giá trình độ & lộ trình','real-reading':'Đọc thực tế','study4':'Luyện thi HSK','match-game':'Đối chiếu 3 cột','sentence-game':'Sắp xếp câu',home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu','ai-qa':'Hỏi đáp AI',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',profile:'Hồ sơ',account:'Cài đặt',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};

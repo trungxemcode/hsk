@@ -367,7 +367,7 @@ html[data-theme="dark"] body.studio-enabled :is(#translationSubmit,#accountSubmi
 }
 
 /* Nút phụ: trắng, viền mảnh, chữ đậm vừa */
-html body.studio-enabled :is(button,summary):not(.correct):not(.wrong){
+html body.studio-enabled :is(button:where(:not([data-ui-owned]):not(.ui-btn)),summary):not(.correct):not(.wrong){
   border-radius:var(--radius-rd-002);
 }
 html body.studio-enabled :is(
@@ -2347,7 +2347,7 @@ html body.studio-enabled .topbar-actions > button{ vertical-align:middle; }
 
 /* ---- B. Hover: bỏ nền tím đặc, dùng tint nhẹ + giữ màu chữ ---- */
 @media (hover:hover){
-  html body.studio-enabled :is(button,summary):hover:not(:disabled){
+  html body.studio-enabled :is(button:where(:not([data-ui-owned]):not(.ui-btn)),summary):hover:not(:disabled){
     background-color:var(--rd-static-color-162) !important;
     border-color:var(--rd-static-color-163) !important;
     color:var(--rd-ink) !important;
@@ -2355,7 +2355,7 @@ html body.studio-enabled .topbar-actions > button{ vertical-align:middle; }
     filter:none !important;
   }
   /* Chữ con giữ đúng sắc độ thay vì bị ép trắng */
-  html body.studio-enabled :is(button,summary):hover:not(:disabled) *{
+  html body.studio-enabled :is(button:where(:not([data-ui-owned]):not(.ui-btn)),summary):hover:not(:disabled) *{
     color:inherit !important;
   }
   /* Các thành phần có nền màu riêng vẫn giữ màu chữ tương phản */
@@ -2561,7 +2561,7 @@ html body.studio-enabled :is(.icon-button,.theme-button,.menu-button,#headerSear
 @media (hover:hover){
 
   /* 1. Nền hover chung: tint rất nhẹ */
-  html body:not(#_rd).studio-enabled :is(button,summary):hover:not(:disabled){
+  html body:not(#_rd).studio-enabled :is(button:where(:not([data-ui-owned]):not(.ui-btn)),summary):hover:not(:disabled){
     background-color:var(--rd-static-color-055) !important;
     border-color:var(--rd-static-color-009) !important;
     color:var(--rd-ink) !important;
@@ -2569,7 +2569,7 @@ html body.studio-enabled :is(.icon-button,.theme-button,.menu-button,#headerSear
     filter:none !important;
   }
   /* 2. Chữ bên trong: không bị ép trắng */
-  html body:not(#_rd).studio-enabled :is(button,summary):hover:not(:disabled) *{
+  html body:not(#_rd).studio-enabled :is(button:where(:not([data-ui-owned]):not(.ui-btn)),summary):hover:not(:disabled) *{
     color:inherit !important;
   }
 
@@ -5021,7 +5021,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   }
 
   /* 11. Unified Mobile Corner-Radius System (12px interactive controls & disclosures; 16px cards) */
-  html body:not(#_rd).studio-enabled.mobile-ux button:not(#headerInfo):not(#musicQueueLibrary):not(#aiQaSend):not(.qa-chat-attach):not(.mobile-passive-toggle):not(.music-transport-play):not(.music-pill):not(.podcast-speed-btn):not(.podcast-shelf-nav):not([data-search-scope]),
+  html body:not(#_rd).studio-enabled.mobile-ux button:not(#headerInfo):not(#musicQueueLibrary):not(#aiQaSend):not(.qa-chat-attach):not(.mobile-passive-toggle):not(.music-transport-play):not(.music-pill):not(.podcast-speed-btn):not(.podcast-shelf-nav):not([data-search-scope]):where(:not([data-ui-owned]):not(.ui-btn)),
   html body:not(#_rd).studio-enabled.mobile-ux :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select:not(.qa-thinking),textarea){
     border-radius:var(--radius-btn) !important;
   }

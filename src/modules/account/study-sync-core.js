@@ -29,6 +29,9 @@ function validAiStep(step){
  return true;
 }
 function validAiSessions(sessions){return Array.isArray(sessions)&&sessions.length>=1&&sessions.length<=10&&sessions.every(session=>session&&typeof session==='object'&&!Array.isArray(session)&&typeof session.label==='string'&&session.label.length<=140&&typeof session.goalVi==='string'&&session.goalVi.length<=220&&Number.isInteger(session.minutes)&&session.minutes>=1&&session.minutes<=180&&Array.isArray(session.steps)&&session.steps.length>=1&&session.steps.length<=4&&session.steps.every(validAiStep));}
+function validAiLessonDesign(id,design){
+ return Boolean(/^[a-zA-Z0-9_-]{1,64}$/.test(String(id||''))&&design&&typeof design==='object'&&!Array.isArray(design)&&design.lessonId===id&&typeof design.coachIntroVi==='string'&&design.coachIntroVi.trim()&&design.coachIntroVi.length<=500&&typeof design.customPrompt==='string'&&design.customPrompt.length<=300&&typeof design.aiProvider==='string'&&design.aiProvider.length<=40&&typeof design.aiModel==='string'&&design.aiModel.length<=80&&Number.isFinite(design.updatedAt)&&validAiSessions(design.sessions)&&JSON.stringify(design).length<=45000);
+}
 function validCustomAiFields(v){
  if(v.aiGenerated!==undefined&&typeof v.aiGenerated!=='boolean')return false;
  if(v.aiProvider!==undefined&&(typeof v.aiProvider!=='string'||v.aiProvider.length>40))return false;
@@ -39,7 +42,7 @@ function validCustomAiFields(v){
   const designs=v.aiLessonDesigns;
   if(!designs||typeof designs!=='object'||Array.isArray(designs))return false;
   const ids=Object.keys(designs);if(ids.length>12)return false;
-  for(const id of ids){const design=designs[id];if(!/^[a-zA-Z0-9_-]{1,64}$/.test(id)||!design||typeof design!=='object'||Array.isArray(design)||design.lessonId!==id||typeof design.coachIntroVi!=='string'||!design.coachIntroVi.trim()||design.coachIntroVi.length>500||typeof design.customPrompt!=='string'||design.customPrompt.length>300||typeof design.aiProvider!=='string'||design.aiProvider.length>40||typeof design.aiModel!=='string'||design.aiModel.length>80||!Number.isFinite(design.updatedAt)||!validAiSessions(design.sessions))return false;}
+  for(const id of ids){if(!validAiLessonDesign(id,designs[id]))return false;}
  }
  try{return JSON.stringify(v).length<=200000;}catch{return false;}
 }
@@ -71,9 +74,28 @@ function savePlan(state,value,writer){const s=clone(state),p=clone(value);p.id=p
 function activity(state){const days={},hours=Array(24).fill(0),baseDays={},baseHours=Array(24).fill(0);for(const p of Object.values(state.activity||{})){if(!p)continue;for(const [d,value]of Object.entries(p.days||{})){const n=value===true?1:value;if(/^\d{4}-\d{2}-\d{2}$/.test(d)&&Number.isFinite(n)&&n>0){if(p.legacy)baseDays[d]=Math.max(baseDays[d]||0,n);else days[d]=(days[d]||0)+n;}}for(let i=0;i<24;i++){const n=Number.isFinite(p.hours?.[i])?Math.max(0,p.hours[i]):0;if(p.legacy)baseHours[i]=Math.max(baseHours[i],n);else hours[i]+=n;}}for(const [d,n]of Object.entries(baseDays))days[d]=(days[d]||0)+n;for(let i=0;i<24;i++)hours[i]+=baseHours[i];return {version:1,days,hours};}
 function recordActivity(state,writer,now){const s=clone(state),d=new Date(now+7*3600000).toISOString().slice(0,10),hour=new Date(now+7*3600000).getUTCHours(),id=d+'_'+writer,p=s.activity[id]||{days:{[d]:0},hours:Array(24).fill(0)};p.days[d]++;p.hours[hour]++;s.activity[id]=p;return s;}
 function flatten(s){const out={};if(s.plan){const {keys=[],...config}=s.plan;out['study-plan:current']={...config,keyCount:keys.length};for(let i=0;i<keys.length;i+=200)out['study-keys:'+s.plan.id+':'+i/200]=keys.slice(i,i+200);}
- if(validCustom(s.customLesson))out['study-plan:custom-lesson']=clone(s.customLesson);
+ if(validCustom(s.customLesson)){
+  const {aiLessonDesigns,...baseCustom}=clone(s.customLesson);
+  out['study-plan:custom-lesson']=baseCustom;
+  if(aiLessonDesigns&&typeof aiLessonDesigns==='object'){
+   for(const [lessonId,design]of Object.entries(aiLessonDesigns)){
+    if(validAiLessonDesign(lessonId,design))out['study-custom-design:'+lessonId]=clone(design);
+   }
+  }
+ }
  for(const [id,p]of Object.entries(s.parts||{})){const r=row(p.row),base={...p,row:{...r}};for(const k of arrays){delete base.row[k];for(let i=0;i<r[k].length;i+=200)out['study-array:'+id+':'+k+':'+i/200]=r[k].slice(i,i+200);}out['study-journal:'+id]=base;}for(const [id,p]of Object.entries(s.activity||{}))out['study-activity:'+id]=p;return out;}
-function fromRecords(records,owner){const s=empty(owner),keys=[],chunks=[];for(const [id,v]of Object.entries(records)){if(id==='study-plan:current'){if(v&&v.version===1&&typeof v.id==='string'&&v.target>=1&&v.target<=6&&Number.isFinite(v.end))s.plan=clone(v);}else if(id==='study-plan:custom-lesson'){if(validCustom(v))s.customLesson=clone(v);}else if(id.startsWith('study-keys:'))keys.push([id.slice(11),v]);else if(id.startsWith('study-journal:')){if(v&&typeof v.planId==='string'&&typeof v.day==='string'&&v.row&&typeof v.row==='object')s.parts[id.slice(14)]=clone(v);}else if(id.startsWith('study-array:'))chunks.push([id.slice(12),v]);else if(id.startsWith('study-activity:'))s.activity[id.slice(15)]=clone(v);}
+function fromRecords(records,owner){const s=empty(owner),keys=[],chunks=[],customDesigns=[];for(const [id,v]of Object.entries(records)){if(id==='study-plan:current'){if(v&&v.version===1&&typeof v.id==='string'&&v.target>=1&&v.target<=6&&Number.isFinite(v.end))s.plan=clone(v);}else if(id==='study-plan:custom-lesson'){if(validCustom(v))s.customLesson=clone(v);}else if(id.startsWith('study-custom-design:')){customDesigns.push([id.slice(20),v]);}else if(id.startsWith('study-keys:'))keys.push([id.slice(11),v]);else if(id.startsWith('study-journal:')){if(v&&typeof v.planId==='string'&&typeof v.day==='string'&&v.row&&typeof v.row==='object')s.parts[id.slice(14)]=clone(v);}else if(id.startsWith('study-array:'))chunks.push([id.slice(12),v]);else if(id.startsWith('study-activity:'))s.activity[id.slice(15)]=clone(v);}
+ if(s.customLesson&&customDesigns.length){
+  const merged={...(s.customLesson.aiLessonDesigns||{})};
+  for(const [lessonId,design]of customDesigns){
+   if(!validAiLessonDesign(lessonId,design))continue;
+   if(!merged[lessonId]||Number(design.updatedAt||0)>=Number(merged[lessonId].updatedAt||0))merged[lessonId]=clone(design);
+  }
+  const kept=Object.entries(merged).sort((a,b)=>Number(b[1]?.updatedAt||0)-Number(a[1]?.updatedAt||0)).slice(0,12);
+  const finalMap={};
+  for(const [k,v]of kept){finalMap[k]=v;if(JSON.stringify({...s.customLesson,aiLessonDesigns:finalMap}).length>180000){delete finalMap[k];break;}}
+  if(Object.keys(finalMap).length)s.customLesson.aiLessonDesigns=finalMap;
+ }
  if(s.plan){s.plan.keys=keys.filter(([id])=>id.startsWith(s.plan.id+':')).sort((a,b)=>Number(a[0].split(':').at(-1))-Number(b[0].split(':').at(-1))).flatMap(([,v])=>Array.isArray(v)?v:[]);delete s.plan.keyCount;}
  for(const [id,p]of Object.entries(s.parts)){p.row=row(p.row);for(const k of arrays)p.row[k]=chunks.filter(([key])=>key.startsWith(id+':'+k+':')).sort((a,b)=>Number(a[0].split(':').at(-1))-Number(b[0].split(':').at(-1))).flatMap(([,v])=>Array.isArray(v)?v:[]);}return s;}
 const api={KEY,empty,seed,plan,savePlan,validCustom,customLesson,saveCustomLesson,activity,recordActivity,flatten,fromRecords};root.HSKStudySyncCore=api;if(typeof module!=='undefined')module.exports=api;
