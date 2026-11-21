@@ -1,7 +1,6 @@
 {
-  "request": "Optimize AI lesson Firestore synchronization (<100 KB per design) and IndexedDB persistence; enforce generated Worker parity; introduce opt-in CSS layers for lesson custom and buttons. Preserve every unrelated page, route, menu and mobile dock.",
+  "request": "Introduce HSK speaking pronunciation shadowing and four-tone pitch assessment in Lessons, guided and custom lesson flows only. Keep all other routes, Home, global navigation and media layouts unchanged.",
   "excludedRoutes": [
-    "home",
     "lessons"
   ]
 }

@@ -2733,6 +2733,19 @@
         {"kind": "contains", "file": "src/modules/lessons/lessons.js", "value": "openCustom"},
         {"kind": "contains", "file": "src/modules/shell/home-overview.js", "value": "homeCustomLesson"}
       ]
+    },
+    {
+      "id": "active-speaking-pitch-contour",
+      "name": "Thu âm giọng nói, kiểm tra thanh điệu 4 thanh và shadowing trong bài học",
+      "checks": [
+        {"kind": "file", "file": "src/modules/speaking/pitch-core.js", "value": ""},
+        {"kind": "file", "file": "src/modules/speaking/speech-recorder.js", "value": ""},
+        {"kind": "file", "file": "src/modules/speaking/shadowing.js", "value": ""},
+        {"kind": "file", "file": "speaking.css", "value": ""},
+        {"kind": "contains", "file": "src/modules/lessons/lessons.js", "value": "HSKSpeaking"},
+        {"kind": "file", "file": "server/speaking.test.mjs", "value": ""},
+        {"kind": "file", "file": "tools/check-speaking-ui.cjs", "value": ""}
+      ]
     }
   ]
 }

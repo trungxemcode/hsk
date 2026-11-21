@@ -1318,7 +1318,20 @@
           el('p', `Từ ${idx + 1} / ${slice.length} · ${step.titleVi}${aiFocus ? ' (✨ AI chọn lọc & viết mẹo nhớ)' : ''}`, 'hint'),
           el('h4', w.han, 'lesson-han')
         );
-        if (window.HSKSpeech) card.append(window.HSKSpeech.button(w.han, 'Nghe ' + w.han));
+        if (window.HSKSpeech || window.HSKSpeaking) {
+          const speakRow = el('div', undefined, 'speaking-inline-actions');
+          if (window.HSKSpeech) speakRow.append(window.HSKSpeech.button(w.han, 'Nghe ' + w.han));
+          if (window.HSKSpeaking) {
+            speakRow.append(window.HSKSpeaking.button({
+              text: w.han,
+              pinyin: w.pin,
+              meaning: w.mean,
+              items: slice.map(item => ({ text: item.han, pinyin: item.pin, meaning: item.mean })),
+              index: idx
+            }));
+          }
+          card.append(speakRow);
+        }
         if (revealed) {
           card.append(el('p', w.pin || '', 'lesson-pinyin'), el('p', w.mean || '', 'lesson-meaning'));
           if (w.mnemonicVi) {
@@ -1330,7 +1343,12 @@
               el('strong', `💬 Ví dụ ứng dụng: ${w.exampleCn}`),
               el('p', `${w.examplePin || ''} — ${w.exampleVi || ''}`)
             );
-            if (window.HSKSpeech) exBox.append(window.HSKSpeech.button(w.exampleCn, 'Nghe ví dụ'));
+            if (window.HSKSpeech || window.HSKSpeaking) {
+              const exRow = el('div', undefined, 'speaking-inline-actions');
+              if (window.HSKSpeech) exRow.append(window.HSKSpeech.button(w.exampleCn, 'Nghe ví dụ'));
+              if (window.HSKSpeaking) exRow.append(window.HSKSpeaking.button({ text: w.exampleCn, pinyin: w.examplePin, meaning: w.exampleVi, compact: true }));
+              exBox.append(exRow);
+            }
             card.append(exBox);
           }
         }
@@ -1360,7 +1378,12 @@
         for (const ex of (g.examples || []).slice(0, 2)) {
           const line = el('p', `${ex.cn} — ${ex.pin} — ${ex.vi}`);
           box.append(line);
-          if (window.HSKSpeech) box.append(window.HSKSpeech.button(ex.cn, 'Nghe ví dụ'));
+          if (window.HSKSpeech || window.HSKSpeaking) {
+            const exRow = el('div', undefined, 'speaking-inline-actions');
+            if (window.HSKSpeech) exRow.append(window.HSKSpeech.button(ex.cn, 'Nghe ví dụ'));
+            if (window.HSKSpeaking) exRow.append(window.HSKSpeaking.button({ text: ex.cn, pinyin: ex.pin, meaning: ex.vi, compact: true }));
+            box.append(exRow);
+          }
         }
         if (g.error) box.append(el('p', 'Lưu ý: ' + g.error, 'lesson-error-note'));
         stageEl.append(box);
@@ -1387,9 +1410,19 @@
         if (window.HSKSpeech) {
           stageEl.append(window.HSKSpeech.button(lines.map(x => x.cn), 'Nghe toàn đoạn', true));
         }
-        for (const x of lines) {
+        for (const [li, x] of lines.entries()) {
           const p = el('p', (x.speaker ? x.speaker + ': ' : '') + x.cn);
           stageEl.append(p, el('small', `${x.pin} · ${x.vi}`, 'hint'));
+          if (window.HSKSpeaking) {
+            stageEl.append(window.HSKSpeaking.button({
+              text: x.cn,
+              pinyin: x.pin,
+              meaning: x.vi,
+              compact: true,
+              items: lines.map(it => ({ text: it.cn, pinyin: it.pin, meaning: it.vi })),
+              index: li
+            }));
+          }
         }
       }
       if (step.scenario) {

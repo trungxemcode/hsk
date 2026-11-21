@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "model": "sherpa-onnx-asr-zh-int8-runtime",
+  "cacheName": "hsk-speaking-asr-offline-v1",
+  "assets": {
+    "runtime": {
+      "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort.wasm.min.js",
+      "sha256": "65e09376df69107e881b5c34d2d37aed333a366b6d941073ec518168e269b87d",
+      "bytes": 48327,
+      "type": "text/javascript"
+    },
+    "module": {
+      "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort-wasm-simd-threaded.mjs",
+      "sha256": "30dd851d9c00622940500f71ddd2ff8820c5cb65270816080175b958705385a8",
+      "bytes": 20856,
+      "type": "text/javascript"
+    },
+    "wasm": {
+      "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort-wasm-simd-threaded.wasm",
+      "sha256": "71aef04959c5c1b6de461b6538e2058e306610034a85aad2742d0c7fd4533fe4",
+      "bytes": 11210254,
+      "type": "application/wasm"
+    }
+  },
+  "downloadBytes": 11279437
+}
