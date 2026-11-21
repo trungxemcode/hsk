@@ -116,7 +116,7 @@ html body.studio-enabled button.lesson-custom-toggle-btn,
 html body.studio-enabled button.lesson-custom-primary:not(.correct):not(.wrong):not(:disabled),
 .lesson-custom-primary{
   background:var(--button-active-bg,var(--accent))!important;
-  color:var(--button-active-text,#fff)!important;
+  color:var(--button-active-text)!important;
   border-color:var(--button-active-bg,var(--accent))!important;
   font-weight:600;
 }
@@ -221,10 +221,10 @@ html body.studio-enabled button.lesson-custom-secondary,
   transition:width .12s ease;
 }
 .custom-weight-seg.is-vocab{background:var(--accent);}
-.custom-weight-seg.is-grammar{background:var(--green,#16a34a);}
-.custom-weight-seg.is-reading{background:var(--blue,#2563eb);}
-.custom-weight-seg.is-listening{background:var(--amber,#d97706);}
-.custom-weight-seg.is-writing{background:var(--rose,#db2777);}
+.custom-weight-seg.is-grammar{background:var(--green);}
+.custom-weight-seg.is-reading{background:var(--blue);}
+.custom-weight-seg.is-listening{background:var(--rd-amber);}
+.custom-weight-seg.is-writing{background:var(--rd-rose);}
 .custom-weight-sliders{
   display:grid;
   gap:6px;
