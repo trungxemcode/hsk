@@ -21,7 +21,7 @@ if(approval){
  approvedBefore=path.join(require('node:os').tmpdir(),'hsk-approved-ui-'+process.pid);
  execFileSync('git',['-C',after,'worktree','add','--detach',approvedBefore,approval.approvedSHA],{encoding:'utf8'});
  assert.ok(approvedBefore,'Owner-approved design requires original base AND immutable approved checkpoint');
- assert.equal(approval.pullRequest,423,'Approval is strictly PR #423');
+ assert.equal(approval.pullRequest,449,'Approval is strictly PR #449');
  assert.equal(approval.baseSHA,baseSHA,'Approval base must be unchanged main merge base');
  assert.equal(approval.approvedSHA,execFileSync('git',['-C',approvedBefore,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),'Approved checkpoint must be exact');
  assert.equal(git('merge-base',baseSHA,approval.approvedSHA),baseSHA,'Approved design must descend from original baseline');

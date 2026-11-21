@@ -56,6 +56,15 @@ test('settings are private by verified UID and FOSTA handles chat without a shar
  assert.equal(calls[0].body.model,'gpt-6.1-sol');
  assert.equal(calls[0].body.stream,false);
  assert.equal(calls[0].redirect,'manual');
+ const upgraded=await request('alice',settingsPath,{op:'save',settings:{provider:'fosta',model:'gpt-6.2-sol',enabled:true}});
+ assert.equal(upgraded.status,200);
+ for(const [aiModel,model,effort] of [[undefined,'gpt-6.2-sol',undefined],['gpt-6.2-astra:xhigh','gpt-6.2-astra','xhigh']]){
+  const reply=await request('alice','/lesson-ask',{...question,aiProvider:'personal:fosta',aiModel});
+  assert.equal(reply.status,200);
+  assert.equal(calls.at(-1).headers.Authorization,'Bearer '+key);
+  assert.equal(calls.at(-1).body.model,model);
+  assert.equal(calls.at(-1).body.reasoning_effort,effort);
+ }
  // An enabled private key must never silently fall back to a shared provider
  // when the master encryption secret is unavailable after configuration.
  const secretBefore=env.AI_PERSONAL_KEY_SECRET,callsBefore=calls.length;
@@ -590,5 +599,5 @@ test('/ai-providers and /account-role return consistent personal provider capabi
  assert.equal(roleRes.status,200);
  const roleData=await roleRes.json();
  assert.deepEqual(roleData.providers,providersData);
- assert.deepEqual(providersData.personal.models,['gpt-6-luna','gpt-6-astra','gpt-6.1-sol']);
+ assert.deepEqual(providersData.personal.models,['gpt-6-luna','gpt-6-astra','gpt-6.1-sol','gpt-6.2-sol','gpt-6.2-astra']);
 });

@@ -1,5 +1,5 @@
 {
-  "request": "Upgrade the AI Lesson Architect and custom lesson experience on Home + Lessons, desktop and mobile.",
+  "request": "Optimize AI lesson Firestore synchronization (<100 KB per design) and IndexedDB persistence; enforce generated Worker parity; introduce opt-in CSS layers for lesson custom and buttons. Preserve every unrelated page, route, menu and mobile dock.",
   "excludedRoutes": [
     "home",
     "lessons"

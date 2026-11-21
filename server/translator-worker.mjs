@@ -1386,7 +1386,7 @@ QUY TẮC: Tối đa 80 cues theo đúng thứ tự thời gian; có thể gộp
     const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
     if(usePersonalAi&&!usePersonalCookie){
      headers['X-HSK-AI-Provider']=personalAi.provider;
-     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||/^(?:gpt-6-luna|gpt-6-astra|gpt-6\.1-sol)(?::(?:low|medium|high|xhigh))?$/i.test(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;reviewModel=activePersonalModel;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now,sentenceReview:isSentenceMode});}
+     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||/^(?:gpt-6-luna|gpt-6-astra|gpt-6\.1-sol|gpt-6\.2-(?:sol|astra))(?::(?:low|medium|high|xhigh))?$/i.test(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;reviewModel=activePersonalModel;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now,sentenceReview:isSentenceMode});}
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});

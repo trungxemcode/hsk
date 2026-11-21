@@ -118,7 +118,7 @@ test('global owner approval pins original main, approved design and every route 
  const src=fs.readFileSync(path.join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
  const workflow=fs.readFileSync('.github/workflows/ui-outside-scope.yml','utf8');
  const {needsVisualComparison,verifyVisual}=require('./ci-sharding-core.cjs');
- assert.equal(approval.pullRequest,423);assert.equal(approval.ownerApproved,true);
+ assert.equal(approval.pullRequest,449);assert.equal(approval.ownerApproved,true);
  assert.deepEqual(approval.routes,ROUTES);
  assert.deepEqual(approval.scenarios,['390-light','390-dark','1440-light','1440-dark']);
  assert.equal(needsVisualComparison(['.github/ui-global-approval.json']),true);
