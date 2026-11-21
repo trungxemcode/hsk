@@ -56,7 +56,7 @@ Các event cần tra tại nơi phát/lắng nghe: `hsk-lessons-ready`, `hsk-acc
 | Tính năng | File/thư mục cần xem đầu tiên | Không làm hỏng |
 |---|---|---|
 | Bài học | `src/modules/lessons/`, `lessons-data.json`, `lesson-content-hsk*.json` | ID bài/từ, ví dụ, bằng chứng hoàn thành, đọc và grading |
-| Luyện phát âm | `src/modules/speaking/` | Thu micro với mức khuếch đại tự động khi thiết bị hỗ trợ và thu dự phòng bằng `MediaRecorder` trên cùng luồng. Giảm tần số lấy mẫu trước khi phân tích cao độ. Đối chiếu từng chữ theo thứ tự với kết quả nhận diện đã chốt. Thiếu kết quả nhận diện thì chỉ hiển thị điểm thanh điệu. |
+| Luyện phát âm | `src/modules/speaking/` | Thu dự phòng bằng `MediaRecorder` và điều chỉnh ngưỡng giọng nhỏ theo nhiễu. Trên iPhone/iPad, ưu tiên để bộ nhận diện tự kết thúc, đóng phiên âm thanh trước khi mở lượt mới. Đối chiếu từng chữ theo thứ tự với kết quả nhận diện đã chốt. Điểm thanh điệu được tính riêng. |
 | Mục tiêu/lịch học | `src/modules/planner/`, placement | Mục tiêu học khác bộ lọc tìm từ; kết quả đánh giá không tự chứng minh thuộc từ |
 | Luyện tập/SRS | `app.js`, `src/modules/practice/` | Lịch đến hạn, điểm, lỗi sai, tập từ thật đang chọn |
 | Đề thi | `src/modules/exams/`, `content/drive-hsk/`, Drive audio/exam manifests | Câu hỏi, đáp án, ảnh/audio, thời gian và kết quả |

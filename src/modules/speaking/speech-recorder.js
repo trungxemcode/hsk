@@ -9,6 +9,7 @@
 
   let activeSession = null;
   let openingMicrophone = false;
+  let appleRecognitionAttempted = false;
   let mockProvider = null;
 
   function openDb() {
@@ -294,7 +295,7 @@
     return merged;
   }
 
-  function buildResult(pcm, sampleRate, durationMs, transcript, recognitionSupported, backupBlob = null) {
+  function buildResult(pcm, sampleRate, durationMs, transcript, recognitionSupported, backupBlob = null, provisionalTranscript = '') {
     const core = root.HSKPitchCore;
     const wavBytes = core ? core.encodeWav16k(pcm, sampleRate) : new Uint8Array(44);
     const wavBlob = backupBlob || new Blob([wavBytes], { type: 'audio/wav' });
@@ -305,6 +306,7 @@
       wavBlob,
       durationMs,
       transcript: String(transcript || '').trim(),
+      provisionalTranscript: provisionalTranscript.trim(),
       recognitionSupported: Boolean(recognitionSupported)
     };
   }
@@ -331,6 +333,26 @@
     } catch {
       return null;
     }
+  }
+
+  function playAppleRecordingCue() {
+    const synthesis = root.speechSynthesis;
+    if (!synthesis || !root.SpeechSynthesisUtterance) return Promise.resolve();
+    return new Promise(resolve => {
+      const cue = new root.SpeechSynthesisUtterance('Đọc nhé');
+      cue.lang = 'vi-VN';
+      const finish = () => {
+        clearTimeout(timeout);
+        cue.onend = cue.onerror = null;
+        resolve();
+      };
+      const timeout = setTimeout(() => {
+        finish();
+        try { synthesis.cancel(); } catch {}
+      }, 1600);
+      cue.onend = cue.onerror = finish;
+      try { synthesis.speak(cue); } catch { finish(); }
+    });
   }
 
   function isSupported() {
@@ -408,15 +430,22 @@
       throw Error('Trình duyệt hiện chưa hỗ trợ thu âm qua Web Audio API.');
     }
 
+    const { audioSession, userAgent = '', platform = '', maxTouchPoints = 0 } = root.navigator;
+    const isAppleMobile = /iPhone|iPad|iPod/i.test(userAgent) || (platform === 'MacIntel' && maxTouchPoints > 1);
+    const Recog = root.SpeechRecognition || root.webkitSpeechRecognition;
+    if (isAppleMobile && Recog) {
+      // Speak the cue before reopening the mic to re-prime WebKit between consecutive turns.
+      if (appleRecognitionAttempted) await playAppleRecordingCue();
+      appleRecognitionAttempted = true;
+    }
     const ctx = new AC();
-    const audioSession = root.navigator.audioSession;
     const previousAudioType = audioSession?.type;
     try { if (audioSession) audioSession.type = 'play-and-record'; } catch {}
     if (ctx.state === 'suspended' || ctx.state === 'interrupted') {
       void ctx.resume().catch(() => {});
     }
-    const releaseContext = () => {
-      try { ctx.close().catch(() => {}); } catch {}
+    const releaseContext = async () => {
+      try { await ctx.close(); } catch {}
       try { if (audioSession?.type === 'play-and-record') audioSession.type = previousAudioType; } catch {}
     };
     let stream;
@@ -430,7 +459,7 @@
         }
       });
     } catch (err) {
-      releaseContext();
+      await releaseContext();
       throw friendlyMicError(err);
     }
 
@@ -450,7 +479,7 @@
     } catch (err) {
       if (!backup) {
         stream.getTracks().forEach(track => track.stop());
-        releaseContext();
+        await releaseContext();
         throw friendlyMicError(err);
       }
     }
@@ -468,29 +497,28 @@
     let autoStopped = false;
 
     // Parallel browser ASR (Mandarin) when available; audio pitch evaluation stays 100% independent.
-    const Recog = root.SpeechRecognition || root.webkitSpeechRecognition;
     let recognition = null;
     let recognitionEnded = false;
     let resolveRecognitionStop;
-    let finalTranscript = '';
+    const finalSegments = [];
+    let interimTranscript = '';
     if (Recog) {
       try {
         recognition = new Recog();
         recognition.lang = opts.lang || 'zh-CN';
-        recognition.continuous = true;
+        recognition.continuous = !isAppleMobile;
         recognition.interimResults = true;
         recognition.maxAlternatives = 1;
         recognition.onresult = event => {
-          let fin = '';
-          let intr = '';
+          const interimSegments = [];
           for (let i = 0; i < event.results.length; i++) {
             const res = event.results[i];
             const txt = res[0]?.transcript || '';
-            if (res.isFinal) fin += txt;
-            else intr += txt;
+            if (res.isFinal) finalSegments[i] = txt;
+            else if (!finalSegments[i]) interimSegments.push(txt);
           }
-          finalTranscript = fin;
-          onTranscript((fin + intr).trim(), false);
+          interimTranscript = interimSegments.join('').trim();
+          onTranscript([...finalSegments, interimTranscript].join('').trim(), false);
         };
         recognition.onend = () => {
           recognitionEnded = true;
@@ -521,15 +549,16 @@
       if (clarity < 0.45) {
         noiseFloor = Math.min(0.08, noiseFloor * 0.75 + rms * 0.25);
       }
-      if (clarity >= 0.54 && rms > peakRms) peakRms = rms;
+      peakRms *= 0.93;
+      if (clarity >= 0.54) peakRms = Math.max(peakRms, rms);
 
-      const gate = Math.max(0.0018, noiseFloor * 1.6, peakRms * 0.16);
+      const gate = Math.max(0.0009, noiseFloor * 1.45, peakRms * 0.08);
       const isVoicedFrame = rms >= gate && clarity >= 0.56;
       if (isVoicedFrame) {
         hasSpoken = true;
         lastSpeechAt = now;
       }
-      onLevel(isVoicedFrame ? rms : Math.min(rms * 0.35, noiseFloor), elapsed);
+      onLevel(rms, elapsed);
       if (autoSilenceMs > 0 && !autoStopped && hasSpoken && elapsed >= 1500 && now - lastSpeechAt >= autoSilenceMs) {
         autoStopped = true;
         session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
@@ -540,13 +569,13 @@
       session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
     }, maxMs);
 
-    function teardownAudio() {
+    async function teardownAudio() {
       clearTimeout(maxTimer);
       try { processor?.disconnect(); } catch {}
       try { source?.disconnect(); } catch {}
       try { silentGain?.disconnect(); } catch {}
       try { stream.getTracks().forEach(t => t.stop()); } catch {}
-      releaseContext();
+      await releaseContext();
     }
 
     let resolveTeardown;
@@ -569,13 +598,16 @@
             const timeout = setTimeout(() => {
               resolveRecognitionStop?.();
               try { recognition.abort(); } catch {}
-            }, 1800);
+            }, isAppleMobile ? 2600 : 1800);
             resolveRecognitionStop = () => {
               clearTimeout(timeout);
               resolveRecognitionStop = undefined;
               resolve();
             };
-            try { recognition.stop(); } catch { resolveRecognitionStop?.(); }
+            // iOS can leave the next recognition deaf after manually stopping a live session.
+            if (!isAppleMobile) {
+              try { recognition.stop(); } catch { resolveRecognitionStop?.(); }
+            }
           }) : null;
         try {
           if (needsBackup) {
@@ -590,12 +622,12 @@
             }
           }
           await finalizeTranscript;
-          const transcript = finalTranscript.trim();
+          const transcript = finalSegments.join('').trim();
           if (transcript) onTranscript(transcript, true);
-          return buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition), backupBlob);
+          return buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition), backupBlob, interimTranscript);
         } finally {
-          if (recognition) recognition.onresult = null;
-          teardownAudio();
+          if (recognition) recognition.onresult = recognition.onend = null;
+          await Promise.all([teardownAudio(), backupResult]);
           if (activeSession === session) activeSession = null;
           resolveTeardown();
         }
@@ -603,10 +635,11 @@
       async cancel() {
         if (stopped) return teardownDone;
         stopped = true;
-        if (activeSession === session) activeSession = null;
-        void backup?.stop();
-        teardownAudio();
+        const backupResult = backup?.stop();
+        if (recognition) recognition.onresult = recognition.onend = null;
         try { recognition?.abort?.(); } catch {}
+        await Promise.all([teardownAudio(), backupResult]);
+        if (activeSession === session) activeSession = null;
         resolveTeardown();
       }
     };

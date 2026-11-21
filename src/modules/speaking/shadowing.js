@@ -466,8 +466,12 @@
       resultBox.append(scoreHead);
 
       if (recording.transcript) {
-        const matchNote = scoreResult.charMatch ? ` · Khớp chữ: ${scoreResult.charMatch.matchRatio}%` : '';
+        const confirmed = scoreResult.syllables.filter(s => s.pronunciationVerified === true).length;
+        const matchNote = scoreResult.charMatch ? ` · Xác nhận ${confirmed}/${scoreResult.syllables.length} chữ` : '';
         resultBox.append(el('p', `Nhận diện giọng nói: “${recording.transcript}”${matchNote}`, 'speaking-transcript'));
+      }
+      if (recording.provisionalTranscript) {
+        resultBox.append(el('p', `Nghe tạm: “${recording.provisionalTranscript}” · Chưa xác nhận chữ`, 'speaking-transcript'));
       }
 
       const needsFix = (scoreResult.syllables || []).filter(s =>
@@ -515,7 +519,7 @@
         : { hasVoice: false, overallScore: 0, syllables: [], summaryVi: 'Thiếu bộ phân tích cao độ.' };
 
       statusText.textContent = scoreResult.hasVoice
-        ? 'Đã chấm xong. Bấm "⇄ Đối chiếu" để nghe so mẫu, hoặc "›" sang từ kế tiếp.'
+        ? scoreResult.charMatch ? 'Đã chấm xong. Bấm “⇄ Đối chiếu” để nghe so mẫu.' : 'Đã thu giọng. Trình duyệt chưa chốt chữ để chấm phần từ.'
         : userAudioUrl ? 'Chưa tách được cao độ. Bấm “Giọng mình” để nghe lại.' : 'Micro chưa trả âm thanh. Bấm “Thu lại” để thử lại.';
       timerText.textContent = `${(recording.durationMs / 1000).toFixed(1)}s`;
       renderAnalysis(recording, scoreResult);
@@ -564,7 +568,7 @@
         meterTrack.hidden = false;
         const session = await recorder.start({
           maxMs: currentMaxMs,
-          autoSilenceMs: 950,
+          autoSilenceMs: 1250,
           lang: 'zh-CN',
           onLevel: (rms, elapsedMs) => {
             if (closed || activeTake !== take) return;

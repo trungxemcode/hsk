@@ -410,9 +410,9 @@
     const sortedRms = allRms.slice().sort((a, b) => a - b);
     const ambientFloor = percentile(sortedRms, 0.18);
     const rmsFloor = Math.max(
-      opts.minRms || 0.00035,
-      maxRms * (opts.rmsRatio || 0.06),
-      ambientFloor * 1.32 + Math.max(0, maxRms - ambientFloor) * 0.10
+      opts.minRms || 0.00022,
+      maxRms * (opts.rmsRatio || 0.035),
+      ambientFloor * 1.25 + Math.max(0, maxRms - ambientFloor) * 0.035
     );
     const nsdf = new Float64Array(tauMax + 2);
 
@@ -630,7 +630,7 @@
     let idx = 0;
     while (idx < track.length) {
       const f = track[idx];
-      if (!(f.f0 > 0 && (f.clarity || 0) >= 0.58 && (f.rms || 0) >= peakTrackRms * 0.08)) {
+      if (!(f.f0 > 0 && (f.clarity || 0) >= 0.58 && (f.rms || 0) >= peakTrackRms * 0.045)) {
         idx++;
         continue;
       }
@@ -643,7 +643,7 @@
       let lastValid = idx;
       while (idx < track.length) {
         const cur = track[idx];
-        if (cur.f0 > 0 && (cur.clarity || 0) >= 0.56 && (cur.rms || 0) >= peakTrackRms * 0.07) {
+        if (cur.f0 > 0 && (cur.clarity || 0) >= 0.56 && (cur.rms || 0) >= peakTrackRms * 0.035) {
           rmsSum += cur.rms || 0;
           if ((cur.rms || 0) > rmsMax) rmsMax = cur.rms || 0;
           claritySum += cur.clarity || 0;
@@ -658,7 +658,7 @@
           break;
         }
       }
-      if (voicedCount >= 2 && rmsMax >= peakTrackRms * 0.09 && claritySum / voicedCount >= 0.58) {
+      if (voicedCount >= 2 && rmsMax >= peakTrackRms * 0.055 && claritySum / voicedCount >= 0.58) {
         islands.push({
           start,
           end: lastValid + 1,
@@ -1152,8 +1152,9 @@
     });
     const peakSyllableRms = Math.max(0, ...segData.map(d => d.segMeanRms));
 
-    const rawAnalyses = segData.map(d =>
-      analyzeToneSegment(d.voiced, d.meta.spokenTone, d.meta.isFinal, d.meta.optionalNeutral, peakSyllableRms)
+    const rawAnalyses = segData.map((d, idx) =>
+      analyzeToneSegment(d.voiced, d.meta.spokenTone, d.meta.isFinal, d.meta.optionalNeutral,
+        charMatch?.perChar[idx] ? peakSyllableRms * 0.45 : peakSyllableRms)
     );
     const isStrongSpoken = segData.map((d, idx) => {
       const a = rawAnalyses[idx];
@@ -1202,12 +1203,12 @@
         const isSoftTone = meta.spokenTone === 5 || meta.optionalNeutral;
         const tailMinF = isSoftTone ? 3 : 4;
         const tailMinC = isSoftTone ? 0.64 : 0.62;
-        const tailMinRms = isSoftTone ? 0.10 : 0.14;
+        const tailMinRms = charMatched ? 0.045 : isSoftTone ? 0.10 : 0.14;
         const weakOrNoisyTail = (
           voicedCount < tailMinF
           || segMeanClarity < tailMinC
           || (peakSyllableRms > 0 && segMeanRms < peakSyllableRms * tailMinRms)
-          || score < 50
+          || (score < 50 && !charMatched)
         );
         if (weakOrNoisyTail) {
           pronunciationVerified = false;

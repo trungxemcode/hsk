@@ -352,7 +352,73 @@ test('recorder scores only final speech recognition results', async () => {
   recognition.onresult({ results: [result('没', true), result('关系', false)] });
   const recording = await session.stop();
   assert.equal(recording.transcript, '没');
+  assert.equal(recording.provisionalTranscript, '关系');
   assert.deepEqual(previews, [['没关系', false], ['没', true]]);
+});
+
+test('iPhone retries naturally finish recognition and clear the previous audio session', async () => {
+  const events = [];
+  let current;
+  const node = { connect() {}, disconnect() {} };
+  const window = {
+    navigator: {
+      userAgent: 'iPhone', audioSession: { type: 'auto' },
+      mediaDevices: { async getUserMedia() {
+        events.push('microphone');
+        return { getTracks: () => [{ stop() { events.push('track closed'); } }] };
+      } }
+    },
+    AudioContext: class {
+      createMediaStreamSource() { return node; }
+      createScriptProcessor() { return { ...node }; }
+      createGain() { return { ...node, gain: { value: 1 } }; }
+      async close() {
+        await new Promise(resolve => setTimeout(resolve, 5));
+        events.push('context closed');
+      }
+    },
+    SpeechSynthesisUtterance: class {},
+    speechSynthesis: { speak(cue) { events.push('cue'); setTimeout(() => cue.onend(), 0); } },
+    webkitSpeechRecognition: class {
+      start() {
+        assert.equal(this.continuous, false);
+        current = this;
+        events.push('recognition');
+      }
+      stop() { assert.fail('manual stop breaks consecutive iPhone recognition'); }
+      abort() { assert.fail('a completed recognition should never be aborted'); }
+    }
+  };
+  const source = readFileSync(new URL('../src/modules/speaking/speech-recorder.js', import.meta.url), 'utf8');
+  runInNewContext(source, { window, Blob, setTimeout, clearTimeout });
+  for (const [transcript, isFinal] of [['北', true], ['北方', true], ['方', false]]) {
+    const session = await window.HSKRecorder.start();
+    const result = session.stop();
+    setTimeout(() => {
+      current.onresult({ results: [Object.assign([{ transcript }], { isFinal })] });
+      current.onend();
+    }, 0);
+    const recording = await result;
+    assert.equal(recording.transcript, isFinal ? transcript : '');
+    assert.equal(recording.provisionalTranscript, isFinal ? '' : transcript);
+    assert.equal(window.navigator.audioSession.type, 'auto');
+  }
+  assert.deepEqual(events, [
+    'microphone', 'recognition', 'track closed', 'context closed',
+    'cue', 'microphone', 'recognition', 'track closed', 'context closed',
+    'cue', 'microphone', 'recognition', 'track closed', 'context closed'
+  ]);
+});
+
+test('keeps a quieter final syllable confirmed even when its tone is wrong', () => {
+  const samples = concatWithPause([
+    synthContour(172, 126, 105, 0.3),
+    synthContour(225, null, 130, 0.32).map(sample => sample * 0.11)
+  ], 0.1);
+  const result = pitchCore.segmentAndScore({ samples, text: '北方', pinyin: 'běi fāng', transcript: '北方' });
+  assert.deepEqual(result.syllables.map(s => s.pronunciationVerified), [true, true]);
+  assert.equal(result.syllables[1].detectedTone, 4);
+  assert.ok(result.syllables[1].score < 65);
 });
 
 test('finds and keeps both quiet syllables in a 48kHz recording of 北方', () => {
