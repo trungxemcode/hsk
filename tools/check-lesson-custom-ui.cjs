@@ -41,8 +41,14 @@ const http = require('node:http');
       await page.route('https://**/*', r => r.abort());
       await page.route('**/account-config.json', r => r.fulfill({ contentType: 'application/json', body: '{"enabled":false}' }));
       await page.route('**/translation-config.json', r => r.fulfill({ json: { enabled: true, endpoint: 'https://custom-test.invalid/translate' } }));
+      let forceProfileError = false;
+      let profileRequestCount = 0;
       await page.route('https://custom-test.invalid/custom-lesson-profile', async route => {
         const body = route.request().postDataJSON();
+        if (body.mode !== 'design') profileRequestCount++;
+        if (forceProfileError && body.mode !== 'design') {
+          return route.fulfill({ status: 503, json: { error: 'Lỗi AI thử nghiệm' } });
+        }
         if (body.mode === 'design') {
           return route.fulfill({
             json: {
@@ -177,6 +183,7 @@ const http = require('node:http');
         el.value = '5';
         el.dispatchEvent(new Event('input', { bubbles: true }));
       });
+      assert.match(await page.locator('#lessonCustomLiveSummary').innerText(), /5 ngày\/tuần/, 'Live summary must reflect weekly frequency changes');
       await page.locator('#lessonCustomStyleCard').waitFor({ state: 'visible' });
       await page.locator('#lessonCustomStyleRange').evaluate(el => {
         el.value = '0';
@@ -216,6 +223,19 @@ const http = require('node:http');
       await page.locator('#lessonCustomPreview').waitFor({ state: 'visible' });
       await page.locator('#lessonCustomApplyBtn').click();
       assert.equal(await page.evaluate(() => window.HSKStudyStore.customLesson?.minutes), 25);
+
+      // A failed AI turn must show a usable fallback profile without issuing a duplicate request.
+      await page.locator('#lessonCustomEditBtn').click();
+      await page.locator('#lessonCustomModeAi').click();
+      forceProfileError = true;
+      const requestsBeforeFallback = profileRequestCount;
+      await page.locator('#lessonCustomChatInput').fill('Tôi muốn học 40 phút mỗi ngày, ưu tiên đọc hiểu');
+      await page.locator('#lessonCustomChatSend').click();
+      await page.locator('#lessonCustomPreview').waitFor({ state: 'visible' });
+      assert.equal(profileRequestCount - requestsBeforeFallback, 1, 'AI failure must not trigger a duplicate profile request');
+      assert.match(await page.locator('#lessonCustomInterview').innerText(), /Lỗi AI thử nghiệm/);
+      await page.locator('#lessonCustomApplyBtn').click();
+      forceProfileError = false;
 
       // Verify template mode also works cleanly for switching back to focused_block / 30m
       await page.locator('#lessonCustomEditBtn').click();

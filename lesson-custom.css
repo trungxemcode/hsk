@@ -116,7 +116,7 @@ html body.studio-enabled button.lesson-custom-toggle-btn,
 html body.studio-enabled button.lesson-custom-primary:not(.correct):not(.wrong):not(:disabled),
 .lesson-custom-primary{
   background:var(--button-active-bg,var(--accent))!important;
-  color:var(--button-active-text,#fff)!important;
+  color:var(--button-active-text)!important;
   border-color:var(--button-active-bg,var(--accent))!important;
   font-weight:600;
 }
@@ -203,7 +203,7 @@ html body.studio-enabled button.custom-mode-btn:not(.correct):not(.wrong):not([a
   font-size:.84rem;
   font-weight:600;
   border:none!important;
-  background:transparent!important;
+  background:var(--palette-clear)!important;
   color:var(--muted,var(--ink-soft,var(--ink)))!important;
 }
 html body.studio-enabled button.custom-mode-btn:not(.correct):not(.wrong)[aria-pressed="true"],
@@ -214,7 +214,7 @@ html body.studio-enabled button.custom-mode-btn:not(.correct):not(.wrong)[aria-p
   font-weight:600;
   border:none!important;
   background:var(--button-active-bg,var(--accent))!important;
-  color:var(--button-active-text,#fff)!important;
+  color:var(--button-active-text)!important;
 }
 .custom-slider-grid{
   display:grid;
@@ -257,10 +257,10 @@ html body.studio-enabled button.custom-mode-btn:not(.correct):not(.wrong)[aria-p
   transition:width .12s ease;
 }
 .custom-weight-seg.is-vocab{background:var(--accent);}
-.custom-weight-seg.is-grammar{background:var(--green,#16a34a);}
-.custom-weight-seg.is-reading{background:var(--blue,#2563eb);}
-.custom-weight-seg.is-listening{background:var(--amber,#d97706);}
-.custom-weight-seg.is-writing{background:var(--rose,#db2777);}
+.custom-weight-seg.is-grammar{background:var(--green);}
+.custom-weight-seg.is-reading{background:var(--blue);}
+.custom-weight-seg.is-listening{background:var(--rd-amber);}
+.custom-weight-seg.is-writing{background:var(--rd-rose);}
 .custom-weight-sliders{
   display:grid;
   gap:6px;
@@ -315,9 +315,9 @@ html body.studio-enabled button.custom-slider-stop-btn,
   font-size:.76rem;
   font-weight:500;
   line-height:1.25;
-  border:1px solid transparent!important;
+  border:1px solid var(--palette-clear)!important;
   border-radius:var(--radius-btn)!important;
-  background:transparent!important;
+  background:var(--palette-clear)!important;
   color:var(--muted,var(--ink-soft,var(--ink)))!important;
   white-space:nowrap!important;
   overflow:hidden;
@@ -326,7 +326,7 @@ html body.studio-enabled button.custom-slider-stop-btn,
 html body.studio-enabled button.custom-slider-stop-btn.is-active,
 .custom-slider-stop-btn.is-active{
   background:color-mix(in srgb, var(--accent) 12%, var(--surface))!important;
-  border-color:color-mix(in srgb, var(--accent) 35%, transparent)!important;
+  border-color:color-mix(in srgb, var(--accent) 35%, var(--palette-clear))!important;
   color:var(--accent)!important;
   font-weight:700;
 }

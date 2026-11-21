@@ -562,7 +562,7 @@
       liveNoteEl.id = 'lessonCustomLiveSummary';
       const updateLiveNote = () => {
         const previewPlan = C.buildLessonPlan(buildTemplateProfile(hsk), lesson || { id: `standard-${hsk}-01`, number: 1, vi: `Bài 1`, words: [] });
-        liveNoteEl.textContent = `Dự kiến ${previewPlan.sessions.length} phiên: ${previewPlan.sessions.map(s => `${s.minutes}p`).join(' · ')} (${previewPlan.styleLabel})`;
+        liveNoteEl.textContent = `Dự kiến ${previewPlan.sessions.length} phiên: ${previewPlan.sessions.map(s => `${s.minutes}p`).join(' · ')} · ${sliderDays} ngày/tuần (${previewPlan.styleLabel})`;
       };
 
       const syncWeightsDom = () => {
@@ -653,6 +653,7 @@
       daysRange.oninput = () => {
         sliderDays = Number(daysRange.value);
         daysValEl.textContent = `${sliderDays} ngày / tuần`;
+        updateLiveNote();
       };
       daysCard.append(daysTop, daysRange, daysTicks);
       timeGrid.append(minCard, daysCard);
@@ -831,9 +832,11 @@
         rerender();
         return;
       }
-      if (turnRes.ready === true && turnRes.profile) {
+      if (turnRes.profile) {
         draftProfile = turnRes.profile;
-        interviewStatus = `✨ AI (${formatProviderName(turnRes.provider)}) đã thiết kế xong lộ trình bài học từ mô tả của bạn.`;
+        interviewStatus = turnRes.source === 'ai'
+          ? `✨ AI (${formatProviderName(turnRes.provider)}) đã thiết kế xong lộ trình bài học từ mô tả của bạn.`
+          : `⚠️ ${turnRes.warning || 'AI chưa phản hồi; đã tạo bản nháp để bạn không mất nội dung.'}`;
         chatHistory.push({ role: 'ai', text: turnRes.replyVi || draftProfile.summaryVi });
         rerender();
         return;
@@ -855,12 +858,14 @@
       input.id = 'lessonCustomChatInput';
       input.type = 'text';
       input.maxLength = 400;
-      input.placeholder = 'Mô tả tự do cho AI (VD: 60p/ngày, sáng tranh thủ 5-10p, tối 30p, 60% từ vựng)…';
-      input.disabled = interviewBusy;
+      input.placeholder = aiReady
+        ? 'Mô tả tự do cho AI (VD: 60p/ngày, sáng tranh thủ 5-10p, tối 30p, 60% từ vựng)…'
+        : 'Đăng nhập và bật mạng để sử dụng chat AI…';
+      input.disabled = interviewBusy || !aiReady;
       const sendBtn = el('button', interviewBusy ? 'AI đang xử lý…' : 'Gửi cho AI', 'lesson-custom-primary');
       sendBtn.id = 'lessonCustomChatSend';
       sendBtn.type = 'submit';
-      sendBtn.disabled = interviewBusy;
+      sendBtn.disabled = interviewBusy || !aiReady;
       compose.onsubmit = e => {
         e.preventDefault();
         const val = input.value.trim();
@@ -870,7 +875,7 @@
       panel.append(compose);
 
       const quickActions = el('div', undefined, 'lesson-custom-actions');
-      if (collectedAnswers.length > 0) {
+      if (collectedAnswers.length > 0 && aiReady) {
         const earlyBtn = btn('✨ Tạo lộ trình ngay từ mô tả trên', finalizeWithAi, 'lesson-custom-secondary');
         earlyBtn.id = 'lessonCustomEarlyAiBtn';
         quickActions.append(earlyBtn);

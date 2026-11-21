@@ -1,5 +1,5 @@
 {
-  "request": "Upgrade the AI Lesson Architect and custom lesson experience on Home + Lessons, desktop and mobile.",
+  "request": "Separate the custom HSK lesson template slider configurator from the real AI chat design mode on Home and Lessons, desktop and mobile. Preserve the existing lesson runner and all unrelated routes.",
   "excludedRoutes": [
     "home",
     "lessons"

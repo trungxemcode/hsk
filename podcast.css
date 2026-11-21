@@ -1593,7 +1593,7 @@ html[data-theme="dark"] body.studio-enabled #podcastPanel button.podcast-channel
     right: 10px;
     bottom: var(--podcast-mask-bottom, 10px);
     padding: 8px 12px;
-    border-radius: 12px;
+    border-radius:var(--radius-btn);
   }
   /* Structured mobile playback controls: transport row + clean 2-col utilities + full-width speed bar. */
   #podcastPanel .podcast-transport-row {
@@ -1634,7 +1634,7 @@ html[data-theme="dark"] body.studio-enabled #podcastPanel button.podcast-channel
     width: 100%;
     min-height: 36px !important;
     padding: 6px 8px !important;
-    border-radius: 8px !important;
+    border-radius:var(--radius-8px) !important;
     font-size: 12.5px !important;
   }
 }
