@@ -56,6 +56,7 @@ Các event cần tra tại nơi phát/lắng nghe: `hsk-lessons-ready`, `hsk-acc
 | Tính năng | File/thư mục cần xem đầu tiên | Không làm hỏng |
 |---|---|---|
 | Bài học | `src/modules/lessons/`, `lessons-data.json`, `lesson-content-hsk*.json` | ID bài/từ, ví dụ, bằng chứng hoàn thành, đọc và grading |
+| Luyện phát âm | `src/modules/speaking/` | Đối chiếu từng chữ theo thứ tự với kết quả nhận diện đã chốt. Thiếu kết quả nhận diện thì chỉ hiển thị điểm thanh điệu. |
 | Mục tiêu/lịch học | `src/modules/planner/`, placement | Mục tiêu học khác bộ lọc tìm từ; kết quả đánh giá không tự chứng minh thuộc từ |
 | Luyện tập/SRS | `app.js`, `src/modules/practice/` | Lịch đến hạn, điểm, lỗi sai, tập từ thật đang chọn |
 | Đề thi | `src/modules/exams/`, `content/drive-hsk/`, Drive audio/exam manifests | Câu hỏi, đáp án, ảnh/audio, thời gian và kết quả |

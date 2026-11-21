@@ -430,8 +430,9 @@
     // Parallel browser ASR (Mandarin) when available; audio pitch evaluation stays 100% independent.
     const Recog = root.SpeechRecognition || root.webkitSpeechRecognition;
     let recognition = null;
+    let recognitionEnded = false;
+    let resolveRecognitionStop;
     let finalTranscript = '';
-    let interimTranscript = '';
     if (Recog) {
       try {
         recognition = new Recog();
@@ -449,10 +450,12 @@
             else intr += txt;
           }
           finalTranscript = fin;
-          interimTranscript = intr;
-          onTranscript((finalTranscript + interimTranscript).trim(), false);
+          onTranscript((fin + intr).trim(), false);
         };
-        recognition.onerror = () => {};
+        recognition.onend = () => {
+          recognitionEnded = true;
+          resolveRecognitionStop?.();
+        };
         recognition.start();
       } catch {
         recognition = null;
@@ -526,20 +529,22 @@
         const sampleRate = ctx.sampleRate || 16000;
         teardownAudio();
 
-        if (recognition) {
+        if (recognition && !recognitionEnded) {
           await new Promise(resolve => {
-            let settled = false;
-            const finish = () => { if (!settled) { settled = true; resolve(); } };
-            const t = setTimeout(finish, 750);
-            recognition.onend = () => { clearTimeout(t); finish(); };
-            try { recognition.stop(); } catch { clearTimeout(t); finish(); }
+            const timeout = setTimeout(() => resolveRecognitionStop(), 750);
+            resolveRecognitionStop = () => {
+              clearTimeout(timeout);
+              resolveRecognitionStop = undefined;
+              resolve();
+            };
+            try { recognition.stop(); } catch { resolveRecognitionStop?.(); }
           });
         }
 
         const pcm = concatFloat32(chunks, totalSamples);
-        const transcript = (finalTranscript + interimTranscript).trim();
+        const transcript = finalTranscript.trim();
         if (transcript) onTranscript(transcript, true);
-        return buildResult(pcm, sampleRate, durationMs, transcript, Boolean(Recog));
+        return buildResult(pcm, sampleRate, durationMs, transcript, Boolean(recognition));
       },
       async cancel() {
         if (stopped) return;
