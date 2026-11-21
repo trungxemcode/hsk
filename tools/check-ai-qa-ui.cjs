@@ -568,13 +568,14 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   assert.equal(await page.locator('#personalAiModel').inputValue(),'muse-spark');
   assert.match(await page.locator('#personalAiEndpoint').textContent(),/token\/cookie phiên Muse AI.*hatch_sess/);
   await page.locator('#personalAiProvider').selectOption('fosta');
-  await page.locator('#personalAiFostaModel').selectOption('gpt-6-luna');
-  assert.equal(await page.locator('#personalAiFostaModel option').count(),3);
+  const fostaModels=await page.locator('#personalAiFostaModel option').evaluateAll(options=>options.map(option=>option.value));
+  assert.deepEqual(fostaModels.sort(),['gpt-6-astra','gpt-6-luna','gpt-6.1-sol','gpt-6.2-astra','gpt-6.2-sol']);
+  await page.locator('#personalAiFostaModel').selectOption('gpt-6.2-sol');
   await page.locator('#personalAiEnabled').check();
   await page.locator('#personalAiKey').fill('fake-test-key-only');
   await page.locator('#personalAiForm button[type=submit]').click();
   await page.getByText('Đang dùng API riêng cho Hỏi đáp AI.',{exact:true}).waitFor();
-  assert.deepEqual(savedSettings,{provider:'fosta',model:'gpt-6-luna',enabled:true,apiKey:'fake-test-key-only'});
+  assert.deepEqual(savedSettings,{provider:'fosta',model:'gpt-6.2-sol',enabled:true,apiKey:'fake-test-key-only'});
   assert.equal(await page.locator('#personalAiKey').inputValue(),'');
   assert.equal(await page.evaluate(()=>JSON.stringify(localStorage).includes('fake-test-key-only')),false);
   // Saving a provider makes it available but must not silently replace the
@@ -582,7 +583,7 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   // Fosta account before asserting its direct client-side request.
   await page.evaluate(()=>window.HSKAiProviderPicker.setSelectionFromSelect('personal:fosta'));
   await page.waitForFunction(()=>document.querySelector('#aiQaThinking')?.getAttribute('aria-label')==='Chọn mức độ mạnh hoặc model cho Fosta');
-  let directAuth=null,directModel=null;await page.route('https://codex.fosta.app/v1/chat/completions',r=>{directAuth=r.request().headers()['authorization'];directModel=r.request().postDataJSON().model;return r.fulfill({json:{choices:[{message:{content:JSON.stringify({answer:'Trả lời trực tiếp từ PWA',explanationStrategyUsed:'direct_explanation',suggestedQuestions:[],memoryCandidates:[]})}}]}});});const directReply=await page.evaluate(()=>window.HSKAiProviderPicker.tryDirectAsk({uid:'qa-user',aiProvider:'auto',aiModel:'gpt-6-astra',question:'Xin chào',hsk:3,lesson:{content:{}},history:[]}));assert.equal(directAuth,'Bearer fake-test-key-only');assert.equal(directModel,'gpt-6-astra');assert.equal(directReply.answer,'Trả lời trực tiếp từ PWA');assert.equal(await thinking.getAttribute('aria-label'),'Chọn mức độ mạnh hoặc model cho Fosta');
+  let directAuth=null,directModel=null;await page.route('https://codex.fosta.app/v1/chat/completions',r=>{directAuth=r.request().headers()['authorization'];directModel=r.request().postDataJSON().model;return r.fulfill({json:{choices:[{message:{content:JSON.stringify({answer:'Trả lời trực tiếp từ PWA',explanationStrategyUsed:'direct_explanation',suggestedQuestions:[],memoryCandidates:[]})}}]}});});const directReply=await page.evaluate(()=>window.HSKAiProviderPicker.tryDirectAsk({uid:'qa-user',aiProvider:'auto',aiModel:'gpt-6.2-astra',question:'Xin chào',hsk:3,lesson:{content:{}},history:[]}));assert.equal(directAuth,'Bearer fake-test-key-only');assert.equal(directModel,'gpt-6.2-astra');assert.equal(directReply.answer,'Trả lời trực tiếp từ PWA');assert.equal(await thinking.getAttribute('aria-label'),'Chọn mức độ mạnh hoặc model cho Fosta');
 assert.deepEqual(errors,[]);console.log('PASS AI Q&A',width,'realtime sync, chat layout, history menu, bounded snapshot, request, response');await page.close();
  }}finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});
