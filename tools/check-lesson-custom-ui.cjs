@@ -169,10 +169,19 @@ const http = require('node:http');
       assert.match(await page.locator('#lessonCustomPreview').innerText(), /Từ vựng:\s*50%/);
       await page.locator('#lessonCustomApplyBtn').click();
 
-      // Saved profile updates banner & study store
+      // Saved profile updates banner & study store (collapsed details by default, expandable on toggle)
       await page.locator('#lessonCustomStartSession').waitFor({ state: 'visible' });
       const savedMinutes = await page.evaluate(() => window.HSKStudyStore.customLesson?.minutes);
       assert.equal(savedMinutes, 25);
+      const detailsToggle = page.locator('#lessonCustomDetailsToggle');
+      const detailsBody = page.locator('#lessonCustomDetailsBody');
+      assert.equal(await detailsToggle.getAttribute('aria-expanded'), 'false');
+      assert.equal(await detailsBody.isVisible(), false);
+      await detailsToggle.click();
+      assert.equal(await detailsToggle.getAttribute('aria-expanded'), 'true');
+      assert.equal(await detailsBody.isVisible(), true);
+      await detailsToggle.click();
+      assert.equal(await detailsBody.isVisible(), false);
 
       // Editing an existing profile must reopen the interview, not only show the saved preview.
       await page.locator('#lessonCustomEditBtn').click();

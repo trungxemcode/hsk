@@ -17,6 +17,8 @@
   let interviewStatus = '';
   let activeSessionIndex = 0;
   let activeStepStage = null;
+  let bannerDetailsOpen = false;
+  let homeSessionsOpen = false;
   let lessonDesignBusy = false;
   let lessonDesignStatus = '';
   const autoDesignedLessons = new Set();
@@ -722,39 +724,52 @@
     const effectiveProfile = profile ? C.createProfile({ ...profile, hsk }) : null;
     const plan = effectiveProfile ? C.buildLessonPlan(effectiveProfile, lesson, progressRecord) : null;
 
-    const head = el('div', undefined, 'lesson-custom-head');
-    const copy = el('div');
-    copy.append(
-      el(
-        'p',
-        effectiveProfile?.aiGenerated
-          ? `Bài học tùy chỉnh · ✨ AI thiết kế (${formatProviderName(effectiveProfile.aiProvider)})`
-          : 'Bài học tùy chỉnh (AI cá nhân hóa)',
-        'lesson-eyebrow'
-      ),
-      el('h3', effectiveProfile ? `Cách học riêng của bạn · HSK ${hsk}` : 'Học HSK theo thời gian và kiểu bạn muốn'),
-      el(
-        'p',
-        effectiveProfile
-          ? effectiveProfile.summaryVi
-          : 'Trò chuyện với Gia sư AI về kỹ năng bạn muốn ưu tiên, số phút rảnh mỗi ngày và kiểu học (giờ trống, rảnh tay, một mạch…) để AI tự thiết kế lại giáo án & bài tập cho bạn.',
-        'hint'
-      )
-    );
-    head.append(copy);
-    box.append(head);
+    const eyebrowRow = el('div', undefined, 'lesson-custom-eyebrow-row');
+    const eyebrowText = effectiveProfile?.aiGenerated
+      ? `Tùy chỉnh · ✨ ${effectiveProfile.aiProvider && effectiveProfile.aiProvider !== 'custom' ? formatProviderName(effectiveProfile.aiProvider) : 'AI'}`
+      : 'Bài học tùy chỉnh (AI)';
+    eyebrowRow.append(el('p', eyebrowText, 'lesson-eyebrow'));
 
     if (plan) {
-      const badges = el('div', undefined, 'lesson-custom-badges');
-      if (plan.aiDesigned) {
-        badges.append(el('span', `✨ AI thiết kế (${formatProviderName(plan.aiProvider)})`, 'custom-ai-badge'));
-      }
-      badges.append(
-        el('span', `${plan.totalMinutes} phút / ngày`, 'lesson-custom-badge'),
-        el('span', plan.styleLabel, 'lesson-custom-badge'),
-        el('span', plan.goalLabel, 'lesson-custom-badge'),
-        el('span', `${plan.completedSteps}/${plan.totalSteps} bước hôm nay`, 'lesson-custom-badge')
+      const toggleBtn = btn(
+        bannerDetailsOpen ? 'Thu gọn ▴' : `Chi tiết (${plan.sessions.length} phiên) ▾`,
+        () => {
+          bannerDetailsOpen = !bannerDetailsOpen;
+          renderCatalogBanner(container, { hsk, lesson, progressRecord, onOpenRunner });
+        },
+        'lesson-custom-secondary lesson-custom-toggle-btn'
       );
+      toggleBtn.id = 'lessonCustomDetailsToggle';
+      toggleBtn.setAttribute('aria-expanded', bannerDetailsOpen ? 'true' : 'false');
+      toggleBtn.setAttribute('aria-controls', 'lessonCustomDetailsBody');
+      eyebrowRow.append(toggleBtn);
+    }
+
+    const head = el('div', undefined, 'lesson-custom-head');
+    const copy = el('div', undefined, 'lesson-custom-head-copy');
+    copy.append(
+      eyebrowRow,
+      el('h3', effectiveProfile ? `Cách học riêng · HSK ${hsk}` : 'Học HSK theo thời gian và kiểu bạn muốn')
+    );
+
+    if (plan) {
+      copy.append(
+        el(
+          'p',
+          `${plan.totalMinutes} phút/ngày · ${plan.styleLabel} · ${plan.goalLabel} · ${plan.completedSteps}/${plan.totalSteps} bước`,
+          'lesson-custom-meta'
+        )
+      );
+      head.append(copy);
+      box.append(head);
+
+      const details = el('div', undefined, 'lesson-custom-details');
+      details.id = 'lessonCustomDetailsBody';
+      details.hidden = !bannerDetailsOpen;
+
+      if (effectiveProfile?.summaryVi) {
+        details.append(el('p', effectiveProfile.summaryVi, 'hint'));
+      }
       const weightsRow = el('div', undefined, 'lesson-custom-weights');
       for (const s of C.SKILLS) {
         const pill = el('span', undefined, 'lesson-custom-weight-pill');
@@ -765,7 +780,18 @@
       for (const sess of plan.sessions) {
         sessionsPreview.append(el('span', `${sess.completed ? '✓ ' : ''}${sess.label}`));
       }
-      box.append(badges, weightsRow, sessionsPreview);
+      details.append(weightsRow, sessionsPreview);
+      box.append(details);
+    } else {
+      copy.append(
+        el(
+          'p',
+          'Trò chuyện ngắn với Gia sư AI về kỹ năng ưu tiên, số phút mỗi ngày và nhịp học để AI thiết kế giáo án riêng.',
+          'hint'
+        )
+      );
+      head.append(copy);
+      box.append(head);
     }
 
     const actions = el('div', undefined, 'lesson-custom-actions');
@@ -832,21 +858,34 @@
     const plan = profile ? C.buildLessonPlan(profile, { id: `standard-${targetHsk}-01`, number: 1, vi: `HSK ${targetHsk}`, words: [] }) : null;
 
     const head = el('div', undefined, 'lesson-custom-head');
-    const copy = el('div');
+    const copy = el('div', undefined, 'lesson-custom-head-copy');
     copy.append(
       el('h3', plan ? `Bài học của tôi hôm nay · HSK ${targetHsk}` : 'Bài học của tôi hôm nay'),
       el(
         'p',
         plan
-          ? `${plan.totalMinutes} phút/ngày · ${plan.styleLabel}${plan.aiDesigned ? ' · ✨ AI thiết kế' : ''}`
+          ? `${plan.totalMinutes} phút/ngày · ${plan.styleLabel}${plan.aiDesigned ? ' · ✨ AI' : ''}`
           : 'Để AI hỏi nhanh vài câu rồi tự thiết kế lại giáo án & bài tập HSK đúng kiểu của bạn.',
         'hint'
       )
     );
     head.append(copy);
+    if (plan && plan.sessions.length > 2) {
+      const homeToggle = btn(
+        homeSessionsOpen ? 'Thu gọn ▴' : `${plan.sessions.length} phiên ▾`,
+        () => {
+          homeSessionsOpen = !homeSessionsOpen;
+          renderHomeCard(container);
+        },
+        'lesson-custom-secondary lesson-custom-toggle-btn'
+      );
+      homeToggle.id = 'homeCustomSessionsToggle';
+      homeToggle.setAttribute('aria-expanded', homeSessionsOpen ? 'true' : 'false');
+      head.append(homeToggle);
+    }
     container.append(head);
 
-    if (plan) {
+    if (plan && (plan.sessions.length <= 2 || homeSessionsOpen)) {
       const row = el('div', undefined, 'overview-custom-sessions');
       for (const s of plan.sessions) {
         row.append(el('span', `${s.completed ? '✓ ' : ''}${s.label}`));
