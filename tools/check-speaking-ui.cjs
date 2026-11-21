@@ -2,6 +2,7 @@ const { chromium } = require('playwright');
 const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 
 const MIME = {
@@ -149,6 +150,60 @@ const MIME = {
 
       await modal.getByRole('button', { name: 'Đóng', exact: true }).click();
       await modal.waitFor({ state: 'detached' });
+
+      if (viewport.width === 390) {
+        const assetPayload = Buffer.from('mock-sherpa-asr-runtime-v1');
+        const assetSha = crypto.createHash('sha256').update(assetPayload).digest('hex');
+        const mockAssetUrl = 'https://cdn.jsdelivr.net/npm/hsk-mock-asr.js';
+        await page.route('**/speaking-asr-config.json', r => r.fulfill({
+          json: {
+            schema: 1,
+            cacheName: 'hsk-speaking-asr-offline-v1',
+            assets: { runtime: { url: mockAssetUrl, sha256: assetSha, bytes: assetPayload.length, type: 'text/javascript' } }
+          }
+        }));
+        await page.route(mockAssetUrl, r => r.fulfill({
+          status: 200,
+          headers: { 'Content-Type': 'text/javascript', 'Access-Control-Allow-Origin': '*' },
+          body: assetPayload
+        }));
+
+        await cardSpeakBtn.click();
+        await modal.waitFor();
+        const packBtn = modal.locator('.speaking-pack-btn');
+        await packBtn.waitFor();
+        await packBtn.click();
+        await page.waitForFunction(() => document.querySelector('.speaking-pack-btn')?.classList.contains('is-installed'));
+        assert.match(await packBtn.innerText(), /Xóa gói Offline/);
+
+        // Direct deletion in speaking modal
+        await packBtn.click();
+        await page.waitForFunction(() => !document.querySelector('.speaking-pack-btn')?.classList.contains('is-installed'));
+        assert.match(await packBtn.innerText(), /Tải gói nhận diện Offline/);
+
+        // Re-install and verify it also appears inside Settings -> Dọn dẹp dung lượng and deletes cleanly
+        await packBtn.click();
+        await page.waitForFunction(() => document.querySelector('.speaking-pack-btn')?.classList.contains('is-installed'));
+        await modal.getByRole('button', { name: 'Đóng', exact: true }).click();
+        await modal.waitFor({ state: 'detached' });
+
+        await page.evaluate(() => window.HSKStudio.navigate('account'));
+        await page.locator('#storageCleanupOpen').click();
+        await page.waitForFunction(() => !document.querySelector('#storageCleanupStatus')?.textContent?.includes('Đang tính'));
+        const cleanupCheck = page.getByRole('checkbox', { name: 'Gói nhận diện giọng nói tiếng Trung offline', exact: true });
+        await cleanupCheck.check();
+        await page.locator('#storageCleanupDelete').click();
+        await page.waitForFunction(() => document.querySelector('#storageCleanupStatus')?.textContent?.includes('Đã xóa 1 / 1'));
+        assert.equal(await page.evaluate(async () => (await window.HSKSpeakingOfflinePack.downloaded()).installed), false);
+        await page.locator('#storageCleanupClose').click();
+
+        // Navigate back to lessons for dialogue checks
+        await page.evaluate(async () => {
+          window.HSKStudio.navigate('lessons');
+          history.replaceState(null, '', '#lesson/standard-1-01');
+          await window.HSKLessonNav.open();
+        });
+      }
 
       // Dialogue heading compact button check
       await selectSection('reading', 'Đọc & hội thoại');

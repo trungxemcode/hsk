@@ -5,7 +5,8 @@ const packages=[
  ['hsk-handwriting-neural-ppocrv5-ort122-v1','Nhận dạng viết tay nâng cao','Cần tải lại để dùng nhận dạng nâng cao.'],
  ['hsk-writing-data-2','Dữ liệu nét chữ đã xem','Tải lại khi mở chữ tương ứng.'],
  ['hsk-open-dictionary-cedict-v1','Từ điển mở rộng đã tra','Cần mạng để tải lại các phần đã xóa.'],
- ['hsk-sentence-onnx-v1','Gói sửa câu tại máy (cũ)','Đã ngừng dùng. Có thể xóa để giải phóng dung lượng.']
+ ['hsk-sentence-onnx-v1','Gói sửa câu tại máy (cũ)','Đã ngừng dùng. Có thể xóa để giải phóng dung lượng.'],
+ ['hsk-speaking-asr-offline-v1','Gói nhận diện giọng nói tiếng Trung offline','Xóa gói nhận diện giọng nói tải thêm để giải phóng dung lượng.']
 ];
 const owner=()=>root.HSKAccountDashboard?.user?.uid||(()=>{try{return JSON.parse(localStorage.getItem('hsk-account-meta-v1'))?.uid||'guest';}catch{return 'guest';}})();
 const size=n=>n<1024?n+' B':(n<1048576?n/1024:n/1048576).toLocaleString('vi-VN',{maximumFractionDigits:2})+(n<1048576?' KiB':' MiB');
@@ -23,6 +24,7 @@ async function refresh(message=''){
  const token=++scan,uid=owner();q('storageCleanupAll').textContent='Chọn tất cả';scanOwner=uid;busy=true;rows=[];list.replaceChildren();status.textContent='Đang tính dung lượng tải thêm…';controls();const found=[],errors=[];
  try{
   if(root.HSKVoiceManager){try{const v=await root.HSKVoiceManager.downloaded();if(v.bytes>0){let name=v.selection.voiceId||'Gói giọng đã tải';try{const c=await root.HSKVoiceManager.catalog();name=c.voices.find(x=>x.id===v.selection.voiceId)?.label||name;}catch{}found.push({id:'voice',name:'Giọng tiếng Trung · '+name,bytes:v.bytes,revision:v.selection.revision,voiceURI:v.selection.source==='device'?v.selection.voiceURI:'',note:'Xóa gói giọng và bộ chạy tải thêm; trở về giọng thiết bị.'});}}catch{errors.push('gói giọng');}}
+  if(root.HSKRecorder?.usage){try{const rb=await root.HSKRecorder.usage();if(rb>0)found.push({id:'speaking-recordings',name:'Bản ghi âm luyện nói trên máy',bytes:rb,note:'Xóa các bản thu giọng nói đã lưu tạm trên thiết bị.'});}catch{errors.push('bản ghi âm');}}
   if(root.HSKLegacyMusicCleanup){try{for(const t of await root.HSKLegacyMusicCleanup.list(uid))found.push({id:'music:'+t.url,name:t.title,bytes:t.size,asset:t.asset,addedAt:t.addedAt,url:t.url,note:'Nhạc đã lưu từ bản cũ · '+(t.author||'Trên thiết bị')});}catch{errors.push('nhạc ngoại tuyến');}}
   if(root.caches){let names;try{names=await caches.keys();}catch{errors.push('gói bổ sung');names=[];}for(const [id,name,note] of packages){if(!names.includes(id))continue;try{const cache=await caches.open(id),keys=await cache.keys();let bytes=0;for(const key of keys){const r=await cache.match(key);if(r){if(r.type==='opaque')throw Error('Không đo được');bytes+=(await r.blob()).size;}}if(keys.length)found.push({id,name,note,bytes,keys});}catch{errors.push(name);}}}
   if(token!==scan)return;if(uid!==owner())return refresh('Tài khoản đã thay đổi.');
@@ -46,7 +48,7 @@ q('storageCleanupResetExtras').onclick=async()=>{
   return;
  }
  stopConfirm();
- if((selected.some(r=>r.id==='voice')&&root.HSKVoiceManager?.installing)||(selected.some(r=>r.id==='hsk-handwriting-neural-ppocrv5-ort122-v1')&&root.HSKHandwritingDownloads?.busy)){
+ if((selected.some(r=>r.id==='voice')&&root.HSKVoiceManager?.installing)||(selected.some(r=>r.id==='hsk-handwriting-neural-ppocrv5-ort122-v1')&&root.HSKHandwritingDownloads?.busy)||(selected.some(r=>r.id==='hsk-speaking-asr-offline-v1')&&root.HSKSpeakingOfflinePack?.busy)){
   transferStatus.textContent='Một gói đang chạy. Hãy dừng tác vụ tải trước khi xóa.';return;
  }
  const uid=owner();busy=true;controls();let count=0;const failures=[],cleared=[];
@@ -127,10 +129,11 @@ q('storageCleanupInstallExtras').onclick=async()=>{
 q('storageCleanupAll').onclick=()=>{const checked=!rows.every(r=>r.input.checked);for(const r of rows)r.input.checked=checked;q('storageCleanupAll').textContent=checked?'Bỏ chọn tất cả':'Chọn tất cả';controls();};
 q('storageCleanupDelete').onclick=async()=>{
  if(busy||scanOwner!==owner())return;const selected=rows.filter(r=>r.input.checked);if(!selected.length)return;
- if((selected.some(r=>r.id==='hsk-handwriting-neural-ppocrv5-ort122-v1')&&root.HSKHandwritingDownloads?.busy)||(selected.some(r=>r.url||r.id==='hsk-music-codec-v1')&&root.HSKMusic?.downloadingOffline)||(selected.some(r=>r.id==='voice')&&root.HSKVoiceManager?.installing)){status.textContent='Đang tải gói mới. Hãy đợi hoàn tất hoặc hủy tải rồi dọn dẹp.';return;}
+ if((selected.some(r=>r.id==='hsk-handwriting-neural-ppocrv5-ort122-v1')&&root.HSKHandwritingDownloads?.busy)||(selected.some(r=>r.url||r.id==='hsk-music-codec-v1')&&root.HSKMusic?.downloadingOffline)||(selected.some(r=>r.id==='voice')&&root.HSKVoiceManager?.installing)||(selected.some(r=>r.id==='hsk-speaking-asr-offline-v1')&&root.HSKSpeakingOfflinePack?.busy)){status.textContent='Đang tải gói mới. Hãy đợi hoàn tất hoặc hủy tải rồi dọn dẹp.';return;}
  busy=true;controls();status.textContent='Đang xóa '+selected.length+' mục…';let deleted=0;const errors=[],musicUrls=[],cleanedPackages=[],uid=scanOwner;
  for(const row of selected){if(uid!==owner()){errors.push('Tài khoản đã thay đổi');break;}try{
   if(row.id==='voice')await root.HSKVoiceManager.chooseDevice(row.voiceURI,row.revision);
+  else if(row.id==='speaking-recordings'){await root.HSKRecorder.clearRecordings();cleanedPackages.push('speaking-recordings');}
   else if(row.url){await root.HSKLegacyMusicCleanup.remove(uid,row.url,row);musicUrls.push(row.url);}
   else{if(!packages.some(p=>p[0]===row.id))throw Error('Gói không được phép dọn');const cache=await caches.open(row.id);for(const key of row.keys)await cache.delete(key);cleanedPackages.push(row.id);}
   deleted++;

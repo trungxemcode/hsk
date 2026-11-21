@@ -318,10 +318,25 @@
     font-size: .78rem;
     color: var(--muted, var(--ink-soft, var(--ink)));
   }
-  .speaking-clear-btn {
-    min-height: 34px;
-    padding: 5px 10px;
+  .speaking-foot-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .speaking-clear-btn,
+  .speaking-pack-btn {
+    min-height: 36px;
+    padding: 6px 10px;
     font-size: .78rem;
+  }
+  .speaking-pack-btn.is-installed {
+    border-color: color-mix(in srgb, #dc2626 35%, var(--line));
+    color: #b91c1c;
+    background: color-mix(in srgb, #dc2626 6%, var(--surface));
+  }
+  html[data-theme="dark"] .speaking-pack-btn.is-installed {
+    color: #fca5a5;
   }
 
   @media (max-width: 600px) {

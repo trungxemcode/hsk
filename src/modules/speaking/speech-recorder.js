@@ -95,7 +95,11 @@
       try {
         const tx = db.transaction(STORE_NAME, 'readwrite');
         tx.objectStore(STORE_NAME).clear();
-        tx.oncomplete = () => { db.close(); resolve(true); };
+        tx.oncomplete = () => {
+          db.close();
+          root.dispatchEvent?.(new CustomEvent('hsk-speaking-pack-changed'));
+          resolve(true);
+        };
         tx.onerror = () => { db.close(); resolve(false); };
       } catch {
         db.close();
@@ -103,6 +107,158 @@
       }
     });
   }
+
+  async function usage() {
+    const db = await openDb();
+    if (!db) return 0;
+    return new Promise(resolve => {
+      try {
+        const tx = db.transaction(STORE_NAME, 'readonly');
+        const req = tx.objectStore(STORE_NAME).getAll();
+        req.onsuccess = () => {
+          const rows = Array.isArray(req.result) ? req.result : [];
+          const total = rows.reduce((n, r) => n + (r.wavBlob?.size || 0), 0);
+          db.close();
+          resolve(total);
+        };
+        req.onerror = () => { db.close(); resolve(0); };
+      } catch {
+        db.close();
+        resolve(0);
+      }
+    });
+  }
+
+  const OFFLINE_ASR_CACHE = 'hsk-speaking-asr-offline-v1';
+  const ALLOWED_ASSET_HOSTS = ['huggingface.co', 'cdn.jsdelivr.net'];
+  let packAbort = null;
+
+  function emitPackChanged(detail = {}) {
+    try { root.dispatchEvent?.(new CustomEvent('hsk-speaking-pack-changed', { detail })); } catch {}
+  }
+
+  function createOfflinePackManager() {
+    async function downloaded() {
+      if (!root.caches) return { installed: false, bytes: 0, busy: Boolean(packAbort) };
+      try {
+        const has = await root.caches.has(OFFLINE_ASR_CACHE);
+        if (!has) return { installed: false, bytes: 0, busy: Boolean(packAbort) };
+        const cache = await root.caches.open(OFFLINE_ASR_CACHE);
+        const keys = await cache.keys();
+        let bytes = 0;
+        for (const req of keys) {
+          const res = await cache.match(req);
+          if (!res || res.type === 'opaque') continue;
+          const cl = Number(res.headers.get('Content-Length'));
+          if (Number.isFinite(cl) && cl > 0) bytes += cl;
+          else bytes += (await res.arrayBuffer()).byteLength;
+        }
+        return { installed: keys.length > 0 && bytes > 0, bytes, busy: Boolean(packAbort) };
+      } catch {
+        return { installed: false, bytes: 0, busy: Boolean(packAbort) };
+      }
+    }
+
+    function cancelInstall() {
+      if (packAbort) {
+        packAbort.abort();
+        packAbort = null;
+        emitPackChanged({ installing: false });
+      }
+    }
+
+    async function install(onProgress = () => {}) {
+      if (!root.caches || !root.crypto?.subtle) {
+        throw Error('Trình duyệt chưa hỗ trợ kho lưu trữ gói ngoại tuyến.');
+      }
+      cancelInstall();
+      const controller = new AbortController();
+      packAbort = controller;
+      emitPackChanged({ installing: true });
+
+      try {
+        const cfgRes = await fetch('./speaking-asr-config.json', { cache: 'no-store', signal: controller.signal });
+        if (!cfgRes.ok) throw Error('Không tải được cấu hình gói nhận diện offline.');
+        const cfg = await cfgRes.json();
+        const assets = Object.entries(cfg.assets || {});
+        if (!assets.length) throw Error('Cấu hình gói nhận diện trống.');
+
+        const cache = await root.caches.open(OFFLINE_ASR_CACHE);
+        const total = assets.reduce((sum, [, a]) => sum + Number(a?.bytes || 0), 0);
+        let loaded = 0;
+        onProgress({ phase: 'download', loaded: 0, total });
+
+        for (const [name, asset] of assets) {
+          if (controller.signal.aborted) throw new DOMException('Đã hủy.', 'AbortError');
+          if (!asset || typeof asset.url !== 'string' || !/^[a-f0-9]{64}$/.test(asset.sha256) || !Number.isSafeInteger(asset.bytes) || asset.bytes <= 0 || asset.bytes > 80 * 1024 * 1024) {
+            throw Error('Cấu hình tệp nhận diện không hợp lệ.');
+          }
+          const parsed = new URL(asset.url, root.location?.href || 'https://example.com');
+          if (parsed.protocol !== 'https:' || !ALLOWED_ASSET_HOSTS.includes(parsed.hostname)) {
+            throw Error('Nguồn tải gói nhận diện không nằm trong danh sách cho phép.');
+          }
+
+          let cachedBytes = null;
+          const hit = await cache.match(asset.url);
+          if (hit && hit.type !== 'opaque') {
+            const buf = await hit.arrayBuffer();
+            const digest = Array.from(new Uint8Array(await root.crypto.subtle.digest('SHA-256', buf)), b => b.toString(16).padStart(2, '0')).join('');
+            if (buf.byteLength === asset.bytes && digest === asset.sha256) cachedBytes = buf;
+            else await cache.delete(asset.url);
+          }
+
+          if (!cachedBytes) {
+            const res = await fetch(asset.url, { cache: 'no-store', signal: controller.signal });
+            if (!res.ok || res.type === 'opaque') throw Error(`Không tải được thành phần ${name}.`);
+            const buf = await res.arrayBuffer();
+            if (buf.byteLength !== asset.bytes) throw Error(`Dung lượng thành phần ${name} không khớp.`);
+            const digest = Array.from(new Uint8Array(await root.crypto.subtle.digest('SHA-256', buf)), b => b.toString(16).padStart(2, '0')).join('');
+            if (digest !== asset.sha256) throw Error(`Mã kiểm tra SHA-256 thành phần ${name} không khớp.`);
+            await cache.put(asset.url, new Response(buf, { headers: { 'Content-Type': asset.type || 'application/octet-stream', 'Content-Length': String(buf.byteLength) } }));
+          }
+
+          loaded += asset.bytes;
+          onProgress({ phase: 'download', loaded, total, name });
+        }
+
+        const status = await downloaded();
+        onProgress({ phase: 'done', loaded: total, total });
+        emitPackChanged({ installed: status.installed, bytes: status.bytes });
+        return status;
+      } finally {
+        if (packAbort === controller) packAbort = null;
+        emitPackChanged();
+      }
+    }
+
+    async function remove() {
+      cancelInstall();
+      if (!root.caches) return { installed: false, bytes: 0 };
+      try {
+        await root.caches.delete(OFFLINE_ASR_CACHE);
+      } catch {}
+      emitPackChanged({ installed: false, bytes: 0 });
+      return { installed: false, bytes: 0 };
+    }
+
+    return {
+      CACHE_NAME: OFFLINE_ASR_CACHE,
+      get busy() { return Boolean(packAbort); },
+      downloaded,
+      install,
+      cancelInstall,
+      remove
+    };
+  }
+
+  const offlinePack = createOfflinePackManager();
+  root.HSKSpeakingOfflinePack = offlinePack;
+  root.addEventListener?.('hsk-storage-cleaned', event => {
+    const pkgs = event?.detail?.packages;
+    if (Array.isArray(pkgs) && (pkgs.includes(OFFLINE_ASR_CACHE) || pkgs.includes('speaking-recordings'))) {
+      emitPackChanged();
+    }
+  });
 
   function silenceOtherAudio() {
     try { root.HSKSpeech?.stop?.(); } catch {}
@@ -353,6 +509,8 @@
     saveRecording,
     listRecordings,
     clearRecordings,
+    usage,
+    offlinePack,
     stopActive: () => activeSession?.cancel?.()
   };
 

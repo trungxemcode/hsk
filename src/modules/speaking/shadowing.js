@@ -233,9 +233,46 @@
     resultBox.hidden = true;
 
     const foot = el('div', undefined, 'speaking-modal-foot');
-    const footNote = el('span', 'Chấm thanh điệu chạy 100% trên thiết bị (0đ AI).');
+    const footNote = el('span', 'Chấm thanh điệu 0đ trên máy (MPM + DTW).');
+    const footActions = el('div', undefined, 'speaking-foot-actions');
+    const packBtn = el('button', '⬇ Tải gói nhận diện Offline', 'speaking-pack-btn');
     const clearBtn = el('button', 'Xóa bản ghi trên máy', 'speaking-clear-btn');
-    foot.append(footNote, clearBtn);
+    footActions.append(packBtn, clearBtn);
+    foot.append(footNote, footActions);
+
+    const formatBytes = n => {
+      if (!n || n <= 0) return '0 B';
+      if (n < 1048576) return `${Math.max(1, Math.round(n / 1024))} KiB`;
+      return `${(n / 1048576).toLocaleString('vi-VN', { maximumFractionDigits: 1 })} MiB`;
+    };
+
+    async function refreshStorageControls() {
+      if (closed) return;
+      const pack = recorder?.offlinePack;
+      if (pack) {
+        const info = await pack.downloaded().catch(() => ({ installed: false, bytes: 0, busy: false }));
+        if (closed) return;
+        if (info.busy) {
+          packBtn.textContent = 'Hủy tải gói Offline';
+          packBtn.classList.remove('is-installed');
+        } else if (info.installed) {
+          packBtn.textContent = `🗑 Xóa gói Offline (${formatBytes(info.bytes)})`;
+          packBtn.classList.add('is-installed');
+        } else {
+          packBtn.textContent = '⬇ Tải gói nhận diện Offline (~10,8 MiB)';
+          packBtn.classList.remove('is-installed');
+        }
+      } else {
+        packBtn.hidden = true;
+      }
+
+      if (recorder?.usage) {
+        const recBytes = await recorder.usage().catch(() => 0);
+        if (closed) return;
+        clearBtn.textContent = recBytes > 0 ? `Xóa bản ghi (${formatBytes(recBytes)})` : 'Chưa có bản ghi';
+        clearBtn.disabled = recBytes <= 0;
+      }
+    }
 
     dialog.append(head);
     if (syllables.length) dialog.append(sylStrip);
@@ -389,7 +426,9 @@
           transcript: recording.transcript,
           durationMs: recording.durationMs,
           wavBlob: recording.wavBlob
-        }).catch(() => {});
+        }).then(() => refreshStorageControls()).catch(() => {});
+      } else {
+        void refreshStorageControls();
       }
     }
 
@@ -493,10 +532,59 @@
       }
     };
 
+    packBtn.onclick = async () => {
+      const pack = recorder?.offlinePack;
+      if (!pack) return;
+      if (pack.busy) {
+        pack.cancelInstall();
+        statusText.textContent = 'Đã hủy tải gói nhận diện Offline.';
+        await refreshStorageControls();
+        return;
+      }
+      const info = await pack.downloaded().catch(() => ({ installed: false, bytes: 0 }));
+      if (info.installed) {
+        await pack.remove();
+        statusText.textContent = `Đã xóa gói nhận diện Offline (${formatBytes(info.bytes)}) để giải phóng dung lượng.`;
+        await refreshStorageControls();
+        return;
+      }
+      if (!root.navigator?.onLine) {
+        statusText.textContent = 'Cần kết nối mạng để tải gói nhận diện Offline lần đầu.';
+        return;
+      }
+      statusText.textContent = 'Đang tải gói nhận diện giọng nói Offline (~10,8 MiB)…';
+      try {
+        const res = await pack.install(p => {
+          if (closed) return;
+          if (p.total) {
+            const pct = Math.round((p.loaded / p.total) * 100);
+            packBtn.textContent = `Đang tải ${pct}% · Hủy`;
+          }
+        });
+        if (!closed) {
+          statusText.textContent = `Đã tải xong gói Offline (${formatBytes(res.bytes)}). Có thể xóa bất cứ lúc nào khi không dùng.`;
+          await refreshStorageControls();
+        }
+      } catch (err) {
+        if (!closed) {
+          statusText.textContent = err?.name === 'AbortError'
+            ? 'Đã hủy tải gói nhận diện Offline.'
+            : (err?.message || 'Không tải được gói nhận diện Offline.');
+          await refreshStorageControls();
+        }
+      }
+    };
+
     clearBtn.onclick = async () => {
       await recorder?.clearRecordings?.();
-      if (!closed) statusText.textContent = 'Đã xóa toàn bộ bản ghi âm giọng nói lưu trên máy.';
+      if (!closed) {
+        statusText.textContent = 'Đã xóa toàn bộ bản ghi âm giọng nói lưu trên máy.';
+        await refreshStorageControls();
+      }
     };
+
+    const onPackChanged = () => { void refreshStorageControls(); };
+    root.addEventListener('hsk-speaking-pack-changed', onPackChanged);
 
     function close() {
       if (closed) return;
@@ -512,6 +600,7 @@
       }
       root.removeEventListener('pagehide', close);
       root.removeEventListener('hashchange', close);
+      root.removeEventListener('hsk-speaking-pack-changed', onPackChanged);
       dialog.removeEventListener('cancel', onCancel);
       if (typeof dialog.close === 'function' && dialog.open) dialog.close();
       dialog.remove();
@@ -535,6 +624,7 @@
     else dialog.setAttribute('open', '');
 
     drawPitchChart(canvas, syllables, lastResult);
+    void refreshStorageControls();
     root.requestAnimationFrame?.(() => {
       if (!closed) drawPitchChart(canvas, syllables, lastResult);
     });

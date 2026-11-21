@@ -162,3 +162,28 @@ test('recognizes natural huyen-style Tone 4 drop with fade-out and half-third (2
   assert.ok(resT3Half.overallScore >= 78, `expected half-third T3 score >= 78, got ${resT3Half.overallScore}`);
   assert.match(resT3Half.syllables[0].feedbackVi, /nửa dấu 21/);
 });
+
+test('dtwDistance and MPM clarity support time-warped Tone 4 hold-then-drop contours', () => {
+  const straight = [4.7, 4.4, 4.1, 3.8, 3.5, 3.2, 2.9, 2.6, 2.2, 1.9, 1.6, 1.3];
+  const delayedDrop = [4.7, 4.7, 4.7, 4.6, 4.5, 4.1, 3.3, 2.5, 1.8, 1.5, 1.3, 1.3];
+  const dtw = pitchCore.dtwDistance(delayedDrop, straight, 4);
+  assert.ok(dtw < 0.25, `expected time-warped DTW distance < 0.25, got ${dtw}`);
+
+  const sr = 16000;
+  const n = Math.round(0.36 * sr);
+  const samples = new Float32Array(n);
+  let phase = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / (n - 1);
+    const hz = t < 0.4 ? 225 : 225 - 100 * Math.pow((t - 0.4) / 0.6, 0.9);
+    phase += (2 * Math.PI * hz) / sr;
+    samples[i] = 0.6 * Math.sin(phase) + 0.2 * Math.sin(2 * phase);
+  }
+  const padded = concatWithPause([samples], 0, sr);
+  const track = pitchCore.extractPitchTrack(padded, sr);
+  const voiced = track.filter(f => f.f0 > 0);
+  assert.ok(voiced.some(f => f.clarity >= 0.85), 'MPM should report high harmonic clarity >= 0.85');
+  const scored = pitchCore.segmentAndScore({ samples: padded, sampleRate: sr, text: '去', pinyin: 'qù' });
+  assert.equal(scored.syllables[0].detectedTone, 4);
+  assert.ok(scored.overallScore >= 80, `expected delayed-drop T4 score >= 80, got ${scored.overallScore}`);
+});

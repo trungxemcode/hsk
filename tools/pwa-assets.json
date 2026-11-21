@@ -31,6 +31,7 @@
     "src/modules/speaking/speech-recorder.js",
     "src/modules/speaking/shadowing.js",
     "speaking.css",
+    "speaking-asr-config.json",
     "style.css",
     "mobile-layout.css",
     "src/modules/shell/mobile-layout.js",

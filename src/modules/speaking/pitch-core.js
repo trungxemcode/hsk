@@ -157,18 +157,19 @@
   }
 
   /**
-   * Extracts F0 pitch track (Hz + Chao 1..5 normalized scale) using the YIN algorithm.
+   * Extracts F0 pitch track + Clarity using MPM (McLeod Pitch Method / NSDF + Key Maximum Picking)
+   * and normalizes to the Chao 5-level scale [1..5].
    */
   function extractPitchTrack(samples, sampleRate = 16000, opts = {}) {
     if (!samples || !samples.length || !sampleRate) return [];
     const minHz = opts.minHz || 66;
     const maxHz = opts.maxHz || 450;
-    const threshold = opts.yinThreshold || 0.2;
+    const clarityThreshold = opts.clarityThreshold || 0.70;
+    const kCutoff = opts.cutoff || 0.86;
     const hopSize = Math.max(32, Math.round(sampleRate * (opts.hopSec || 0.01)));
     const tauMin = Math.max(2, Math.floor(sampleRate / maxHz));
     const tauMax = Math.ceil(sampleRate / minHz);
-    const winSize = Math.max(Math.round(sampleRate * (opts.winSec || 0.04)), tauMax * 2 + 4);
-    const halfWin = Math.floor(winSize / 2);
+    const winSize = Math.max(Math.round(sampleRate * (opts.winSec || 0.044)), tauMax * 2 + 4);
 
     if (samples.length < winSize) return [];
 
@@ -183,63 +184,86 @@
       }
       const rms = Math.sqrt(sq / winSize);
       if (rms > maxRms) maxRms = rms;
-      rawFrames.push({ start, timeMs: Math.round(((start + halfWin) / sampleRate) * 1000), rms, f0: 0 });
+      rawFrames.push({
+        start,
+        timeMs: Math.round(((start + winSize / 2) / sampleRate) * 1000),
+        rms,
+        f0: 0,
+        clarity: 0
+      });
     }
 
     const rmsFloor = Math.max(opts.minRms || 0.0035, maxRms * (opts.rmsRatio || 0.055));
-    const diff = new Float64Array(tauMax + 2);
-    const cmndf = new Float64Array(tauMax + 2);
+    const nsdf = new Float64Array(tauMax + 2);
 
     for (const frame of rawFrames) {
       if (frame.rms < rmsFloor) continue;
       const s0 = frame.start;
-      diff[0] = 0;
-      cmndf[0] = 1;
-      let runningSum = 0;
+      for (let tau = 0; tau <= tauMax; tau++) {
+        let acf = 0;
+        let div = 0;
+        const limit = winSize - tau;
+        for (let j = 0; j < limit; j++) {
+          const a = samples[s0 + j];
+          const b = samples[s0 + j + tau];
+          acf += a * b;
+          div += a * a + b * b;
+        }
+        nsdf[tau] = div > 0 ? (2 * acf) / div : 0;
+      }
+
+      // Collect positive arch maxima after the first negative zero-crossing (McLeod Pitch Method).
+      const keyMaxima = [];
+      let crossedZero = false;
+      let curPeakTau = -1;
+      let curPeakVal = -Infinity;
 
       for (let tau = 1; tau <= tauMax; tau++) {
-        let sum = 0;
-        for (let j = 0; j < halfWin; j++) {
-          const d = samples[s0 + j] - samples[s0 + j + tau];
-          sum += d * d;
+        const val = nsdf[tau];
+        if (!crossedZero) {
+          if (val <= 0) crossedZero = true;
+          continue;
         }
-        diff[tau] = sum;
-        runningSum += sum;
-        cmndf[tau] = runningSum > 0 ? (sum * tau) / runningSum : 1;
+        if (val > 0) {
+          if (val > curPeakVal) {
+            curPeakVal = val;
+            curPeakTau = tau;
+          }
+        } else if (curPeakTau > 0) {
+          if (curPeakTau >= tauMin) keyMaxima.push({ tau: curPeakTau, val: curPeakVal });
+          curPeakTau = -1;
+          curPeakVal = -Infinity;
+        }
+      }
+      if (curPeakTau >= tauMin) {
+        keyMaxima.push({ tau: curPeakTau, val: curPeakVal });
       }
 
-      let pickedTau = -1;
-      for (let tau = tauMin; tau < tauMax; tau++) {
-        if (cmndf[tau] < threshold) {
-          while (tau + 1 <= tauMax && cmndf[tau + 1] < cmndf[tau]) tau++;
-          pickedTau = tau;
-          break;
+      if (!keyMaxima.length) continue;
+
+      let globalMax = 0;
+      for (const m of keyMaxima) {
+        if (m.val > globalMax) globalMax = m.val;
+      }
+      frame.clarity = Number(Math.max(0, Math.min(1, globalMax)).toFixed(3));
+      if (globalMax < clarityThreshold) continue;
+
+      const picked = keyMaxima.find(m => m.val >= globalMax * kCutoff && m.val >= clarityThreshold);
+      if (!picked) continue;
+
+      let betterTau = picked.tau;
+      if (picked.tau > 1 && picked.tau < tauMax) {
+        const a = nsdf[picked.tau - 1];
+        const b = nsdf[picked.tau];
+        const c = nsdf[picked.tau + 1];
+        const denom = 2 * (a - 2 * b + c);
+        if (Math.abs(denom) > 1e-9) {
+          const delta = (a - c) / denom;
+          if (Math.abs(delta) < 1) betterTau += delta;
         }
       }
-      if (pickedTau < 0) {
-        let bestVal = 0.42;
-        for (let tau = tauMin; tau <= tauMax; tau++) {
-          if (cmndf[tau] < bestVal) {
-            bestVal = cmndf[tau];
-            pickedTau = tau;
-          }
-        }
-      }
-      if (pickedTau >= tauMin && pickedTau <= tauMax) {
-        let betterTau = pickedTau;
-        if (pickedTau > 1 && pickedTau < tauMax) {
-          const a = cmndf[pickedTau - 1];
-          const b = cmndf[pickedTau];
-          const c = cmndf[pickedTau + 1];
-          const denom = 2 * (a - 2 * b + c);
-          if (Math.abs(denom) > 1e-9) {
-            const delta = (a - c) / denom;
-            if (Math.abs(delta) < 1) betterTau += delta;
-          }
-        }
-        const f0 = sampleRate / betterTau;
-        if (f0 >= minHz && f0 <= maxHz) frame.f0 = f0;
-      }
+      const f0 = sampleRate / betterTau;
+      if (f0 >= minHz && f0 <= maxHz) frame.f0 = f0;
     }
 
     const filteredF0 = medianFilter(rawFrames.map(f => f.f0), 3);
@@ -277,6 +301,44 @@
       }
     }
     return rawFrames;
+  }
+
+  /**
+   * Computes normalized Dynamic Time Warping (DTW) distance between two pitch sequences.
+   */
+  function dtwDistance(seqA, seqB, band = 4) {
+    const a = Array.isArray(seqA) ? seqA : [];
+    const b = Array.isArray(seqB) ? seqB : [];
+    const n = a.length;
+    const m = b.length;
+    if (!n || !m) return Infinity;
+
+    const w = Math.max(band, Math.abs(n - m));
+    const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(Infinity));
+    const steps = Array.from({ length: n + 1 }, () => Array(m + 1).fill(1));
+    dp[0][0] = 0;
+    steps[0][0] = 0;
+
+    for (let i = 1; i <= n; i++) {
+      const jStart = Math.max(1, i - w);
+      const jEnd = Math.min(m, i + w);
+      for (let j = jStart; j <= jEnd; j++) {
+        const cost = Math.abs(a[i - 1] - b[j - 1]);
+        let bestPrev = dp[i - 1][j - 1];
+        let bestSteps = steps[i - 1][j - 1];
+        if (dp[i - 1][j] < bestPrev) {
+          bestPrev = dp[i - 1][j];
+          bestSteps = steps[i - 1][j];
+        }
+        if (dp[i][j - 1] < bestPrev) {
+          bestPrev = dp[i][j - 1];
+          bestSteps = steps[i][j - 1];
+        }
+        dp[i][j] = cost + bestPrev;
+        steps[i][j] = bestSteps + 1;
+      }
+    }
+    return dp[n][m] / Math.max(1, steps[n][m]);
   }
 
   /**
@@ -481,17 +543,22 @@
     }
 
     const target = targetContour(spokenTone, 12, isFinal, usedHalfThird);
-
-    // Score shape match combining normalized template similarity and detected tone match.
     const userMean = chaoResampled.reduce((s, v) => s + v, 0) / 12;
-    const tgtMean = target.reduce((s, v) => s + v, 0) / 12;
-    let sqErr = 0;
-    for (let i = 0; i < 12; i++) {
-      const diff = (chaoResampled[i] - userMean) - (target[i] - tgtMean);
-      sqErr += diff * diff;
+    const userCentered = chaoResampled.map(v => v - userMean);
+
+    // Multi-template DTW shape comparison (time-warp tolerant for early/late tone drops).
+    const candidates = [target];
+    if (spokenTone === 4) {
+      // Also allow gentle dấu huyền (4 -> 2) fall template
+      candidates.push(Array.from({ length: 12 }, (_, i) => 4.2 - 2.3 * (i / 11)));
     }
-    const rmse = Math.sqrt(sqErr / 12);
-    let shapeScore = Math.round(Math.max(25, Math.min(100, 100 - rmse * 28)));
+    let minDtw = Infinity;
+    for (const tmpl of candidates) {
+      const tmplMean = tmpl.reduce((s, v) => s + v, 0) / tmpl.length;
+      const d = dtwDistance(userCentered, tmpl.map(v => v - tmplMean), 4);
+      if (d < minDtw) minDtw = d;
+    }
+    let shapeScore = Math.round(Math.max(25, Math.min(100, 100 - minDtw * 32)));
 
     if (spokenTone === 5) {
       detectedTone = 5;
@@ -722,6 +789,7 @@
     parseSyllables,
     extractPitchTrack,
     targetContour,
+    dtwDistance,
     segmentAndScore,
     encodeWav16k
   };
