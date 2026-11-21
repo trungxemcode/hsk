@@ -418,7 +418,7 @@ test('iPhone retries naturally finish recognition and clear the previous audio s
   ]);
 });
 
-test('mobile 2-character phrases confirm both syllables on interim/clipped ASR and consecutive same-word retries', () => {
+test('mobile 2-character phrases do not confuse tone matching with ASR recognition on retries', () => {
   const sr = 16000;
   const bei = synthContour(175, 128, 170, 0.28, sr); // 北 T3
   const fang = synthContour(225, null, 225, 0.28, sr); // 方 T1
@@ -444,8 +444,8 @@ test('mobile 2-character phrases confirm both syllables on interim/clipped ASR a
     pinyin: 'běi fāng',
     transcript: '北'
   });
-  assert.deepEqual(resClipped.syllables.map(s => s.pronunciationVerified), [true, true]);
-  assert.ok(resClipped.overallScore >= 80, `Expected clipped-ASR 北方 >= 80, got ${resClipped.overallScore}`);
+  assert.deepEqual(resClipped.syllables.map(s => s.pronunciationVerified), [true, false]);
+  assert.ok(resClipped.overallScore < 70, 'Partial ASR cannot confirm a missing second character from tones alone');
 
   // 3) Consecutive take on same word when mobile cloud ASR throttles (empty transcript) but both syllables are clearly spoken
   const resRetry = pitchCore.segmentAndScore({
@@ -454,10 +454,11 @@ test('mobile 2-character phrases confirm both syllables on interim/clipped ASR a
     text: '北方',
     pinyin: 'běi fāng',
     transcript: '',
-    retryFallbackTranscript: '北方'
+    recognitionSupported: false
   });
-  assert.deepEqual(resRetry.syllables.map(s => s.pronunciationVerified), [true, true]);
-  assert.ok(resRetry.overallScore >= 80, `Expected retry 北方 >= 80, got ${resRetry.overallScore}`);
+  assert.equal(resRetry.charMatch, null, 'A retry with no ASR must not invent a recognized word');
+  assert.deepEqual(resRetry.syllables.map(s => s.pronunciationVerified), [null, null]);
+  assert.ok(resRetry.toneScore >= 80, `Expected retry tonal contour >= 80, got ${resRetry.toneScore}`);
 });
 
 test('installed Mandarin model handles consecutive phone recordings without browser recognition', async () => {
@@ -641,7 +642,7 @@ test('passes 对不起 with soft brief middle 不 and full 6-char sentence even 
   assert.ok(resSentence.overallScore >= 75, `Expected sentence overall >= 75, got ${resSentence.overallScore}`);
 });
 
-test('iPhone avoids concurrent webkitSpeechRecognition mic conflict, opens AudioContext after getUserMedia, and verifies consecutive 北方 takes', async () => {
+test('iPhone records consecutive 北方 takes without simultaneous mic conflict or invented text recognition', async () => {
   const order = [];
   let processor;
   const sr = 16000;
@@ -718,7 +719,8 @@ test('iPhone avoids concurrent webkitSpeechRecognition mic conflict, opens Audio
       recognitionSupported: Boolean(rec.recognitionSupported)
     });
     assert.equal(scored.hasVoice, true);
-    assert.deepEqual(scored.syllables.map(s => s.pronunciationVerified), [true, true]);
-    assert.ok(scored.overallScore >= 80, `Take ${take} expected overall >= 80, got ${scored.overallScore}`);
+    assert.equal(scored.charMatch, null, 'No recognizer means no verified Chinese characters');
+    assert.deepEqual(scored.syllables.map(s => s.pronunciationVerified), [null, null]);
+    assert.ok(scored.toneScore >= 80, `Take ${take} expected tone score >= 80, got ${scored.toneScore}`);
   }
 });
