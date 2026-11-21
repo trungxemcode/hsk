@@ -234,3 +234,48 @@ test('noise-robust band-pass filtering, adaptive SNR gate and homophone ASR matc
   assert.ok(res.charMatch.matchRatio >= 90, `Expected homophone ASR match >= 90%, got ${res.charMatch.matchRatio}`);
   assert.ok(res.overallScore >= 78, `Expected noisy room overall score >= 78, got ${res.overallScore}`);
 });
+
+test('rejects partial utterance followed by laughter/wheezing instead of scoring fake passes', () => {
+  const sr = 16000;
+  // Learner says ONLY the 1st syllable (没 -> T2) clearly, then laughs/wheezes (noisy unpitched bursts)
+  const mei = synthContour(145, null, 225, 0.24, sr);
+  const laugh = new Float32Array(Math.round(0.55 * sr));
+  let seed = 42;
+  for (let i = 0; i < laugh.length; i++) {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    const gate = (Math.floor(i / (0.12 * sr)) % 2 === 0) ? 0.12 : 0.01;
+    laugh[i] = ((seed / 0xffffffff) - 0.5) * gate;
+  }
+  const combined = concatWithPause([mei, laugh], 0.08, sr);
+
+  // Case 1: Only syllable 1 spoken, laugh after -> syllables 2 & 3 MUST score < 40%
+  const resNoAsr = pitchCore.segmentAndScore({
+    samples: combined,
+    sampleRate: sr,
+    text: '没关系',
+    pinyin: 'méi guān xi'
+  });
+  assert.ok(resNoAsr.syllables[0].score >= 70, 'First clearly spoken syllable passes');
+  assert.ok(resNoAsr.syllables[1].score < 40, `Expected missing/laugh 关 < 40%, got ${resNoAsr.syllables[1].score}`);
+  assert.ok(resNoAsr.syllables[2].score < 40, `Expected missing/laugh 系 < 40%, got ${resNoAsr.syllables[2].score}`);
+
+  // Case 2: Browser ASR only recognized "没" out of "没关系" -> locks 关 & 系 even if pitch slices exist
+  const fullAudio = concatWithPause([
+    synthContour(145, null, 225, 0.25, sr),
+    synthContour(215, null, 215, 0.25, sr),
+    synthContour(175, null, 155, 0.2, sr)
+  ], 0.06, sr);
+  const resPartialAsr = pitchCore.segmentAndScore({
+    samples: fullAudio,
+    sampleRate: sr,
+    text: '没关系',
+    pinyin: 'méi guān xi',
+    transcript: '没',
+    recognitionSupported: true
+  });
+  assert.equal(resPartialAsr.syllables[0].pronunciationVerified, true);
+  assert.equal(resPartialAsr.syllables[1].pronunciationVerified, false);
+  assert.equal(resPartialAsr.syllables[2].pronunciationVerified, false);
+  assert.ok(resPartialAsr.syllables[1].score <= 38);
+  assert.ok(resPartialAsr.syllables[2].score <= 38);
+});
