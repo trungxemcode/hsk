@@ -1,0 +1,336 @@
+/* Active speaking, shadowing and tone pitch contour UI.
+   Scoped in @layer hsk-modules (zero !important; buttons opt in via data-ui-owned). */
+@layer hsk-modules {
+  .speaking-practice-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 7px 12px;
+    border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--line));
+    border-radius: var(--radius-btn);
+    background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+    color: var(--accent-ink, var(--accent));
+    font-size: .86rem;
+    font-weight: 600;
+    line-height: 1.25;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .speaking-practice-btn.is-compact {
+    min-height: 44px;
+    padding: 6px 10px;
+    font-size: .82rem;
+  }
+  .speaking-practice-btn svg,
+  .speaking-modal button svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  @media (hover: hover) {
+    .speaking-practice-btn:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  }
+  .speaking-inline-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-block: 6px;
+  }
+
+  .speaking-modal {
+    box-sizing: border-box;
+    width: min(680px, calc(100vw - 24px));
+    max-height: calc(100dvh - 32px);
+    overflow: auto;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-dialog, var(--radius-card));
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+  }
+  .speaking-modal[open] {
+    display: grid;
+    gap: 14px;
+  }
+  .speaking-modal::backdrop {
+    background: rgb(15 23 42 / 56%);
+    backdrop-filter: blur(2px);
+  }
+  .speaking-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .speaking-eyebrow {
+    margin: 0 0 2px;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .speaking-target-han {
+    margin: 0;
+    font-size: clamp(1.5rem, 4vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+  .speaking-target-mean {
+    margin: 4px 0 0;
+    font-size: .92rem;
+    line-height: 1.45;
+    color: var(--muted, var(--ink-soft, var(--ink)));
+  }
+  .speaking-close-btn {
+    min-height: 40px;
+    padding: 6px 12px;
+    font-size: .86rem;
+    flex: 0 0 auto;
+  }
+
+  .speaking-syllable-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .speaking-syl-chip {
+    display: grid;
+    gap: 2px;
+    padding: 6px 10px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--line);
+    background: var(--paper);
+    min-width: 66px;
+  }
+  .speaking-syl-chip strong {
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+  .speaking-syl-chip small {
+    font-size: .78rem;
+    color: var(--muted, var(--ink-soft, var(--ink)));
+  }
+  .speaking-syl-chip.has-sandhi {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    background: color-mix(in srgb, var(--accent) 7%, var(--paper));
+  }
+  .speaking-sandhi-note {
+    margin: 0;
+    padding: 8px 11px;
+    border-radius: var(--radius-btn);
+    border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+    background: color-mix(in srgb, var(--accent) 6%, var(--paper));
+    font-size: .84rem;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .speaking-controls {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .speaking-controls button {
+    min-height: 44px;
+    padding: 8px 10px;
+    font-size: .86rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .speaking-record-btn {
+    background: var(--button-active-bg, var(--accent));
+    color: var(--button-active-text, #fff);
+    border-color: var(--button-active-bg, var(--accent));
+  }
+  .speaking-record-btn.is-recording {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #fff;
+  }
+  @media (hover: hover) {
+    .speaking-record-btn:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--button-active-bg, var(--accent)) 88%, #000);
+      border-color: color-mix(in srgb, var(--button-active-bg, var(--accent)) 88%, #000);
+      color: var(--button-active-text, #fff);
+    }
+    .speaking-record-btn.is-recording:hover:not(:disabled) {
+      background: #b91c1c;
+      border-color: #b91c1c;
+      color: #fff;
+    }
+  }
+
+  .speaking-live-bar {
+    display: grid;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .speaking-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: .86rem;
+    color: var(--ink);
+  }
+  .speaking-timer {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .speaking-meter-track {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .speaking-meter-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    transition: width .08s linear;
+  }
+
+  .speaking-chart-wrap {
+    padding: 10px 12px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--line);
+    background: var(--paper);
+    display: grid;
+    gap: 8px;
+  }
+  .speaking-chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: .78rem;
+    color: var(--muted, var(--ink-soft, var(--ink)));
+  }
+  .speaking-pitch-canvas {
+    display: block;
+    width: 100%;
+    height: 176px;
+    border-radius: var(--radius-btn);
+    background: var(--surface);
+  }
+
+  .speaking-result-box {
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .speaking-score-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .speaking-score-pill {
+    padding: 4px 11px;
+    border-radius: var(--radius-pill);
+    font-size: .88rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  }
+  .speaking-score-pill.is-good {
+    background: color-mix(in srgb, #16a34a 15%, var(--surface));
+    color: #15803d;
+    border-color: color-mix(in srgb, #16a34a 35%, var(--line));
+  }
+  .speaking-score-pill.is-warn {
+    background: color-mix(in srgb, #d97706 16%, var(--surface));
+    color: #b45309;
+    border-color: color-mix(in srgb, #d97706 38%, var(--line));
+  }
+  html[data-theme="dark"] .speaking-score-pill.is-good {
+    color: #86efac;
+  }
+  html[data-theme="dark"] .speaking-score-pill.is-warn {
+    color: #fcd34d;
+  }
+
+  .speaking-transcript {
+    margin: 0;
+    font-size: .88rem;
+    line-height: 1.45;
+  }
+  .speaking-feedback-list {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .speaking-feedback-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-size: .84rem;
+  }
+  .speaking-feedback-item.is-ok {
+    border-color: color-mix(in srgb, #16a34a 40%, var(--line));
+  }
+  .speaking-feedback-item.is-warn {
+    border-color: color-mix(in srgb, #d97706 45%, var(--line));
+  }
+  .speaking-modal-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: .78rem;
+    color: var(--muted, var(--ink-soft, var(--ink)));
+  }
+  .speaking-clear-btn {
+    min-height: 34px;
+    padding: 5px 10px;
+    font-size: .78rem;
+  }
+
+  @media (max-width: 600px) {
+    .speaking-modal {
+      width: calc(100vw - 16px);
+      padding: 14px;
+    }
+    .speaking-controls {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

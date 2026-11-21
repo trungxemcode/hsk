@@ -638,7 +638,7 @@ body.show-translator .workspace>section:not(#translatorPanel){display:none!impor
  .field-row{flex-direction:row;align-items:center;gap:10px}
  .field-row input,.field-row select,.field-row button{width:auto!important}
  input,select,textarea{min-height:0;border-radius:var(--radius-8px);font-size:inherit}
- button{min-height:0;border-radius:var(--radius-8px);touch-action:auto}
+ button:where(:not([data-ui-owned]):not(.ui-btn)){min-height:0;border-radius:var(--radius-8px);touch-action:auto}
  .card{width:min(380px,100%);height:300px;margin-bottom:24px}
  .buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:12px}
  .buttons button{grid-column:auto;min-height:40px;padding:8px 14px;font-size:14px}
