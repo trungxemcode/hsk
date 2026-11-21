@@ -377,8 +377,8 @@
     try {
       stream = await root.navigator.mediaDevices.getUserMedia({
         audio: {
-          echoCancellation: false,
-          noiseSuppression: false,
+          echoCancellation: true,
+          noiseSuppression: true,
           autoGainControl: false,
           channelCount: 1
         }
@@ -396,6 +396,25 @@
     const processor = ctx.createScriptProcessor(2048, 1, 1);
     const silentGain = ctx.createGain();
     silentGain.gain.value = 0;
+
+    // Vocal band-pass (72 Hz .. 3600 Hz) strips fan/AC hum and high-frequency room hiss before MPM/VAD.
+    let hpFilter = null;
+    let lpFilter = null;
+    if (typeof ctx.createBiquadFilter === 'function') {
+      try {
+        hpFilter = ctx.createBiquadFilter();
+        hpFilter.type = 'highpass';
+        hpFilter.frequency.value = 72;
+        hpFilter.Q.value = 0.707;
+        lpFilter = ctx.createBiquadFilter();
+        lpFilter.type = 'lowpass';
+        lpFilter.frequency.value = 3600;
+        lpFilter.Q.value = 0.707;
+      } catch {
+        hpFilter = null;
+        lpFilter = null;
+      }
+    }
 
     const chunks = [];
     let totalSamples = 0;
@@ -452,21 +471,34 @@
       const rms = Math.sqrt(sq / copy.length);
       const now = Date.now();
       const elapsed = now - startedAt;
-      if (elapsed < 220 && rms > 0) noiseFloor = Math.min(0.03, noiseFloor * 0.7 + rms * 0.3);
-      if (rms > peakRms) peakRms = rms;
-      const gate = Math.max(0.014, noiseFloor * 2.1, peakRms * 0.16);
-      if (rms >= gate) {
+
+      const core = root.HSKPitchCore;
+      const clarity = core?.quickVoicedClarity ? core.quickVoicedClarity(copy, ctx.sampleRate || 16000) : 1;
+      if ((elapsed < 250 || clarity < 0.45) && rms > 0) {
+        noiseFloor = Math.min(0.08, noiseFloor * 0.75 + rms * 0.25);
+      }
+      if (clarity >= 0.54 && rms > peakRms) peakRms = rms;
+
+      const gate = Math.max(0.014, noiseFloor * 1.75, peakRms * 0.16);
+      const isVoicedFrame = rms >= gate && clarity >= 0.56;
+      if (isVoicedFrame) {
         hasSpoken = true;
         lastSpeechAt = now;
       }
-      onLevel(rms, elapsed);
+      onLevel(isVoicedFrame ? rms : Math.min(rms * 0.35, noiseFloor), elapsed);
       if (autoSilenceMs > 0 && !autoStopped && hasSpoken && peakRms >= 0.018 && elapsed >= 1250 && now - lastSpeechAt >= autoSilenceMs) {
         autoStopped = true;
         session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
       }
     };
 
-    source.connect(processor);
+    if (hpFilter && lpFilter) {
+      source.connect(hpFilter);
+      hpFilter.connect(lpFilter);
+      lpFilter.connect(processor);
+    } else {
+      source.connect(processor);
+    }
     processor.connect(silentGain);
     silentGain.connect(ctx.destination);
 
@@ -477,6 +509,8 @@
     function teardownAudio() {
       clearTimeout(maxTimer);
       try { processor.disconnect(); } catch {}
+      try { lpFilter?.disconnect(); } catch {}
+      try { hpFilter?.disconnect(); } catch {}
       try { source.disconnect(); } catch {}
       try { silentGain.disconnect(); } catch {}
       try { stream.getTracks().forEach(t => t.stop()); } catch {}

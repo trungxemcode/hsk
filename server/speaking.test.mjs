@@ -198,3 +198,39 @@ test('dtwDistance and MPM clarity support time-warped Tone 4 hold-then-drop cont
   assert.ok(resDbq.syllables[1].score >= 80, `expected middle 不 in 对不起 >= 80, got ${resDbq.syllables[1].score}`);
   assert.ok(resDbq.overallScore >= 80, `expected 对不起 overall >= 80, got ${resDbq.overallScore}`);
 });
+
+test('noise-robust band-pass filtering, adaptive SNR gate and homophone ASR matching work in noisy rooms', () => {
+  const sr = 16000;
+  // Build clean 2-syllable speech (再见 -> T4 + T4) and add 50Hz fan hum + deterministic white noise (~8dB SNR)
+  const zai = synthContour(240, null, 135, 0.34, sr);
+  const jian = synthContour(235, null, 128, 0.36, sr);
+  const clean = concatWithPause([zai, jian], 0.09, sr);
+  const noisy = new Float32Array(clean.length);
+  let seed = 1337;
+  for (let i = 0; i < clean.length; i++) {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    const white = (seed / 0xffffffff - 0.5) * 0.28;
+    const hum50 = 0.14 * Math.sin((2 * Math.PI * 50 * i) / sr);
+    noisy[i] = clean[i] + white + hum50;
+  }
+
+  // Noise-only slice vs voiced slice clarity check for VAD
+  const pureNoise = noisy.subarray(0, 800);
+  const voicedSlice = noisy.subarray(Math.round(0.14 * sr), Math.round(0.14 * sr) + 1024);
+  assert.ok(pitchCore.quickVoicedClarity(pureNoise, sr) < 0.56, 'Pure noise + 50Hz hum should fail voiced clarity gate');
+  assert.ok(pitchCore.quickVoicedClarity(voicedSlice, sr) >= 0.70, 'Noisy speech should still pass voiced clarity gate');
+
+  // Homophone ASR match (在见 vs 再见) + noisy pitch extraction
+  const res = pitchCore.segmentAndScore({
+    samples: noisy,
+    sampleRate: sr,
+    text: '再见',
+    pinyin: 'zài jiàn',
+    transcript: '在见'
+  });
+  assert.equal(res.hasVoice, true);
+  assert.equal(res.syllables[0].detectedTone, 4);
+  assert.equal(res.syllables[1].detectedTone, 4);
+  assert.ok(res.charMatch.matchRatio >= 90, `Expected homophone ASR match >= 90%, got ${res.charMatch.matchRatio}`);
+  assert.ok(res.overallScore >= 78, `Expected noisy room overall score >= 78, got ${res.overallScore}`);
+});

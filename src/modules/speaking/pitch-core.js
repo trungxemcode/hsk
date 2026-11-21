@@ -28,6 +28,114 @@
     5: 'Thanh nhẹ'
   };
 
+  const HOMOPHONE_GROUPS = {
+    ai: '爱哀挨矮唉', ba: '八吧把爸罢霸', bai: '百白摆败', ban: '班半办般版板', bang: '帮旁棒榜绑',
+    bao: '包报抱饱宝保', bei: '杯北被备倍背悲', ben: '本奔笨', bi: '比笔必闭币鼻', bian: '边便变遍编辩',
+    biao: '表标', bie: '别憋', bing: '冰并病兵', bo: '播伯波博', bu: '不步部布补捕',
+    cai: '菜才猜采财', can: '参餐残惨', cao: '草操', ce: '厕测策', cha: '茶查差插',
+    chan: '产', chang: '长常场唱厂肠', chao: '超吵炒朝', che: '车彻', chen: '衬沉陈尘',
+    cheng: '成城程乘承称诚', chi: '吃迟持尺池', chong: '重虫充冲', chou: '抽愁臭', chu: '出初除处楚础',
+    chuan: '穿船传串', chuang: '窗床创', chui: '吹垂', chun: '春纯唇', ci: '次词此辞磁',
+    cong: '从聪匆', cu: '粗促醋', cun: '村存寸', cuo: '错措',
+    da: '大打达答搭', dai: '带代待袋戴呆', dan: '但单蛋担淡弹', dang: '当党档', dao: '到道倒岛导刀',
+    de: '的得地德', deng: '等灯登', di: '弟地第低底递帝', dian: '点电店典垫', diao: '掉吊调钓',
+    ding: '定订顶盯', dong: '东冬懂动洞', dou: '都豆斗抖', du: '读都度毒独堵', duan: '短段断端',
+    dui: '对队兑', dun: '顿蹲盾', duo: '多朵躲夺',
+    e: '饿额恶鹅', en: '嗯恩', er: '二儿耳而尔',
+    fa: '发法罚乏', fan: '饭反翻烦范犯', fang: '房放方防访仿', fei: '飞非费肥肺废', fen: '分份粉奋愤',
+    feng: '风封丰疯峰', fu: '服福父夫付复负副富附',
+    gai: '该改概盖', gan: '干感敢赶甘', gang: '刚钢港岗', gao: '高告搞膏', ge: '个哥各歌割格革',
+    gei: '给', gen: '跟根', geng: '更耕', gong: '工公功共供宫', gou: '狗够购构沟',
+    gu: '故古顾固骨股鼓', gua: '瓜挂刮', guai: '怪乖', guan: '关观管馆惯冠', guang: '光广逛',
+    gui: '贵归规鬼柜', guo: '国果过锅',
+    hai: '还海孩害', han: '汉寒汗喊含', hang: '行航', hao: '好号毫豪', he: '和喝河合盒何核贺',
+    hei: '黑', hen: '很恨狠', heng: '横衡', hong: '红洪虹宏', hou: '后候厚猴喉',
+    hu: '湖护户互呼乎忽胡', hua: '花画话化划滑', huai: '坏怀', huan: '欢还换环缓', huang: '黄慌皇谎晃',
+    hui: '会回灰汇毁悔', hun: '婚混魂', huo: '火活或货获伙',
+    ji: '几机鸡记计己纪技际既及极集急寄激', jia: '家加假价架驾嫁', jian: '见件间建健渐简检减肩',
+    jiang: '讲江将奖降酱', jiao: '叫教交校觉角脚娇', jie: '姐借接街结节解界届戒', jin: '进近今金斤紧禁仅尽',
+    jing: '京经精静净镜景竟惊警', jiu: '九酒久旧救就究', ju: '句居具举局拒聚俱据', juan: '卷捐', jue: '觉决绝', jun: '军均君',
+    ka: '卡咖', kai: '开', kan: '看刊砍', kang: '康抗', kao: '考烤靠',
+    ke: '可课客刻科渴克颗', ken: '肯', kong: '空恐控', kou: '口扣', ku: '哭苦裤库酷',
+    kua: '夸跨', kuai: '快块筷', kuan: '宽款', kuang: '况矿框', kui: '亏愧', kun: '困昆', kuo: '扩阔',
+    la: '啦拉辣蜡', lai: '来赖', lan: '蓝篮懒烂拦', lang: '浪狼朗廊', lao: '老劳牢',
+    le: '了乐', lei: '累类泪雷', leng: '冷', li: '里理礼李离力立历丽利例励', lian: '连脸练联恋怜',
+    liang: '两亮凉量辆粮良', liao: '聊料了', lie: '列烈猎', lin: '邻林临淋', ling: '零领另灵令龄',
+    liu: '六流留刘柳', long: '龙笼隆', lou: '楼漏露', lu: '路录陆露绿旅律', luan: '乱卵', lue: '略', lun: '轮论', luo: '落罗螺',
+    ma: '吗妈马骂麻', mai: '买卖麦迈', man: '慢满漫蛮', mang: '忙盲茫', mao: '猫毛帽貌冒贸',
+    mei: '没每妹美煤眉', men: '们门闷', meng: '梦猛蒙', mi: '米密迷秘蜜', mian: '面棉免勉',
+    miao: '秒苗描妙', mie: '灭', min: '民敏', ming: '明名命鸣', mo: '末摸磨模莫默', mou: '某', mu: '母目木幕慕墓',
+    na: '那哪拿纳', nai: '奶耐', nan: '男南难', nao: '脑闹恼', ne: '呢', nei: '内', nen: '嫩', neng: '能',
+    ni: '你呢泥拟逆', nian: '年念粘', niang: '娘酿', niao: '鸟尿', nie: '捏', nin: '您', ning: '宁凝', niu: '牛扭纽',
+    nong: '农浓弄', nu: '努怒女', nuan: '暖', nue: '虐', nuo: '诺挪',
+    ou: '偶欧', pa: '怕爬帕', pai: '拍排派牌', pan: '盘盼判攀', pang: '旁胖', pao: '跑泡炮抛',
+    pei: '陪配赔佩', pen: '盆喷', peng: '朋碰捧棚', pi: '皮批啤疲脾匹', pian: '片篇偏骗', piao: '票漂飘',
+    pie: '撇', pin: '品拼贫频', ping: '平瓶评凭苹', po: '破坡迫泼', pu: '普铺葡朴',
+    qi: '起期七气汽企器奇骑齐弃妻', qia: '卡洽', qian: '千前钱铅浅欠签迁', qiang: '强墙抢枪', qiao: '桥敲悄巧瞧',
+    qie: '切且茄', qin: '亲琴勤侵', qing: '请青清情晴轻庆倾', qiong: '穷', qiu: '秋球求',
+    qu: '去取区趣曲趋', quan: '全劝权圈泉', que: '缺却确雀', qun: '群裙',
+    ran: '然燃染', rang: '让', rao: '绕扰', re: '热惹', ren: '人认任忍刃', reng: '扔仍', ri: '日', rong: '容荣融',
+    rou: '肉柔', ru: '如入乳', ruan: '软', rui: '瑞锐', run: '润', ruo: '若弱',
+    sa: '撒洒', sai: '赛塞', san: '三散伞', sang: '嗓丧', sao: '扫嫂', se: '色', sen: '森', seng: '僧',
+    sha: '沙杀傻纱', shai: '晒筛', shan: '山衫善闪扇', shang: '上商伤尚赏', shao: '少烧稍勺',
+    she: '谁设社舍蛇射', shen: '什身深神审申伸慎', sheng: '生声省胜剩升圣', shi: '是事市室试识世十时实使始师诗石食史拾',
+    shou: '手收受首瘦寿兽', shu: '书数树熟属输舒叔鼠', shua: '刷耍', shuai: '摔甩帅', shuan: '栓', shuang: '双爽',
+    shui: '水谁睡税', shun: '顺', shuo: '说硕', si: '四死思司丝似私斯撕', song: '送松宋', sou: '搜',
+    su: '诉速素苏俗', suan: '算酸', sui: '岁虽随碎', sun: '孙损', suo: '所锁缩',
+    ta: '他她它塌踏塔', tai: '太台态抬', tan: '谈弹叹探贪摊', tang: '糖汤躺趟堂', tao: '套逃桃讨淘',
+    te: '特', teng: '疼腾', ti: '题体踢提替梯', tian: '天田甜填添', tiao: '条跳挑调', tie: '铁贴',
+    ting: '听停厅挺', tong: '同通痛统桶铜', tou: '头偷投透', tu: '图土突兔涂吐', tuan: '团', tui: '腿推退', tun: '吞', tuo: '脱拖托妥',
+    wa: '瓦挖哇', wai: '外歪', wan: '晚完玩万碗弯', wang: '忘望王往网亡', wei: '为位未味围维伟委微危',
+    wen: '问文闻温稳吻', weng: '翁', wo: '我握卧', wu: '五无物屋午舞误务恶',
+    xi: '西洗习喜系细戏吸息希惜', xia: '下夏吓瞎', xian: '先现线显险县鲜限献', xiang: '想向像象乡香响享箱相',
+    xiao: '小笑校消效晓销', xie: '写些谢鞋血斜协', xin: '新心信辛欣', xing: '星行兴形醒性姓幸型',
+    xiong: '兄胸雄熊', xiu: '休修羞秀', xu: '需许续须序虚', xuan: '选宣旋', xue: '学雪血', xun: '寻训迅',
+    ya: '牙压呀鸭押', yan: '眼言演研严验盐烟颜厌', yang: '样羊洋阳养扬', yao: '要药摇咬腰邀',
+    ye: '也业夜叶爷野', yi: '一以已意医衣椅移议异易亿疑义艺', yin: '因音阴银引印', ying: '英应影迎硬营赢',
+    yong: '用永拥勇', you: '有又由游友右邮油优幼', yu: '鱼雨语与于育预遇域余', yuan: '远元园员原愿院圆源',
+    yue: '月越约乐阅', yun: '云运允韵',
+    za: '杂砸', zai: '在再载', zan: '咱暂赞', zang: '脏葬', zao: '早造糟', ze: '责则择', zen: '怎',
+    zeng: '增赠', zha: '扎炸', zhai: '摘窄债', zhan: '站占战展粘', zhang: '张长丈帐涨障', zhao: '找照着招朝',
+    zhe: '这着者折', zhen: '真针阵震镇珍', zheng: '正整争政证挣', zhi: '只知之直指纸止支值质制治志至致',
+    zhong: '中重种钟终忠', zhou: '周州粥洲', zhu: '住主助注猪竹祝著筑', zhua: '抓', zhuan: '专转传赚',
+    zhuang: '装壮状撞', zhui: '追', zhun: '准', zhuo: '桌捉', zi: '字子自资紫', zong: '总宗', zou: '走', zu: '足组祖租阻',
+    zuan: '钻', zui: '最嘴醉罪', zun: '尊遵', zuo: '做作坐座左昨'
+  };
+
+  let dynamicPinyinMap = null;
+
+  function buildPinyinLookup() {
+    if (dynamicPinyinMap) return dynamicPinyinMap;
+    const map = new Map();
+    const add = (han, basePy) => {
+      if (!han || !basePy) return;
+      let set = map.get(han);
+      if (!set) { set = new Set(); map.set(han, set); }
+      set.add(basePy);
+    };
+    for (const [py, chars] of Object.entries(HOMOPHONE_GROUPS)) {
+      for (const ch of Array.from(chars)) add(ch, py);
+    }
+    if (Array.isArray(root.words)) {
+      for (const w of root.words) {
+        if (!w?.han || !w?.pin) continue;
+        const hans = Array.from(w.han).filter(c => /\p{Script=Han}/u.test(c));
+        const tokens = String(w.pin).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+          .replace(/ü/g, 'v').split(/[\s\-·,/]+/).filter(Boolean);
+        if (hans.length === 1 && tokens.length === 1) {
+          add(hans[0], tokens[0].replace(/[^a-z]/g, ''));
+        }
+      }
+    }
+    dynamicPinyinMap = map;
+    return map;
+  }
+
+  function tonelessPinyin(pin) {
+    return String(pin || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase().replace(/ü/g, 'u').replace(/[^a-z]/g, '');
+  }
+
   function stripSpeakerPrefix(text) {
     return String(text || '').replace(/^\s*[A-Za-z0-9\u4e00-\u9fff]{1,6}\s*[:：]\s*/, '').trim();
   }
@@ -158,16 +266,118 @@
     });
   }
 
+  function preprocessForPitch(samples, sampleRate = 16000) {
+    const n = samples.length;
+    const out = new Float32Array(n);
+    if (!n) return out;
+
+    let mean = 0;
+    for (let i = 0; i < n; i++) mean += samples[i];
+    mean /= n;
+
+    // 1st-order high-pass (~70 Hz) suppresses fan/AC rumble and 50/60 Hz hum.
+    const dt = 1 / sampleRate;
+    const rcHp = 1 / (2 * Math.PI * 70);
+    const alphaHp = rcHp / (rcHp + dt);
+    let prevX = 0;
+    let prevY = 0;
+    for (let i = 0; i < n; i++) {
+      const x = samples[i] - mean;
+      prevY = alphaHp * (prevY + x - prevX);
+      prevX = x;
+      out[i] = prevY;
+    }
+
+    // Zero-phase (forward + backward) low-pass (~950 Hz) boosts voice SNR in noisy rooms.
+    const rcLp = 1 / (2 * Math.PI * 950);
+    const alphaLp = dt / (rcLp + dt);
+    let lp = out[0];
+    for (let i = 1; i < n; i++) {
+      lp += alphaLp * (out[i] - lp);
+      out[i] = lp;
+    }
+    lp = out[n - 1];
+    for (let i = n - 2; i >= 0; i--) {
+      lp += alphaLp * (out[i] - lp);
+      out[i] = lp;
+    }
+    return out;
+  }
+
+  function bridgeSingleFrameGaps(rawFrames) {
+    for (let i = 1; i < rawFrames.length - 1; i++) {
+      if (rawFrames[i].f0 > 0) continue;
+      const prev = rawFrames[i - 1].f0;
+      const next = rawFrames[i + 1].f0;
+      if (prev > 0 && next > 0 && Math.abs(prev - next) / Math.max(prev, next) <= 0.28) {
+        rawFrames[i].f0 = (prev + next) / 2;
+        rawFrames[i].clarity = Math.min(rawFrames[i - 1].clarity || 0.7, rawFrames[i + 1].clarity || 0.7);
+      }
+    }
+  }
+
   /**
-   * Extracts F0 pitch track + Clarity using MPM (McLeod Pitch Method / NSDF + Key Maximum Picking)
-   * and normalizes to the Chao 5-level scale [1..5].
+   * Fast real-time harmonic clarity score (0..1) for noise-resistant VAD in Web Audio capture.
+   */
+  function quickVoicedClarity(samples, sampleRate = 16000) {
+    if (!samples || samples.length < 320) return 0;
+    const step = sampleRate >= 32000 ? 2 : 1;
+    const effRate = sampleRate / step;
+    const downLen = Math.min(800, Math.floor(samples.length / step));
+    const slice = new Float32Array(downLen);
+    let mean = 0;
+    for (let i = 0; i < downLen; i++) {
+      slice[i] = samples[i * step];
+      mean += slice[i];
+    }
+    mean /= downLen;
+    // Simple 70Hz HP + ~950Hz LP on small VAD slice
+    const dt = 1 / effRate;
+    const aHp = (1 / (2 * Math.PI * 70)) / (1 / (2 * Math.PI * 70) + dt);
+    const aLp = dt / (1 / (2 * Math.PI * 950) + dt);
+    let px = 0; let py = 0; let lp = 0;
+    for (let i = 0; i < downLen; i++) {
+      const x = slice[i] - mean;
+      py = aHp * (py + x - px);
+      px = x;
+      lp += aLp * (py - lp);
+      slice[i] = lp;
+    }
+    const tauMin = Math.max(2, Math.floor(effRate / 450));
+    const tauMax = Math.min(downLen - 32, Math.ceil(effRate / 66));
+    if (tauMax <= tauMin) return 0;
+
+    let best = 0;
+    let crossedZero = false;
+    const lagStep = effRate > 18000 ? 2 : 1;
+    for (let tau = 2; tau <= tauMax; tau += lagStep) {
+      let acf = 0; let div = 0;
+      const limit = downLen - tau;
+      for (let j = 0; j < limit; j++) {
+        const a = slice[j]; const b = slice[j + tau];
+        acf += a * b;
+        div += a * a + b * b;
+      }
+      const val = div > 0 ? (2 * acf) / div : 0;
+      if (!crossedZero) {
+        if (val <= 0) crossedZero = true;
+      } else if (tau >= tauMin && val > best) {
+        best = val;
+      }
+    }
+    return Math.max(0, Math.min(1, best));
+  }
+
+  /**
+   * Extracts F0 pitch track + Clarity using filtered MPM (McLeod Pitch Method / NSDF + Key Maximum Picking)
+   * with adaptive ambient noise-floor gating, normalized to the Chao 5-level scale [1..5].
    */
   function extractPitchTrack(samples, sampleRate = 16000, opts = {}) {
     if (!samples || !samples.length || !sampleRate) return [];
     const minHz = opts.minHz || 66;
     const maxHz = opts.maxHz || 450;
-    const clarityThreshold = opts.clarityThreshold || 0.70;
-    const kCutoff = opts.cutoff || 0.86;
+    const clarityThreshold = opts.clarityThreshold || 0.62;
+    const kCutoff = opts.cutoff || 0.85;
     const hopSize = Math.max(32, Math.round(sampleRate * (opts.hopSec || 0.01)));
     const tauMin = Math.max(2, Math.floor(sampleRate / maxHz));
     const tauMax = Math.ceil(sampleRate / minHz);
@@ -175,17 +385,20 @@
 
     if (samples.length < winSize) return [];
 
+    const cleanSamples = preprocessForPitch(samples, sampleRate);
     const rawFrames = [];
     let maxRms = 0;
+    const allRms = [];
 
-    for (let start = 0; start + winSize <= samples.length; start += hopSize) {
+    for (let start = 0; start + winSize <= cleanSamples.length; start += hopSize) {
       let sq = 0;
       for (let i = 0; i < winSize; i++) {
-        const s = samples[start + i];
+        const s = cleanSamples[start + i];
         sq += s * s;
       }
       const rms = Math.sqrt(sq / winSize);
       if (rms > maxRms) maxRms = rms;
+      allRms.push(rms);
       rawFrames.push({
         start,
         timeMs: Math.round(((start + winSize / 2) / sampleRate) * 1000),
@@ -195,7 +408,13 @@
       });
     }
 
-    const rmsFloor = Math.max(opts.minRms || 0.0035, maxRms * (opts.rmsRatio || 0.055));
+    const sortedRms = allRms.slice().sort((a, b) => a - b);
+    const ambientFloor = percentile(sortedRms, 0.18);
+    const rmsFloor = Math.max(
+      opts.minRms || 0.0035,
+      maxRms * (opts.rmsRatio || 0.06),
+      ambientFloor * 1.32 + Math.max(0, maxRms - ambientFloor) * 0.10
+    );
     const nsdf = new Float64Array(tauMax + 2);
 
     for (const frame of rawFrames) {
@@ -206,8 +425,8 @@
         let div = 0;
         const limit = winSize - tau;
         for (let j = 0; j < limit; j++) {
-          const a = samples[s0 + j];
-          const b = samples[s0 + j + tau];
+          const a = cleanSamples[s0 + j];
+          const b = cleanSamples[s0 + j + tau];
           acf += a * b;
           div += a * a + b * b;
         }
@@ -269,11 +488,15 @@
     }
 
     const filteredF0 = medianFilter(rawFrames.map(f => f.f0), 3);
-    const voicedSt = [];
     for (let i = 0; i < rawFrames.length; i++) {
       rawFrames[i].f0 = filteredF0[i];
-      if (filteredF0[i] > 0) {
-        const st = 12 * Math.log2(filteredF0[i] / 100);
+    }
+    bridgeSingleFrameGaps(rawFrames);
+
+    const voicedSt = [];
+    for (let i = 0; i < rawFrames.length; i++) {
+      if (rawFrames[i].f0 > 0) {
+        const st = 12 * Math.log2(rawFrames[i].f0 / 100);
         rawFrames[i].semitone = st;
         voicedSt.push(st);
       } else {
@@ -612,20 +835,47 @@
     };
   }
 
-  function computeCharMatch(targetText, transcript) {
+  function computeCharMatch(targetText, transcript, parsedSyllables = []) {
     const expected = Array.from(stripSpeakerPrefix(targetText)).filter(c => /\p{Script=Han}/u.test(c));
     const heard = Array.from(String(transcript || '')).filter(c => /\p{Script=Han}/u.test(c));
     if (!expected.length || !heard.length) return null;
+
+    const pyMap = buildPinyinLookup();
+    const isHomophone = (expChar, expIdx, heardChar) => {
+      if (expChar === heardChar) return true;
+      const expSet = pyMap.get(expChar) || new Set();
+      const syPin = tonelessPinyin(parsedSyllables[expIdx]?.pinyin || '');
+      if (syPin) expSet.add(syPin);
+      const heardSet = pyMap.get(heardChar);
+      if (!heardSet || !expSet.size) return false;
+      for (const p of heardSet) {
+        if (expSet.has(p)) return true;
+      }
+      return false;
+    };
+
     let hits = 0;
     let cursor = 0;
-    const perChar = expected.map(ch => {
+    const perChar = expected.map((ch, idx) => {
       const foundAt = heard.indexOf(ch, cursor);
       if (foundAt >= 0) {
         cursor = foundAt + 1;
-        hits++;
+        hits += 1;
         return true;
       }
+      // Homophone match when noisy room causes browser ASR to pick another same-reading Hanzi.
+      for (let j = cursor; j < heard.length; j++) {
+        if (isHomophone(ch, idx, heard[j])) {
+          cursor = j + 1;
+          hits += 0.9;
+          return true;
+        }
+      }
       if (heard.includes(ch)) {
+        hits += 0.6;
+        return true;
+      }
+      if (heard.some(h => isHomophone(ch, idx, h))) {
         hits += 0.5;
         return true;
       }
@@ -634,7 +884,7 @@
     return {
       expectedCount: expected.length,
       heardText: heard.join(''),
-      matchRatio: Math.round((hits / expected.length) * 100),
+      matchRatio: Math.min(100, Math.round((hits / expected.length) * 100)),
       perChar
     };
   }
@@ -646,7 +896,7 @@
     const parsed = parseSyllables(text, pinyin);
     const track = extractPitchTrack(samples, sampleRate);
     const voicedFrames = track.filter(f => f.f0 > 0);
-    const charMatch = computeCharMatch(text, transcript);
+    const charMatch = computeCharMatch(text, transcript, parsed);
 
     if (!parsed.length) {
       return {
@@ -801,6 +1051,8 @@
     TONE_SHORT,
     parseSyllables,
     extractPitchTrack,
+    quickVoicedClarity,
+    computeCharMatch,
     targetContour,
     dtwDistance,
     segmentAndScore,
