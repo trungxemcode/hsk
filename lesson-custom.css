@@ -171,6 +171,112 @@ html body.studio-enabled button.lesson-custom-secondary,
   flex-wrap:wrap;
   gap:8px;
 }
+.custom-chip-row-compact{
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  max-width:100%;
+  padding-bottom:2px;
+  scrollbar-width:none;
+}
+.custom-chip-row-compact::-webkit-scrollbar{
+  display:none;
+}
+.custom-chip-row-compact .custom-chip{
+  flex:0 0 auto;
+  white-space:nowrap!important;
+  min-height:40px!important;
+  padding:8px 12px!important;
+}
+.custom-slider-card{
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-card);
+  background:var(--paper);
+  display:grid;
+  gap:10px;
+}
+.custom-single-slider-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+  font-size:.9rem;
+}
+.custom-slider-total,
+.custom-slider-value{
+  color:var(--accent);
+  font-weight:700;
+}
+.custom-weights-bar{
+  height:8px;
+  border-radius:var(--radius-pill);
+  overflow:hidden;
+  display:flex;
+  gap:2px;
+  background:var(--surface);
+}
+.custom-weight-seg{
+  height:100%;
+  transition:width .12s ease;
+}
+.custom-weight-seg.is-vocab{background:var(--accent);}
+.custom-weight-seg.is-grammar{background:var(--green,#16a34a);}
+.custom-weight-seg.is-reading{background:var(--blue,#2563eb);}
+.custom-weight-seg.is-listening{background:var(--amber,#d97706);}
+.custom-weight-seg.is-writing{background:var(--rose,#db2777);}
+.custom-weight-sliders{
+  display:grid;
+  gap:6px;
+}
+.custom-weight-slider-row{
+  display:grid;
+  grid-template-columns:minmax(98px, 118px) minmax(0, 1fr) 42px;
+  align-items:center;
+  gap:10px;
+  font-size:.86rem;
+}
+.custom-weight-name{
+  color:var(--ink);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.custom-weight-pct{
+  text-align:right;
+  color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+.custom-slider-card input[type="range"]{
+  width:100%;
+  margin:0;
+  accent-color:var(--accent);
+  cursor:pointer;
+}
+.custom-slider-ticks{
+  display:flex;
+  justify-content:space-between;
+  font-size:.76rem;
+  color:var(--muted,var(--ink-soft,var(--ink)));
+  margin-top:-4px;
+}
+.custom-slider-foot{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.custom-slider-reset{
+  min-height:38px!important;
+  padding:7px 12px!important;
+  font-size:.84rem;
+}
+.custom-slider-confirm{
+  min-height:40px!important;
+  padding:8px 14px!important;
+  font-size:.88rem;
+}
 .custom-chip{
   background:var(--paper);
   color:var(--ink);

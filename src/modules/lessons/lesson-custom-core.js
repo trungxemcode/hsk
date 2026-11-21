@@ -66,11 +66,11 @@
       questionVi: 'Bạn muốn học theo kiểu nào phù hợp nhịp sinh hoạt nhất?',
       hintVi: 'App sẽ chia bài thành từng phiên theo đúng thói quen học của bạn.',
       options: [
-        { value: 'spare_time', label: 'Tranh thủ giờ trống · phiên ngắn 5–10 phút' },
-        { value: 'focused_block', label: 'Ngồi học 1 mạch tập trung' },
-        { value: 'hands_free', label: 'Rảnh tay · nghe nhiều khi di chuyển' },
-        { value: 'bedtime_review', label: 'Ôn nhẹ trước khi ngủ' },
-        { value: 'weekend_sprint', label: 'Ngày thường ngắn · cuối tuần học sâu' }
+        { value: 'spare_time', label: 'Tranh thủ giờ trống · phiên ngắn 5–10 phút', shortLabel: 'Ngắt quãng 5–10p' },
+        { value: 'focused_block', label: 'Ngồi học 1 mạch tập trung', shortLabel: 'Học 1 mạch' },
+        { value: 'hands_free', label: 'Rảnh tay · nghe nhiều khi di chuyển', shortLabel: 'Nghe rảnh tay' },
+        { value: 'bedtime_review', label: 'Ôn nhẹ trước khi ngủ', shortLabel: 'Ôn trước ngủ' },
+        { value: 'weekend_sprint', label: 'Ngày thường ngắn · cuối tuần học sâu', shortLabel: 'Cuối tuần sâu' }
       ]
     },
     {
@@ -89,10 +89,10 @@
       questionVi: 'Mục tiêu ưu tiên nhất hiện tại của bạn là gì?',
       hintVi: 'Giúp ưu tiên dạng bài kiểm tra và ôn tập phù hợp.',
       options: [
-        { value: 'exam', label: 'Thi đỗ chứng chỉ HSK' },
-        { value: 'conversation', label: 'Giao tiếp phản xạ tự nhiên' },
-        { value: 'reading_comprehension', label: 'Đọc hiểu văn bản, truyện, bài báo' },
-        { value: 'work_travel', label: 'Dùng trong công việc & đời sống' }
+        { value: 'exam', label: 'Thi đỗ chứng chỉ HSK', shortLabel: 'Thi đỗ HSK' },
+        { value: 'conversation', label: 'Giao tiếp phản xạ tự nhiên', shortLabel: 'Giao tiếp' },
+        { value: 'reading_comprehension', label: 'Đọc hiểu văn bản, truyện, bài báo', shortLabel: 'Đọc hiểu' },
+        { value: 'work_travel', label: 'Dùng trong công việc & đời sống', shortLabel: 'Công việc & đời sống' }
       ]
     }
   ];
@@ -128,6 +128,45 @@
       if (!adjusted) break;
     }
     return result;
+  }
+
+  function rebalanceWeights(rawWeights, changedSkill, nextValue) {
+    const base = normalizeWeights(rawWeights, 'balanced');
+    if (!SKILLS.includes(changedSkill)) return base;
+    const lockedVal = clamp(Math.round(Number(nextValue) || base[changedSkill]), 5, 70);
+    const others = SKILLS.filter(s => s !== changedSkill);
+    const remainingTarget = 100 - lockedVal;
+    const otherSum = others.reduce((acc, s) => acc + base[s], 0) || others.length;
+    const result = { [changedSkill]: lockedVal };
+    for (const s of others) {
+      result[s] = clamp(Math.round((base[s] * remainingTarget) / otherSum), 5, 70);
+    }
+    let diff = remainingTarget - others.reduce((acc, s) => acc + result[s], 0);
+    let safety = 0;
+    while (diff !== 0 && safety++ < 60) {
+      const step = diff > 0 ? 1 : -1;
+      const sorted = others.slice().sort((a, b) => (diff > 0 ? result[a] - result[b] : result[b] - result[a]));
+      let moved = false;
+      for (const s of sorted) {
+        if (result[s] + step >= 5 && result[s] + step <= 70) {
+          result[s] += step;
+          diff -= step;
+          moved = true;
+          break;
+        }
+      }
+      if (!moved) break;
+    }
+    return result;
+  }
+
+  function inferFocusChoice(weights = {}) {
+    const w = normalizeWeights(weights, 'balanced');
+    if (w.vocab >= 40) return 'vocab_heavy';
+    if (w.grammar >= 35) return 'grammar_heavy';
+    if (w.listening >= 30) return 'listening_speaking';
+    if (w.reading >= 30) return 'reading_heavy';
+    return 'balanced';
   }
 
   function parseNaturalReply(stepId, text) {
@@ -1379,6 +1418,8 @@
     INTERVIEW_STEPS,
     ALLOWED_STEP_ACTIONS,
     normalizeWeights,
+    rebalanceWeights,
+    inferFocusChoice,
     parseNaturalReply,
     hasExplicitMicroText,
     extractCustomSchedule,

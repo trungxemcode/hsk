@@ -157,13 +157,33 @@ const http = require('node:http');
       await page.locator('#lessonCustomBanner').waitFor({ state: 'visible' });
       await page.locator('#lessonCustomInterview').waitFor({ state: 'visible' });
 
-      // 2. Answer 5 questions in chat UI with quick-reply chips & free-text input
-      await page.locator('.custom-chip').first().click(); // focus
+      // 2. Answer 5 questions in chat UI with 100% weight sliders, range sliders, 1-row compact chips & free-text input
+      await page.locator('#lessonCustomWeightCard').waitFor({ state: 'visible' });
+      const vocabSlider = page.locator('#lessonCustomWeightCard input[data-skill="vocab"]');
+      await vocabSlider.evaluate(el => {
+        el.value = '50';
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      const weightSum = await page.locator('#lessonCustomWeightCard input[type="range"]').evaluateAll(
+        inputs => inputs.reduce((s, inp) => s + Number(inp.value), 0)
+      );
+      assert.equal(weightSum, 100, 'Skill weight sliders must always rebalance to 100%');
+      await page.locator('#lessonCustomWeightsConfirm').click(); // focus
+
+      await page.locator('#lessonCustomMinutesCard').waitFor({ state: 'visible' });
       await page.locator('#lessonCustomChatInput').fill('25 phút mỗi ngày');
-      await page.locator('#lessonCustomChatSend').click();
-      await page.locator('.custom-chip').first().click(); // style: spare_time
-      await page.locator('.custom-chip').first().click(); // days
-      await page.locator('.custom-chip').first().click(); // goal
+      await page.locator('#lessonCustomChatSend').click(); // minutes via chat
+
+      await page.locator('.custom-chip-row-compact .custom-chip').first().click(); // style: spare_time
+
+      await page.locator('#lessonCustomDaysCard').waitFor({ state: 'visible' });
+      await page.locator('#lessonCustomDaysRange').evaluate(el => {
+        el.value = '5';
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      await page.locator('#lessonCustomDaysConfirm').click(); // days slider
+
+      await page.locator('.custom-chip-row-compact .custom-chip').first().click(); // goal
 
       await page.locator('#lessonCustomPreview').waitFor({ state: 'visible' });
       assert.match(await page.locator('#lessonCustomPreview').innerText(), /Từ vựng:\s*50%/);

@@ -19,6 +19,9 @@
   let activeStepStage = null;
   let bannerDetailsOpen = false;
   let homeSessionsOpen = false;
+  let sliderWeights = { ...C.FOCUS_PRESETS.balanced };
+  let sliderMinutes = 30;
+  let sliderDays = 6;
   let lessonDesignBusy = false;
   let lessonDesignStatus = '';
   const autoDesignedLessons = new Set();
@@ -117,6 +120,7 @@
   function seedFromAnswers(hsk, answers) {
     const map = {};
     for (const row of answers) {
+      if (row.weights) map.weights = row.weights;
       if (row.id !== 'freeform' && row.id !== 'turn') {
         map[row.id] = row.parsedValue ?? C.parseNaturalReply(row.id, row.answer);
       } else if (row.answer) {
@@ -130,6 +134,7 @@
     return C.createProfile({
       hsk,
       focusChoice: map.focus || 'balanced',
+      weights: map.weights,
       minutes: Number(map.minutes || plannerMinutes || 20),
       style: map.style || 'spare_time',
       days: Number(map.days || window.HSKPlanner?.plan?.days || 6),
@@ -392,6 +397,10 @@
     interviewStatus = '';
     formMode = false;
     draftProfile = null;
+    const saved = getSavedProfile();
+    sliderWeights = { ...(saved?.weights || C.FOCUS_PRESETS.balanced) };
+    sliderMinutes = Number(saved?.minutes || window.HSKPlanner?.plan?.minutes || 30);
+    sliderDays = Number(saved?.days || window.HSKPlanner?.plan?.days || 6);
     const first = C.INTERVIEW_STEPS[0];
     chatHistory = [
       {
@@ -595,7 +604,7 @@
       rerender();
     };
 
-    const submitAnswer = async (displayLabel, rawVal) => {
+    const submitAnswer = async (displayLabel, rawVal, extraMeta = null) => {
       if (interviewBusy) return;
       const stepObj = C.INTERVIEW_STEPS[interviewStep];
       const text = String(displayLabel || rawVal || '').trim();
@@ -603,11 +612,13 @@
 
       chatHistory.push({ role: 'user', text });
       if (stepObj) {
-        collectedAnswers.push({
+        const entry = {
           id: stepObj.id,
           answer: text,
           parsedValue: rawVal !== undefined ? rawVal : C.parseNaturalReply(stepObj.id, text)
-        });
+        };
+        if (extraMeta?.weights) entry.weights = extraMeta.weights;
+        collectedAnswers.push(entry);
         interviewStep++;
       } else {
         collectedAnswers.push({ id: 'freeform', answer: text });
@@ -655,15 +666,164 @@
     };
 
     if (!draftProfile) {
-      const chips = el('div', undefined, 'custom-chip-list');
       if (Array.isArray(aiDynamicChips) && aiDynamicChips.length) {
+        const chips = el('div', undefined, 'custom-chip-list');
         for (const label of aiDynamicChips) {
           chips.append(btn(label, () => submitAnswer(label), 'custom-chip'));
         }
         panel.append(chips);
+      } else if (currentStep?.id === 'focus') {
+        const card = el('div', undefined, 'custom-slider-card');
+        card.id = 'lessonCustomWeightCard';
+        const top = el('div', undefined, 'custom-single-slider-head');
+        const totalBadge = el('span', 'Tổng: 100%', 'custom-slider-total');
+        top.append(el('strong', 'Kéo tỉ trọng từng kỹ năng'), totalBadge);
+
+        const bar = el('div', undefined, 'custom-weights-bar');
+        const barSegs = {};
+        const rangeInputs = {};
+        const valLabels = {};
+
+        for (const skill of C.SKILLS) {
+          const seg = el('span', undefined, `custom-weight-seg is-${skill}`);
+          seg.style.width = `${sliderWeights[skill]}%`;
+          seg.title = `${C.SKILL_LABELS[skill]}: ${sliderWeights[skill]}%`;
+          barSegs[skill] = seg;
+          bar.append(seg);
+        }
+
+        const syncWeightsDom = () => {
+          let total = 0;
+          for (const s of C.SKILLS) {
+            const v = sliderWeights[s];
+            total += v;
+            rangeInputs[s].value = String(v);
+            valLabels[s].textContent = `${v}%`;
+            barSegs[s].style.width = `${v}%`;
+            barSegs[s].title = `${C.SKILL_LABELS[s]}: ${v}%`;
+          }
+          totalBadge.textContent = `Tổng: ${total}%`;
+        };
+
+        const rows = el('div', undefined, 'custom-weight-sliders');
+        for (const skill of C.SKILLS) {
+          const row = el('label', undefined, 'custom-weight-slider-row');
+          const name = el('span', C.SKILL_LABELS[skill], 'custom-weight-name');
+          const range = document.createElement('input');
+          range.type = 'range';
+          range.min = '5';
+          range.max = '70';
+          range.step = '1';
+          range.value = String(sliderWeights[skill]);
+          range.dataset.skill = skill;
+          range.setAttribute('aria-label', `${C.SKILL_LABELS[skill]} (%)`);
+          const pct = el('strong', `${sliderWeights[skill]}%`, 'custom-weight-pct');
+          range.oninput = () => {
+            sliderWeights = C.rebalanceWeights(sliderWeights, skill, Number(range.value));
+            syncWeightsDom();
+          };
+          rangeInputs[skill] = range;
+          valLabels[skill] = pct;
+          row.append(name, range, pct);
+          rows.append(row);
+        }
+
+        const sliderFoot = el('div', undefined, 'custom-slider-foot');
+        const resetEqBtn = btn('Cân bằng', () => {
+          sliderWeights = { ...C.FOCUS_PRESETS.balanced };
+          syncWeightsDom();
+        }, 'lesson-custom-secondary custom-slider-reset');
+        const confirmBtn = btn('Xác nhận tỉ trọng này →', () => {
+          const weightsCopy = { ...sliderWeights };
+          const text = C.SKILLS.map(s => `${C.SKILL_LABELS[s]} ${weightsCopy[s]}%`).join(' · ');
+          submitAnswer(text, C.inferFocusChoice(weightsCopy), { weights: weightsCopy });
+        }, 'lesson-custom-primary custom-slider-confirm');
+        confirmBtn.id = 'lessonCustomWeightsConfirm';
+        sliderFoot.append(resetEqBtn, confirmBtn);
+
+        card.append(top, bar, rows, sliderFoot);
+        panel.append(card);
+      } else if (currentStep?.id === 'minutes') {
+        const card = el('div', undefined, 'custom-slider-card');
+        card.id = 'lessonCustomMinutesCard';
+        const top = el('div', undefined, 'custom-single-slider-head');
+        const valEl = el('strong', `${sliderMinutes} phút / ngày`, 'custom-slider-value');
+        valEl.id = 'lessonCustomMinutesValue';
+        top.append(el('span', 'Chọn quỹ thời gian mỗi ngày (10–180 phút)'), valEl);
+
+        const range = document.createElement('input');
+        range.id = 'lessonCustomMinutesRange';
+        range.type = 'range';
+        range.min = '10';
+        range.max = '180';
+        range.step = '5';
+        range.value = String(sliderMinutes);
+        range.setAttribute('aria-label', 'Số phút học mỗi ngày');
+
+        const ticks = el('div', undefined, 'custom-slider-ticks');
+        for (const m of [10, 50, 95, 140, 180]) {
+          ticks.append(el('span', `${m}p`));
+        }
+
+        const confirmBtn = btn(`Xác nhận ${sliderMinutes} phút/ngày →`, () => {
+          submitAnswer(`${sliderMinutes} phút / ngày`, String(sliderMinutes));
+        }, 'lesson-custom-primary custom-slider-confirm');
+        confirmBtn.id = 'lessonCustomMinutesConfirm';
+
+        range.oninput = () => {
+          sliderMinutes = Number(range.value);
+          valEl.textContent = `${sliderMinutes} phút / ngày`;
+          confirmBtn.textContent = `Xác nhận ${sliderMinutes} phút/ngày →`;
+        };
+
+        const foot = el('div', undefined, 'custom-slider-foot');
+        foot.append(confirmBtn);
+        card.append(top, range, ticks, foot);
+        panel.append(card);
+      } else if (currentStep?.id === 'days') {
+        const card = el('div', undefined, 'custom-slider-card');
+        card.id = 'lessonCustomDaysCard';
+        const top = el('div', undefined, 'custom-single-slider-head');
+        const valEl = el('strong', `${sliderDays} ngày / tuần`, 'custom-slider-value');
+        valEl.id = 'lessonCustomDaysValue';
+        top.append(el('span', 'Tần suất học mỗi tuần (3–7 ngày)'), valEl);
+
+        const range = document.createElement('input');
+        range.id = 'lessonCustomDaysRange';
+        range.type = 'range';
+        range.min = '3';
+        range.max = '7';
+        range.step = '1';
+        range.value = String(sliderDays);
+        range.setAttribute('aria-label', 'Số ngày học mỗi tuần');
+
+        const ticks = el('div', undefined, 'custom-slider-ticks');
+        for (const d of [3, 4, 5, 6, 7]) {
+          ticks.append(el('span', `${d} ngày`));
+        }
+
+        const confirmBtn = btn(`Xác nhận ${sliderDays} ngày/tuần →`, () => {
+          submitAnswer(`${sliderDays} ngày / tuần`, String(sliderDays));
+        }, 'lesson-custom-primary custom-slider-confirm');
+        confirmBtn.id = 'lessonCustomDaysConfirm';
+
+        range.oninput = () => {
+          sliderDays = Number(range.value);
+          valEl.textContent = `${sliderDays} ngày / tuần`;
+          confirmBtn.textContent = `Xác nhận ${sliderDays} ngày/tuần →`;
+        };
+
+        const foot = el('div', undefined, 'custom-slider-foot');
+        foot.append(confirmBtn);
+        card.append(top, range, ticks, foot);
+        panel.append(card);
       } else if (currentStep) {
+        const isCompactRow = currentStep.id === 'style' || currentStep.id === 'goal';
+        const chips = el('div', undefined, isCompactRow ? 'custom-chip-list custom-chip-row-compact' : 'custom-chip-list');
         for (const opt of currentStep.options) {
-          chips.append(btn(opt.label, () => submitAnswer(opt.label, opt.value), 'custom-chip'));
+          const b = btn(opt.shortLabel || opt.label, () => submitAnswer(opt.label, opt.value), 'custom-chip');
+          if (opt.shortLabel && opt.shortLabel !== opt.label) b.title = opt.label;
+          chips.append(b);
         }
         panel.append(chips);
       }
