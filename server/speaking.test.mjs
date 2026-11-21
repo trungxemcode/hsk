@@ -186,4 +186,15 @@ test('dtwDistance and MPM clarity support time-warped Tone 4 hold-then-drop cont
   const scored = pitchCore.segmentAndScore({ samples: padded, sampleRate: sr, text: '去', pinyin: 'qù' });
   assert.equal(scored.syllables[0].detectedTone, 4);
   assert.ok(scored.overallScore >= 80, `expected delayed-drop T4 score >= 80, got ${scored.overallScore}`);
+
+  // 3-syllable expression with middle 不 (对不起): accepts light middle tone gracefully
+  const duibuqi = concatWithPause([
+    synthContour(235, null, 130, 0.28, sr),
+    synthContour(165, null, 160, 0.16, sr),
+    synthContour(145, null, 110, 0.34, sr)
+  ], 0.06, sr);
+  const resDbq = pitchCore.segmentAndScore({ samples: duibuqi, sampleRate: sr, text: '对不起', pinyin: 'duì bu qǐ' });
+  assert.equal(resDbq.syllables[1].optionalNeutral, true);
+  assert.ok(resDbq.syllables[1].score >= 80, `expected middle 不 in 对不起 >= 80, got ${resDbq.syllables[1].score}`);
+  assert.ok(resDbq.overallScore >= 80, `expected 对不起 overall >= 80, got ${resDbq.overallScore}`);
 });

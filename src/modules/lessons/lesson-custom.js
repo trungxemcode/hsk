@@ -1316,7 +1316,15 @@
         if (window.HSKSpeech || window.HSKSpeaking) {
           const speakRow = el('div', undefined, 'speaking-inline-actions');
           if (window.HSKSpeech) speakRow.append(window.HSKSpeech.button(w.han, 'Nghe ' + w.han));
-          if (window.HSKSpeaking) speakRow.append(window.HSKSpeaking.button({ text: w.han, pinyin: w.pin, meaning: w.mean }));
+          if (window.HSKSpeaking) {
+            speakRow.append(window.HSKSpeaking.button({
+              text: w.han,
+              pinyin: w.pin,
+              meaning: w.mean,
+              items: slice.map(item => ({ text: item.han, pinyin: item.pin, meaning: item.mean })),
+              index: idx
+            }));
+          }
           card.append(speakRow);
         }
         if (revealed) {
@@ -1397,11 +1405,18 @@
         if (window.HSKSpeech) {
           stageEl.append(window.HSKSpeech.button(lines.map(x => x.cn), 'Nghe toàn đoạn', true));
         }
-        for (const x of lines) {
+        for (const [li, x] of lines.entries()) {
           const p = el('p', (x.speaker ? x.speaker + ': ' : '') + x.cn);
           stageEl.append(p, el('small', `${x.pin} · ${x.vi}`, 'hint'));
           if (window.HSKSpeaking) {
-            stageEl.append(window.HSKSpeaking.button({ text: x.cn, pinyin: x.pin, meaning: x.vi, compact: true }));
+            stageEl.append(window.HSKSpeaking.button({
+              text: x.cn,
+              pinyin: x.pin,
+              meaning: x.vi,
+              compact: true,
+              items: lines.map(it => ({ text: it.cn, pinyin: it.pin, meaning: it.vi })),
+              index: li
+            }));
           }
         }
       }

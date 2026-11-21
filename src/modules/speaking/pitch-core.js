@@ -100,12 +100,14 @@
     const syllables = hanChars.map((han, idx) => {
       const pin = pinTokens[idx] || '';
       const baseTone = pin ? extractToneFromSyllable(pin) : 5;
+      const optionalNeutral = hanChars.length === 3 && idx === 1 && (han === '不' || han === '没');
       return {
         index: idx,
         han,
         pinyin: pin,
         baseTone,
         spokenTone: baseTone,
+        optionalNeutral,
         sandhiNote: '',
         isFinal: idx === hanChars.length - 1
       };
@@ -488,8 +490,17 @@
     return denom ? (n * sxy - sx * sy) / denom : 0;
   }
 
-  function analyzeToneSegment(voicedFrames, spokenTone, isFinal) {
+  function analyzeToneSegment(voicedFrames, spokenTone, isFinal, optionalNeutral = false) {
     if (voicedFrames.length < 2) {
+      if (optionalNeutral) {
+        return {
+          detectedTone: 5,
+          score: 82,
+          userContour: [],
+          target: targetContour(5, 12, false),
+          feedbackVi: 'Âm lướt nhẹ tự nhiên'
+        };
+      }
       return {
         detectedTone: 0,
         score: 0,
@@ -560,9 +571,9 @@
     }
     let shapeScore = Math.round(Math.max(25, Math.min(100, 100 - minDtw * 32)));
 
-    if (spokenTone === 5) {
-      detectedTone = 5;
-      shapeScore = Math.max(75, Math.min(96, Math.round(92 - Math.max(0, rangeSt - 4) * 5)));
+    if (spokenTone === 5 || (optionalNeutral && (detectedTone === spokenTone || rangeSt <= 3.6))) {
+      detectedTone = spokenTone === 5 ? 5 : detectedTone;
+      shapeScore = Math.max(80, Math.min(97, Math.round(92 - Math.max(0, rangeSt - 4) * 4)));
     } else if (detectedTone === spokenTone) {
       shapeScore = Math.max(78, Math.min(99, shapeScore));
     } else {
@@ -572,6 +583,8 @@
     let feedbackVi;
     if (spokenTone === 5) {
       feedbackVi = 'Thanh nhẹ · đọc ngắn và nhẹ';
+    } else if (optionalNeutral && detectedTone !== spokenTone) {
+      feedbackVi = 'Đọc lướt nhẹ tự nhiên (hoặc giữ nguyên thanh)';
     } else if (detectedTone === spokenTone) {
       if (spokenTone === 3 && usedHalfThird) {
         feedbackVi = 'Chuẩn Thanh 3 (đọc nửa dấu 21 tự nhiên)';
@@ -672,7 +685,7 @@
       const [lo, hi] = ranges[idx] || [0, 0];
       const segFrames = track.slice(lo, hi);
       const voiced = trimUnvoicedEdges(segFrames).filter(f => f.f0 > 0);
-      const analysis = analyzeToneSegment(voiced, meta.spokenTone, meta.isFinal);
+      const analysis = analyzeToneSegment(voiced, meta.spokenTone, meta.isFinal, meta.optionalNeutral);
       return {
         ...meta,
         startMs: segFrames[0]?.timeMs || 0,

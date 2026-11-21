@@ -146,6 +146,22 @@ const MIME = {
         await page.evaluate(t => { document.documentElement.dataset.theme = t; }, theme);
         const overflow = await modal.evaluate(el => el.scrollWidth > el.clientWidth + 1);
         assert.equal(overflow, false, `Speaking modal overflow at ${viewport.width}px (${theme})`);
+        if (viewport.width === 1440 && theme === 'light') {
+          const vScroll = await modal.evaluate(el => el.scrollHeight > el.clientHeight + 4);
+          assert.equal(vScroll, false, 'Desktop speaking modal should fit in 1 screen without vertical scrollbar');
+        }
+      }
+
+      // Sequential prev/next navigation without closing the modal
+      const navCount = modal.locator('.speaking-nav-count');
+      if (await navCount.isVisible()) {
+        const firstText = await modal.locator('.speaking-target-han').innerText();
+        const firstCounter = await navCount.innerText();
+        assert.match(firstCounter, /^1\s*\/\s*\d+/);
+        await modal.getByRole('button', { name: 'Từ hoặc câu tiếp theo', exact: true }).click();
+        const nextText = await modal.locator('.speaking-target-han').innerText();
+        assert.notEqual(nextText, firstText, 'Clicking › advances directly to next word');
+        assert.match(await navCount.innerText(), /^2\s*\/\s*\d+/);
       }
 
       await modal.getByRole('button', { name: 'Đóng', exact: true }).click();

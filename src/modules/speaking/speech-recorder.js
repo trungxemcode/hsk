@@ -401,6 +401,12 @@
     let totalSamples = 0;
     const startedAt = Date.now();
     let stopped = false;
+    const autoSilenceMs = opts.autoSilenceMs === 0 ? 0 : Math.max(650, Number(opts.autoSilenceMs) || 950);
+    let noiseFloor = 0.008;
+    let peakRms = 0;
+    let hasSpoken = false;
+    let lastSpeechAt = 0;
+    let autoStopped = false;
 
     // Parallel browser ASR (Mandarin) when available; audio pitch evaluation stays 100% independent.
     const Recog = root.SpeechRecognition || root.webkitSpeechRecognition;
@@ -444,7 +450,20 @@
       let sq = 0;
       for (let i = 0; i < copy.length; i++) sq += copy[i] * copy[i];
       const rms = Math.sqrt(sq / copy.length);
-      onLevel(rms, Date.now() - startedAt);
+      const now = Date.now();
+      const elapsed = now - startedAt;
+      if (elapsed < 220 && rms > 0) noiseFloor = Math.min(0.03, noiseFloor * 0.7 + rms * 0.3);
+      if (rms > peakRms) peakRms = rms;
+      const gate = Math.max(0.014, noiseFloor * 2.1, peakRms * 0.16);
+      if (rms >= gate) {
+        hasSpoken = true;
+        lastSpeechAt = now;
+      }
+      onLevel(rms, elapsed);
+      if (autoSilenceMs > 0 && !autoStopped && hasSpoken && peakRms >= 0.018 && elapsed >= 1250 && now - lastSpeechAt >= autoSilenceMs) {
+        autoStopped = true;
+        session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
+      }
     };
 
     source.connect(processor);
