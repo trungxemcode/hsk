@@ -19,7 +19,7 @@
  function createPlayer({synth,Utterance,notify=()=>{},rate=.85,gapMs=0,voiceURI=''}){
   let token=0,active=null,held=null,queueTimer,packController;
   const reset=button=>{if(button){button.classList.remove('is-speaking');button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',button.dataset.speechLabel);}};
-  function stop(){token++;packController?.abort();packController=null;if(root.HSKVoiceManager?.selection.source==='pack')root.HSKVoiceManager.stop();clearTimeout(queueTimer);reset(active);active=null;held=null;synth?.cancel();}
+  function stop(){const wasActive=Boolean(active||held||packController);token++;packController?.abort();packController=null;if(root.HSKVoiceManager?.selection.source==='pack')root.HSKVoiceManager.stop();clearTimeout(queueTimer);reset(active);active=null;held=null;if(wasActive||synth?.speaking||synth?.pending)synth?.cancel();}
   function play(input,button,language='zh-CN'){
    if(active===button&&active){stop();notify('Đã dừng phát âm.');return;}
    stop();

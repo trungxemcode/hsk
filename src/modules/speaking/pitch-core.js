@@ -1106,7 +1106,10 @@
   /**
    * Segments audio into expected syllables and scores Mandarin tones + optional ASR transcript.
    */
-  function segmentAndScore({ samples, sampleRate = 16000, text = '', pinyin = '', transcript = '', provisionalTranscript = '', retryFallbackTranscript = '' } = {}) {
+  function segmentAndScore({
+    samples, sampleRate = 16000, text = '', pinyin = '',
+    transcript = '', provisionalTranscript = ''
+  } = {}) {
     const parsed = parseSyllables(text, pinyin);
     const track = sampleRate > 16000 && samples?.length
       ? extractPitchTrack(resample16k(samples, sampleRate), 16000)
@@ -1183,17 +1186,9 @@
         if (mergedMatch && (!charMatch || mergedMatch.matchRatio >= charMatch.matchRatio)) {
           charMatch = mergedMatch;
         }
-      } else if (!charMatch && retryFallbackTranscript && allSyllablesClearlySpoken) {
-        charMatch = computeCharMatch(text, retryFallbackTranscript, parsed);
-      } else if (
-        charMatch
-        && charMatch.heardCount > 0
-        && charMatch.heardCount < parsed.length
-        && charMatch.perChar.filter(Boolean).length === charMatch.heardCount
-        && allSyllablesClearlySpoken
-      ) {
-        charMatch = computeCharMatch(text, parsed.map(p => p.han).join(''), parsed);
       }
+      // Pitch contours and syllable boundaries cannot identify Mandarin consonants/vowels.
+      // Never fabricate a full-text ASR match from the expected exercise text.
     }
 
     const ranges = findSyllableRanges(track, charMatch?.heardCount ?? parsed.length, peakTrackRms);
