@@ -42,7 +42,10 @@ async function loadRecognizer(cacheName, config) {
     dtype: 'q8'
   });
   return async samples => {
-    const { text } = await recognizer(samples, {
+    const padSamples = 5600; // 350ms silence padding at 16kHz reduces STFT boundary distortion on short words.
+    const padded = new Float32Array(samples.length + padSamples * 2);
+    padded.set(samples, padSamples);
+    const { text } = await recognizer(padded, {
       language: 'zh', task: 'transcribe', do_sample: false, max_new_tokens: 64
     });
     return typeof text === 'string' ? toSimplifiedChinese(text.trim()) : '';

@@ -29,7 +29,7 @@
   };
 
   const HOMOPHONE_GROUPS = {
-    ai: '爱哀挨矮唉', ba: '八吧把爸罢霸', bai: '百白摆败', ban: '班半办般版板', bang: '帮旁棒榜绑',
+    ai: '爱哀挨矮唉', ba: '八吧把爸罢霸', bai: '百白摆败拜', ban: '班半办般版板', bang: '帮旁棒榜绑',
     bao: '包报抱饱宝保', bei: '杯北被备倍背悲', ben: '本奔笨', bi: '比笔必闭币鼻', bian: '边便变遍编辩',
     biao: '表标', bie: '别憋', bing: '冰并病兵', bo: '播伯波博', bu: '不步部布补捕',
     cai: '菜才猜采财', can: '参餐残惨', cao: '草操', ce: '厕测策', cha: '茶查差插',
@@ -121,8 +121,10 @@
         if (!w?.han || !w?.pin) continue;
         const hans = Array.from(w.han).filter(c => /\p{Script=Han}/u.test(c));
         const tokens = String(w.pin).split(/[\s\-·,/]+/).filter(Boolean);
-        if (hans.length === 1 && tokens.length === 1) {
-          add(hans[0], tonelessPinyin(tokens[0]));
+        if (hans.length && hans.length === tokens.length) {
+          for (let k = 0; k < hans.length; k++) {
+            add(hans[k], tonelessPinyin(tokens[k]));
+          }
         }
       }
     }
@@ -652,6 +654,10 @@
           gapAllowance = 0;
           idx++;
         } else if (gapAllowance < 1 && idx + 1 < track.length && track[idx + 1].f0 > 0 && (track[idx + 1].clarity || 0) >= 0.58) {
+          const prevF0 = lastValid >= start ? track[lastValid].f0 : 0;
+          const nextF0 = track[idx + 1].f0;
+          const sameSyllablePitch = prevF0 > 0 && Math.abs(Math.log2(nextF0 / prevF0) * 12) < 3.5;
+          if (!sameSyllablePitch) break;
           gapAllowance++;
           idx++;
         } else {
@@ -674,18 +680,42 @@
     }
 
     if (!islands.length) return Array.from({ length: expectedCount }, () => [0, 0]);
+
+    // Drop brief edge/noise blips when a larger vocal island is present so 2+ syllable merged bursts split cleanly.
+    if (islands.length >= 2) {
+      const maxVoiced = Math.max(...islands.map(i => i.voicedCount));
+      const maxMass = Math.max(...islands.map(i => i.mass));
+      if (maxVoiced >= 10) {
+        const filtered = islands.filter((isl, k) => {
+          const isEdge = k === 0 || k === islands.length - 1;
+          if (k === 0 && isl.voicedCount <= 5 && isl.mass < maxMass * 0.12) return false;
+          if (isl.voicedCount <= 2 && isl.mass < maxMass * 0.18 && (isEdge || maxVoiced >= 14)) return false;
+          if (isl.voicedCount <= 3 && isl.mass < maxMass * 0.08 && maxVoiced >= 14) return false;
+          return true;
+        });
+        if (filtered.length) {
+          islands.splice(0, islands.length, ...filtered);
+        }
+      }
+    }
+
     if (expectedCount === 1) {
       const strongest = islands.slice().sort((a, b) => b.mass - a.mass)[0];
       return [[strongest.start, strongest.end]];
     }
 
-    // Consolidate over-segmented islands: drop tiny breath blips first, then merge nearest neighbors.
+    // Consolidate over-segmented islands: drop tiny outliers first, then merge nearest neighbors without large pitch jumps.
     while (islands.length > expectedCount) {
+      const maxMass = Math.max(...islands.map(i => i.mass));
       let blipIdx = -1;
       let blipMass = Infinity;
       for (let k = 0; k < islands.length; k++) {
         const isl = islands[k];
-        if (isl.voicedCount <= 2 && isl.meanClarity < 0.65 && isl.rmsMax < peakTrackRms * 0.18 && isl.mass < blipMass) {
+        const isWeakOutlier = (
+          (isl.voicedCount <= 5 && isl.mass < maxMass * 0.15)
+          || (isl.voicedCount <= 2 && isl.meanClarity < 0.65 && isl.rmsMax < peakTrackRms * 0.18)
+        );
+        if (isWeakOutlier && isl.mass < blipMass) {
           blipMass = isl.mass;
           blipIdx = k;
         }
@@ -696,11 +726,17 @@
       }
 
       let bestMergeIdx = 0;
-      let bestGap = Infinity;
+      let bestScore = Infinity;
       for (let k = 0; k < islands.length - 1; k++) {
+        const leftEnd = track[islands[k].end - 1];
+        const rightStart = track[islands[k + 1].start];
+        const pitchJump = (leftEnd?.f0 > 0 && rightStart?.f0 > 0)
+          ? Math.abs(leftEnd.semitone - rightStart.semitone)
+          : 0;
         const gap = islands[k + 1].start - islands[k].end;
-        if (gap < bestGap) {
-          bestGap = gap;
+        const mergeCost = gap + (pitchJump >= 3.5 ? 20 : 0);
+        if (mergeCost < bestScore) {
+          bestScore = mergeCost;
           bestMergeIdx = k;
         }
       }
@@ -835,16 +871,27 @@
           if (lo <= hi) {
             let bestMetric = Infinity;
             for (let j = lo; j <= hi; j++) {
+              const nearBefore = track[Math.max(prev, j - 2)];
+              const nearAfter = track[Math.min(isl.end - 1, j + 2)];
+              const leftV = track[j - 1].f0 > 0 ? track[j - 1] : (j - 2 >= prev && track[j - 2].f0 > 0 ? track[j - 2] : null);
+              const edgeJump = (track[j].f0 > 0 && leftV)
+                ? Math.abs(track[j].semitone - leftV.semitone)
+                : 0;
+              const stepJump = track[j - 1].f0 > 0 && track[j].f0 > 0
+                ? Math.abs(track[j].semitone - track[j - 1].semitone)
+                : 0;
+              const windowJump = nearBefore.f0 > 0 && nearAfter.f0 > 0
+                ? Math.abs(nearAfter.semitone - nearBefore.semitone)
+                : 0;
               if (islands.length === 1 || requireBoundaryForSplit) {
                 // A sustained vowel needs an acoustic boundary before it can count as two syllables.
                 const before = track[Math.max(prev, j - 5)];
                 const after = track[Math.min(isl.end - 1, j + 5)];
                 const hasDip = track[j].rms <= Math.min(before.rms, after.rms) * 0.65;
-                const pitchReset = track[j - 1].f0 > 0 && track[j].f0 > 0
-                  && Math.abs(track[j].semitone - track[j - 1].semitone) >= 2.5;
+                const pitchReset = edgeJump >= 2.2 || stepJump >= 2.2 || windowJump >= 4.2;
                 if (!hasDip && !pitchReset) continue;
               }
-              const metric = (track[j].rms || 0) + Math.abs(j - ideal) * 0.0005;
+              const metric = (track[j].rms || 0) + Math.abs(j - ideal) * 0.0005 - edgeJump * 0.05 - stepJump * 0.015 - windowJump * 0.005;
               if (metric < bestMetric) {
                 bestMetric = metric;
                 bestSplit = j;
@@ -1031,22 +1078,101 @@
     };
   }
 
+  const INITIAL_GROUPS = [
+    ['b', 'p', 'm', 'f'],
+    ['d', 't', 'n', 'l'],
+    ['g', 'k', 'h'],
+    ['z', 'c', 's', 'zh', 'ch', 'sh', 'r', 'j', 'q', 'x']
+  ];
+  const NEAR_FINAL_GROUPS = [
+    ['ei', 'ai', 'ui'],
+    ['an', 'ang'],
+    ['en', 'eng'],
+    ['in', 'ing'],
+    ['ao', 'ou'],
+    ['ie', 'ue']
+  ];
+
+  function splitPinyinInitialFinal(pin) {
+    const clean = String(pin || '');
+    const m = clean.match(/^(zh|ch|sh|[bpmfdtnlgkhjqxrzcsyw])(.*)$/);
+    return m ? { initial: m[1], final: m[2] } : { initial: '', final: clean };
+  }
+
+  function mainVowel(fin) {
+    if (!fin) return '';
+    if (fin.includes('a')) return 'a';
+    if (fin.includes('o')) return 'o';
+    if (fin.includes('e')) return 'e';
+    if (fin.includes('i')) return 'i';
+    if (fin.includes('u')) return 'u';
+    if (fin.includes('v')) return 'v';
+    return '';
+  }
+
+  function sameInitialGroup(a, b) {
+    if (!a || !b) return false;
+    return INITIAL_GROUPS.some(grp => grp.includes(a) && grp.includes(b));
+  }
+
+  function sameNearFinalGroup(a, b) {
+    if (!a || !b) return false;
+    return NEAR_FINAL_GROUPS.some(grp => grp.includes(a) && grp.includes(b));
+  }
+
+  function isNearPhoneticMatch(r1, r2) {
+    if (!r1 || !r2 || r1 === r2) return false;
+    const p1 = splitPinyinInitialFinal(r1);
+    const p2 = splitPinyinInitialFinal(r2);
+    const mv1 = mainVowel(p1.final);
+    const mv2 = mainVowel(p2.final);
+    if (p1.initial && p1.initial === p2.initial) {
+      if ((mv1 && mv1 === mv2) || sameNearFinalGroup(p1.final, p2.final)) return true;
+    }
+    if (p1.initial && p2.initial && sameInitialGroup(p1.initial, p2.initial)) {
+      if (mv1 && mv1 === mv2) return true;
+      if (p1.final && p1.final === p2.final) return true;
+    }
+    return false;
+  }
+
   function computeCharMatch(targetText, transcript, parsedSyllables = []) {
     const expected = parsedSyllables.length ? parsedSyllables : parseSyllables(targetText);
     const heard = Array.from(String(transcript || '')).filter(c => /\p{Script=Han}/u.test(c));
     if (!expected.length || !heard.length) return null;
 
     const pyMap = buildPinyinLookup();
+    const resolveReadingSet = han => {
+      let set = pyMap.get(han);
+      if (!set && typeof root.pinyinPro?.pinyin === 'function') {
+        try {
+          const arr = root.pinyinPro.pinyin(han, { toneType: 'none', type: 'array', multiple: true });
+          const next = new Set((Array.isArray(arr) ? arr : [arr]).map(tonelessPinyin).filter(Boolean));
+          if (next.size) {
+            pyMap.set(han, next);
+            set = next;
+          }
+        } catch {}
+      }
+      return set;
+    };
     const targetReadings = expected.map(({ han, pinyin }) => {
       const reading = tonelessPinyin(pinyin);
-      return reading ? [reading] : Array.from(pyMap.get(han) || []);
+      return reading ? [reading] : Array.from(resolveReadingSet(han) || []);
     });
-    const heardReadings = heard.map(han => pyMap.get(han));
+    const heardReadings = heard.map(resolveReadingSet);
     const gapCost = 10;
     const wrongCharCost = 11;
     const pairCost = (i, j) => {
       if (expected[i].han === heard[j]) return 0;
-      if (targetReadings[i].some(reading => heardReadings[j]?.has(reading))) return 1;
+      const hSet = heardReadings[j];
+      if (!hSet || !hSet.size) return wrongCharCost;
+      if (targetReadings[i].some(reading => hSet.has(reading))) return 1;
+      for (const expRead of targetReadings[i]) {
+        for (const hRead of hSet) {
+          if (isNearPhoneticMatch(expRead, hRead)) return 3;
+        }
+      }
       return wrongCharCost;
     };
 
@@ -1066,6 +1192,7 @@
 
     let hits = 0;
     const perChar = expected.map(() => false);
+    const nearChar = expected.map(() => false);
     const heardIndices = expected.map(() => -1);
     let i = 0;
     let j = 0;
@@ -1074,7 +1201,8 @@
       if (costs[i][j] === cost + costs[i + 1][j + 1]) {
         heardIndices[i] = j;
         perChar[i] = cost < wrongCharCost;
-        if (perChar[i]) hits += cost === 0 ? 1 : 0.9;
+        if (cost === 3) nearChar[i] = true;
+        if (perChar[i]) hits += cost === 0 ? 1 : cost === 1 ? 0.9 : 0.65;
         i++;
         j++;
       } else if (costs[i][j] === gapCost + costs[i + 1][j]) {
@@ -1089,6 +1217,7 @@
       heardText: heard.join(''),
       matchRatio: Math.round((hits / Math.max(expected.length, heard.length)) * 100),
       perChar,
+      nearChar,
       heardIndices
     };
   }
@@ -1231,7 +1360,10 @@
       let detectedTone = analysis.detectedTone;
       let feedbackVi = analysis.feedbackVi;
       const charMatched = charMatch ? Boolean(charMatch.perChar[idx]) : null;
-      let pronunciationVerified = detectedTone > 0 ? charMatched : false;
+      const isNearMatch = Boolean(charMatch?.nearChar?.[idx]);
+      let pronunciationVerified = detectedTone > 0
+        ? (isNearMatch ? (score >= 55 && charMatched) : charMatched)
+        : false;
 
       const hasSpokenBefore = idx > 0 && isStrongAnchor.slice(0, idx).some(Boolean);
       const hasSpokenAfter = idx < parsed.length - 1 && isStrongAnchor.slice(idx + 1).some(Boolean);
