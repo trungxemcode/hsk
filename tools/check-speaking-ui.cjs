@@ -170,23 +170,27 @@ const MIME = {
       await modal.getByRole('button', { name: 'Đóng', exact: true }).click();
       await modal.waitFor({ state: 'detached' });
 
-      for (const hasTranscript of [true, false]) {
+      await page.evaluate(() => window.HSKSpeaking.open({ text: '妈妈妈', pinyin: 'mā mā mā' }));
+      for (const [transcript, syllableCount] of [['妈', 1], ['妈妈妈', 3], ['', 1]]) {
         await page.evaluate(transcript => {
-          window.HSKSpeaking.open({ text: '妈妈妈', pinyin: 'mā mā mā' });
           const sampleRate = 16000;
-          const pcm = new Float32Array(sampleRate);
-          pcm.set(Float32Array.from({ length: 9600 }, (_, i) => 0.5 * Math.sin(2 * Math.PI * 220 * i / sampleRate)), 3200);
+          const count = transcript.length || 1;
+          const pcm = new Float32Array(6400 + count * 9600);
+          const syllable = Float32Array.from({ length: 7200 }, (_, i) => 0.5 * Math.sin(2 * Math.PI * 220 * i / sampleRate));
+          for (let i = 0; i < count; i++) pcm.set(syllable, 3200 + i * 9600);
           window.HSKRecorder.setMockProvider(() => ({ pcm, sampleRate, transcript }));
-        }, hasTranscript ? '妈' : '');
+        }, transcript);
         await recBtn.click();
         await page.waitForFunction(() => document.querySelector('.speaking-record-btn')?.classList.contains('is-recording'));
         await recBtn.click();
+        await modal.getByRole('button', { name: /Thu lại/ }).waitFor();
         await resultBox.waitFor();
-        assert.equal(await modal.locator('.speaking-syl-chip.is-ok').count(), hasTranscript ? 1 : 0);
-        assert.equal(await modal.locator('.speaking-syl-chip.is-warn').count(), hasTranscript ? 2 : 3);
-        assert.match(await modal.locator('.speaking-score-head').innerText(), hasTranscript ? /1\/3/ : /Chỉ chấm thanh điệu/);
-        await modal.getByRole('button', { name: 'Đóng', exact: true }).click();
+        assert.equal(await modal.locator('.speaking-syl-chip.is-ok').count(), transcript ? syllableCount : 0);
+        assert.equal(await modal.locator('.speaking-syl-chip.is-warn').count(), transcript ? 3 - syllableCount : 3);
+        if (transcript) assert.match(await modal.locator('.speaking-transcript').innerText(), new RegExp(`${syllableCount}/3`));
+        else assert.match(await modal.locator('.speaking-score-head').innerText(), /Chỉ chấm thanh điệu/);
       }
+      await modal.getByRole('button', { name: 'Đóng', exact: true }).click();
 
       if (viewport.width === 390) {
         const assetPayload = Buffer.from('mock-sherpa-asr-runtime-v1');
