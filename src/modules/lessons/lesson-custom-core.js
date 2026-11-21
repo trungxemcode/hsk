@@ -471,12 +471,12 @@
     const entries = Object.entries(rawMap)
       .filter(([k, v]) => typeof k === 'string' && k.length <= 64 && v && typeof v === 'object')
       .sort((a, b) => Number(b[1]?.updatedAt || 0) - Number(a[1]?.updatedAt || 0))
-      .slice(0, 12);
+      .slice(0, 6);
     for (const [k, v] of entries) {
       const clean = sanitizeAiLessonDesign(v, k, totalMinutes);
       if (clean && JSON.stringify(clean).length <= 45000) out[k] = clean;
-      if (JSON.stringify(out).length > 140000) {
-        while (Object.keys(out).length && JSON.stringify(out).length > 140000) {
+      if (JSON.stringify(out).length > 90000) {
+        while (Object.keys(out).length && JSON.stringify(out).length > 90000) {
           delete out[Object.keys(out).pop()];
         }
       }

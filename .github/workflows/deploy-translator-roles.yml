@@ -31,11 +31,11 @@ jobs:
         run: node --test server/account-roles.test.mjs server/translator-worker.test.mjs server/original-reading.test.mjs server/personal-ai.test.mjs
       - name: Require current generated Worker
         run: |
-          node tools/build-worker-bundle.cjs
+          node tools/build-worker-bundle.cjs --check
           git diff --exit-code -- server/translator-worker-bundled.mjs
-      - name: Ensure bundled script includes the actual role routes
+      - name: Ensure bundled script includes the actual role, voice and custom lesson routes
         run: |
-          node --input-type=module -e "import {readFileSync} from 'node:fs';const s=readFileSync('server/translator-worker-bundled.mjs','utf8');for(const p of ['/account-role','/admin/accounts','/admin/account-role','/reading-library'])if(!s.includes(p))throw Error('Missing '+p);"
+          node --input-type=module -e "import {readFileSync} from 'node:fs';const s=readFileSync('server/translator-worker-bundled.mjs','utf8');for(const p of ['/account-role','/admin/accounts','/admin/account-role','/reading-library','/voice-precache','/custom-lesson-profile'])if(!s.includes(p))throw Error('Missing '+p);"
       - name: Bundle the checked-in Worker for inspection
         run: npx --yes wrangler@4 deploy --dry-run --outdir /tmp/hsk-translator-role-build --config server/wrangler.jsonc
       - name: Publish existing translator Worker (preserve variables and secrets)

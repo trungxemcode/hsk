@@ -158,7 +158,7 @@
       gap: 8px;
       margin-bottom: 12px;
     }
-    button {
+    button:where(:not([data-ui-owned]):not(.ui-btn)) {
       padding: 8px 14px;
       border: none;
       border-radius:var(--radius-8px);
@@ -168,11 +168,11 @@
       cursor: pointer;
       transition: all 0.25s;
     }
-    button:hover {
+    button:where(:not([data-ui-owned]):not(.ui-btn)):hover {
       background: var(--legacy-hex-143d91);
       transform: translateY(-1px);
     }
-    button:disabled {
+    button:where(:not([data-ui-owned]):not(.ui-btn)):disabled {
         background-color: var(--legacy-hex-bdc3c7);
         cursor: not-allowed;
     }
@@ -400,9 +400,9 @@ input,select,textarea{font-size:16px;min-height:46px;border-radius:var(--radius-
 #searchForm{flex-direction:row;align-items:center}
 #searchForm #searchInput{flex:1;min-width:0;width:auto!important}
 #searchForm button{width:auto!important;flex:0 0 auto}
-button{min-height:46px;border-radius:var(--radius-btn);touch-action:manipulation}
-button:hover{transform:none}
-button:active{filter:brightness(.92)}
+button:where(:not([data-ui-owned]):not(.ui-btn)){min-height:46px;border-radius:var(--radius-btn);touch-action:manipulation}
+button:where(:not([data-ui-owned]):not(.ui-btn)):hover{transform:none}
+button:where(:not([data-ui-owned]):not(.ui-btn)):active{filter:brightness(.92)}
 
 /* Tab Thẻ từ vựng */
 #learnPanel{align-items:stretch}
@@ -671,7 +671,7 @@ body.show-lessons h1::after{content:"Bài học"!important}
 #lessonsPanel{max-width:1100px;margin-inline:auto}
 #lessonsPanel h2{display:block;font-size:22px}
 #lessonsPanel h3{margin:20px 0 10px;font-size:20px}
-#lessonsPanel button{min-height:48px;white-space:normal;line-height:1.4}
+#lessonsPanel button:where(:not([data-ui-owned]):not(.ui-btn)){min-height:48px;white-space:normal;line-height:1.4}
 .lesson-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
 .lesson-levels button[aria-pressed=true],.lesson-actions button[aria-pressed=true]{background:var(--legacy-hex-12307a);color:var(--palette-white)}
 .lesson-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
@@ -713,7 +713,7 @@ progress::-webkit-progress-value{background:var(--legacy-hex-16965a);border-radi
 .lesson-mastery{padding:16px;border:1px solid var(--legacy-hex-cde1d5);border-radius:var(--radius-16px);background:var(--legacy-hex-f2faf5);line-height:1.6}
 .lesson-mastery progress{margin:12px 0}
 .lesson-mastery p{margin:8px 0}
-.lesson-back{display:block;margin-bottom:12px;background:var(--legacy-hex-e8eef9)!important;color:var(--legacy-hex-12307a)!important}
+.lesson-back:where(:not([data-ui-owned]):not(.ui-btn)){display:block;margin-bottom:12px;background:var(--legacy-hex-e8eef9)!important;color:var(--legacy-hex-12307a)!important}
 .lesson-level-picker{width:100%}
 #lessonPracticeBack{margin:10px 0;min-height:48px}
 body.lesson-focus .offline-bar,body.lesson-focus .memory-reminder,body.lesson-focus #lessonsPanel>h2{display:none!important}
