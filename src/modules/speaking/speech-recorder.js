@@ -221,8 +221,8 @@
     try {
       stream = await root.navigator.mediaDevices.getUserMedia({
         audio: {
-          echoCancellation: true,
-          noiseSuppression: true,
+          echoCancellation: false,
+          noiseSuppression: false,
           autoGainControl: false,
           channelCount: 1
         }

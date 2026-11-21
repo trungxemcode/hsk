@@ -135,3 +135,30 @@ test('encodeWav16k writes valid RIFF/WAVE 16kHz mono 16-bit header and trims sil
   // Trimmed duration should be ~0.3s + 0.24s padding (< 1s = 32044 bytes total)
   assert.ok(wav.length > 44 && wav.length < 32044, `unexpected trimmed WAV size: ${wav.length}`);
 });
+
+test('recognizes natural huyen-style Tone 4 drop with fade-out and half-third (21) without trailing hook', () => {
+  const sr = 16000;
+  // Natural Tone 4 spoken by a male voice dropping 125Hz -> 72Hz with realistic fade-out in the second half
+  const rawLen = Math.round(0.32 * sr);
+  const t4Fade = new Float32Array(rawLen);
+  let phase = 0;
+  for (let i = 0; i < rawLen; i++) {
+    const t = i / (rawLen - 1);
+    // Slight consonant onset rise in first 12%, then falling drop like dấu huyền into low tail
+    const hz = t < 0.12 ? 120 + 6 * (t / 0.12) : 126 - 54 * Math.pow((t - 0.12) / 0.88, 0.9);
+    phase += (2 * Math.PI * hz) / sr;
+    const fadeEnv = t < 0.1 ? t / 0.1 : Math.max(0.14, 1 - 0.85 * Math.pow((t - 0.1) / 0.9, 1.3));
+    t4Fade[i] = fadeEnv * (0.6 * Math.sin(phase) + 0.25 * Math.sin(2 * phase));
+  }
+  const sT4Gentle = concatWithPause([t4Fade], 0, sr);
+  const resT4 = pitchCore.segmentAndScore({ samples: sT4Gentle, sampleRate: sr, text: '看', pinyin: 'kàn' });
+  assert.equal(resT4.syllables[0].detectedTone, 4);
+  assert.ok(resT4.overallScore >= 78, `expected gentle huyen-like T4 score >= 78, got ${resT4.overallScore}`);
+
+  // Half-third (21) on an isolated syllable (drops from 145Hz -> 108Hz without trailing rise)
+  const halfThird = concatWithPause([synthContour(145, null, 108, 0.36, sr)], 0, sr);
+  const resT3Half = pitchCore.segmentAndScore({ samples: halfThird, sampleRate: sr, text: '马', pinyin: 'mǎ' });
+  assert.equal(resT3Half.syllables[0].detectedTone, 3);
+  assert.ok(resT3Half.overallScore >= 78, `expected half-third T3 score >= 78, got ${resT3Half.overallScore}`);
+  assert.match(resT3Half.syllables[0].feedbackVi, /nửa dấu 21/);
+});

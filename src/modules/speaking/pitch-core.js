@@ -161,9 +161,9 @@
    */
   function extractPitchTrack(samples, sampleRate = 16000, opts = {}) {
     if (!samples || !samples.length || !sampleRate) return [];
-    const minHz = opts.minHz || 75;
+    const minHz = opts.minHz || 66;
     const maxHz = opts.maxHz || 450;
-    const threshold = opts.yinThreshold || 0.18;
+    const threshold = opts.yinThreshold || 0.2;
     const hopSize = Math.max(32, Math.round(sampleRate * (opts.hopSec || 0.01)));
     const tauMin = Math.max(2, Math.floor(sampleRate / maxHz));
     const tauMax = Math.ceil(sampleRate / minHz);
@@ -186,7 +186,7 @@
       rawFrames.push({ start, timeMs: Math.round(((start + halfWin) / sampleRate) * 1000), rms, f0: 0 });
     }
 
-    const rmsFloor = Math.max(opts.minRms || 0.008, maxRms * (opts.rmsRatio || 0.14));
+    const rmsFloor = Math.max(opts.minRms || 0.0035, maxRms * (opts.rmsRatio || 0.055));
     const diff = new Float64Array(tauMax + 2);
     const cmndf = new Float64Array(tauMax + 2);
 
@@ -217,7 +217,7 @@
         }
       }
       if (pickedTau < 0) {
-        let bestVal = 0.32;
+        let bestVal = 0.42;
         for (let tau = tauMin; tau <= tauMax; tau++) {
           if (cmndf[tau] < bestVal) {
             bestVal = cmndf[tau];
@@ -256,20 +256,20 @@
     }
 
     const sortedSt = voicedSt.slice().sort((a, b) => a - b);
-    const p10 = percentile(sortedSt, 0.1);
+    const p05 = percentile(sortedSt, 0.05);
     const p50 = percentile(sortedSt, 0.5);
-    const p90 = percentile(sortedSt, 0.9);
-    const rawSpan = p90 - p10;
-    const effectiveSpan = Math.max(5.5, rawSpan);
+    const p95 = percentile(sortedSt, 0.95);
+    const rawSpan = p95 - p05;
+    const effectiveSpan = Math.max(2.4, rawSpan);
 
     for (const frame of rawFrames) {
       if (frame.f0 > 0) {
         let chao;
-        if (rawSpan < 3.5) {
-          // Steady pitch remains cleanly legible instead of amplifying 2Hz micro-jitter across 1..5.
-          chao = 3.8 + ((frame.semitone - p50) / effectiveSpan) * 3.2;
+        if (rawSpan < 1.2) {
+          // Steady pitch remains cleanly legible instead of amplifying micro-jitter across 1..5.
+          chao = 3.8 + ((frame.semitone - p50) / 3.2) * 2.4;
         } else {
-          chao = 1.2 + ((frame.semitone - p10) / effectiveSpan) * 3.6;
+          chao = 1.2 + ((frame.semitone - p05) / effectiveSpan) * 3.6;
         }
         frame.chao = Math.max(1, Math.min(5, chao));
       } else {
@@ -282,7 +282,7 @@
   /**
    * Canonical Chao 5-level pitch contour templates [1..5].
    */
-  function targetContour(tone, points = 12, isFinal = true) {
+  function targetContour(tone, points = 12, isFinal = true, halfThird = false) {
     const out = [];
     for (let i = 0; i < points; i++) {
       const t = points === 1 ? 0 : i / (points - 1);
@@ -292,14 +292,14 @@
       } else if (tone === 2) {
         y = 2.4 + 2.2 * Math.pow(t, 1.15);
       } else if (tone === 3) {
-        if (isFinal) {
+        if (isFinal && !halfThird) {
           // 214 contour: dip to 1.2 around t=0.45 then rise toward 3.5
           y = t <= 0.45
             ? 2.4 - 1.2 * (t / 0.45)
             : 1.2 + 2.3 * Math.pow((t - 0.45) / 0.55, 1.15);
         } else {
-          // Half-third (21): fall gently and remain low
-          y = 2.4 - 1.15 * Math.sin((t * Math.PI) / 2);
+          // Half-third (21): fall gently like a Vietnamese dấu huyền without trailing rebound
+          y = 2.6 - 1.4 * Math.sin((t * Math.PI) / 2);
         }
       } else if (tone === 4) {
         y = 4.7 - 3.4 * Math.pow(t, 0.95);
@@ -439,7 +439,6 @@
 
     const stResampled = resampleArray(voicedFrames.map(f => f.semitone), 12);
     const chaoResampled = resampleArray(voicedFrames.map(f => f.chao), 12).map(v => Number(v.toFixed(2)));
-    const target = targetContour(spokenTone, 12, isFinal);
 
     const startAvg = (stResampled[0] + stResampled[1] + stResampled[2]) / 3;
     const endAvg = (stResampled[9] + stResampled[10] + stResampled[11]) / 3;
@@ -450,28 +449,38 @@
       if (stResampled[i] > maxSt) maxSt = stResampled[i];
     }
     const rangeSt = maxSt - minSt;
+    const earlyPeakSt = Math.max(...stResampled.slice(0, 6));
+    const dropFromPeakSt = earlyPeakSt - endAvg;
+    const tailReboundSt = endAvg - minSt;
     const dipFromEnds = Math.min(startAvg, endAvg) - minSt;
-    const dipRise = endAvg - minSt;
-    const chaoMean = chaoResampled.reduce((s, v) => s + v, 0) / chaoResampled.length;
 
     let detectedTone;
-    if (dipFromEnds >= 1.7 && minIdx >= 2 && minIdx <= 9 && dipRise >= 1.4) {
+    let usedHalfThird = !isFinal;
+
+    if (dipFromEnds >= 1.5 && minIdx >= 2 && minIdx <= 9 && tailReboundSt >= 1.3 && dropFromPeakSt < 2.0) {
       detectedTone = 3;
-    } else if (totalDeltaSt >= 2.1 && endAvg - startAvg >= 1.7) {
+    } else if (totalDeltaSt >= 1.6 && endAvg - startAvg >= 1.25) {
       detectedTone = 2;
-    } else if (totalDeltaSt <= -2.6 && startAvg - endAvg >= 2.2 && dipRise < 1.5) {
-      detectedTone = 4;
-    } else if (spokenTone === 3 && !isFinal && totalDeltaSt <= -1.0 && chaoMean <= 3.1 && rangeSt >= 1.2) {
-      detectedTone = 3;
-    } else if (rangeSt <= 3.0 && Math.abs(totalDeltaSt) <= 2.2) {
+    } else if ((dropFromPeakSt >= 0.95 || totalDeltaSt <= -0.9) && tailReboundSt < 1.15) {
+      // Falling contour (includes natural Tone 4 / huyền drop without trailing rebound).
+      if (spokenTone === 3 && dropFromPeakSt >= 0.85) {
+        detectedTone = 3;
+        usedHalfThird = true;
+      } else {
+        detectedTone = 4;
+      }
+    } else if (rangeSt <= 1.35 && Math.abs(totalDeltaSt) <= 0.85 && dropFromPeakSt < 0.95) {
       detectedTone = 1;
-    } else if (totalDeltaSt < -1.5) {
-      detectedTone = 4;
-    } else if (totalDeltaSt > 1.5) {
+    } else if (totalDeltaSt < -0.75 || dropFromPeakSt >= 0.85) {
+      detectedTone = spokenTone === 3 && tailReboundSt < 1.2 ? 3 : 4;
+      if (detectedTone === 3) usedHalfThird = true;
+    } else if (totalDeltaSt > 0.9) {
       detectedTone = 2;
     } else {
       detectedTone = 1;
     }
+
+    const target = targetContour(spokenTone, 12, isFinal, usedHalfThird);
 
     // Score shape match combining normalized template similarity and detected tone match.
     const userMean = chaoResampled.reduce((s, v) => s + v, 0) / 12;
@@ -482,13 +491,13 @@
       sqErr += diff * diff;
     }
     const rmse = Math.sqrt(sqErr / 12);
-    let shapeScore = Math.round(Math.max(25, Math.min(100, 100 - rmse * 30)));
+    let shapeScore = Math.round(Math.max(25, Math.min(100, 100 - rmse * 28)));
 
     if (spokenTone === 5) {
       detectedTone = 5;
       shapeScore = Math.max(75, Math.min(96, Math.round(92 - Math.max(0, rangeSt - 4) * 5)));
     } else if (detectedTone === spokenTone) {
-      shapeScore = Math.max(76, Math.min(99, shapeScore));
+      shapeScore = Math.max(78, Math.min(99, shapeScore));
     } else {
       shapeScore = Math.min(62, shapeScore);
     }
@@ -497,17 +506,21 @@
     if (spokenTone === 5) {
       feedbackVi = 'Thanh nhẹ · đọc ngắn và nhẹ';
     } else if (detectedTone === spokenTone) {
-      feedbackVi = `Chuẩn ${TONE_SHORT[spokenTone]}`;
+      if (spokenTone === 3 && usedHalfThird) {
+        feedbackVi = 'Chuẩn Thanh 3 (đọc nửa dấu 21 tự nhiên)';
+      } else {
+        feedbackVi = `Chuẩn ${TONE_SHORT[spokenTone]}`;
+      }
     } else if (spokenTone === 1) {
       feedbackVi = `Đang bị nghiêng thành ${TONE_SHORT[detectedTone]} · cần giữ cao và phẳng ngang`;
     } else if (spokenTone === 2) {
       feedbackVi = `Đang giống ${TONE_SHORT[detectedTone]} · cần vuốt cao độ đi lên ở cuối`;
     } else if (spokenTone === 3) {
       feedbackVi = isFinal
-        ? `Đang giống ${TONE_SHORT[detectedTone]} · cần hạ trầm xuống đáy rồi hơi nhấc lên`
+        ? `Đang giống ${TONE_SHORT[detectedTone]} · cần hạ trầm xuống đáy (hoặc nửa dấu như dấu huyền)`
         : `Đang giống ${TONE_SHORT[detectedTone]} · cần hạ giọng xuống vùng trầm`;
     } else {
-      feedbackVi = `Đang giống ${TONE_SHORT[detectedTone]} · cần thả dứt khoát từ cao xuống thấp`;
+      feedbackVi = `Đang giống ${TONE_SHORT[detectedTone]} · cần hạ dứt khoát từ trên xuống (như dấu huyền)`;
     }
 
     return {
