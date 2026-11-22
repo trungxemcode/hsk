@@ -1,5 +1,5 @@
 {
-  "request": "Introduce HSK speaking pronunciation shadowing and four-tone pitch assessment in Lessons, guided and custom lesson flows only. Keep all other routes, Home, global navigation and media layouts unchanged.",
+  "request": "Add a target-duration slider and optional AI time estimate within the guided lesson automatic presentation on Lessons, preserving all other routes, shared navigation and controls.",
   "excludedRoutes": [
     "lessons"
   ]
