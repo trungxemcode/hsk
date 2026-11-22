@@ -37,7 +37,8 @@ async function bytes(asset,signal,onProgress){
  if(hash!==asset.sha256)throw Error('Gói giọng không vượt qua kiểm tra dữ liệu.');if(signal.aborted)throw aborted();return blob;
 }
 async function getAssets(v){const assets=[];for(const pair of v.files){let blob=null;try{blob=await store.asset(pair[1]);}catch{blob=null;}if(!(await isReadableBlob(blob)))throw Error('Gói giọng trên máy đã bị dọn. Hãy vào Giọng tiếng Trung để tải lại.');assets.push([pair[0],blob]);}return assets;}
-async function engine(){await ready;if(selection.source!=='pack')throw aborted();if(workerClient&&!workerClient.closed&&workerRevision===selection.revision){await workerClient.ready;return workerClient;}dispose();const revision=selection.revision,c=client();workerClient=c;workerRevision=revision;try{c.ready=getAssets(selection).then(assets=>c.call('init',{assets}));await c.ready;if(selection.revision!==revision)throw aborted();return c;}catch(e){if(workerClient===c)dispose();throw e;}}
+async function engine(){await ready;if(selection.source!=='pack')throw aborted();if(workerClient&&!workerClient.closed&&workerRevision===selection.revision){await workerClient.ready;return workerClient;}dispose();const revision=selection.revision,c=client();workerClient=c;workerRevision=revision;try{c.ready=getAssets(selection).then(assets=>c.call('init',{assets,verify:false}));await c.ready;if(selection.revision!==revision)throw aborted();return c;}catch(e){if(workerClient===c)dispose();throw e;}}
+function warmUp(){if(selection.source!=='pack')return;engine().then(()=>scheduleIdle()).catch(()=>{});}
 async function install(voiceId,onProgress=()=>{}){
  if(!support())throw Error('Thiết bị chưa hỗ trợ gói giọng mở rộng. Bạn vẫn có thể chọn giọng thiết bị.');
  installController?.abort();const controller=new AbortController(),signal=controller.signal,run=++operation;installController=controller;let candidate;
@@ -48,7 +49,7 @@ async function install(voiceId,onProgress=()=>{}){
  onProgress({phase:'download',loaded,total});
  for(const spec of specs){if(signal.aborted||run!==operation)throw aborted();if(!blobs.has(spec.sha256)){const fetched=await bytes(spec,signal,n=>{loaded+=n;onProgress({phase:'download',loaded,total});});blobs.set(spec.sha256,fetched);newBlobs.set(spec.sha256,fetched);}}
  if(signal.aborted||run!==operation)throw aborted();stopAudio();dispose();onProgress({phase:'verify',loaded,total});candidate=client();const cancel=()=>candidate?.close();signal.addEventListener('abort',cancel,{once:true});
- try{await candidate.call('init',{assets:files.map(([role,hash])=>[role,blobs.get(hash)])});}finally{signal.removeEventListener('abort',cancel);}
+ try{await candidate.call('init',{assets:files.map(([role,hash])=>[role,blobs.get(hash)]),verify:true});}finally{signal.removeEventListener('abort',cancel);}
  if(signal.aborted||run!==operation)throw aborted();
  const next=await store.replace(before.revision,{source:'pack',voiceURI:'',voiceId,engine:c.engine,assets:specs.map(v=>v.sha256),files},newBlobs,signal);
  persist(next);workerClient=candidate;workerRevision=next.revision;candidate=null;onProgress({phase:'done',loaded,total});scheduleIdle();return next;
@@ -108,7 +109,7 @@ async function speak(text,rate=.85,signal){
  await new Promise((resolve,reject)=>{source=ac.createBufferSource();source.buffer=buffer;source.connect(ac.destination);playReject=reject;source.onended=()=>{source?.disconnect();source=null;playReject=null;resolve(true);};source.start();});
  }finally{signal?.removeEventListener('abort',abort);scheduleIdle();}
 }
-root.HSKVoiceManager={ready,catalog,support,install,cancelInstall,chooseDevice,speak,prefetch,unlock,async downloaded(){await ready;return {selection:store?await store.snapshot():{...selection},bytes:store?await store.usage():0};},get installing(){return !!installController;},stop(){speechRun++;stopAudio();scheduleIdle();},get selection(){return {...selection};}};
+root.HSKVoiceManager={ready,catalog,support,install,cancelInstall,chooseDevice,speak,prefetch,warmUp,unlock,async downloaded(){await ready;return {selection:store?await store.snapshot():{...selection},bytes:store?await store.usage():0};},get installing(){return !!installController;},stop(){speechRun++;stopAudio();scheduleIdle();},get selection(){return {...selection};}};
 root.addEventListener('storage',event=>{if(event.key===key&&store)store.snapshot().then(v=>{stopAudio();dispose();selection=v;emit();}).catch(()=>{});});
 root.addEventListener('pagehide',()=>{cancelInstall();stopAudio();dispose();context?.close().catch(()=>{});context=null;});
 })(window);
