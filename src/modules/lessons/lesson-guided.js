@@ -36,57 +36,97 @@ function presentation(lesson,words,store){
  const speed=el('select');speed.setAttribute('aria-label','Tốc độ trình chiếu');for(const [value,name] of [[.65,'Rất chậm'],[.75,'Chậm'],[1,'Vừa']]){const o=el('option',name);o.value=value;speed.append(o);}speed.value='0.75';
  const strokeHost=el('div',undefined,'guided-stroke-stage');strokeHost.hidden=true;strokeHost.setAttribute('aria-label','Mẫu thứ tự nét viết');
  const voiceDialog=el('dialog',undefined,'guided-voice-dialog'),voiceSelect=el('select'),voiceNote=el('p'),voiceStatus=el('p');voiceSelect.setAttribute('aria-label','Giọng tiếng Việt');voiceDialog.setAttribute('aria-label','Chọn giọng tiếng Việt');voiceStatus.setAttribute('role','status');
- const viPackBox=el('div',undefined,'guided-vi-pack'),viPackHint=el('p',undefined,'guided-vi-pack-hint'),viPackProg=el('progress',undefined,'guided-vi-pack-prog');viPackProg.max=100;viPackProg.value=0;viPackProg.hidden=true;
- const viPackBtn=button('⬇ Tải giọng Việt offline (~60 MiB)',()=>toggleViPack());viPackBtn.className='guided-vi-pack-btn';
- viPackBox.append(viPackHint,viPackProg,viPackBtn);
+ const VI_OFFLINE_VOICES=[['vi_altotram_medium','Nữ miền Bắc · Ấm áp (~60 MiB)'],['vi_diemdam_medium','Nam miền Bắc · Điềm đạm (~60 MiB)']];
+ const viPackBox=el('div',undefined,'guided-vi-pack'),viPackSelect=el('select',undefined,'guided-vi-pack-select'),viPackHint=el('p',undefined,'guided-vi-pack-hint'),viPackProg=el('progress',undefined,'guided-vi-pack-prog'),viPackActions=el('div',undefined,'guided-vi-pack-actions');viPackProg.max=100;viPackProg.value=0;viPackProg.hidden=true;
+ viPackSelect.setAttribute('aria-label','Chọn giọng Việt offline');
+ for(const [id,name] of VI_OFFLINE_VOICES){const o=el('option',name);o.value=id;viPackSelect.append(o);}
+ const viPackBtn=button('⬇ Tải giọng Việt offline (~60 MiB)',()=>installOrCancelViPack());viPackBtn.className='guided-vi-pack-btn';
+ const viPackDelBtn=button('Xóa giọng Việt offline',()=>removeViPack());viPackDelBtn.className='guided-vi-pack-del';viPackDelBtn.hidden=true;
+ viPackActions.append(viPackBtn,viPackDelBtn);
+ viPackBox.append(viPackSelect,viPackHint,viPackProg,viPackActions);
  const mbVi=n=>(n/1048576).toLocaleString('vi-VN',{maximumFractionDigits:1})+' MiB';
- let viPackBusy=false;
+ let viPackBusy=false,viPackSynced=false;
+ const isModernViId=id=>VI_OFFLINE_VOICES.some(([vid])=>vid===id);
  const previewPlayer=window.HSKSpeech?.createPlayer({synth:window.speechSynthesis,Utterance:window.SpeechSynthesisUtterance,voiceURI:()=>vietnameseVoice,rate:1,notify:m=>voiceStatus.textContent=m});
  function refreshViPackUi(){
   const vm=window.HSKViVoiceManager;
   if(!vm||!vm.support?.()){viPackBox.hidden=true;return;}
   viPackBox.hidden=false;
-  const installed=vm.selection?.source==='pack';
+  const sel=vm.selection||{};
+  const installed=sel.source==='pack';
+  const installedId=installed?String(sel.voiceId||''):'';
+  const isLegacy=installed&&!isModernViId(installedId);
+  if(!viPackSynced&&installed&&isModernViId(installedId)){viPackSelect.value=installedId;viPackSynced=true;}
+  const chosenId=viPackSelect.value||VI_OFFLINE_VOICES[0][0];
+  const chosenName=(VI_OFFLINE_VOICES.find(([id])=>id===chosenId)||VI_OFFLINE_VOICES[0])[1].replace(/\s*\(~.*\)$/,'');
+  const installedLabel=sel.voiceLabel||(isLegacy?'Bản cũ (VAIS-1000)':chosenName);
+  viPackSelect.disabled=viPackBusy;
   viPackProg.hidden=!viPackBusy;
   if(viPackBusy){
+   viPackBtn.hidden=false;
    viPackBtn.textContent='Hủy tải';
    viPackBtn.disabled=false;
-   viPackHint.textContent='Đang tải gói giọng Việt offline (Piper VAIS-1000) chạy ngay trên máy…';
-  }else if(installed){
-   viPackBtn.textContent='Xóa giọng Việt offline (~60 MiB)';
+   viPackDelBtn.hidden=true;
+   viPackHint.textContent=`Đang tải giọng Việt tự nhiên (${chosenName}) lưu ngay trên máy…`;
+  }else if(isLegacy){
+   viPackBtn.hidden=false;
+   viPackBtn.textContent='⬆ Nâng cấp giọng Việt tự nhiên (~60 MiB)';
    viPackBtn.disabled=false;
-   viPackHint.textContent='Đã cài sẵn giọng Việt offline (Piper VAIS-1000) trong app — chạy mượt trên mọi trình duyệt PC & điện thoại, không cần mạng.';
+   viPackDelBtn.hidden=false;
+   viPackDelBtn.textContent='Xóa bản cũ';
+   viPackDelBtn.disabled=false;
+   viPackHint.textContent='Đang cài bản cũ (VAIS-1000 dễ nghe như giọng ngoại). Nâng cấp sang giọng Việt miền Bắc tự nhiên ở trên — app tự thay bản cũ, không tốn thêm bộ nhớ.';
+  }else if(installed&&chosenId!==installedId){
+   viPackBtn.hidden=false;
+   viPackBtn.textContent='⬇ Đổi sang giọng đã chọn (~60 MiB)';
+   viPackBtn.disabled=false;
+   viPackDelBtn.hidden=false;
+   viPackDelBtn.textContent='Xóa';
+   viPackDelBtn.disabled=false;
+   viPackHint.textContent=`Đang dùng: ${installedLabel}. Bấm nút bên dưới để tải và đổi sang "${chosenName}" (tự xóa giọng cũ).`;
+  }else if(installed){
+   viPackBtn.hidden=true;
+   viPackDelBtn.hidden=false;
+   viPackDelBtn.textContent='Xóa giọng Việt offline (~60 MiB)';
+   viPackDelBtn.disabled=false;
+   viPackHint.textContent=`Đã cài sẵn: ${installedLabel} — chạy mượt ngay trên máy, không cần mạng. Chọn giọng khác ở trên nếu muốn đổi.`;
   }else{
+   viPackBtn.hidden=false;
    viPackBtn.textContent='⬇ Tải giọng Việt offline (~60 MiB)';
    viPackBtn.disabled=false;
-   viPackHint.textContent='Dùng cho PC / trình duyệt thiếu giọng Việt: tải 1 lần (~60 MiB), lưu trong máy và đọc tiếng Việt tự nhiên kể cả khi offline.';
+   viPackDelBtn.hidden=true;
+   viPackHint.textContent='Dùng cho PC / trình duyệt thiếu giọng Việt: chọn giọng miền Bắc tự nhiên ở trên, tải 1 lần (~60 MiB) và đọc offline ngay trên máy.';
   }
  }
- async function toggleViPack(){
+ viPackSelect.onchange=()=>refreshViPackUi();
+ async function removeViPack(){
+  const vm=window.HSKViVoiceManager;if(!vm||viPackBusy)return;
+  previewPlayer?.stop();
+  viPackDelBtn.disabled=true;viPackBtn.disabled=true;
+  try{await vm.remove();viPackSynced=false;if(vietnameseVoice==='__vi_offline_pack__'){vietnameseVoice='';try{localStorage.setItem('hsk-guided-vi-voice','');}catch{}}voiceStatus.textContent='Đã xóa gói giọng Việt offline.';}
+  catch(e){voiceStatus.textContent=e.message||'Chưa xóa được gói giọng Việt.';}
+  finally{refreshVoices();}
+ }
+ async function installOrCancelViPack(){
   const vm=window.HSKViVoiceManager;if(!vm)return;
   if(viPackBusy){vm.cancelInstall();return;}
   previewPlayer?.stop();
-  if(vm.selection?.source==='pack'){
-   viPackBtn.disabled=true;
-   try{await vm.remove();if(vietnameseVoice==='__vi_offline_pack__'){vietnameseVoice='';try{localStorage.setItem('hsk-guided-vi-voice','');}catch{}}voiceStatus.textContent='Đã xóa gói giọng Việt offline.';}
-   catch(e){voiceStatus.textContent=e.message||'Chưa xóa được gói giọng Việt.';}
-   finally{refreshVoices();}
-   return;
-  }
+  const targetId=viPackSelect.value||VI_OFFLINE_VOICES[0][0];
   viPackBusy=true;viPackProg.value=0;refreshViPackUi();
   try{
-   await vm.install(p=>{
+   await vm.install(targetId,p=>{
     viPackProg.value=p.total?p.loaded/p.total*100:100;
     voiceStatus.textContent=p.phase==='verify'?'Đang kiểm tra giọng Việt trên máy…':p.phase==='done'?'Đã tải xong giọng Việt offline! Bấm Nghe thử để kiểm tra.':`Đang tải giọng Việt offline ${mbVi(p.loaded)} / ${mbVi(p.total)}…`;
    });
+   viPackSynced=true;
    vietnameseVoice='__vi_offline_pack__';try{localStorage.setItem('hsk-guided-vi-voice',vietnameseVoice);}catch{}
   }catch(e){
    voiceStatus.textContent=e.name==='AbortError'?'Đã hủy tải gói giọng Việt.':(e.message||'Chưa tải được giọng Việt offline.');
   }finally{viPackBusy=false;refreshVoices();}
  }
- function refreshVoices(){const voices=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^(?:vi(?:[-_]|$)|vie\b)/i.test(v.lang||'')||/\b(?:vietnamese|tiếng việt|hoaimy|namminh)\b/i.test(v.name||''));const hasViPack=window.HSKViVoiceManager?.selection?.source==='pack';voiceSelect.replaceChildren();const auto=el('option',hasViPack&&!voices.length?'Tự động · dùng giọng Việt offline trong app':'Tự động · ưu tiên giọng tự nhiên');auto.value='';voiceSelect.append(auto);if(hasViPack){const po=el('option','Piper · Nữ · VAIS-1000 · offline trong app');po.value='__vi_offline_pack__';voiceSelect.append(po);}for(const v of voices){const o=el('option',v.name+(v.localService?' · trên thiết bị':' · trực tuyến'));o.value=v.voiceURI;voiceSelect.append(o);}voiceSelect.value=(vietnameseVoice==='__vi_offline_pack__'&&hasViPack)||voices.some(v=>v.voiceURI===vietnameseVoice)?vietnameseVoice:'';voiceNote.textContent=hasViPack?'Đang có gói giọng Việt offline trong app. Bấm Nghe thử để kiểm tra.':voices.length>1?'Nghe thử và chọn giọng bạn thích. Giọng trực tuyến cần có mạng.':voices.length===1?'Thiết bị hiện chỉ có một giọng Việt. Có thể tải thêm giọng Việt offline bên dưới.':'Trình duyệt này chưa có giọng tiếng Việt. Bấm nút tải giọng Việt offline bên dưới để dùng ngay trên PC (hoặc mở bằng Microsoft Edge).';refreshViPackUi();}
+ function refreshVoices(){const voices=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^(?:vi(?:[-_]|$)|vie\b)/i.test(v.lang||'')||/\b(?:vietnamese|tiếng việt|hoaimy|namminh)\b/i.test(v.name||''));const viSel=window.HSKViVoiceManager?.selection||{};const hasViPack=viSel.source==='pack';const isLegacy=hasViPack&&!isModernViId(String(viSel.voiceId||''));voiceSelect.replaceChildren();const auto=el('option',hasViPack&&!voices.length?'Tự động · dùng giọng Việt offline trong app':'Tự động · ưu tiên giọng tự nhiên');auto.value='';voiceSelect.append(auto);if(hasViPack){const po=el('option',(viSel.voiceLabel||'Giọng Việt offline trong app')+(isLegacy?' · bản cũ':''));po.value='__vi_offline_pack__';voiceSelect.append(po);}for(const v of voices){const o=el('option',v.name+(v.localService?' · trên thiết bị':' · trực tuyến'));o.value=v.voiceURI;voiceSelect.append(o);}voiceSelect.value=(vietnameseVoice==='__vi_offline_pack__'&&hasViPack)||voices.some(v=>v.voiceURI===vietnameseVoice)?vietnameseVoice:'';voiceNote.textContent=isLegacy?'Đang dùng bản giọng Việt cũ. Hãy bấm "Nâng cấp giọng Việt tự nhiên" bên dưới để nghe tự nhiên hơn.':hasViPack?'Đang có gói giọng Việt offline trong app. Bấm Nghe thử để kiểm tra.':voices.length>1?'Nghe thử và chọn giọng bạn thích. Giọng trực tuyến cần có mạng.':voices.length===1?'Thiết bị hiện chỉ có một giọng Việt. Có thể tải thêm giọng Việt offline bên dưới.':'Trình duyệt này chưa có giọng tiếng Việt. Bấm tải giọng Việt offline bên dưới (hoặc mở app bằng Microsoft Edge để dùng giọng Hoài My / Nam Minh tự nhiên miễn phí).';refreshViPackUi();}
  voiceSelect.onchange=()=>{previewPlayer?.stop();vietnameseVoice=voiceSelect.value;try{localStorage.setItem('hsk-guided-vi-voice',vietnameseVoice);}catch{}voiceStatus.textContent='Đã chọn giọng. Bấm Nghe thử để kiểm tra.';};
- const voiceSettings=button('Giọng Việt',()=>{playing=false;stop();update();refreshVoices();voiceStatus.textContent='';voiceDialog.showModal();});
+ const voiceSettings=button('Giọng Việt',()=>{playing=false;stop();update();viPackSynced=false;refreshVoices();voiceStatus.textContent='';voiceDialog.showModal();});
  const closeVoice=()=>{previewPlayer?.stop();if(viPackBusy)window.HSKViVoiceManager?.cancelInstall?.();voiceDialog.close();voiceSettings.focus();};
  voiceDialog.append(el('h2','Giọng tiếng Việt'),voiceSelect,voiceNote,viPackBox,voiceStatus,button('Nghe thử',()=>previewPlayer?.play('Xin chào, chúng ta cùng học tiếng Trung nhé.',undefined,'vi-VN')),button('Xong',closeVoice));voiceDialog.addEventListener('cancel',e=>{e.preventDefault();closeVoice();});
  window.speechSynthesis?.addEventListener?.('voiceschanged',refreshVoices);

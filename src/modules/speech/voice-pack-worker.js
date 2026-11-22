@@ -1,7 +1,7 @@
 /* Single-thread WASM SIMD; no cloud synthesis or cross-origin isolation required. */
 'use strict';
 importScripts('./voice-model.js','./voice-model-transport.js');
-let tts,isKokoro=false;
+let tts,isKokoro=false,isViPiper=false;
 async function unzip(blob){return new Response(blob.stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();}
 function voiceData(buffer){
  // Read only stored tensor bytes from the ZIP container, never execute pickle.
@@ -28,20 +28,20 @@ async function initialize(assets){
  const resources=JSON.parse(new TextDecoder().decode(resourcesBuf)),FS=Module.FS;
  for(const [path,b64] of Object.entries(resources)){if(path==='/model-metadata.bin')continue;FS.mkdirTree(path.slice(0,path.lastIndexOf('/'))||'/');const raw=atob(b64);FS.writeFile(path,Uint8Array.from(raw,c=>c.charCodeAt(0)));}
  if(viResBuf){
-  isKokoro=false;
+  isKokoro=false;isViPiper=true;
   const viRes=JSON.parse(new TextDecoder().decode(viResBuf));
   for(const [path,b64] of Object.entries(viRes)){FS.mkdirTree(path.slice(0,path.lastIndexOf('/'))||'/');const raw=atob(b64);FS.writeFile(path,Uint8Array.from(raw,c=>c.charCodeAt(0)));}
   FS.writeFile('/model.onnx',new Uint8Array(await files.model.arrayBuffer()),{canOwn:true});
   tts=createOfflineTts(Module,{offlineTtsModelConfig:{vits:{model:'/model.onnx',tokens:'/vi-tokens.txt',lexicon:'',dataDir:'/espeak-ng-data',noiseScale:.667,noiseScaleW:.8,lengthScale:1},numThreads:1,debug:0,provider:'cpu'},ruleFsts:'',ruleFars:'',maxNumSentences:1});
  }else if(files.config){
-  isKokoro=false;
+  isKokoro=false;isViPiper=false;
   const config=JSON.parse(await files.config.text());if(config.type!=='piper')throw Error('Loại gói giọng chưa được hỗ trợ.');
   const varint=n=>{const b=[];do{const v=n%128;n=Math.floor(n/128);b.push(v+(n?128:0));}while(n);return b;},field=(n,b)=>[...varint(n*8+2),...varint(b.length),...b],enc=s=>Array.from(new TextEncoder().encode(s));
   const metadata=Uint8Array.from(Object.entries(config.metadata).flatMap(([k,v])=>field(14,[...field(1,enc(k)),...field(2,enc(v))])));
   FS.writeFile('/tokens.txt',config.tokens);FS.writeFile('/model.onnx',HSKVoiceModel.expand(new Uint8Array(await files.model.arrayBuffer()),metadata),{canOwn:true});
   tts=createOfflineTts(Module,{offlineTtsModelConfig:{vits:{model:'/model.onnx',tokens:'/tokens.txt',lexicon:'',dataDir:'/espeak-ng-data',noiseScale:.667,noiseScaleW:.8,lengthScale:1},numThreads:1,debug:0,provider:'cpu'},ruleFsts:'',ruleFars:'',maxNumSentences:1});
  }else{
-  isKokoro=true;
+  isKokoro=true;isViPiper=false;
   // Add Sherpa metadata to the unmodified web export; keep only one speaker.
   const model=await HSKVoiceModelTransport.unpackModel(files.model),raw=atob(resources['/model-metadata.bin']),metadata=Uint8Array.from(raw,c=>c.charCodeAt(0)),combined=HSKVoiceModel.expand(model,metadata);
   FS.writeFile('/model.onnx',combined,{canOwn:true});
@@ -50,11 +50,16 @@ async function initialize(assets){
  }
  FS.unlink('/model.onnx');
 }
-function normalizeTtsText(text,kokoro){
+function normalizeTtsText(text,kokoro,viPiper=false){
  let s=String(text||'').replace(/〇/g,'零').trim();
  // Anchor short/bare Chinese words with terminal punctuation so Kokoro's neural prosody
  // does not hallucinate a leading murmur ("ừm...") before the first syllable.
  if(kokoro&&s&&/\p{Script=Han}/u.test(s)&&!/[。！？!?…；;.]+$/.test(s))s+='。';
+ if(viPiper&&s){
+  // Smooth dictionary separators so Vietnamese Piper reads meanings with natural phrasing.
+  s=s.normalize('NFC').replace(/\s*[;；/·]+\s*/g,', ').replace(/\s+/g,' ').trim();
+  if(!/[.!?…]+$/.test(s))s+='.';
+ }
  return s;
 }
 function effectiveSpeed(rate,kokoro){
@@ -157,10 +162,10 @@ function cleanAudioEdges(samples,sampleRate){
  return out;
 }
 function generate(text,rate){
- const input=normalizeTtsText(text,isKokoro),speed=effectiveSpeed(rate,isKokoro);
+ const input=normalizeTtsText(text,isKokoro,isViPiper),speed=effectiveSpeed(rate,isKokoro);
  const a=tts.generate({text:input,sid:0,speed});
  if(![16000,22050,24000].includes(a.sampleRate)||a.samples.length<100||a.samples.some(v=>!Number.isFinite(v))||!a.samples.some(v=>Math.abs(v)>.0001))throw Error('Giọng chưa tạo được âm thanh hợp lệ. Hãy thử giọng khác.');
- let samples=isKokoro?cleanAudioEdges(a.samples,a.sampleRate):a.samples;
+ let samples=(isKokoro||isViPiper)?cleanAudioEdges(a.samples,a.sampleRate):a.samples;
  if(isKokoro){
   const desired=targetAcousticSpeed(rate);
   if(desired<speed-.02)samples=timeStretchWSOLA(samples,a.sampleRate,desired/speed);

@@ -1,6 +1,6 @@
 {
-  "schema": 1,
-  "engine": "sherpa-onnx-1.13.8-piper-vi",
+  "schema": 2,
+  "engine": "sherpa-onnx-1.13.8-piper-vi-v2",
   "shared": [
     {
       "role": "engine",
@@ -33,21 +33,34 @@
     {
       "role": "viResources",
       "url": "../../../vendor/vietnamese-voices/vi-resources.json.gz",
-      "bytes": 29393,
-      "sha256": "a922f6ca80e2a74ad23b09535ebb43ce482ce90936076548dd6cc99ef8b0188c",
+      "bytes": 29435,
+      "sha256": "a56ea96dc5746afc2ce23e1878a7571af4519a90acdc1e1d3faa60880564b138",
       "type": "application/octet-stream"
     }
   ],
   "voices": [
     {
-      "id": "vi_vais1000_medium",
-      "label": "Piper · Nữ · VAIS-1000 (Offline)",
+      "id": "vi_altotram_medium",
+      "label": "Nữ miền Bắc · Ấm áp (Offline)",
       "assets": [
         {
           "role": "model",
-          "url": "https://huggingface.co/csukuangfj/vits-piper-vi_VN-vais1000-medium/resolve/3d92898cf942406c23330da466a831d3d923c2a2/vi_VN-vais1000-medium.onnx",
-          "bytes": 63201425,
-          "sha256": "7264e130a2f2e62c2dd586e3790ba054b669f9f72a2bdb2c0d60207136611576",
+          "url": "https://huggingface.co/vnhellboy/vietnamese-piper-voices/resolve/df2a53e0b5c8039d17e642cc8d80fa03d59374b7/vits-piper-vi_VN-altotram-medium/vi_VN-altotram-medium.onnx",
+          "bytes": 63516182,
+          "sha256": "2832e9e64e427c36bf02665e8bbba7a41851ae34aa9de50c078ddb0a75d4cd0d",
+          "type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "id": "vi_diemdam_medium",
+      "label": "Nam miền Bắc · Điềm đạm (Offline)",
+      "assets": [
+        {
+          "role": "model",
+          "url": "https://huggingface.co/vnhellboy/vietnamese-piper-voices/resolve/df2a53e0b5c8039d17e642cc8d80fa03d59374b7/vits-piper-vi_VN-diemdam-medium/vi_VN-diemdam-medium.onnx",
+          "bytes": 63516182,
+          "sha256": "821096ee1f6d424fd9d1a0ff83fd851637e5ff880e8aaf3c5b53be87269a6e26",
           "type": "application/octet-stream"
         }
       ]

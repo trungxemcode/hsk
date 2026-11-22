@@ -49,19 +49,21 @@ async function fetchAssetBytes(asset,signal,onProgress){
 async function getAssets(v){const assets=[];for(const pair of v.files){let blob=null;try{blob=await store.asset(pair[1]);}catch{blob=null;}if(!(await isReadableBlob(blob)))throw Error('Gói giọng Việt trên máy đã bị dọn. Hãy tải lại trong Giọng Việt.');assets.push([pair[0],blob]);}return assets;}
 async function engine(){await ready;if(selection.source!=='pack')throw aborted();if(workerClient&&!workerClient.closed&&workerRevision===selection.revision){await workerClient.ready;return workerClient;}dispose();const revision=selection.revision,c=client();workerClient=c;workerRevision=revision;try{c.ready=getAssets(selection).then(assets=>c.call('init',{assets,verify:false}));await c.ready;if(selection.revision!==revision)throw aborted();return c;}catch(e){if(workerClient===c)dispose();throw e;}}
 function warmUp(){if(selection.source!=='pack')return;engine().then(()=>scheduleIdle()).catch(()=>{});}
-async function install(onProgress=()=>{}){
+async function install(voiceIdOrProgress,maybeProgress){
+ const voiceId=typeof voiceIdOrProgress==='string'?voiceIdOrProgress:'';
+ const onProgress=typeof voiceIdOrProgress==='function'?voiceIdOrProgress:(typeof maybeProgress==='function'?maybeProgress:()=>{});
  if(!support())throw Error('Trình duyệt này chưa hỗ trợ gói giọng Việt offline.');
  installController?.abort();const controller=new AbortController(),signal=controller.signal,run=++operation;installController=controller;let candidate;
- try{await ready;const before=await store.snapshot(),c=await catalog(),voice=c.voices[0];
+ try{await ready;const before=await store.snapshot(),c=await catalog(),voice=(voiceId&&c.voices.find(v=>v.id===voiceId))||c.voices[0];
  const specs=[...c.shared,...voice.assets],blobs=new Map(),newBlobs=new Map(),files=[];let total=0,loaded=0;
  for(const spec of specs){let saved=null;try{saved=await store.asset(spec.sha256);}catch{saved=null;}if(await isReadableBlob(saved,spec.bytes))blobs.set(spec.sha256,saved);else total+=spec.bytes;files.push([spec.role,spec.sha256]);}
  const quota=await navigator.storage?.estimate?.().catch(()=>null);if(quota?.quota&&quota.quota-quota.usage<total*1.2)throw Error('Máy chưa đủ dung lượng trống để tải giọng Việt offline.');
  onProgress({phase:'download',loaded,total});
  for(const spec of specs){if(signal.aborted||run!==operation)throw aborted();if(!blobs.has(spec.sha256)){const fetched=await fetchAssetBytes(spec,signal,n=>{loaded+=n;onProgress({phase:'download',loaded,total});});blobs.set(spec.sha256,fetched);newBlobs.set(spec.sha256,fetched);}}
  if(signal.aborted||run!==operation)throw aborted();stopAudio();dispose();onProgress({phase:'verify',loaded,total});candidate=client();const cancel=()=>candidate?.close();signal.addEventListener('abort',cancel,{once:true});
- try{await candidate.call('init',{assets:files.map(([role,hash])=>[role,blobs.get(hash)]),verify:true,verifyText:'Xin chào.'});}finally{signal.removeEventListener('abort',cancel);}
+ try{await candidate.call('init',{assets:files.map(([role,hash])=>[role,blobs.get(hash)]),verify:true,verifyText:'Xin chào, chúng ta cùng học tiếng Trung nhé.'});}finally{signal.removeEventListener('abort',cancel);}
  if(signal.aborted||run!==operation)throw aborted();
- const next=await store.replace(before.revision,{source:'pack',voiceId:voice.id,engine:c.engine,assets:specs.map(v=>v.sha256),files},newBlobs,signal);
+ const next=await store.replace(before.revision,{source:'pack',voiceId:voice.id,voiceLabel:voice.label,engine:c.engine,assets:specs.map(v=>v.sha256),files},newBlobs,signal);
  persist(next);workerClient=candidate;workerRevision=next.revision;candidate=null;onProgress({phase:'done',loaded,total});scheduleIdle();return next;
  }finally{candidate?.close();if(installController===controller)installController=null;}
 }
