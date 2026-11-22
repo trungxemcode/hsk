@@ -52,8 +52,64 @@ function normalizeTtsText(text,kokoro){
 }
 function effectiveSpeed(rate,kokoro){
  const r=Math.max(.5,Math.min(1.5,Number(rate)||.85));
- // Kokoro-82M degrades below ~0.81x (stretching BOS silence into a voiced hum and slowing iPhone CPU).
- return kokoro?Number(Math.max(.81,Math.min(1.35,.8+(r-.5)*.55)).toFixed(2)):r;
+ // Synthesize inside Kokoro at >= 0.88x (clean prosody, zero BOS "ừm" hum, fast CPU)
+ // and use pitch-preserving WSOLA below 0.88x for genuinely slow learner speeds.
+ return kokoro?Number(Math.max(.88,Math.min(1.35,r)).toFixed(2)):r;
+}
+function targetAcousticSpeed(rate){
+ const r=Math.max(.5,Math.min(1.5,Number(rate)||.85));
+ if(r>=.8)return Math.max(.88,Math.min(1.35,r));
+ // Map learner rates: 0.52 (Rất chậm) -> 0.63x, 0.60 (Chậm) -> 0.70x, 0.70 -> 0.79x, 0.80 (Vừa) -> 0.88x
+ return Number(Math.max(.58,Math.min(.88,.7+(r-.6)*.9)).toFixed(2));
+}
+function timeStretchWSOLA(samples,sampleRate,ratio){
+ if(!samples||ratio>=.98||ratio<=.45)return samples;
+ const winLen=Math.max(256,(Math.round(sampleRate*.032)&~1));
+ const synHop=winLen>>1;
+ const anaHop=Math.max(32,Math.round(synHop*ratio));
+ const searchRad=Math.round(sampleRate*.008);
+ const n=samples.length;
+ if(n<=winLen+searchRad)return samples;
+ const hann=new Float32Array(winLen);
+ for(let i=0;i<winLen;i++)hann[i]=.5*(1-Math.cos(2*Math.PI*i/winLen));
+ const numFrames=Math.max(1,Math.floor((n-winLen)/anaHop)+1);
+ const outLen=(numFrames-1)*synHop+winLen;
+ const out=new Float32Array(outLen);
+ // First grain starts at sample 0 with flat leading half so onset is untouched.
+ for(let i=0;i<synHop;i++)out[i]=samples[i];
+ for(let i=synHop;i<winLen;i++)out[i]=samples[i]*hann[i];
+ let prevSrc=0;
+ const corrStep=4;
+ for(let k=1;k<numFrames;k++){
+  const ideal=Math.min(n-winLen,k*anaHop);
+  const refStart=Math.min(n-synHop,prevSrc+synHop);
+  const lo=Math.max(0,ideal-searchRad),hi=Math.min(n-winLen,ideal+searchRad);
+  let bestPos=ideal,bestScore=-Infinity;
+  for(let cand=lo;cand<=hi;cand+=2){
+   let dot=0,eA=0,eB=0;
+   for(let j=0;j<synHop;j+=corrStep){
+    const a=samples[refStart+j],b=samples[cand+j];
+    dot+=a*b;eA+=a*a;eB+=b*b;
+   }
+   const denom=Math.sqrt(eA*eB)+1e-9;
+   const score=dot/denom;
+   if(score>bestScore){bestScore=score;bestPos=cand;}
+  }
+  const refLo=Math.max(lo,bestPos-1),refHi=Math.min(hi,bestPos+1);
+  for(let cand=refLo;cand<=refHi;cand++){
+   let dot=0,eA=0,eB=0;
+   for(let j=0;j<synHop;j+=2){
+    const a=samples[refStart+j],b=samples[cand+j];
+    dot+=a*b;eA+=a*a;eB+=b*b;
+   }
+   const score=dot/(Math.sqrt(eA*eB)+1e-9);
+   if(score>bestScore){bestScore=score;bestPos=cand;}
+  }
+  const outStart=k*synHop;
+  for(let i=0;i<winLen;i++)out[outStart+i]+=samples[bestPos+i]*hann[i];
+  prevSrc=bestPos;
+ }
+ return out;
 }
 function cleanAudioEdges(samples,sampleRate){
  const n=samples.length;if(n<Math.round(sampleRate*.08))return samples;
@@ -97,6 +153,11 @@ function generate(text,rate){
  const input=normalizeTtsText(text,isKokoro),speed=effectiveSpeed(rate,isKokoro);
  const a=tts.generate({text:input,sid:0,speed});
  if(![16000,22050,24000].includes(a.sampleRate)||a.samples.length<100||a.samples.some(v=>!Number.isFinite(v))||!a.samples.some(v=>Math.abs(v)>.0001))throw Error('Giọng chưa tạo được âm thanh hợp lệ. Hãy thử giọng khác.');
- return {samples:isKokoro?cleanAudioEdges(a.samples,a.sampleRate):a.samples,sampleRate:a.sampleRate};
+ let samples=isKokoro?cleanAudioEdges(a.samples,a.sampleRate):a.samples;
+ if(isKokoro){
+  const desired=targetAcousticSpeed(rate);
+  if(desired<speed-.02)samples=timeStretchWSOLA(samples,a.sampleRate,desired/speed);
+ }
+ return {samples,sampleRate:a.sampleRate};
 }
 self.onmessage=async({data})=>{const {id,type}=data;try{if(type==='init'){await initialize(data.assets);if(data.verify!==false)generate('你好。',1);self.postMessage({id,ok:true});}else{const a=generate(data.text,data.rate);self.postMessage({id,samples:a.samples,sampleRate:a.sampleRate},[a.samples.buffer]);}}catch(e){self.postMessage({id,error:e.message||'Không mở được giọng đọc.'});}};

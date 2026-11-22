@@ -2,7 +2,7 @@
 (function(root){
  'use strict';
  function chooseVoice(voices,language='zh-CN',preferredURI=''){
-  if(/^vi(?:-|_|$)/i.test(language)){const choices=voices.filter(v=>/^vi(?:-|_|$)/i.test(v.lang));const selected=choices.find(v=>v.voiceURI===preferredURI);if(selected)return selected;const quality=v=>/natural|neural|premium|enhanced/i.test(v.name)?3:!v.localService?2:1;return choices.slice().sort((a,b)=>quality(b)-quality(a))[0]||null;}
+  if(/^vi(?:-|_|$)/i.test(language)){const choices=voices.filter(v=>/^(?:vi(?:[-_]|$)|vie\b)/i.test(v.lang||'')||/\b(?:vietnamese|tiếng việt|hoaimy|namminh)\b/i.test(v.name||''));const selected=choices.find(v=>v.voiceURI===preferredURI);if(selected)return selected;const quality=v=>/natural|neural|premium|enhanced/i.test(v.name)?3:!v.localService?2:1;return choices.slice().sort((a,b)=>quality(b)-quality(a))[0]||null;}
   const mandarin=voices.filter(v=>/^(zh|cmn)(-|_|$)/i.test(v.lang)&&!/^zh[-_]hk/i.test(v.lang)&&!/(cantonese|yue)/i.test(v.name));
   const selected=mandarin.find(v=>v.voiceURI===preferredURI);if(selected)return selected;
   const preferred=mandarin.filter(v=>/^(zh[-_](cn|hans)|cmn[-_]cn)/i.test(v.lang));
