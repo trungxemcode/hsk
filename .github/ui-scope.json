@@ -1,5 +1,5 @@
 {
-  "request": "Introduce HSK speaking pronunciation shadowing and four-tone pitch assessment in Lessons, guided and custom lesson flows only. Keep all other routes, Home, global navigation and media layouts unchanged.",
+  "request": "Fix iOS Safari speaking dialog and syllable-chip layout in Lessons and prioritize trimming dead/idle time before speeding up Chinese and Vietnamese voices in guided automatic lessons. Preserve all unrelated routes and shared navigation.",
   "excludedRoutes": [
     "lessons"
   ]
