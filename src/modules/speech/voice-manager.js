@@ -4,8 +4,15 @@ const base=new URL('./',document.currentScript.src),key='hsk-chinese-voice-selec
 let selection={source:'device',voiceURI:'',voiceId:'',revision:0,assets:[]};try{const v=JSON.parse(localStorage.getItem(key));if(v&&['device','pack'].includes(v.source))selection={...selection,...v};}catch{}
 const store=root.indexedDB?root.HSKVoiceStore.createStore(root.indexedDB):null;
 let catalogPromise,installController,workerClient,workerRevision=-1,operation=0,speechRun=0,context,source,playReject,idleTimer,synthQueue=Promise.resolve();
-const pcmCache=new Map(),inflightSynth=new Map(),queuedPrefetch=new Set(),MAX_PCM_CACHE=28;
-const clearSynthCache=()=>{pcmCache.clear();inflightSynth.clear();queuedPrefetch.clear();};
+const pcmCache=new Map(),inflightSynth=new Map(),MAX_PCM_CACHE=28;
+const clearSynthCache=()=>{for(const entry of inflightSynth.values())entry.cancelled=true;pcmCache.clear();inflightSynth.clear();};
+const cancelQueuedPrefetches=(keepKey='')=>{for(const [k,entry] of inflightSynth)if(entry.isPrefetch&&k!==keepKey)entry.cancelled=true;};
+async function isReadableBlob(blob,expectedBytes){
+ if(!blob||typeof blob.size!=='number')return false;
+ if(expectedBytes!==undefined&&blob.size!==expectedBytes)return false;
+ if(typeof blob.slice==='function'){try{await blob.slice(0,1).arrayBuffer();}catch{return false;}}
+ return true;
+}
 const emit=()=>root.dispatchEvent(new CustomEvent('hsk-chinese-voice-change',{detail:{...selection}}));
 function persist(v){if(v.revision<selection.revision)return;selection=v;try{localStorage.setItem(key,JSON.stringify(v));}catch{}emit();}
 const ready=store?store.snapshot().then(v=>{selection=v;persist(v);}).catch(()=>{}):Promise.resolve();
@@ -29,21 +36,21 @@ async function bytes(asset,signal,onProgress){
  const blob=new Blob(parts,{type:asset.type||'application/octet-stream'}),hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',await blob.arrayBuffer())),n=>n.toString(16).padStart(2,'0')).join('');
  if(hash!==asset.sha256)throw Error('Gói giọng không vượt qua kiểm tra dữ liệu.');if(signal.aborted)throw aborted();return blob;
 }
-async function getAssets(v){const assets=[];for(const pair of v.files){const blob=await store.asset(pair[1]);if(!blob)throw Error('Gói giọng trên máy đã bị dọn. Hãy tải lại trong Giọng tiếng Trung.');assets.push([pair[0],blob]);}return assets;}
+async function getAssets(v){const assets=[];for(const pair of v.files){let blob=null;try{blob=await store.asset(pair[1]);}catch{blob=null;}if(!(await isReadableBlob(blob)))throw Error('Gói giọng trên máy đã bị dọn. Hãy vào Giọng tiếng Trung để tải lại.');assets.push([pair[0],blob]);}return assets;}
 async function engine(){await ready;if(selection.source!=='pack')throw aborted();if(workerClient&&!workerClient.closed&&workerRevision===selection.revision){await workerClient.ready;return workerClient;}dispose();const revision=selection.revision,c=client();workerClient=c;workerRevision=revision;try{c.ready=getAssets(selection).then(assets=>c.call('init',{assets}));await c.ready;if(selection.revision!==revision)throw aborted();return c;}catch(e){if(workerClient===c)dispose();throw e;}}
 async function install(voiceId,onProgress=()=>{}){
  if(!support())throw Error('Thiết bị chưa hỗ trợ gói giọng mở rộng. Bạn vẫn có thể chọn giọng thiết bị.');
  installController?.abort();const controller=new AbortController(),signal=controller.signal,run=++operation;installController=controller;let candidate;
  try{await ready;const before=await store.snapshot(),c=await catalog(),voice=c.voices.find(v=>v.id===voiceId);if(!voice)throw Error('Không tìm thấy giọng.');if(voice.downloadable===false)throw Error(voice.unavailableReason||'Giọng này hiện chỉ có demo.');
- const specs=[...c.shared,...(voice.assets||[{...voice.asset,role:'voice'}])],blobs=new Map(),files=[];let total=0,loaded=0;
- for(const spec of specs){const saved=await store.asset(spec.sha256);if(saved&&saved.size===spec.bytes)blobs.set(spec.sha256,saved);else total+=spec.bytes;files.push([spec.role,spec.sha256]);}
+ const specs=[...c.shared,...(voice.assets||[{...voice.asset,role:'voice'}])],blobs=new Map(),newBlobs=new Map(),files=[];let total=0,loaded=0;
+ for(const spec of specs){let saved=null;try{saved=await store.asset(spec.sha256);}catch{saved=null;}if(await isReadableBlob(saved,spec.bytes))blobs.set(spec.sha256,saved);else total+=spec.bytes;files.push([spec.role,spec.sha256]);}
  const quota=await navigator.storage?.estimate?.().catch(()=>null);if(quota?.quota&&quota.quota-quota.usage<total*1.2)throw Error('Máy chưa đủ dung lượng trống để đổi giọng. Giọng cũ vẫn được giữ.');
  onProgress({phase:'download',loaded,total});
- for(const spec of specs){if(signal.aborted||run!==operation)throw aborted();if(!blobs.has(spec.sha256))blobs.set(spec.sha256,await bytes(spec,signal,n=>{loaded+=n;onProgress({phase:'download',loaded,total});}));}
+ for(const spec of specs){if(signal.aborted||run!==operation)throw aborted();if(!blobs.has(spec.sha256)){const fetched=await bytes(spec,signal,n=>{loaded+=n;onProgress({phase:'download',loaded,total});});blobs.set(spec.sha256,fetched);newBlobs.set(spec.sha256,fetched);}}
  if(signal.aborted||run!==operation)throw aborted();stopAudio();dispose();onProgress({phase:'verify',loaded,total});candidate=client();const cancel=()=>candidate?.close();signal.addEventListener('abort',cancel,{once:true});
  try{await candidate.call('init',{assets:files.map(([role,hash])=>[role,blobs.get(hash)])});}finally{signal.removeEventListener('abort',cancel);}
  if(signal.aborted||run!==operation)throw aborted();
- const next=await store.replace(before.revision,{source:'pack',voiceURI:'',voiceId,engine:c.engine,assets:specs.map(v=>v.sha256),files},blobs,signal);
+ const next=await store.replace(before.revision,{source:'pack',voiceURI:'',voiceId,engine:c.engine,assets:specs.map(v=>v.sha256),files},newBlobs,signal);
  persist(next);workerClient=candidate;workerRevision=next.revision;candidate=null;onProgress({phase:'done',loaded,total});scheduleIdle();return next;
  }finally{candidate?.close();if(installController===controller)installController=null;}
 }
@@ -60,12 +67,19 @@ function synthesize(text,rate=.85,{isPrefetch=false}={}){
  const r=Math.max(.5,Math.min(1.5,Number(rate)||.85));
  const rev=selection.revision,cacheKey=`${rev}|${r.toFixed(2)}|${clean}`;
  if(pcmCache.has(cacheKey)){const hit=pcmCache.get(cacheKey);cachePut(cacheKey,hit);return Promise.resolve(hit);}
- if(inflightSynth.has(cacheKey))return inflightSynth.get(cacheKey);
- if(isPrefetch)queuedPrefetch.add(cacheKey);
- else queuedPrefetch.clear();
+ const existing=inflightSynth.get(cacheKey);
+ if(existing){
+  if(!isPrefetch){
+   if(!existing.cancelled){existing.isPrefetch=false;cancelQueuedPrefetches(cacheKey);return existing.promise;}
+   inflightSynth.delete(cacheKey);
+  }else if(!existing.cancelled){
+   return existing.promise;
+  }
+ }
+ if(!isPrefetch)cancelQueuedPrefetches(cacheKey);
+ const entry={isPrefetch,cancelled:false,promise:null};
  const task=synthQueue.catch(()=>{}).then(async()=>{
-  if(isPrefetch&&!queuedPrefetch.has(cacheKey))throw aborted();
-  queuedPrefetch.delete(cacheKey);
+  if(entry.isPrefetch&&entry.cancelled)throw aborted();
   if(pcmCache.has(cacheKey))return pcmCache.get(cacheKey);
   const c=await engine();
   if(selection.source!=='pack'||selection.revision!==rev)throw aborted();
@@ -74,9 +88,10 @@ function synthesize(text,rate=.85,{isPrefetch=false}={}){
   if(selection.revision===rev&&result?.samples)cachePut(cacheKey,result);
   return result;
  });
+ entry.promise=task;
  synthQueue=task.catch(()=>{});
- inflightSynth.set(cacheKey,task);
- task.finally(()=>{if(inflightSynth.get(cacheKey)===task)inflightSynth.delete(cacheKey);queuedPrefetch.delete(cacheKey);scheduleIdle();});
+ inflightSynth.set(cacheKey,entry);
+ task.finally(()=>{if(inflightSynth.get(cacheKey)===entry)inflightSynth.delete(cacheKey);scheduleIdle();}).catch(()=>{});
  return task;
 }
 function prefetch(text,rate=.85){
@@ -87,13 +102,13 @@ function prefetch(text,rate=.85){
 async function speak(text,rate=.85,signal){
  const run=++speechRun;
  if(signal?.aborted)throw aborted();unlock();stopAudio();clearTimeout(idleTimer);const revision=selection.revision;
- const abort=()=>{speechRun++;stopAudio();queuedPrefetch.clear();scheduleIdle();};signal?.addEventListener('abort',abort,{once:true});
+ const abort=()=>{speechRun++;stopAudio();scheduleIdle();};signal?.addEventListener('abort',abort,{once:true});
  try{const result=await synthesize(text,rate,{isPrefetch:false});if(signal?.aborted||revision!==selection.revision||run!==speechRun)throw aborted();
  const ac=audioContext();await ac.resume();if(signal?.aborted||run!==speechRun)throw aborted();const buffer=ac.createBuffer(1,result.samples.length,result.sampleRate);buffer.copyToChannel(result.samples,0);
  await new Promise((resolve,reject)=>{source=ac.createBufferSource();source.buffer=buffer;source.connect(ac.destination);playReject=reject;source.onended=()=>{source?.disconnect();source=null;playReject=null;resolve(true);};source.start();});
  }finally{signal?.removeEventListener('abort',abort);scheduleIdle();}
 }
-root.HSKVoiceManager={ready,catalog,support,install,cancelInstall,chooseDevice,speak,prefetch,unlock,async downloaded(){await ready;return {selection:store?await store.snapshot():{...selection},bytes:store?await store.usage():0};},get installing(){return !!installController;},stop(){speechRun++;stopAudio();queuedPrefetch.clear();scheduleIdle();},get selection(){return {...selection};}};
+root.HSKVoiceManager={ready,catalog,support,install,cancelInstall,chooseDevice,speak,prefetch,unlock,async downloaded(){await ready;return {selection:store?await store.snapshot():{...selection},bytes:store?await store.usage():0};},get installing(){return !!installController;},stop(){speechRun++;stopAudio();scheduleIdle();},get selection(){return {...selection};}};
 root.addEventListener('storage',event=>{if(event.key===key&&store)store.snapshot().then(v=>{stopAudio();dispose();selection=v;emit();}).catch(()=>{});});
 root.addEventListener('pagehide',()=>{cancelInstall();stopAudio();dispose();context?.close().catch(()=>{});context=null;});
 })(window);

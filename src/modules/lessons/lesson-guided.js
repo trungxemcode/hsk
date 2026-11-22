@@ -265,16 +265,15 @@ function presentation(lesson,words,store){
   const id=epoch;
   prefetchTimer=setTimeout(()=>{
    if(closed||id!==epoch||!sound.checked||window.HSKVoiceManager?.selection?.source!=='pack')return;
-   const zhRate=getZhRate(),seen=new Set();
-   for(let j=pos+1;j<frames.length&&seen.size<2&&j<=pos+10;j++){
+   const zhRate=getZhRate();
+   for(let j=pos+1;j<frames.length&&j<=pos+8;j++){
     const f=frames[j];
     if(!f?.speak||f.language==='vi-VN')continue;
-    if(seen.has(f.speak))continue;
-    seen.add(f.speak);
     const parts=window.HSKSpeech?.chunks?window.HSKSpeech.chunks(f.speak,60):[f.speak];
     for(const part of parts)window.HSKVoiceManager.prefetch(part,zhRate);
+    break;
    }
-  },120);
+  },60);
  }
  function update(){pause.textContent=pos>=frames.length?'Học lại':playing?'Tạm dừng':'Tiếp tục';pause.setAttribute('aria-pressed',String(playing));previous.disabled=pos===0;next.disabled=pos>=frames.length;}
  function schedule(ms){const id=epoch;clearTimeout(timer);timer=setTimeout(()=>{if(!closed&&playing&&id===epoch)move(1);},ms);}

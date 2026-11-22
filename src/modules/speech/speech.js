@@ -30,7 +30,7 @@
     if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
     notify('Đang phát âm tiếng Trung…');let index=0;
     const next=()=>{if(id!==token)return;if(index===parts.length){reset(active);active=null;packController=null;notify('Đã nghe xong.');return;}
-     manager.speak(parts[index++],typeof rate==='function'?rate():rate,controller.signal).then(()=>{if(id!==token)return;const gap=Math.max(0,Math.min(10000,Number(typeof gapMs==='function'?gapMs():gapMs)||0));if(index<parts.length&&gap)queueTimer=setTimeout(next,gap);else next();}).catch(e=>{if(id!==token)return;stop();if(e.name!=='AbortError')notify(e.message||'Không phát được giọng mở rộng. Hãy thử giọng thiết bị.');});};next();return;
+     manager.speak(parts[index++],typeof rate==='function'?rate():rate,controller.signal).then(()=>{if(id!==token)return;const gap=Math.max(0,Math.min(10000,Number(typeof gapMs==='function'?gapMs():gapMs)||0));if(index<parts.length&&gap)queueTimer=setTimeout(next,gap);else next();}).catch(e=>{if(id!==token)return;const userAborted=controller.signal.aborted;stop();if(e.name!=='AbortError'||!userAborted)notify(e.name==='AbortError'?'Giọng đọc bị gián đoạn. Bấm Tiếp tục để thử lại.':(e.message||'Không phát được giọng mở rộng. Hãy thử giọng thiết bị.'));});};next();return;
    }
    if(!synth||!Utterance){notify('Trình duyệt chưa hỗ trợ phát âm. Hãy thử Chrome, Edge hoặc Safari.');return;}
    const parts=chunks(input,vietnamese?500:100);if(!parts.length)return;
