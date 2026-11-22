@@ -414,8 +414,11 @@
         } else if (info.installed) {
           packBtn.textContent = `🗑 Xóa gói Offline (${formatBytes(info.bytes)})`;
           packBtn.classList.add('is-installed');
+        } else if (info.needsUpgrade) {
+          packBtn.textContent = '⬇ Cập nhật gói Offline tiếng Trung (~70 MiB)';
+          packBtn.classList.remove('is-installed');
         } else {
-          packBtn.textContent = '⬇ Tải gói nhận diện Offline (~53 MiB)';
+          packBtn.textContent = '⬇ Tải gói nhận diện Offline (~70 MiB)';
           packBtn.classList.remove('is-installed');
         }
       } else {
@@ -726,7 +729,9 @@
         statusText.textContent = 'Cần kết nối mạng để tải gói nhận diện Offline lần đầu.';
         return;
       }
-      statusText.textContent = 'Đang tải gói nhận diện giọng nói Offline (~53 MiB)…';
+      statusText.textContent = info.needsUpgrade
+        ? 'Đang cập nhật gói nhận diện tiếng Trung Offline (~70 MiB)…'
+        : 'Đang tải gói nhận diện giọng nói Offline (~70 MiB)…';
       try {
         const res = await pack.install(p => {
           if (closed) return;

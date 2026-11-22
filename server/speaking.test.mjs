@@ -858,3 +858,79 @@ test('buildPinyinLookup reads lexical const words and dictionarySupplement and k
   assert.deepEqual(Array.from(core.computeCharMatch('我爱你', '我恨你').perChar), [true, false, true]);
   assert.deepEqual(Array.from(core.computeCharMatch('我爱你', '早上好').perChar), [false, false, false]);
 });
+
+test('speaking-asr-config.json defines valid schema 3 zipformer2_ctc Mandarin offline pack', () => {
+  const cfg = JSON.parse(readFileSync(new URL('../speaking-asr-config.json', import.meta.url), 'utf8'));
+  assert.equal(cfg.schema, 3);
+  assert.equal(cfg.engine, 'zipformer2_ctc');
+  assert.deepEqual(Object.keys(cfg.assets).sort(), ['model', 'module', 'runtime', 'tokens', 'wasm']);
+  let sum = 0;
+  for (const [name, asset] of Object.entries(cfg.assets)) {
+    assert.match(asset.sha256, /^[a-f0-9]{64}$/, `${name} sha256 must be 64 hex chars`);
+    assert.ok(asset.bytes > 0 && asset.bytes <= 80 * 1024 * 1024, `${name} bytes must fit 80 MiB limit`);
+    const u = new URL(asset.url);
+    assert.ok(['huggingface.co', 'cdn.jsdelivr.net'].includes(u.hostname), `${name} host must be allowlisted`);
+    sum += asset.bytes;
+  }
+  assert.equal(cfg.downloadBytes, sum);
+});
+
+test('offline pack manager flags legacy whisper-tiny v2 cache for upgrade and accepts schema 3', async () => {
+  const store = new Map();
+  const makeRes = (obj, size = 128) => ({
+    type: 'basic',
+    headers: { get: k => (k.toLowerCase() === 'content-length' ? String(size) : null) },
+    async json() { return obj; },
+    async arrayBuffer() { return new ArrayBuffer(size); }
+  });
+  const cacheObj = {
+    async match(key) { return store.get(typeof key === 'string' ? key : key.url) || null; },
+    async keys() { return [...store.keys()].map(url => ({ url })); }
+  };
+  const window = {
+    caches: {
+      async has() { return true; },
+      async open() { return cacheObj; }
+    }
+  };
+  const source = readFileSync(new URL('../src/modules/speaking/speech-recorder.js', import.meta.url), 'utf8');
+  runInNewContext(source, { window, Blob, setTimeout, clearTimeout });
+
+  // Legacy v2 Whisper cache -> needsUpgrade: true, installed: false
+  store.set('./speaking-asr-ready-v2.json', makeRes({ schema: 2, model: 'Xenova/whisper-tiny', assets: {} }, 55721998));
+  const legacyStatus = await window.HSKSpeakingOfflinePack.downloaded();
+  assert.equal(legacyStatus.installed, false);
+  assert.equal(legacyStatus.needsUpgrade, true);
+
+  // Schema 3 Zipformer2-CTC cache -> installed: true, needsUpgrade: false
+  const assetUrl = 'https://huggingface.co/csukuangfj/test/model.int8.onnx';
+  store.clear();
+  store.set('./speaking-asr-ready-v3.json', makeRes({ schema: 3, engine: 'zipformer2_ctc', assets: { model: { url: assetUrl } } }, 256));
+  store.set(assetUrl, makeRes({}, 1024));
+  const v3Status = await window.HSKSpeakingOfflinePack.downloaded();
+  assert.equal(v3Status.installed, true);
+  assert.equal(v3Status.needsUpgrade, false);
+});
+
+test('mandarin-asr-worker Kaldi Fbank and BBPE CTC decoding produce exact Mandarin characters', () => {
+  const source = readFileSync(new URL('../src/modules/speaking/mandarin-asr-worker.js', import.meta.url), 'utf8');
+  const ctx = { TextDecoder, Float32Array, Uint16Array, Uint8Array, Map, Math };
+  runInNewContext(
+    `${source}
+     globalThis.__exports = { createBbpeMap, createKaldiFbank, decodeCtcTokens };`,
+    ctx
+  );
+  const { createBbpeMap, createKaldiFbank, decodeCtcTokens } = ctx.__exports;
+  const bbpeMap = createBbpeMap();
+  const tokens = ['<blk>', '<sos/eos>', '<unk>', '▁ƎĽĥ', '▁ƍĻŕ'];
+  const decoded = decodeCtcTokens([0, 3, 4, 2, 1], tokens, bbpeMap, new TextDecoder('utf-8'));
+  assert.equal(decoded, '的是');
+
+  const fbank = createKaldiFbank();
+  const tone = synthContour(220, null, 220, 0.25, 16000);
+  const { feats, numFrames, featDim } = fbank(tone);
+  assert.equal(featDim, 80);
+  assert.equal(numFrames, 25);
+  assert.equal(feats.length, 25 * 80);
+  assert.ok(feats.every(Number.isFinite), 'All Fbank features must be finite numbers');
+});
