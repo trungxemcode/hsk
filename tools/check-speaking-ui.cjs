@@ -149,9 +149,12 @@ const MIME = {
         const mBox = await modal.boundingBox();
         assert.ok(mBox && Math.abs((mBox.x + mBox.width / 2) - viewport.width / 2) <= 4, `Speaking modal must be centered horizontally: ${JSON.stringify(mBox)}`);
         if (viewport.width === 1440 && theme === 'light') {
-          assert.ok(mBox.width <= 662, `Desktop speaking modal width should be <= 660px, got ${mBox.width}`);
+          assert.ok(mBox.width >= 760 && mBox.width <= 880, `Desktop speaking modal width should be 760–880px for comfortable reading, got ${mBox.width}`);
           const vScroll = await modal.evaluate(el => el.scrollHeight > el.clientHeight + 4);
           assert.equal(vScroll, false, 'Desktop speaking modal should fit in 1 screen without vertical scrollbar');
+        }
+        if (viewport.width === 390 && theme === 'light') {
+          assert.ok(mBox.height <= 680, `Mobile speaking modal should stay compact (<= 680px), got ${mBox.height}`);
         }
       }
 

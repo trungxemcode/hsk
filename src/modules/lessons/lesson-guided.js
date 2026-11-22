@@ -11,10 +11,11 @@ function presentation(lesson,words,store){
  if(saved?.version===6){const found=frames.findIndex(f=>f.id===saved.frameId);if(found>=0)pos=found;}
  const dialog=el('dialog',undefined,'guided-presentation'),head=el('header'),label=el('p'),progress=el('progress'),stage=el('div',undefined,'guided-slide'),caption=el('p',undefined,'guided-slide-label'),text=el('p',undefined,'guided-slide-text'),pin=el('p',undefined,'guided-slide-pin'),status=el('p',undefined,'guided-slide-status'),foot=el('footer'),actions=el('div',undefined,'guided-slide-actions');
  dialog.setAttribute('aria-label','Trình chiếu học tự động');stage.setAttribute('aria-live','off');status.setAttribute('role','status');progress.max=frames.length||1;progress.setAttribute('aria-label','Tiến độ trình chiếu');
- const pause=button('Tạm dừng',()=>{if(pos>=frames.length){pos=0;playing=true;render();return;}playing=!playing;stop();update();if(playing)run();});
- const previous=button('← Trước',()=>move(-1)),next=button('Tiếp →',()=>move(1)),exit=button('Thoát',()=>{close();store.exit();}),manual=button('Học từng chặng',()=>close());
- const sound=el('input'),soundLabel=el('label','Âm thanh ');sound.type='checkbox';sound.checked=true;soundLabel.append(sound);sound.onchange=()=>{stop();if(playing)run();};
- const speed=el('select');speed.setAttribute('aria-label','Tốc độ trình chiếu');for(const [value,name] of [[.65,'Rất chậm'],[.75,'Chậm'],[1,'Vừa']]){const o=el('option',name);o.value=value;speed.append(o);}speed.value='0.75';speed.onchange=()=>{stop();if(playing)run();};
+ function unlockAudio(){window.HSKVoiceManager?.unlock?.();try{if(window.speechSynthesis?.paused)window.speechSynthesis.resume();}catch{}}
+ const pause=button('Tạm dừng',()=>{unlockAudio();if(pos>=frames.length){pos=0;playing=true;render();return;}playing=!playing;stop();update();if(playing)run();});
+ const previous=button('← Trước',()=>{unlockAudio();move(-1);}),next=button('Tiếp →',()=>{unlockAudio();move(1);}),exit=button('Thoát',()=>{close();store.exit();}),manual=button('Học từng chặng',()=>close());
+ const sound=el('input'),soundLabel=el('label','Âm thanh ');sound.type='checkbox';sound.checked=true;soundLabel.append(sound);sound.onchange=()=>{unlockAudio();stop();if(playing)run();};
+ const speed=el('select');speed.setAttribute('aria-label','Tốc độ trình chiếu');for(const [value,name] of [[.65,'Rất chậm'],[.75,'Chậm'],[1,'Vừa']]){const o=el('option',name);o.value=value;speed.append(o);}speed.value='0.75';speed.onchange=()=>{unlockAudio();stop();if(playing)run();};
  const strokeHost=el('div',undefined,'guided-stroke-stage');strokeHost.hidden=true;strokeHost.setAttribute('aria-label','Mẫu thứ tự nét viết');
  const voiceDialog=el('dialog',undefined,'guided-voice-dialog'),voiceSelect=el('select'),voiceNote=el('p'),voiceStatus=el('p');voiceSelect.setAttribute('aria-label','Giọng tiếng Việt');voiceDialog.setAttribute('aria-label','Chọn giọng tiếng Việt');voiceStatus.setAttribute('role','status');
  const previewPlayer=window.HSKSpeech?.createPlayer({synth:window.speechSynthesis,Utterance:window.SpeechSynthesisUtterance,voiceURI:()=>vietnameseVoice,rate:1,notify:m=>voiceStatus.textContent=m});
@@ -46,7 +47,12 @@ function presentation(lesson,words,store){
   if(closed||!playing||pos>=frames.length)return;keepAwake();const f=frames[pos];status.textContent='';
   if(f.kind==='repeat'){readAlong(f,epoch);return;}
   audioDone=!sound.checked||!f.speak;strokesDone=!f.strokes;spokenStarted=0;
-  if(f.strokes){animateStrokes(f,epoch);return;}
+  if(f.strokes){
+   // Start Mandarin pronunciation synchronously inside the user gesture before async stroke loading.
+   if(sound.checked&&f.speak)speak(f,epoch);
+   animateStrokes(f,epoch);
+   return;
+  }
   speak(f,epoch);
  }
  function speak(f,id){
@@ -58,7 +64,7 @@ function presentation(lesson,words,store){
  }
  async function animateStrokes(f,id){
   const active=()=>!closed&&playing&&id===epoch;
-  status.textContent='Đang tải mẫu nét viết…';
+  if(!spokenStarted)status.textContent='Đang tải mẫu nét viết…';
   try{
    if(!window.HanziWriter||!window.HSKWritingPractice?.characterData)throw Error('no stroke engine');
    const chars=Array.from(f.text).filter(c=>/\p{Script=Han}/u.test(c));if(!chars.length)throw Error('no Han characters');
@@ -72,7 +78,7 @@ function presentation(lesson,words,store){
    await Promise.all(writers.map(w=>w.hideCharacter({duration:0})));if(!active())return;
    for(let loop=0;loop<(f.loops||1);loop++){
     if(loop){await Promise.all(writers.map(w=>w.hideCharacter({duration:0})));if(!active())return;}
-    const animations=writers.map(w=>w.animateCharacter());if(loop===0)speak(f,id);
+    const animations=writers.map(w=>w.animateCharacter());if(loop===0&&!spokenStarted)speak(f,id);
     await Promise.all(animations);if(!active())return;
    }
    strokesDone=true;clearTimeout(repeatTimer);complete();
@@ -105,7 +111,7 @@ function presentation(lesson,words,store){
  const observer=new ResizeObserver(fit);observer.observe(stage);document.addEventListener('visibilitychange',visibility);window.addEventListener('resize',fit);window.visualViewport?.addEventListener('resize',fit);window.addEventListener('pagehide',close);window.addEventListener('hsk-account-ready',close);dialog.addEventListener('cancel',cancel);
  // CSS fills the viewport on iPhone; supported browsers can also hide browser chrome.
  if(!document.fullscreenElement&&document.documentElement.requestFullscreen)try{const request=document.documentElement.requestFullscreen();request?.then(()=>{if(closed)document.exitFullscreen?.().catch(()=>{});else{ownedFullscreen=true;fit();}}).catch(()=>{});}catch{}
- window.HSKSpeech?.stop();render();pause.focus({preventScroll:true});return close;
+ unlockAudio();window.HSKSpeech?.stop();render();pause.focus({preventScroll:true});return close;
 }
 function mount(host,lesson,words,store){
  dispose();const steps=window.HSKGuidedCore.plan(lesson,words);let startedAt=0,index=0,running=false,timer=null,dead=false,answered=false,audio=false,speed=1,retry=null,retries=new Set(),closeShow=()=>{};
@@ -116,7 +122,7 @@ function mount(host,lesson,words,store){
  function live(){return !dead&&box.isConnected&&!document.getElementById('lessonsPanel').hidden;}
  function clear(){clearTimeout(timer);timer=null;player?.stop();}
  function persist(){if(live())store.persist({guided:{version:1,stepId:index<steps.length?key(steps[index],index):'done',updatedAt:Date.now()}});}
- const play=button('Bắt đầu tự chạy',()=>{if(index>=steps.length)return;running=!running;clear();update();if(running)run();}),back=button('← Trước',()=>{if(index>0){index--;retry=null;draw();}}),next=button('Tiếp →',()=>advance()),exit=button('Về bài học',()=>{dispose();store.exit();});
+ const play=button('Bắt đầu tự chạy',()=>{if(index>=steps.length)return;window.HSKVoiceManager?.unlock?.();running=!running;clear();update();if(running)run();}),back=button('← Trước',()=>{if(index>0){index--;retry=null;draw();}}),next=button('Tiếp →',()=>advance()),exit=button('Về bài học',()=>{dispose();store.exit();});
  function update(){play.textContent=running?'Tạm dừng':'Tiếp tục tự chạy';play.setAttribute('aria-pressed',String(running));back.disabled=index===0;next.disabled=index>=steps.length||(['check','recall'].includes(steps[index]?.kind)&&!answered);next.textContent=retry?'Ôn lại điểm vừa sai →':'Tiếp →';}
  function schedule(ms){clearTimeout(timer);if(running&&live())timer=setTimeout(()=>{if(running&&live())advance();},ms);}
  function run(){if(!live()||!running||index>=steps.length)return;const s=steps[index];startedAt=Date.now();if(['check','recall'].includes(s.kind)){update();return;}const text=s.words?.map(w=>w.han)||s.lines?.map(x=>x.cn)||s.grammar?.examples?.map(x=>x.cn);if(audio&&text?.length&&player){player.play(text);return;}schedule(window.HSKGuidedCore.duration(s,speed));}
@@ -133,7 +139,7 @@ function mount(host,lesson,words,store){
     if(s.kind==='check')store.answer(q,correct);if(!correct&&!retries.has(key(s,index))){retries.add(key(s,index));retry=explanation;}update();});b.dataset.guidedAnswer=String(i);opts.append(b);}body.append(opts);
   }update();controls.scrollIntoView?.({block:'nearest',behavior:'auto'});if(running)run();
  }
- settings.append(el('summary','Tốc độ & giọng đọc'));const speedLabel=el('label','Tốc độ chuyển: '),select=el('select');select.setAttribute('aria-label','Tốc độ học tự động');for(const [value,label] of [[.75,'Chậm'],[1,'Vừa'],[1.5,'Nhanh']]){const o=el('option',label);o.value=value;select.append(o);}select.value='1';select.onchange=()=>{speed=Number(select.value);clear();if(running)run();};speedLabel.append(select);const audioLabel=el('label'),check=el('input');check.type='checkbox';check.onchange=()=>{audio=check.checked;clear();if(running)run();};audioLabel.append(check,document.createTextNode('Tự đọc tiếng Trung'));settings.append(speedLabel,audioLabel);controls.append(back,play,next);box.append(meter,bar,controls,body,feedback,notice,settings,exit);host.append(box);
+ settings.append(el('summary','Tốc độ & giọng đọc'));const speedLabel=el('label','Tốc độ chuyển: '),select=el('select');select.setAttribute('aria-label','Tốc độ học tự động');for(const [value,label] of [[.75,'Chậm'],[1,'Vừa'],[1.5,'Nhanh']]){const o=el('option',label);o.value=value;select.append(o);}select.value='1';select.onchange=()=>{speed=Number(select.value);clear();if(running)run();};speedLabel.append(select);const audioLabel=el('label'),check=el('input');check.type='checkbox';check.onchange=()=>{audio=check.checked;if(audio)window.HSKVoiceManager?.unlock?.();clear();if(running)run();};audioLabel.append(check,document.createTextNode('Tự đọc tiếng Trung'));settings.append(speedLabel,audioLabel);controls.append(back,play,next);box.append(meter,bar,controls,body,feedback,notice,settings,exit);host.append(box);
  box.addEventListener('toggle',e=>{if(e.target.open&&running){running=false;clear();update();notice.textContent='Đã tạm dừng để bạn xem chi tiết.';}},true);
  const visibility=()=>{if(document.hidden){running=false;clear();update();}},onLeave=()=>{running=false;clear();update();};document.addEventListener('visibilitychange',visibility);window.addEventListener('pagehide',onLeave);window.addEventListener('hsk-account-ready',onLeave);
  const openShow=()=>{running=false;clear();closeShow();closeShow=presentation(lesson,words,store);};
