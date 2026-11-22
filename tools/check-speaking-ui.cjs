@@ -154,7 +154,9 @@ const MIME = {
           assert.equal(vScroll, false, 'Desktop speaking modal should fit in 1 screen without vertical scrollbar');
         }
         if (viewport.width === 390 && theme === 'light') {
-          assert.ok(mBox.height <= 680, `Mobile speaking modal should stay compact (<= 680px), got ${mBox.height}`);
+          assert.ok(mBox.height <= 620, `Mobile speaking modal should stay compact (<= 620px), got ${mBox.height}`);
+          const chipHeights = await modal.locator('.speaking-syl-chip').evaluateAll(ns => ns.map(n => n.getBoundingClientRect().height));
+          assert.ok(chipHeights.length > 0 && chipHeights.every(h => h <= 36), `Mobile syllable chips must stay snug (<= 36px), got ${JSON.stringify(chipHeights)}`);
         }
       }
 

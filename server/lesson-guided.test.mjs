@@ -33,21 +33,34 @@ test('pacing removes idle waits while retaining silent reading time and a delibe
  assert.ok(C.karaokeDuration({text:'你好。'})>=10000);
  assert.ok(C.karaokeDuration({text:'你好。'},.75,20000)>20000);
 });
-test('target duration recalculates loops and pace to fit whole lesson without dropping content',()=>{
+test('target duration prioritizes trimming dead time before accelerating voice without dropping content',()=>{
  const lessonContent=JSON.parse(fs.readFileSync('lesson-content-hsk3.json')).lessons[0];
  const words=Array.from({length:15},(_,i)=>({han:['打算','周末','北方','南方','面包','地图','搬','带','找','游戏','作业','着急','复习','准备','计划'][i],pin:'p'+i,mean:'Nghĩa mẫu '+i}));
  const ex=w=>[{cn:`我${w.han}明天去学习中文。`,pin:'wo ming tian qu xue xi zhong wen',vi:`Ví dụ với từ ${w.han}.`},{cn:`周末我们一起${w.han}吧。`,pin:'zhou mo wo men yi qi ba',vi:`Ví dụ thứ hai với ${w.han}.`}];
  const base=C.estimateLessonBaseline({content:lessonContent},words,ex);
- assert.ok(base.minMinutes>=2&&base.minMinutes<base.baselineMinutes&&base.baselineMinutes<base.maxMinutes,JSON.stringify(base));
+ assert.ok(base.minMinutes>=2&&base.minMinutes<base.deadTimeThresholdMinutes&&base.deadTimeThresholdMinutes<base.baselineMinutes&&base.baselineMinutes<base.maxMinutes,JSON.stringify(base));
  assert.equal(base.metrics.wordCount,15);
- const fast=C.computePacingForTarget({content:lessonContent},words,Math.max(base.minMinutes,Math.round(base.baselineMinutes*0.55)),ex);
- assert.ok(fast.wordLoops<=2||fast.speechRate>0.65,'shorter target reduces repetitions or increases pace');
- assert.ok(Math.abs(fast.estimatedMinutes-fast.targetMinutes)<=2,`estimated ${fast.estimatedMinutes}p close to target ${fast.targetMinutes}p`);
- const fastSlides=C.presentation({content:lessonContent},words,ex,{wordLoops:fast.wordLoops,meaningLoops:fast.meaningLoops});
+ // Stage 1: moderate reduction trims dead time first and keeps voice locked at natural 0.60x / 1.00x.
+ const midTarget=Math.max(base.deadTimeThresholdMinutes+1,Math.round((base.baselineMinutes+base.deadTimeThresholdMinutes)/2));
+ const deadTrim=C.computePacingForTarget({content:lessonContent},words,midTarget,ex);
+ assert.equal(deadTrim.strategy,'trim-dead-time');
+ assert.equal(deadTrim.voiceAccelerated,false);
+ assert.equal(deadTrim.speechRate,0.6,'voice stays at standard speed while trimming dead time');
+ assert.equal(deadTrim.viRate,1,'Vietnamese voice stays at standard speed while trimming dead time');
+ assert.ok(deadTrim.deadTimeCutPct>0&&deadTrim.pauseScale<1&&deadTrim.karaokeScale<1,'dead time and waits are reduced first');
+ assert.ok(Math.abs(deadTrim.estimatedMinutes-deadTrim.targetMinutes)<=2,`estimated ${deadTrim.estimatedMinutes}p close to target ${deadTrim.targetMinutes}p`);
+ // Stage 2: below dead-time floor, voice finally speeds up after dead time hits 100% threshold.
+ const ultraFast=C.computePacingForTarget({content:lessonContent},words,base.minMinutes,ex);
+ assert.equal(ultraFast.strategy,'boost-voice');
+ assert.equal(ultraFast.deadTimeCutPct,100);
+ assert.equal(ultraFast.wordLoops,1);assert.equal(ultraFast.meaningLoops,1);
+ assert.equal(ultraFast.voiceAccelerated,true);
+ assert.ok(ultraFast.speechRate>0.6&&ultraFast.viRate>1,'voice speeds up only after dead time hits threshold');
+ const fastSlides=C.presentation({content:lessonContent},words,ex,{wordLoops:ultraFast.wordLoops,meaningLoops:ultraFast.meaningLoops});
  assert.equal(fastSlides.filter(s=>s.kind==='word').length,15,'never drops any vocabulary word');
  assert.equal(fastSlides.filter(s=>s.kind==='grammar').length,(lessonContent.grammar||[]).length,'never drops any grammar point');
  const deep=C.computePacingForTarget({content:lessonContent},words,Math.min(base.maxMinutes,Math.round(base.baselineMinutes*1.3)),ex);
- assert.ok(deep.wordLoops>=3&&deep.speechRate<=fast.speechRate,'longer target keeps full loops and calmer speed');
+ assert.ok(deep.wordLoops>=3&&deep.speechRate<=0.6&&!deep.voiceAccelerated,'longer target keeps full loops and calmer speed');
 });
 test('classifyTimeBudget and parseAiTimeEstimate grade rush (red), optimal (green) and relaxed (blue) accurately',()=>{
  const ai=C.parseAiTimeEstimate({answer:'```json\n{"recommendedMinutes":30,"minSafeMinutes":27,"maxRelaxedMinutes":35,"reasonVi":"Bài có 15 từ mới và 3 điểm ngữ pháp cần khoảng 30 phút."}\n```'},24);
