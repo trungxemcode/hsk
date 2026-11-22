@@ -400,6 +400,9 @@
 
       renderSyllableStrip(null);
       drawPitchChart(canvas, currentSyllables, null);
+      if (root.HSKVoiceManager?.selection?.source === 'pack' && currentText) {
+        root.HSKVoiceManager.prefetch?.(currentText, 0.82);
+      }
       opts.onNavigate?.(curIdx, item);
     }
 
@@ -609,7 +612,8 @@
         meterTrack.hidden = false;
         const session = await recorder.start({
           maxMs: currentMaxMs,
-          autoSilenceMs: 1250,
+          autoSilenceMs: currentSyllables.length === 1 ? 900 : 1250,
+          expectedSyllables: currentSyllables.length,
           lang: 'zh-CN',
           onLevel: (rms, elapsedMs) => {
             if (closed || activeTake !== take) return;

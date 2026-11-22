@@ -604,6 +604,8 @@
     let totalSamples = 0;
     const startedAt = Date.now();
     const autoSilenceMs = opts.autoSilenceMs === 0 ? 0 : Math.max(650, Number(opts.autoSilenceMs) || 950);
+    const singleSyllable = Number(opts.expectedSyllables) === 1;
+    const minAutoStopMs = singleSyllable ? 1100 : 1750;
     let noiseFloor = 0.001;
     let peakRms = 0;
     let capturePeakRms = 0;
@@ -681,32 +683,39 @@
       totalSamples += copy.length;
       let sq = 0;
       for (let i = 0; i < copy.length; i++) sq += copy[i] * copy[i];
-      const rms = Math.sqrt(sq / copy.length);
-      capturePeakRms = Math.max(capturePeakRms, rms);
+      const rawRms = Math.sqrt(sq / copy.length);
+      capturePeakRms = Math.max(capturePeakRms, rawRms);
       const now = Date.now();
       const elapsed = now - startedAt;
 
       const core = root.HSKPitchCore;
-      const clarity = core?.quickVoicedClarity ? core.quickVoicedClarity(copy, ctx.sampleRate || 16000) : 1;
-      if (clarity < 0.45) {
-        noiseFloor = Math.min(0.08, noiseFloor * 0.75 + rms * 0.25);
+      // Measure VAD energy on the 90-950 Hz wind-filtered voice band so fan rumble never swamps the gate.
+      const metrics = core?.quickVoicedMetrics
+        ? core.quickVoicedMetrics(copy, ctx.sampleRate || 16000)
+        : { clarity: core?.quickVoicedClarity ? core.quickVoicedClarity(copy, ctx.sampleRate || 16000) : 1, rms: rawRms };
+      const clarity = metrics.clarity;
+      const rms = metrics.rms;
+      if (clarity < 0.44) {
+        noiseFloor = Math.min(0.06, noiseFloor * 0.78 + rms * 0.22);
       }
       peakRms *= 0.93;
-      if (clarity >= 0.54) peakRms = Math.max(peakRms, rms);
+      if (clarity >= 0.48) peakRms = Math.max(peakRms, rms);
 
-      const gate = Math.max(0.0009, noiseFloor * 1.45, peakRms * 0.08);
-      const isVoicedOnset = elapsed >= 160 && rms >= gate && clarity >= 0.50;
+      const gate = Math.max(0.00075, noiseFloor * 1.4, peakRms * 0.08);
+      const onsetClarity = noiseFloor > 0.003 ? 0.44 : 0.48;
+      const isVoicedOnset = elapsed >= 140 && rms >= gate && clarity >= onsetClarity;
       if (!hasSpoken) {
         voicedStreak = isVoicedOnset ? voicedStreak + 1 : 0;
-        if (voicedStreak >= 2) {
+        const neededStreak = singleSyllable && clarity >= 0.60 && rms >= gate * 1.25 ? 1 : 2;
+        if (voicedStreak >= neededStreak) {
           hasSpoken = true;
           lastSpeechAt = now;
         }
-      } else if (rms >= gate * 0.8 && (clarity >= 0.40 || rms >= Math.max(0.0022, noiseFloor * 2.2))) {
+      } else if (rms >= gate * 0.78 && (clarity >= 0.38 || rms >= Math.max(0.0020, noiseFloor * 2.1))) {
         lastSpeechAt = now;
       }
       onLevel(rms, elapsed);
-      if (autoSilenceMs > 0 && !autoStopped && hasSpoken && elapsed >= 1750 && now - lastSpeechAt >= autoSilenceMs) {
+      if (autoSilenceMs > 0 && !autoStopped && hasSpoken && elapsed >= minAutoStopMs && now - lastSpeechAt >= autoSilenceMs) {
         autoStopped = true;
         session.stop().then(res => { if (res) onAutoStop(res); }).catch(() => {});
       }

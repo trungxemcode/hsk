@@ -3,7 +3,9 @@
 const base=new URL('./',document.currentScript.src),key='hsk-chinese-voice-selection-v1',aborted=()=>new DOMException('Đã hủy.','AbortError');
 let selection={source:'device',voiceURI:'',voiceId:'',revision:0,assets:[]};try{const v=JSON.parse(localStorage.getItem(key));if(v&&['device','pack'].includes(v.source))selection={...selection,...v};}catch{}
 const store=root.indexedDB?root.HSKVoiceStore.createStore(root.indexedDB):null;
-let catalogPromise,installController,workerClient,workerRevision=-1,operation=0,speechRun=0,context,source,playReject,idleTimer;
+let catalogPromise,installController,workerClient,workerRevision=-1,operation=0,speechRun=0,context,source,playReject,idleTimer,synthQueue=Promise.resolve();
+const pcmCache=new Map(),inflightSynth=new Map(),queuedPrefetch=new Set(),MAX_PCM_CACHE=28;
+const clearSynthCache=()=>{pcmCache.clear();inflightSynth.clear();queuedPrefetch.clear();};
 const emit=()=>root.dispatchEvent(new CustomEvent('hsk-chinese-voice-change',{detail:{...selection}}));
 function persist(v){if(v.revision<selection.revision)return;selection=v;try{localStorage.setItem(key,JSON.stringify(v));}catch{}emit();}
 const ready=store?store.snapshot().then(v=>{selection=v;persist(v);}).catch(()=>{}):Promise.resolve();
@@ -12,7 +14,7 @@ function support(){return !!(root.WebAssembly?.validate(new Uint8Array([0,97,115
 function audioContext(){if(!context||context.state==='closed'){const C=root.AudioContext||root.webkitAudioContext;if(!C)throw Error('Thiết bị chưa hỗ trợ âm thanh của gói giọng.');context=new C();}return context;}
 function unlock(){try{if(root.navigator?.audioSession&&root.navigator.audioSession.type!=='play-and-record')root.navigator.audioSession.type='playback';}catch{}try{audioContext().resume().catch(()=>{});}catch{}}
 function stopAudio(){if(source){source.onended=null;try{source.stop();}catch{}source.disconnect();source=null;}if(playReject){const reject=playReject;playReject=null;reject(aborted());}}
-function dispose(){clearTimeout(idleTimer);workerClient?.close();workerClient=null;workerRevision=-1;}
+function dispose(){clearTimeout(idleTimer);clearSynthCache();workerClient?.close();workerClient=null;workerRevision=-1;}
 function client(){const worker=new Worker(new URL('voice-pack-worker.js',base)),pending=new Map();let sequence=0,closed=false;
  const close=(error=aborted())=>{if(closed)return;closed=true;worker.terminate();for(const p of pending.values()){clearTimeout(p.timer);p.reject(error);}pending.clear();};
  worker.onmessage=({data})=>{const p=pending.get(data.id);if(!p)return;pending.delete(data.id);clearTimeout(p.timer);if(data.error){const e=Error(data.error);p.reject(e);close(e);}else p.resolve(data);};worker.onerror=()=>close(Error('Không mở được bộ giọng trên thiết bị này.'));
@@ -47,17 +49,51 @@ async function install(voiceId,onProgress=()=>{}){
 }
 function cancelInstall(){operation++;installController?.abort();}
 async function chooseDevice(voiceURI='',expectedRevision){cancelInstall();await ready;if(!store){persist({source:'device',voiceURI,voiceId:'',assets:[],revision:selection.revision+1});return;}const before=await store.snapshot();if(expectedRevision!==undefined&&before.revision!==expectedRevision)throw Error('Giọng đã thay đổi. Hãy xem lại danh sách trước khi xóa.');const next=await store.replace(before.revision,{source:'device',voiceURI,voiceId:'',assets:[],files:[]},new Map());stopAudio();dispose();persist(next);}
-function scheduleIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(()=>{if(workerClient?.busy||playReject)scheduleIdle();else dispose();},45000);}
+function scheduleIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(()=>{if(workerClient?.busy||playReject||inflightSynth.size)scheduleIdle();else dispose();},300000);}
+function cachePut(cacheKey,value){
+ if(pcmCache.has(cacheKey))pcmCache.delete(cacheKey);
+ pcmCache.set(cacheKey,value);
+ while(pcmCache.size>MAX_PCM_CACHE)pcmCache.delete(pcmCache.keys().next().value);
+}
+function synthesize(text,rate=.85,{isPrefetch=false}={}){
+ const clean=String(text||'').trim();if(!clean)return Promise.reject(aborted());
+ const r=Math.max(.5,Math.min(1.5,Number(rate)||.85));
+ const rev=selection.revision,cacheKey=`${rev}|${r.toFixed(2)}|${clean}`;
+ if(pcmCache.has(cacheKey)){const hit=pcmCache.get(cacheKey);cachePut(cacheKey,hit);return Promise.resolve(hit);}
+ if(inflightSynth.has(cacheKey))return inflightSynth.get(cacheKey);
+ if(isPrefetch)queuedPrefetch.add(cacheKey);
+ else queuedPrefetch.clear();
+ const task=synthQueue.catch(()=>{}).then(async()=>{
+  if(isPrefetch&&!queuedPrefetch.has(cacheKey))throw aborted();
+  queuedPrefetch.delete(cacheKey);
+  if(pcmCache.has(cacheKey))return pcmCache.get(cacheKey);
+  const c=await engine();
+  if(selection.source!=='pack'||selection.revision!==rev)throw aborted();
+  clearTimeout(idleTimer);
+  const result=await c.call('speak',{text:clean,rate:r});
+  if(selection.revision===rev&&result?.samples)cachePut(cacheKey,result);
+  return result;
+ });
+ synthQueue=task.catch(()=>{});
+ inflightSynth.set(cacheKey,task);
+ task.finally(()=>{if(inflightSynth.get(cacheKey)===task)inflightSynth.delete(cacheKey);queuedPrefetch.delete(cacheKey);scheduleIdle();});
+ return task;
+}
+function prefetch(text,rate=.85){
+ if(selection.source!=='pack')return;
+ const clean=String(text||'').trim();if(!clean)return;
+ synthesize(clean,rate,{isPrefetch:true}).catch(()=>{});
+}
 async function speak(text,rate=.85,signal){
  const run=++speechRun;
  if(signal?.aborted)throw aborted();unlock();stopAudio();clearTimeout(idleTimer);const revision=selection.revision;
- const abort=()=>{speechRun++;stopAudio();if(workerClient?.busy)dispose();else scheduleIdle();};signal?.addEventListener('abort',abort,{once:true});
- try{const c=await engine();if(signal?.aborted||revision!==selection.revision||run!==speechRun)throw aborted();const result=await c.call('speak',{text:String(text),rate:Math.max(.5,Math.min(1.5,Number(rate)||.85))});if(signal?.aborted||revision!==selection.revision||run!==speechRun)throw aborted();
- const ac=audioContext();await ac.resume();if(signal?.aborted)throw aborted();const buffer=ac.createBuffer(1,result.samples.length,result.sampleRate);buffer.copyToChannel(result.samples,0);
+ const abort=()=>{speechRun++;stopAudio();queuedPrefetch.clear();scheduleIdle();};signal?.addEventListener('abort',abort,{once:true});
+ try{const result=await synthesize(text,rate,{isPrefetch:false});if(signal?.aborted||revision!==selection.revision||run!==speechRun)throw aborted();
+ const ac=audioContext();await ac.resume();if(signal?.aborted||run!==speechRun)throw aborted();const buffer=ac.createBuffer(1,result.samples.length,result.sampleRate);buffer.copyToChannel(result.samples,0);
  await new Promise((resolve,reject)=>{source=ac.createBufferSource();source.buffer=buffer;source.connect(ac.destination);playReject=reject;source.onended=()=>{source?.disconnect();source=null;playReject=null;resolve(true);};source.start();});
  }finally{signal?.removeEventListener('abort',abort);scheduleIdle();}
 }
-root.HSKVoiceManager={ready,catalog,support,install,cancelInstall,chooseDevice,speak,unlock,async downloaded(){await ready;return {selection:store?await store.snapshot():{...selection},bytes:store?await store.usage():0};},get installing(){return !!installController;},stop(){speechRun++;stopAudio();if(workerClient?.busy)dispose();else scheduleIdle();},get selection(){return {...selection};}};
+root.HSKVoiceManager={ready,catalog,support,install,cancelInstall,chooseDevice,speak,prefetch,unlock,async downloaded(){await ready;return {selection:store?await store.snapshot():{...selection},bytes:store?await store.usage():0};},get installing(){return !!installController;},stop(){speechRun++;stopAudio();queuedPrefetch.clear();scheduleIdle();},get selection(){return {...selection};}};
 root.addEventListener('storage',event=>{if(event.key===key&&store)store.snapshot().then(v=>{stopAudio();dispose();selection=v;emit();}).catch(()=>{});});
 root.addEventListener('pagehide',()=>{cancelInstall();stopAudio();dispose();context?.close().catch(()=>{});context=null;});
 })(window);
