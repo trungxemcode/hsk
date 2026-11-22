@@ -53,6 +53,23 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    }
    await show.getByRole('button',{name:'Giọng Việt',exact:true}).click();const voiceDialog=p.getByRole('dialog',{name:'Chọn giọng tiếng Việt',exact:true});await voiceDialog.getByRole('button',{name:'Nghe thử',exact:true}).click();assert.equal(await p.evaluate(()=>__spoken.at(-1).voice.voiceURI),'natural','prefer natural Vietnamese');await voiceDialog.getByLabel('Giọng tiếng Việt',{exact:true}).selectOption('basic');await voiceDialog.getByRole('button',{name:'Nghe thử',exact:true}).click();assert.equal(await p.evaluate(()=>__spoken.at(-1).voice.voiceURI),'basic','explicit voice choice');assert.equal(await p.evaluate(()=>localStorage.getItem('hsk-guided-vi-voice')),'basic');await voiceDialog.getByRole('button',{name:'Xong',exact:true}).click();
    if(width===390){
+    await p.route('**/translation-config.json',r=>r.fulfill({body:'{"endpoint":"https://mock-guided-ai.local/translate"}',contentType:'application/json'}));
+    await p.route('https://mock-guided-ai.local/lesson-ask',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({answer:JSON.stringify({recommendedMinutes:30,minSafeMinutes:27,maxRelaxedMinutes:35,reasonVi:'Ước tính 30 phút cho bài mẫu.'})})}));
+    await p.evaluate(()=>{window.HSKAccountDashboard=window.HSKAccountDashboard||{};window.HSKAccountDashboard.user={uid:'guided-test',getIdToken:async()=>'tok'};});
+    await show.locator('.guided-time-trigger').click();
+    const timeDialog=show.locator('.guided-time-dialog');await timeDialog.waitFor();
+    await timeDialog.locator('.guided-time-ai-btn').click();
+    await p.waitForFunction(()=>document.querySelector('.guided-time-ai-title')?.textContent?.includes('30 phút'));
+    assert.equal(await timeDialog.locator('.guided-time-control').getAttribute('data-zone'),'optimal','30p matches AI green zone');
+    await timeDialog.locator('.guided-time-slider').evaluate(el=>{el.value='15';el.dispatchEvent(new Event('input',{bubbles:true}));});
+    assert.equal(await timeDialog.locator('.guided-time-control').getAttribute('data-zone'),'rush','15p below AI 30p turns red');
+    await timeDialog.locator('.guided-time-apply').click();
+    assert.equal(await show.locator('.guided-time-trigger').textContent(),'⏱ 15p');
+    assert.equal(await show.locator('.guided-time-trigger').getAttribute('data-time-zone'),'rush');
+    await show.locator('.guided-time-trigger').click();await timeDialog.locator('.guided-time-reset').click();
+    assert.equal(await show.locator('.guided-time-trigger').textContent(),'⏱ Thời gian');
+   }
+   if(width===390){
     await p.evaluate(()=>{HSKLessonGuided.stop();__spoken=[];window.__pendingStrokes=[];HanziWriter.create=(host,han,opts)=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('width',opts.width);svg.setAttribute('height',opts.height);host.append(svg);return {hideCharacter:async()=>{},animateCharacter:()=>new Promise(resolve=>__pendingStrokes.push(resolve)),pauseAnimation(){}};};HSKLessons.examples=()=>[];HSKLessonGuided.mount(document.querySelector('#lessonsPanel'),{content:{}},[{han:'我爱',pin:'wǒ ài',mean:'tôi yêu'}],{read:()=>({}),persist(){},exit(){},practice(){}});});
     await p.waitForFunction(()=>__spoken.length===1&&__pendingStrokes.length===2);assert.equal(await p.evaluate(()=>__spoken[0].text),'我爱');
     for(let i=0;i<5;i++){const n=await p.evaluate(()=>__spoken.length);await p.evaluate(()=>__spoken.at(-1).onend());await p.waitForFunction(n=>__spoken.length===n+1,n);assert.equal(await p.evaluate(()=>__spoken.at(-1).text),'我爱','repeat Mandarin without a three-read cap while strokes run');}
