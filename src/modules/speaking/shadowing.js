@@ -52,8 +52,8 @@
     if (!ctx || typeof ctx.beginPath !== 'function') return;
 
     const dpr = Math.max(1, Math.min(2, root.devicePixelRatio || 1));
-    const width = Math.max(280, Math.round(canvas.clientWidth || 560));
-    const height = Math.max(120, Math.round(canvas.clientHeight || 146));
+    const width = Math.max(260, Math.round(canvas.clientWidth || 560));
+    const height = Math.max(96, Math.round(canvas.clientHeight || 146));
     if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
       canvas.width = width * dpr;
       canvas.height = height * dpr;
@@ -72,15 +72,16 @@
     const okColor = isDark ? '#4ade80' : '#16a34a';
     const warnColor = isDark ? '#fbbf24' : '#d97706';
 
-    const padL = 22;
+    const wide = width >= 620;
+    const padL = wide ? 26 : 20;
     const padR = 10;
-    const padT = 24;
-    const padB = 12;
+    const padT = wide ? 28 : 22;
+    const padB = wide ? 14 : 10;
     const plotW = Math.max(120, width - padL - padR);
-    const plotH = Math.max(70, height - padT - padB);
+    const plotH = Math.max(60, height - padT - padB);
     const chaoToY = chao => padT + ((5 - Math.max(1, Math.min(5, chao))) / 4) * plotH;
 
-    ctx.font = '11px system-ui, -apple-system, sans-serif';
+    ctx.font = wide ? '12px system-ui, -apple-system, sans-serif' : '11px system-ui, -apple-system, sans-serif';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     for (let lv = 1; lv <= 5; lv++) {
@@ -128,10 +129,10 @@
       }
 
       ctx.fillStyle = ink;
-      ctx.font = '600 13px system-ui, -apple-system, sans-serif';
+      ctx.font = wide ? '600 15px system-ui, -apple-system, sans-serif' : '600 13px system-ui, -apple-system, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
-      ctx.fillText(`${col.han}${col.pinyin ? ' ' + col.pinyin : ''}`, x0 + colW / 2, 3, colW - 4);
+      ctx.fillText(`${col.han}${col.pinyin ? ' ' + col.pinyin : ''}`, x0 + colW / 2, wide ? 4 : 3, colW - 4);
 
       const drawSpan = Math.max(16, colW - insetX * 2);
       const startX = x0 + insetX;

@@ -51,3 +51,14 @@ test('downloaded Chinese voice uses central choice, preserves chunk order, and c
  try{const player=speech.createPlayer({notify:m=>messages.push(m),rate:.7});player.play(['你好。','再见。']);assert.equal(calls[0].text,'你好。');assert.equal(calls[0].rate,.7);calls[0].resolve();await new Promise(r=>setImmediate(r));assert.equal(calls[1].text,'再见。');player.stop();calls[1].resolve();await new Promise(r=>setImmediate(r));assert.ok(!messages.includes('Đã nghe xong.'));
  }finally{delete globalThis.HSKVoiceManager;}
 });
+test('resumes paused speechSynthesis and waits for async voiceschanged before speaking Mandarin',()=>{
+ const spoken=[];let resumed=0,readyVoices=[],handler=null;
+ const synth={paused:true,resume(){resumed++;this.paused=false;},cancel(){},getVoices:()=>readyVoices,addEventListener(type,fn){if(type==='voiceschanged')handler=fn;},removeEventListener(type,fn){if(type==='voiceschanged'&&handler===fn)handler=null;},speak(u){spoken.push(u);}};
+ const player=speech.createPlayer({synth,Utterance:class{constructor(t){this.text=t;}}});
+ player.play('北方');
+ assert.equal(spoken.length,0,'waits when initial voice list is empty');
+ assert.ok(handler,'registers voiceschanged listener');
+ readyVoices=[zh];handler();
+ assert.equal(resumed,1,'resumes paused synth before speaking');
+ assert.equal(spoken.length,1);assert.equal(spoken[0].text,'北方');assert.equal(spoken[0].voice,zh);
+});

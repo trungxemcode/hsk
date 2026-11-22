@@ -9,8 +9,8 @@ function persist(v){if(v.revision<selection.revision)return;selection=v;try{loca
 const ready=store?store.snapshot().then(v=>{selection=v;persist(v);}).catch(()=>{}):Promise.resolve();
 const catalog=()=>catalogPromise||(catalogPromise=fetch(new URL('voice-catalog.json',base),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Không tải được danh sách giọng.');return r.json();}).catch(e=>{catalogPromise=null;throw e;}));
 function support(){return !!(root.WebAssembly?.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,96,0,1,123,3,2,1,0,10,10,1,8,0,65,0,253,15,253,98,11]))&&root.indexedDB&&root.Worker&&root.WebAssembly&&root.crypto?.subtle&&root.DecompressionStream&&(root.AudioContext||root.webkitAudioContext));}
-function audioContext(){if(!context){const C=root.AudioContext||root.webkitAudioContext;if(!C)throw Error('Thiết bị chưa hỗ trợ âm thanh của gói giọng.');context=new C();}return context;}
-function unlock(){try{audioContext().resume().catch(()=>{});}catch{}}
+function audioContext(){if(!context||context.state==='closed'){const C=root.AudioContext||root.webkitAudioContext;if(!C)throw Error('Thiết bị chưa hỗ trợ âm thanh của gói giọng.');context=new C();}return context;}
+function unlock(){try{if(root.navigator?.audioSession&&root.navigator.audioSession.type!=='play-and-record')root.navigator.audioSession.type='playback';}catch{}try{audioContext().resume().catch(()=>{});}catch{}}
 function stopAudio(){if(source){source.onended=null;try{source.stop();}catch{}source.disconnect();source=null;}if(playReject){const reject=playReject;playReject=null;reject(aborted());}}
 function dispose(){clearTimeout(idleTimer);workerClient?.close();workerClient=null;workerRevision=-1;}
 function client(){const worker=new Worker(new URL('voice-pack-worker.js',base)),pending=new Map();let sequence=0,closed=false;

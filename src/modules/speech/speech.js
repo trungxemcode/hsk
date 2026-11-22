@@ -17,9 +17,10 @@
   }return result;
  }
  function createPlayer({synth,Utterance,notify=()=>{},rate=.85,gapMs=0,voiceURI=''}){
-  let token=0,active=null,held=null,queueTimer,packController;
+  let token=0,active=null,held=null,queueTimer,packController,voiceWaitTimer,voiceWaitHandler;
   const reset=button=>{if(button){button.classList.remove('is-speaking');button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',button.dataset.speechLabel);}};
-  function stop(){const wasActive=Boolean(active||held||packController);token++;packController?.abort();packController=null;if(root.HSKVoiceManager?.selection.source==='pack')root.HSKVoiceManager.stop();clearTimeout(queueTimer);reset(active);active=null;held=null;if(wasActive||synth?.speaking||synth?.pending)synth?.cancel();}
+  function clearVoiceWait(){clearTimeout(voiceWaitTimer);voiceWaitTimer=null;if(voiceWaitHandler){try{synth?.removeEventListener?.('voiceschanged',voiceWaitHandler);}catch{}voiceWaitHandler=null;}}
+  function stop(){const wasActive=Boolean(active||held||packController);token++;clearVoiceWait();packController?.abort();packController=null;if(root.HSKVoiceManager?.selection.source==='pack')root.HSKVoiceManager.stop();clearTimeout(queueTimer);reset(active);active=null;held=null;if(wasActive||synth?.speaking||synth?.pending)synth?.cancel();}
   function play(input,button,language='zh-CN'){
    if(active===button&&active){stop();notify('Đã dừng phát âm.');return;}
    stop();
@@ -34,18 +35,30 @@
    if(!synth||!Utterance){notify('Trình duyệt chưa hỗ trợ phát âm. Hãy thử Chrome, Edge hoặc Safari.');return;}
    const parts=chunks(input,vietnamese?500:100);if(!parts.length)return;
    const requested=typeof voiceURI==='function'?voiceURI():voiceURI;
-   const voice=chooseVoice(synth.getVoices(),language,vietnamese?requested:(manager?.selection.voiceURI||requested));
-   if(!voice){notify(vietnamese?'Chưa tìm thấy giọng tiếng Việt. Hãy thêm giọng Vietnamese trong cài đặt giọng nói của thiết bị, rồi thử lại.':'Chưa tìm thấy giọng tiếng Trung. Hãy thêm giọng Mandarin / Chinese trong cài đặt giọng nói của thiết bị, rồi thử lại.');return;}
-   const id=token;active=button;if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
-   let index=0;notify(vietnamese?'Đang phát âm tiếng Việt…':'Đang phát âm tiếng Trung…');
-   function next(){
+   const id=token;
+   function startWithVoices(){
     if(id!==token)return;
-    if(index===parts.length){reset(active);active=null;held=null;notify('Đã nghe xong.');return;}
-    const utterance=new Utterance(parts[index++]);held=utterance;utterance.voice=voice;utterance.lang=voice.lang||'zh-CN';utterance.rate=Math.max(.5,Math.min(1.5,Number(typeof rate==='function'?rate():rate)||.85));utterance.pitch=1;utterance.volume=1;
-    let ended=false;
-    utterance.onend=()=>{if(ended||id!==token)return;ended=true;const gap=Math.max(0,Math.min(10000,Number(typeof gapMs==='function'?gapMs():gapMs)||0));if(index<parts.length&&gap)queueTimer=setTimeout(next,gap);else next();};utterance.onerror=event=>{if(ended||id!==token)return;ended=true;stop();notify(event.error==='network'?'Giọng đọc này cần kết nối mạng. Hãy kết nối hoặc cài giọng đọc offline.':'Không phát được âm thanh. Kiểm tra âm lượng và giọng đọc của thiết bị.');};
-    try{synth.speak(utterance);}catch{if(id===token){stop();notify('Không phát được âm thanh. Hãy thử lại.');}}
-   }next();
+    const voice=chooseVoice(synth.getVoices(),language,vietnamese?requested:(manager?.selection.voiceURI||requested));
+    if(!voice){notify(vietnamese?'Chưa tìm thấy giọng tiếng Việt. Hãy thêm giọng Vietnamese trong cài đặt giọng nói của thiết bị, rồi thử lại.':'Chưa tìm thấy giọng tiếng Trung. Hãy thêm giọng Mandarin / Chinese trong cài đặt giọng nói của thiết bị, rồi thử lại.');return;}
+    active=button;if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
+    let index=0;notify(vietnamese?'Đang phát âm tiếng Việt…':'Đang phát âm tiếng Trung…');
+    function next(){
+     if(id!==token)return;
+     if(index===parts.length){reset(active);active=null;held=null;notify('Đã nghe xong.');return;}
+     const utterance=new Utterance(parts[index++]);held=utterance;utterance.voice=voice;utterance.lang=voice.lang||'zh-CN';utterance.rate=Math.max(.5,Math.min(1.5,Number(typeof rate==='function'?rate():rate)||.85));utterance.pitch=1;utterance.volume=1;
+     let ended=false;
+     utterance.onend=()=>{if(ended||id!==token)return;ended=true;const gap=Math.max(0,Math.min(10000,Number(typeof gapMs==='function'?gapMs():gapMs)||0));if(index<parts.length&&gap)queueTimer=setTimeout(next,gap);else next();};utterance.onerror=event=>{if(ended||id!==token)return;ended=true;stop();notify(event.error==='network'?'Giọng đọc này cần kết nối mạng. Hãy kết nối hoặc cài giọng đọc offline.':'Không phát được âm thanh. Kiểm tra âm lượng và giọng đọc của thiết bị.');};
+     try{if(synth.paused)synth.resume?.();synth.speak(utterance);}catch{if(id===token){stop();notify('Không phát được âm thanh. Hãy thử lại.');}}
+    }next();
+   }
+   const initialVoices=synth.getVoices();
+   if(!initialVoices.length&&typeof synth.addEventListener==='function'){
+    voiceWaitHandler=()=>{if(!synth.getVoices().length)return;clearVoiceWait();startWithVoices();};
+    synth.addEventListener('voiceschanged',voiceWaitHandler);
+    voiceWaitTimer=setTimeout(()=>{clearVoiceWait();startWithVoices();},500);
+    return;
+   }
+   startWithVoices();
   }
   return {play,stop,get currentUtterance(){return held;}};
  }
