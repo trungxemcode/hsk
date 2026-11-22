@@ -20,21 +20,33 @@
   let token=0,active=null,held=null,queueTimer,packController,voiceWaitTimer,voiceWaitHandler;
   const reset=button=>{if(button){button.classList.remove('is-speaking');button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',button.dataset.speechLabel);}};
   function clearVoiceWait(){clearTimeout(voiceWaitTimer);voiceWaitTimer=null;if(voiceWaitHandler){try{synth?.removeEventListener?.('voiceschanged',voiceWaitHandler);}catch{}voiceWaitHandler=null;}}
-  function stop(){const wasActive=Boolean(active||held||packController);token++;clearVoiceWait();packController?.abort();packController=null;if(root.HSKVoiceManager?.selection.source==='pack')root.HSKVoiceManager.stop();clearTimeout(queueTimer);reset(active);active=null;held=null;if(wasActive||synth?.speaking||synth?.pending)synth?.cancel();}
+  function stop(){const wasActive=Boolean(active||held||packController);token++;clearVoiceWait();packController?.abort();packController=null;if(root.HSKVoiceManager?.selection.source==='pack')root.HSKVoiceManager.stop();if(root.HSKViVoiceManager?.selection.source==='pack')root.HSKViVoiceManager.stop();clearTimeout(queueTimer);reset(active);active=null;held=null;if(wasActive||synth?.speaking||synth?.pending)synth?.cancel();}
+  function playPack(packManager,parts,button,label){
+   packManager.unlock();const controller=new AbortController();packController=controller;const id=token;active=button;
+   if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
+   notify(label);let index=0;
+   const next=()=>{if(id!==token)return;if(index===parts.length){reset(active);active=null;packController=null;notify('Đã nghe xong.');return;}
+    packManager.speak(parts[index++],typeof rate==='function'?rate():rate,controller.signal).then(()=>{if(id!==token)return;const gap=Math.max(0,Math.min(10000,Number(typeof gapMs==='function'?gapMs():gapMs)||0));if(index<parts.length&&gap)queueTimer=setTimeout(next,gap);else next();}).catch(e=>{if(id!==token)return;const userAborted=controller.signal.aborted;stop();if(e.name!=='AbortError'||!userAborted)notify(e.name==='AbortError'?'Giọng đọc bị gián đoạn. Bấm Tiếp tục để thử lại.':(e.message||'Không phát được giọng mở rộng. Hãy thử giọng thiết bị.'));});};next();
+  }
   function play(input,button,language='zh-CN'){
    if(active===button&&active){stop();notify('Đã dừng phát âm.');return;}
    stop();
-   const manager=root.HSKVoiceManager,vietnamese=/^vi(?:-|_|$)/i.test(language);
+   const manager=root.HSKVoiceManager,viManager=root.HSKViVoiceManager,vietnamese=/^vi(?:-|_|$)/i.test(language);
+   const requested=typeof voiceURI==='function'?voiceURI():voiceURI;
    if(!vietnamese&&manager?.selection.source==='pack'){
-    const parts=chunks(input,60);if(!parts.length)return;manager.unlock();const controller=new AbortController();packController=controller;const id=token;active=button;
-    if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
-    notify('Đang phát âm tiếng Trung…');let index=0;
-    const next=()=>{if(id!==token)return;if(index===parts.length){reset(active);active=null;packController=null;notify('Đã nghe xong.');return;}
-     manager.speak(parts[index++],typeof rate==='function'?rate():rate,controller.signal).then(()=>{if(id!==token)return;const gap=Math.max(0,Math.min(10000,Number(typeof gapMs==='function'?gapMs():gapMs)||0));if(index<parts.length&&gap)queueTimer=setTimeout(next,gap);else next();}).catch(e=>{if(id!==token)return;const userAborted=controller.signal.aborted;stop();if(e.name!=='AbortError'||!userAborted)notify(e.name==='AbortError'?'Giọng đọc bị gián đoạn. Bấm Tiếp tục để thử lại.':(e.message||'Không phát được giọng mở rộng. Hãy thử giọng thiết bị.'));});};next();return;
+    const parts=chunks(input,60);if(!parts.length)return;
+    playPack(manager,parts,button,'Đang phát âm tiếng Trung…');return;
+   }
+   if(vietnamese&&viManager?.selection.source==='pack'){
+    const deviceVi=synth?chooseVoice(synth.getVoices(),'vi-VN',requested):null;
+    const useViPack=requested==='__vi_offline_pack__'||!requested||!deviceVi;
+    if(useViPack){
+     const parts=chunks(input,120);if(!parts.length)return;
+     playPack(viManager,parts,button,'Đang phát âm tiếng Việt…');return;
+    }
    }
    if(!synth||!Utterance){notify('Trình duyệt chưa hỗ trợ phát âm. Hãy thử Chrome, Edge hoặc Safari.');return;}
    const parts=chunks(input,vietnamese?500:100);if(!parts.length)return;
-   const requested=typeof voiceURI==='function'?voiceURI():voiceURI;
    const id=token;
    function startWithVoices(){
     if(id!==token)return;

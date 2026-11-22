@@ -1,5 +1,5 @@
 {
-  "request": "Fix iOS Safari speaking dialog and syllable-chip layout in Lessons and prioritize trimming dead/idle time before speeding up Chinese and Vietnamese voices in guided automatic lessons. Preserve all unrelated routes and shared navigation.",
+  "request": "Add optional Vietnamese Piper VAIS-1000 offline voice pack for guided lessons and repeat Chinese lesson examples two or three times. Preserve all unrelated routes, app layout, player navigation and dock.",
   "excludedRoutes": [
     "lessons"
   ]
