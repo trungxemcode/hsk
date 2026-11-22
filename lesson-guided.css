@@ -37,7 +37,7 @@ body.guided-presenting{overflow:hidden}
 .guided-vi-pack{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-btn);padding:10px 12px;margin:10px 0;display:flex;flex-direction:column;gap:8px}
 .guided-vi-pack-hint{margin:0;font-size:12.5px;line-height:1.45;color:var(--sub)}
 .guided-vi-pack-prog{width:100%;height:6px}
-.guided-vi-pack-btn{align-self:flex-start;margin:0!important;font-size:12.5px;font-weight:600;border:1px solid color-mix(in srgb,var(--accent,#5b4be8) 45%,var(--line));background:color-mix(in srgb,var(--accent,#5b4be8) 10%,var(--surface));color:var(--accent-dark,var(--ink))}
+.guided-vi-pack-btn{align-self:flex-start;margin:0!important;font-size:12.5px;font-weight:600;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--line));background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--accent-dark,var(--ink))}
 
 .guided-time-dialog{width:min(92vw,520px);max-width:min(92vw,520px);max-height:90dvh;overflow:auto;box-sizing:border-box;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius-card);padding:16px 18px;box-shadow:var(--shadow-studio-layout-31)}
 .guided-time-dialog::backdrop{background:var(--mobile-backdrop);backdrop-filter:blur(2px)}
