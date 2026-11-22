@@ -125,10 +125,12 @@ function presentation(lesson,words,store){
   tickMax.textContent=`Tối đa ${maxMin}p`;
   zoneNote.textContent=`${currentGrade.detail} (Đỏ < ${currentGrade.minSafeMinutes}p · Xanh lá ${currentGrade.minSafeMinutes}–${currentGrade.maxRelaxedMinutes}p · Xanh dương > ${currentGrade.maxRelaxedMinutes}p)`;
   planGrid.replaceChildren();
+  const deadTimeText=currentPreview.deadTimeCutPct>=100?'Tối giản (chạm ngưỡng)':currentPreview.deadTimeCutPct>0?`Giảm ${currentPreview.deadTimeCutPct}%`:'Tiêu chuẩn (0%)';
+  const voiceText=`${currentPreview.speechRate.toFixed(2)}x (${currentPreview.voiceAccelerated?'Tăng tốc':'Giữ chuẩn'})`;
   const rows=[
-   ['Lặp viết & đọc từ',`${currentPreview.wordLoops} lượt`],
-   ['Lặp đọc nghĩa Việt',`${currentPreview.meaningLoops} lượt`],
-   ['Tốc độ giọng Trung',`${currentPreview.speechRate.toFixed(2)}x`],
+   ['Lặp từ & nghĩa',`${currentPreview.wordLoops} từ · ${currentPreview.meaningLoops} nghĩa`],
+   ['Thời gian chết & chờ',deadTimeText],
+   ['Tốc độ giọng Trung',voiceText],
    ['Nhịp đọc theo',`${currentPreview.rhythmLabel} (${Math.round(currentPreview.karaokeScale*100)}%)`]
   ];
   for(const [k,v] of rows){
@@ -136,7 +138,7 @@ function presentation(lesson,words,store){
    item.append(el('span',k,'guided-time-metric-k'),el('strong',v,'guided-time-metric-v'));
    planGrid.append(item);
   }
-  planFooter.textContent=`Dự kiến thực tế: ~${currentPreview.estimatedMinutes} phút · ${currentPreview.slideCount} thẻ (giữ đủ 100% nội dung bài).`;
+  planFooter.textContent=`${currentPreview.strategyNoteVi}. Dự kiến ~${currentPreview.estimatedMinutes} phút · ${currentPreview.slideCount} thẻ (giữ đủ 100% bài).`;
   applyTimeBtn.textContent=`Áp dụng (${targetVal} phút)`;
   resetTimeBtn.disabled=!activePacing;
  }

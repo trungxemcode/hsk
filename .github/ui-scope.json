@@ -1,5 +1,5 @@
 {
-  "request": "Add a target-duration slider and optional AI time estimate within the guided lesson automatic presentation on Lessons, preserving all other routes, shared navigation and controls.",
+  "request": "Fix iOS Safari speaking dialog and syllable-chip layout in Lessons and prioritize trimming dead/idle time before speeding up Chinese and Vietnamese voices in guided automatic lessons. Preserve all unrelated routes and shared navigation.",
   "excludedRoutes": [
     "lessons"
   ]

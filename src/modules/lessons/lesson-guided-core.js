@@ -62,23 +62,55 @@ function pronunciationGap(){return 300;}
 function karaokeDuration(slide,speed=.75,modelMs=0){const count=Array.from(slide.text||'').filter(c=>/\p{Script=Han}/u.test(c)).length;return Math.max(8000,count*650,modelMs*1.4)/Math.max(.65,Math.min(1,Number(speed)||.75));}
 function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
 function countHan(str){return Array.from(String(str||'')).filter(c=>/\p{Script=Han}/u.test(c)).length;}
-function pacingAtPace(wordLoops,meaningLoops,pace=1){
- const p=clamp(Number(pace)||1,.55,2.35);
+function pacingAtCompress(wordLoops,meaningLoops,compress=0){
+ const c=clamp(Number(compress)||0,-.6,2);
+ const wL=Math.max(1,Math.min(5,Math.round(wordLoops||3)));
+ const mL=Math.max(1,Math.min(4,Math.round(meaningLoops||3)));
+ if(c<=0){
+  const t=Math.abs(c)/.6;
+  return {
+   wordLoops:wL,meaningLoops:mL,compress:Number(c.toFixed(3)),
+   speechRate:Number((.6-.1*t).toFixed(2)),
+   viRate:Number((1-.1*t).toFixed(2)),
+   strokeSpeed:Number((.45-.13*t).toFixed(2)),
+   strokeDelayMs:Math.round(240+90*t),
+   karaokeScale:Number((1+.55*t).toFixed(2)),
+   pauseScale:Number((1+.45*t).toFixed(2)),
+   speedValue:Number((.75-.1*t).toFixed(2)),
+   deadTimeCutPct:0,voiceAccelerated:false,strategy:c<-.04?'relaxed':'standard'
+  };
+ }
+ if(c<=1){
+  // Priority 1: cut dead time (pauses, idle karaoke wait, stroke gaps) while locking voice at natural speed.
+  const d=c;
+  return {
+   wordLoops:wL,meaningLoops:mL,compress:Number(c.toFixed(3)),
+   speechRate:.6,
+   viRate:1,
+   strokeSpeed:Number((.45+.7*d).toFixed(2)),
+   strokeDelayMs:Math.round(240-180*d),
+   karaokeScale:Number((1-.64*d).toFixed(2)),
+   pauseScale:Number((1-.75*d).toFixed(2)),
+   speedValue:Number((.75+.25*d).toFixed(2)),
+   deadTimeCutPct:Math.round(d*100),voiceAccelerated:false,strategy:'trim-dead-time'
+  };
+ }
+ // Priority 2: dead time already minimized to threshold -> ramp voice speed smoothly.
+ const v=c-1;
  return {
-  wordLoops:Math.max(1,Math.min(5,Math.round(wordLoops||3))),
-  meaningLoops:Math.max(1,Math.min(4,Math.round(meaningLoops||3))),
-  pace:Number(p.toFixed(3)),
-  speechRate:Number(clamp(.6*Math.pow(p,.78),.48,1.35).toFixed(2)),
-  viRate:Number(clamp(1*Math.pow(p,.55),.85,1.6).toFixed(2)),
-  strokeSpeed:Number(clamp(.45*Math.pow(p,1.45),.3,2.4).toFixed(2)),
-  strokeDelayMs:Math.round(clamp(240/Math.pow(p,1.35),45,340)),
-  karaokeScale:Number(clamp(1/Math.pow(p,1.28),.28,1.65).toFixed(2)),
-  pauseScale:Number(clamp(1/Math.pow(p,1.15),.3,1.5).toFixed(2)),
-  speedValue:Number(clamp(.75*p,.65,1.5).toFixed(2))
+  wordLoops:wL,meaningLoops:mL,compress:Number(c.toFixed(3)),
+  speechRate:Number((.6+.7*v).toFixed(2)),
+  viRate:Number((1+.55*v).toFixed(2)),
+  strokeSpeed:Number((1.15+1.2*v).toFixed(2)),
+  strokeDelayMs:Math.round(60-20*v),
+  karaokeScale:Number((.36-.11*v).toFixed(2)),
+  pauseScale:Number((.25-.07*v).toFixed(2)),
+  speedValue:Number((1+.45*v).toFixed(2)),
+  deadTimeCutPct:100,voiceAccelerated:true,strategy:'boost-voice'
  };
 }
 function estimateFrameSeconds(frame,pacing){
- const p=pacing||pacingAtPace(3,3,1);
+ const p=pacing||pacingAtCompress(3,3,0);
  const pauseSec=(transitionPause()*p.pauseScale)/1000;
  const leadSec=(practiceLead()*p.pauseScale)/1000;
  if(frame.kind==='word'){
@@ -130,66 +162,78 @@ function lessonMetrics(lesson,words,examples=()=>[]){
 function estimateLessonBaseline(lesson,words,examples=()=>[]){
  const metrics=lessonMetrics(lesson,words,examples);
  const defaultFrames=presentation(lesson,words,examples,{wordLoops:3,meaningLoops:3});
- const baselineSec=estimateTotalSeconds(defaultFrames,pacingAtPace(3,3,1));
+ const baselineSec=estimateTotalSeconds(defaultFrames,pacingAtCompress(3,3,0));
  const fastFrames=presentation(lesson,words,examples,{wordLoops:1,meaningLoops:1});
- const minSec=estimateTotalSeconds(fastFrames,pacingAtPace(1,1,2.35));
+ const deadFloorSec=estimateTotalSeconds(fastFrames,pacingAtCompress(1,1,1));
+ const minSec=estimateTotalSeconds(fastFrames,pacingAtCompress(1,1,2));
  const deepFrames=presentation(lesson,words,examples,{wordLoops:4,meaningLoops:3});
- const deepSec=estimateTotalSeconds(deepFrames,pacingAtPace(4,3,.6));
+ const deepSec=estimateTotalSeconds(deepFrames,pacingAtCompress(4,3,-.6));
  const baselineMinutes=Math.max(3,Math.round(baselineSec/60));
  const minMinutes=Math.max(2,Math.min(baselineMinutes-1,Math.ceil(minSec/60)));
+ const deadTimeThresholdMinutes=Math.max(minMinutes,Math.min(baselineMinutes,Math.ceil(deadFloorSec/60)));
  const maxMinutes=Math.max(baselineMinutes+15,Math.min(180,Math.ceil(deepSec/60)));
- return {baselineMinutes,baselineSeconds:Math.round(baselineSec),minMinutes,maxMinutes,slideCount:defaultFrames.length,metrics};
+ return {baselineMinutes,baselineSeconds:Math.round(baselineSec),minMinutes,deadTimeThresholdMinutes,maxMinutes,slideCount:defaultFrames.length,metrics};
 }
 function computePacingForTarget(lesson,words,targetMinutes,examples=()=>[]){
  const baseline=estimateLessonBaseline(lesson,words,examples);
  const clampedTarget=clamp(Math.round(Number(targetMinutes)||baseline.baselineMinutes),baseline.minMinutes,Math.max(baseline.maxMinutes,180));
  const targetSec=clampedTarget*60;
- const ratio=clampedTarget/Math.max(1,baseline.baselineMinutes);
- const tiers=[
-  {wordLoops:4,meaningLoops:3,bias:ratio>=1.18?.02:.24},
-  {wordLoops:3,meaningLoops:3,bias:ratio<=.6?.18:ratio<=.85?.10:0},
-  {wordLoops:2,meaningLoops:2,bias:ratio<=.6?.08:ratio<=.85?0:.08},
-  {wordLoops:2,meaningLoops:1,bias:ratio<=.6?.03:ratio<=.85?.04:.14},
-  {wordLoops:1,meaningLoops:1,bias:ratio<=.6?0:ratio<=.85?.09:.20}
- ];
- let best=null;
- for(const tier of tiers){
-  if(tier.wordLoops===4&&clampedTarget<baseline.baselineMinutes*1.12)continue;
-  const frames=presentation(lesson,words,examples,{wordLoops:tier.wordLoops,meaningLoops:tier.meaningLoops});
-  let lo=.55,hi=2.35;
-  const maxDur=estimateTotalSeconds(frames,pacingAtPace(tier.wordLoops,tier.meaningLoops,lo));
-  const minDur=estimateTotalSeconds(frames,pacingAtPace(tier.wordLoops,tier.meaningLoops,hi));
-  let chosenPace;
-  if(targetSec>=maxDur)chosenPace=lo;
-  else if(targetSec<=minDur)chosenPace=hi;
+ function solve(wL,mL,lo,hi){
+  const frames=presentation(lesson,words,examples,{wordLoops:wL,meaningLoops:mL});
+  const durHi=estimateTotalSeconds(frames,pacingAtCompress(wL,mL,lo));
+  const durLo=estimateTotalSeconds(frames,pacingAtCompress(wL,mL,hi));
+  let c;
+  if(targetSec>=durHi)c=lo;
+  else if(targetSec<=durLo)c=hi;
   else{
+   let a=lo,b=hi;
    for(let i=0;i<24;i++){
-    const mid=(lo+hi)/2;
-    if(estimateTotalSeconds(frames,pacingAtPace(tier.wordLoops,tier.meaningLoops,mid))>targetSec)lo=mid;
-    else hi=mid;
+    const mid=(a+b)/2;
+    if(estimateTotalSeconds(frames,pacingAtCompress(wL,mL,mid))>targetSec)a=mid;
+    else b=mid;
    }
-   chosenPace=(lo+hi)/2;
+   c=(a+b)/2;
   }
-  const pacing=pacingAtPace(tier.wordLoops,tier.meaningLoops,chosenPace);
-  const estSec=estimateTotalSeconds(frames,pacing);
-  const relErr=Math.abs(estSec-targetSec)/Math.max(60,targetSec);
-  const pacePenalty=Math.abs(chosenPace-1)*.45;
-  const score=relErr*6+pacePenalty+tier.bias;
-  if(!best||score<best.score){
-   best={score,pacing,estSec,slideCount:frames.length};
-  }
+  const pacing=pacingAtCompress(wL,mL,c);
+  return {pacing,estSec:estimateTotalSeconds(frames,pacing),slideCount:frames.length};
  }
- const p=best.pacing;
- const estimatedMinutes=Math.max(1,Math.round(best.estSec/60));
- const rhythmLabel=p.karaokeScale<=.55?'Rất nhanh':p.karaokeScale<=.82?'Nhanh gọn':p.karaokeScale<=1.12?'Tiêu chuẩn':'Thư thả';
+ let chosen=null;
+ if(targetSec>=baseline.baselineSeconds*.98){
+  const useDeep=targetSec>=baseline.baselineSeconds*1.18;
+  chosen=solve(useDeep?4:3,3,-.6,0);
+ }else{
+  // Priority 1: cut dead time first (and trim extra loops if needed) while keeping voice at standard 0.60x/1.00x.
+  const deadTimeTiers=[
+   {wordLoops:3,meaningLoops:3,minC:0},
+   {wordLoops:2,meaningLoops:2,minC:.4},
+   {wordLoops:2,meaningLoops:1,minC:.6},
+   {wordLoops:1,meaningLoops:1,minC:.75}
+  ];
+  for(const tier of deadTimeTiers){
+   const candidate=solve(tier.wordLoops,tier.meaningLoops,tier.minC,1);
+   if(candidate.estSec<=targetSec+20){chosen=candidate;break;}
+  }
+  // Priority 2: only once dead time is minimized to threshold (compress=1, 1 loop), boost voice speed.
+  if(!chosen)chosen=solve(1,1,1,2);
+ }
+ const p=chosen.pacing;
+ const estimatedMinutes=Math.max(1,Math.round(chosen.estSec/60));
+ const rhythmLabel=p.karaokeScale<=.42?'Tối giản chờ':p.karaokeScale<=.78?'Rút gọn chờ':p.karaokeScale<=1.12?'Tiêu chuẩn':'Thư thả';
+ const strategyNoteVi=p.strategy==='boost-voice'
+  ?'Ưu tiên 2: Đã tối giản thời gian chết, tăng tốc giọng để kịp giờ'
+  :p.strategy==='trim-dead-time'
+   ?'Ưu tiên 1: Giảm thời gian chết trước, giữ nguyên tốc độ giọng chuẩn'
+   :'Giữ tốc độ giọng chuẩn, nhịp rộng rãi để ghi nhớ sâu';
  return {
   ...p,
   targetMinutes:clampedTarget,
   estimatedMinutes,
-  estimatedSeconds:Math.round(best.estSec),
-  slideCount:best.slideCount,
+  estimatedSeconds:Math.round(chosen.estSec),
+  slideCount:chosen.slideCount,
+  deadTimeThresholdMinutes:baseline.deadTimeThresholdMinutes,
   rhythmLabel,
-  summaryVi:`${p.wordLoops} lượt viết/đọc từ · ${p.meaningLoops} lượt nghĩa · giọng Trung ${p.speechRate}x · nhịp ${rhythmLabel.toLowerCase()}`
+  strategyNoteVi,
+  summaryVi:`${p.wordLoops} lượt từ · ${p.meaningLoops} lượt nghĩa · giảm ${p.deadTimeCutPct}% thời gian chết · giọng Trung ${p.speechRate.toFixed(2)}x`
  };
 }
 function classifyTimeBudget(targetMinutes,referenceMinutes,minSafeMinutes,maxRelaxedMinutes){
