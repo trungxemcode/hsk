@@ -100,16 +100,32 @@ body.guided-presenting{overflow:hidden}
 /* Viewport player structure must follow available space, including when a saved
    visual-design stylesheet sets fixed heights or translates its controls.
    Four selector anchors outrank the designer's three anchors, only in this dialog. */
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]{
+ position:fixed!important;inset:0!important;width:100%!important;height:100vh!important;height:100dvh!important;max-width:none!important;max-height:none!important;margin:0!important;translate:none!important;transform:none!important;box-sizing:border-box!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto 5px minmax(0,1fr) auto!important;gap:12px!important;padding:max(12px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))!important;overflow:hidden!important;
+}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>header,
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>progress,
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>.guided-slide,
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>.guided-slide>*,
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-stroke-stage>div,
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-stroke-stage svg,
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>footer,
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>footer>*:not(dialog),
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide-actions>button{
  height:auto!important;min-height:0!important;max-height:none!important;position:static!important;translate:none!important;transform:none!important;margin:0!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
 }
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>progress{height:5px!important}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-stroke-stage:not([hidden]){display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:12px!important;width:auto!important}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-stroke-stage>div{flex:none!important;display:flex!important;align-items:center!important;justify-content:center!important;width:auto!important}
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>footer{align-content:start!important;align-items:center!important;gap:8px 14px!important;padding:0!important;flex-shrink:0!important}
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide-actions{gap:8px!important;flex:0 0 100%!important}
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] button,
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] select{min-height:44px!important}
+@media(max-height:450px){
+ :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]{gap:5px!important;padding-block:6px!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto 4px minmax(0,1fr)!important}
+ :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>progress{height:4px!important}
+ :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>footer{gap:6px!important}
+}
 
 /* Larger viewport-relative reading type; existing fit() shrinks only if needed. */
 :is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide-text{font-size:calc(clamp(28px,min(3.4vw,6vh),64px) * var(--slide-scale))!important;text-align:center!important}
