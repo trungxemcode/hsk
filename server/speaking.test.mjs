@@ -934,3 +934,51 @@ test('mandarin-asr-worker Kaldi Fbank and BBPE CTC decoding produce exact Mandar
   assert.equal(feats.length, 25 * 80);
   assert.ok(feats.every(Number.isFinite), 'All Fbank features must be finite numbers');
 });
+
+test('captures short single-syllable 啊 inside heavy fan wind blast while rejecting pure wind', () => {
+  const sr = 48000;
+  const totalSec = 5.0;
+  const n = Math.round(totalSec * sr);
+  let seed = 1337;
+  const rand = () => {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return (seed / 0xffffffff) * 2 - 1;
+  };
+  // Heavy 25-65 Hz fan/wind blast + broadband air turbulence across entire 5s clip.
+  const windOnly = new Float32Array(n);
+  let lpWind = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / sr;
+    const w = rand();
+    lpWind = lpWind * 0.96 + w * 0.04;
+    const rumble = 0.14 * Math.sin(2 * Math.PI * 28 * t) + 0.09 * Math.sin(2 * Math.PI * 52 * t) + 0.22 * lpWind;
+    const airRush = 0.012 * w;
+    windOnly[i] = rumble + airRush;
+  }
+
+  // Pure wind must never pass as voiced speech.
+  const windTrack = pitchCore.extractPitchTrack(windOnly, sr);
+  assert.equal(windTrack.filter(f => f.f0 > 0).length, 0, 'Pure fan wind must not produce fake pitch');
+
+  // Now speak a brief 0.20s neutral-tone 啊 at t = 2.2s inside the 5s fan blast.
+  const withAh = new Float32Array(windOnly);
+  const ah = synthContour(195, null, 175, 0.20, sr);
+  const startIdx = Math.round(2.2 * sr);
+  for (let i = 0; i < ah.length; i++) withAh[startIdx + i] += ah[i] * 0.09;
+
+  const track = pitchCore.extractPitchTrack(withAh, sr);
+  const voiced = track.filter(f => f.f0 > 0);
+  assert.ok(voiced.length >= 6, `Expected >= 6 voiced frames for 啊 in fan wind, got ${voiced.length}`);
+
+  const res = pitchCore.segmentAndScore({ samples: withAh, sampleRate: sr, text: '啊', pinyin: 'a', transcript: '啊', recognitionSupported: true });
+  assert.equal(res.hasVoice, true);
+  assert.equal(res.syllables[0].charMatched, true);
+  assert.ok(res.overallScore >= 70, `Expected 啊 in fan wind to score >= 70, got ${res.overallScore}`);
+
+  // prepareAsrAudio must strip the 4+ seconds of fan wind and isolate the brief 啊 burst cleanly.
+  const asrAudio = pitchCore.prepareAsrAudio(withAh, sr);
+  assert.ok(asrAudio.length < 16000 * 1.4, `Expected wind trimmed to < 1.4s around 啊, got ${(asrAudio.length / 16000).toFixed(2)}s`);
+  const metrics = pitchCore.quickVoicedMetrics(withAh.subarray(startIdx, startIdx + 2048), sr);
+  const windMetrics = pitchCore.quickVoicedMetrics(windOnly.subarray(0, 2048), sr);
+  assert.ok(metrics.clarity >= 0.5 && metrics.rms > windMetrics.rms * 1.5, `Expected wind-filtered VAD to separate 啊 from fan: ah=${JSON.stringify(metrics)} wind=${JSON.stringify(windMetrics)}`);
+});

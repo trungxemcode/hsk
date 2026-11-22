@@ -29,6 +29,7 @@
   };
 
   const HOMOPHONE_GROUPS = {
+    a: '啊阿呵腌',
     ai: '爱哀挨矮唉', ba: '八吧把爸罢霸', bai: '百白摆败拜', ban: '班半办般版板', bang: '帮旁棒榜绑',
     bao: '包报抱饱宝保', bei: '杯北被备倍背悲', ben: '本奔笨', bi: '比笔必闭币鼻', bian: '边便变遍编辩',
     biao: '表标', bie: '别憋', bing: '冰并病兵', bo: '播伯波博', bu: '不步部布补捕',
@@ -307,7 +308,7 @@
     });
   }
 
-  function preprocessForPitch(samples, sampleRate = 16000) {
+  function applyButterworthHighPass(samples, sampleRate = 16000, cutoffHz = 90) {
     const n = samples.length;
     const out = new Float32Array(n);
     if (!n) return out;
@@ -316,20 +317,42 @@
     for (let i = 0; i < n; i++) mean += samples[i];
     mean /= n;
 
-    // 1st-order high-pass (~70 Hz) suppresses fan/AC rumble and 50/60 Hz hum.
-    const dt = 1 / sampleRate;
-    const rcHp = 1 / (2 * Math.PI * 70);
-    const alphaHp = rcHp / (rcHp + dt);
-    let prevX = 0;
-    let prevY = 0;
-    for (let i = 0; i < n; i++) {
-      const x = samples[i] - mean;
-      prevY = alphaHp * (prevY + x - prevX);
-      prevX = x;
-      out[i] = prevY;
-    }
+    // 2nd-order Butterworth high-pass (-12 dB/oct) strongly rejects fan/wind blast (15-90 Hz)
+    // while preserving human vocal pitch and formants.
+    const safeCut = Math.max(20, Math.min(sampleRate * 0.25, cutoffHz));
+    const w0 = (2 * Math.PI * safeCut) / sampleRate;
+    const cosW0 = Math.cos(w0);
+    const alpha = Math.sin(w0) / (2 * Math.SQRT1_2);
+    const invA0 = 1 / (1 + alpha);
+    const b0 = ((1 + cosW0) * 0.5) * invA0;
+    const b1 = -(1 + cosW0) * invA0;
+    const b2 = b0;
+    const a1 = (-2 * cosW0) * invA0;
+    const a2 = (1 - alpha) * invA0;
 
-    // Zero-phase (forward + backward) low-pass (~950 Hz) boosts voice SNR in noisy rooms.
+    let x1 = 0;
+    let x2 = 0;
+    let y1 = 0;
+    let y2 = 0;
+    for (let i = 0; i < n; i++) {
+      const x0 = samples[i] - mean;
+      const y0 = b0 * x0 + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2;
+      x2 = x1;
+      x1 = x0;
+      y2 = y1;
+      y1 = y0;
+      out[i] = y0;
+    }
+    return out;
+  }
+
+  function preprocessForPitch(samples, sampleRate = 16000) {
+    const n = samples.length;
+    if (!n) return new Float32Array(0);
+    const out = applyButterworthHighPass(samples, sampleRate, 90);
+
+    // Zero-phase (forward + backward) low-pass (~950 Hz) boosts voice SNR in noisy/windy rooms.
+    const dt = 1 / sampleRate;
     const rcLp = 1 / (2 * Math.PI * 950);
     const alphaLp = dt / (rcLp + dt);
     let lp = out[0];
@@ -358,35 +381,31 @@
   }
 
   /**
-   * Fast real-time harmonic clarity score (0..1) for noise-resistant VAD in Web Audio capture.
+   * Fast real-time wind-filtered harmonic clarity (0..1) and voice-band RMS for VAD capture.
    */
-  function quickVoicedClarity(samples, sampleRate = 16000) {
-    if (!samples || samples.length < 320) return 0;
+  function quickVoicedMetrics(samples, sampleRate = 16000) {
+    if (!samples || samples.length < 320) return { clarity: 0, rms: 0 };
     const step = sampleRate >= 32000 ? 2 : 1;
     const effRate = sampleRate / step;
     const downLen = Math.min(800, Math.floor(samples.length / step));
-    const slice = new Float32Array(downLen);
-    let mean = 0;
+    const rawSlice = new Float32Array(downLen);
     for (let i = 0; i < downLen; i++) {
-      slice[i] = step === 2 ? (samples[i * 2] + samples[i * 2 + 1]) * 0.5 : samples[i];
-      mean += slice[i];
+      rawSlice[i] = step === 2 ? (samples[i * 2] + samples[i * 2 + 1]) * 0.5 : samples[i];
     }
-    mean /= downLen;
-    // Simple 70Hz HP + ~950Hz LP on small VAD slice
+    const slice = applyButterworthHighPass(rawSlice, effRate, 90);
     const dt = 1 / effRate;
-    const aHp = (1 / (2 * Math.PI * 70)) / (1 / (2 * Math.PI * 70) + dt);
     const aLp = dt / (1 / (2 * Math.PI * 950) + dt);
-    let px = 0; let py = 0; let lp = 0;
+    let lp = slice[0] || 0;
+    let sq = 0;
     for (let i = 0; i < downLen; i++) {
-      const x = slice[i] - mean;
-      py = aHp * (py + x - px);
-      px = x;
-      lp += aLp * (py - lp);
+      lp += aLp * (slice[i] - lp);
       slice[i] = lp;
+      sq += lp * lp;
     }
+    const rms = Math.sqrt(sq / downLen);
     const tauMin = Math.max(2, Math.floor(effRate / 450));
     const tauMax = Math.min(downLen - 32, Math.ceil(effRate / 66));
-    if (tauMax <= tauMin) return 0;
+    if (tauMax <= tauMin) return { clarity: 0, rms };
 
     let best = 0;
     let crossedZero = false;
@@ -406,7 +425,11 @@
         best = val;
       }
     }
-    return Math.max(0, Math.min(1, best));
+    return { clarity: Math.max(0, Math.min(1, best)), rms };
+  }
+
+  function quickVoicedClarity(samples, sampleRate = 16000) {
+    return quickVoicedMetrics(samples, sampleRate).clarity;
   }
 
   /**
@@ -457,10 +480,14 @@
       refRms * (opts.rmsRatio || 0.035),
       ambientFloor * 1.25 + Math.max(0, refRms - ambientFloor) * 0.035
     );
+    const windRescueRmsFloor = Math.max(opts.minRms || 0.00022, ambientFloor * 1.25, rmsFloor * 0.78);
+    const rescueClarityFloor = Math.min(clarityThreshold, 0.45);
+    const rescueF0 = new Float64Array(rawFrames.length);
     const nsdf = new Float64Array(tauMax + 2);
 
-    for (const frame of rawFrames) {
-      if (frame.rms < rmsFloor) continue;
+    for (let fi = 0; fi < rawFrames.length; fi++) {
+      const frame = rawFrames[fi];
+      if (frame.rms < Math.min(rmsFloor, windRescueRmsFloor)) continue;
       const s0 = frame.start;
       for (let tau = 0; tau <= tauMax; tau++) {
         let acf = 0;
@@ -509,24 +536,55 @@
         if (m.val > globalMax) globalMax = m.val;
       }
       frame.clarity = Number(Math.max(0, Math.min(1, globalMax)).toFixed(3));
-      if (globalMax < clarityThreshold) continue;
+      const refineTau = picked => {
+        let betterTau = picked.tau;
+        if (picked.tau > 1 && picked.tau < tauMax) {
+          const a = nsdf[picked.tau - 1];
+          const b = nsdf[picked.tau];
+          const c = nsdf[picked.tau + 1];
+          const denom = 2 * (a - 2 * b + c);
+          if (Math.abs(denom) > 1e-9) {
+            const delta = (a - c) / denom;
+            if (Math.abs(delta) < 1) betterTau += delta;
+          }
+        }
+        const f0 = sampleRate / betterTau;
+        return f0 >= minHz && f0 <= maxHz ? f0 : 0;
+      };
 
-      const picked = keyMaxima.find(m => m.val >= globalMax * kCutoff && m.val >= clarityThreshold);
-      if (!picked) continue;
+      if (globalMax >= clarityThreshold && frame.rms >= rmsFloor) {
+        const picked = keyMaxima.find(m => m.val >= globalMax * kCutoff && m.val >= clarityThreshold);
+        if (picked) {
+          const f0 = refineTau(picked);
+          if (f0) frame.f0 = f0;
+        }
+      } else if (globalMax >= rescueClarityFloor && frame.rms >= windRescueRmsFloor) {
+        const picked = keyMaxima.find(m => m.val >= globalMax * kCutoff && m.val >= rescueClarityFloor);
+        if (picked) rescueF0[fi] = refineTau(picked);
+      }
+    }
 
-      let betterTau = picked.tau;
-      if (picked.tau > 1 && picked.tau < tauMax) {
-        const a = nsdf[picked.tau - 1];
-        const b = nsdf[picked.tau];
-        const c = nsdf[picked.tau + 1];
-        const denom = 2 * (a - 2 * b + c);
-        if (Math.abs(denom) > 1e-9) {
-          const delta = (a - c) / denom;
-          if (Math.abs(delta) < 1) betterTau += delta;
+    // Wind-noise rescue for short single-syllable vowels (e.g. 啊 next to a fan):
+    // only activate when the standard pass found < 4 voiced frames under an elevated ambient floor,
+    // and only accept harmonically stable runs (>= 3 adjacent frames within 28% pitch ratio).
+    const standardVoicedCount = rawFrames.reduce((n, f) => n + (f.f0 > 0 ? 1 : 0), 0);
+    if (standardVoicedCount < 4 && ambientFloor >= 0.0018 && maxRms >= ambientFloor * 1.35) {
+      let runStart = -1;
+      for (let i = 0; i <= rawFrames.length; i++) {
+        const f0 = i < rawFrames.length ? (rawFrames[i].f0 || rescueF0[i]) : 0;
+        const prev = i > 0 ? (rawFrames[i - 1].f0 || rescueF0[i - 1]) : 0;
+        const coherent = f0 > 0 && (runStart === -1 || (prev > 0 && Math.max(f0, prev) / Math.min(f0, prev) <= 1.28));
+        if (coherent) {
+          if (runStart === -1) runStart = i;
+        } else {
+          if (runStart !== -1 && i - runStart >= 3) {
+            for (let k = runStart; k < i; k++) {
+              if (!rawFrames[k].f0 && rescueF0[k] > 0) rawFrames[k].f0 = rescueF0[k];
+            }
+          }
+          runStart = f0 > 0 ? i : -1;
         }
       }
-      const f0 = sampleRate / betterTau;
-      if (f0 >= minHz && f0 <= maxHz) frame.f0 = f0;
     }
 
     const filteredF0 = medianFilter(rawFrames.map(f => f.f0), 3);
@@ -1558,7 +1616,10 @@
     const sorted = winRms.slice().sort((a, b) => a - b);
     const ambientRms = percentile(sorted, 0.20);
     const p90Rms = percentile(sorted, 0.90);
-    const frameGate = Math.max(0.00025, Math.min(0.0022, ambientRms * 1.75, p90Rms * 0.05));
+    const p98Rms = percentile(sorted, 0.98);
+    const frameGate = ambientRms > 0.0022
+      ? Math.max(ambientRms * 1.38, ambientRms + Math.max(0, p98Rms - ambientRms) * 0.24)
+      : Math.max(0.00025, Math.min(0.0022, ambientRms * 1.75, p90Rms * 0.05));
     const active = winRms.map(r => r >= frameGate);
     const paired = active.map((ok, k) => ok && (Boolean(active[k - 1]) || Boolean(active[k + 1])));
     const picked = paired.some(Boolean) ? paired : (active.some(Boolean) ? active : null);
@@ -1571,27 +1632,13 @@
     return [first, last];
   }
 
-  /** Preprocesses captured audio for local Mandarin ASR (high-pass, windowed trim, smooth AGC). */
+  /** Preprocesses captured audio for local Mandarin ASR (2nd-order wind HPF, windowed trim, smooth AGC). */
   function prepareAsrAudio(samples, inputSampleRate = 16000) {
     const raw = samples instanceof Float32Array ? samples : new Float32Array(samples || 0);
     if (!raw.length) return new Float32Array(0);
     const resampled = resample16k(raw, inputSampleRate);
-    const n = resampled.length;
-    const hp = new Float32Array(n);
-    let mean = 0;
-    for (let i = 0; i < n; i++) mean += resampled[i];
-    mean /= n;
-    const dt = 1 / 16000;
-    const rc = 1 / (2 * Math.PI * 65);
-    const alpha = rc / (rc + dt);
-    let px = 0;
-    let py = 0;
-    for (let i = 0; i < n; i++) {
-      const x = resampled[i] - mean;
-      py = alpha * (py + x - px);
-      px = x;
-      hp[i] = py;
-    }
+    // 2nd-order Butterworth 115 Hz high-pass aggressively strips fan/wind rumble before ASR framing.
+    const hp = applyButterworthHighPass(resampled, 16000, 115);
 
     const [first, last] = findSpeechBounds(hp, 16000, 0.20, 0.25);
     const trimmed = hp.slice(first, last + 1);
@@ -1609,17 +1656,19 @@
 
     const sortedBlocks = Array.from(blockRms).sort((a, b) => a - b);
     const ambientRms = percentile(sortedBlocks, 0.15);
-    const refSpeechRms = percentile(sortedBlocks, 0.85) || sortedBlocks[sortedBlocks.length - 1] || 0;
+    const peakBlockRms = sortedBlocks[sortedBlocks.length - 1] || 0;
+    const refSpeechRms = Math.max(percentile(sortedBlocks, 0.92), peakBlockRms * 0.55);
     if (refSpeechRms <= 0) return trimmed;
 
-    const activeThreshold = Math.max(0.00025, ambientRms * 1.8, refSpeechRms * 0.08);
+    const windy = ambientRms > 0.003;
+    const activeThreshold = Math.max(0.00025, ambientRms * (windy ? 1.45 : 1.8), refSpeechRms * 0.08);
     const baseGain = Math.min(64, Math.max(1, 0.12 / Math.max(0.00025, refSpeechRms)));
     const rawGain = new Float32Array(numBlocks);
     for (let b = 0; b < numBlocks; b++) {
       const r = blockRms[b];
       rawGain[b] = r >= activeThreshold
         ? Math.min(64, Math.max(0.5, 0.12 / r))
-        : Math.min(baseGain, 4);
+        : (windy ? Math.min(0.45, baseGain * 0.35) : Math.min(baseGain, 4));
     }
 
     const smoothGain = new Float32Array(numBlocks);
@@ -1698,6 +1747,7 @@
     parseSyllables,
     extractPitchTrack,
     quickVoicedClarity,
+    quickVoicedMetrics,
     computeCharMatch,
     targetContour,
     dtwDistance,

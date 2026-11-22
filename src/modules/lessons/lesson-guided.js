@@ -5,7 +5,7 @@ const button=(text,fn)=>{const b=el('button',text);b.type='button';b.onclick=fn;
 function presentation(lesson,words,store){
  const examplesFn=w=>window.HSKLessons.examples(w);
  let frames=window.HSKGuidedCore.presentation(lesson,words,examplesFn);
- let pos=0,playing=true,closed=false,timer,watchdog,karaokeTimer,repeatTimer,writer=null,epoch=0,wake=null,ownedFullscreen=false,spokenStarted=0,audioDone=false,strokesDone=false,activePacing=null,aiEstimate=null,aiPending=null;
+ let pos=0,playing=true,closed=false,timer,watchdog,karaokeTimer,repeatTimer,prefetchTimer,writer=null,epoch=0,wake=null,ownedFullscreen=false,spokenStarted=0,audioDone=false,strokesDone=false,activePacing=null,aiEstimate=null,aiPending=null;
  let vietnameseVoice='';try{vietnameseVoice=localStorage.getItem('hsk-guided-vi-voice')||'';}catch{}
  const AI_TIME_CACHE_KEY='hsk-guided-ai-time-v1';
  const lessonKey=String(lesson?.id||lesson?.vi||lesson?.title||'guided-lesson');
@@ -258,7 +258,24 @@ function presentation(lesson,words,store){
  function save(){if(!closed)store.persist({guidedShow:{version:6,frameId:frames[pos]?.id||'done',updatedAt:Date.now()}});}
  function releaseWake(){const old=wake;wake=null;old?.release().catch(()=>{});}
  function keepAwake(){if(!playing||closed||document.hidden||!navigator.wakeLock||wake)return;const id=epoch;navigator.wakeLock.request('screen').then(lock=>{if(closed||!playing||id!==epoch)lock.release().catch(()=>{});else wake=lock;}).catch(()=>{});}
- function stop(){epoch++;clearTimeout(timer);clearTimeout(watchdog);clearTimeout(karaokeTimer);clearTimeout(repeatTimer);writer?.pauseAnimation();writer=null;player?.stop();releaseWake();}
+ function stop(){epoch++;clearTimeout(timer);clearTimeout(watchdog);clearTimeout(karaokeTimer);clearTimeout(repeatTimer);clearTimeout(prefetchTimer);writer?.pauseAnimation();writer=null;player?.stop();releaseWake();}
+ function prefetchUpcoming(){
+  clearTimeout(prefetchTimer);
+  if(closed||!sound.checked||window.HSKVoiceManager?.selection?.source!=='pack'||typeof window.HSKVoiceManager.prefetch!=='function')return;
+  const id=epoch;
+  prefetchTimer=setTimeout(()=>{
+   if(closed||id!==epoch||!sound.checked||window.HSKVoiceManager?.selection?.source!=='pack')return;
+   const zhRate=getZhRate(),seen=new Set();
+   for(let j=pos+1;j<frames.length&&seen.size<2&&j<=pos+10;j++){
+    const f=frames[j];
+    if(!f?.speak||f.language==='vi-VN')continue;
+    if(seen.has(f.speak))continue;
+    seen.add(f.speak);
+    const parts=window.HSKSpeech?.chunks?window.HSKSpeech.chunks(f.speak,60):[f.speak];
+    for(const part of parts)window.HSKVoiceManager.prefetch(part,zhRate);
+   }
+  },120);
+ }
  function update(){pause.textContent=pos>=frames.length?'Học lại':playing?'Tạm dừng':'Tiếp tục';pause.setAttribute('aria-pressed',String(playing));previous.disabled=pos===0;next.disabled=pos>=frames.length;}
  function schedule(ms){const id=epoch;clearTimeout(timer);timer=setTimeout(()=>{if(!closed&&playing&&id===epoch)move(1);},ms);}
  function complete(){if(audioDone&&strokesDone)schedule(getTransitionPause());}
@@ -331,7 +348,7 @@ function presentation(lesson,words,store){
   stop();save();strokeHost.hidden=true;strokeHost.replaceChildren();text.hidden=false;progress.value=Math.min(pos,frames.length);label.textContent=`${Math.min(pos+1,frames.length)}/${frames.length} · Học tự động${activePacing?` · Mục tiêu ${activePacing.targetMinutes}p`:''}`;
   if(pos>=frames.length){playing=false;caption.textContent='Đã xem hết bài';text.textContent='Sẵn sàng ôn lại?';pin.textContent='Nghe và xem không tự tính là đã thuộc từ.';status.replaceChildren(button('Làm ôn ngắn',()=>{close();store.practice();}));}
   else{const f=frames[pos];stage.dataset.slideKind=f.kind;stage.dataset.frameId=f.id;caption.textContent=f.label;text.textContent=f.kind==='pinyin'?window.HSKGuidedCore.formatPinyin(f.text):f.text;pin.textContent=window.HSKGuidedCore.formatPinyin(f.pin||'',f.speak||f.text);status.textContent='';}
-  update();fit();if(playing)run();
+  update();fit();if(playing)run();prefetchUpcoming();
  }
  function move(delta){if(closed)return;pos=Math.max(0,Math.min(frames.length,pos+delta));render();}
  function close(){if(closed)return;save();closed=true;playing=false;stop();aiPending?.abort();aiPending=null;previewPlayer?.stop();if(voiceDialog.open)voiceDialog.close();if(timeDialog.open)timeDialog.close();window.speechSynthesis?.removeEventListener?.('voiceschanged',refreshVoices);observer.disconnect();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('resize',fit);window.visualViewport?.removeEventListener('resize',fit);window.removeEventListener('pagehide',close);window.removeEventListener('hsk-account-ready',close);dialog.removeEventListener('cancel',cancel);dialog.close();dialog.remove();document.body.classList.remove('guided-presenting');if(ownedFullscreen&&document.fullscreenElement===document.documentElement)document.exitFullscreen?.().catch(()=>{});if(priorFocus?.isConnected)priorFocus.focus({preventScroll:true});}
