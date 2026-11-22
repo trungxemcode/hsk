@@ -22,8 +22,9 @@ function presentation(lesson,words,store){
  const getViRate=()=>activePacing?activePacing.viRate:1;
  const getStrokeSpeed=()=>activePacing?activePacing.strokeSpeed:.6*Number(speed.value);
  const getStrokeDelay=()=>activePacing?activePacing.strokeDelayMs:180/Number(speed.value);
- const getTransitionPause=()=>activePacing?Math.round(window.HSKGuidedCore.transitionPause()*activePacing.pauseScale):window.HSKGuidedCore.transitionPause()/Number(speed.value);
+ const getTransitionPause=()=>activePacing?Math.round(window.HSKGuidedCore.transitionPause()*activePacing.pauseScale):Math.round(window.HSKGuidedCore.transitionPause()/Number(speed.value)*1.35);
  const getPronunciationGap=()=>activePacing?Math.round(window.HSKGuidedCore.pronunciationGap()*activePacing.pauseScale):window.HSKGuidedCore.pronunciationGap()/Number(speed.value);
+ const getWordRepeatGap=()=>activePacing?Math.round(Math.max(getPronunciationGap()*2.6,window.HSKGuidedCore.pronunciationGap()*2.6)):Math.round(getPronunciationGap()*3);
  const getPracticeLead=()=>activePacing?Math.round(window.HSKGuidedCore.practiceLead()*activePacing.pauseScale):window.HSKGuidedCore.practiceLead();
  const getKaraokeDuration=(f,modelMs)=>activePacing?Math.max(2200,Math.round(window.HSKGuidedCore.karaokeDuration(f,activePacing.speedValue,modelMs)*activePacing.karaokeScale)):window.HSKGuidedCore.karaokeDuration(f,Number(speed.value),modelMs);
  const getSlideDuration=f=>activePacing?Math.max(1200,Math.round(window.HSKGuidedCore.slideDuration(f,activePacing.speedValue))):window.HSKGuidedCore.slideDuration(f,Number(speed.value));
@@ -34,7 +35,7 @@ function presentation(lesson,words,store){
  const strokeHost=el('div',undefined,'guided-stroke-stage');strokeHost.hidden=true;strokeHost.setAttribute('aria-label','Mẫu thứ tự nét viết');
  const voiceDialog=el('dialog',undefined,'guided-voice-dialog'),voiceSelect=el('select'),voiceNote=el('p'),voiceStatus=el('p');voiceSelect.setAttribute('aria-label','Giọng tiếng Việt');voiceDialog.setAttribute('aria-label','Chọn giọng tiếng Việt');voiceStatus.setAttribute('role','status');
  const previewPlayer=window.HSKSpeech?.createPlayer({synth:window.speechSynthesis,Utterance:window.SpeechSynthesisUtterance,voiceURI:()=>vietnameseVoice,rate:1,notify:m=>voiceStatus.textContent=m});
- function refreshVoices(){const voices=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^vi(?:-|_|$)/i.test(v.lang));voiceSelect.replaceChildren();const auto=el('option','Tự động · ưu tiên giọng tự nhiên');auto.value='';voiceSelect.append(auto);for(const v of voices){const o=el('option',v.name+(v.localService?' · trên thiết bị':' · trực tuyến'));o.value=v.voiceURI;voiceSelect.append(o);}voiceSelect.value=voices.some(v=>v.voiceURI===vietnameseVoice)?vietnameseVoice:'';voiceNote.textContent=voices.length>1?'Nghe thử và chọn giọng bạn thích. Giọng trực tuyến cần có mạng.':voices.length===1?'Thiết bị hiện chỉ có một giọng Việt. Có thể thêm giọng Vietnamese chất lượng cao trong cài đặt thiết bị.':'Chưa có giọng Việt. Thêm giọng Vietnamese trong cài đặt thiết bị.';}
+ function refreshVoices(){const voices=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^(?:vi(?:[-_]|$)|vie\b)/i.test(v.lang||'')||/\b(?:vietnamese|tiếng việt|hoaimy|namminh)\b/i.test(v.name||''));voiceSelect.replaceChildren();const auto=el('option','Tự động · ưu tiên giọng tự nhiên');auto.value='';voiceSelect.append(auto);for(const v of voices){const o=el('option',v.name+(v.localService?' · trên thiết bị':' · trực tuyến'));o.value=v.voiceURI;voiceSelect.append(o);}voiceSelect.value=voices.some(v=>v.voiceURI===vietnameseVoice)?vietnameseVoice:'';voiceNote.textContent=voices.length>1?'Nghe thử và chọn giọng bạn thích. Giọng trực tuyến cần có mạng.':voices.length===1?'Thiết bị hiện chỉ có một giọng Việt. Có thể thêm giọng Vietnamese chất lượng cao trong cài đặt thiết bị.':'Trình duyệt này chưa có giọng tiếng Việt. Trên laptop Windows, mở app bằng Microsoft Edge (có sẵn giọng Việt Hoài My / Nam Minh tự nhiên) hoặc cài thêm trong Windows Settings → Time & language → Speech → Add voices → Vietnamese.';}
  voiceSelect.onchange=()=>{previewPlayer?.stop();vietnameseVoice=voiceSelect.value;try{localStorage.setItem('hsk-guided-vi-voice',vietnameseVoice);}catch{}voiceStatus.textContent='Đã chọn giọng. Bấm Nghe thử để kiểm tra.';};
  const voiceSettings=button('Giọng Việt',()=>{playing=false;stop();update();refreshVoices();voiceStatus.textContent='';voiceDialog.showModal();});
  const closeVoice=()=>{previewPlayer?.stop();voiceDialog.close();voiceSettings.focus();};
@@ -282,11 +283,15 @@ function presentation(lesson,words,store){
   if(closed||!playing)return;
   if(message==='Đã nghe xong.'){
    clearTimeout(watchdog);audioDone=true;const f=frames[pos],elapsed=Date.now()-spokenStarted;if(f.kind==='chinese')modelTimes.set(f.text,elapsed);
-   if(f.loopWhileStrokes&&!strokesDone){const id=epoch;status.textContent='Vừa xem nét vừa nghe lại…';repeatTimer=setTimeout(()=>{if(!closed&&playing&&id===epoch&&!strokesDone){audioDone=false;speak(f,id);}},getPronunciationGap());return;}
+   if(f.loopWhileStrokes&&!strokesDone){const id=epoch;status.textContent='Vừa xem nét vừa nghe lại…';repeatTimer=setTimeout(()=>{if(!closed&&playing&&id===epoch&&!strokesDone){audioDone=false;speak(f,id);}},getWordRepeatGap());return;}
    status.textContent='';complete();
   }
   else if(message.startsWith('Đang phát âm'))status.textContent=frames[pos]?.language==='vi-VN'?'Đang đọc nghĩa tiếng Việt…':'Đang đọc tiếng Trung…';
-  else{playing=false;stop();status.title=message;status.textContent=message.includes('Chưa tìm thấy')?(frames[pos]?.language==='vi-VN'?'Chưa có giọng tiếng Việt. Thêm giọng Vietnamese rồi bấm Tiếp tục.':'Chưa có giọng Mandarin. Thêm giọng vào thiết bị, rồi bấm Tiếp tục.'):'Chưa phát được âm thanh. Bấm Tiếp tục để thử lại hoặc tắt Âm thanh.';update();}
+  else if(message.includes('Chưa tìm thấy')&&frames[pos]?.language==='vi-VN'){
+   clearTimeout(watchdog);audioDone=true;status.title=message;status.textContent='Trình duyệt chưa có giọng Việt (mở bằng Microsoft Edge hoặc cài Vietnamese trên Windows để nghe đọc) · tự chuyển tiếp…';
+   schedule(getSlideDuration(frames[pos]));
+  }
+  else{playing=false;stop();status.title=message;status.textContent=message.includes('Chưa tìm thấy')?'Chưa có giọng Mandarin. Thêm giọng vào thiết bị, rồi bấm Tiếp tục.':'Chưa phát được âm thanh. Bấm Tiếp tục để thử lại hoặc tắt Âm thanh.';update();}
  }});
  function run(){
   if(closed||!playing||pos>=frames.length)return;keepAwake();const f=frames[pos];status.textContent='';

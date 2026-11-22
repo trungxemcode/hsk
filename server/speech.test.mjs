@@ -62,18 +62,25 @@ test('resumes paused speechSynthesis and waits for async voiceschanged before sp
  assert.equal(resumed,1,'resumes paused synth before speaking');
  assert.equal(spoken.length,1);assert.equal(spoken[0].text,'北方');assert.equal(spoken[0].voice,zh);
 });
-test('Kokoro worker normalizes short words, clamps slow speed and trims leading vocoder murmur',async()=>{
+test('Kokoro worker normalizes short words, clamps slow speed, stretches smoothly with WSOLA and trims leading vocoder murmur',async()=>{
  const fs=await import('node:fs'),vm=await import('node:vm');
  const src=fs.readFileSync(new URL('../src/modules/speech/voice-pack-worker.js',import.meta.url),'utf8');
  const ctx={self:{},importScripts(){},Float32Array,Math,Number,String,Promise,URL,Object,TextDecoder,TextEncoder,Uint8Array,DataView,DecompressionStream:class{},Response:class{}};
- vm.runInNewContext(src+'\nglobalThis.__exp={normalizeTtsText,effectiveSpeed,cleanAudioEdges};',ctx);
- const {normalizeTtsText,effectiveSpeed,cleanAudioEdges}=ctx.__exp;
+ vm.runInNewContext(src+'\nglobalThis.__exp={normalizeTtsText,effectiveSpeed,targetAcousticSpeed,timeStretchWSOLA,cleanAudioEdges};',ctx);
+ const {normalizeTtsText,effectiveSpeed,targetAcousticSpeed,timeStretchWSOLA,cleanAudioEdges}=ctx.__exp;
  assert.equal(normalizeTtsText('打算',true),'打算。','appends period to bare Han words for clean Kokoro prosody');
  assert.equal(normalizeTtsText('你好。',true),'你好。','does not double-punctuate');
- assert.ok(effectiveSpeed(.6,true)>=.81&&effectiveSpeed(.6,true)<=.9,'clamps slow guided rate into Kokoro stable range');
+ assert.equal(effectiveSpeed(.6,true),.88,'synthesizes Kokoro cleanly at >= 0.88x');
+ assert.equal(targetAcousticSpeed(.6),.7,'maps Chậm learner rate to genuinely slow 0.70x acoustic speed');
  assert.equal(effectiveSpeed(.6,false),.6,'preserves raw speed for non-Kokoro engines');
+ // WSOLA stretches a 150Hz male vocal sine cleanly by ~1.25x without NaN or clipping.
+ const sr=24000,tone=new Float32Array(Math.round(sr*.5));
+ for(let i=0;i<tone.length;i++)tone[i]=.6*Math.sin(2*Math.PI*150*i/sr);
+ const stretched=timeStretchWSOLA(tone,sr,.7/.88);
+ assert.ok(stretched.length>tone.length*1.18&&stretched.length<tone.length*1.32,`expected ~1.26x stretch, got ${(stretched.length/tone.length).toFixed(2)}x`);
+ assert.ok(stretched.every(v=>Number.isFinite(v)&&Math.abs(v)<=1.05),'WSOLA output stays bounded and finite');
  // Synthetic 24kHz buffer: 40ms silence + 60ms low "ừm" murmur (0.08 amp) + 30ms dip + 250ms main speech (0.7 amp)
- const sr=24000,buf=new Float32Array(Math.round(sr*.45));
+ const buf=new Float32Array(Math.round(sr*.45));
  for(let i=Math.round(sr*.04);i<Math.round(sr*.10);i++)buf[i]=.08*Math.sin(2*Math.PI*130*i/sr);
  for(let i=Math.round(sr*.13);i<Math.round(sr*.38);i++)buf[i]=.7*Math.sin(2*Math.PI*220*i/sr);
  const cleaned=cleanAudioEdges(buf,sr);
