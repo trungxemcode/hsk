@@ -81,6 +81,7 @@ test('Kokoro worker normalizes short words, clamps slow speed, stretches smoothl
  const {normalizeTtsText,effectiveSpeed,targetAcousticSpeed,timeStretchWSOLA,cleanAudioEdges}=ctx.__exp;
  assert.equal(normalizeTtsText('打算',true),'打算。','appends period to bare Han words for clean Kokoro prosody');
  assert.equal(normalizeTtsText('你好。',true),'你好。','does not double-punctuate');
+ assert.equal(normalizeTtsText('miền Bắc; phương bắc / phía bắc',false,true),'miền Bắc, phương bắc, phía bắc.','normalizes Vietnamese dictionary punctuation for natural Piper phrasing');
  assert.equal(effectiveSpeed(.6,true),.88,'synthesizes Kokoro cleanly at >= 0.88x');
  assert.equal(targetAcousticSpeed(.6),.7,'maps Chậm learner rate to genuinely slow 0.70x acoustic speed');
  assert.equal(effectiveSpeed(.6,false),.6,'preserves raw speed for non-Kokoro engines');

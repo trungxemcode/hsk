@@ -1,5 +1,5 @@
 {
-  "request": "Add optional Vietnamese Piper VAIS-1000 offline voice pack for guided lessons and repeat Chinese lesson examples two or three times. Preserve all unrelated routes, app layout, player navigation and dock.",
+  "request": "Upgrade offline Vietnamese voice pack in guided lessons to natural Northern Vietnamese models (Alto Tram & Diem Dam) with selector and 1-click upgrade from legacy VAIS-1000. Preserve all unrelated routes, app layout, player navigation and dock.",
   "excludedRoutes": [
     "lessons"
   ]

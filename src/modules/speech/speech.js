@@ -41,7 +41,7 @@
     const deviceVi=synth?chooseVoice(synth.getVoices(),'vi-VN',requested):null;
     const useViPack=requested==='__vi_offline_pack__'||!requested||!deviceVi;
     if(useViPack){
-     const parts=chunks(input,120);if(!parts.length)return;
+     const parts=chunks((Array.isArray(input)?input:[input]).map(s=>String(s||'').replace(/\s*[;；]+\s*/g,', ')),180);if(!parts.length)return;
      playPack(viManager,parts,button,'Đang phát âm tiếng Việt…');return;
     }
    }
