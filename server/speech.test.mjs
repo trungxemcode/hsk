@@ -62,6 +62,17 @@ test('resumes paused speechSynthesis and waits for async voiceschanged before sp
  assert.equal(resumed,1,'resumes paused synth before speaking');
  assert.equal(spoken.length,1);assert.equal(spoken[0].text,'北方');assert.equal(spoken[0].voice,zh);
 });
+test('offline Vietnamese pack plays meanings when installed even without system vi-VN voices',async()=>{
+ const calls=[],messages=[];
+ globalThis.HSKViVoiceManager={selection:{source:'pack'},unlock(){},stop(){},speak(text,rate,signal){return new Promise(resolve=>{calls.push({text,rate});resolve(true);});}};
+ try{
+  const player=speech.createPlayer({synth:{getVoices:()=>[zh],cancel(){},speak(){throw Error('must not use Mandarin');}},Utterance:class{},notify:m=>messages.push(m),rate:1});
+  player.play('Xin chào.',undefined,'vi-VN');
+  await new Promise(r=>setImmediate(r));
+  assert.equal(calls.length,1);assert.equal(calls[0].text,'Xin chào.');
+  assert.equal(messages.at(-1),'Đã nghe xong.');
+ }finally{delete globalThis.HSKViVoiceManager;}
+});
 test('Kokoro worker normalizes short words, clamps slow speed, stretches smoothly with WSOLA and trims leading vocoder murmur',async()=>{
  const fs=await import('node:fs'),vm=await import('node:vm');
  const src=fs.readFileSync(new URL('../src/modules/speech/voice-pack-worker.js',import.meta.url),'utf8');

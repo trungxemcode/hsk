@@ -14,9 +14,10 @@ function voiceData(buffer){
 }
 async function initialize(assets){
  const files=Object.fromEntries(assets);
- const [wasmBinary,resourcesBuf,voiceBuf]=await Promise.all([
+ const [wasmBinary,resourcesBuf,viResBuf,voiceBuf]=await Promise.all([
   unzip(files.wasm),
   unzip(files.resources),
+  files.viResources?unzip(files.viResources):Promise.resolve(null),
   files.voice?files.voice.arrayBuffer():Promise.resolve(null)
  ]);
  await new Promise((resolve,reject)=>{
@@ -26,7 +27,13 @@ async function initialize(assets){
  const binding=URL.createObjectURL(files.bindings);try{importScripts(binding);}finally{URL.revokeObjectURL(binding);}
  const resources=JSON.parse(new TextDecoder().decode(resourcesBuf)),FS=Module.FS;
  for(const [path,b64] of Object.entries(resources)){if(path==='/model-metadata.bin')continue;FS.mkdirTree(path.slice(0,path.lastIndexOf('/'))||'/');const raw=atob(b64);FS.writeFile(path,Uint8Array.from(raw,c=>c.charCodeAt(0)));}
- if(files.config){
+ if(viResBuf){
+  isKokoro=false;
+  const viRes=JSON.parse(new TextDecoder().decode(viResBuf));
+  for(const [path,b64] of Object.entries(viRes)){FS.mkdirTree(path.slice(0,path.lastIndexOf('/'))||'/');const raw=atob(b64);FS.writeFile(path,Uint8Array.from(raw,c=>c.charCodeAt(0)));}
+  FS.writeFile('/model.onnx',new Uint8Array(await files.model.arrayBuffer()),{canOwn:true});
+  tts=createOfflineTts(Module,{offlineTtsModelConfig:{vits:{model:'/model.onnx',tokens:'/vi-tokens.txt',lexicon:'',dataDir:'/espeak-ng-data',noiseScale:.667,noiseScaleW:.8,lengthScale:1},numThreads:1,debug:0,provider:'cpu'},ruleFsts:'',ruleFars:'',maxNumSentences:1});
+ }else if(files.config){
   isKokoro=false;
   const config=JSON.parse(await files.config.text());if(config.type!=='piper')throw Error('Loại gói giọng chưa được hỗ trợ.');
   const varint=n=>{const b=[];do{const v=n%128;n=Math.floor(n/128);b.push(v+(n?128:0));}while(n);return b;},field=(n,b)=>[...varint(n*8+2),...varint(b.length),...b],enc=s=>Array.from(new TextEncoder().encode(s));
@@ -160,4 +167,4 @@ function generate(text,rate){
  }
  return {samples,sampleRate:a.sampleRate};
 }
-self.onmessage=async({data})=>{const {id,type}=data;try{if(type==='init'){await initialize(data.assets);if(data.verify!==false)generate('你好。',1);self.postMessage({id,ok:true});}else{const a=generate(data.text,data.rate);self.postMessage({id,samples:a.samples,sampleRate:a.sampleRate},[a.samples.buffer]);}}catch(e){self.postMessage({id,error:e.message||'Không mở được giọng đọc.'});}};
+self.onmessage=async({data})=>{const {id,type}=data;try{if(type==='init'){await initialize(data.assets);if(data.verify!==false)generate(data.verifyText||'你好。',1);self.postMessage({id,ok:true});}else{const a=generate(data.text,data.rate);self.postMessage({id,samples:a.samples,sampleRate:a.sampleRate},[a.samples.buffer]);}}catch(e){self.postMessage({id,error:e.message||'Không mở được giọng đọc.'});}};

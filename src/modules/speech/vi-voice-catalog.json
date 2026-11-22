@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "engine": "sherpa-onnx-1.13.8-piper-vi",
+  "shared": [
+    {
+      "role": "engine",
+      "url": "../../../vendor/chinese-voices/engine.js",
+      "bytes": 79421,
+      "sha256": "0c936699fada8f0a83ff152c92417f3f2931001915f7c05ef501a8889f11b0cd",
+      "type": "text/javascript"
+    },
+    {
+      "role": "bindings",
+      "url": "../../../vendor/chinese-voices/bindings.js",
+      "bytes": 33771,
+      "sha256": "99f2ffe791e93352b9b4b9bf999839db58f69a603e26e9adedc74504f1762814",
+      "type": "text/javascript"
+    },
+    {
+      "role": "wasm",
+      "url": "../../../vendor/chinese-voices/engine.wasm.gz",
+      "bytes": 3800632,
+      "sha256": "a50d7f951a3a0197973ab6319b05b90be0752c8d401ffeaa196145401b4db6b4",
+      "type": "application/octet-stream"
+    },
+    {
+      "role": "resources",
+      "url": "../../../vendor/chinese-voices/resources.json.gz",
+      "bytes": 2098939,
+      "sha256": "0514e8bbbd659b6f22ccf21ebcf95074c969be11631b62f0a95fdfe02fb7d7fe",
+      "type": "application/octet-stream"
+    },
+    {
+      "role": "viResources",
+      "url": "../../../vendor/vietnamese-voices/vi-resources.json.gz",
+      "bytes": 29393,
+      "sha256": "a922f6ca80e2a74ad23b09535ebb43ce482ce90936076548dd6cc99ef8b0188c",
+      "type": "application/octet-stream"
+    }
+  ],
+  "voices": [
+    {
+      "id": "vi_vais1000_medium",
+      "label": "Piper · Nữ · VAIS-1000 (Offline)",
+      "assets": [
+        {
+          "role": "model",
+          "url": "https://huggingface.co/csukuangfj/vits-piper-vi_VN-vais1000-medium/resolve/3d92898cf942406c23330da466a831d3d923c2a2/vi_VN-vais1000-medium.onnx",
+          "bytes": 63201425,
+          "sha256": "7264e130a2f2e62c2dd586e3790ba054b669f9f72a2bdb2c0d60207136611576",
+          "type": "application/octet-stream"
+        }
+      ]
+    }
+  ]
+}

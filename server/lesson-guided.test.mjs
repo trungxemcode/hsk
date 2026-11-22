@@ -60,7 +60,9 @@ test('target duration prioritizes trimming dead time before accelerating voice w
  assert.equal(fastSlides.filter(s=>s.kind==='word').length,15,'never drops any vocabulary word');
  assert.equal(fastSlides.filter(s=>s.kind==='grammar').length,(lessonContent.grammar||[]).length,'never drops any grammar point');
  const deep=C.computePacingForTarget({content:lessonContent},words,Math.min(base.maxMinutes,Math.round(base.baselineMinutes*1.3)),ex);
- assert.ok(deep.wordLoops>=3&&deep.speechRate<=0.6&&!deep.voiceAccelerated,'longer target keeps full loops and calmer speed');
+ assert.ok(deep.wordLoops>=3&&deep.exampleLoops===3&&deep.speechRate<=0.6&&!deep.voiceAccelerated,'longer target reads examples 3 times with calmer speed');
+ assert.equal(C.presentation({content:lessonContent},words,ex,{exampleLoops:3}).find(s=>s.kind==='chinese').repetitions,3);
+ assert.equal(C.presentation({content:lessonContent},words,ex).find(s=>s.kind==='chinese').repetitions,2);
 });
 test('classifyTimeBudget and parseAiTimeEstimate grade rush (red), optimal (green) and relaxed (blue) accurately',()=>{
  const ai=C.parseAiTimeEstimate({answer:'```json\n{"recommendedMinutes":30,"minSafeMinutes":27,"maxRelaxedMinutes":35,"reasonVi":"Bài có 15 từ mới và 3 điểm ngữ pháp cần khoảng 30 phút."}\n```'},24);
