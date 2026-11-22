@@ -33,3 +33,31 @@ test('pacing removes idle waits while retaining silent reading time and a delibe
  assert.ok(C.karaokeDuration({text:'你好。'})>=10000);
  assert.ok(C.karaokeDuration({text:'你好。'},.75,20000)>20000);
 });
+test('target duration recalculates loops and pace to fit whole lesson without dropping content',()=>{
+ const lessonContent=JSON.parse(fs.readFileSync('lesson-content-hsk3.json')).lessons[0];
+ const words=Array.from({length:15},(_,i)=>({han:['打算','周末','北方','南方','面包','地图','搬','带','找','游戏','作业','着急','复习','准备','计划'][i],pin:'p'+i,mean:'Nghĩa mẫu '+i}));
+ const ex=w=>[{cn:`我${w.han}明天去学习中文。`,pin:'wo ming tian qu xue xi zhong wen',vi:`Ví dụ với từ ${w.han}.`},{cn:`周末我们一起${w.han}吧。`,pin:'zhou mo wo men yi qi ba',vi:`Ví dụ thứ hai với ${w.han}.`}];
+ const base=C.estimateLessonBaseline({content:lessonContent},words,ex);
+ assert.ok(base.minMinutes>=2&&base.minMinutes<base.baselineMinutes&&base.baselineMinutes<base.maxMinutes,JSON.stringify(base));
+ assert.equal(base.metrics.wordCount,15);
+ const fast=C.computePacingForTarget({content:lessonContent},words,Math.max(base.minMinutes,Math.round(base.baselineMinutes*0.55)),ex);
+ assert.ok(fast.wordLoops<=2||fast.speechRate>0.65,'shorter target reduces repetitions or increases pace');
+ assert.ok(Math.abs(fast.estimatedMinutes-fast.targetMinutes)<=2,`estimated ${fast.estimatedMinutes}p close to target ${fast.targetMinutes}p`);
+ const fastSlides=C.presentation({content:lessonContent},words,ex,{wordLoops:fast.wordLoops,meaningLoops:fast.meaningLoops});
+ assert.equal(fastSlides.filter(s=>s.kind==='word').length,15,'never drops any vocabulary word');
+ assert.equal(fastSlides.filter(s=>s.kind==='grammar').length,(lessonContent.grammar||[]).length,'never drops any grammar point');
+ const deep=C.computePacingForTarget({content:lessonContent},words,Math.min(base.maxMinutes,Math.round(base.baselineMinutes*1.3)),ex);
+ assert.ok(deep.wordLoops>=3&&deep.speechRate<=fast.speechRate,'longer target keeps full loops and calmer speed');
+});
+test('classifyTimeBudget and parseAiTimeEstimate grade rush (red), optimal (green) and relaxed (blue) accurately',()=>{
+ const ai=C.parseAiTimeEstimate({answer:'```json\n{"recommendedMinutes":30,"minSafeMinutes":27,"maxRelaxedMinutes":35,"reasonVi":"Bài có 15 từ mới và 3 điểm ngữ pháp cần khoảng 30 phút."}\n```'},24);
+ assert.equal(ai.parsedFromAi,true);assert.equal(ai.recommendedMinutes,30);assert.equal(ai.minSafeMinutes,27);assert.equal(ai.maxRelaxedMinutes,35);assert.match(ai.reasonVi,/30 phút/);
+ const rush=C.classifyTimeBudget(15,ai.recommendedMinutes,ai.minSafeMinutes,ai.maxRelaxedMinutes);
+ assert.equal(rush.zone,'rush');assert.equal(rush.color,'red');
+ const optimal=C.classifyTimeBudget(30,ai.recommendedMinutes,ai.minSafeMinutes,ai.maxRelaxedMinutes);
+ assert.equal(optimal.zone,'optimal');assert.equal(optimal.color,'green');
+ const relaxed=C.classifyTimeBudget(42,ai.recommendedMinutes,ai.minSafeMinutes,ai.maxRelaxedMinutes);
+ assert.equal(relaxed.zone,'relaxed');assert.equal(relaxed.color,'blue');
+ const proseFallback=C.parseAiTimeEstimate({answer:'Khoảng 25 phút là hợp lý.'},20);
+ assert.equal(proseFallback.parsedFromAi,true);assert.equal(proseFallback.recommendedMinutes,25);
+});
