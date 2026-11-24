@@ -22,7 +22,7 @@
     "src/modules/planner/planner.js",
     "index.html",
     "app-hoc-hsk.html",
-    "seo-landing.css",
+    "src/seo-landing.css",
     "src/modules/practice/question-adapter.mjs",
     "src/shared/tutor-contracts.mjs",
     "studio-layout.css",
