@@ -27,7 +27,7 @@ class DesignerTests(unittest.TestCase):
         (self.root / 'tools/home-designer/schema.json').write_text(json.dumps(SCHEMA))
         (self.root / 'app-version.json').write_text('{"release":"test"}')
         self.html = '<html><head><script src="app.js"></script></head><body><button id="keep" onclick="run()">Go</button></body></html>'
-        (self.root / 'index.html').write_text(self.html)
+        (self.root / 'app-hoc-hsk.html').write_text(self.html)
 
     def tearDown(self):
         self.temp.cleanup()
@@ -39,13 +39,13 @@ class DesignerTests(unittest.TestCase):
         (self.root / 'app.js').write_text('window.run=()=>42;')
         M.apply_config(self.root, SCHEMA, c)
         self.assertEqual(json.loads((self.root / 'tools/pwa-assets.json').read_text())['files'], ['app.js', 'home-design.css'])
-        html = (self.root / 'index.html').read_text()
+        html = (self.root / 'app-hoc-hsk.html').read_text()
         self.assertEqual(html.count('href="./home-design.css"'), 1)
         self.assertIn('<button id="keep" onclick="run()">', html)
         self.assertIn('<script src="app.js"></script>', html)
         self.assertEqual((self.root / 'app.js').read_text(), 'window.run=()=>42;')
         M.apply_config(self.root, SCHEMA, c)
-        self.assertEqual((self.root / 'index.html').read_text(), html)
+        self.assertEqual((self.root / 'app-hoc-hsk.html').read_text(), html)
         broken = config()
         broken['styles']['desktop']['word-heading'] = {'color': 'url(https://bad.example)'}
         before = {p.name: p.read_bytes() for p in self.root.glob('*') if p.is_file()}

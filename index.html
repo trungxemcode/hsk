@@ -1,616 +1,908 @@
-<!DOCTYPE html><html lang="vi"><head>
-  <meta charset="UTF-8">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem('hsk-theme-v1')==='dark'?'dark':'light';}catch(_){document.documentElement.dataset.theme='light';}</script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="preload" as="script" href="./src/modules/music/music-core.js">
-<link rel="preload" as="script" href="./src/modules/music/music-soundcloud.js">
-<link rel="preload" as="script" href="./src/modules/shell/legacy-music-cleanup.js">
-<link rel="preload" as="script" href="./src/modules/music/music.js">
-  <title>Học HSK miễn phí cùng Gia sư AI, luyện thi HSK 1–6 | HSK Flashcards</title>
-  <meta name="description" content="Học HSK online miễn phí từ cấp 1 đến 6 cùng Gia sư AI giải đáp tiếng Trung bằng tiếng Việt. Luyện thi thử HSK, ôn từ vựng flashcard, tập viết chữ Hán và sửa câu miễn phí.">
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>
+    // Keep existing home-screen installs and shared lesson links opening the app.
+    if (navigator.standalone === true || matchMedia('(display-mode: standalone)').matches || location.hash.startsWith('#lesson/')) {
+      location.replace('./app-hoc-hsk.html' + location.search + location.hash);
+    }
+  </script>
+  <title>Học HSK miễn phí cùng Gia sư AI &amp; Luyện thi HSK 1–6 online | HSK Flashcards</title>
+  <meta name="description" content="Web học HSK miễn phí từ cấp 1 đến cấp 6 cùng Gia sư AI giải đáp tiếng Trung bằng tiếng Việt. Luyện thi thử HSK online, luyện nghe đọc viết, học từ vựng flashcard, sửa câu tiếng Trung và tập viết chữ Hán miễn phí.">
   <link rel="canonical" href="https://hskfreelearningai.pages.dev/">
-  <link rel="sitemap" type="application/xml" href="https://hskfreelearningai.pages.dev/sitemap.xml">
+  <link rel="icon" href="./icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icon-180.png">
+  <meta name="theme-color" content="#37299e">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="vi_VN">
   <meta property="og:site_name" content="HSK Flashcards">
-  <meta property="og:title" content="Học HSK miễn phí cùng Gia sư AI, luyện thi HSK 1–6 | HSK Flashcards">
-  <meta property="og:description" content="Học HSK online miễn phí từ cấp 1 đến 6 cùng Gia sư AI giải đáp tiếng Trung bằng tiếng Việt. Luyện thi thử HSK, ôn từ vựng flashcard, tập viết chữ Hán và sửa câu miễn phí.">
+  <meta property="og:title" content="Học HSK miễn phí cùng Gia sư AI &amp; Luyện thi HSK 1–6 online">
+  <meta property="og:description" content="Tự học tiếng Trung HSK 1–6 miễn phí ngay trên web: Gia sư AI hỏi đáp 1-1 bằng tiếng Việt, sửa câu tiếng Trung, làm đề thi thử HSK, flashcard SRS và tập viết chữ Hán.">
   <meta property="og:url" content="https://hskfreelearningai.pages.dev/">
   <meta property="og:image" content="https://hskfreelearningai.pages.dev/icon-512.png">
-  <link rel="stylesheet" href="./style.css?v=push-2">
-  <link rel="stylesheet" href="./music.css">
-  <link rel="stylesheet" href="./music-lyrics.css">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./icon-180.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#2563eb">
-<link rel="stylesheet" href="./mobile-layout.css?v=mobile-3">
-<meta name="theme-color" content="#12307a">
-<script src="./src/utils/ai-config.js" defer=""></script>
-<script src="./src/modules/admin/admin-core.js" defer=""></script>
-<script src="./src/modules/admin/admin.js" defer=""></script>
-<script src="./src/modules/notebook/notebook-tools-core.js" defer></script><script src="./src/modules/backup/backup-core.js" defer></script><script src="./src/modules/account/study-sync-core.js" defer></script><script src="./src/modules/account/study-sync.js" defer></script><script src="./src/modules/account/account-core.js?v=account-4" defer=""></script>
-<script src="./src/modules/account/account.js?v=account-3" defer=""></script>
-<script src="./src/modules/account/personal-ai-settings.js" defer></script>
-<link rel="stylesheet" href="./ui-buttons.css"><link rel="stylesheet" href="./notebook.css"><script src="./src/modules/notebook/notebook.js" defer></script><link rel="stylesheet" href="./notebook-factory.css"><script src="./src/modules/notebook/notebook-factory.js" defer></script><script src="./src/modules/backup/backup-restore.js" defer></script>
-<script src="./src/modules/translation/translator.js" defer=""></script>
-<script src="./src/modules/translation/ocr.js" defer=""></script>
-<script src="./src/modules/lessons/lesson-mastery.js" defer=""></script>
-<script type="module" src="./src/shared/tutor-contracts.mjs"></script><script type="module" src="./src/modules/practice/question-adapter.mjs"></script><script src="./src/modules/ai-coach/coach-profile.js" defer></script><script src="./src/modules/ai-coach/tutor-loop-engine.js" defer></script><script src="./src/modules/ai-coach/ai-coach-core.js" defer></script><script src="./src/modules/ai-coach/ai-qa-core.js" defer></script><script src="./src/modules/ai-coach/qa-intent-router.js" defer></script><script src="./src/modules/ai-coach/qa-understanding-memory.js" defer></script><script src="./src/modules/ai-coach/ai-qa-suggestions-ui.js" defer></script>
-<script src="./src/modules/ai-coach/ai-coach-images.js" defer></script>
-<script src="./src/modules/ai-coach/ai-coach.js" defer></script><script src="./src/modules/ai-coach/ai-teacher.js" defer></script><script src="./src/modules/ai-coach/qa-project-sources.js" defer></script><script src="./src/modules/ai-coach/qa-projects.js" defer></script><script src="./src/modules/ai-coach/ai-provider-picker.js" defer></script><script src="./src/modules/ai-coach/ai-qa.js" defer></script>
-<script src="./src/modules/lessons/lesson-mini.js" defer></script>
-<link rel="stylesheet" href="./speech.css"><script src="./src/modules/speech/voice-store.js" defer=""></script><script src="./src/modules/speech/voice-manager.js" defer=""></script><script src="./src/modules/speech/vi-voice-manager.js" defer=""></script><script src="./src/modules/speech/speech.js" defer=""></script><script src="./src/modules/speech/voice-settings.js" defer=""></script><link rel="stylesheet" href="./speaking.css"><script src="./src/modules/speaking/pitch-core.js" defer=""></script><script src="./src/modules/speaking/speech-recorder.js" defer=""></script><script src="./src/modules/speaking/shadowing.js" defer=""></script>
-<link rel="stylesheet" href="./lesson-guided.css"><script src="./src/modules/lessons/lesson-guided-core.js" defer></script><script src="./src/modules/lessons/lesson-guided.js" defer></script><link rel="stylesheet" href="./lesson-custom.css"><script src="./src/modules/lessons/lesson-custom-core.js" defer></script><script src="./src/modules/lessons/lesson-custom.js" defer></script>
-<script src="./src/modules/lessons/lessons.js" defer=""></script>
-<link rel="stylesheet" href="./lesson-chat.css?v=lesson-chat-2">
-<script src="./src/modules/translation/lesson-chat.js?v=lesson-chat-2" defer=""></script>
-<link rel="stylesheet" href="./handwriting.css?v=handwriting-2">
-<script src="./src/modules/handwriting/handwriting-learning.js?v=handwriting-2" defer=""></script>
-<script src="./src/modules/handwriting/handwriting-core.js?v=handwriting-2" defer=""></script>
-<script src="./src/modules/handwriting/handwriting.js?v=handwriting-2" defer=""></script>
-<link rel="stylesheet" href="./writing-practice.css">
-<script src="./hanzi-writer.min.js" defer></script>
-<script src="./src/modules/shell/feature-page.js" defer></script>
-<script src="./src/modules/handwriting/writing-practice.js" defer></script>
-<link rel="stylesheet" href="./placement.css">
-<script src="./src/modules/placement/placement-core.js" defer></script>
-<script src="./src/modules/placement/placement.js" defer></script>
-<link rel="stylesheet" href="./passive.css">
-<script src="./src/modules/passive/passive-core.js" defer></script>
-<script src="./src/modules/passive/passive.js" defer></script>
-<link rel="stylesheet" href="./studio-layout.css"><link rel="stylesheet" href="./exam.css"><link rel="stylesheet" href="./storage-cleanup.css"><script src="./src/modules/shell/storage-cleanup.js" defer></script>
-<script src="./site-design-live.js" defer></script>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Học HSK miễn phí cùng Gia sư AI &amp; Luyện thi HSK 1–6 online">
+  <meta name="twitter:description" content="Web tự học HSK 1–6 miễn phí có Gia sư AI giải đáp tiếng Trung bằng tiếng Việt, luyện đề thi thử HSK, flashcard SRS và tập viết chữ Hán.">
+  <meta name="twitter:image" content="https://hskfreelearningai.pages.dev/icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/seo-landing.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('hsk-theme-v1');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = saved === 'dark' || saved === 'light' ? saved : (prefersDark ? 'dark' : 'light');
+      } catch (_) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "HSK Flashcards — Học HSK miễn phí cùng Gia sư AI",
+          "url": "https://hskfreelearningai.pages.dev/app-hoc-hsk",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Web, iOS, Android",
+          "inLanguage": "vi",
+          "isAccessibleForFree": true,
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "VND"
+          },
+          "description": "Web học HSK miễn phí từ cấp 1 đến cấp 6 cùng Gia sư AI tiếng Trung bằng tiếng Việt, luyện thi thử HSK online, sửa câu tiếng Trung, học từ vựng flashcard SRS, tập viết chữ Hán và luyện phát âm.",
+          "featureList": [
+            "Gia sư AI hỏi đáp tiếng Trung bằng tiếng Việt",
+            "Sửa câu tiếng Trung và giải thích lỗi sai bằng AI",
+            "Luyện thi HSK 1–6 miễn phí đầy đủ Nghe, Đọc, Viết",
+            "Giáo trình HSK 1–6 và chế độ học tự động",
+            "Học từ vựng HSK bằng flashcard và ôn tập ngắt quãng SRS",
+            "Tập viết chữ Hán theo thứ tự nét và vẽ tay tra từ",
+            "Luyện phát âm tiếng Trung theo câu, đọc truyện và nghe nhạc học HSK"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Web học HSK miễn phí này có đủ từ HSK 1 đến HSK 6 không?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Có. HSK Flashcards hỗ trợ đầy đủ 6 cấp độ từ HSK 1 cho người mới bắt đầu đến HSK 6 nâng cao, bao gồm giáo trình bài học, từ vựng flashcard, bài luyện tập và đề thi thử HSK theo từng cấp."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Gia sư AI tiếng Trung giúp được gì khi tự học ở nhà?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Bạn có thể hỏi trực tiếp bằng tiếng Việt bất cứ lúc nào: phân biệt các cặp từ dễ nhầm như 不 và 没, giải thích ngữ pháp, hỏi vì sao một đáp án HSK đúng, nhờ sửa câu tiếng Trung tự viết cho tự nhiên hơn hoặc xin gợi ý lộ trình học theo cấp HSK."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Có làm đề thi thử HSK và luyện nghe HSK miễn phí không?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Có. Bạn có thể chọn đúng cấp HSK muốn ôn, làm bài tập Nghe – Đọc – Viết hoặc đề thi thử HSK trực tuyến miễn phí, xem đáp án chi tiết ngay sau khi làm và gom riêng các câu làm sai để ôn lại."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Mới bắt đầu học tiếng Trung từ con số 0 có tự học được không?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hoàn toàn được. Người mới có thể bắt đầu từ HSK 1 với giáo trình hội thoại có audio phát âm tiếng Trung, phiên âm pinyin, âm Hán Việt, nghĩa tiếng Việt, chế độ học tự động từng từ và hướng dẫn tập viết chữ Hán theo từng nét."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Có tập viết chữ Hán, học từ vựng flashcard và sửa câu tiếng Trung không?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Có đầy đủ trên cùng một trang web: flashcard lật thẻ kèm lịch ôn ngắt quãng SRS, trắc nghiệm, ghép 3 cột, sắp xếp câu, tập viết chữ Hán đúng thứ tự nét, vẽ tay tra chữ, sửa câu tiếng Trung bằng AI, đọc truyện và nghe nhạc học tiếng Trung."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Có học HSK miễn phí trên điện thoại hay máy tính đều được không?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Được. Bạn chỉ cần mở trình duyệt trên điện thoại iPhone, Android hoặc máy tính là vào học ngay, giao diện tự thích ứng màn hình nhỏ và có thể thêm ra màn hình chính như một ứng dụng."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
 </head>
+<body>
+  <a class="skip-link" href="#main-content">Chuyển tới nội dung chính</a>
 
-<body class="studio-enabled"><div class="app-shell"><aside class="sidebar" aria-label="Điều hướng ứng dụng"><div class="brand-side"><div class="brand-mark" aria-hidden="true">汉</div><div class="brand-text"><strong>HSK Flashcards</strong></div><button type="button" id="sidebarToggle" class="sidebar-toggle" aria-label="Thu gọn thanh bên" aria-expanded="true" title="Thu gọn thanh bên"><i data-icon="panel-left"></i></button></div><div class="sidebar-label">KHÔNG GIAN CỦA BẠN</div><nav class="side-nav" aria-label="Điều hướng chức năng"><button type="button" data-studio-go="home" aria-label="Trang chủ"><i data-icon="house"></i><span>Trang chủ</span></button><details class="nav-group"><summary aria-label="Học tập HSK"><i data-icon="book-open"></i><span>Học tập HSK</span><i class="nav-chevron" data-icon="chevron-down"></i></summary><div class="nav-group-items"><button type="button" data-studio-go="lessons" aria-label="Giáo trình HSK"><i data-icon="book-open"></i><span>Giáo trình HSK</span></button><button type="button" data-studio-go="learn" aria-label="Flashcard"><i data-icon="layers"></i><span>Flashcard</span></button></div></details><details class="nav-group"><summary aria-label="Ôn luyện"><i data-icon="repeat-2"></i><span>Ôn luyện</span><i class="nav-chevron" data-icon="chevron-down"></i></summary><div class="nav-group-items"><button type="button" data-studio-go="practice" aria-label="Luyện &amp; Ôn"><i data-icon="repeat-2"></i><span>Luyện &amp; Ôn</span></button><button type="button" data-studio-go="notebook" aria-label="Sổ từ vựng"><i data-icon="book-open"></i><span>Sổ từ vựng</span></button></div></details><details class="nav-group"><summary aria-label="Giải trí"><i data-icon="headphones"></i><span>Giải trí</span><i class="nav-chevron" data-icon="chevron-down"></i></summary><div class="nav-group-items"><button type="button" data-studio-go="real-reading" aria-label="Đọc truyện &amp; bài đọc tiếng Trung"><i data-icon="book-open"></i><span>Đọc truyện &amp; bài đọc tiếng Trung</span></button><button type="button" data-studio-go="music-play" aria-label="Nghe nhạc & học tiếng Trung"><i data-icon="headphones"></i><span>Nghe nhạc & học tiếng Trung</span></button></div></details><details class="nav-group"><summary aria-label="Công cụ"><i data-icon="sliders-horizontal"></i><span>Công cụ</span><i class="nav-chevron" data-icon="chevron-down"></i></summary><div class="nav-group-items"><button type="button" data-studio-go="search" aria-label="Tra cứu &amp; dịch"><i data-icon="search"></i><span>Tra cứu &amp; dịch</span></button><button type="button" data-studio-go="ai-qa" aria-label="Hỏi đáp AI"><i data-icon="sparkles"></i><span>Hỏi đáp AI</span></button><button type="button" data-studio-go="sentence-editor" aria-label="Sửa câu tiếng Trung"><i data-icon="book-open"></i><span>Sửa câu tiếng Trung</span></button></div></details><details class="nav-group"><summary aria-label="Luyện thi HSK"><i data-icon="graduation-cap"></i><span>Luyện thi HSK</span><i class="nav-chevron" data-icon="chevron-down"></i></summary><div class="nav-group-items"><button type="button" data-studio-go="exam" aria-label="Bài tập Nghe – Đọc – Viết"><i data-icon="list-checks"></i><span>Bài tập Nghe – Đọc – Viết</span></button><button type="button" data-studio-go="study4" aria-label="Đề thi thử HSK"><i data-icon="graduation-cap"></i><span>Đề thi thử HSK</span></button></div></details><button type="button" data-studio-go="profile" aria-label="Hồ sơ"><i data-icon="user"></i><span>Hồ sơ</span></button><button type="button" data-studio-go="account" aria-label="Cài đặt"><i data-icon="sliders-horizontal"></i><span>Cài đặt</span></button><button hidden data-studio-go="music">Nghe nhạc học HSK</button></nav><div class="sidebar-bottom"></div></aside><div class="app-area"><header class="topbar" id="studioHeader"><div class="topbar-inner"><button type="button" class="menu-btn menu-button" id="menuBtn" aria-label="Mở menu" aria-controls="drawer" aria-expanded="false"><i data-icon="menu"></i></button><div class="topbar-title"><small id="activeCrumb" hidden="">KHÔNG GIAN HỌC TẬP</small><strong id="activeTitle">Tổng quan</strong></div><div class="topbar-actions"><button class="icon-button" id="headerSearch" type="button" aria-label="Mở tra cứu" data-studio-go="search"><i data-icon="search"></i></button><button type="button" class="level-pill" id="levelPill" aria-label="Đổi bộ lọc HSK"></button><button class="avatar-button" id="headerInfo" type="button" aria-label="Hồ sơ" data-studio-go="profile"><i data-icon="user"></i></button></div></div></header><main class="workspace"><section id="notebookPanel" class="panel hub-panel" data-studio-hub-panel="notebook" hidden></section><section class="panel hub-panel" id="studioPractice" hidden="" data-studio-hub-panel="practice"><div class="hub-intro"><h2>Luyện &amp; Ôn</h2></div><details class="hub-group hub-review-section" id="studioReview"><summary class="hub-group-heading">Ôn</summary><div class="hub-cards review-hubs"><button class="hub-card" data-studio-go="srs"><span class="hub-symbol mint" data-icon="repeat-2"></span><span class="hub-content"><strong>Ôn tập SRS</strong><small>Ôn từ đến hạn theo mức độ ghi nhớ.</small><em>Mở phiên ôn <i data-icon="arrow-up-right"></i></em></span></button><button class="hub-card" data-studio-go="mistakes"><span class="hub-symbol peach" data-icon="target"></span><span class="hub-content"><strong>Ôn câu sai</strong><small>Ôn lại câu đã làm sai.</small><em>Xem lỗi đã gặp <i data-icon="arrow-up-right"></i></em></span></button></div></details><details class="hub-group" id="practiceGroup"><summary class="hub-group-heading">Luyện</summary><div class="hub-cards practice-hubs"><button class="hub-card large" data-studio-go="learn"><span class="hub-visual"><span class="han-visual">字</span></span><span class="hub-content"><strong>Thẻ từ vựng</strong><small>Học chữ Hán, phát âm và nghĩa.</small><em>Học với flashcards <i data-icon="arrow-up-right"></i></em></span></button><button class="hub-card" data-studio-go="quiz"><span class="hub-symbol lilac" data-icon="list-checks"></span><span class="hub-content"><strong>Trắc nghiệm</strong><small>Chọn đáp án và xem lại câu đã sai.</small><em>Bắt đầu luyện <i data-icon="arrow-up-right"></i></em></span></button><button class="hub-card" data-studio-go="compare"><span class="hub-symbol peach" data-icon="split"></span><span class="hub-content"><strong>Từ dễ nhầm</strong><small>Đối chiếu âm đọc, nét chữ và cách dùng.</small><em>Xem so sánh <i data-icon="arrow-up-right"></i></em></span></button><button class="hub-card" data-studio-go="match-game"><span class="hub-symbol mint" data-icon="grid-3x3"></span><span class="hub-content"><strong>Đối chiếu 3 cột</strong><small>Ghép Hán tự – pinyin – nghĩa tiếng Việt.</small><em>Luyện đối chiếu <i data-icon="arrow-up-right"></i></em></span></button><button class="hub-card" data-studio-go="sentence-game"><span class="hub-symbol lilac" data-icon="list-ordered"></span><span class="hub-content"><strong>Sắp xếp câu</strong><small>Xếp từ thành câu tiếng Trung.</small><em>Luyện xếp câu <i data-icon="arrow-up-right"></i></em></span></button></div></details></section><section class="panel pg-panel" id="matchGamePanel" data-studio-hub-panel="match-game" hidden><div class="pg-intro"><h2>Đối chiếu Hán – Pinyin – Nghĩa</h2><p class="pg-subtitle">Ghép ba ô Hán – pinyin – nghĩa. Các cột được xáo riêng.</p></div><div class="pg-content"></div></section><section class="panel pg-panel" id="sentenceGamePanel" data-studio-hub-panel="sentence-game" hidden><div class="pg-intro"><h2>Sắp xếp câu tiếng Trung</h2><p class="pg-subtitle">Chạm để xếp câu; chạm lại để sửa.</p></div><div class="pg-content"></div></section><section class="panel home-panel" id="studioHome" data-studio-hub-panel="home" hidden="">
-<section id="planToday" class="plan-panel" hidden aria-label="Kế hoạch hôm nay"><div class="section-row"><div class="plan-heading"><h3 id="planTodayTitle">Kế hoạch hôm nay</h3><p id="planTodayMeta"></p></div><button type="button" data-studio-go="home" id="planSettingsLink">Chỉnh mục tiêu</button></div><div id="planTasks"></div></section><details id="homePlanSettings" class="plan-panel" aria-label="Mục tiêu học tập"><summary>Mục tiêu &amp; lịch học</summary><div id="planEmpty"><p>Chọn HSK, nhịp học và nhận nhiệm vụ hằng ngày.</p><button id="planGoSetup" type="button">Lập kế hoạch học</button></div><div id="planOverview" hidden><section class="plan-overview-group"><h4 id="planTitle"></h4><p id="planDeadline"></p><p id="planProgress"></p><progress id="planVocabularyMeter" aria-label="Tiến độ học từ mới" max="1" value="0"></progress><p id="planNotice" role="status"></p></section><section class="plan-overview-group"><label class="plan-check"><input id="planAIToggle" type="checkbox"> Tự tinh chỉnh lịch với AI</label><p class="hint">Khi bật, app gửi thống kê học tổng hợp theo tuần tới dịch vụ AI. AI chỉ tăng tốc khi có bằng chứng nhớ lại; khi chậm, bạn chọn giãn hạn hoặc học bù.</p></section><section class="plan-overview-group"><h4>Nhịp học</h4><p id="planAssessment"></p><p id="planAIStatus" role="status"></p><div class="plan-actions"><button id="planReview" type="button">Đánh giá nhịp học</button><button id="planUndo" type="button" hidden>Hoàn tác đổi lịch</button><button id="planEdit" type="button">Lập lại kế hoạch</button></div></section><div id="planSlow" hidden><h4>Chọn cách điều chỉnh</h4><div class="plan-adjust-options"><article><strong>Giãn thời hạn</strong><p id="planExtendInfo"></p><button id="planExtend" type="button">Giữ nhịp, giãn mục tiêu</button></article><article><strong>Học bù</strong><p id="planCatchupInfo"></p><button id="planCatchup" type="button">Tăng nhịp để giữ hạn</button></article></div></div></div><details id="planSetup"><summary>Chọn mục tiêu và lịch học</summary><form id="planForm"><label for="planLevel">Mục tiêu nội dung HSK</label><select id="planLevel"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5" selected>HSK 5</option><option value="6">HSK 6</option></select><label for="planBasis">Nền tảng hiện tại (tự đánh giá)</label><select id="planBasis"><option value="0">Mới bắt đầu</option><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4" selected>HSK 4</option><option value="5">HSK 5</option></select><label for="planBudget">Tối đa bao nhiêu phút mỗi ngày?</label><input id="planBudget" type="number" min="15" max="240" value="180" required><label for="planDays">Số ngày học mỗi tuần</label><select id="planDays"><option value="5">5 ngày · nghỉ cuối tuần</option><option value="6" selected>6 ngày · Chủ nhật ôn nhẹ</option><option value="7">7 ngày</option></select><fieldset><legend>Chọn nhịp học</legend><div id="planChoices"></div></fieldset><p id="planScope" class="hint"></p><label class="plan-check"><input id="planAI" type="checkbox"> Tự tinh chỉnh lịch với AI</label><p class="hint">Cần đăng nhập và mạng để dùng AI. Chỉ gửi thống kê tổng hợp; kế hoạch và nhật ký được đồng bộ khi đăng nhập và có mạng. Đây là lộ trình học nội dung trong app, chưa phải đánh giá đủ điều kiện thi.</p><button type="submit">Tạo kế hoạch</button><p id="planStatus" role="status"></p></form></details></details>  <div class="dashboard-grid">
-    <div class="dashboard-primary">
-      <details class="update-push-settings"><summary>Thông báo phiên bản mới</summary><p id="updatePushStatus" role="status">Đang kiểm tra hỗ trợ thông báo…</p><div class="update-notice-actions"><button type="button" id="updatePushEnable" disabled>Nhận thông báo cập nhật</button><button type="button" id="updatePushDisable" disabled>Tắt báo cập nhật</button></div></details>
-      <div class="feature-hero"><div class="feature-copy"><h3>Tiếp tục hành trình<br>HSK của bạn.</h3><p>Học từ vựng, hội thoại và theo dõi tiến độ.</p><button class="hero-button" data-studio-go="lessons">Khám phá bài học <span data-icon="arrow-up-right"></span></button></div><div class="hero-character" aria-hidden="true">学<span>习</span></div></div>
-      <div class="section-row"><h3>Lối tắt học tập</h3><button type="button" data-studio-go="notebook">Sổ từ vựng →</button></div>
-      <div class="shortcut-grid">
-        <button class="shortcut" data-studio-go="learn"><span class="shortcut-icon indigo" data-icon="layers"></span><strong>Thẻ từ vựng</strong><small>Lật thẻ và nghe phát âm</small><span class="shortcut-arrow" data-icon="arrow-up-right"></span></button>
-        <button class="shortcut" data-studio-go="quiz"><span class="shortcut-icon peach" data-icon="circle-help"></span><strong>Trắc nghiệm</strong><small>Kiểm tra khả năng ghi nhớ</small><span class="shortcut-arrow" data-icon="arrow-up-right"></span></button>
-        <button class="shortcut" data-studio-go="srs"><span class="shortcut-icon mint" data-icon="refresh-cw"></span><strong>Ôn tập SRS</strong><small>Ôn những từ đến hạn</small><span class="shortcut-arrow" data-icon="arrow-up-right"></span></button>
-        <button class="shortcut" data-studio-go="search"><span class="shortcut-icon sky" data-icon="search"></span><strong>Tra cứu từ</strong><small>Tìm nghĩa và cách dùng</small><span class="shortcut-arrow" data-icon="arrow-up-right"></span></button>
-      </div>
-      <div class="home-music-grid"><button type="button" class="home-music-chill" data-studio-go="music-play"><span data-icon="headphones" aria-hidden="true"></span><span><strong>Nghe nhạc &amp; học HSK</strong><small>Kho nhạc · Lời bài hát · Playlist</small></span><i data-icon="arrow-right" aria-hidden="true"></i></button><button type="button" class="home-music-entry" data-studio-go="music" hidden><span data-icon="volume-2" aria-hidden="true"></span><span><strong>Nghe nhạc học HSK</strong><small>Kho bài hát có sẵn của App</small></span><i data-icon="arrow-right" aria-hidden="true"></i></button></div>
-      <div class="section-row pathway-head"><h3>Một nhịp học hiệu quả</h3></div>
-      <div class="pathway"><div class="path-step"><span>01</span><div><strong>Khám phá</strong><small>Đọc bài, nghe hội thoại</small></div><i data-icon="arrow-right"></i></div><div class="path-step"><span>02</span><div><strong>Luyện tập</strong><small>Thẻ từ, trắc nghiệm</small></div><i data-icon="arrow-right"></i></div><div class="path-step"><span>03</span><div><strong>Ghi nhớ</strong><small>Ôn sai, ôn SRS</small></div></div></div>
-    </div>
-    <aside class="dashboard-side">
-      <button type="button" class="side-card today-card" data-studio-go="learn"><span class="section-row"><span class="today-title">Góc học tập</span></span><span class="featured-han">你好<span>nǐ hǎo</span></span><span class="today-copy">Lật thẻ, nghe phát âm và xem ví dụ.</span><span class="subtle-link">Mở thẻ học <i data-icon="arrow-right"></i></span></button>
-      <div class="side-card stats-card"><div class="section-row"><h3>Không gian học</h3><i data-icon="layout-grid"></i></div><div class="stats-stack"><div><span class="stat-icon" data-icon="book-open"></span><strong id="studioHomeLessons">02</strong><small>Bài học</small></div><div><span class="stat-icon" data-icon="layers"></span><strong id="studioHomeWords">06</strong><small>Từ vựng</small></div><div><span class="stat-icon" data-icon="volume-2"></span><strong id="studioHomeDue">Audio</strong><small>Đến hạn</small></div></div></div>
-      <button class="review-reminder" data-studio-go="review"><span data-icon="calendar-clock"></span><span><strong>Đến lúc ôn lại?</strong><small>Ôn đúng phần cần nhớ.</small></span><i data-icon="arrow-up-right"></i></button>
-    </aside>
-  </div>
-</section>
-<p id="storageNotice" role="status" hidden=""></p><aside class="memory-reminder" role="status"><span id="memoryReminderText"></span> <button id="memoryDueStart" hidden="">Ôn từ đến hạn ngay</button></aside><div id="appLoadStatus" role="status">Dữ liệu học HSK đang load…</div>
-  <button id="lessonPracticeBack" type="button" hidden="">← Quay về bài đang học</button>
-<section id="learnPanel" aria-label="Thẻ từ vựng"><div class="activity-intro"><h2>Học từ vựng</h2></div>
-  
-  
-  
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <a class="brand" href="./" aria-label="Trang chủ HSK Flashcards">
+        <span class="brand-mark" aria-hidden="true">汉</span>
+        <span>HSK Flashcards</span>
+      </a>
 
-  
+      <nav class="nav-links" aria-label="Điều hướng nội dung trang">
+        <a href="#gia-su-ai">Gia sư AI</a>
+        <a href="#luyen-thi-hsk">Luyện thi HSK 1–6</a>
+        <a href="./sua-cau-tieng-trung-ai.html">Sửa câu AI</a>
+        <a href="./phan-biet-tu-de-nham-hsk.html">Từ dễ nhầm</a>
+        <a href="./tap-viet-chu-han-online.html">Tập viết chữ Hán</a>
+      </nav>
 
-  <!----------------------------------------------------------->
-  <!-- VỊ TRÍ 1 (HTML): CHÈN PHẦN NHẢY THẺ SAU KHỐI NÚT ĐIỀU KHIỂN -->
-  <!----------------------------------------------------------->
-  
-  
-  <!----------------------------------------------------------->
-  
-  
-  
-
-  
-
-
-  
-  
-  
-  <div class="flash-layout"><div class="flash-focus"><div class="card" id="flashcard" tabindex="0" aria-label="Lật thẻ từ vựng">
-    <div class="inner">
-      <div class="front face">
-        <div class="hsk-tag hsk-badge" id="hskTag"></div>
-        <div class="han" id="han"></div>
-      </div>
-      <div class="back face">
-        <div class="pin" id="pin"></div>
-        <div class="mean" id="mean"></div>
-        <div class="hv" id="hv"></div>
+      <div class="nav-actions">
+        <button type="button" class="theme-btn" id="themeToggle" aria-label="Chuyển giao diện sáng tối" title="Chuyển sáng / tối">
+          <svg class="ico ico-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="ico ico-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </button>
+        <a class="btn-primary" href="./app-hoc-hsk.html">
+          <span>Vào học ngay</span>
+          <svg class="ico" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg>
+        </a>
       </div>
     </div>
-  </div><div id="progress">Đã học: 0 / 0</div><div class="buttons">
-    <button id="prev">⬅️ Trước</button>
-    <button id="next">➡️ Tiếp</button>
-    <button id="exampleBtn">📝 Xem ví dụ</button>
-    <button id="shuffle">🎲 Ngẫu nhiên</button>
-    <button id="reset">🧹 Reset</button>
-  </div></div><div class="flash-tools"><div class="tool-card"><h3>Bộ thẻ học</h3><div class="field-row"><label for="masteryFilter">Trạng thái:</label><select id="masteryFilter"><option value="all">Tất cả từ</option><option value="known">Đã thuộc</option><option value="unknown">Chưa thuộc (gồm từ chưa đánh dấu)</option></select></div></div><div class="tool-card"><h3>Ví dụ và ghi nhớ</h3><div class="example" id="example">
-    <div class="cn" id="exCn"></div><div class="example-pinyin" id="exPin" lang="zh-Latn"></div>
-    <div class="vi" id="exVi"></div><div id="dictionaryExamples"></div>
-  </div><button id="memoryLearnCurrent">Học từ này trong ngữ cảnh</button><button id="wordConfusionOpen">Phân biệt âm / nét dễ nhầm</button></div><div class="tool-card"><h3>Di chuyển nhanh</h3><div class="jump-control">
-    <input type="number" id="jumpInput" placeholder="Nhập số thứ tự (1-N)" min="1">
-    <button id="jumpBtn">Nhảy đến thẻ</button>
-  </div><div id="jumpStatus"></div><div id="learningStats" aria-live="polite"></div></div><div class="tool-card"><h3>Từ liên quan</h3><div id="wordRelations" class="card-relations"></div></div></div></div></section>
-  <section id="searchPanel" class="panel-box activity-panel" hidden=""><nav class="studio-search-tabs" aria-label="Các công cụ tra cứu"><button type="button" data-studio-go="search" data-search-tool="vocabulary">Từ vựng</button><button id="handwritingOpen" data-search-tool="handwriting" type="button" aria-controls="handwritingPanel" aria-expanded="false" disabled="">Vẽ chữ</button><button type="button" data-studio-go="translator" data-search-tool="translate">Dịch câu</button><button type="button" data-search-tool="image">Đọc ảnh</button></nav>
-    <h2>Tìm kiếm từ vựng</h2>
-    <div class="dictionary-modes" role="group" aria-label="Chế độ tra cứu"><button type="button" data-search-scope="hsk" aria-pressed="true">Tra cứu HSK</button><button type="button" data-search-scope="general" aria-pressed="false">Tra cứu thường</button></div>
-    <p id="dictionaryModeHint" class="hint">Ưu tiên từ vựng HSK.</p>
-    <form id="searchForm" class="field-row"><input id="searchInput" aria-label="Từ hoặc nghĩa cần tra" placeholder="Ví dụ: 你好, ni hao, vui vẻ…" autocomplete="off"><button type="submit">Tìm kiếm</button></form>
-    <section id="handwritingPanel" class="handwriting-panel" aria-label="Vẽ chữ để tra cứu" hidden="">
-      <div class="handwriting-head"><strong>Vẽ một chữ Hán · Thử nghiệm</strong><button id="handwritingClose" type="button" aria-label="Đóng khung vẽ">×</button></div>
-      <p class="hint">Vẽ theo thứ tự nét bất kỳ, rồi chọn chữ đúng. Gợi ý có thể sai; app không chấm bài luyện viết.</p>
-      <div class="handwriting-board"><canvas id="handwritingCanvas" width="640" height="640" aria-label="Khung vẽ một chữ Hán bằng cảm ứng, bút hoặc chuột"></canvas></div>
-      <div class="handwriting-actions">
-        <div class="handwriting-edit-actions" role="group" aria-label="Chỉnh nét vẽ"><button id="handwritingUndo" type="button" disabled>Hoàn tác nét</button><button id="handwritingClear" type="button">Xóa</button></div>
-        <div class="handwriting-recognition-actions" role="group" aria-label="Nhận dạng chữ"><button id="handwritingRecognize" type="button" disabled="">Nhận dạng offline</button><button id="handwritingAI" type="button" disabled="">Nhờ AI nhận dạng</button><button id="handwritingCancelAI" type="button" hidden="">Hủy</button></div>
-      </div>
-      <details class="handwriting-advanced-settings"><summary>Tùy chọn nhận dạng</summary><button id="handwritingAdvanced" type="button" disabled="">Tải nhận dạng nâng cao (~28 MB)</button><p id="handwritingAdvancedStatus" class="hint" role="status">Chạy trên thiết bị, không cần API key. Tải một lần để dùng offline; nét vẽ không được gửi đi.</p></details>
-      <p id="handwritingStatus" class="hint" role="status" aria-live="polite"></p>
-      <div id="handwritingCandidates" class="handwriting-candidates" aria-label="Chọn chữ bạn vừa vẽ"></div>
-      <form id="handwritingCorrection" class="handwriting-correction" hidden=""><label for="handwritingCorrectChar">Không có chữ đúng? Nhập một chữ Hán rồi xác nhận:</label><div><input id="handwritingCorrectChar" autocomplete="off" aria-label="Chữ Hán đúng" placeholder="好" required=""><button type="submit">Xác nhận chữ đúng</button></div></form>
-      <label class="handwriting-share"><input id="handwritingShare" type="checkbox"> Góp mẫu đã xác nhận để cải thiện gợi ý chung</label>
-      <p class="hint">Nhận dạng offline chạy trên thiết bị. Khi đăng nhập, mẫu chữ đã xác nhận được đồng bộ riêng theo tài khoản để dùng trên thiết bị khác. Nhờ AI sẽ gửi riêng ảnh ô vẽ lên máy chủ; cần mạng. Dùng AI không bật góp mẫu. Mẫu chỉ được gửi để cải thiện khi bạn bật góp mẫu và xác nhận chữ đúng.</p>
-      <p id="handwritingLearningStatus" class="hint" role="status"></p><button id="handwritingForget" type="button">Xóa mẫu đã học trên thiết bị</button><button id="handwritingMeaningSearch" type="button">Trở lại tìm nghĩa tiếng Việt</button>
-      <small class="handwriting-credit">Hình chữ Arphic © 1999, không có bảo đảm; cho phép chia sẻ/chỉnh sửa theo APL. <a href="./handwriting-notice.html" target="_blank" rel="noopener">Nguồn và giấy phép</a>.</small>
-    </section>
-    <div id="searchSummary" class="hint" role="status"></div>
-    <div id="searchResults" class="result-grid"></div><button id="searchMore" hidden="">Xem thêm</button>
-  </section>
-  <section id="sentenceEditor" class="sentence-editor" data-studio-hub-panel="sentence-editor" hidden aria-label="Sửa câu tiếng Trung">
-    <form class="sentence-editor-shell">
-      <div class="sentence-columns">
-        <div class="sentence-sheet">
-          <label for="sentenceDraft" class="visually-hidden">Văn bản tiếng Trung</label>
-          <div class="sentence-writing">
-            <pre class="sentence-mirror" aria-hidden="true"></pre>
-            <textarea id="sentenceDraft" lang="zh" maxlength="5000" spellcheck="false" placeholder="Viết hoặc dán câu tiếng Trung vào đây…" aria-label="Văn bản tiếng Trung"></textarea>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <span class="hero-watermark" aria-hidden="true">学习</span>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-title">Học HSK miễn phí cùng Gia sư AI và luyện thi HSK 1–6 online</h1>
+          <p class="hero-lead">
+            Web tự học tiếng Trung miễn phí ngay trên trình duyệt. Khi gặp câu khó, bạn hỏi thẳng Gia sư AI bằng tiếng Việt, nhờ sửa câu tiếng Trung, làm đề thi thử HSK 1–6 và ôn từ vựng flashcard mỗi ngày.
+          </p>
+          <div class="hero-cta-row">
+            <a class="btn-hero-main" href="./app-hoc-hsk.html">
+              <span>Vào học HSK miễn phí ngay</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+            <a class="btn-hero-ghost" href="#luyen-thi-hsk">
+              <span>Xem luyện thi HSK 1–6</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </a>
           </div>
-          <footer class="sentence-footer">
-            <div class="sentence-footer-meta">
-              <span class="sentence-count">0 / 5000 ký tự</span>
-              <button type="button" class="sentence-undo" disabled>Hoàn tác</button>
-              <button type="button" class="sentence-example">Thử câu mẫu</button>
-            </div>
-            <div class="sentence-ai-actions">
-              <label for="sentenceAiProvider" class="visually-hidden">Nhà cung cấp AI</label>
-              <select id="sentenceAiProvider" class="qa-thinking">
-                <option value="auto">Tự động</option>
-                <optgroup label="Hệ thống">
-                  <option value="system-gemini">Gemini</option>
-                  <option value="system-chatgpt">ChatGPT</option>
-                </optgroup>
-                <optgroup label="API / cookie riêng">
-                  <option value="personal">Cấu hình đang bật</option>
-                  <option value="personal:openai">OpenAI</option>
-                  <option value="personal:fosta">Fosta</option>
-                  <option value="personal:deepseek">DeepSeek</option>
-                  <option value="personal:claude">Claude</option>
-                  <option value="personal:gemini">Gemini</option>
-                  <option value="personal:chatgpt-cookie">ChatGPT</option>
-                  <option value="personal:muse-cookie">Muse AI</option>
-                  <option value="personal:custom">Tùy chỉnh (API riêng)</option>
-                </optgroup>
-              </select>
-              <select id="sentenceAiThinking" class="qa-thinking" aria-label="Mức suy nghĩ của AI" title="Mức suy nghĩ áp dụng khi dùng API mặc định" disabled>
-                <option value="low">Thấp</option>
-                <option value="medium">Trung bình</option>
-                <option value="high">Cao</option>
-              </select>
-              <button type="submit" class="sentence-check-btn">Kiểm tra bằng AI</button>
-            </div>
-          </footer>
+          <ul class="hero-proof">
+            <li>
+              <svg class="ico" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Đủ giáo trình &amp; đề HSK 1 đến HSK 6</span>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Gia sư AI giải thích dễ hiểu bằng tiếng Việt</span>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Học trực tiếp trên điện thoại và máy tính</span>
+            </li>
+          </ul>
         </div>
-        <aside class="sentence-review" aria-label="Gợi ý và công cụ kiểm tra" data-active-tool="grammar">
-          <div class="sentence-review-head">
-            <div class="sentence-review-title">
-              <h3 id="sentenceToolHeading">Gợi ý chỉnh sửa · HSK 1–6</h3>
-              <span id="sentenceToolSubtitle" class="sentence-tool-subtitle">Sửa ngữ pháp &amp; cách diễn đạt</span>
+
+        <aside class="tutor-demo" aria-label="Xem thử Gia sư AI giải đáp tiếng Trung">
+          <div class="tutor-demo-head">
+            <div class="tutor-demo-id">
+              <span class="tutor-avatar" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M12 3 L14.4 9.6 L21 12 L14.4 14.4 L12 21 L9.6 14.4 L3 12 L9.6 9.6 Z"/></svg>
+              </span>
+              <div>
+                <strong>Gia sư AI tiếng Trung</strong>
+                <span><i class="live-dot" aria-hidden="true"></i> Bấm thử một câu hỏi bên dưới</span>
+              </div>
             </div>
-            <div class="sentence-filters" aria-label="Lọc gợi ý" data-tool-only="grammar">
-              <button type="button" data-sentence-filter="all" aria-pressed="true">Tất cả</button>
-              <button type="button" data-sentence-filter="fix" aria-pressed="false">Cần sửa</button>
-              <button type="button" data-sentence-filter="style" aria-pressed="false">Tự nhiên hơn</button>
+            <span class="tutor-demo-tag">Miễn phí 1–1</span>
+          </div>
+
+          <div class="tutor-prompts" role="tablist" aria-label="Câu hỏi mẫu cho Gia sư AI">
+            <button type="button" class="prompt-chip" role="tab" aria-selected="true" data-ai-tab="0">Khi nào dùng 不 và 没?</button>
+            <button type="button" class="prompt-chip" role="tab" aria-selected="false" data-ai-tab="1">Giải thích đáp án HSK</button>
+            <button type="button" class="prompt-chip" role="tab" aria-selected="false" data-ai-tab="2">Sửa câu tiếng Trung</button>
+            <button type="button" class="prompt-chip" role="tab" aria-selected="false" data-ai-tab="3">Lộ trình tự học HSK</button>
+          </div>
+
+          <div class="tutor-stage" id="aiStage" role="tabpanel" aria-live="polite">
+            <div class="msg-user">Khi nào dùng <span lang="zh-Hans">不</span> và khi nào dùng <span lang="zh-Hans">没</span>? Cho mình ví dụ dễ hiểu.</div>
+            <div class="msg-ai">
+              <p>Cách nhớ nhanh nhất: <span class="zh-inline" lang="zh-Hans">不</span> (bù) dùng cho thói quen, hiện tại, tương lai hoặc ý muốn; còn <span class="zh-inline" lang="zh-Hans">没</span> (méi) dùng khi nói việc <strong>đã không xảy ra</strong> trong quá khứ hoặc phủ định <span class="zh-inline" lang="zh-Hans">有</span>.</p>
+              <div class="ai-ex-list">
+                <div class="ai-ex">
+                  <span class="cn" lang="zh-Hans">我明天不去学校。</span>
+                  <span class="py">Wǒ míngtiān bù qù xuéxiào.</span>
+                  <span class="vi">Ngày mai tôi không đi học. (tương lai → dùng 不)</span>
+                </div>
+                <div class="ai-ex">
+                  <span class="cn" lang="zh-Hans">我昨天没去学校。</span>
+                  <span class="py">Wǒ zuótiān méi qù xuéxiào.</span>
+                  <span class="vi">Hôm qua tôi đã không đi học. (quá khứ → dùng 没)</span>
+                </div>
+              </div>
+              <p>Mẹo thi HSK: thấy <span class="zh-inline" lang="zh-Hans">有</span> thì luôn đi với <span class="zh-inline" lang="zh-Hans">没</span> (<span class="zh-inline" lang="zh-Hans">没有</span>), không bao giờ viết <span class="zh-inline" lang="zh-Hans">不有</span>.</p>
             </div>
           </div>
-          <div class="sentence-review-body">
-            <p class="sentence-status" role="status" aria-live="polite">Dán văn bản tiếng Trung rồi bấm Kiểm tra bằng AI.</p>
 
-            <div class="sentence-tool-pane" data-sentence-pane="grammar">
-              <p class="sentence-help">AI giải thích lỗi và gợi ý cách viết tự nhiên hơn.</p>
-              <div class="sentence-bulk-bar" hidden>
-                <button type="button" class="sentence-apply-all">Sửa toàn bộ gợi ý</button>
-              </div>
-              <div class="sentence-suggestions"></div>
-            </div>
-
-            <div class="sentence-tool-pane" data-sentence-pane="detector" hidden>
-              <div class="sentence-pane-actions">
-                <button type="button" id="sentenceDetectorRunBtn" class="sentence-tool-cta">Quét dấu hiệu AI</button>
-              </div>
-              <p class="sentence-pane-hint" id="sentenceDetectorHint">Phát hiện tỷ lệ giống văn bản AI, giải thích vì sao và tô đỏ đoạn nghi ngờ khi mở rộng.</p>
-              <div id="sentenceAiDetector" class="sentence-detector" hidden aria-live="polite"></div>
-            </div>
-
-            <div class="sentence-tool-pane" data-sentence-pane="rewrite" hidden>
-              <div class="sentence-rewrite-styles" role="group" aria-label="Phong cách viết lại">
-                <button type="button" data-rewrite-style="natural" aria-pressed="true">Tự nhiên (Humanize)</button>
-                <button type="button" data-rewrite-style="formal" aria-pressed="false">Trang trọng HSK</button>
-                <button type="button" data-rewrite-style="concise" aria-pressed="false">Ngắn gọn</button>
-              </div>
-              <div class="sentence-pane-actions">
-                <button type="button" id="sentenceRewriteRunBtn" class="sentence-tool-cta">Viết lại đoạn văn</button>
-              </div>
-              <p class="sentence-pane-hint">Giữ nguyên nội dung đã dán; giúp văn phong tự nhiên hơn hoặc hợp chuẩn viết HSK.</p>
-              <div id="sentenceRewriteOutput" class="sentence-rewrite-output" hidden></div>
-            </div>
-
-            <div class="sentence-tool-pane" data-sentence-pane="ask" hidden>
-              <div class="sentence-qa-chips" aria-label="Gợi ý câu hỏi nhanh">
-                <button type="button" data-qa-preset="Dịch toàn bộ đoạn văn tiếng Trung đang dán sang tiếng Việt tự nhiên và chú thích ngắn từ khó.">Dịch sang tiếng Việt</button>
-                <button type="button" data-qa-preset="Phân tích và giải thích ngắn các cấu trúc ngữ pháp chính xuất hiện trong đoạn văn đang dán.">Giải thích ngữ pháp</button>
-                <button type="button" data-qa-preset="Đánh giá đoạn văn này đang ở khoảng trình độ HSK mấy và gợi ý 2 điểm nâng cấp nhanh.">Chấm mức HSK</button>
-              </div>
-              <div class="sentence-qa-compose">
-                <label for="sentenceQaInput" class="visually-hidden">Câu hỏi về văn bản</label>
-                <input type="text" id="sentenceQaInput" maxlength="480" placeholder="Hỏi AI về đoạn văn đang dán…" autocomplete="off">
-                <button type="button" id="sentenceQaSendBtn" class="sentence-tool-cta">Hỏi AI</button>
-              </div>
-              <div id="sentenceQaThread" class="sentence-qa-thread"></div>
-            </div>
-
-            <div class="sentence-tool-pane" data-sentence-pane="grader" hidden>
-              <div class="sentence-grader-rubrics" role="group" aria-label="Tiêu chí chấm điểm">
-                <button type="button" data-grader-rubric="hsk" aria-pressed="true">Chuẩn thi HSK</button>
-                <button type="button" data-grader-rubric="natural" aria-pressed="false">Tự nhiên bản xứ</button>
-                <button type="button" data-grader-rubric="strict" aria-pressed="false">Khắt khe</button>
-              </div>
-              <div class="sentence-grader-topic-wrap">
-                <label for="sentenceGraderPrompt" class="visually-hidden">Đề bài hoặc chủ đề (tùy chọn)</label>
-                <input type="text" id="sentenceGraderPrompt" maxlength="200" placeholder="Đề bài / chủ đề viết (tùy chọn)…" autocomplete="off">
-              </div>
-              <div class="sentence-pane-actions">
-                <button type="button" id="sentenceGraderRunBtn" class="sentence-tool-cta">Chấm điểm bằng AI</button>
-              </div>
-              <p class="sentence-pane-hint" id="sentenceGraderHint">AI đánh giá theo thang 100 điểm kèm 4 tiêu chí ngữ pháp, từ vựng, mạch lạc và độ tự nhiên HSK.</p>
-              <div id="sentenceGraderOutput" class="sentence-grader-output" hidden aria-live="polite"></div>
-            </div>
-
-            <div class="sentence-tool-pane" data-sentence-pane="stats" hidden>
-              <div id="sentenceStatsBody" class="sentence-stats-body"></div>
-            </div>
+          <div class="tutor-demo-foot">
+            <span>Hỏi mọi thắc mắc HSK bằng tiếng Việt</span>
+            <a href="./app-hoc-hsk.html">
+              <span>Hỏi Gia sư AI ngay</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
           </div>
         </aside>
-        <nav class="sentence-rail" aria-label="Công cụ kiểm tra ngữ pháp">
-          <div class="sentence-rail-dock" role="tablist" aria-label="Tính năng kiểm tra">
-            <button type="button" class="sentence-rail-item" data-sentence-tool="grammar" role="tab" aria-selected="true" aria-pressed="true" aria-label="Sửa ngữ pháp &amp; Diễn đạt">
-              <span class="sentence-rail-label">Sửa ngữ pháp</span>
-              <span class="sentence-rail-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.3 2.3 4.8-4.9"/></svg>
-              </span>
-              <span class="sentence-rail-badge" data-tool-badge="grammar" hidden></span>
-            </button>
-            <button type="button" id="sentenceAiDetectBtn" class="sentence-rail-item" data-sentence-tool="detector" role="tab" aria-selected="false" aria-pressed="false" aria-label="AI Detector · Phát hiện văn bản AI">
-              <span class="sentence-rail-label">AI Detector</span>
-              <span class="sentence-rail-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5a1 1 0 0 1 1-1h2"/><path d="M17 4h2a1 1 0 0 1 1 1v2"/><path d="M20 17v2a1 1 0 0 1-1 1h-2"/><path d="M7 20H5a1 1 0 0 1-1-1v-2"/><path d="M12 7l1.4 3.6L17 12l-3.6 1.4L12 17l-1.4-3.6L7 12l3.6-1.4Z"/></svg>
-              </span>
-              <span class="sentence-rail-badge" data-tool-badge="detector" hidden></span>
-            </button>
-            <button type="button" class="sentence-rail-item" data-sentence-tool="grader" role="tab" aria-selected="false" aria-pressed="false" aria-label="AI Grader · Chấm điểm bài viết">
-              <span class="sentence-rail-label">AI Grader</span>
-              <span class="sentence-rail-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 19L10 5h1l5.5 14"/><path d="M6.5 14h8"/><path d="M19 5v5"/><path d="M16.5 7.5h5"/></svg>
-              </span>
-              <span class="sentence-rail-badge" data-tool-badge="grader" hidden></span>
-            </button>
-            <button type="button" class="sentence-rail-item" data-sentence-tool="rewrite" role="tab" aria-selected="false" aria-pressed="false" aria-label="Viết lại &amp; Tự nhiên hóa">
-              <span class="sentence-rail-label">Viết lại &amp; Tự nhiên</span>
-              <span class="sentence-rail-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L4 14h7l-1 7 9-11h-7l1-7z"/></svg>
-              </span>
-              <span class="sentence-rail-badge" data-tool-badge="rewrite" hidden></span>
-            </button>
-            <button type="button" class="sentence-rail-item" data-sentence-tool="ask" role="tab" aria-selected="false" aria-pressed="false" aria-label="Hỏi nhanh AI về bài viết">
-              <span class="sentence-rail-label">Hỏi nhanh AI</span>
-              <span class="sentence-rail-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 18 0Z"/><path d="M12 8.5l.9 2.1L15 11.5l-2.1.9L12 14.5l-.9-2.1L9 11.5l2.1-.9Z"/></svg>
-              </span>
-              <span class="sentence-rail-badge" data-tool-badge="ask" hidden></span>
-            </button>
-            <button type="button" class="sentence-rail-item" data-sentence-tool="stats" role="tab" aria-selected="false" aria-pressed="false" aria-label="Thống kê chữ &amp; Nhịp câu">
-              <span class="sentence-rail-label">Thống kê chữ</span>
-              <span class="sentence-rail-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 15v-4"/><path d="M12 15V7"/><path d="M17 15v-6"/></svg>
-              </span>
-            </button>
-          </div>
-        </nav>
       </div>
-    </form>
-  </section>
-  <section id="aiQaPanel" class="panel-box activity-panel ai-qa-panel" data-studio-hub-panel="ai-qa" hidden aria-label="Hỏi đáp AI">
-    <div class="ai-qa-shell">
-      <aside id="aiQaHistory" class="ai-qa-history" aria-label="Các cuộc trò chuyện gần đây" hidden>
-        <div class="ai-qa-history-head"><strong>Cuộc trò chuyện</strong><button id="aiQaHistoryClose" type="button" aria-label="Đóng danh sách cuộc trò chuyện">×</button></div>
-        <button id="aiQaNewChat" class="ai-qa-new-chat" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M10 14l1-4 7-7 3 3-7 7-4 1Z"/></svg> Đoạn chat mới</button>
-        <div class="ai-qa-sidebar-content">
-        <div class="qa-project-sidebar">
-          <div class="qa-project-sidebar-heading">
-            <button id="qaProjectSectionToggle" type="button" aria-expanded="true" aria-controls="qaProjectFolders">Dự án <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
-            <button id="qaProjectCreate" type="button" aria-label="Tạo dự án" title="Tạo dự án"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
-          </div>
-          <div id="qaProjectFolders"></div>
+    </section>
+
+    <section class="band" id="gia-su-ai" aria-labelledby="ai-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="ai-heading">Gia sư AI giải đáp tiếng Trung như có người kèm riêng ở nhà</h2>
+          <p>
+            Tự học tiếng Trung online dễ nản nhất là lúc bí ngữ pháp hoặc không biết mình đặt câu đúng hay sai. Gia sư AI trên HSK Flashcards giúp bạn gỡ rối ngay bằng tiếng Việt dễ hiểu.
+          </p>
         </div>
-        <h3 class="ai-qa-recent-heading">Gần đây</h3>
-        <div id="aiQaConversationList" class="ai-qa-conversation-list" role="list" aria-label="Gần đây"></div>
-        </div>
-      </aside>
-      <section id="qaProjectHome" class="qa-project-home" hidden aria-labelledby="qaProjectTitle">
-        <button id="qaProjectHistory" type="button" aria-label="Mở danh sách cuộc trò chuyện" aria-controls="aiQaHistory">☰</button>
-        <button id="qaProjectExit" type="button">← Hỏi đáp AI</button>
-        <div class="qa-project-content">
-          <div class="qa-project-title-row">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-            <h2 id="qaProjectTitle"></h2>
-          </div>
-          <form id="qaProjectChatForm" class="qa-project-form qa-chat-composer">
-            <input id="qaProjectQuestion" aria-label="Tin nhắn mới trong dự án" maxlength="500">
-            <select id="qaProjectThinking" class="qa-thinking" aria-label="Mức suy nghĩ của AI" title="Mức suy nghĩ áp dụng khi dùng API mặc định" disabled><option value="low">Thấp</option><option value="medium">Trung bình</option><option value="high">Cao</option></select><button type="submit" aria-label="Gửi tin nhắn"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button>
-          </form>
-          <div class="qa-project-tabs">
-            <button id="qaProjectChatsTab" type="button" aria-pressed="true">Trò chuyện</button>
-            <button id="qaProjectSourcesTab" type="button" aria-pressed="false">Nguồn</button>
-          </div>
-          <div id="qaProjectChats"></div>
-          <div id="qaProjectSources" hidden>
-            <div id="qaProjectSourceIntro" class="qa-project-source-intro">
-              <div id="qaProjectSourceEmpty">
-                <strong>Cung cấp thêm ngữ cảnh cho AI</strong>
-                <p>Thêm liên kết hoặc tài liệu để AI hiểu rõ hơn về dự án của bạn.</p>
+
+        <div class="ai-split">
+          <ul class="ai-list">
+            <li>
+              <span class="ai-list-ico" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </span>
+              <div>
+                <h3>Hỏi ngữ pháp và phân biệt từ dễ nhầm tiếng Trung</h3>
+                <p>Cứ hỏi tự nhiên theo cách bạn nghĩ, như “khi nào dùng 了 với 过” hay “一点儿 khác 有点儿 chỗ nào”. Xem thêm <a href="./phan-biet-tu-de-nham-hsk.html">bảng 16 cặp từ dễ nhầm HSK</a>.</p>
               </div>
-              <button id="qaProjectAddSource" type="button" aria-expanded="false" aria-controls="qaProjectSourceOptions">Thêm nguồn</button>
+            </li>
+            <li>
+              <span class="ai-list-ico" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+              </span>
+              <div>
+                <h3>Sửa câu tiếng Trung bằng AI cho tự nhiên hơn</h3>
+                <p>Nhập câu bạn tự đặt để luyện viết HSK hoặc giao tiếp. Công cụ <a href="./sua-cau-tieng-trung-ai.html">sửa câu tiếng Trung bằng AI</a> chỉ rõ lỗi sai và gợi ý câu tự nhiên như người bản xứ.</p>
+              </div>
+            </li>
+            <li>
+              <span class="ai-list-ico" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </span>
+              <div>
+                <h3>Hiểu cặn kẽ đáp án đề thi HSK</h3>
+                <p>Không còn học vẹt đáp án A, B, C, D. Bạn có thể hỏi vì sao đáp án đó đúng và các lựa chọn còn lại sai ở sắc thái hay cấu trúc nào để tránh lặp lại lỗi sai.</p>
+              </div>
+            </li>
+            <li>
+              <span class="ai-list-ico" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+              </span>
+              <div>
+                <h3>Tạo bài đọc theo cấp HSK và bám sát tiến độ</h3>
+                <p>Gia sư AI bám theo cấp HSK mục tiêu của bạn, gợi ý bài đọc luyện mắt vừa sức và nhắc đúng điểm ngữ pháp hoặc từ vựng bạn còn hay vướng.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="editor-showcase" aria-label="Ví dụ công cụ sửa câu tiếng Trung bằng AI">
+            <div class="editor-head">
+              <h3>Xem cách AI sửa câu tiếng Trung</h3>
+              <div class="editor-tabs" role="tablist" aria-label="Chọn câu ví dụ sửa lỗi">
+                <button type="button" role="tab" aria-selected="true" data-edit-tab="0">Ví dụ 1</button>
+                <button type="button" role="tab" aria-selected="false" data-edit-tab="1">Ví dụ 2</button>
+              </div>
             </div>
-            <div id="qaProjectSourceOptions" class="qa-project-source-options" hidden>
-              <form id="qaProjectLinkForm" class="qa-project-form">
-                <input id="qaProjectLink" type="url" maxlength="1000" required placeholder="https://…" aria-label="Link nguồn">
-                <button type="submit">Thêm link</button>
-              </form>
-              <label for="qaProjectFile">Tải tệp từ thiết bị</label>
-              <input id="qaProjectFile" type="file">
-              <p>AI ưu tiên nội dung từ link rồi đến tệp. Với nguồn chưa đọc được chữ, dùng ô văn bản để bổ sung.</p>
+
+            <div id="editorStage" role="tabpanel" aria-live="polite">
+              <div class="sentence-block">
+                <span class="sentence-label">Câu bạn viết</span>
+                <p class="sentence-han" lang="zh-Hans">我昨天 <span class="err-mark">不</span> 去看电影。</p>
+                <p class="sentence-vi">Ý muốn nói: Hôm qua tôi không đi xem phim.</p>
+              </div>
+
+              <div class="sentence-block is-fixed">
+                <span class="sentence-label">
+                  <svg class="ico" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span>Câu AI sửa lại tự nhiên hơn</span>
+                </span>
+                <p class="sentence-han" lang="zh-Hans">我昨天 <span class="ok-mark">没</span> 去看电影。</p>
+                <p class="sentence-py">Wǒ zuótiān méi qù kàn diànyǐng.</p>
+                <p class="sentence-vi">Hôm qua tôi đã không đi xem phim.</p>
+              </div>
+
+              <p class="editor-note">
+                <strong>Vì sao sửa:</strong> Có mốc thời gian quá khứ <span class="zh-inline" lang="zh-Hans">昨天</span> (hôm qua) nên phủ định hành động đã không diễn ra phải dùng <span class="zh-inline" lang="zh-Hans">没</span> thay cho <span class="zh-inline" lang="zh-Hans">不</span>.
+              </p>
             </div>
-            <div id="qaProjectSourceList"></div>
+
+            <div class="editor-action">
+              <a class="text-link" href="./sua-cau-tieng-trung-ai.html">
+                <span>Xem thêm 6 lỗi viết câu hay gặp</span>
+                <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+            </div>
           </div>
-          <p id="qaProjectStatus" role="status"></p>
         </div>
-      </section>
-      <dialog id="qaProjectDialog" class="qa-project-dialog" aria-labelledby="qaProjectDialogTitle">
-        <form id="qaProjectCreateForm">
-          <header><h2 id="qaProjectDialogTitle">Tạo dự án</h2><button id="qaProjectCancel" type="button" aria-label="Đóng">×</button></header>
-          <label for="qaProjectName">Tên dự án</label>
-          <input id="qaProjectName" maxlength="64" placeholder="Ví dụ: Ôn HSK 4" required>
-          <p>Lưu cuộc trò chuyện và nguồn học theo từng chủ đề trên thiết bị này.</p>
-          <footer><label>Bộ nhớ riêng <input id="qaProjectPrivate" type="checkbox" role="switch"></label><button type="submit">Tạo dự án</button></footer>
-        </form>
-      </dialog>
-      <div class="ai-qa-chat">
-        <header class="ai-qa-chatbar">
-          <button id="aiQaHistoryToggle" class="ai-qa-history-toggle" type="button" aria-expanded="false" aria-controls="aiQaHistory"><span aria-hidden="true">☰</span><span>Gần đây</span></button>
-          <button id="qaProjectBack" type="button" hidden aria-label="Về dự án">←</button><div class="ai-qa-chat-title"><strong id="aiQaConversationTitle">Hỏi đáp AI</strong><small>Gia sư AI · HSK</small></div>
-          <span class="ai-qa-level-note">Theo mục tiêu HSK của app</span>
-        </header>
-        <div class="ai-qa-learning-strip"><span class="ai-qa-learning-dot" aria-hidden="true"></span><span id="aiQaSnapshot" role="status"></span></div>
-        <div id="aiQaMessages" class="ai-qa-messages" role="log" aria-live="polite"></div>
-        <div id="aiQaEmpty" class="ai-qa-empty"><strong>Hỏi gia sư AI bất cứ điều gì</strong><span>Hỏi tiếng Trung, cách học hoặc lộ trình. Muốn đánh giá tiến độ, hãy nhập: <em>Đánh giá lộ trình học của tôi</em>.</span></div>
-        <p id="aiQaStatus" class="ai-qa-status" role="status"></p>
-        <form id="aiQaForm" class="ai-qa-form qa-chat-composer"><button id="aiQaJumpToLatest" class="ai-qa-jump-to-latest" type="button" aria-label="Xuống tin nhắn mới nhất" aria-controls="aiQaMessages" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></button><textarea id="aiQaInput" rows="1" maxlength="500" aria-label="Tin nhắn cho gia sư AI" placeholder="Nhắn tin cho gia sư AI…"></textarea><select id="aiQaThinking" class="qa-thinking" aria-label="Mức suy nghĩ của AI" title="Mức suy nghĩ áp dụng khi dùng API mặc định" disabled><option value="low">Thấp</option><option value="medium">Trung bình</option><option value="high">Cao</option></select><button id="aiQaSend" class="ai-qa-send" type="submit" aria-label="Gửi tin nhắn"><span aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span></button></form>
-        <p class="ai-qa-boundary-note">AI dùng dữ liệu học tập tổng hợp. Khi đã đủ bằng chứng gần 99%, AI sẽ xác nhận bạn đã đạt và đề xuất bước tiếp theo, không bắt bạn mắc kẹt vì lỗi vụn vặt.</p>
       </div>
-    </div>
-  </section>
-  <section id="quizPanel" class="panel-box activity-panel" hidden="">
-    <h2>Kiểm tra trắc nghiệm</h2>
-    <p class="hint">Chọn 1 trong 4 đáp án ngẫu nhiên. SRS: đúng → Nhớ, sai → Quên.</p>
-    <form id="quizForm">
-      <div class="quiz-level-picker">
-        <div class="field-row"><label for="quizLevelMode">Phạm vi ôn:</label><select id="quizLevelMode"><option value="all">Tất cả HSK 1–6</option><option value="single">Một level</option><option value="range">Khoảng level</option></select></div>
-        <div id="quizSingleRow" class="field-row" hidden=""><label for="quizSingleLevel">Chọn level:</label><select id="quizSingleLevel"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></div>
-        <div id="quizRangeRow" class="field-row" hidden=""><label for="quizLevelFrom">Từ:</label><select id="quizLevelFrom"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select><label for="quizLevelTo">Đến:</label><select id="quizLevelTo"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5" selected="">HSK 5</option><option value="6">HSK 6</option></select></div>
-        <p id="quizPoolPreview" class="hint" role="status"></p>
+    </section>
+
+    <section class="band band-surface" id="luyen-thi-hsk" aria-labelledby="exam-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="exam-heading">Luyện thi HSK miễn phí đủ 6 cấp độ từ HSK 1 đến HSK 6</h2>
+          <p>
+            Chọn đúng cấp HSK bạn đang ôn để làm bài tập Nghe – Đọc – Viết và đề thi thử HSK online miễn phí. Làm xong có ngay đáp án chi tiết và danh sách câu làm sai để ôn lại cho chắc.
+          </p>
+        </div>
+
+        <div class="level-tabs" role="tablist" aria-label="Chọn cấp độ HSK muốn xem">
+          <button type="button" class="level-tab" role="tab" aria-selected="true" data-hsk="1">HSK 1</button>
+          <button type="button" class="level-tab" role="tab" aria-selected="false" data-hsk="2">HSK 2</button>
+          <button type="button" class="level-tab" role="tab" aria-selected="false" data-hsk="3">HSK 3</button>
+          <button type="button" class="level-tab" role="tab" aria-selected="false" data-hsk="4">HSK 4</button>
+          <button type="button" class="level-tab" role="tab" aria-selected="false" data-hsk="5">HSK 5</button>
+          <button type="button" class="level-tab" role="tab" aria-selected="false" data-hsk="6">HSK 6</button>
+        </div>
+
+        <div class="exam-sheet" id="examSheet" role="tabpanel" aria-live="polite">
+          <div class="exam-info">
+            <h3 id="examLevelTitle">Luyện thi HSK 1 miễn phí — Nền tảng cho người mới bắt đầu</h3>
+            <p id="examLevelDesc">Làm quen với từ vựng cơ bản, nghe hiểu câu ngắn kèm hình ảnh và nhận diện mặt chữ Hán kèm pinyin. Phù hợp cho người tự học tiếng Trung từ con số 0.</p>
+            <dl class="exam-facts">
+              <div class="exam-fact">
+                <dt>Kỹ năng luyện thi</dt>
+                <dd id="examSkills">Nghe hiểu &amp; Đọc hiểu</dd>
+              </div>
+              <div class="exam-fact">
+                <dt>Nội dung ôn tập</dt>
+                <dd id="examFocus">Chào hỏi, số đếm, sinh hoạt hằng ngày</dd>
+              </div>
+            </dl>
+            <div class="exam-actions">
+              <a class="btn-primary" href="./app-hoc-hsk.html">
+                <span id="examCtaLabel">Làm đề luyện thi HSK 1 miễn phí</span>
+                <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+              <a class="text-link" id="examDetailLink" href="./luyen-thi-hsk-1-mien-phi.html">
+                <span id="examDetailLabel">Xem trang ôn thi HSK 1</span>
+                <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="mini-quiz" aria-label="Câu hỏi luyện thử HSK">
+            <div class="mini-quiz-head">
+              <span id="quizBadge">Câu luyện thử HSK 1</span>
+              <span>Bấm chọn đáp án</span>
+            </div>
+            <p class="mini-quiz-q" id="quizQuestion" lang="zh-Hans">他是我爸爸，他是___。</p>
+            <p class="mini-quiz-sub" id="quizSub">Chọn từ phù hợp điền vào chỗ trống (nghĩa: Ông ấy là bố tôi, ông ấy là bác sĩ).</p>
+            <div class="mini-opts" id="quizOptions">
+              <button type="button" class="mini-opt" data-opt="0"><span class="opt-key">A</span><span lang="zh-Hans">医生</span></button>
+              <button type="button" class="mini-opt" data-opt="1"><span class="opt-key">B</span><span lang="zh-Hans">水果</span></button>
+              <button type="button" class="mini-opt" data-opt="2"><span class="opt-key">C</span><span lang="zh-Hans">天气</span></button>
+              <button type="button" class="mini-opt" data-opt="3"><span class="opt-key">D</span><span lang="zh-Hans">桌子</span></button>
+            </div>
+            <p class="mini-feedback" id="quizFeedback">Chọn một đáp án để xem giải thích nhanh như khi làm bài trong app.</p>
+          </div>
+        </div>
       </div>
-      <div class="field-row"><label for="quizDirection">Dạng câu hỏi:</label><select id="quizDirection"><option value="combined">Kiểm tra tổng hợp · tự chọn dạng</option><option value="mixed">Trộn chữ Hán ↔ nghĩa</option><option value="blank">Điền từ vào chỗ trống · HSK 1–6</option><option value="usage">Chọn nghĩa theo ngữ cảnh · HSK 1–6</option><option value="han">Chữ Hán → nghĩa tiếng Việt</option><option value="mean">Nghĩa tiếng Việt → chữ Hán</option></select></div>
-      <fieldset id="quizCombinedTypes" hidden="" style="border:1px solid #cad6ef;border-radius:12px;padding:12px;margin:0 0 14px"><legend>Chọn các dạng muốn trộn</legend><div class="quiz-type-grid">
-        <label><input type="checkbox" name="quizType" value="han" checked=""> Chữ Hán → nghĩa tiếng Việt</label>
-        <label><input type="checkbox" name="quizType" value="mean" checked=""> Nghĩa tiếng Việt → chữ Hán</label>
-        <label><input type="checkbox" name="quizType" value="blank" checked=""> Điền từ vào chỗ trống</label>
-        <label><input type="checkbox" name="quizType" value="usage" checked=""> Chọn nghĩa theo ngữ cảnh</label>
-      </div><p class="hint">Chọn ít nhất một dạng; câu hỏi được chia đều và xáo trộn.</p></fieldset>
-      <label class="adaptive-option"><input id="adaptiveToggle" type="checkbox" checked=""> Ôn thích ứng: ưu tiên từ và câu hay sai</label><p class="hint">Tối đa 60% câu dành cho lỗi chưa khắc phục, phần còn lại luyện đa dạng trong HSK và chế độ đã chọn. Phân tích lưu trên thiết bị này.</p>
-      <div class="field-row"><label for="quizScope">Nhóm từ:</label><select id="quizScope"><option value="all">Tất cả trong phạm vi ôn</option><option value="unknown">Chưa thuộc</option><option value="known">Đã thuộc</option><option value="due">Đến hạn SRS</option></select><label for="quizCount">Số câu:</label><input id="quizCount" type="number" min="1" max="100" value="10" style="width:85px"><button type="submit">Bắt đầu / Làm lại</button></div>
-    </form>
-    <div id="quizProgress" class="hint" role="status"></div>
-    <div id="quizPrompt" class="quiz-prompt"></div><div id="quizOptions" class="answers"></div>
-    <div id="quizFeedback" role="status"></div><button id="quizNext" hidden="">Câu tiếp theo</button>
-  </section>
-  <section id="mistakesPanel" class="panel-box activity-panel" hidden="">
-    <h2>Ôn câu sai và từ hay nhầm</h2><h3>Phân tích học tập cá nhân</h3><div id="adaptiveAnalysis" class="result-grid"></div><p class="hint">Tự lưu câu sai để ôn lại; ưu tiên câu sai nhiều lần. Lịch sử được giữ khi tải lại.</p>
-    <div class="field-row"><label for="mistakeScope">Hiển thị:</label><select id="mistakeScope"><option value="pending">Câu chưa ôn đúng</option><option value="all">Tất cả câu từng làm sai</option></select><label for="mistakeCount">Số câu:</label><input id="mistakeCount" type="number" min="1" max="100" value="10" style="width:80px"><button id="mistakeStart">Ôn các câu này</button></div>
-    <p id="mistakeSummary" class="hint" role="status"></p><h3>Từ hay nhầm</h3><div id="mistakeWords" class="result-grid"></div><h3>Câu đã làm sai</h3><div id="mistakeList"></div><button id="mistakeMore" hidden="">Xem thêm câu sai</button>
-  </section>
-  <section id="comparePanel" class="panel-box activity-panel" hidden="">
-    <div class="confusion-tabs" role="group" aria-label="Loại dễ nhầm"><button id="compareMeaningTab" aria-pressed="true">Nghĩa / cách dùng</button><button id="compareShapeTab" aria-pressed="false">Âm / nét dễ nhầm</button></div><h2 id="compareTitle">Từ gần nghĩa khác cách dùng</h2><p class="hint" id="compareIntro">Giải thích đã đối chiếu với Hanzii; các câu bài tập được biên soạn riêng. Đọc cách dùng, điểm giao nhau và lưu ý trước khi luyện. Đồng nghĩa và trái nghĩa của từng từ nằm dưới thẻ từ vựng, trong kết quả tìm kiếm và đáp án SRS. Bộ lọc HSK trong menu ☰ lọc theo từ trong nhóm.</p><div class="field-row"><label for="compareCategory">Loại nhóm:</label><select id="compareCategory"><option value="near">Gần nghĩa, khác cách dùng</option><option value="other">Các cặp dễ lẫn khác</option><option value="indexed">Âm / nét · toàn bộ HSK 1–6</option><option value="visual">25 cặp nét cơ bản</option><option value="all">Tất cả nhóm cách dùng</option></select></div><div id="visualCompareSearch" hidden=""><label for="visualCompareQuery">Tìm chữ hoặc từ minh họa</label><input id="visualCompareQuery" type="search" placeholder="Ví dụ: 未, 末, 眼睛, khát"></div><div id="hskConfusionControls" hidden=""><div class="confusion-control-row"><label>Xem theo<select id="hskConfusionScope"><option value="word">Từ HSK</option><option value="char">Từng chữ Hán</option></select></label><label>Đối chiếu<select id="hskConfusionKind"><option value="sound">Gần âm</option><option value="shape">Giống nét / thành phần</option></select></label></div><label for="hskConfusionQuery">Tìm từ, chữ, phiên âm hoặc nghĩa</label><input id="hskConfusionQuery" type="search" placeholder="Ví dụ: 清, 眼睛, qīng, mắt"></div><p id="compareSummary" class="hint"></p><button id="compareStart">Luyện các nhóm đang hiển thị</button><div id="compareGroups"></div><button id="hskConfusionMore" hidden="">Xem thêm</button>
-  </section>
-  <section id="srsPanel" class="panel-box activity-panel" hidden="">
-    <h2>Ôn tập ngắt quãng SRS</h2>
-    <details class="push-settings"><summary>🔔 Nhắc ôn trên điện thoại</summary>
-    <p class="hint">iPhone: mở bằng Safari → Chia sẻ → Thêm vào màn hình chính; mở app từ biểu tượng đó rồi bật thông báo (iOS 16.4 trở lên).</p>
-    <div class="field-row"><label for="pushHour">Giờ nhắc (giờ Việt Nam):</label><select id="pushHour"></select></div>
-    <div class="field-row"><button id="pushEnable" disabled="">Bật thông báo</button><button id="pushDisable" disabled="">Tắt thông báo</button></div>
-    <p id="pushStatus" class="hint" role="status">Đang kiểm tra kết nối thông báo…</p>
-    <p class="hint">Nhắc mỗi ngày khi có từ đến hạn. App gửi giờ nhắc và hạn ôn sớm nhất tới OneSignal khi bạn học hoặc mở app. Lịch kiểm tra một lần mỗi giờ, có thể gửi trễ.</p>
-    </details>
-    <p class="hint">Ôn từ đến hạn, rồi tối đa 10 từ mới trong HSK đã chọn. Tự đánh giá Quên / Khó / Nhớ / Dễ để đặt lịch ôn.</p>
-    <div class="memory-options"><label><input id="memoryContextToggle" type="checkbox"> Học trong ngữ cảnh: nhớ từ bị che trong câu</label><label><input id="memoryNewWords" type="checkbox"> Thêm tối đa 10 từ mới sau khi ôn từ đến hạn</label></div>
-    <p class="hint">Nhớ: ôn sau 1 ngày, rồi 3 ngày và tăng dần. Dễ: bắt đầu sau 4 ngày. Khó: khoảng cách ngắn hơn; Quên: ôn lại sau 10 phút. Ngày hẹn được lưu trên trình duyệt này và tự kiểm tra khi mở app. Muốn nhận nhắc ôn khi đóng app, hãy hoàn tất kết nối và bật thông báo ở mục phía trên.</p>
-    <details class="memory-schedule"><summary>Lịch ôn 7 ngày và các từ sắp đến hạn</summary><div id="memoryCalendar"></div><div id="memoryUpcoming"></div></details>
-    <div id="srsStats" class="hint" role="status"></div>
-    <div class="field-row"><button id="srsStart">Bắt đầu phiên ôn</button></div>
-    <div id="srsProgress" class="hint"></div>
-    <div id="srsCard" class="review-card" hidden=""><span id="srsLevel" class="hsk-tag"></span><div id="srsHan" class="han"></div><div id="memoryWordDates" class="hint"></div><div id="memoryContext"></div><button id="srsReveal">Xem đáp án</button><div id="srsAnswer" hidden=""><p id="srsPin"></p><p id="srsMean"></p><p id="srsHv"></p><div id="srsExample"></div><div id="srsDictionaryExample"></div></div></div>
-    <div id="srsRatings" class="ratings" hidden=""><button data-rating="again">Quên<small></small></button><button data-rating="hard">Khó<small></small></button><button data-rating="good">Nhớ<small></small></button><button data-rating="easy">Dễ<small></small></button></div>
-    <div id="srsMessage" role="status"></div>
-  </section>
-  <section id="adminPanel" class="panel-box activity-panel" aria-label="Dashboard admin" hidden=""><h2>Dashboard học viên</h2><p class="hint">Thống kê từ tiến độ đã đồng bộ. Đã thuộc là trạng thái tự đánh dấu hoặc kết quả ôn; dữ liệu offline xuất hiện khi người học kết nối lại.</p><button id="adminRefresh">Làm mới thống kê</button><p id="adminStatus" role="status"></p><div id="adminOverview" class="admin-kpis"></div><label for="adminSearch">Tìm học viên</label><input id="adminSearch" type="search" placeholder="Nhập email"><label for="adminStudent">Chọn học viên</label><select id="adminStudent"></select><div id="adminDetail"></div></section>
-  <section id="accountPanel" class="panel-box activity-panel" aria-label="Cài đặt" data-account-current="settings" hidden="">
-<h2 id="accountPageTitle">Cài đặt</h2><section id="accountProfileView" class="account-section-view" data-account-section-view="profile" hidden aria-labelledby="accountProfileTitle"><h3 id="accountProfileTitle" class="account-view-title">Hồ sơ học tập</h3><div class="studio-account-overview"><div class="account-metrics"><article class="account-metric"><span class="metric-caption">Chuỗi học tập</span><strong id="studioStreak">—</strong><small id="studioStreakNote">Đang đọc hoạt động trên thiết bị</small></article><article class="account-metric"><span class="metric-caption">Giờ học thường xuyên</span><strong id="studioHour">—</strong><small id="studioHourNote">Chưa có dữ liệu giờ học</small></article><article class="account-metric"><span class="metric-caption">Đang theo học</span><strong id="studioTarget">HSK 5</strong><small>Mục tiêu học · không phải điểm đánh giá trình độ</small></article></div><div class="account-details"><article class="account-detail"><h3>Tiến độ từ vựng</h3><label for="studioTargetLevel">Cấp đang theo học</label><select id="studioTargetLevel"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5" selected="">HSK 5</option><option value="6">HSK 6</option></select><div class="account-progress-heading"><span id="studioProgressLabel">HSK 5</span><strong id="studioProgressPercent">0% / 100%</strong></div><div class="account-progress-track" id="studioProgress" role="progressbar" aria-label="Tiến độ từ vựng" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="studioProgressFill"></span></div><p id="studioKnownCount" class="hint"></p></article><article class="account-detail"><h3>Lịch học tập</h3><div class="account-week" id="studioWeek"></div><p class="hint" id="studioActivityNote">Chuỗi ngày tính từ nhật ký học; đăng nhập để đồng bộ giữa các thiết bị.</p></article></div></div><p id="accountBadge" class="account-badge"></p><p id="accountStatus" role="status" class="hint"></p><details class="account-detail account-exam-history"><summary class="account-exam-history-heading"><span>Lịch sử làm bài HSK</span><span id="hskExamHistoryCount" class="account-exam-history-count"></span></summary><p class="hint">Lịch sử riêng của chế độ luyện thi HSK, lưu trên thiết bị này.</p><div id="hskExamHistory" class="hsk-exam-history" aria-live="polite"></div></details></section>
+    </section>
 
+    <section class="band" id="cong-cu-mien-phi" aria-labelledby="suite-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="suite-heading">Tất cả công cụ tự học tiếng Trung miễn phí trên một trang web</h2>
+          <p>
+            Không cần cài nhiều ứng dụng rời rạc. Từ học bài mới, ôn từ vựng flashcard, tập viết chữ Hán đến luyện phát âm và giải trí bằng truyện, nhạc tiếng Trung đều có sẵn.
+          </p>
+        </div>
 
-<section id="accountSettingsView" class="account-section-view" data-account-section-view="settings" aria-labelledby="accountSettingsTitle"><h3 id="accountSettingsTitle" class="account-view-title">Cài đặt ứng dụng</h3><p class="hint">Tiến độ từ vựng, lịch SRS, câu sai và phân tích học tập được lưu theo tài khoản. Khi mất mạng, app giữ thay đổi trên máy và gửi lên khi có mạng. Nếu hai thiết bị sửa cùng một mục, lần cập nhật có thời gian mới hơn được giữ.</p>
-<div class="account-backup-actions" role="group" aria-label="Sao lưu tiến độ"><button id="accountBackup">Tải bản sao lưu tiến độ</button><button id="accountRestore" type="button">Nhập bản sao lưu JSON</button></div><p class="hint">Thống kê tiến độ đã đồng bộ có thể được quản trị viên xem. Firebase quản lý email và mật khẩu. Bạn không cần đăng nhập lại mỗi lần mở app trên thiết bị đã đăng nhập.</p>
-<div class="account-detail studio-account-settings"><div id="accountForms"><form id="accountForm">
-<label for="accountAction">Bạn muốn</label><select id="accountAction"><option value="login">Đăng nhập</option><option value="register">Tạo tài khoản mới</option></select>
-<label for="accountEmail">Email</label><input id="accountEmail" type="email" autocomplete="username" required="" placeholder="Email của bạn">
-<label for="accountPassword">Mật khẩu</label><input id="accountPassword" type="password" autocomplete="current-password" required="" minlength="8" placeholder="Ít nhất 8 ký tự">
-<button id="accountSubmit" type="submit">Đăng nhập</button></form><button id="accountReset" type="button">Quên mật khẩu</button></div><div id="accountSigned" hidden=""><p>Đang đăng nhập: <strong id="accountEmailLabel"></strong></p><div class="account-actions"><button id="accountSync">Đồng bộ lại</button><button id="accountApply" hidden="">Áp dụng tiến độ mới</button><button id="accountImport" hidden="">Nhập tiến độ cũ trên thiết bị</button><button id="accountVerify">Gửi email xác minh</button><button id="accountLogout">Đăng xuất</button></div></div><button class="secondary-btn" type="button" data-studio-go="admin" id="studioAdminLink" hidden="">Dashboard học viên</button></div><article class="account-detail" id="personalAiSettings">
-<h3>API riêng cho Hỏi đáp AI</h3>
-<p class="hint">Dùng key của bạn cho chat thường và chat trong dự án. Nhà cung cấp tính phí theo tài khoản API của bạn.</p>
-<button id="personalAiLoad" type="button">Mở cài đặt API</button>
-<form id="personalAiForm" hidden autocomplete="off">
-<label><input id="personalAiEnabled" type="checkbox"> Dùng API riêng</label>
-<label for="personalAiProvider">Nhà cung cấp</label>
-<select id="personalAiProvider"><option value="fosta">FOSTA (OpenAI-compatible)</option><option value="custom">Tùy chỉnh (OpenAI-compatible / Endpoint riêng)</option><option value="chatgpt-cookie">ChatGPT Web Cookie</option><option value="muse-cookie">Muse AI (Token / Cookie)</option><option value="openai">OpenAI / ChatGPT</option><option value="claude">Anthropic / Claude</option><option value="deepseek">DeepSeek</option><option value="gemini">Google Gemini</option></select>
-<div id="personalAiEndpointGroup" hidden>
-<label for="personalAiCustomEndpoint">Endpoint / Base URL</label>
-<input id="personalAiCustomEndpoint" type="url" maxlength="300" spellcheck="false" placeholder="https://literouter.fun/v1/chat/completions">
-</div>
-<label id="personalAiModelLabel" for="personalAiFostaModel">Model</label>
-<select id="personalAiFostaModel" aria-label="Model FOSTA">
-<option value="gpt-6-luna">Luna (Mặc định: Nhẹ, Trung bình, Nâng cao, Chuyên sâu)</option>
-<option value="gpt-6-astra">Astra (Mô hình cao cấp nhất)</option>
-<option value="gpt-6.1-sol">Sol (Mô hình cân bằng chi phí)</option>
-<option value="gpt-6.2-sol">GPT-6.2 Sol</option>
-<option value="gpt-6.2-astra">GPT-6.2 Astra</option>
-</select>
-<div class="personal-ai-model-row" id="personalAiModelRow">
-<input id="personalAiModel" maxlength="100" spellcheck="false" hidden disabled>
-<button id="personalAiFetchModels" type="button" class="secondary-btn" hidden>Kiểm tra &amp; Lấy model</button>
-</div>
-<div id="personalAiModelListContainer" hidden>
-<div class="personal-ai-model-list-header">
-<span>Chọn model (<span id="personalAiModelCount">0</span>):</span>
-<button id="personalAiModelListClose" type="button" class="secondary-btn">Đóng</button>
-</div>
-<div id="personalAiModelList" class="personal-ai-model-list"></div>
-</div>
-<p id="personalAiEndpoint" class="hint"></p>
-<label for="personalAiKey">API key</label>
-<input id="personalAiKey" type="password" maxlength="16384" autocomplete="new-password" spellcheck="false" autocapitalize="off">
-<div class="account-actions"><button type="submit">Lưu cài đặt API</button><button id="personalAiRemove" type="button" hidden>Xóa API key</button></div>
-</form>
-<p id="personalAiStatus" class="hint" role="status"></p>
-</article><article class="account-detail"><h3>Giọng đọc</h3><p class="hint">Chọn giọng thiết bị hoặc tải thêm giọng nghe offline.</p><button id="chineseVoiceSettings" type="button">Giọng tiếng Trung</button></article><article class="account-detail"><h3>Dữ liệu tải thêm</h3><p class="hint">Xem dung lượng, xóa gói không dùng.</p><button id="storageCleanupOpen" type="button">Dọn dẹp dung lượng</button></article><footer class="account-version"><div class="account-version-copy"><strong>Phiên bản hiện tại</strong><p id="studioVersion">Đang xác định phiên bản…</p></div><div class="offline-bar"><span id="offlineStatus" role="status">Đang chuẩn bị học offline…</span><button id="offlineCheck" type="button">Kiểm tra cập nhật</button><button id="offlineUpdate" hidden="">Cập nhật</button><button id="designSync" type="button" hidden>Đồng bộ giao diện</button><span id="designSyncStatus" role="status"></span></div></footer></section></section>
-<section id="translatorPanel" class="panel-box activity-panel" hidden="" aria-label="Dịch câu"><nav class="studio-search-tabs" aria-label="Các công cụ tra cứu"><button type="button" data-studio-go="search" data-search-tool="vocabulary">Từ vựng</button><button type="button" data-search-tool="handwriting" disabled>Vẽ chữ</button><button type="button" data-studio-go="translator" data-search-tool="translate">Dịch câu</button><button type="button" data-search-tool="image">Đọc ảnh</button></nav>
-<h2>Dịch câu Việt ↔ Trung</h2>
-<p class="hint">Việt → Trung: diễn đạt theo HSK đã chọn. Trung → Việt: giữ câu gốc, thêm phiên âm và giải thích.</p>
-<details class="ocr-panel"><summary>📷 Dịch chữ tiếng Trung trong ảnh</summary>
-<p class="hint">Chọn hoặc chụp ảnh có chữ tiếng Trung (giản thể hoặc phồn thể). Ảnh chỉ được gửi tới Google Gemini khi bấm Nhận dạng chữ; hãy kiểm tra nội dung trước khi dịch.</p>
-<div class="ocr-actions"><button id="ocrChoose" type="button">Chọn ảnh</button><button id="ocrCamera" type="button">Chụp ảnh</button></div>
-<input id="ocrFile" type="file" accept="image/*" hidden=""><input id="ocrCapture" type="file" accept="image/*" capture="environment" hidden="">
-<div id="ocrStage"><img id="ocrPreview" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Ảnh chữ Trung cần nhận dạng" draggable="false" hidden=""><div id="ocrCropBox" hidden=""></div></div><div class="ocr-actions"><button id="ocrCrop" type="button" hidden="">Chọn vùng chữ</button><button id="ocrWhole" type="button" hidden="">Toàn ảnh</button></div>
-<div class="ocr-actions"><button id="ocrFast" type="button" disabled="">Dịch ảnh một lượt (thử nghiệm)</button><button id="ocrRead" type="button" disabled="">Nhận dạng chữ</button><button id="ocrCancel" type="button" hidden="">Hủy</button><button id="ocrRemove" type="button" hidden="">Bỏ ảnh</button></div>
-<p id="ocrStatus" class="hint" role="status" aria-live="polite"></p>
-<div id="ocrOutput" hidden=""><label for="ocrText">Chữ nhận dạng — có thể sửa hoặc giữ lại đoạn cần dịch</label><textarea id="ocrText" rows="5" maxlength="10000"></textarea><button id="ocrUse" type="button">Đưa chữ Trung vào ô dịch</button><p class="hint">Dịch tối đa 500 ký tự/lượt. Kiểm tra lỗi nhận dạng từ ảnh mờ.</p></div>
-</details>
-<form id="translationForm"><label for="translationDirection">Chiều dịch</label><select id="translationDirection"><option value="vi-zh">Tiếng Việt → Tiếng Trung theo HSK</option><option value="zh-vi">Tiếng Trung → Tiếng Việt, kèm phiên âm</option></select><label id="translationInputLabel" for="translationInput">Câu tiếng Việt</label><textarea id="translationInput" maxlength="500" rows="4" placeholder="Nhập câu bạn muốn dịch…" required=""></textarea><label id="translationLevelLabel" for="translationLevel">Trình độ đích</label><select id="translationLevel"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3" selected="">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select><button id="translationSubmit" type="submit" disabled="">Dịch câu</button></form>
-<p id="translationStatus" role="status">Đang kiểm tra kết nối…</p>
-<article id="translationResult" hidden=""><h3 id="translation-heading"></h3><p id="translation-chinese" lang="zh"></p><p id="translation-vietnamese" lang="vi" hidden=""></p><p id="translation-pinyin"></p><p id="translation-explanation"></p><p id="translation-note" hidden=""></p><p id="translation-outside" class="hint" hidden=""></p><section id="translationQa" aria-label="Hỏi đáp về câu dịch"><h3>Hỏi AI về câu này</h3><div id="translationChat" role="log" aria-live="polite"></div><form id="translationAskForm"><label for="translationQuestion">Bạn muốn hỏi gì về câu dịch?</label><textarea id="translationQuestion" rows="2" maxlength="500" placeholder="Ví dụ: Vì sao dùng 了 trong câu này?" required=""></textarea><button id="translationAskSubmit" type="submit">Gửi câu hỏi</button><p id="translationAskStatus" role="status" class="hint"></p></form></section></article>
-<p class="hint">Dịch bằng AI, cần mạng. Câu tiếng Việt, bản dịch và câu hỏi được gửi đến Google Gemini; dữ liệu ở gói miễn phí có thể được Google dùng để cải thiện sản phẩm.</p>
-</section>
+        <div class="suite-bento">
+          <article class="flash-feature" aria-label="Thử lật thẻ từ vựng HSK Flashcard">
+            <div>
+              <h3>Học từ vựng HSK bằng flashcard và ôn ngắt quãng SRS</h3>
+              <p>Lật thẻ xem chữ Hán, phiên âm pinyin, âm Hán Việt và ví dụ thực tế. Hệ thống nhắc ôn đúng lúc sắp quên, đi kèm bài trắc nghiệm, ghép 3 cột và sắp xếp câu.</p>
+            </div>
 
-<section id="lessonsPanel" class="panel-box activity-panel" aria-label="Bài học giáo trình chuẩn HSK" hidden=""><h2>Bài học · Giáo trình chuẩn HSK</h2><p class="hint">Chọn HSK → chọn bài. HSK 4–6 gồm hai tập Thượng và Hạ.</p><p id="lessonsStatus" role="status" aria-live="polite"></p><div id="lessonsContent"></div></section>
-<section id="aboutPanel" class="about" aria-label="Giới thiệu ứng dụng" hidden="">
-    <div class="about-hero"><span class="about-logo" aria-hidden="true">汉</span><div><strong>HSK Flashcards</strong><span>Tổng hợp HSK 1–6</span></div></div>
-    <div class="about-card"><h3>Ứng dụng này để làm gì</h3>
-      <p>Học từ vựng HSK 1–6 bằng thẻ lật, tìm từ theo nghĩa tiếng Việt, làm trắc nghiệm, ôn lại câu đã sai, phân biệt các từ dễ nhầm và ôn tập ngắt quãng (SRS).</p></div>
-    
-    <div class="about-card"><h3>Nguồn dữ liệu trích dẫn</h3><p><a href="./open-dictionary-notice.html" target="_blank" rel="noopener">Từ điển mở và giấy phép</a></p>
-      <p>Nghĩa, câu ví dụ và quan hệ từ (đồng nghĩa, trái nghĩa) được đối chiếu với từ điển <a href="https://hanzii.net" target="_blank" rel="noopener noreferrer">Hanzii</a>. Các câu bài tập và phần giải thích cách dùng được biên soạn riêng dựa trên Hanzii và được ghi rõ, tách khỏi câu gốc.</p>
-<details id="dictionarySummary" class="dictionary-summary"><summary id="dictionaryCoverage"></summary><p id="dictionaryCoverageDetail"></p></details>
+            <div class="flip-scene">
+              <button type="button" class="flip-card" id="demoFlashcard" aria-pressed="false" aria-label="Bấm để lật thẻ từ vựng mẫu">
+                <span class="flip-face front">
+                  <span class="flip-badge" id="cardLevel">HSK 1</span>
+                  <span class="flip-han" id="cardHan" lang="zh-Hans">学习</span>
+                  <span class="flip-hint">Chạm vào thẻ để lật xem nghĩa và ví dụ</span>
+                </span>
+                <span class="flip-face back">
+                  <span class="flip-badge" id="cardLevelBack">HSK 1</span>
+                  <span class="flip-py" id="cardPinyin">xuéxí</span>
+                  <span class="flip-meaning" id="cardMeaning">Học, học tập</span>
+                  <span class="flip-hv" id="cardHv">Hán Việt: học tập</span>
+                  <span class="flip-ex" id="cardEx"><strong lang="zh-Hans">我每天学习汉语。</strong> — Tôi học tiếng Trung mỗi ngày.</span>
+                </span>
+              </button>
+            </div>
+
+            <div class="flash-controls">
+              <button type="button" class="flash-nav-btn" id="nextCardBtn">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+                <span>Xem thẻ khác</span>
+              </button>
+              <a class="text-link" href="./app-hoc-hsk.html">
+                <span>Học trọn bộ flashcard</span>
+                <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <div class="suite-stack">
+            <article class="suite-item wide">
+              <span class="suite-ico tone-indigo" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </span>
+              <h3>Giáo trình HSK 1–6 &amp; chế độ học tự động rảnh tay</h3>
+              <p>Mỗi bài học có đầy đủ hội thoại, từ mới, audio phát âm chuẩn tiếng Trung và giải nghĩa tiếng Việt. Chế độ Học tự động tự chiếu nét chữ, đọc mẫu và chuyển câu liên tục giúp bạn ôn nhẹ nhàng mà vẫn vào đầu.</p>
+            </article>
+
+            <article class="suite-item">
+              <span class="suite-ico tone-peach" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+              </span>
+              <h3>Tập viết chữ Hán theo đúng thứ tự nét</h3>
+              <p>Xem mô phỏng từng nét viết chuẩn, tập tô trực tiếp trên màn hình và xem <a href="./tap-viet-chu-han-online.html">7 quy tắc thứ tự nét chữ Hán</a>.</p>
+            </article>
+
+            <article class="suite-item">
+              <span class="suite-ico tone-mint" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+              </span>
+              <h3>Luyện phát âm tiếng Trung &amp; đọc shadowing</h3>
+              <p>Nghe giọng đọc mẫu rõ ràng, luyện nói nhại theo từng câu và xem phản hồi thanh điệu để phát âm tiếng Trung chuẩn và tự tin hơn.</p>
+            </article>
+
+            <article class="suite-item">
+              <span class="suite-ico tone-sky" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </span>
+              <h3>Đọc truyện &amp; nghe nhạc học tiếng Trung</h3>
+              <p>Đọc bài tiếng Trung theo cấp HSK kèm pinyin, bấm tra nhanh từ lạ và học từ vựng qua lời bài hát để giữ cảm hứng học mỗi ngày.</p>
+            </article>
+
+            <article class="suite-item">
+              <span class="suite-ico tone-indigo" aria-hidden="true">
+                <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </span>
+              <h3>Tra từ điển, dịch ảnh &amp; sổ từ vựng riêng</h3>
+              <p>Tra nhanh từ vựng Trung – Việt, dịch câu, dịch chữ trên ảnh chụp, lưu từ khó vào sổ riêng và kiểm tra trình độ để lập kế hoạch học cá nhân.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-surface" id="chuyen-de-hsk" aria-labelledby="directory-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="directory-heading">Khám phá nhanh lộ trình luyện thi HSK 1–6 &amp; chuyên đề tự học</h2>
+          <p>Chọn đúng cấp độ HSK hoặc kỹ năng bạn đang muốn luyện để xem hướng dẫn chi tiết, bài tập thử và công cụ miễn phí đi kèm.</p>
+        </div>
+        <div class="hub-links-grid">
+          <a class="hub-link-card" href="./luyen-thi-hsk-1-mien-phi.html">
+            <strong><span>Luyện thi HSK 1 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Tự học tiếng Trung từ con số 0, có pinyin, audio chậm rõ và đề HSK 1.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-2-mien-phi.html">
+            <strong><span>Luyện thi HSK 2 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Giao tiếp tình huống hằng ngày, mẫu câu so sánh 比 và đề thử HSK 2.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-3-mien-phi.html">
+            <strong><span>Luyện thi HSK 3 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Đọc chữ Hán không cần pinyin, luyện xếp câu và kỹ năng Viết HSK 3.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-4-mien-phi.html">
+            <strong><span>Luyện thi HSK 4 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Ôn liên từ ghép cặp, viết câu mô tả tranh và giải đề HSK 4 cùng AI.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-5-mien-phi.html">
+            <strong><span>Luyện thi HSK 5 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Đọc hiểu bài dài, collocation học thuật và luyện viết đoạn 80 chữ.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-6-mien-phi.html">
+            <strong><span>Luyện thi HSK 6 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Phân tích câu bệnh ngữ (语病), sắc thái thành ngữ và tóm tắt bài viết.</span>
+          </a>
+          <a class="hub-link-card" href="./sua-cau-tieng-trung-ai.html">
+            <strong><span>Sửa câu tiếng Trung bằng AI</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Kiểm tra ngữ pháp tiếng Trung online, chỉ rõ lỗi sai và gợi ý câu tự nhiên.</span>
+          </a>
+          <a class="hub-link-card" href="./phan-biet-tu-de-nham-hsk.html">
+            <strong><span>Phân biệt 16 cặp từ dễ nhầm HSK</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Tra nhanh 不/没, 了/过, 一点儿/有点儿, 还是/或者, 就/才, 适合/合适…</span>
+          </a>
+          <a class="hub-link-card" href="./tap-viet-chu-han-online.html">
+            <strong><span>Tập viết chữ Hán online</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>7 quy tắc thứ tự nét chuẩn, tập tô trực tiếp và vẽ tay tra chữ Hán.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="hoi-dap-hsk" aria-labelledby="faq-heading">
+      <div class="wrap faq-grid">
+        <div class="faq-aside">
+          <h2 id="faq-heading">Người tự học HSK miễn phí thường hỏi gì?</h2>
+          <p>
+            Giải đáp nhanh những câu hỏi phổ biến nhất khi tìm web học tiếng Trung miễn phí, luyện thi HSK online và học cùng Gia sư AI.
+          </p>
+          <a class="btn-primary" href="./app-hoc-hsk.html">
+            <span>Mở ứng dụng học ngay</span>
+            <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div class="faq-list">
+          <details open>
+            <summary>
+              <span>Web học HSK miễn phí này có đủ từ HSK 1 đến HSK 6 không?</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Có. HSK Flashcards hỗ trợ trọn bộ 6 cấp độ từ HSK 1 đến HSK 6, gồm giáo trình bài học, bộ từ vựng flashcard, bài tập luyện kỹ năng và kho đề thi thử HSK theo từng cấp để bạn theo học xuyên suốt trên cùng một trang web.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Gia sư AI tiếng Trung giúp được gì khi tự học ở nhà?</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Bạn cứ gõ câu hỏi bằng tiếng Việt như đang hỏi thầy cô kèm riêng: phân biệt hai từ dễ nhầm, giải thích cấu trúc ngữ pháp, hỏi vì sao một đáp án trong đề HSK lại đúng, nhờ sửa câu tiếng Trung tự đặt hoặc gợi ý lộ trình ôn thi HSK phù hợp.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Có làm đề thi thử HSK và luyện nghe HSK miễn phí không?</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Có. Bạn có thể luyện bài tập Nghe – Đọc – Viết và làm đề thi thử HSK miễn phí theo đúng cấp độ mục tiêu. Sau khi hoàn thành, bạn xem được đáp án chi tiết và ôn tập riêng lại những câu từng làm sai.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Mới bắt đầu học tiếng Trung từ con số 0 có học được không?</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Hoàn toàn được. Bạn có thể bắt đầu ngay từ HSK 1 với giáo trình hội thoại cơ bản, nghe phát âm tiếng Trung chậm rõ, xem phiên âm pinyin và nghĩa tiếng Việt, kết hợp chế độ học tự động và tập viết từng nét chữ Hán.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Có tập viết chữ Hán, học từ vựng flashcard và sửa câu tiếng Trung không?</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Có đầy đủ. Ngoài Gia sư AI và luyện thi HSK, trang web tích hợp sẵn flashcard SRS nhắc ôn đúng lịch, trắc nghiệm, ghép từ 3 cột, sắp xếp câu, tập viết chữ Hán đúng thứ tự nét, vẽ tay tra chữ, sửa câu tiếng Trung AI, đọc truyện và nghe nhạc.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Học HSK miễn phí trên điện thoại hay máy tính đều được chứ?</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Được. HSK Flashcards chạy trực tiếp trên trình duyệt của iPhone, điện thoại Android, máy tính bảng và máy tính mà không cần tải bộ cài nặng. Bạn cũng có thể thêm ra màn hình chính để mở học nhanh mỗi ngày.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-wrap" aria-labelledby="closing-heading">
+      <div class="wrap">
+        <div class="closing-banner">
+          <div class="closing-copy">
+            <h2 id="closing-heading">Bắt đầu học HSK miễn phí cùng Gia sư AI ngay hôm nay</h2>
+            <p>Mở thẳng ứng dụng trên trình duyệt để học từ vựng HSK 1–6, làm đề thi thử và hỏi đáp tiếng Trung cùng AI mọi lúc.</p>
+          </div>
+          <a class="btn-hero-main" href="./app-hoc-hsk.html">
+            <span>Mở HSK Flashcards miễn phí</span>
+            <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <a class="brand" href="./">
+        <span class="brand-mark" aria-hidden="true">汉</span>
+        <span>HSK Flashcards</span>
+      </a>
+      <nav class="footer-links" aria-label="Liên kết cuối trang">
+        <a href="./sua-cau-tieng-trung-ai.html">Sửa câu AI</a>
+        <a href="./phan-biet-tu-de-nham-hsk.html">Từ dễ nhầm HSK</a>
+        <a href="./tap-viet-chu-han-online.html">Tập viết chữ Hán</a>
+        <a href="./luyen-thi-hsk-1-mien-phi.html">HSK 1–6</a>
+        <a href="./app-hoc-hsk.html">Vào ứng dụng học HSK</a>
+      </nav>
     </div>
-    <div class="about-card"><h3>Dữ liệu học của bạn</h3>
-      <p>Tiến độ từ vựng, lịch ôn SRS và lịch sử câu sai được lưu trong trình duyệt của thiết bị này. Xóa dữ liệu trình duyệt hoặc đổi thiết bị sẽ làm mất các thông tin đó.</p></div>
-  </section>
-</main></div></div>
-  
-  
-  <h1 hidden="">HSK Flashcards (Tổng hợp HSK 1-6)</h1>
+  </footer>
 
-  
-  <div class="mobile-controls studio-legacy-controls" hidden="">
-    <label for="mobileLevel">Trình độ<select id="mobileLevel"><option value="all">Tất cả HSK</option><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></label>
-    <label for="mobileMode">Cách học<select id="mobileMode"><option value="learn">Thẻ từ vựng</option><option value="search">Tìm kiếm</option><option value="quiz">Trắc nghiệm</option><option value="mistakes">Ôn câu sai</option><option value="compare">Từ dễ nhầm</option><option value="srs">Ôn tập SRS</option><option value="lessons">Bài học</option></select></label>
-  </div>
+  <script>
+    (function () {
+      var themeBtn = document.getElementById('themeToggle');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+          var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
+          try { localStorage.setItem('hsk-theme-v1', next); } catch (_) {}
+        });
+      }
 
+      var aiData = [
+        {
+          q: 'Khi nào dùng <span lang="zh-Hans">不</span> và khi nào dùng <span lang="zh-Hans">没</span>? Cho mình ví dụ dễ hiểu.',
+          body: '<p>Cách nhớ nhanh nhất: <span class="zh-inline" lang="zh-Hans">不</span> (bù) dùng cho thói quen, hiện tại, tương lai hoặc ý muốn; còn <span class="zh-inline" lang="zh-Hans">没</span> (méi) dùng khi nói việc <strong>đã không xảy ra</strong> trong quá khứ hoặc phủ định <span class="zh-inline" lang="zh-Hans">有</span>.</p>' +
+            '<div class="ai-ex-list">' +
+              '<div class="ai-ex"><span class="cn" lang="zh-Hans">我明天不去学校。</span><span class="py">Wǒ míngtiān bù qù xuéxiào.</span><span class="vi">Ngày mai tôi không đi học. (tương lai → dùng 不)</span></div>' +
+              '<div class="ai-ex"><span class="cn" lang="zh-Hans">我昨天没去学校。</span><span class="py">Wǒ zuótiān méi qù xuéxiào.</span><span class="vi">Hôm qua tôi đã không đi học. (quá khứ → dùng 没)</span></div>' +
+            '</div>' +
+            '<p>Mẹo thi HSK: thấy <span class="zh-inline" lang="zh-Hans">有</span> thì luôn đi với <span class="zh-inline" lang="zh-Hans">没</span> (<span class="zh-inline" lang="zh-Hans">没有</span>), không bao giờ viết <span class="zh-inline" lang="zh-Hans">不有</span>.</p>'
+        },
+        {
+          q: 'Câu HSK 4: “<span lang="zh-Hans">虽然下雨了，___他还是按时来了</span>” sao chọn <span lang="zh-Hans">但是</span> mà không chọn <span lang="zh-Hans">所以</span>?',
+          body: '<p>Vì vế đầu có <span class="zh-inline" lang="zh-Hans">虽然</span> (mặc dù) báo hiệu quan hệ <strong>tương phản</strong>, nên vế sau bắt buộc đi cặp với <span class="zh-inline" lang="zh-Hans">但是</span> (nhưng).</p>' +
+            '<div class="ai-ex-list">' +
+              '<div class="ai-ex"><span class="cn" lang="zh-Hans">虽然下雨了，但是他还是按时来了。</span><span class="py">Suīrán xiàyǔ le, dànshì tā háishì ànshí lái le.</span><span class="vi">Mặc dù trời mưa, nhưng anh ấy vẫn đến đúng giờ.</span></div>' +
+            '</div>' +
+            '<p>Còn <span class="zh-inline" lang="zh-Hans">所以</span> (cho nên) chỉ đi với <span class="zh-inline" lang="zh-Hans">因为</span> (bởi vì) khi diễn tả nguyên nhân – kết quả.</p>'
+        },
+        {
+          q: 'Nhờ AI sửa câu này giúp mình: “<span lang="zh-Hans">我很喜欢吃中国菜非常</span>”',
+          body: '<p>Câu này bị lặp phó từ chỉ mức độ (<span class="zh-inline" lang="zh-Hans">很</span> và <span class="zh-inline" lang="zh-Hans">非常</span>) và đặt <span class="zh-inline" lang="zh-Hans">非常</span> sai vị trí ở cuối câu. Trong tiếng Trung, phó từ mức độ đứng <strong>trước động từ tâm lý</strong>.</p>' +
+            '<div class="ai-ex-list">' +
+              '<div class="ai-ex"><span class="cn" lang="zh-Hans">我非常喜欢吃中国菜。</span><span class="py">Wǒ fēicháng xǐhuan chī Zhōngguó cài.</span><span class="vi">Tôi rất thích ăn món Trung Quốc.</span></div>' +
+            '</div>' +
+            '<p>Gợi ý mở rộng: bạn có thể thay <span class="zh-inline" lang="zh-Hans">非常</span> bằng <span class="zh-inline" lang="zh-Hans">特别</span> (đặc biệt) để câu nói tự nhiên hơn trong giao tiếp.</p>'
+        },
+        {
+          q: 'Mình mới học từ con số 0, muốn tự học HSK 1–3 miễn phí thì bắt đầu sao?',
+          body: '<p>Bạn có thể đi theo 3 bước gọn nhẹ ngay trên web, mỗi ngày 20–30 phút:</p>' +
+            '<div class="ai-ex-list">' +
+              '<div class="ai-ex"><span class="cn">1. Học bài mới trong Giáo trình HSK 1</span><span class="vi">Nghe audio hội thoại, bật Học tự động để quen âm và mặt chữ.</span></div>' +
+              '<div class="ai-ex"><span class="cn">2. Ôn 10–15 thẻ Flashcard SRS mỗi tối</span><span class="vi">Tập viết nét các chữ hay quên và hỏi Gia sư AI ngay khi vướng ngữ pháp.</span></div>' +
+              '<div class="ai-ex"><span class="cn">3. Cuối tuần làm thử đề HSK 1</span><span class="vi">Ôn lại các câu làm sai rồi tăng dần lên HSK 2 và HSK 3.</span></div>' +
+            '</div>'
+        }
+      ];
 
+      var aiTabs = document.querySelectorAll('[data-ai-tab]');
+      var aiStage = document.getElementById('aiStage');
+      aiTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var idx = Number(btn.getAttribute('data-ai-tab')) || 0;
+          aiTabs.forEach(function (b) { b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+          var item = aiData[idx];
+          if (item && aiStage) {
+            aiStage.innerHTML = '<div class="msg-user">' + item.q + '</div><div class="msg-ai is-switching">' + item.body + '</div>';
+          }
+        });
+      });
 
-  <nav class="app-tabs studio-legacy-tabs" aria-label="Chế độ học">
-<button id="lessonsBtn" data-mode="lessons" aria-pressed="false" aria-label="Bài học"><span class="ico" aria-hidden="true">📚</span><span class="lbl">Bài học</span></button>
-    <button class="active" data-mode="learn" aria-pressed="true" aria-label="Thẻ từ vựng"><span class="ico" aria-hidden="true">📖</span><span class="lbl">Thẻ từ</span></button>
-    <button data-mode="search" aria-pressed="false" aria-label="Tìm kiếm từ vựng"><span class="ico" aria-hidden="true">🔎</span><span class="lbl">Tìm kiếm</span></button>
-    <button data-mode="quiz" aria-pressed="false" aria-label="Trắc nghiệm"><span class="ico" aria-hidden="true">🎯</span><span class="lbl">Trắc nghiệm</span></button>
-    <button data-mode="mistakes" aria-pressed="false" aria-label="Ôn câu sai"><span class="ico" aria-hidden="true">↻</span><span class="lbl">Ôn sai</span></button>
-    <button data-mode="compare" aria-pressed="false" aria-label="Từ dễ nhầm"><span class="ico" aria-hidden="true">⇄</span><span class="lbl">Dễ nhầm</span></button>
-    <button data-mode="srs" aria-pressed="false" aria-label="Ôn tập SRS"><span class="ico" aria-hidden="true">📅</span><span class="lbl">SRS</span></button>
-  </nav>
-  
-  
-  
-  
+      var editData = [
+        {
+          wrong: '我昨天 <span class="err-mark">不</span> 去看电影。',
+          intent: 'Ý muốn nói: Hôm qua tôi không đi xem phim.',
+          fixed: '我昨天 <span class="ok-mark">没</span> 去看电影。',
+          py: 'Wǒ zuótiān méi qù kàn diànyǐng.',
+          vi: 'Hôm qua tôi đã không đi xem phim.',
+          note: '<strong>Vì sao sửa:</strong> Có mốc thời gian quá khứ <span class="zh-inline" lang="zh-Hans">昨天</span> (hôm qua) nên phủ định hành động đã không diễn ra phải dùng <span class="zh-inline" lang="zh-Hans">没</span> thay cho <span class="zh-inline" lang="zh-Hans">不</span>.'
+        },
+        {
+          wrong: '我在公司工作 <span class="err-mark">在</span> 两年了。',
+          intent: 'Ý muốn nói: Tôi đã làm việc ở công ty được hai năm rồi.',
+          fixed: '我在公司工作 <span class="ok-mark">了</span> 两年了。',
+          py: 'Wǒ zài gōngsī gōngzuò le liǎng nián le.',
+          vi: 'Tôi đã làm việc ở công ty được hai năm rồi.',
+          note: '<strong>Vì sao sửa:</strong> Khi nói khoảng thời gian đã làm một việc (và vẫn tiếp tục), dùng <span class="zh-inline" lang="zh-Hans">动词 + 了 + thời lượng + 了</span>, không lặp giới từ <span class="zh-inline" lang="zh-Hans">在</span> trước khoảng thời gian.'
+        }
+      ];
 
-  <div class="drawer-scrim" id="drawerScrim"></div>
-  <aside class="drawer" id="drawer" aria-label="Menu" aria-hidden="true" inert="">
-    <div class="drawer-head"><span class="about-logo" aria-hidden="true">汉</span><div><strong>HSK Flashcards</strong><span>Tổng hợp HSK 1–6</span></div>
-      <button type="button" class="drawer-close" id="drawerClose" aria-label="Đóng menu"><span data-icon="x" aria-hidden="true"></span></button></div>
-    <div class="drawer-body"><button type="button" class="drawer-item music-chill-nav-entry" data-studio-go="music-play"><span class="di-ico" data-icon="headphones" aria-hidden="true"></span><span class="di-lbl">Nghe nhạc &amp; học HSK</span><span class="di-chev" data-icon="arrow-right" aria-hidden="true"></span></button><button type="button" class="drawer-item music-nav-entry" hidden data-studio-go="music"><span class="di-ico" data-icon="volume-2" aria-hidden="true"></span><span class="di-lbl">Nghe nhạc học HSK</span><span class="di-chev" data-icon="arrow-right" aria-hidden="true"></span></button>
-      <section class="drawer-group drawer-filter-group"><button type="button" class="drawer-item hsk-filter-toggle" id="hskFilterToggle" aria-expanded="false" aria-controls="hskFilterContent"><span class="di-ico" data-icon="sliders-horizontal" aria-hidden="true"></span><span class="di-lbl">Bộ lọc HSK</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></button>
-      <div class="hsk-filter-content" id="hskFilterContent" inert=""><div class="hsk-filter-inner">
-      <p class="drawer-hint">Áp dụng cho thẻ từ vựng, tìm kiếm, trắc nghiệm và ôn tập.</p>
-  <div class="filter-buttons">
-    <button class="filter-btn active" data-filter="all">TẤT CẢ</button>
-    <button class="filter-btn hsk1" data-filter="1">HSK 1</button>
-    <button class="filter-btn hsk2" data-filter="2">HSK 2</button>
-    <button class="filter-btn hsk3" data-filter="3">HSK 3</button>
-    <button class="filter-btn hsk4" data-filter="4">HSK 4</button>
-    <button class="filter-btn hsk5" data-filter="5">HSK 5</button>
-    <button class="filter-btn hsk6" data-filter="6">HSK 6</button>
-  </div>
-      </div></div></section>
-<details class="drawer-group"><summary class="drawer-group-heading"><span class="di-ico" data-icon="target" aria-hidden="true"></span><span class="di-lbl">Ôn luyện</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></summary><div class="drawer-group-content"><button type="button" class="drawer-item" data-drawer-mode="quiz"><span class="di-ico" data-icon="target" aria-hidden="true"></span><span class="di-lbl">Trắc nghiệm</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></button><button type="button" class="drawer-item" data-drawer-mode="mistakes"><span class="di-ico" data-icon="refresh-cw" aria-hidden="true"></span><span class="di-lbl">Ôn câu sai</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></button><button type="button" class="drawer-item" data-drawer-mode="compare"><span class="di-ico" data-icon="arrow-left-right" aria-hidden="true"></span><span class="di-lbl">Từ dễ nhầm</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></button><div class="lesson-menu-levels"><h2 class="drawer-title">Giáo trình HSK</h2><button type="button" class="drawer-item" data-lesson-level="1">HSK 1</button><button type="button" class="drawer-item" data-lesson-level="2">HSK 2</button><button type="button" class="drawer-item" data-lesson-level="3">HSK 3</button><button type="button" class="drawer-item" data-lesson-level="4">HSK 4</button><button type="button" class="drawer-item" data-lesson-level="5">HSK 5</button><button type="button" class="drawer-item" data-lesson-level="6">HSK 6</button></div></div></details><details class="drawer-group"><summary class="drawer-group-heading"><span class="di-ico" data-icon="languages" aria-hidden="true"></span><span class="di-lbl">Công cụ</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></summary><div class="drawer-group-content"><button type="button" class="drawer-item" id="translatorBtn"><span class="di-ico" data-icon="languages" aria-hidden="true"></span><span class="di-lbl">Dịch câu theo HSK</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></button></div></details><details class="drawer-group"><summary class="drawer-group-heading"><span class="di-ico" data-icon="user" aria-hidden="true"></span><span class="di-lbl">Cài đặt</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></summary><div class="drawer-group-content"><button type="button" class="drawer-item" id="accountBtn"><span class="di-ico" data-icon="user" aria-hidden="true"></span><span class="di-lbl" id="accountNavLabel">Đăng nhập / Tạo tài khoản</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></button><button type="button" class="drawer-item" id="adminBtn" hidden=""><span class="di-ico" data-icon="layout-grid" aria-hidden="true"></span><span class="di-lbl">Dashboard admin</span><span class="di-chev">›</span></button></div></details><details class="drawer-group"><summary class="drawer-group-heading"><span class="di-ico" data-icon="circle-help" aria-hidden="true"></span><span class="di-lbl">Thông tin</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></summary><div class="drawer-group-content"><button type="button" class="drawer-item" id="aboutBtn"><span class="di-ico" data-icon="circle-help" aria-hidden="true"></span><span class="di-lbl">Giới thiệu ứng dụng</span><span class="di-chev" data-icon="chevron-down" aria-hidden="true"></span></button></div></details>
-    </div>
-  </aside>
-<!-- Dữ liệu words được gộp vào đây -->
-  
+      var editTabs = document.querySelectorAll('[data-edit-tab]');
+      var editorStage = document.getElementById('editorStage');
+      editTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var idx = Number(btn.getAttribute('data-edit-tab')) || 0;
+          editTabs.forEach(function (b) { b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+          var d = editData[idx];
+          if (d && editorStage) {
+            editorStage.innerHTML =
+              '<div class="sentence-block"><span class="sentence-label">Câu bạn viết</span>' +
+              '<p class="sentence-han" lang="zh-Hans">' + d.wrong + '</p>' +
+              '<p class="sentence-vi">' + d.intent + '</p></div>' +
+              '<div class="sentence-block is-fixed"><span class="sentence-label">' +
+              '<svg class="ico" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>' +
+              '<span>Câu AI sửa lại tự nhiên hơn</span></span>' +
+              '<p class="sentence-han" lang="zh-Hans">' + d.fixed + '</p>' +
+              '<p class="sentence-py">' + d.py + '</p>' +
+              '<p class="sentence-vi">' + d.vi + '</p></div>' +
+              '<p class="editor-note">' + d.note + '</p>';
+          }
+        });
+      });
 
-  
-<aside id="updateNotice" class="update-notice" aria-label="Thông báo cập nhật" hidden><strong>Có phiên bản HSK mới</strong><p id="updateNoticeText" role="status"></p><div class="update-notice-actions"><button type="button" id="updateNoticeApply" disabled>Đang tải…</button><button type="button" id="updateNoticeLater">Để sau</button></div></aside>
-<link rel="stylesheet" href="./open-dictionary.css"><link rel="stylesheet" href="./ai-qa.css"><link rel="stylesheet" href="./sentence-editor.css"><script src="./src/modules/translation/sentence-review-core.js" defer></script><script src="./src/modules/translation/sentence-editor.js" defer></script><script src="./loader.js?v=push-2" defer=""></script>
-<script src="./offline.js?v=offline-2" defer=""></script>
-<script src="./src/modules/shell/mobile-layout.js?v=mobile-3" defer=""></script>
-<button id="lessonChatButton" class="lesson-chat-button" type="button" aria-label="Hỏi AI về bài học" title="Hỏi AI về bài học" aria-controls="lessonChatPanel" aria-expanded="false" hidden=""><span aria-hidden="true">💬</span></button>
-<section id="lessonSelectionPrompt" class="lesson-selection-prompt" aria-label="Hỏi AI về đoạn đã chọn" hidden="">
- <form id="lessonSelectionForm"><label for="lessonSelectionInput">Hỏi về đoạn đã chọn</label><textarea id="lessonSelectionInput" rows="2" maxlength="160" placeholder="Giải thích chi tiết ý này…" required=""></textarea><div><button id="lessonSelectionClose" type="button" aria-label="Đóng">×</button><button type="submit">Hỏi AI</button></div></form>
-</section>
-<section id="lessonChatPanel" class="lesson-chat-panel" aria-label="Hỏi đáp AI về bài đang mở" hidden="">
- <header class="lesson-chat-head"><div><strong>Hỏi đáp bài học</strong><small id="lessonChatTitle"></small></div><button id="lessonChatClose" type="button" aria-label="Đóng hỏi đáp">×</button></header>
- <div id="lessonChatMessages" class="lesson-chat-messages" role="log" aria-live="polite"></div><p id="lessonChatStatus" class="lesson-chat-status" role="status"></p>
- <form id="lessonChatForm" class="lesson-chat-form"><textarea id="lessonChatInput" rows="2" maxlength="500" aria-label="Câu hỏi về bài học" placeholder="Bạn thắc mắc gì trong bài này?" required=""></textarea><button id="lessonChatSend" type="submit">Gửi</button></form>
-</section>
-<link rel="stylesheet" href="./home-overview.css"><script src="./src/modules/shell/home-overview.js" defer></script>
+      var hskLevels = {
+        1: {
+          title: 'Luyện thi HSK 1 miễn phí — Nền tảng cho người mới bắt đầu',
+          desc: 'Làm quen với từ vựng cơ bản, nghe hiểu câu ngắn kèm hình ảnh và nhận diện mặt chữ Hán kèm pinyin. Phù hợp cho người tự học tiếng Trung từ con số 0.',
+          skills: 'Nghe hiểu & Đọc hiểu',
+          focus: 'Chào hỏi, số đếm, sinh hoạt hằng ngày',
+          cta: 'Làm đề luyện thi HSK 1 miễn phí',
+          q: '他是我爸爸，他是___。',
+          sub: 'Chọn từ phù hợp điền vào chỗ trống (nghĩa: Ông ấy là bố tôi, ông ấy là bác sĩ).',
+          opts: ['医生', '水果', '天气', '桌子'],
+          answer: 0,
+          explain: 'Đáp án đúng là A — 医生 (yīshēng: bác sĩ). Các từ còn lại là 水果 (trái cây), 天气 (thời tiết), 桌子 (cái bàn).'
+        },
+        2: {
+          title: 'Luyện thi HSK 2 miễn phí — Giao tiếp tình huống quen thuộc',
+          desc: 'Luyện nghe hội thoại ngắn, nắm chắc các cấu trúc hỏi đường, mua sắm, thời gian và sở thích để sẵn sàng thi đỗ HSK 2.',
+          skills: 'Nghe hiểu & Đọc hiểu',
+          focus: 'Mua sắm, đi lại, công việc cơ bản',
+          cta: 'Làm đề luyện thi HSK 2 miễn phí',
+          q: '外边下雨了，别忘了___雨伞。',
+          sub: 'Chọn động từ phù hợp (nghĩa: Ngoài trời mưa rồi, đừng quên mang theo ô).',
+          opts: ['穿', '带', '唱', '送'],
+          answer: 1,
+          explain: 'Đáp án đúng là B — 带 (dài: mang theo). 穿 dùng cho mặc quần áo, 唱 là hát, 送 là tặng hoặc tiễn.'
+        },
+        3: {
+          title: 'Luyện thi HSK 3 miễn phí — Bước sang luyện Viết không cần pinyin',
+          desc: 'Rèn kỹ năng đọc hiểu chữ Hán trực tiếp không phụ thuộc pinyin, luyện sắp xếp câu và viết chữ đúng ngữ pháp theo cấu trúc đề HSK 3.',
+          skills: 'Nghe – Đọc – Viết',
+          focus: 'Kể chuyện, du lịch, học tập và sắp xếp câu',
+          cta: 'Làm đề luyện thi HSK 3 miễn phí',
+          q: '这个问题太难了，我___不懂。',
+          sub: 'Chọn bổ ngữ kết quả phù hợp (nghĩa: Câu hỏi này khó quá, tôi nghe không hiểu).',
+          opts: ['听', '看', '写', '问'],
+          answer: 0,
+          explain: 'Đáp án đúng là A — 听 (tīng) tạo cụm 听不懂 (nghe không hiểu), rất hay gặp trong bài đọc hiểu và nghe hiểu HSK 3.'
+        },
+        4: {
+          title: 'Luyện thi HSK 4 miễn phí — Đủ chuẩn xét tốt nghiệp & du học',
+          desc: 'Tập trung luyện câu liên từ, đoạn đọc dài, sắp xếp thứ tự câu và viết câu mô tả tranh — kết hợp Gia sư AI giải thích bẫy ngữ pháp.',
+          skills: 'Nghe – Đọc – Viết câu',
+          focus: 'Liên từ, phân biệt từ gần nghĩa, diễn đạt quan điểm',
+          cta: 'Làm đề luyện thi HSK 4 miễn phí',
+          q: '不管遇到什么困难，我们都应该___下去。',
+          sub: 'Chọn động từ phù hợp (nghĩa: Dù gặp khó khăn gì, chúng ta đều nên kiên trì tiếp tục).',
+          opts: ['坚持', '拒绝', '批评', '怀疑'],
+          answer: 0,
+          explain: 'Đáp án đúng là A — 坚持 (jiānchí: kiên trì). Cụm cố định hay gặp trong HSK 4 là 坚持下去 (kiên trì đến cùng).'
+        },
+        5: {
+          title: 'Luyện thi HSK 5 miễn phí — Đọc báo chí & viết đoạn văn tiếng Trung',
+          desc: 'Nâng phản xạ nghe bài phỏng vấn dài, phân tích sắc thái từ gần nghĩa nâng cao và luyện viết đoạn văn 80 chữ có AI hỗ trợ sửa câu.',
+          skills: 'Nghe – Đọc sâu – Viết đoạn',
+          focus: 'Từ vựng học thuật, thành ngữ, viết đoạn 80 chữ',
+          cta: 'Làm đề luyện thi HSK 5 miễn phí',
+          q: '他的演讲非常精彩，赢得了全场观众的热烈___。',
+          sub: 'Chọn danh từ phù hợp (nghĩa: Bài diễn thuyết rất xuất sắc, giành được tràng pháo tay nồng nhiệt).',
+          opts: ['掌声', '理由', '条件', '规律'],
+          answer: 0,
+          explain: 'Đáp án đúng là A — 掌声 (zhǎngshēng: tiếng vỗ tay), thường kết hợp với tính từ 热烈 (nhiệt liệt).'
+        },
+        6: {
+          title: 'Luyện thi HSK 6 miễn phí — Tìm câu sai ngữ pháp & tóm tắt bài viết',
+          desc: 'Thực chiến dạng bài tìm câu bệnh ngữ, đọc hiểu văn bản dài, sắc thái từ đồng nghĩa tinh tế và rèn kỹ năng viết tóm tắt cùng Gia sư AI.',
+          skills: 'Nghe – Đọc chuyên sâu – Tóm tắt',
+          focus: 'Phân tích câu sai (语病), thành ngữ, tóm tắt 400 chữ',
+          cta: 'Làm đề luyện thi HSK 6 miễn phí',
+          q: '面对突发情况，她表现得十分___，迅速找到了解决办法。',
+          sub: 'Chọn từ miêu tả thái độ phù hợp (nghĩa: Trước tình huống bất ngờ, cô ấy rất bình tĩnh).',
+          opts: ['镇定', '盲目', '苛刻', '僵硬'],
+          answer: 0,
+          explain: 'Đáp án đúng là A — 镇定 (zhèndìng: điềm tĩnh, vững vàng trước biến cố), phù hợp với vế sau “nhanh chóng tìm ra cách giải quyết”.'
+        }
+      };
 
+      var currentHsk = 1;
+      var levelTabs = document.querySelectorAll('[data-hsk]');
+      var quizOptionsEl = document.getElementById('quizOptions');
+      var quizFeedbackEl = document.getElementById('quizFeedback');
 
-<div class="mobile-dock" id="mobileDock"><nav class="bottom-nav" aria-label="Điều hướng chính"><button class="active" data-studio-go="home"><i data-icon="house"></i>Tổng quan</button><button data-studio-go="lessons"><i data-icon="book-open"></i>Bài học</button><button data-studio-go="practice"><i data-icon="pencil-ruler"></i>Luyện &amp; Ôn</button><button data-studio-go="notebook"><i data-icon="book-open"></i>Sổ từ vựng</button><button data-studio-go="search"><i data-icon="search"></i>Tra cứu</button></nav></div><script src="./src/modules/shell/mobile-dock.js" defer></script><link rel="stylesheet" href="./podcast.css"><script src="./src/modules/admin/admin-portal-core.js" defer></script><script src="./src/modules/admin/resource-sync.js" defer></script><script src="./src/modules/podcast/podcast-core.js" defer></script><script src="./src/modules/podcast/podcast.js" defer></script><script src="./src/modules/shell/studio.js" defer=""></script><link rel="stylesheet" href="./real-reading.css"><script src="./src/modules/reading/real-reading-variety-core.js" defer></script><script src="./src/modules/reading/real-reading.js" defer></script><script src="./src/modules/reading/original-reading.js" defer></script><link rel="stylesheet" href="./practice-selector.css"><script src="./src/modules/practice/study4-practice.js" defer></script><script src="./src/modules/practice/practice-selector.js" defer></script><script src="./src/modules/practice/practice-generator-core.js" defer></script><link rel="stylesheet" href="./practice-games.css"><script src="./src/modules/practice/practice-games-core.js" defer></script><script src="./src/modules/practice/practice-games.js" defer></script><script src="./src/modules/planner/planner-core.js" defer></script><script src="./src/modules/planner/planner.js" defer></script><script src="./src/modules/exams/exam-bank.js" defer></script><script src="./src/modules/exams/exam-expansion.js" defer></script><script src="./src/modules/exams/exam-core.js" defer></script><script src="./src/modules/exams/exam.js" defer></script><script src="./src/modules/exams/drive-exam.js" defer></script><script src="./src/modules/exams/drive-audio.js" defer></script><link rel="stylesheet" href="./mobile-ux.css"><script src="./src/modules/shell/mobile-ux.js" defer></script><link rel="stylesheet" href="./redesign.css"><script src="./redesign.js" defer></script></body></html>
+      function renderHsk(lvl) {
+        currentHsk = lvl;
+        var d = hskLevels[lvl];
+        if (!d) return;
+        document.getElementById('examLevelTitle').textContent = d.title;
+        document.getElementById('examLevelDesc').textContent = d.desc;
+        document.getElementById('examSkills').textContent = d.skills;
+        document.getElementById('examFocus').textContent = d.focus;
+        document.getElementById('examCtaLabel').textContent = d.cta;
+        document.getElementById('examDetailLink').setAttribute('href', './luyen-thi-hsk-' + lvl + '-mien-phi.html');
+        document.getElementById('examDetailLabel').textContent = 'Xem trang ôn thi HSK ' + lvl;
+        document.getElementById('quizBadge').textContent = 'Câu luyện thử HSK ' + lvl;
+        document.getElementById('quizQuestion').textContent = d.q;
+        document.getElementById('quizSub').textContent = d.sub;
+        quizFeedbackEl.textContent = 'Chọn một đáp án để xem giải thích nhanh như khi làm bài trong app.';
+        var keys = ['A', 'B', 'C', 'D'];
+        quizOptionsEl.innerHTML = d.opts.map(function (opt, i) {
+          return '<button type="button" class="mini-opt" data-opt="' + i + '"><span class="opt-key">' + keys[i] + '</span><span lang="zh-Hans">' + opt + '</span></button>';
+        }).join('');
+      }
+
+      levelTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var lvl = Number(btn.getAttribute('data-hsk')) || 1;
+          levelTabs.forEach(function (b) { b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+          renderHsk(lvl);
+        });
+      });
+
+      if (quizOptionsEl) {
+        quizOptionsEl.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-opt]');
+          if (!btn) return;
+          var picked = Number(btn.getAttribute('data-opt'));
+          var d = hskLevels[currentHsk];
+          var buttons = quizOptionsEl.querySelectorAll('[data-opt]');
+          buttons.forEach(function (b, i) {
+            b.classList.remove('is-correct', 'is-wrong');
+            if (i === d.answer) b.classList.add('is-correct');
+            else if (i === picked) b.classList.add('is-wrong');
+          });
+          quizFeedbackEl.textContent = (picked === d.answer ? 'Chính xác! ' : 'Chưa đúng rồi. ') + d.explain;
+        });
+      }
+
+      var cards = [
+        { level: 'HSK 1', han: '学习', py: 'xuéxí', meaning: 'Học, học tập', hv: 'Hán Việt: học tập', cn: '我每天学习汉语。', vi: 'Tôi học tiếng Trung mỗi ngày.' },
+        { level: 'HSK 3', han: '明白', py: 'míngbai', meaning: 'Hiểu, rõ ràng', hv: 'Hán Việt: minh bạch', cn: '听老师解释后我明白了。', vi: 'Nghe giải thích xong tôi đã hiểu rồi.' },
+        { level: 'HSK 4', han: '坚持', py: 'jiānchí', meaning: 'Kiên trì, giữ vững', hv: 'Hán Việt: kiên trì', cn: '每天坚持复习二十分钟。', vi: 'Mỗi ngày kiên trì ôn tập hai mươi phút.' }
+      ];
+      var cardIdx = 0;
+      var flashBtn = document.getElementById('demoFlashcard');
+      var nextCardBtn = document.getElementById('nextCardBtn');
+
+      if (flashBtn) {
+        flashBtn.addEventListener('click', function () {
+          var flipped = flashBtn.getAttribute('aria-pressed') === 'true';
+          flashBtn.setAttribute('aria-pressed', flipped ? 'false' : 'true');
+        });
+      }
+
+      if (nextCardBtn && flashBtn) {
+        nextCardBtn.addEventListener('click', function () {
+          cardIdx = (cardIdx + 1) % cards.length;
+          var c = cards[cardIdx];
+          flashBtn.setAttribute('aria-pressed', 'false');
+          document.getElementById('cardLevel').textContent = c.level;
+          document.getElementById('cardLevelBack').textContent = c.level;
+          document.getElementById('cardHan').textContent = c.han;
+          document.getElementById('cardPinyin').textContent = c.py;
+          document.getElementById('cardMeaning').textContent = c.meaning;
+          document.getElementById('cardHv').textContent = c.hv;
+          document.getElementById('cardEx').innerHTML = '<strong lang="zh-Hans">' + c.cn + '</strong> — ' + c.vi;
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

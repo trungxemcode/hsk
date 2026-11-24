@@ -25,7 +25,7 @@ const MIME = {
 
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   const browser = await chromium.launch({ executablePath: process.env.CHROME_EXECUTABLE });
-  const baseUrl = `http://127.0.0.1:${server.address().port}/index.html`;
+  const baseUrl = `http://127.0.0.1:${server.address().port}/app-hoc-hsk.html`;
 
   try {
     for (const { width, height, theme } of [

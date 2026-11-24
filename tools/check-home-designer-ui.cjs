@@ -4,14 +4,14 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
  const root=process.cwd(),temp=fs.mkdtempSync(path.join(os.tmpdir(),'hsk-designer-')),fixture=path.join(temp,'project');let server,browser,editorPage;
  try{
   execFileSync('python3',['-c',"import shutil,os,sys;shutil.copytree(sys.argv[1],sys.argv[2],copy_function=os.link,ignore=shutil.ignore_patterns('.git','__pycache__','node_modules'))",root,fixture]);
-  const originalIndex=fs.readFileSync(path.join(fixture,'index.html'),'utf8');
+  const originalIndex=fs.readFileSync(path.join(fixture,'app-hoc-hsk.html'),'utf8');
   server=spawn('python3',[path.join(root,'tools/serve-home-designer.py'),'--root',fixture,'--port','0'],{stdio:['ignore','pipe','pipe']});
   const url=await new Promise((resolve,reject)=>{let output='';const timer=setTimeout(()=>reject(Error('Local designer did not start')),15000);server.stdout.on('data',b=>{output+=b;const m=output.match(/http:\/\/127\.0\.0\.1:\d+/);if(m){clearTimeout(timer);resolve(m[0]);}});server.once('exit',code=>{clearTimeout(timer);reject(Error('Local server exited '+code));});server.stderr.on('data',b=>{output+=b;});});
   browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE});
   const page=await browser.newPage({viewport:{width:1440,height:1000},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   editorPage=page;
   const ordinary=await browser.newPage({viewport:{width:1440,height:900},serviceWorkers:'block'});
-  await ordinary.goto(url+'/index.html',{waitUntil:'domcontentloaded'});await ordinary.waitForFunction(()=>window.HSKLessons&&document.querySelector('#homeDailyWord h3'));
+  await ordinary.goto(url+'/app-hoc-hsk.html',{waitUntil:'domcontentloaded'});await ordinary.waitForFunction(()=>window.HSKLessons&&document.querySelector('#homeDailyWord h3'));
   const font=()=>ordinary.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize);
   const baseline=await font();
   await page.goto(url+'/tools/home-designer/editor.html',{waitUntil:'domcontentloaded'});
@@ -56,10 +56,10 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await page.locator('#file').setInputFiles({name:'broken.json',mimeType:'application/json',buffer:Buffer.from('{"schema":1,"scripts":"bad"}')});await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Không nhập được'));assert.equal(await frame.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'28px');
   await page.locator('#file').setInputFiles(file);
   await page.locator('#apply').click();await page.locator('#confirm button[value="ok"]').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Đã lưu vào dự án'));
-  const appliedIndex=fs.readFileSync(path.join(fixture,'index.html'),'utf8');assert.equal((appliedIndex.match(/href="\.\/home-design\.css"/g)||[]).length,1);assert.equal(appliedIndex.replace(/\n?<!-- HSK HOME DESIGN START -->[\s\S]*?<!-- HSK HOME DESIGN END -->\n?/,''),originalIndex);
+  const appliedIndex=fs.readFileSync(path.join(fixture,'app-hoc-hsk.html'),'utf8');assert.equal((appliedIndex.match(/href="\.\/home-design\.css"/g)||[]).length,1);assert.equal(appliedIndex.replace(/\n?<!-- HSK HOME DESIGN START -->[\s\S]*?<!-- HSK HOME DESIGN END -->\n?/,''),originalIndex);
   await ordinary.reload({waitUntil:'domcontentloaded'});await ordinary.waitForFunction(()=>document.querySelector('#homeDailyWord h3'));assert.equal(await font(),'28px','applied CSS must work in the ordinary app');
   await ordinary.setViewportSize({width:390,height:844});await ordinary.waitForFunction(()=>document.body.classList.contains('mobile-ux'));assert.equal(await font(),'20px','mobile export');
-  const landscape=await browser.newPage({viewport:{width:844,height:390},isMobile:true,hasTouch:true,serviceWorkers:'block'});await landscape.goto(url+'/index.html',{waitUntil:'domcontentloaded'});await landscape.waitForFunction(()=>document.body.classList.contains('mobile-ux')&&document.querySelector('#homeDailyWord h3'));assert.equal(await landscape.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'20px','phone landscape follows app mobile rules');await landscape.close();
+  const landscape=await browser.newPage({viewport:{width:844,height:390},isMobile:true,hasTouch:true,serviceWorkers:'block'});await landscape.goto(url+'/app-hoc-hsk.html',{waitUntil:'domcontentloaded'});await landscape.waitForFunction(()=>document.body.classList.contains('mobile-ux')&&document.querySelector('#homeDailyWord h3'));assert.equal(await landscape.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'20px','phone landscape follows app mobile rules');await landscape.close();
   await page.locator('#reset').click();await page.locator('#confirm button[value="ok"]').click();await frame.waitForFunction(()=>getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize!=='28px');assert.equal(await frame.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),baseline,'reset preview ignores previously applied CSS');
   await page.locator('#undo').click();assert.equal(await frame.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'28px');
   await page.locator('#mobile').click();await frame.waitForFunction(()=>innerWidth===390);await page.screenshot({path:'/tmp/home-designer-mobile.png',fullPage:true});

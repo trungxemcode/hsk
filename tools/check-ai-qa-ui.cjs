@@ -9,7 +9,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   let chatRole='regular';
   await page.route('https://ai.test/account-role',route=>route.fulfill({json:{account:{role:chatRole}}}));
 await page.route('https://ai.test/ai-providers',route=>route.fulfill({json:{system:{gemini:{available:true},chatgpt:{available:false}},personal:{configured:true,enabled:true,provider:'claude',model:'claude-sonnet'}}}));
-  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html',{waitUntil:'domcontentloaded',timeout:60000});
+  await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html',{waitUntil:'domcontentloaded',timeout:60000});
   // Studio navigation intentionally stays gated until the real lesson/data boot
   // completes. Waiting only for the shell API races that gate and leaves the
   // route hidden on slower local or bundled-browser runs.

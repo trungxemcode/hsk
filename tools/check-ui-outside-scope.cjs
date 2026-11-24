@@ -39,8 +39,9 @@ const config=changed.includes('.github/ui-scope.json')?JSON.parse(fs.readFileSyn
 const protectedRoutes=scope(config);report.scope=config;
 if(!compareUI){report.result='Not applicable: no app or visual-guard changes';save();console.log(report.result);process.exit(0);}
 // Every newly introduced route needs explicit scope and a real panel.
-const baseHTML=fs.readFileSync(path.join(before,'index.html'),'utf8');
-const headHTML=fs.readFileSync(path.join(after,'index.html'),'utf8');
+const appPage=root=>fs.existsSync(path.join(root,'app-hoc-hsk.html'))?'app-hoc-hsk.html':'index.html';
+const baseHTML=fs.readFileSync(path.join(before,appPage(before)),'utf8');
+const headHTML=fs.readFileSync(path.join(after,appPage(after)),'utf8');
 for(const html of [baseHTML,headHTML]){
  for(const match of html.matchAll(/data-studio-go="([^"]+)"/g)) assert.ok(ROUTES.includes(match[1])||match[1]==='review','Uncovered navigation route: '+match[1]);
 }
@@ -51,7 +52,7 @@ function serve(root){
   if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404);return res.end();}
   res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png'})[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));
  });
- return new Promise(resolve=>server.listen(0,'127.0.0.1',()=>resolve(server)));
+ return new Promise(resolve=>server.listen(0,'127.0.0.1',()=>resolve({server,entry:appPage(root)})));
 }
 (async()=>{
  const {chromium}=require('playwright'),{PNG}=require('pngjs');
@@ -59,7 +60,7 @@ function serve(root){
  const headServer=servers[servers.length-1],approvedServer=approval?servers[1]:null;
  const browser=await chromium.launch({headless:true,args:['--disable-gpu','--force-color-profile=srgb'],...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  let failures=0;
- async function capture(server,route,width,theme,prefix){
+ async function capture({server,entry},route,width,theme,prefix){
   const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1,locale:'vi-VN',timezoneId:'Asia/Ho_Chi_Minh',reducedMotion:'reduce',serviceWorkers:'block'});
   try{
    await page.clock.setFixedTime(new Date('2026-10-30T03:00:00Z'));
@@ -70,7 +71,7 @@ function serve(root){
     await page.route('**/translation-config.json',r=>r.fulfill({json:{enabled:true,endpoint:'https://roles.invalid/translate'}}));
     await page.route('https://roles.invalid/**',r=>r.fulfill({json:new URL(r.request().url()).pathname==='/account-role'?{account:{uid:'BIvUyItDYJWcLvlhhtYFyj5csBH2',email:'owner@test.invalid',role:'admin'}}:{accounts:[{uid:'BIvUyItDYJWcLvlhhtYFyj5csBH2',email:'owner@test.invalid',role:'admin'}],cursor:null}}));
    }
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html',{waitUntil:'domcontentloaded'});
+   await page.goto('http://127.0.0.1:'+server.address().port+'/'+entry,{waitUntil:'domcontentloaded'});
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKMobileUX&&window.HSKLessons&&document.body.dataset.studioHub==='home',null,{timeout:60000});
    if(route.startsWith('music')){await page.evaluate(()=>window.HSKMusicLoad?.start());await page.waitForFunction(()=>!!window.HSKMusic,null,{timeout:60000});}
    if(route==='admin'){
@@ -196,5 +197,5 @@ function serve(root){
    if(!result.pass)failures++;report.results.push(result);save();console.log((result.pass?'PASS ':'FAIL ')+key+' pixels='+result.changedPixels+' geometry='+result.geometryEqual);
   }
   report.result=failures?'FAIL: '+failures+' outside-scope states changed':approval?'PASS: owner-approved global UI unchanged on all protected states':'PASS: protected entry-page states unchanged';save();assert.equal(failures,0,report.result);
- }finally{await browser.close();for(const s of servers)s.close();if(approvedBefore)execFileSync('git',['-C',after,'worktree','remove','--force',approvedBefore]);}
+ }finally{await browser.close();for(const {server} of servers)server.close();if(approvedBefore)execFileSync('git',['-C',after,'worktree','remove','--force',approvedBefore]);}
 })().catch(e=>{report.error=e.stack;save();console.error(e);process.exitCode=1;});

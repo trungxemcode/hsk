@@ -41,7 +41,7 @@ test('preview disables account/push/SW; only owner can open editing session; ord
  assert.equal((await handleDesign(request('/__designer/identity',null,'0',{headers:{Authorization:'Bearer real-test-token'}}),env,{}, {fetchFn:ownerFetch})).status,200);
  for(const p of ['/account-config.json','/push-config.json'])assert.deepEqual(await(await handleDesign(request(p),env)).json(),{enabled:false});
  assert.equal((await handleDesign(request('/offline-worker.js',null,'0',{headers:{'Service-Worker':'script'}}),env)).status,404);
- const preview=await handleDesign(request('/index.html'),env);assert.match(preview.headers.get('Content-Security-Policy'),/connect-src 'self' data: blob:/);
+ const preview=await handleDesign(request('/app-hoc-hsk.html'),env);assert.match(preview.headers.get('Content-Security-Policy'),/connect-src 'self' data: blob:/);
  const publicRead=await handleDesign(request('/api/design',null,'0',{headers:{Origin:'https://trungxemcode.github.io'}}),env);assert.equal(publicRead.headers.get('Access-Control-Allow-Origin'),'https://trungxemcode.github.io');
 });
 test('Cloudflare Pages can read public design without access to editor routes',async()=>{

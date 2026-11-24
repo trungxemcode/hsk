@@ -1,7 +1,7 @@
 const {chromium}=require('playwright');const fs=require('node:fs'),assert=require('node:assert/strict');
 (async()=>{const browser=await chromium.launch({headless:true});try{
  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('http://127.0.0.1:8765/index.html');await page.waitForFunction(()=>!!window.HSKLessons,{timeout:60000});
+ await page.goto('http://127.0.0.1:8765/app-hoc-hsk.html');await page.waitForFunction(()=>!!window.HSKLessons,{timeout:60000});
  const match=await page.evaluate(()=>['你们','太……了','花花','贏','內容','勺（子）'].map(h=>({han:h,count:window.HSKLessons.match([h]).length,examples:window.HSKLessons.match([h]).map(w=>window.HSKLessons.examples(w).length)})));
  assert.ok(match.every(x=>x.count>0&&x.examples.every(n=>n>=3)));
  for(let n=1;n<=6;n++)for(const num of ['03','06','09','12']){

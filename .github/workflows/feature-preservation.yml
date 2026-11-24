@@ -72,6 +72,7 @@ jobs:
         node tools/check-practice-games-core.cjs
         node tools/check-study-sync-dom.cjs
         node tools/check-update-dom.cjs
+        node tools/check-seo-entry-dom.cjs
         node tools/check-real-reading-variety.cjs
   browser-shards:
     name: mobile-learning-shard (${{ matrix.shard }}/3)
