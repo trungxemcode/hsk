@@ -1,3 +1,8 @@
+## 2026-11-24 — Tự cập nhật HSK từ GitHub
+
+- `offline.js` tiếp tục kiểm tra máy chủ khi service worker cũ còn chờ áp dụng. Thông báo cập nhật hiện lại khi bản mới hơn tải xong. Không có thay đổi bố cục PC hoặc mobile.
+- `pwa-release-guard.yml` đối chiếu bản công khai trên Cloudflare Pages và GitHub Pages sau mỗi lần push vào `main`. `check-update-dom.cjs` mô phỏng hai bản phát hành liên tiếp và kiểm tra thao tác áp dụng bản mới.
+
 ## 2026-11-17 — Learn Chinese Through Podcast: đợt ngoài danh sách đã xử lý
 
 - Phạm vi: chỉ thêm nội dung vào Luyện nghe Podcast, trên PC và điện thoại. Danh sách 15 video người dùng đã xử lý được loại khỏi đợt này.

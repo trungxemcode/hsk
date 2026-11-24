@@ -37,6 +37,15 @@ jobs:
     needs: release-guard
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: GitHub Pages
+            site: https://trungxemcode.github.io/hsk/
+          - host: Cloudflare Pages
+            site: https://hskfreelearningai.pages.dev/
+    name: Verify ${{ matrix.host }} deployment
     steps:
       - uses: actions/checkout@v4
         with:
@@ -44,5 +53,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Verify deployed GitHub Pages files match commit
-        run: python tools/verify-live-pwa.py --attempts 22 --delay 20
+      - name: Verify deployed PWA files match commit
+        env:
+          PWA_SITE: ${{ matrix.site }}
+        run: python tools/verify-live-pwa.py --site "$PWA_SITE" --attempts 22 --delay 20
