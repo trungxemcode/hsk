@@ -23,6 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./seo-landing.css">
   <script>
     (function () {
       try {
@@ -118,1615 +119,6 @@
       ]
     }
   </script>
-  <style>
-    @font-face {
-      font-family: 'HSK Sans';
-      font-style: normal;
-      font-weight: 400 800;
-      font-display: swap;
-      src: url('./vendor/fonts/inter-latin.woff2') format('woff2');
-      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-    }
-    @font-face {
-      font-family: 'HSK Sans';
-      font-style: normal;
-      font-weight: 400 800;
-      font-display: swap;
-      src: url('./vendor/fonts/inter-latin-ext.woff2') format('woff2');
-      unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'HSK Sans';
-      font-style: normal;
-      font-weight: 400 800;
-      font-display: swap;
-      src: url('./vendor/fonts/inter-vietnamese.woff2') format('woff2');
-      unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-    }
-
-    :root {
-      color-scheme: light;
-      --font-display: 'Be Vietnam Pro', 'HSK Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-body: 'HSK Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-han: 'Noto Sans CJK SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-
-      --paper: #f4f4fa;
-      --surface: #ffffff;
-      --surface-soft: #f8f7fe;
-      --surface-tint: #efedff;
-      --ink-strong: #14142b;
-      --ink: #343452;
-      --muted: #5b5b7a;
-      --line: #e4e2f1;
-      --line-strong: #d3d0e8;
-
-      --accent: #5b4be8;
-      --accent-dark: #3b2fb0;
-      --accent-ink: #4636c7;
-      --accent-soft: #ebe8ff;
-      --focus-ring: #5b4be8;
-
-      --hero-bg: linear-gradient(142deg, #4b3bc9 0%, #37299e 58%, #261b75 100%);
-      --hero-ink: #ffffff;
-      --hero-ink-soft: #e6e2ff;
-      --hero-ink-muted: #cdc6ff;
-      --hero-line: rgba(255, 255, 255, 0.16);
-      --hero-panel-bg: rgba(255, 255, 255, 0.98);
-      --hero-panel-ink: #14142b;
-
-      --emerald: #0a7a5e;
-      --emerald-bg: #e7f7f1;
-      --emerald-line: #bce6d7;
-      --fix-ink: #c12b40;
-      --fix-bg: #ffeff2;
-      --fix-line: #f6cad1;
-      --peach-bg: #fff1e9;
-      --peach-ink: #a65236;
-      --sky-bg: #ecf4ff;
-      --sky-ink: #2c5fa3;
-
-      --shadow-sm: 0 2px 8px rgba(20, 20, 43, 0.05);
-      --shadow-md: 0 12px 32px -12px rgba(20, 20, 43, 0.14), 0 2px 6px rgba(20, 20, 43, 0.04);
-      --shadow-hero-card: 0 24px 56px -18px rgba(17, 11, 66, 0.45), 0 4px 12px rgba(17, 11, 66, 0.18);
-
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 22px;
-      --radius-pill: 999px;
-
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --container: min(100% - 2.5rem, 73rem);
-    }
-
-    html[data-theme="dark"] {
-      color-scheme: dark;
-      --paper: #0f0f18;
-      --surface: #181826;
-      --surface-soft: #212136;
-      --surface-tint: #28224f;
-      --ink-strong: #f4f4fc;
-      --ink: #dcdcef;
-      --muted: #b0b0cc;
-      --line: #2d2d45;
-      --line-strong: #404060;
-
-      --accent: #7c6bff;
-      --accent-dark: #9e92ff;
-      --accent-ink: #b3a8ff;
-      --accent-soft: #26204a;
-      --focus-ring: #9e92ff;
-
-      --hero-bg: linear-gradient(142deg, #2d2275 0%, #201757 58%, #151039 100%);
-      --hero-ink: #ffffff;
-      --hero-ink-soft: #e2deff;
-      --hero-ink-muted: #bcb4f5;
-      --hero-line: rgba(212, 204, 255, 0.16);
-      --hero-panel-bg: #171726;
-      --hero-panel-ink: #f0f0fa;
-
-      --emerald: #5bd3a5;
-      --emerald-bg: rgba(16, 163, 127, 0.16);
-      --emerald-line: rgba(91, 211, 165, 0.34);
-      --fix-ink: #ff8a9b;
-      --fix-bg: rgba(239, 68, 68, 0.16);
-      --fix-line: rgba(255, 138, 155, 0.34);
-      --peach-bg: rgba(207, 128, 102, 0.16);
-      --peach-ink: #f2b199;
-      --sky-bg: rgba(102, 149, 213, 0.16);
-      --sky-ink: #9ac2f7;
-
-      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.28);
-      --shadow-md: 0 18px 42px -18px rgba(0, 0, 0, 0.55);
-      --shadow-hero-card: 0 28px 64px -18px rgba(0, 0, 0, 0.65);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      scrollbar-color: var(--line-strong) var(--paper);
-      scrollbar-width: thin;
-    }
-
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      overflow-x: clip;
-    }
-
-    ::selection {
-      background: var(--accent);
-      color: #ffffff;
-    }
-
-    ::-webkit-scrollbar { width: 10px; height: 10px; }
-    ::-webkit-scrollbar-track { background: var(--paper); }
-    ::-webkit-scrollbar-thumb {
-      background: var(--line-strong);
-      border-radius: 999px;
-      border: 2px solid var(--paper);
-    }
-
-    a {
-      color: inherit;
-      text-underline-offset: 0.22em;
-    }
-
-    button {
-      font: inherit;
-      color: inherit;
-      cursor: pointer;
-    }
-
-    :focus-visible {
-      outline: 3px solid var(--focus-ring);
-      outline-offset: 3px;
-    }
-
-    svg.ico {
-      width: 1.15rem;
-      height: 1.15rem;
-      flex: none;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: -9999px;
-      top: 0.75rem;
-      z-index: 100;
-      padding: 0.65rem 1rem;
-      background: var(--accent);
-      color: #ffffff;
-      border-radius: var(--radius-sm);
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .skip-link:focus { left: 1rem; }
-
-    .wrap {
-      width: var(--container);
-      margin-inline: auto;
-    }
-
-    /* Sticky navigation bar */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: color-mix(in srgb, var(--surface) 88%, transparent);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      min-height: 4.35rem;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      text-decoration: none;
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.05rem;
-      letter-spacing: -0.025em;
-      color: var(--ink-strong);
-      flex: none;
-    }
-
-    .brand-mark {
-      width: 2.35rem;
-      height: 2.35rem;
-      border-radius: 12px;
-      background: var(--ink-strong);
-      color: var(--surface);
-      display: grid;
-      place-items: center;
-      font-family: var(--font-han);
-      font-size: 1.3rem;
-      font-weight: 500;
-      line-height: 1;
-      flex: none;
-    }
-
-    html[data-theme="dark"] .brand-mark {
-      background: var(--accent);
-      color: #ffffff;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .nav-links a {
-      padding: 0.5rem 0.85rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--ink);
-      text-decoration: none;
-      transition: background 180ms ease, color 180ms ease;
-    }
-
-    .nav-links a:hover {
-      background: var(--accent-soft);
-      color: var(--accent-ink);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex: none;
-    }
-
-    .theme-btn {
-      width: 2.5rem;
-      height: 2.5rem;
-      border: 1px solid var(--line-strong);
-      background: var(--surface);
-      color: var(--ink);
-      border-radius: var(--radius-sm);
-      display: grid;
-      place-items: center;
-      transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
-    }
-    .theme-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent-ink);
-      background: var(--surface-soft);
-    }
-    .theme-btn .ico-sun { display: none; }
-    html[data-theme="dark"] .theme-btn .ico-sun { display: block; }
-    html[data-theme="dark"] .theme-btn .ico-moon { display: none; }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.55rem;
-      min-height: 2.65rem;
-      padding: 0.6rem 1.15rem;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      background: var(--accent);
-      color: #ffffff;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.93rem;
-      text-decoration: none;
-      transition: transform 180ms var(--ease-out-expo), background 180ms ease, box-shadow 180ms ease;
-    }
-    .btn-primary:hover {
-      background: var(--accent-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px -8px rgba(91, 75, 232, 0.55);
-    }
-    .btn-primary:active { transform: translateY(0); }
-
-    /* Committed Indigo Hero */
-    .hero {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      background: var(--hero-bg);
-      color: var(--hero-ink);
-      padding: clamp(2.6rem, 5.5vw, 4.75rem) 1rem clamp(3rem, 6vw, 5.25rem);
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: -1;
-    }
-    .hero::before {
-      width: 44rem;
-      height: 44rem;
-      right: -13rem;
-      top: -14rem;
-      border: 1px solid rgba(255, 255, 255, 0.13);
-    }
-    .hero::after {
-      width: 58rem;
-      height: 58rem;
-      right: -20rem;
-      top: -21rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-watermark {
-      position: absolute;
-      left: -1.5rem;
-      bottom: -3.2rem;
-      font-family: var(--font-han);
-      font-size: clamp(11rem, 22vw, 19rem);
-      font-weight: 500;
-      line-height: 1;
-      letter-spacing: -0.06em;
-      color: rgba(255, 255, 255, 0.06);
-      user-select: none;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.96fr);
-      gap: clamp(2rem, 4.5vw, 3.75rem);
-      align-items: center;
-    }
-
-    .hero-copy h1 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(2.15rem, 4.2vw, 3.35rem);
-      font-weight: 800;
-      line-height: 1.14;
-      letter-spacing: -0.035em;
-      text-wrap: balance;
-      color: var(--hero-ink);
-    }
-
-    .hero-lead {
-      margin: 1.25rem 0 0;
-      max-width: 36rem;
-      font-size: clamp(1.02rem, 1.3vw, 1.13rem);
-      line-height: 1.65;
-      color: var(--hero-ink-soft);
-    }
-
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.85rem;
-      margin-top: 1.85rem;
-    }
-
-    .btn-hero-main {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.65rem;
-      min-height: 3.35rem;
-      padding: 0.85rem 1.55rem;
-      border-radius: 14px;
-      background: #ffffff;
-      color: #2f2396;
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1rem;
-      text-decoration: none;
-      box-shadow: 0 12px 28px -10px rgba(13, 8, 56, 0.55);
-      transition: transform 200ms var(--ease-out-expo), background 180ms ease, box-shadow 200ms ease;
-    }
-    .btn-hero-main:hover {
-      background: #f4f2ff;
-      transform: translateY(-2px);
-      box-shadow: 0 16px 34px -10px rgba(13, 8, 56, 0.65);
-    }
-    .btn-hero-main:focus-visible {
-      outline: 3px solid #ffffff;
-      outline-offset: 3px;
-    }
-
-    .btn-hero-ghost {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      min-height: 3.35rem;
-      padding: 0.85rem 1.25rem;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.96rem;
-      text-decoration: none;
-      transition: background 180ms ease, border-color 180ms ease;
-    }
-    .btn-hero-ghost:hover {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(255, 255, 255, 0.45);
-    }
-    .btn-hero-ghost:focus-visible {
-      outline: 3px solid #ffffff;
-      outline-offset: 3px;
-    }
-
-    .hero-proof {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.65rem 1.35rem;
-      margin: 1.75rem 0 0;
-      padding: 1.25rem 0 0;
-      border-top: 1px solid var(--hero-line);
-      list-style: none;
-      font-size: 0.92rem;
-      color: var(--hero-ink-soft);
-    }
-
-    .hero-proof li {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .hero-proof .ico {
-      width: 1rem;
-      height: 1rem;
-      color: #a9ffde;
-    }
-
-    /* Interactive AI Tutor Showcase inside Hero */
-    .tutor-demo {
-      background: var(--hero-panel-bg);
-      color: var(--hero-panel-ink);
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      box-shadow: var(--shadow-hero-card);
-      overflow: hidden;
-    }
-
-    html[data-theme="dark"] .tutor-demo {
-      border-color: var(--line-strong);
-    }
-
-    .tutor-demo-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--line);
-      background: var(--surface-soft);
-    }
-
-    .tutor-demo-id {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      min-width: 0;
-    }
-
-    .tutor-avatar {
-      width: 2.25rem;
-      height: 2.25rem;
-      border-radius: 10px;
-      background: var(--accent);
-      color: #ffffff;
-      display: grid;
-      place-items: center;
-      flex: none;
-    }
-
-    .tutor-avatar svg.ico {
-      width: 1.25rem;
-      height: 1.25rem;
-      fill: rgba(255, 255, 255, 0.22);
-    }
-
-    .tutor-demo-id strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      line-height: 1.25;
-      color: var(--ink-strong);
-    }
-
-    .tutor-demo-id > div > span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .live-dot {
-      width: 0.46rem;
-      height: 0.46rem;
-      border-radius: 50%;
-      background: #10a37f;
-      flex: none;
-    }
-
-    .tutor-demo-tag {
-      font-size: 0.76rem;
-      font-weight: 700;
-      padding: 0.28rem 0.65rem;
-      border-radius: var(--radius-pill);
-      background: var(--emerald-bg);
-      color: var(--emerald);
-      white-space: nowrap;
-    }
-
-    .tutor-prompts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      padding: 0.9rem 1.25rem 0.65rem;
-    }
-
-    .prompt-chip {
-      border: 1px solid var(--line-strong);
-      background: var(--surface);
-      color: var(--ink);
-      border-radius: var(--radius-pill);
-      padding: 0.42rem 0.78rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      line-height: 1.3;
-      transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
-    }
-
-    .prompt-chip:hover {
-      border-color: var(--accent);
-      color: var(--accent-ink);
-      background: var(--surface-soft);
-    }
-
-    .prompt-chip[aria-selected="true"] {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #ffffff;
-    }
-
-    .tutor-stage {
-      padding: 0.5rem 1.25rem 1.25rem;
-      display: grid;
-      gap: 0.85rem;
-      min-height: 18.75rem;
-      align-content: start;
-    }
-
-    .msg-user {
-      justify-self: end;
-      max-width: 90%;
-      padding: 0.72rem 1rem;
-      border-radius: 16px 16px 4px 16px;
-      background: var(--accent-soft);
-      color: var(--ink-strong);
-      font-size: 0.92rem;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-
-    .msg-ai {
-      padding: 1rem 1.1rem;
-      border-radius: 4px 16px 16px 16px;
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      font-size: 0.91rem;
-      line-height: 1.6;
-      color: var(--ink);
-    }
-
-    .msg-ai.is-switching {
-      animation: stageFade 260ms var(--ease-out-expo);
-    }
-
-    @keyframes stageFade {
-      from { opacity: 0.35; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .msg-ai p { margin: 0 0 0.65rem; }
-    .msg-ai p:last-child { margin-bottom: 0; }
-    .msg-ai strong { color: var(--ink-strong); }
-
-    .zh-inline {
-      font-family: var(--font-han);
-      font-weight: 600;
-      color: var(--accent-ink);
-    }
-
-    .ai-ex-list {
-      display: grid;
-      gap: 0.5rem;
-      margin: 0.65rem 0;
-    }
-
-    .ai-ex {
-      padding: 0.6rem 0.75rem;
-      border-radius: 10px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-    }
-
-    .ai-ex .cn {
-      display: block;
-      font-family: var(--font-han);
-      font-size: 1.02rem;
-      font-weight: 600;
-      color: var(--ink-strong);
-      line-height: 1.45;
-    }
-
-    .ai-ex .py {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--accent-ink);
-      font-weight: 600;
-    }
-
-    .ai-ex .vi {
-      display: block;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .tutor-demo-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 0.8rem 1.25rem;
-      border-top: 1px solid var(--line);
-      background: var(--surface-soft);
-    }
-
-    .tutor-demo-foot span {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .tutor-demo-foot a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-family: var(--font-display);
-      font-size: 0.86rem;
-      font-weight: 700;
-      color: var(--accent-ink);
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .tutor-demo-foot a:hover { text-decoration: underline; }
-
-    /* Shared section spacing & typography */
-    .band {
-      padding: clamp(3.5rem, 7vw, 5.75rem) 1rem;
-    }
-
-    .band-surface {
-      background: var(--surface);
-      border-block: 1px solid var(--line);
-    }
-
-    .section-head {
-      max-width: 44rem;
-      margin-bottom: clamp(1.85rem, 3.5vw, 2.75rem);
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
-      font-weight: 800;
-      line-height: 1.18;
-      letter-spacing: -0.03em;
-      text-wrap: balance;
-      color: var(--ink-strong);
-    }
-
-    .section-head p {
-      margin: 0.85rem 0 0;
-      font-size: 1.03rem;
-      color: var(--muted);
-      max-width: 62ch;
-    }
-
-    /* Section 2: Gia su AI deep-dive + Sentence Editor showcase */
-    .ai-split {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      gap: clamp(2rem, 5vw, 4rem);
-      align-items: start;
-    }
-
-    .ai-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .ai-list li {
-      display: grid;
-      grid-template-columns: 2.5rem minmax(0, 1fr);
-      gap: 1rem;
-      padding: 1.25rem 0;
-      border-bottom: 1px solid var(--line);
-      align-items: start;
-    }
-
-    .ai-list li:first-child {
-      border-top: 1px solid var(--line);
-    }
-
-    .ai-list-ico {
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 12px;
-      background: var(--accent-soft);
-      color: var(--accent-ink);
-      display: grid;
-      place-items: center;
-    }
-
-    .ai-list h3 {
-      margin: 0 0 0.3rem;
-      font-family: var(--font-display);
-      font-size: 1.08rem;
-      font-weight: 700;
-      color: var(--ink-strong);
-      line-height: 1.35;
-    }
-
-    .ai-list p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 54ch;
-    }
-
-    .editor-showcase {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      box-shadow: var(--shadow-md);
-    }
-
-    .editor-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .editor-head h3 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--ink-strong);
-    }
-
-    .editor-tabs {
-      display: inline-flex;
-      gap: 0.35rem;
-      padding: 0.25rem;
-      border-radius: 10px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-    }
-
-    .editor-tabs button {
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 0.38rem 0.72rem;
-      border-radius: 7px;
-      transition: background 160ms ease, color 160ms ease;
-    }
-
-    .editor-tabs button[aria-selected="true"] {
-      background: var(--surface);
-      color: var(--ink-strong);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .sentence-block {
-      border-radius: 14px;
-      padding: 1rem 1.1rem;
-      border: 1px solid var(--line);
-      background: var(--surface-soft);
-      margin-bottom: 0.85rem;
-    }
-
-    .sentence-block.is-fixed {
-      background: var(--emerald-bg);
-      border-color: var(--emerald-line);
-    }
-
-    .sentence-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--muted);
-      margin-bottom: 0.45rem;
-    }
-
-    .sentence-block.is-fixed .sentence-label {
-      color: var(--emerald);
-    }
-
-    .sentence-han {
-      font-family: var(--font-han);
-      font-size: clamp(1.25rem, 2.2vw, 1.5rem);
-      font-weight: 600;
-      line-height: 1.5;
-      color: var(--ink-strong);
-      margin: 0;
-    }
-
-    .err-mark {
-      background: var(--fix-bg);
-      color: var(--fix-ink);
-      border: 1px solid var(--fix-line);
-      padding: 0.05rem 0.35rem;
-      border-radius: 6px;
-      text-decoration: line-through;
-      text-decoration-thickness: 2px;
-    }
-
-    .ok-mark {
-      background: var(--surface);
-      color: var(--emerald);
-      border: 1px solid var(--emerald-line);
-      padding: 0.05rem 0.38rem;
-      border-radius: 6px;
-    }
-
-    .sentence-py {
-      margin: 0.35rem 0 0;
-      font-size: 0.88rem;
-      color: var(--accent-ink);
-      font-weight: 600;
-    }
-
-    .sentence-vi {
-      margin: 0.15rem 0 0;
-      font-size: 0.9rem;
-      color: var(--ink);
-    }
-
-    .editor-note {
-      margin: 1rem 0 0;
-      padding-top: 1rem;
-      border-top: 1px solid var(--line);
-      font-size: 0.92rem;
-      color: var(--ink);
-    }
-
-    .editor-note strong { color: var(--ink-strong); }
-
-    .editor-action {
-      margin-top: 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .text-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--accent-ink);
-      text-decoration: none;
-    }
-    .text-link:hover { text-decoration: underline; }
-
-    /* Section 3: Free HSK 1-6 Exam Explorer */
-    .level-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .level-tab {
-      min-height: 2.75rem;
-      padding: 0.55rem 1.15rem;
-      border-radius: 12px;
-      border: 1px solid var(--line-strong);
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.94rem;
-      font-variant-numeric: tabular-nums;
-      transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms var(--ease-out-expo);
-    }
-
-    .level-tab:hover {
-      border-color: var(--accent);
-      color: var(--accent-ink);
-    }
-
-    .level-tab[aria-selected="true"] {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #ffffff;
-      box-shadow: 0 8px 18px -8px rgba(91, 75, 232, 0.55);
-    }
-
-    .exam-sheet {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      gap: clamp(1.5rem, 3.5vw, 2.75rem);
-      padding: clamp(1.4rem, 3.2vw, 2.25rem);
-      border-radius: var(--radius-lg);
-      background: var(--paper);
-      border: 1px solid var(--line);
-    }
-
-    .exam-info h3 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(1.3rem, 2.2vw, 1.65rem);
-      font-weight: 800;
-      color: var(--ink-strong);
-      line-height: 1.25;
-    }
-
-    .exam-info > p {
-      margin: 0.7rem 0 1.25rem;
-      color: var(--muted);
-      font-size: 0.97rem;
-    }
-
-    .exam-facts {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.85rem;
-      margin: 0 0 1.5rem;
-    }
-
-    .exam-fact {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 0.9rem 1rem;
-    }
-
-    .exam-fact dt {
-      font-size: 0.79rem;
-      font-weight: 700;
-      color: var(--muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .exam-fact dd {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--ink-strong);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .mini-quiz {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      padding: 1.35rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    .mini-quiz-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--accent-ink);
-    }
-
-    .mini-quiz-q {
-      margin: 0;
-      font-family: var(--font-han);
-      font-size: 1.22rem;
-      font-weight: 600;
-      color: var(--ink-strong);
-      line-height: 1.55;
-    }
-
-    .mini-quiz-sub {
-      margin: -0.45rem 0 0;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .mini-opts {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.55rem;
-    }
-
-    .mini-opt {
-      min-height: 2.85rem;
-      padding: 0.55rem 0.85rem;
-      border-radius: 12px;
-      border: 1px solid var(--line-strong);
-      background: var(--surface-soft);
-      color: var(--ink-strong);
-      text-align: left;
-      font-family: var(--font-han);
-      font-weight: 600;
-      font-size: 0.98rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: border-color 160ms ease, background 160ms ease;
-    }
-
-    .mini-opt:hover { border-color: var(--accent); }
-
-    .mini-opt span.opt-key {
-      font-family: var(--font-display);
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--muted);
-    }
-
-    .mini-opt.is-correct {
-      background: var(--emerald-bg);
-      border-color: var(--emerald-line);
-      color: var(--emerald);
-    }
-
-    .mini-opt.is-wrong {
-      background: var(--fix-bg);
-      border-color: var(--fix-line);
-      color: var(--fix-ink);
-    }
-
-    .mini-feedback {
-      margin: 0;
-      padding: 0.78rem 0.95rem;
-      border-radius: 12px;
-      background: var(--surface-tint);
-      color: var(--ink-strong);
-      font-size: 0.88rem;
-      line-height: 1.55;
-    }
-
-    /* Section 4: Asymmetric Free Study Suite Bento */
-    .suite-bento {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.45fr);
-      gap: 1.25rem;
-      align-items: stretch;
-    }
-
-    .flash-feature {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1.25rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .flash-feature h3 {
-      margin: 0 0 0.45rem;
-      font-family: var(--font-display);
-      font-size: 1.32rem;
-      font-weight: 800;
-      color: var(--ink-strong);
-      line-height: 1.25;
-    }
-
-    .flash-feature > div > p {
-      margin: 0;
-      font-size: 0.94rem;
-      color: var(--muted);
-    }
-
-    .flip-scene {
-      perspective: 1100px;
-      width: 100%;
-    }
-
-    .flip-card {
-      position: relative;
-      width: 100%;
-      min-height: 15.25rem;
-      border: 0;
-      padding: 0;
-      background: transparent;
-      text-align: center;
-      transform-style: preserve-3d;
-      transition: transform 520ms var(--ease-out-expo);
-    }
-
-    .flip-card[aria-pressed="true"] {
-      transform: rotateY(180deg);
-    }
-
-    .flip-face {
-      position: absolute;
-      inset: 0;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      border-radius: 18px;
-      border: 1px solid var(--line-strong);
-      background: var(--surface-soft);
-      padding: 1.4rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-    }
-
-    .flip-face.back {
-      transform: rotateY(180deg);
-      background: var(--surface-tint);
-      border-color: color-mix(in srgb, var(--accent) 32%, var(--line));
-    }
-
-    .flip-badge {
-      position: absolute;
-      top: 0.9rem;
-      right: 0.95rem;
-      font-size: 0.74rem;
-      font-weight: 800;
-      padding: 0.25rem 0.65rem;
-      border-radius: var(--radius-pill);
-      background: var(--surface);
-      border: 1px solid var(--line);
-      color: var(--accent-ink);
-    }
-
-    .flip-han {
-      font-family: var(--font-han);
-      font-size: clamp(3.3rem, 6vw, 4.4rem);
-      font-weight: 500;
-      line-height: 1.12;
-      color: var(--ink-strong);
-    }
-
-    .flip-hint {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 0.45rem;
-    }
-
-    .flip-py {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--accent-ink);
-    }
-
-    .flip-meaning {
-      font-size: 1.12rem;
-      font-weight: 700;
-      color: var(--ink-strong);
-    }
-
-    .flip-hv {
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .flip-ex {
-      margin-top: 0.45rem;
-      padding: 0.55rem 0.85rem;
-      border-radius: 10px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      font-size: 0.84rem;
-      color: var(--ink);
-    }
-
-    .flip-ex strong {
-      font-family: var(--font-han);
-      color: var(--ink-strong);
-      font-weight: 600;
-    }
-
-    .flash-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
-
-    .flash-nav-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      min-height: 2.4rem;
-      padding: 0.45rem 0.9rem;
-      border-radius: 10px;
-      border: 1px solid var(--line-strong);
-      background: var(--surface);
-      color: var(--ink-strong);
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-    .flash-nav-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent-ink);
-    }
-
-    .suite-stack {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.1rem;
-    }
-
-    .suite-item {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      padding: 1.35rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      transition: border-color 180ms ease, transform 200ms var(--ease-out-expo);
-    }
-
-    .suite-item:hover {
-      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
-      transform: translateY(-2px);
-    }
-
-    .suite-item.wide {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 0.55rem 1.15rem;
-      align-items: start;
-      background: var(--surface-soft);
-    }
-
-    .suite-ico {
-      width: 2.6rem;
-      height: 2.6rem;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      flex: none;
-    }
-
-    .tone-indigo { background: var(--accent-soft); color: var(--accent-ink); }
-    .tone-mint { background: var(--emerald-bg); color: var(--emerald); }
-    .tone-peach { background: var(--peach-bg); color: var(--peach-ink); }
-    .tone-sky { background: var(--sky-bg); color: var(--sky-ink); }
-
-    .suite-item h3 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: 1.07rem;
-      font-weight: 700;
-      color: var(--ink-strong);
-      line-height: 1.3;
-    }
-
-    .suite-item p {
-      margin: 0;
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .suite-item.wide .suite-ico { grid-row: 1 / 3; }
-
-    /* Section 5: Conversational SEO FAQ */
-    .faq-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
-      gap: clamp(2rem, 5vw, 4rem);
-      align-items: start;
-    }
-
-    .faq-aside {
-      position: sticky;
-      top: 6rem;
-    }
-
-    .faq-aside h2 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(1.7rem, 3vw, 2.35rem);
-      font-weight: 800;
-      line-height: 1.18;
-      letter-spacing: -0.03em;
-      color: var(--ink-strong);
-      text-wrap: balance;
-    }
-
-    .faq-aside p {
-      margin: 0.9rem 0 1.4rem;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .faq-list details {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .faq-list details:first-child {
-      border-top: 1px solid var(--line);
-    }
-
-    .faq-list summary {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.2rem 0.25rem;
-      cursor: pointer;
-      font-family: var(--font-display);
-      font-size: 1.04rem;
-      font-weight: 700;
-      color: var(--ink-strong);
-      line-height: 1.4;
-    }
-
-    .faq-list summary::-webkit-details-marker { display: none; }
-
-    .faq-list summary .ico {
-      color: var(--accent-ink);
-      transition: transform 220ms var(--ease-out-expo);
-    }
-
-    .faq-list details[open] summary .ico {
-      transform: rotate(180deg);
-    }
-
-    .faq-answer {
-      padding: 0 0.25rem 1.25rem;
-      font-size: 0.96rem;
-      color: var(--ink);
-      max-width: 64ch;
-    }
-
-    .faq-answer p { margin: 0; }
-
-    /* Closing CTA Band */
-    .closing-wrap {
-      padding: clamp(3rem, 6vw, 4.5rem) 1rem clamp(3.25rem, 6.5vw, 5rem);
-    }
-
-    .closing-banner {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      border-radius: 26px;
-      background: var(--hero-bg);
-      color: #ffffff;
-      padding: clamp(2.25rem, 5vw, 3.75rem);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.75rem;
-      box-shadow: var(--shadow-hero-card);
-    }
-
-    .closing-banner::after {
-      content: "学习";
-      position: absolute;
-      right: 1.5rem;
-      bottom: -2.2rem;
-      font-family: var(--font-han);
-      font-size: clamp(7rem, 15vw, 12rem);
-      font-weight: 500;
-      line-height: 1;
-      color: rgba(255, 255, 255, 0.08);
-      pointer-events: none;
-      user-select: none;
-      z-index: -1;
-    }
-
-    .closing-copy {
-      max-width: 39rem;
-    }
-
-    .closing-copy h2 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(1.65rem, 3.2vw, 2.4rem);
-      font-weight: 800;
-      line-height: 1.18;
-      letter-spacing: -0.03em;
-      text-wrap: balance;
-    }
-
-    .closing-copy p {
-      margin: 0.75rem 0 0;
-      color: var(--hero-ink-soft);
-      font-size: 1.02rem;
-    }
-
-    /* Footer */
-    .site-footer {
-      border-top: 1px solid var(--line);
-      background: var(--surface);
-      padding-block: 2rem;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem 2rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1.35rem;
-    }
-
-    .footer-links a {
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .footer-links a:hover {
-      color: var(--accent-ink);
-      text-decoration: underline;
-    }
-
-    @media (max-width: 980px) {
-      .hero-grid,
-      .ai-split,
-      .exam-sheet,
-      .suite-bento,
-      .faq-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .faq-aside {
-        position: static;
-      }
-
-      .nav-links {
-        display: none;
-      }
-    }
-
-    @media (max-width: 600px) {
-      :root {
-        --container: min(100% - 1.5rem, 73rem);
-      }
-
-      .hero,
-      .band,
-      .closing-wrap {
-        padding-inline: 0.75rem;
-      }
-
-      .nav-bar {
-        min-height: 3.85rem;
-        gap: 0.5rem;
-      }
-
-      .brand {
-        gap: 0.5rem;
-        font-size: 0.94rem;
-        min-width: 0;
-      }
-
-      .brand-mark {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 10px;
-        font-size: 1.12rem;
-      }
-
-      .nav-actions {
-        gap: 0.4rem;
-      }
-
-      .theme-btn {
-        width: 2.25rem;
-        height: 2.25rem;
-      }
-
-      .btn-primary {
-        min-height: 2.25rem;
-        padding: 0.45rem 0.72rem;
-        font-size: 0.82rem;
-        white-space: nowrap;
-      }
-
-      .editor-showcase {
-        padding: 1.25rem;
-      }
-
-      .hero-cta-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .tutor-stage { min-height: 0; }
-
-      .exam-facts,
-      .mini-opts,
-      .suite-stack {
-        grid-template-columns: 1fr;
-      }
-
-      .suite-item.wide {
-        grid-template-columns: 1fr;
-      }
-      .suite-item.wide .suite-ico { grid-row: auto; }
-
-      .closing-banner {
-        border-radius: 20px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Chuyển tới nội dung chính</a>
@@ -1741,8 +133,9 @@
       <nav class="nav-links" aria-label="Điều hướng nội dung trang">
         <a href="#gia-su-ai">Gia sư AI</a>
         <a href="#luyen-thi-hsk">Luyện thi HSK 1–6</a>
-        <a href="#cong-cu-mien-phi">Công cụ miễn phí</a>
-        <a href="#hoi-dap-hsk">Hỏi đáp</a>
+        <a href="./sua-cau-tieng-trung-ai">Sửa câu AI</a>
+        <a href="./phan-biet-tu-de-nham-hsk">Từ dễ nhầm</a>
+        <a href="./tap-viet-chu-han-online">Tập viết chữ Hán</a>
       </nav>
 
       <div class="nav-actions">
@@ -1759,7 +152,6 @@
   </header>
 
   <main id="main-content">
-    <!-- Hero: Committed Deep Indigo + Live Interactive Gia su AI Showcase -->
     <section class="hero" aria-labelledby="hero-title">
       <span class="hero-watermark" aria-hidden="true">学习</span>
       <div class="wrap hero-grid">
@@ -1846,7 +238,6 @@
       </div>
     </section>
 
-    <!-- Section 2: Gia su AI deep-dive + Sentence Editor Artifact -->
     <section class="band" id="gia-su-ai" aria-labelledby="ai-heading">
       <div class="wrap">
         <div class="section-head">
@@ -1864,7 +255,7 @@
               </span>
               <div>
                 <h3>Hỏi ngữ pháp và phân biệt từ dễ nhầm tiếng Trung</h3>
-                <p>Cứ hỏi tự nhiên theo cách bạn nghĩ, như “khi nào dùng 了 với 过” hay “一点儿 khác 有点儿 chỗ nào”. Gia sư AI tách nghĩa rõ ràng kèm câu ví dụ có pinyin và dịch Việt.</p>
+                <p>Cứ hỏi tự nhiên theo cách bạn nghĩ, như “khi nào dùng 了 với 过” hay “一点儿 khác 有点儿 chỗ nào”. Xem thêm <a href="./phan-biet-tu-de-nham-hsk">bảng 16 cặp từ dễ nhầm HSK</a>.</p>
               </div>
             </li>
             <li>
@@ -1873,7 +264,7 @@
               </span>
               <div>
                 <h3>Sửa câu tiếng Trung bằng AI cho tự nhiên hơn</h3>
-                <p>Nhập câu bạn tự đặt để luyện viết HSK hoặc giao tiếp. Công cụ sửa câu chỉ rõ lỗi sai, giữ đúng ý muốn nói và gợi ý cách diễn đạt tự nhiên như người bản xứ.</p>
+                <p>Nhập câu bạn tự đặt để luyện viết HSK hoặc giao tiếp. Công cụ <a href="./sua-cau-tieng-trung-ai">sửa câu tiếng Trung bằng AI</a> chỉ rõ lỗi sai và gợi ý câu tự nhiên như người bản xứ.</p>
               </div>
             </li>
             <li>
@@ -1928,8 +319,8 @@
             </div>
 
             <div class="editor-action">
-              <a class="text-link" href="https://hskfreelearningai.pages.dev/">
-                <span>Mở công cụ sửa câu tiếng Trung miễn phí</span>
+              <a class="text-link" href="./sua-cau-tieng-trung-ai">
+                <span>Xem thêm 6 lỗi viết câu hay gặp</span>
                 <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
               </a>
             </div>
@@ -1938,7 +329,6 @@
       </div>
     </section>
 
-    <!-- Section 3: Free HSK 1-6 Exam Prep + Interactive Mini Question -->
     <section class="band band-surface" id="luyen-thi-hsk" aria-labelledby="exam-heading">
       <div class="wrap">
         <div class="section-head">
@@ -1971,10 +361,16 @@
                 <dd id="examFocus">Chào hỏi, số đếm, sinh hoạt hằng ngày</dd>
               </div>
             </dl>
-            <a class="btn-primary" href="https://hskfreelearningai.pages.dev/">
-              <span id="examCtaLabel">Làm đề luyện thi HSK 1 miễn phí</span>
-              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-            </a>
+            <div class="exam-actions">
+              <a class="btn-primary" href="https://hskfreelearningai.pages.dev/">
+                <span id="examCtaLabel">Làm đề luyện thi HSK 1 miễn phí</span>
+                <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+              <a class="text-link" id="examDetailLink" href="./luyen-thi-hsk-1-mien-phi">
+                <span id="examDetailLabel">Xem trang ôn thi HSK 1</span>
+                <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+            </div>
           </div>
 
           <div class="mini-quiz" aria-label="Câu hỏi luyện thử HSK">
@@ -1996,7 +392,6 @@
       </div>
     </section>
 
-    <!-- Section 4: Asymmetric Free Study Suite -->
     <section class="band" id="cong-cu-mien-phi" aria-labelledby="suite-heading">
       <div class="wrap">
         <div class="section-head">
@@ -2056,7 +451,7 @@
                 <svg class="ico" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
               </span>
               <h3>Tập viết chữ Hán theo đúng thứ tự nét</h3>
-              <p>Xem mô phỏng từng nét viết chuẩn, tập tô trực tiếp trên màn hình và dùng bảng vẽ tay để tra chữ Hán khi quên cách đọc.</p>
+              <p>Xem mô phỏng từng nét viết chuẩn, tập tô trực tiếp trên màn hình và xem <a href="./tap-viet-chu-han-online">7 quy tắc thứ tự nét chữ Hán</a>.</p>
             </article>
 
             <article class="suite-item">
@@ -2087,8 +482,54 @@
       </div>
     </section>
 
-    <!-- Section 5: Natural Vietnamese Google-Search FAQ -->
-    <section class="band band-surface" id="hoi-dap-hsk" aria-labelledby="faq-heading">
+    <section class="band band-surface" id="chuyen-de-hsk" aria-labelledby="directory-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="directory-heading">Khám phá nhanh lộ trình luyện thi HSK 1–6 &amp; chuyên đề tự học</h2>
+          <p>Chọn đúng cấp độ HSK hoặc kỹ năng bạn đang muốn luyện để xem hướng dẫn chi tiết, bài tập thử và công cụ miễn phí đi kèm.</p>
+        </div>
+        <div class="hub-links-grid">
+          <a class="hub-link-card" href="./luyen-thi-hsk-1-mien-phi">
+            <strong><span>Luyện thi HSK 1 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Tự học tiếng Trung từ con số 0, có pinyin, audio chậm rõ và đề HSK 1.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-2-mien-phi">
+            <strong><span>Luyện thi HSK 2 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Giao tiếp tình huống hằng ngày, mẫu câu so sánh 比 và đề thử HSK 2.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-3-mien-phi">
+            <strong><span>Luyện thi HSK 3 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Đọc chữ Hán không cần pinyin, luyện xếp câu và kỹ năng Viết HSK 3.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-4-mien-phi">
+            <strong><span>Luyện thi HSK 4 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Ôn liên từ ghép cặp, viết câu mô tả tranh và giải đề HSK 4 cùng AI.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-5-mien-phi">
+            <strong><span>Luyện thi HSK 5 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Đọc hiểu bài dài, collocation học thuật và luyện viết đoạn 80 chữ.</span>
+          </a>
+          <a class="hub-link-card" href="./luyen-thi-hsk-6-mien-phi">
+            <strong><span>Luyện thi HSK 6 miễn phí</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Phân tích câu bệnh ngữ (语病), sắc thái thành ngữ và tóm tắt bài viết.</span>
+          </a>
+          <a class="hub-link-card" href="./sua-cau-tieng-trung-ai">
+            <strong><span>Sửa câu tiếng Trung bằng AI</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Kiểm tra ngữ pháp tiếng Trung online, chỉ rõ lỗi sai và gợi ý câu tự nhiên.</span>
+          </a>
+          <a class="hub-link-card" href="./phan-biet-tu-de-nham-hsk">
+            <strong><span>Phân biệt 16 cặp từ dễ nhầm HSK</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Tra nhanh 不/没, 了/过, 一点儿/有点儿, 还是/或者, 就/才, 适合/合适…</span>
+          </a>
+          <a class="hub-link-card" href="./tap-viet-chu-han-online">
+            <strong><span>Tập viết chữ Hán online</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>7 quy tắc thứ tự nét chuẩn, tập tô trực tiếp và vẽ tay tra chữ Hán.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="hoi-dap-hsk" aria-labelledby="faq-heading">
       <div class="wrap faq-grid">
         <div class="faq-aside">
           <h2 id="faq-heading">Người tự học HSK miễn phí thường hỏi gì?</h2>
@@ -2165,7 +606,6 @@
       </div>
     </section>
 
-    <!-- Closing CTA -->
     <section class="closing-wrap" aria-labelledby="closing-heading">
       <div class="wrap">
         <div class="closing-banner">
@@ -2189,9 +629,10 @@
         <span>HSK Flashcards</span>
       </a>
       <nav class="footer-links" aria-label="Liên kết cuối trang">
-        <a href="#gia-su-ai">Gia sư AI tiếng Trung</a>
-        <a href="#luyen-thi-hsk">Luyện thi HSK 1–6</a>
-        <a href="#cong-cu-mien-phi">Flashcard &amp; Tập viết</a>
+        <a href="./sua-cau-tieng-trung-ai">Sửa câu AI</a>
+        <a href="./phan-biet-tu-de-nham-hsk">Từ dễ nhầm HSK</a>
+        <a href="./tap-viet-chu-han-online">Tập viết chữ Hán</a>
+        <a href="./luyen-thi-hsk-1-mien-phi">HSK 1–6</a>
         <a href="https://hskfreelearningai.pages.dev/">Vào ứng dụng học HSK</a>
       </nav>
     </div>
@@ -2199,7 +640,6 @@
 
   <script>
     (function () {
-      // Theme toggle (syncs cleanly with main app key hsk-theme-v1)
       var themeBtn = document.getElementById('themeToggle');
       if (themeBtn) {
         themeBtn.addEventListener('click', function () {
@@ -2209,7 +649,6 @@
         });
       }
 
-      // Hero interactive Gia su AI showcase
       var aiData = [
         {
           q: 'Khi nào dùng <span lang="zh-Hans">不</span> và khi nào dùng <span lang="zh-Hans">没</span>? Cho mình ví dụ dễ hiểu.',
@@ -2260,7 +699,6 @@
         });
       });
 
-      // Sentence Editor interactive showcase
       var editData = [
         {
           wrong: '我昨天 <span class="err-mark">不</span> 去看电影。',
@@ -2303,7 +741,6 @@
         });
       });
 
-      // Interactive HSK 1-6 Level Explorer + Mini Question
       var hskLevels = {
         1: {
           title: 'Luyện thi HSK 1 miễn phí — Nền tảng cho người mới bắt đầu',
@@ -2393,6 +830,8 @@
         document.getElementById('examSkills').textContent = d.skills;
         document.getElementById('examFocus').textContent = d.focus;
         document.getElementById('examCtaLabel').textContent = d.cta;
+        document.getElementById('examDetailLink').setAttribute('href', './luyen-thi-hsk-' + lvl + '-mien-phi');
+        document.getElementById('examDetailLabel').textContent = 'Xem trang ôn thi HSK ' + lvl;
         document.getElementById('quizBadge').textContent = 'Câu luyện thử HSK ' + lvl;
         document.getElementById('quizQuestion').textContent = d.q;
         document.getElementById('quizSub').textContent = d.sub;
@@ -2427,7 +866,6 @@
         });
       }
 
-      // Interactive Flippable Flashcard Demo
       var cards = [
         { level: 'HSK 1', han: '学习', py: 'xuéxí', meaning: 'Học, học tập', hv: 'Hán Việt: học tập', cn: '我每天学习汉语。', vi: 'Tôi học tiếng Trung mỗi ngày.' },
         { level: 'HSK 3', han: '明白', py: 'míngbai', meaning: 'Hiểu, rõ ràng', hv: 'Hán Việt: minh bạch', cn: '听老师解释后我明白了。', vi: 'Nghe giải thích xong tôi đã hiểu rồi.' },
