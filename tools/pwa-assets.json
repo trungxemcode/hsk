@@ -213,7 +213,19 @@
     "admin-portal.css",
     "src/modules/admin/admin-portal-core.js",
     "src/modules/admin/admin-portal.js",
-    "src/modules/admin/resource-sync.js"
+    "src/modules/admin/resource-sync.js",
+    "seo-landing.css",
+    "seo-offline-prewarm.js",
+    "hoc-hsk-cung-ai.html",
+    "luyen-thi-hsk-1-mien-phi.html",
+    "luyen-thi-hsk-2-mien-phi.html",
+    "luyen-thi-hsk-3-mien-phi.html",
+    "luyen-thi-hsk-4-mien-phi.html",
+    "luyen-thi-hsk-5-mien-phi.html",
+    "luyen-thi-hsk-6-mien-phi.html",
+    "sua-cau-tieng-trung-ai.html",
+    "phan-biet-tu-de-nham-hsk.html",
+    "tap-viet-chu-han-online.html"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",

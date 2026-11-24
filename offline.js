@@ -22,7 +22,10 @@
    latest=manifest.version;latestLabel=manifest.label||'Bản mới';announce();if(waiting())return;
    if(registration.installing){watch(registration.installing);set('Bản mới đang được chuẩn bị. Tiến độ tải sẽ hiện ở đây.');return;}
    if(latest===BUILD&&ready&&activeVersion===BUILD){phase='';const sv=document.getElementById('studioVersion');if(sv&&manifest.label)sv.textContent=manifest.label;set('Bạn đang dùng bản mới nhất · '+manifest.label);return;}
-   set('Đã tìm thấy bản mới · Đang tải cập nhật…');await timeout(registration.update(),20000);watch(registration.installing);
+   set('Đã tìm thấy bản mới · Đang tải cập nhật…');
+   if(!registration.active&&!registration.installing&&!registration.waiting){registration=await timeout(navigator.serviceWorker.register('./OneSignalSDKWorker.js',{scope:'./',updateViaCache:'none'}),20000);registration.addEventListener('updatefound',()=>watch(registration.installing));}
+   else await timeout(registration.update(),20000);
+   watch(registration.installing);
    if(!waiting()&&!registration.installing){phase='error';set('Máy chủ có bản mới nhưng trình duyệt chưa nhận được. Bấm Kiểm tra cập nhật để thử lại; tiến độ vẫn giữ nguyên.');}
   }catch(error){phase='error';set(error.message==='timeout'||error.name==='AbortError'?'Máy chủ không phản hồi trong thời hạn chờ. Bấm Kiểm tra cập nhật để thử lại; tiến độ vẫn được giữ.':'Không đọc được phiên bản mới từ đường dẫn này. Hãy thử lại; Wi-Fi có mạng không bảo đảm máy chủ tải được.');}
   finally{checking=false;if(manual)manual.textContent='Kiểm tra cập nhật';}
