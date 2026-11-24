@@ -13,10 +13,12 @@ async function boundedJSON(request){
 export async function handleDesign(request,env,ctx={},deps={}){
  const url=new URL(request.url),origin=request.headers.get('Origin'),self=url.origin;
  const allowed=[self,...(env.PUBLIC_ORIGINS||'https://trungxemcode.github.io').split(',')];
+ const pagesCanRead=origin&&origin===env.PUBLIC_PAGES_ORIGIN&&url.pathname==='/api/design'
+  &&(request.method==='GET'||request.method==='OPTIONS');
  const headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Vary':'Origin'};
- if(origin&&!allowed.includes(origin))return new Response('Origin not allowed',{status:403,headers});
+ if(origin&&!allowed.includes(origin)&&!pagesCanRead)return new Response('Origin not allowed',{status:403,headers});
  if(origin)headers['Access-Control-Allow-Origin']=origin;
- headers['Access-Control-Allow-Methods']='GET, POST, OPTIONS';
+ headers['Access-Control-Allow-Methods']=pagesCanRead?'GET, OPTIONS':'GET, POST, OPTIONS';
  headers['Access-Control-Allow-Headers']='Authorization, Content-Type, If-None-Match';
  headers['Access-Control-Expose-Headers']='ETag';
  const json=(value,status=200,extra={})=>Response.json(value,{status,headers:{...headers,...extra}});
