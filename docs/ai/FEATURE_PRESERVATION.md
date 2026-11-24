@@ -14,7 +14,7 @@ Baseline phiên bản HSK 3.3.6 được chốt trong `tools/feature-contract.js
 
 ## Chuyển file mà không xóa tính năng
 
-Khi chỉ đổi đường dẫn, giữ nguyên ID/tên tính năng và mọi `kind`/`value` trong từng check; chỉ cập nhật `file`. Gate dùng Git base để xác nhận nguồn cũ đã rời chỗ, đích chưa tồn tại ở base và toàn bộ nội dung khớp nguồn cũ (chỉ chấp nhận khác LF/CRLF khi checkout). Không có cờ bỏ qua hoặc bảng miễn kiểm tra. Chuyển file kèm sửa logic phải tách thành các PR riêng, để bản chuyển đường dẫn thuần túy được kiểm chứng trước; xóa tính năng thật vẫn theo quy trình bên dưới.
+Khi chỉ đổi đường dẫn, giữ nguyên ID/tên tính năng và mọi `kind`/`value` trong từng check; chỉ cập nhật `file`. Gate dùng Git base để xác nhận nội dung gốc đã rời URL cũ, đích chưa tồn tại ở base và toàn bộ nội dung khớp nguồn cũ (chỉ chấp nhận khác LF/CRLF khi checkout). Không có cờ bỏ qua hoặc bảng miễn kiểm tra. Chuyển file kèm sửa logic phải tách thành các PR riêng, để bản chuyển đường dẫn thuần túy được kiểm chứng trước; xóa tính năng thật vẫn theo quy trình bên dưới.
 
 ## Quy trình chủ dự án chủ động yêu cầu XÓA
 

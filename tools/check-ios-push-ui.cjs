@@ -17,7 +17,7 @@ try{
    window.OneSignalDeferred={push(callback){Promise.resolve().then(()=>callback(sdk));}};
   },installed);
   await p.route('https://**/*',r=>r.abort());await p.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
-  await p.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+  await p.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
   await p.waitForFunction(()=>!!window.HSKLessons&&document.querySelector('#pushStatus')?.textContent&&!document.querySelector('#pushStatus').textContent.includes('Đang kiểm tra'),{timeout:25000});
   if(!installed){
    assert.match(await p.locator('#pushStatus').innerText(),/Safari.*Màn hình chính/);

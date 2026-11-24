@@ -12,7 +12,7 @@ const {chromium,webkit}=require('playwright'),http=require('http'),fs=require('f
  await page.route('**/translation-config.json',r=>r.fulfill({json:{enabled:true,endpoint:'https://test.invalid/translate'}}));
  let complete;
  await page.route('**/lesson-ask',async r=>{await new Promise(resolve=>complete=resolve);await r.fulfill({json:{answer:'Test answer'}});});
- await page.route('**/chat-fixture.html',r=>r.fulfill({contentType:'text/html',body:fs.readFileSync('index.html','utf8').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'')}));
+ await page.route('**/chat-fixture.html',r=>r.fulfill({contentType:'text/html',body:fs.readFileSync('app-hoc-hsk.html','utf8').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'')}));
  await page.goto('http://127.0.0.1:'+server.address().port+'/chat-fixture.html');
  await page.evaluate(()=>document.body.classList.add('studio-enabled'));
  await page.addScriptTag({url:'http://127.0.0.1:'+server.address().port+'/src/modules/translation/lesson-chat.js'});

@@ -17,7 +17,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path');
    page.on('pageerror',e=>errors.push(e.message));
    await page.route('https://**/*',r=>r.abort());
    await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
-   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);
+   await page.goto(`http://127.0.0.1:${server.address().port}/app-hoc-hsk.html`);
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKLessons&&window.HSKMobileUX);
    const mobile=await page.evaluate(()=>document.body.classList.contains('mobile-ux'));
    assert.ok(mobile,`mobile-ux missing at ${width}x${height}`);

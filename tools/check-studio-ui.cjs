@@ -8,7 +8,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await page.route('**/account-config.json',route=>route.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
   await page.route('https://**/*',route=>route.abort());
   await page.addInitScript(()=>{window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[{name:'Test Mandarin',lang:'zh-CN',localService:true}],cancel(){},speak(u){window.__spoken=u.text;setTimeout(()=>u.onend?.(),10);}}});});
-  await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);await page.waitForFunction(()=>!!window.HSKLessons&&document.body.dataset.studioHub==='home',{timeout:60000});
+  await page.goto(`http://127.0.0.1:${server.address().port}/app-hoc-hsk.html`);await page.waitForFunction(()=>!!window.HSKLessons&&document.body.dataset.studioHub==='home',{timeout:60000});
   const lessonTab=async name=>{const picker=page.getByLabel('Chọn mục bài học',{exact:true});if(await picker.isVisible())await picker.selectOption({'Từ vựng':'overview','Đọc & hội thoại':'reading','Ngữ pháp':'grammar','Luyện tập':'practice'}[name]);else await page.locator('.lesson-section-nav').getByRole('button',{name,exact:true}).click();};
   const nav=async mode=>{if(mode==='review')mode='practice';if(mode==='practice'){await page.evaluate(()=>HSKStudio.navigate('practice'));return;}const link=page.locator('.sidebar .side-nav [data-studio-go="'+mode+'"]:not([data-nav-action])').first();if(await link.count()){await link.evaluate(n=>{const group=n.closest('details.nav-group');if(group)group.open=true;});await link.click();}else await page.evaluate(route=>HSKStudio.navigate(route),mode);};
   await nav('practice');
@@ -146,7 +146,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   }
   // Touch emulation: verify retained hover after release, and whole learning-corner feedback.
   const touch=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'}),phone=await touch.newPage();
-  await phone.route('https://**/*',r=>r.abort());await phone.goto(`http://127.0.0.1:${server.address().port}/index.html`);await phone.waitForFunction(()=>!!window.HSKStudio&&document.body.dataset.studioHub==='home');
+  await phone.route('https://**/*',r=>r.abort());await phone.goto(`http://127.0.0.1:${server.address().port}/app-hoc-hsk.html`);await phone.waitForFunction(()=>!!window.HSKStudio&&document.body.dataset.studioHub==='home');
   const corner=phone.locator('.shortcut[data-studio-go=learn]');await corner.scrollIntoViewIfNeeded();await corner.focus();await phone.waitForTimeout(350);
   assert.equal(await corner.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(105, 87, 231)');assert.equal(await corner.locator('strong').evaluate(el=>getComputedStyle(el).color),'rgb(255, 255, 255)');
   await phone.screenshot({path:'/tmp/studio-whole-corner-390.png',fullPage:true});await corner.tap();assert.ok(await phone.locator('#flashcard').isVisible());

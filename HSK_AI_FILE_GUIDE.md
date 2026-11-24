@@ -18,7 +18,7 @@ Nguồn xác thực: code đúng nhánh/commit đang làm > cấu hình và th�
 ## 2. Nhận đúng kiến trúc trước khi tìm
 
 - App là HTML/CSS/JavaScript thuần, không mặc định là React hoặc dự án cần `npm run build`.
-- `index.html`: DOM, ID, menu, panel và các script khai báo trực tiếp. `loader.js`: thứ tự nạp dữ liệu/script, fallback gzip và luồng nạp nhạc độc lập. Kiểm cả hai nếu lỗi khởi tạo.
+- `index.html`: trang chủ SEO. `app-hoc-hsk.html`: DOM, ID, menu, panel và các script của app học. `loader.js`: thứ tự nạp dữ liệu/script, fallback gzip và luồng nạp nhạc độc lập. Kiểm cả hai nếu lỗi khởi tạo.
 - `app.js`: trạng thái và cơ chế học dùng chung còn ở gốc; không coi đây là chủ sở hữu mọi giao diện.
 - JS tính năng nằm trong `src/modules/<nhóm>/`; CSS phần lớn vẫn ở gốc. Không tìm `music.css` hoặc `mobile-ux.css` trong `src/modules/` theo phỏng đoán.
 - Các file dữ liệu lớn nằm ở `content/data/`, các JSON bài học ở gốc; chỉ đọc bản ghi cần thiết. Bản `.gz` là dữ liệu nén, không phải file nguồn để sửa tay.

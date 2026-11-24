@@ -40,7 +40,7 @@ const SAMPLE={
    if(genre!=='dialogue'){value.scriptMode=[];value.paragraphMode=[...SAMPLE.paragraphMode,{hanzi:'他们一边吃早饭，一边讨论今天的工作。',pinyin:'Tāmen yìbiān chī zǎofàn, yìbiān tǎolùn jīntiān de gōngzuò.',vi:'Họ vừa ăn sáng vừa trao đổi công việc hôm nay.'}];}
    await r.fulfill({contentType:'application/json',body:JSON.stringify({story:value})});
   });
-  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+  await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
   await page.waitForFunction(()=>!!window.HSKRealReading&&!!window.HSKStudio&&!!window.HSKLessons,{timeout:25000});
   await page.evaluate(()=>HSKStudio.navigate('real-reading'));await page.locator('#rrContentMode').selectOption('ai');
   if(width===320){const bodies=await page.evaluate(async()=>{const catalog=await fetch('./lessons-data.json').then(r=>r.json());return catalog.courses.flatMap(c=>c.lessons.map(l=>({hsk:c.hsk,lessonId:l.id,lessonWords:HSKRealReadingVariety.requestWords(HSKLessons.match(l.words))})));});assert.equal(bodies.length,146);assert.ok(bodies.every(checkReadingBody),'all real lesson vocabularies must satisfy the Worker contract');}

@@ -15,7 +15,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path');
   await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
   if(mode==='no-api')await page.addInitScript(()=>{window.DecompressionStream=undefined;});
   if(mode==='broken-gzip')await page.route('**/content/data/*.js.gz',r=>r.fulfill({contentType:'application/octet-stream',body:'invalid gzip'}));
-  await page.goto('http://127.0.0.1:'+server.address().port+'/hsk/index.html');
+  await page.goto('http://127.0.0.1:'+server.address().port+'/hsk/app-hoc-hsk.html');
   await page.waitForFunction(()=>window.HSKStudio&&window.HSKLessons&&document.body.dataset.studioHub==='home',null,{timeout:60000});
   const state=await page.evaluate(()=>({count:words.length,checked:!!words[0].practice,fold:fold('Đẹp'),sense:splitSenses({mean:'Học (học tập)',hv:'học'}),globals:['HSKAccountCore','HSKStudySyncCore','HSKBackupCore','HSKSpeech','HSKOpenDictionaryCore','HSKExam','HSKPlacement'].every(k=>!!window[k])}));
   assert.equal(state.count,5011);assert.equal(state.checked,true);assert.equal(state.fold,'dep');assert.deepEqual(state.sense,['học tập']);assert.equal(state.globals,true);

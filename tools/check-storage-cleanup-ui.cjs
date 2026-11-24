@@ -5,7 +5,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  try{browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  for(const width of [390,1440]){
   const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
-  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKLegacyMusicCleanup&&window.HSKVoiceManager);await require('./legacy-music-fixture.cjs')(page);
+  await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKLegacyMusicCleanup&&window.HSKVoiceManager);await require('./legacy-music-fixture.cjs')(page);
   await page.evaluate(async bytes=>{
    localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'cleanup-one'}));window.HSKAccountDashboard={user:{uid:'cleanup-one'}};localStorage.setItem('cleanup-progress-sentinel','keep');
    const file=new File([new Uint8Array(bytes)],'track.m4a',{type:'audio/mp4'});

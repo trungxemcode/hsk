@@ -21,7 +21,7 @@ const regular=['search','learn','quiz','srs','mistakes','compare','account','les
    page.on('pageerror',err=>errors.push(err.message));
    await page.route('https://**/*',route=>route.abort());
    await page.route('**/account-config.json',route=>route.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>!!window.HSKStudio&&!!window.HSKLessons&&document.body.dataset.studioHub==='home',{timeout:60000});
    const globals=['HSKStudio','HSKLessonNav','HSKPracticeSelection','HSKPracticeGames','HSKNotebook','HSKRealReading','HSKStudy4','HSKStudyStore','HSKExam'];
    const found=await page.evaluate(names=>Object.fromEntries(names.map(name=>[name,!!window[name]])),globals);

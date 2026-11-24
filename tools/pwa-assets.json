@@ -21,6 +21,8 @@
     "src/modules/planner/planner-core.js",
     "src/modules/planner/planner.js",
     "index.html",
+    "app-hoc-hsk.html",
+    "seo-landing.css",
     "src/modules/practice/question-adapter.mjs",
     "src/shared/tutor-contracts.mjs",
     "studio-layout.css",

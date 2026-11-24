@@ -187,10 +187,10 @@ def apply_config(root, schema, data):
         previous = upgrade(schema, json.loads(applied.read_text(encoding='utf-8')))
         previous['pages']['home'] = data['pages']['home']
         data = previous
-    index = root / 'index.html'
+    index = root / 'app-hoc-hsk.html'
     before = index.read_text(encoding='utf-8')
     if len(re.findall(r'<!-- HSK HOME DESIGN START -->', before)) > 1:
-        raise ValueError('Có nhiều vùng cấu hình giao diện trong index.html; cần kiểm tra lại.')
+        raise ValueError('Có nhiều vùng cấu hình giao diện trong app-hoc-hsk.html; cần kiểm tra lại.')
     before_clean = re.sub(r'\n?<!-- HSK HOME DESIGN START -->.*?<!-- HSK HOME DESIGN END -->\n?', '', before, flags=re.S)
     if '</head>' not in before_clean:
         raise ValueError('Không tìm thấy phần đầu trang để gắn cấu hình.')

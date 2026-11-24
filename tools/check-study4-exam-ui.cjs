@@ -16,7 +16,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    const aiPayloads=[];await page.route('https://**/*',r=>r.abort());await page.route('**/translation-config.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({enabled:true,endpoint:'https://test.example/translate'})}));await page.route('**/lesson-ask',async r=>{const body=JSON.parse(r.request().postData()||'{}');aiPayloads.push(body);await r.fulfill({contentType:'application/json',body:JSON.stringify({answer:body.history?.length?'Giải thích thêm: Phương án đúng khớp ngữ cảnh hội thoại.':'Giải thích 4 phương án:\n- Phương án đúng khớp lời thoại.\n- Phương án bạn chọn và các phương án còn lại sai ngữ cảnh.'})});});
    await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
    await page.addInitScript(()=>localStorage.setItem('hsk-studio-target-v1:guest','3'));
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>!!window.HSKPracticeSelection&&!!window.HSKStudy4&&!!window.HSKStudy4.ready&&!!window.HSKStudio&&!!window.HSKLessons,{timeout:25000});
 
    // Verify all 351 synced tests across HSK 1-6

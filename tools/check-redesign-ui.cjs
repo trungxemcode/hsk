@@ -13,7 +13,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
    const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[];
    page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());
    await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKLessons&&document.querySelectorAll('.path-step[data-rd-enhanced="1"]').length===3);
    await page.evaluate(()=>document.fonts.ready);
    assert(await page.evaluate(()=>Array.from(document.fonts).filter(f=>f.family==='HSK Sans'&&f.status==='loaded').length>=2),'local Latin and Vietnamese font subsets load');

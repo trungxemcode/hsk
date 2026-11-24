@@ -16,7 +16,7 @@ from pwa_assets import read_catalog
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE = 'https://trungxemcode.github.io/hsk/'
 CRITICAL_FILES = (
-    'index.html', 'offline.js', 'offline-worker.js',
+    'index.html', 'app-hoc-hsk.html', 'seo-landing.css', 'offline.js', 'offline-worker.js',
     'OneSignalSDKWorker.js', 'src/modules/reading/real-reading.js', 'push.js',
     'redesign.css', 'redesign.js', 'vendor/fonts/inter-latin.woff2',
     'vendor/fonts/inter-latin-ext.woff2', 'vendor/fonts/inter-vietnamese.woff2',

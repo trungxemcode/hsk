@@ -8,7 +8,7 @@ for(const width of [390,1440]){
  const p=await browser.newPage({viewport:{width,height:844},isMobile:width<721,hasTouch:width<721,serviceWorkers:'block'}),errors=[];p.on('pageerror',e=>errors.push(e.message));
  await p.addInitScript(()=>localStorage.setItem('hsk-studio-target-v1:guest','3'));
  await p.route('https://**/*',r=>r.abort());await p.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
- await p.goto('http://127.0.0.1:'+server.address().port+'/index.html');await p.waitForFunction(()=>!!window.HSKLearningFilter&&!!window.HSKStudio&&!!window.HSKPlanner,{timeout:25000});
+ await p.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');await p.waitForFunction(()=>!!window.HSKLearningFilter&&!!window.HSKStudio&&!!window.HSKPlanner,{timeout:25000});
  await p.waitForFunction(()=>document.querySelector('.filter-btn[data-filter="3"]')?.classList.contains('active'),{timeout:5000});
  assert.equal(await p.evaluate(()=>HSKLearningFilter.level),'3');
  await p.evaluate(()=>HSKStudio.navigate('lessons'));

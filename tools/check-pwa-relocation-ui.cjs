@@ -13,8 +13,10 @@ const fs=require('node:fs'),http=require('node:http'),crypto=require('node:crypt
  let stage='old';
  function fixture(which){
   const old=which==='old',version='hsk-offline-900-0-'+(old?'1':'2');
-  const files={'index.html':Buffer.from('<!doctype html><meta charset="utf-8"><p>'+which+'</p><script src="./'+(old?'backup-core.js':newCore)+'"></script><script src="./'+(old?'backup-restore.js':newUI)+'"></script>'),
+  const shell=Buffer.from('<!doctype html><meta charset="utf-8"><p>'+which+'</p><script src="./'+(old?'backup-core.js':newCore)+'"></script><script src="./'+(old?'backup-restore.js':newUI)+'"></script>');
+  const files={'index.html':old?shell:Buffer.from('<!doctype html><meta charset="utf-8"><h1>Trang giới thiệu HSK</h1>'),
    'unchanged.txt':Buffer.from('same bytes'),[fontName]:font,[old?'words.js.gz':'content/data/words.js.gz']:compressed,[old?'backup-core.js':newCore]:core,[old?'backup-restore.js':newUI]:ui};
+  if(!old)files['app-hoc-hsk.html']=shell;
   let worker=source.replace(/const OFFLINE_VERSION='[^']+';/,"const OFFLINE_VERSION='"+version+"';")
    .replace(/const OFFLINE_FILES=\[.*?\];/,'const OFFLINE_FILES='+JSON.stringify(Object.keys(files))+';')
    .replace(/^const OFFLINE_ALIASES=.*?;$/m,'const OFFLINE_ALIASES='+JSON.stringify(old?{}:aliases)+';');
@@ -54,18 +56,19 @@ const fs=require('node:fs'),http=require('node:http'),crypto=require('node:crypt
   await context.setOffline(true);
   const result=await page.evaluate(async names=>{
    const text=async name=>{const r=await fetch('./'+name);if(!r.ok)throw Error(name+' HTTP '+r.status);return r.text();};
-   return {shell:await text('index.html'),oldCore:await text('backup-core.js'),newCore:await text(names[0]),oldUI:await text('backup-restore.js'),newUI:await text(names[1]),progress:localStorage.getItem('fixture-progress')};
+   return {shell:await text('app-hoc-hsk.html'),oldCore:await text('backup-core.js'),newCore:await text(names[0]),oldUI:await text('backup-restore.js'),newUI:await text(names[1]),progress:localStorage.getItem('fixture-progress')};
   },[newCore,newUI]);
   assert.match(result.shell,/<p>new<\/p>/);assert.equal(result.oldCore,result.newCore);assert.equal(result.oldUI,result.newUI);assert.equal(result.progress,'keep-me');
   const packed=await page.evaluate(async()=>Array.from(new Uint8Array(await (await fetch('./words.js.gz')).arrayBuffer())));assert.deepEqual(packed,[...compressed]);
   const cachedFont=await page.evaluate(async name=>Array.from(new Uint8Array(await (await fetch('./'+name)).arrayBuffer())),fontName);assert.deepEqual(cachedFont,[...font],'offline font keeps every binary byte');
   for(const name of ['unchanged.txt',fontName,newCore,newUI,'content/data/words.js.gz'])assert.equal(requests.filter(q=>q.stage==='new'&&q.name===name).length,0,'Verified unchanged/moved cached asset must be reused: '+name);
-  await page.goto(origin+'/hsk/index.html');await page.waitForFunction(()=>!!window.HSKBackupCore);
+  await page.goto(origin+'/hsk/');await page.getByRole('heading',{name:'Trang giới thiệu HSK'}).waitFor();
+  await page.goto(origin+'/hsk/app-hoc-hsk');await page.waitForFunction(()=>!!window.HSKBackupCore);
   assert.equal(await page.evaluate(()=>localStorage.getItem('fixture-progress')),'keep-me');
   const fresh=await browser.newContext({serviceWorkers:'allow'}),freshPage=await fresh.newPage();
   await freshPage.goto(origin+'/hsk/harness.html');
   await freshPage.evaluate(async()=>{await navigator.serviceWorker.register('./offline-worker.js');await navigator.serviceWorker.ready;});
-  await fresh.setOffline(true);await freshPage.goto(origin+'/hsk/index.html');await freshPage.waitForFunction(()=>!!window.HSKBackupCore);
+  await fresh.setOffline(true);await freshPage.goto(origin+'/hsk/app-hoc-hsk.html');await freshPage.waitForFunction(()=>!!window.HSKBackupCore);
   console.log('PASS real PWA lifecycle at /hsk/: waiting update, explicit activation, cache reuse, old URL aliases, offline reload, progress retention and fresh install (synthetic assets, actual worker).');
   await fresh.close();await context.close();
  }finally{await browser.close();server.close();}

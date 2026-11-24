@@ -200,8 +200,8 @@ test('normalizeAiQaResponse preserves OUT_OF_SCOPE, malformed JSON, and length e
   );
 });
 
-test('index.html loads ai-qa-core.js before ai-provider-picker.js and ai-qa.js', () => {
-  const html = fs.readFileSync(path.resolve('index.html'), 'utf8');
+test('app-hoc-hsk.html loads ai-qa-core.js before ai-provider-picker.js and ai-qa.js', () => {
+  const html = fs.readFileSync(path.resolve('app-hoc-hsk.html'), 'utf8');
   const coreIdx = html.indexOf('./src/modules/ai-coach/ai-qa-core.js');
   const pickerIdx = html.indexOf('./src/modules/ai-coach/ai-provider-picker.js');
   const qaIdx = html.indexOf('./src/modules/ai-coach/ai-qa.js');

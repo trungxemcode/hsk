@@ -7,11 +7,11 @@
       "id": "sentence-editor",
       "name": "Công cụ Sửa câu tiếng Trung",
       "checks": [
-        {"kind": "data_go", "file": "index.html", "value": "sentence-editor"},
-        {"kind": "id", "file": "index.html", "value": "sentenceDraft"},
+        {"kind": "data_go", "file": "app-hoc-hsk.html", "value": "sentence-editor"},
+        {"kind": "id", "file": "app-hoc-hsk.html", "value": "sentenceDraft"},
         {"kind": "file", "file": "src/modules/translation/sentence-editor.js", "value": ""},
         {"kind": "file", "file": "src/modules/translation/sentence-review-core.js", "value": ""},
-        {"kind": "contains", "file": "index.html", "value": "Kiểm tra bằng AI"},
+        {"kind": "contains", "file": "app-hoc-hsk.html", "value": "Kiểm tra bằng AI"},
         {"kind": "contains", "file": "server/translator-worker.mjs", "value": "sentence-editor"}
       ]
     },
@@ -30,12 +30,12 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "ai-qa"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "aiQaPanel"
         },
         {
@@ -64,8 +64,8 @@
       "id": "ai-qa-projects",
       "name": "Dự án riêng trong Hỏi đáp AI",
       "checks": [
-        {"kind": "id", "file": "index.html", "value": "qaProjectPrivate"},
-        {"kind": "id", "file": "index.html", "value": "qaProjectSources"},
+        {"kind": "id", "file": "app-hoc-hsk.html", "value": "qaProjectPrivate"},
+        {"kind": "id", "file": "app-hoc-hsk.html", "value": "qaProjectSources"},
         {"kind": "file", "file": "src/modules/ai-coach/qa-projects.js", "value": ""},
         {"kind": "file", "file": "src/modules/ai-coach/qa-project-sources.js", "value": ""}
       ]
@@ -91,7 +91,7 @@
       "id": "ai-qa-thinking",
       "name": "Mức suy nghĩ Hỏi đáp AI theo quyền tài khoản",
       "checks": [
-        {"kind": "contains", "file": "index.html", "value": "qaProjectThinking"},
+        {"kind": "contains", "file": "app-hoc-hsk.html", "value": "qaProjectThinking"},
         {"kind": "contains", "file": "server/translator-worker.mjs", "value": "QA_THINKING_FORBIDDEN"},
         {"kind": "contains", "file": "tools/check-ai-qa-ui.cjs", "value": "regular chat is locked to Low"}
       ]
@@ -100,7 +100,7 @@
       "id": "account-personal-ai",
       "name": "API riêng theo tài khoản cho Hỏi đáp AI",
       "checks": [
-        {"kind": "id", "file": "index.html", "value": "personalAiForm"},
+        {"kind": "id", "file": "app-hoc-hsk.html", "value": "personalAiForm"},
         {"kind": "contains", "file": "server/personal-ai.mjs", "value": "AES-GCM"},
         {"kind": "contains", "file": "server/translator-worker.mjs", "value": "personal-ai-settings"}
       ]
@@ -109,7 +109,7 @@
       "id": "ai-qa-chatgpt-cookie",
       "name": "Cơ chế Cookie ChatGPT kết hợp Guardrail 3 lớp và BM25 RAG cho Hỏi đáp AI",
       "checks": [
-        {"kind": "contains", "file": "index.html", "value": "chatgpt-cookie"},
+        {"kind": "contains", "file": "app-hoc-hsk.html", "value": "chatgpt-cookie"},
         {"kind": "file", "file": "server/chatgpt-cookie.mjs", "value": ""},
         {"kind": "file", "file": "server/chatgpt-cookie/main.py", "value": ""},
         {"kind": "file", "file": "server/chatgpt-cookie.test.mjs", "value": ""}
@@ -130,7 +130,7 @@
       "id": "ai-qa-muse-ai",
       "name": "Tích hợp Muse AI (Meta Muse Token / Web Cookie và Bearer API) cho Hỏi đáp AI",
       "checks": [
-        {"kind": "contains", "file": "index.html", "value": "muse-cookie"},
+        {"kind": "contains", "file": "app-hoc-hsk.html", "value": "muse-cookie"},
         {"kind": "file", "file": "server/muse-ai.mjs", "value": ""},
         {"kind": "file", "file": "server/muse-ai.test.mjs", "value": ""}
       ]
@@ -141,12 +141,12 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "home"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "studioHome"
         },
         {
@@ -167,7 +167,7 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "lessons"
         },
         {
@@ -188,12 +188,12 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "practice"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "studioPractice"
         },
         {
@@ -208,7 +208,7 @@
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "review"
         }
       ]
@@ -219,17 +219,17 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "search"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "searchInput"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "searchResults"
         },
         {
@@ -239,22 +239,22 @@
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "data-search-tool=\"vocabulary\""
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "data-search-tool=\"handwriting\""
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "data-search-tool=\"translate\""
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "data-search-tool=\"image\""
         },
         {
@@ -305,12 +305,12 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "notebook"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "notebookPanel"
         },
         {
@@ -331,12 +331,12 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "account"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "accountForm"
         },
         {
@@ -346,7 +346,7 @@
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "hskExamHistory"
         },
         {
@@ -362,12 +362,12 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "learn"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "flashcard"
         },
         {
@@ -393,12 +393,12 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "quiz"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "quizOptions"
         },
         {
@@ -419,12 +419,12 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "srs"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "srsCard"
         },
         {
@@ -450,7 +450,7 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "mistakes"
         },
         {
@@ -471,7 +471,7 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "compare"
         },
         {
@@ -492,7 +492,7 @@
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "matchGamePanel"
         },
         {
@@ -507,7 +507,7 @@
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "match-game"
         }
       ]
@@ -523,7 +523,7 @@
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "sentenceGamePanel"
         },
         {
@@ -538,7 +538,7 @@
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "sentence-game"
         }
       ]
@@ -757,12 +757,12 @@
       "checks": [
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "handwritingCanvas"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "handwritingUndo"
         },
         {
@@ -788,7 +788,7 @@
       "checks": [
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "translationInput"
         },
         {
@@ -803,7 +803,7 @@
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "translator"
         },
         {
@@ -829,7 +829,7 @@
       "checks": [
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "ocrFile"
         },
         {
@@ -919,12 +919,12 @@
       "checks": [
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "planForm"
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "planToday"
         },
         {
@@ -987,7 +987,7 @@
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "updateNotice"
         }
       ]
@@ -1008,7 +1008,7 @@
         },
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "offlineCheck"
         },
         {
@@ -1145,7 +1145,7 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "admin"
         },
         {
@@ -1402,12 +1402,12 @@
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "music"
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "music-play"
         },
         {
@@ -1438,7 +1438,7 @@
       "checks": [
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "chineseVoiceSettings"
         },
         {
@@ -1515,12 +1515,12 @@
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "./redesign.css"
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "./redesign.js"
         },
         {
@@ -1602,7 +1602,7 @@
       "checks": [
         {
           "kind": "id",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "storageCleanupOpen"
         },
         {
@@ -1761,7 +1761,7 @@
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "rel=\"preload\" as=\"script\" href=\"./src/modules/music/music.js\""
         },
         {
@@ -2158,7 +2158,7 @@
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "./site-design-live.js"
         }
       ]
@@ -2472,12 +2472,12 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "Học tập HSK"
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "Luyện thi HSK"
         },
         {
@@ -2487,17 +2487,17 @@
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "exam"
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "study4"
         },
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "real-reading"
         }
       ]
@@ -2583,7 +2583,7 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "Tra cứu &amp; dịch"
         },
         {
@@ -2631,7 +2631,7 @@
       "checks": [
         {
           "kind": "data_go",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "profile"
         },
         {
@@ -2672,7 +2672,7 @@
         },
         {
           "kind": "contains",
-          "file": "index.html",
+          "file": "app-hoc-hsk.html",
           "value": "src/modules/practice/practice-generator-core.js"
         },
         {
@@ -2686,8 +2686,8 @@
       "id": "sentence-ai-detector",
       "name": "AI Detector trong Sửa câu tiếng Trung",
       "checks": [
-        {"kind": "id", "file": "index.html", "value": "sentenceAiDetectBtn"},
-        {"kind": "id", "file": "index.html", "value": "sentenceAiDetector"},
+        {"kind": "id", "file": "app-hoc-hsk.html", "value": "sentenceAiDetectBtn"},
+        {"kind": "id", "file": "app-hoc-hsk.html", "value": "sentenceAiDetector"},
         {"kind": "contains", "file": "src/modules/translation/sentence-review-core.js", "value": "analyzeAiLikelihood"},
         {"kind": "contains", "file": "src/modules/translation/sentence-review-core.js", "value": "normalizeAiDetection"},
         {"kind": "contains", "file": "server/translator-worker.mjs", "value": "sentence-ai-detect"}
