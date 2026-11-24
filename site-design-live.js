@@ -37,7 +37,27 @@
   finally{button.disabled=false;}
  }
  async function start(){
-  try{const response=await fetch(configURL,{cache:'no-store'});if(!response.ok)return;const config=await response.json();if(config.enabled!==true||(Array.isArray(config.publicOrigins)&&!config.publicOrigins.includes(location.origin)))return;const url=new URL(config.endpoint,location.href);if(url.protocol!=='https:'&&!(url.hostname==='127.0.0.1'&&location.hostname==='127.0.0.1'))return;endpoint=url.href;try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved?.endpoint===endpoint){apply(saved.css,saved.revision);etag=typeof saved.etag==='string'?saved.etag:'';}}catch{}if(button&&status){button.onclick=check;button.hidden=false;}}catch{}
+  try{
+   const response=await fetch(configURL,{cache:'no-store'});
+   if(!response.ok)return;
+   const config=await response.json();
+   if(config.enabled!==true||(Array.isArray(config.publicOrigins)&&!config.publicOrigins.includes(location.origin)))return;
+   const url=new URL(config.endpoint,location.href);
+   if(url.protocol!=='https:'&&!(url.hostname==='127.0.0.1'&&location.hostname==='127.0.0.1'))return;
+   endpoint=url.href;
+   try{
+    const saved=JSON.parse(localStorage.getItem(key)||'null');
+    if(saved?.endpoint===endpoint){
+     apply(saved.css,saved.revision);
+     etag=typeof saved.etag==='string'?saved.etag:'';
+    }
+   }catch{}
+   if(button&&status){
+    button.onclick=check;
+    button.hidden=false;
+    if(Array.isArray(config.autoSyncOrigins)&&config.autoSyncOrigins.includes(location.origin))void check();
+   }
+  }catch{}
  }
  start();
 })();

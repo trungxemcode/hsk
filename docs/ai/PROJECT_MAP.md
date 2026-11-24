@@ -213,7 +213,7 @@ Phục hồi pinyin dùng Qwen preview chỉ cho bản nhập riêng có kiểm 
 ## Cloud UI Designer (3.23.2 candidate)
 - server/design/worker.mjs: independent Worker, Firebase owner authorization, schema-validated CSS and R2 conditional writes at ui-design/current-v2.json. Assets packed by tools/pack-design-editor.py; preview blocks accounts/push/SW/external connections.
 - tools/home-designer/cloud.js: owner login, sequential auto-publish, per-tab draft recovery and conflict stop. Existing loopback editor remains available.
-- site-design-live.js/config: public release pulls CSS while foreground/online every 15s and on return, retains cached last-good CSS offline; never remounts app/audio or touches learner progress. Tests: server/design-worker.test.mjs, tools/check-cloud-designer-ui.cjs.
+- site-design-live.js/config: GitHub Pages keeps its manual sync button. Cloudflare Pages also loads the current published CSS when the app opens. Both retain the last good design offline. The design Worker grants Cloudflare Pages read-only access to /api/design. Tests: server/design-worker.test.mjs, tools/check-cloud-designer-ui.cjs.
 
 ## Designer object tools (3.23.3)
 - tools/home-designer/objects.js: pointer drag/resize, one-gesture history, cancel and keyboard movement; attaches only to preview document. bridge.js integrates selection/portal and exposes gesture callbacks/replay.

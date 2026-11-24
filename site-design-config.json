@@ -2,6 +2,10 @@
   "enabled": true,
   "endpoint": "https://hsk-ui-designer.trung-hsk668.workers.dev/api/design",
   "publicOrigins": [
-    "https://trungxemcode.github.io"
+    "https://trungxemcode.github.io",
+    "https://hskfreelearningai.pages.dev"
+  ],
+  "autoSyncOrigins": [
+    "https://hskfreelearningai.pages.dev"
   ]
 }

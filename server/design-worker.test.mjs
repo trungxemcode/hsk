@@ -44,3 +44,18 @@ test('preview disables account/push/SW; only owner can open editing session; ord
  const preview=await handleDesign(request('/index.html'),env);assert.match(preview.headers.get('Content-Security-Policy'),/connect-src 'self' data: blob:/);
  const publicRead=await handleDesign(request('/api/design',null,'0',{headers:{Origin:'https://trungxemcode.github.io'}}),env);assert.equal(publicRead.headers.get('Access-Control-Allow-Origin'),'https://trungxemcode.github.io');
 });
+test('Cloudflare Pages can read public design without access to editor routes',async()=>{
+ const {env}=fixture(),origin='https://hskfreelearningai.pages.dev';
+ env.PUBLIC_PAGES_ORIGIN=origin;
+ const options={headers:{Origin:origin}};
+ const preflight=await handleDesign(request('/api/design',null,'0',{...options,method:'OPTIONS'}),env);
+ assert.equal(preflight.status,204);
+ assert.equal(preflight.headers.get('Access-Control-Allow-Methods'),'GET, OPTIONS');
+ const read=await handleDesign(request('/api/design',null,'0',options),env);
+ assert.equal(read.status,200);
+ assert.equal(read.headers.get('Access-Control-Allow-Origin'),origin);
+ assert.equal((await handleDesign(request('/api/design',null,'0',{headers:{Origin:origin,'If-None-Match':read.headers.get('ETag')}}),env)).status,304);
+ for(const [path,method] of [['/__designer/state','GET'],['/__designer/apply','POST'],['/api/design','POST']]){
+  assert.equal((await handleDesign(request(path,null,'0',{...options,method}),env)).status,403);
+ }
+});

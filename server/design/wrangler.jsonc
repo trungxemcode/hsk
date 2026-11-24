@@ -11,6 +11,7 @@
   "vars": {
     "FIREBASE_API_KEY": "AIzaSyAQlltCY7fZzNUnVkaiOusYSwa0LO5a6ko",
     "PUBLIC_ORIGINS": "https://trungxemcode.github.io",
+    "PUBLIC_PAGES_ORIGIN": "https://hskfreelearningai.pages.dev",
     "PUBLIC_URL": "https://trungxemcode.github.io/hsk/",
     "APP_RELEASE": "3.23.3"
   },
