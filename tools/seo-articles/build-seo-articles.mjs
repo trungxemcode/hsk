@@ -183,6 +183,215 @@ function renderFooter(prefix) {
   </footer>`;
 }
 
+function splitLeadPhrase(text, maxLen = 85) {
+  const str = String(text || '').trim();
+  const idx = str.indexOf(':');
+  if (idx < 3 || idx > maxLen) return null;
+  if (!/\s/.test(str[idx + 1] || '')) return null;
+  const head = str.slice(0, idx).trim();
+  if (/^https?$/i.test(head)) return null;
+  const tail = str.slice(idx + 1).trim();
+  if (!tail) return null;
+  return { head, tail };
+}
+
+function renderBulletsOrSteps(bullets) {
+  const stepParsed = bullets.map((raw) => {
+    const text = String(raw || '').trim();
+    const mNum = /^(\d+)\.\s+(.+)$/.exec(text);
+    if (mNum) return { num: mNum[1], body: mNum[2].trim() };
+    const mStep = /^Bước\s+(\d+)\s*[—–:-]\s*(.+)$/i.exec(text);
+    if (mStep) return { num: mStep[1], body: mStep[2].trim() };
+    return null;
+  });
+
+  if (stepParsed.every(Boolean)) {
+    const items = stepParsed.map(({ num, body }) => {
+      const lead = splitLeadPhrase(body, 90);
+      const inner = lead
+        ? `<strong class="step-lead">${escHtml(lead.head)}</strong><span class="step-desc">${escHtml(lead.tail)}</span>`
+        : `<span class="step-desc">${escHtml(body)}</span>`;
+      return `              <li class="article-step"><span class="step-badge" aria-hidden="true">${escHtml(num)}</span><div class="step-body">${inner}</div></li>`;
+    });
+    return ['            <ol class="article-steps">', ...items, '            </ol>'].join('\n');
+  }
+
+  const items = bullets.map((raw) => {
+    const text = String(raw || '').trim();
+    const lead = splitLeadPhrase(text, 95);
+    if (lead) {
+      return `              <li><strong class="bullet-lead">${escHtml(lead.head)}:</strong> ${escHtml(lead.tail)}</li>`;
+    }
+    return `              <li>${escHtml(text)}</li>`;
+  });
+  return ['            <ul class="article-bullets">', ...items, '            </ul>'].join('\n');
+}
+
+function renderTipCard(tip) {
+  const lead = splitLeadPhrase(tip, 65);
+  const contentHtml = lead
+    ? `<div class="tip-content"><p class="tip-title">${escHtml(lead.head)}</p><p class="tip-text">${escHtml(lead.tail)}</p></div>`
+    : `<div class="tip-content"><p class="tip-text">${escHtml(tip)}</p></div>`;
+  return `            <div class="article-tip">
+              <svg class="ico tip-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>
+              ${contentHtml}
+            </div>`;
+}
+
+function getCalendarQuarter(period) {
+  const m = /^(\d{2})\/(\d{4})$/.exec(String(period || '').trim());
+  if (!m) return 'q1';
+  const month = Number(m[1]);
+  const year = Number(m[2]);
+  if (year <= 2026 || month <= 3) return 'q1';
+  if (month <= 6) return 'q2';
+  if (month <= 9) return 'q3';
+  return 'q4';
+}
+
+function formatCalendarDateHtml(raw) {
+  let str = String(raw || '').trim();
+  const shifted = str.startsWith('※');
+  if (shifted) str = str.slice(1).trim();
+
+  let datePart = str;
+  let dayPart = '';
+  const dayMatch = /^(.+?)\s*\(([^)]+)\)$/.exec(str);
+  if (dayMatch) {
+    datePart = dayMatch[1].trim();
+    dayPart = dayMatch[2].trim();
+  }
+
+  const dateHtml = shifted
+    ? `<span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>${escHtml(datePart)}</span>`
+    : `<span class="cell-date-main">${escHtml(datePart)}</span>`;
+
+  if (!dayPart) return dateHtml;
+  const sunClass = /^cn$/i.test(dayPart) ? ' is-sun' : '';
+  return `${dateHtml}<span class="cell-day${sunClass}">${escHtml(dayPart)}</span>`;
+}
+
+function renderIbtResultCell(raw) {
+  const str = String(raw || '').trim();
+  const parts = str.split(/\s*·\s*/);
+  if (parts.length < 2) {
+    return formatCalendarDateHtml(str);
+  }
+  const rows = parts.map((segment) => {
+    const m = /^(HSK|HSKK)\s*:\s*(.+)$/i.exec(segment.trim());
+    if (m) {
+      const label = m[1].toUpperCase();
+      const cls = label === 'HSKK' ? 'cell-tag is-hskk' : 'cell-tag';
+      return `<span class="cell-stack-row"><span class="${cls}">${label}</span>${formatCalendarDateHtml(m[2])}</span>`;
+    }
+    return `<span class="cell-stack-row"><span class="cell-tag">HSK</span>${formatCalendarDateHtml(segment.trim())}</span>`;
+  });
+  return `<div class="cell-stack">${rows.join('')}</div>`;
+}
+
+function renderExamCalendarSheet(table, idx) {
+  const quarterMeta = [
+    { id: 'q1', label: '12/2026 – Q1' },
+    { id: 'q2', label: 'Q2/2027' },
+    { id: 'q3', label: 'Q3/2027' },
+    { id: 'q4', label: 'Q4/2027' },
+  ];
+  const counts = Object.create(null);
+  const rowsHtml = table.rows.map((row) => {
+    const q = getCalendarQuarter(row[0]);
+    counts[q] = (counts[q] || 0) + 1;
+    const cells = [
+      `<td class="cell-period"><span>${escHtml(row[0] || '')}</span></td>`,
+      `<td class="cell-exam-date">${formatCalendarDateHtml(row[1] || '')}</td>`,
+      `<td class="col-group-start">${formatCalendarDateHtml(row[2] || '')}</td>`,
+      `<td>${formatCalendarDateHtml(row[3] || '')}</td>`,
+      `<td class="col-group-start">${formatCalendarDateHtml(row[4] || '')}</td>`,
+      `<td class="cell-result-ibt">${renderIbtResultCell(row[5] || '')}</td>`,
+    ];
+    return `                <tr data-quarter="${escHtml(q)}">${cells.join('')}</tr>`;
+  });
+
+  const filterButtons = [
+    `<button type="button" class="sheet-filter-btn is-active" data-quarter="all" aria-pressed="true">Tất cả (${table.rows.length})</button>`,
+    ...quarterMeta
+      .filter((q) => counts[q.id])
+      .map((q) => `<button type="button" class="sheet-filter-btn" data-quarter="${q.id}" aria-pressed="false">${q.label}</button>`),
+  ].join('');
+
+  return [
+    `            <div class="data-sheet is-calendar" data-table-idx="${idx}">`,
+    '              <div class="data-sheet-bar">',
+    `                <div class="data-sheet-filters" role="group" aria-label="Lọc đợt thi theo quý">${filterButtons}</div>`,
+    '                <p class="data-sheet-legend"><span class="legend-mark" aria-hidden="true">※</span><span>Điều chỉnh ngày trả điểm do nghỉ lễ tại Trung Quốc</span></p>',
+    '              </div>',
+    '              <div class="data-sheet-scroll">',
+    '                <table class="article-table article-table-calendar">',
+    '                  <thead>',
+    '                    <tr class="thead-groups">',
+    '                      <th colspan="2" scope="colgroup">Lịch thi</th>',
+    '                      <th colspan="2" scope="colgroup" class="col-group-start">Hạn đăng ký hệ thống</th>',
+    '                      <th colspan="2" scope="colgroup" class="col-group-start">Ngày công bố kết quả</th>',
+    '                    </tr>',
+    '                    <tr class="thead-cols">',
+    '                      <th scope="col">Đợt</th>',
+    '                      <th scope="col">Ngày thi</th>',
+    '                      <th scope="col" class="col-group-start">Giấy (PBT)</th>',
+    '                      <th scope="col">Máy (iBT)</th>',
+    '                      <th scope="col" class="col-group-start">Thi giấy</th>',
+    '                      <th scope="col">Thi máy HSK &amp; HSKK</th>',
+    '                    </tr>',
+    '                  </thead>',
+    '                  <tbody>',
+    ...rowsHtml,
+    '                  </tbody>',
+    '                </table>',
+    '              </div>',
+    '            </div>',
+  ].join('\n');
+}
+
+function renderSectionTable(table, idx) {
+  const headers = table.headers || [];
+  const rows = table.rows || [];
+  if (headers.length === 6 && /^Đợt thi$/i.test(String(headers[0] || '').trim())) {
+    return renderExamCalendarSheet(table, idx);
+  }
+
+  const searchable = rows.length >= 8;
+  const barHtml = searchable
+    ? [
+        '              <div class="data-sheet-bar">',
+        '                <label class="table-search-wrap">',
+        '                  <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+        '                  <input type="search" class="table-filter-input" placeholder="Tìm nhanh trong bảng (tỉnh thành, trường, hình thức)..." aria-label="Tìm nhanh trong bảng">',
+        '                </label>',
+        `                <span class="table-count" aria-live="polite">Hiển thị ${rows.length}/${rows.length} dòng</span>`,
+        '              </div>',
+      ].join('\n')
+    : '';
+
+  const emptyRowHtml = searchable
+    ? `\n                  <tr class="table-empty-row" hidden><td colspan="${headers.length}">Không tìm thấy dòng phù hợp với từ khóa vừa nhập.</td></tr>`
+    : '';
+
+  return [
+    `            <div class="data-sheet${searchable ? ' is-searchable' : ' is-compact'}" data-table-idx="${idx}">`,
+    ...(barHtml ? [barHtml] : []),
+    '              <div class="data-sheet-scroll">',
+    '                <table class="article-table">',
+    '                  <thead><tr>',
+    ...headers.map((h) => `                    <th scope="col">${escHtml(h)}</th>`),
+    '                  </tr></thead>',
+    '                  <tbody>',
+    ...rows.map((row) => `                    <tr>${row.map((cell) => `<td>${escHtml(cell)}</td>`).join('')}</tr>`),
+    ...(emptyRowHtml ? [emptyRowHtml.slice(1)] : []),
+    '                  </tbody>',
+    '                </table>',
+    '              </div>',
+    '            </div>',
+  ].join('\n');
+}
+
 function renderArticleHtml(article, bySlug) {
   const canonical = `${BASE_URL}/bai-viet/${article.slug}`;
   const catLabel = article.categoryLabel || CATEGORIES[article.category];
@@ -233,6 +442,7 @@ function renderArticleHtml(article, bySlug) {
     .map((s, i) => `            <li><a href="#${escHtml(s.id || `muc-${i + 1}`)}">${escHtml(s.heading)}</a></li>`)
     .join('\n');
 
+  let tableCounter = 0;
   const sectionsHtml = article.sections.map((s, i) => {
     const sid = escHtml(s.id || `muc-${i + 1}`);
     const parts = [`          <section class="article-section" aria-labelledby="${sid}">`, `            <h2 id="${sid}">${escHtml(s.heading)}</h2>`];
@@ -240,18 +450,10 @@ function renderArticleHtml(article, bySlug) {
       parts.push(`            <p>${escHtml(p)}</p>`);
     }
     if (Array.isArray(s.bullets) && s.bullets.length) {
-      parts.push('            <ul>');
-      for (const b of s.bullets) parts.push(`              <li>${escHtml(b)}</li>`);
-      parts.push('            </ul>');
+      parts.push(renderBulletsOrSteps(s.bullets));
     }
     if (s.table && Array.isArray(s.table.headers) && Array.isArray(s.table.rows)) {
-      parts.push('            <div class="article-table-wrap"><table class="article-table"><thead><tr>');
-      for (const h of s.table.headers) parts.push(`              <th>${escHtml(h)}</th>`);
-      parts.push('            </tr></thead><tbody>');
-      for (const row of s.table.rows) {
-        parts.push('              <tr>' + row.map((cell) => `<td>${escHtml(cell)}</td>`).join('') + '</tr>');
-      }
-      parts.push('            </tbody></table></div>');
+      parts.push(renderSectionTable(s.table, tableCounter++));
     }
     if (s.example && s.example.han) {
       parts.push(`            <div class="article-example">
@@ -261,10 +463,7 @@ function renderArticleHtml(article, bySlug) {
             </div>`);
     }
     if (s.tip) {
-      parts.push(`            <div class="article-tip">
-              <svg class="ico tip-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>
-              <p>${escHtml(s.tip)}</p>
-            </div>`);
+      parts.push(renderTipCard(s.tip));
     }
     parts.push('          </section>');
     return parts.join('\n');
@@ -364,7 +563,7 @@ ${renderHeader('../', 'news')}
 
   <main id="main-content">
     <header class="article-hero" aria-labelledby="hero-title">
-      <div class="wrap article-hero-inner">
+      <div class="wrap article-wrap article-hero-inner">
         <ol class="article-crumb" aria-label="Đường dẫn">
           <li><a href="../">HSK Flashcards</a></li>
           <li><a href="../tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a></li>
@@ -388,7 +587,7 @@ ${renderHeader('../', 'news')}
     </header>
 
     <section class="band article-band" aria-label="Nội dung bài viết">
-      <div class="wrap article-shell">
+      <div class="wrap article-wrap article-shell">
         <aside class="article-toc-rail" aria-label="Mục lục bài viết">
           <nav class="article-toc-nav" aria-label="Điều hướng trong bài">
             <p class="article-toc-title">Trong bài viết</p>
@@ -482,6 +681,53 @@ ${renderFooter('../')}
         }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
         document.querySelectorAll('.article-section').forEach(function (sec) { observer.observe(sec); });
       }
+
+      function normText(s) {
+        return String(s || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd');
+      }
+
+      document.querySelectorAll('.data-sheet').forEach(function (sheet) {
+        var filterBtns = sheet.querySelectorAll('[data-quarter]');
+        if (filterBtns.length) {
+          var calRows = sheet.querySelectorAll('tbody tr[data-quarter]');
+          filterBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var q = btn.getAttribute('data-quarter');
+              filterBtns.forEach(function (b) {
+                var active = b === btn;
+                b.classList.toggle('is-active', active);
+                b.setAttribute('aria-pressed', active ? 'true' : 'false');
+              });
+              calRows.forEach(function (row) {
+                row.hidden = q !== 'all' && row.getAttribute('data-quarter') !== q;
+              });
+            });
+          });
+        }
+
+        var searchInput = sheet.querySelector('.table-filter-input');
+        if (searchInput) {
+          var dataRows = Array.prototype.slice.call(sheet.querySelectorAll('tbody tr:not(.table-empty-row)'));
+          var emptyRow = sheet.querySelector('.table-empty-row');
+          var countEl = sheet.querySelector('.table-count');
+          var total = dataRows.length;
+          searchInput.addEventListener('input', function () {
+            var q = normText(searchInput.value.trim());
+            var visible = 0;
+            dataRows.forEach(function (row) {
+              var match = !q || normText(row.textContent).indexOf(q) !== -1;
+              row.hidden = !match;
+              if (match) visible++;
+            });
+            if (emptyRow) emptyRow.hidden = visible !== 0;
+            if (countEl) countEl.textContent = 'Hiển thị ' + visible + '/' + total + ' dòng';
+          });
+        }
+      });
     })();
   </script>
   <script src="../src/seo-offline-prewarm.js" defer></script>

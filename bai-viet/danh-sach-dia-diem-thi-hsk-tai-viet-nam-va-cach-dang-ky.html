@@ -89,7 +89,7 @@
 
   <main id="main-content">
     <header class="article-hero" aria-labelledby="hero-title">
-      <div class="wrap article-hero-inner">
+      <div class="wrap article-wrap article-hero-inner">
         <ol class="article-crumb" aria-label="Đường dẫn">
           <li><a href="../">HSK Flashcards</a></li>
           <li><a href="../tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a></li>
@@ -113,7 +113,7 @@
     </header>
 
     <section class="band article-band" aria-label="Nội dung bài viết">
-      <div class="wrap article-shell">
+      <div class="wrap article-wrap article-shell">
         <aside class="article-toc-rail" aria-label="Mục lục bài viết">
           <nav class="article-toc-nav" aria-label="Điều hướng trong bài">
             <p class="article-toc-title">Trong bài viết</p>
@@ -147,40 +147,55 @@
             <h2 id="bang-diem-thi-hsk-viet-nam">Danh sách các điểm thi HSK &amp; HSKK tại Việt Nam trên hệ thống ChineseTest</h2>
             <p>Theo dữ liệu tra cứu mục Châu Á → Việt Nam trên cổng chính thức chinesetest.cn/test-centers, nhiều trường đại học trên cả ba miền đã có cả hội đồng thi trên giấy (PBT) lẫn phòng thi trên máy tính (ký hiệu IBT).</p>
             <p>Bảng dưới đây tổng hợp các đơn vị tổ chức thi HSK/HSKK tại Việt Nam đang hiển thị trên hệ thống ChineseTest:</p>
-            <div class="article-table-wrap"><table class="article-table"><thead><tr>
-              <th>Khu vực</th>
-              <th>Đơn vị điểm thi trên ChineseTest</th>
-              <th>Hình thức &amp; bài thi ghi nhận</th>
-            </tr></thead><tbody>
-              <tr><td>Hà Nội</td><td>Viện Khổng Tử tại Trường Đại học Hà Nội (HANU)</td><td>HSK, HSKK, YCT, BCT</td></tr>
-              <tr><td>Hà Nội</td><td>Trường Đại học Ngoại ngữ – ĐHQGHN (ULIS)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
-              <tr><td>Hà Nội</td><td>Trường Đại học Sư phạm Hà Nội (HNUE)</td><td>HSK, HSKK</td></tr>
-              <tr><td>Hà Nội</td><td>Trường Đại học Phenikaa</td><td>HSK, HSKK, YCT, BCT</td></tr>
-              <tr><td>Vĩnh Phúc / Hà Nội</td><td>Trường Đại học Sư phạm Hà Nội 2 (HPU2)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK, YCT</td></tr>
-              <tr><td>Thái Nguyên</td><td>Khoa Ngoại ngữ &amp; Trung tâm thi máy HSK – Đại học Thái Nguyên</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
-              <tr><td>Quảng Ninh</td><td>Trường Đại học Hạ Long (Halong University)</td><td>HSK, HSKK, YCT, BCT</td></tr>
-              <tr><td>Lạng Sơn</td><td>Trường ĐH Mỏ – Địa chất (Phân hiệu Lạng Sơn)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
-              <tr><td>Nghệ An</td><td>Trường Đại học Vinh (Vinh University)</td><td>HSK, HSKK, YCT, BCT</td></tr>
-              <tr><td>Thừa Thiên Huế</td><td>Trường Đại học Ngoại ngữ – Đại học Huế (HUFLIS)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
-              <tr><td>Đà Nẵng</td><td>Trường Đại học Duy Tân &amp; Trường Đại học Đông Á</td><td>Đều có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
-              <tr><td>TP. Hồ Chí Minh</td><td>Trường Đại học Sư phạm TP.HCM (HCMUE)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
-              <tr><td>TP. Hồ Chí Minh</td><td>Trường ĐH Khoa học Xã hội &amp; Nhân văn – ĐHQG TP.HCM</td><td>HSK, HSKK, YCT, BCT</td></tr>
-              <tr><td>Đồng Tháp</td><td>Trường Đại học Đồng Tháp (Dong Thap University)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
-            </tbody></table></div>
+            <div class="data-sheet is-searchable" data-table-idx="0">
+              <div class="data-sheet-bar">
+                <label class="table-search-wrap">
+                  <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                  <input type="search" class="table-filter-input" placeholder="Tìm nhanh trong bảng (tỉnh thành, trường, hình thức)..." aria-label="Tìm nhanh trong bảng">
+                </label>
+                <span class="table-count" aria-live="polite">Hiển thị 14/14 dòng</span>
+              </div>
+              <div class="data-sheet-scroll">
+                <table class="article-table">
+                  <thead><tr>
+                    <th scope="col">Khu vực</th>
+                    <th scope="col">Đơn vị điểm thi trên ChineseTest</th>
+                    <th scope="col">Hình thức &amp; bài thi ghi nhận</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td>Hà Nội</td><td>Viện Khổng Tử tại Trường Đại học Hà Nội (HANU)</td><td>HSK, HSKK, YCT, BCT</td></tr>
+                    <tr><td>Hà Nội</td><td>Trường Đại học Ngoại ngữ – ĐHQGHN (ULIS)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
+                    <tr><td>Hà Nội</td><td>Trường Đại học Sư phạm Hà Nội (HNUE)</td><td>HSK, HSKK</td></tr>
+                    <tr><td>Hà Nội</td><td>Trường Đại học Phenikaa</td><td>HSK, HSKK, YCT, BCT</td></tr>
+                    <tr><td>Vĩnh Phúc / Hà Nội</td><td>Trường Đại học Sư phạm Hà Nội 2 (HPU2)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK, YCT</td></tr>
+                    <tr><td>Thái Nguyên</td><td>Khoa Ngoại ngữ &amp; Trung tâm thi máy HSK – Đại học Thái Nguyên</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
+                    <tr><td>Quảng Ninh</td><td>Trường Đại học Hạ Long (Halong University)</td><td>HSK, HSKK, YCT, BCT</td></tr>
+                    <tr><td>Lạng Sơn</td><td>Trường ĐH Mỏ – Địa chất (Phân hiệu Lạng Sơn)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
+                    <tr><td>Nghệ An</td><td>Trường Đại học Vinh (Vinh University)</td><td>HSK, HSKK, YCT, BCT</td></tr>
+                    <tr><td>Thừa Thiên Huế</td><td>Trường Đại học Ngoại ngữ – Đại học Huế (HUFLIS)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
+                    <tr><td>Đà Nẵng</td><td>Trường Đại học Duy Tân &amp; Trường Đại học Đông Á</td><td>Đều có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
+                    <tr><td>TP. Hồ Chí Minh</td><td>Trường Đại học Sư phạm TP.HCM (HCMUE)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
+                    <tr><td>TP. Hồ Chí Minh</td><td>Trường ĐH Khoa học Xã hội &amp; Nhân văn – ĐHQG TP.HCM</td><td>HSK, HSKK, YCT, BCT</td></tr>
+                    <tr><td>Đồng Tháp</td><td>Trường Đại học Đồng Tháp (Dong Thap University)</td><td>Có cả điểm thi giấy &amp; điểm thi máy (IBT) — HSK, HSKK</td></tr>
+                  <tr class="table-empty-row" hidden><td colspan="3">Không tìm thấy dòng phù hợp với từ khóa vừa nhập.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
             <div class="article-tip">
               <svg class="ico tip-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>
-              <p>Mẹo chọn điểm thi: Nếu các điểm thi tại trung tâm Hà Nội hoặc TP.HCM khóa cổng quá nhanh, bạn có thể theo dõi thêm lịch mở đăng ký của các điểm thi lân cận có phòng máy IBT như ĐH Sư phạm Hà Nội 2, ĐH Thái Nguyên, ĐH Hạ Long hoặc ĐH Đồng Tháp.</p>
+              <div class="tip-content"><p class="tip-title">Mẹo chọn điểm thi</p><p class="tip-text">Nếu các điểm thi tại trung tâm Hà Nội hoặc TP.HCM khóa cổng quá nhanh, bạn có thể theo dõi thêm lịch mở đăng ký của các điểm thi lân cận có phòng máy IBT như ĐH Sư phạm Hà Nội 2, ĐH Thái Nguyên, ĐH Hạ Long hoặc ĐH Đồng Tháp.</p></div>
             </div>
           </section>
           <section class="article-section" aria-labelledby="quy-trinh-5-buoc-dang-ky">
             <h2 id="quy-trinh-5-buoc-dang-ky">5 bước đăng ký dự thi HSK an toàn và chuẩn xác cho người mới</h2>
-            <ul>
-              <li>Bước 1 — Chuẩn bị sẵn file ảnh thẻ và giấy tờ: Ảnh chân dung nền trắng chụp trong 6 tháng gần nhất (rõ mặt, không đeo kính màu/mũ) và bản gốc CCCD hoặc Hộ chiếu còn hiệu lực.</li>
-              <li>Bước 2 — Đăng ký tài khoản thí sinh trên chinesetest.cn: Nhập chính xác Họ tên viết IN HOA KHÔNG DẤU, ngày tháng năm sinh và số giấy tờ tùy thân trùng khớp tuyệt đối với giấy tờ sẽ mang vào phòng thi.</li>
-              <li>Bước 3 — Theo dõi thông báo mở cổng của điểm thi: Mỗi hội đồng thi sẽ đăng thông báo riêng về đợt thi mở, cấp độ nhận hồ sơ và hướng dẫn điền đơn trực tuyến.</li>
-              <li>Bước 4 — Hoàn tất lệ phí theo đúng hướng dẫn của trường: Chỉ chuyển khoản vào tài khoản chính thức do điểm thi đại học công bố, tuyệt đối cảnh giác với các trang mạo danh nhận giữ chỗ.</li>
-              <li>Bước 5 — Tải và kiểm tra Thẻ dự thi (Admission Ticket): Trước ngày thi khoảng 5–7 ngày, đăng nhập kiểm tra kỹ họ tên, số CCCD/Hộ chiếu, phòng thi và ca thi; nếu phát hiện sai thông tin phải báo ngay cho điểm thi để điều chỉnh kịp thời.</li>
-            </ul>
+            <ol class="article-steps">
+              <li class="article-step"><span class="step-badge" aria-hidden="true">1</span><div class="step-body"><strong class="step-lead">Chuẩn bị sẵn file ảnh thẻ và giấy tờ</strong><span class="step-desc">Ảnh chân dung nền trắng chụp trong 6 tháng gần nhất (rõ mặt, không đeo kính màu/mũ) và bản gốc CCCD hoặc Hộ chiếu còn hiệu lực.</span></div></li>
+              <li class="article-step"><span class="step-badge" aria-hidden="true">2</span><div class="step-body"><strong class="step-lead">Đăng ký tài khoản thí sinh trên chinesetest.cn</strong><span class="step-desc">Nhập chính xác Họ tên viết IN HOA KHÔNG DẤU, ngày tháng năm sinh và số giấy tờ tùy thân trùng khớp tuyệt đối với giấy tờ sẽ mang vào phòng thi.</span></div></li>
+              <li class="article-step"><span class="step-badge" aria-hidden="true">3</span><div class="step-body"><strong class="step-lead">Theo dõi thông báo mở cổng của điểm thi</strong><span class="step-desc">Mỗi hội đồng thi sẽ đăng thông báo riêng về đợt thi mở, cấp độ nhận hồ sơ và hướng dẫn điền đơn trực tuyến.</span></div></li>
+              <li class="article-step"><span class="step-badge" aria-hidden="true">4</span><div class="step-body"><strong class="step-lead">Hoàn tất lệ phí theo đúng hướng dẫn của trường</strong><span class="step-desc">Chỉ chuyển khoản vào tài khoản chính thức do điểm thi đại học công bố, tuyệt đối cảnh giác với các trang mạo danh nhận giữ chỗ.</span></div></li>
+              <li class="article-step"><span class="step-badge" aria-hidden="true">5</span><div class="step-body"><strong class="step-lead">Tải và kiểm tra Thẻ dự thi (Admission Ticket)</strong><span class="step-desc">Trước ngày thi khoảng 5–7 ngày, đăng nhập kiểm tra kỹ họ tên, số CCCD/Hộ chiếu, phòng thi và ca thi; nếu phát hiện sai thông tin phải báo ngay cho điểm thi để điều chỉnh kịp thời.</span></div></li>
+            </ol>
           </section>
           <section class="article-section" aria-labelledby="quy-che-can-nho-chinesetest">
             <h2 id="quy-che-can-nho-chinesetest">Quy chế phòng thi quan trọng trên trang Regulation của ChineseTest</h2>
@@ -337,6 +352,53 @@
         }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
         document.querySelectorAll('.article-section').forEach(function (sec) { observer.observe(sec); });
       }
+
+      function normText(s) {
+        return String(s || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[̀-ͯ]/g, '')
+          .replace(/đ/g, 'd');
+      }
+
+      document.querySelectorAll('.data-sheet').forEach(function (sheet) {
+        var filterBtns = sheet.querySelectorAll('[data-quarter]');
+        if (filterBtns.length) {
+          var calRows = sheet.querySelectorAll('tbody tr[data-quarter]');
+          filterBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var q = btn.getAttribute('data-quarter');
+              filterBtns.forEach(function (b) {
+                var active = b === btn;
+                b.classList.toggle('is-active', active);
+                b.setAttribute('aria-pressed', active ? 'true' : 'false');
+              });
+              calRows.forEach(function (row) {
+                row.hidden = q !== 'all' && row.getAttribute('data-quarter') !== q;
+              });
+            });
+          });
+        }
+
+        var searchInput = sheet.querySelector('.table-filter-input');
+        if (searchInput) {
+          var dataRows = Array.prototype.slice.call(sheet.querySelectorAll('tbody tr:not(.table-empty-row)'));
+          var emptyRow = sheet.querySelector('.table-empty-row');
+          var countEl = sheet.querySelector('.table-count');
+          var total = dataRows.length;
+          searchInput.addEventListener('input', function () {
+            var q = normText(searchInput.value.trim());
+            var visible = 0;
+            dataRows.forEach(function (row) {
+              var match = !q || normText(row.textContent).indexOf(q) !== -1;
+              row.hidden = !match;
+              if (match) visible++;
+            });
+            if (emptyRow) emptyRow.hidden = visible !== 0;
+            if (countEl) countEl.textContent = 'Hiển thị ' + visible + '/' + total + ' dòng';
+          });
+        }
+      });
     })();
   </script>
   <script src="../src/seo-offline-prewarm.js" defer></script>
