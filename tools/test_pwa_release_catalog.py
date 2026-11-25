@@ -44,6 +44,21 @@ class CatalogTests(unittest.TestCase):
         (self.root / 'data.js').unlink()
         with self.assertRaisesRegex(ValueError, 'Missing or unsafe'): collect_assets(self.root)
 
+    def test_cloudflare_redirects_cannot_be_hashed_as_offline_assets(self):
+        legacy_page = 'old-home.html'
+        (self.root / legacy_page).write_text('<html>Old home</html>')
+        self.catalog['files'].append(legacy_page)
+        self.save()
+        redirects = self.root / '_redirects'
+        for source in ('/old-home.html', '/old-home'):
+            with self.subTest(source=source):
+                redirects.write_text(f'{source} / 301\n')
+                with self.assertRaisesRegex(ValueError, 'PWA asset is redirected.*old-home.html'):
+                    collect_assets(self.root)
+        self.catalog['files'].remove(legacy_page)
+        self.save()
+        self.assertIn('index.html', collect_assets(self.root))
+
     def test_duplicate_assets_rejected(self):
         self.catalog['files'].append('index.html'); self.save()
         with self.assertRaisesRegex(ValueError, 'Duplicate'): read_catalog(self.root)
