@@ -2566,10 +2566,39 @@ html[data-theme="dark"] .tutor-demo {
   color: var(--seo-accent-ink);
 }
 
+.score-portal-btn.is-primary {
+  background: var(--seo-accent);
+  border-color: var(--seo-accent);
+  color: var(--seo-white);
+}
+
+.score-portal-btn.is-primary:hover {
+  background: var(--seo-accent-dark);
+  border-color: var(--seo-accent-dark);
+  color: var(--seo-white);
+}
+
 .score-portal-frame-wrap {
   background: var(--seo-white);
   width: 100%;
   min-height: 760px;
+}
+
+.score-portal-card.is-collapsed .score-portal-bar {
+  border-bottom: 0;
+}
+
+.score-portal-card.is-collapsed .score-portal-open-only,
+.score-portal-card.is-collapsed .score-portal-note {
+  display: none;
+}
+
+.score-portal-card.is-collapsed .score-portal-frame-wrap {
+  height: 0;
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .score-portal-frame {
@@ -2637,7 +2666,7 @@ html[data-theme="dark"] .tutor-demo {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .score-portal-frame-wrap {
+  .score-portal-card:not(.is-collapsed) .score-portal-frame-wrap {
     min-height: 640px;
   }
 

@@ -176,19 +176,20 @@
           </div>
         </div>
 
-        <div class="score-portal-card" id="scorePortalCard">
+        <div class="score-portal-card is-collapsed" id="scorePortalCard">
           <div class="score-portal-bar">
             <div class="score-portal-title">
               <strong>Cổng tra cứu điểm thi chính thức ChineseTest (chinesetest.cn/query-score)</strong>
-              <span>Nhập Số báo danh (Admission Ticket Number), Họ tên không dấu và mã xác thực trực tiếp bên dưới.</span>
+              <span id="scorePortalHint">Cổng tra cứu đang thu gọn và tải sẵn ngầm — bấm “Mở khung tra điểm” để hiện ngay.</span>
             </div>
             <div class="score-portal-actions">
-              <button type="button" class="score-portal-btn" id="toggleFrameHeightBtn">Mở rộng khung</button>
-              <button type="button" class="score-portal-btn" id="reloadFrameBtn">Tải lại cổng</button>
+              <button type="button" class="score-portal-btn is-primary" id="togglePortalBtn" aria-expanded="false" aria-controls="scorePortalFrameWrap">Mở khung tra điểm</button>
+              <button type="button" class="score-portal-btn score-portal-open-only" id="toggleFrameHeightBtn">Mở rộng khung</button>
+              <button type="button" class="score-portal-btn score-portal-open-only" id="reloadFrameBtn">Tải lại cổng</button>
               <a class="score-portal-btn" href="https://www.chinesetest.cn/query-score" target="_blank" rel="noopener noreferrer">Mở tab mới</a>
             </div>
           </div>
-          <div class="score-portal-frame-wrap">
+          <div class="score-portal-frame-wrap" id="scorePortalFrameWrap" inert aria-hidden="true">
             <iframe
               id="ctScoreFrame"
               class="score-portal-frame"
@@ -467,10 +468,47 @@
 
       // 3. Embedded Frame Controls
       var portalCard = document.getElementById('scorePortalCard');
+      var frameWrap = document.getElementById('scorePortalFrameWrap');
+      var portalHint = document.getElementById('scorePortalHint');
+      var togglePortalBtn = document.getElementById('togglePortalBtn');
       var toggleFrameBtn = document.getElementById('toggleFrameHeightBtn');
       var reloadFrameBtn = document.getElementById('reloadFrameBtn');
       var scoreFrame = document.getElementById('ctScoreFrame');
+      var openPortalHeroLink = document.querySelector('a.btn-hero-ghost[href="#cong-tra-diem"]');
 
+      function setPortalOpen(open) {
+        if (!portalCard) return;
+        portalCard.classList.toggle('is-collapsed', !open);
+        if (togglePortalBtn) {
+          togglePortalBtn.textContent = open ? 'Ẩn khung tra điểm' : 'Mở khung tra điểm';
+          togglePortalBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        if (portalHint) {
+          portalHint.textContent = open
+            ? 'Nhập Số báo danh (Admission Ticket Number), Họ tên không dấu và mã xác thực trực tiếp bên dưới.'
+            : 'Cổng tra cứu đang thu gọn và tải sẵn ngầm — bấm “Mở khung tra điểm” để hiện ngay.';
+        }
+        if (frameWrap) {
+          if (open) {
+            frameWrap.removeAttribute('inert');
+            frameWrap.removeAttribute('aria-hidden');
+          } else {
+            frameWrap.setAttribute('inert', '');
+            frameWrap.setAttribute('aria-hidden', 'true');
+          }
+        }
+      }
+
+      if (togglePortalBtn && portalCard) {
+        togglePortalBtn.addEventListener('click', function () {
+          setPortalOpen(portalCard.classList.contains('is-collapsed'));
+        });
+      }
+      if (openPortalHeroLink) {
+        openPortalHeroLink.addEventListener('click', function () {
+          setPortalOpen(true);
+        });
+      }
       if (toggleFrameBtn && portalCard) {
         toggleFrameBtn.addEventListener('click', function () {
           var expanded = portalCard.classList.toggle('is-expanded');
