@@ -322,7 +322,7 @@ function renderExamCalendarSheet(table, idx) {
     `            <div class="data-sheet is-calendar" data-table-idx="${idx}">`,
     '              <div class="data-sheet-bar">',
     `                <div class="data-sheet-filters" role="group" aria-label="Lọc đợt thi theo quý">${filterButtons}</div>`,
-    '                <p class="data-sheet-legend"><span class="legend-mark" aria-hidden="true">※</span><span>Điều chỉnh ngày trả điểm do nghỉ lễ tại Trung Quốc</span></p>',
+    '                <p class="data-sheet-legend" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="legend-mark" aria-hidden="true">※</span><span>Dời lịch do nghỉ lễ</span></p>',
     '              </div>',
     '              <div class="data-sheet-scroll">',
     '                <table class="article-table article-table-calendar">',

@@ -113,7 +113,42 @@
   var scriptEl = document.currentScript;
   var baseScopeUrl = (scriptEl && scriptEl.src) ? new URL('../', scriptEl.src).href : new URL('./', location.href).href;
   var workerUrl = new URL('OneSignalSDKWorker.js', baseScopeUrl).href;
+  var isAppShell = /(?:^|\/)app-hoc-hsk(?:\.html)?$/i.test(location.pathname);
+  var hadController = Boolean(navigator.serviceWorker.controller);
   var started = false;
+  var reloadScheduled = false;
+
+  function activateWaiting(reg) {
+    if (!reg || isAppShell) return;
+    try {
+      if (reg.waiting) reg.waiting.postMessage({ type: 'HSK_ACTIVATE_UPDATE' });
+      var bindInstalling = function (sw) {
+        if (!sw) return;
+        sw.addEventListener('statechange', function () {
+          if (sw.state === 'installed' && reg.waiting) {
+            reg.waiting.postMessage({ type: 'HSK_ACTIVATE_UPDATE' });
+          }
+        });
+      };
+      if (reg.installing) bindInstalling(reg.installing);
+      reg.addEventListener('updatefound', function () {
+        bindInstalling(reg.installing);
+      });
+    } catch (_) {}
+  }
+
+  if (hadController && !isAppShell) {
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (reloadScheduled) return;
+      try {
+        var last = Number(sessionStorage.getItem('hsk-seo-sw-reloaded-at') || '0');
+        if (Date.now() - last < 15000) return;
+        sessionStorage.setItem('hsk-seo-sw-reloaded-at', String(Date.now()));
+      } catch (_) {}
+      reloadScheduled = true;
+      location.reload();
+    });
+  }
 
   function warmOfflineCache() {
     if (started) return;
@@ -123,8 +158,13 @@
         var activeUrl = reg && (reg.active || reg.waiting || reg.installing) ? (reg.active || reg.waiting || reg.installing).scriptURL : '';
         var needsRegister = !reg || !activeUrl || !new URL(activeUrl, location.href).pathname.endsWith('/OneSignalSDKWorker.js') || reg.updateViaCache !== 'none';
         if (needsRegister) {
-          return navigator.serviceWorker.register(workerUrl, { scope: baseScopeUrl, updateViaCache: 'none' });
+          return navigator.serviceWorker.register(workerUrl, { scope: baseScopeUrl, updateViaCache: 'none' }).then(function (nextReg) {
+            activateWaiting(nextReg);
+            return nextReg;
+          });
         }
+        activateWaiting(reg);
+        if (!isAppShell && reg.update) reg.update().catch(function () {});
         return reg;
       }).then(function () {
         if (navigator.storage && navigator.storage.persist) {
