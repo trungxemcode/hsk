@@ -41,6 +41,7 @@ export const SUPPORTING_SLUGS = [
   'phan-biet-tu-de-nham-hsk',
   'tap-viet-chu-han-online',
   'tin-tuc-hsk',
+  'tra-diem-hsk',
 ];
 
 export function escHtml(value) {
@@ -108,7 +109,8 @@ function renderHeader(prefix, currentKey) {
       </a>
       <nav class="nav-links" aria-label="Điều hướng cụm trang học HSK">
 ${link(`${prefix}`, 'Học HSK cùng AI', 'home')}
-${link(`${prefix}tin-tuc-hsk.html`, 'Tin tức &amp; Mẹo HSK', 'news')}
+${link(`${prefix}tra-diem-hsk.html`, 'Tra điểm HSK', 'score')}
+${link(`${prefix}tin-tuc-hsk.html`, 'Tin tức HSK', 'news')}
 ${link(`${prefix}sua-cau-tieng-trung-ai.html`, 'Sửa câu AI', 'editor')}
 ${link(`${prefix}phan-biet-tu-de-nham-hsk.html`, 'Từ dễ nhầm', 'compare')}
 ${link(`${prefix}tap-viet-chu-han-online.html`, 'Tập viết chữ Hán', 'write')}
@@ -136,6 +138,7 @@ function renderFooter(prefix) {
       </a>
       <nav class="footer-links" aria-label="Liên kết cuối trang">
         <a href="${prefix}">Học HSK cùng AI</a>
+        <a href="${prefix}tra-diem-hsk.html">Tra điểm HSK</a>
         <a href="${prefix}tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a>
         <a href="${prefix}luyen-thi-hsk-1-mien-phi.html">Luyện thi HSK 1–6</a>
         <a href="${prefix}phan-biet-tu-de-nham-hsk.html">Từ dễ nhầm</a>
@@ -602,6 +605,10 @@ ${cardsHtml}
           <p>Đọc xong lịch thi và ngữ pháp, áp dụng liền vào luyện đề, sửa câu AI và flashcard SRS để nhớ chắc hơn.</p>
         </div>
         <div class="hub-links-grid">
+          <a class="hub-link-card" href="./tra-diem-hsk.html">
+            <strong><span>Tra điểm thi HSK online trực tiếp</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Mở cổng ChineseTest ngay trên web kèm chuẩn hóa họ tên và tính điểm đậu HSK 1–6.</span>
+          </a>
           <a class="hub-link-card" href="./">
             <strong><span>Học HSK miễn phí cùng Gia sư AI</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
             <span>Hỏi đáp tiếng Trung 1–1 bằng tiếng Việt, giải thích đáp án đề HSK.</span>

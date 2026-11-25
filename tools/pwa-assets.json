@@ -229,6 +229,7 @@
     "src/modules/admin/resource-sync.js",
     "seo-landing.css",
     "seo-offline-prewarm.js",
+    "tra-diem-hsk.html",
     "hoc-hsk-cung-ai.html"
   ],
   "aliases": {

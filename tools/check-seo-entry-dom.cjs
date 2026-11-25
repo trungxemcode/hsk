@@ -9,6 +9,7 @@ const supportingPages = [
   'sua-cau-tieng-trung-ai',
   'phan-biet-tu-de-nham-hsk',
   'tap-viet-chu-han-online',
+  'tra-diem-hsk',
 ];
 const home = fs.readFileSync('index.html', 'utf8');
 const app = fs.readFileSync('app-hoc-hsk.html', 'utf8');
