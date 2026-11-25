@@ -2,10 +2,13 @@
 /**
  * AI SEO Article Generator & Multi-Voice News Rewriter for HSK Flashcards.
  *
+ * Defaults to OpenRouter (`google/gemma-4-31b-it:free`) when OPENROUTER_API_KEY
+ * is set (in env or gitignored `.env.local`), with optional Gemini fallback.
+ *
  * Usage:
- *   GEMINI_API_KEY=... node tools/seo-articles/generate-ai-article.mjs --auto-news-scan
- *   GEMINI_API_KEY=... node tools/seo-articles/generate-ai-article.mjs --force-latest-news --voice hoi-dap-thuc-chien
- *   GEMINI_API_KEY=... node tools/seo-articles/generate-ai-article.mjs \
+ *   OPENROUTER_API_KEY=... node tools/seo-articles/generate-ai-article.mjs --auto-news-scan
+ *   OPENROUTER_API_KEY=... node tools/seo-articles/generate-ai-article.mjs --force-latest-news --voice hoi-dap-thuc-chien
+ *   OPENROUTER_API_KEY=... node tools/seo-articles/generate-ai-article.mjs \
  *     --topic "Lộ trình ôn HSK 4 cấp tốc 60 ngày" --category meo-hoc
  *   node tools/seo-articles/generate-ai-article.mjs --list-queue
  */
@@ -24,10 +27,40 @@ import {
   syncChineseTestOfficial,
 } from './sync-chinesetest-official.mjs';
 
+export const DEFAULT_OPENROUTER_MODEL = 'google/gemma-4-31b-it:free';
+export const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash';
+export const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
 const ARTICLES_PATH = path.join(ROOT, 'content/seo-articles/articles.json');
 const QUEUE_PATH = path.join(ROOT, 'content/seo-articles/topic-queue.json');
+
+export function loadLocalEnv(rootDir = ROOT) {
+  for (const name of ['.env.local', '.env']) {
+    const filePath = path.join(rootDir, name);
+    if (!fs.existsSync(filePath)) continue;
+    const raw = fs.readFileSync(filePath, 'utf8');
+    for (const line of raw.split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eq = trimmed.indexOf('=');
+      if (eq <= 0) continue;
+      const key = trimmed.slice(0, eq).trim();
+      if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(key)) continue;
+      let val = trimmed.slice(eq + 1).trim();
+      if (
+        (val.startsWith('"') && val.endsWith('"') && val.length >= 2) ||
+        (val.startsWith("'") && val.endsWith("'") && val.length >= 2)
+      ) {
+        val = val.slice(1, -1);
+      }
+      if (!process.env[key]) {
+        process.env[key] = val;
+      }
+    }
+  }
+}
 
 export const EDITORIAL_VOICES = {
   'cam-nang-than-thien': {
@@ -433,8 +466,160 @@ export function normalizeGeneratedArticle(raw, defaults) {
   return article;
 }
 
+export function extractJsonObject(text) {
+  let cleaned = String(text || '')
+    .replace(/<think>[\s\S]*?<\/think>/gi, '')
+    .trim();
+  const fenceMatch = /```(?:json)?\s*([\s\S]*?)```/i.exec(cleaned);
+  if (fenceMatch) {
+    cleaned = fenceMatch[1].trim();
+  }
+  try {
+    return JSON.parse(cleaned);
+  } catch (_) {
+    const start = cleaned.indexOf('{');
+    if (start === -1) {
+      throw new Error('Model response did not contain a JSON object.');
+    }
+    let depth = 0;
+    let inString = false;
+    let escaped = false;
+    for (let i = start; i < cleaned.length; i++) {
+      const ch = cleaned[i];
+      if (inString) {
+        if (escaped) {
+          escaped = false;
+        } else if (ch === '\\') {
+          escaped = true;
+        } else if (ch === '"') {
+          inString = false;
+        }
+        continue;
+      }
+      if (ch === '"') {
+        inString = true;
+      } else if (ch === '{') {
+        depth++;
+      } else if (ch === '}') {
+        depth--;
+        if (depth === 0) {
+          return JSON.parse(cleaned.slice(start, i + 1));
+        }
+      }
+    }
+    throw new Error('Could not parse balanced JSON object from model response.');
+  }
+}
+
+export function resolveAiConfig(env = process.env, args = {}) {
+  const providerArg = String(args.provider || env.SEO_AI_PROVIDER || 'auto').trim().toLowerCase();
+  const explicitModel = typeof args.model === 'string' ? args.model.trim() : '';
+  const openrouterKey = String(env.OPENROUTER_API_KEY || '').trim();
+  const geminiKey = String(env.GEMINI_API_KEY || '').trim();
+  const openrouterModel = explicitModel || String(env.OPENROUTER_MODEL || DEFAULT_OPENROUTER_MODEL).trim() || DEFAULT_OPENROUTER_MODEL;
+  const geminiModel = explicitModel || String(env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL).trim() || DEFAULT_GEMINI_MODEL;
+
+  if (providerArg === 'gemini') {
+    if (!geminiKey) {
+      throw new Error('SEO_AI_PROVIDER=gemini was requested, but GEMINI_API_KEY is missing.');
+    }
+    return { provider: 'gemini', apiKey: geminiKey, model: geminiModel, fallback: null };
+  }
+
+  if (providerArg === 'openrouter') {
+    if (!openrouterKey) {
+      throw new Error('SEO_AI_PROVIDER=openrouter was requested, but OPENROUTER_API_KEY is missing.');
+    }
+    return { provider: 'openrouter', apiKey: openrouterKey, model: openrouterModel, fallback: null };
+  }
+
+  if (openrouterKey) {
+    return {
+      provider: 'openrouter',
+      apiKey: openrouterKey,
+      model: openrouterModel,
+      fallback: geminiKey ? { provider: 'gemini', apiKey: geminiKey, model: geminiModel } : null,
+    };
+  }
+
+  if (geminiKey) {
+    return { provider: 'gemini', apiKey: geminiKey, model: geminiModel, fallback: null };
+  }
+
+  throw new Error(
+    'Missing OPENROUTER_API_KEY (or GEMINI_API_KEY). Set OPENROUTER_API_KEY in .env.local or environment variables.'
+  );
+}
+
+export async function callOpenRouterJson(prompt, apiKey, model = DEFAULT_OPENROUTER_MODEL, fetchImpl = fetch) {
+  let useResponseFormat = true;
+  let lastError;
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const payloadBody = {
+        model,
+        messages: [
+          {
+            role: 'system',
+            content:
+              'Bạn là biên tập viên SEO tiếng Việt cho HSK Flashcards. Chỉ trả về duy nhất 01 object JSON hợp lệ, không kèm giải thích hay markdown.',
+          },
+          { role: 'user', content: prompt },
+        ],
+        temperature: 0.65,
+      };
+      if (useResponseFormat) {
+        payloadBody.response_format = { type: 'json_object' };
+      }
+
+      const response = await fetchImpl(OPENROUTER_API_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://hskfreelearningai.pages.dev/',
+          'X-Title': 'HSK Flashcards SEO News Rewriter',
+        },
+        body: JSON.stringify(payloadBody),
+      });
+
+      if (!response.ok) {
+        const errText = await response.text().catch(() => '');
+        lastError = new Error(`OpenRouter API (${model}) HTTP ${response.status}: ${errText.slice(0, 300)}`);
+        if (response.status === 400 && useResponseFormat) {
+          useResponseFormat = false;
+          continue;
+        }
+        if ((response.status === 429 || response.status >= 500) && attempt < 3) {
+          await new Promise((r) => setTimeout(r, 2500 * attempt));
+          continue;
+        }
+        break;
+      }
+
+      const payload = await response.json();
+      const rawContent = payload?.choices?.[0]?.message?.content;
+      const text = Array.isArray(rawContent)
+        ? rawContent.map((p) => (typeof p === 'string' ? p : p?.text || '')).join('').trim()
+        : String(rawContent || '').trim();
+      if (!text) {
+        throw new Error(`OpenRouter API (${model}) returned empty content`);
+      }
+      return extractJsonObject(text);
+    } catch (err) {
+      lastError = err;
+      if (attempt < 3) {
+        await new Promise((r) => setTimeout(r, 2000 * attempt));
+      }
+    }
+  }
+
+  throw lastError || new Error('OpenRouter API request failed');
+}
+
 async function callGeminiJson(prompt, apiKey, model) {
-  const modelsToTry = Array.from(new Set([model, 'gemini-2.5-flash', 'gemini-2.0-flash'].filter(Boolean)));
+  const modelsToTry = Array.from(new Set([model, DEFAULT_GEMINI_MODEL, 'gemini-2.0-flash'].filter(Boolean)));
   let lastError;
 
   for (const candidate of modelsToTry) {
@@ -464,8 +649,7 @@ async function callGeminiJson(prompt, apiKey, model) {
         const payload = await response.json();
         const text = payload?.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('').trim();
         if (!text) throw new Error(`Gemini API (${candidate}) returned empty content`);
-        const cleaned = text.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
-        return JSON.parse(cleaned);
+        return extractJsonObject(text);
       } catch (err) {
         lastError = err;
         if (attempt < 2) await new Promise((r) => setTimeout(r, 1500));
@@ -475,7 +659,23 @@ async function callGeminiJson(prompt, apiKey, model) {
   throw lastError || new Error('Gemini API request failed');
 }
 
+export async function callAiJson(prompt, aiConfig) {
+  if (aiConfig.provider === 'openrouter') {
+    try {
+      return await callOpenRouterJson(prompt, aiConfig.apiKey, aiConfig.model);
+    } catch (err) {
+      if (aiConfig.fallback?.provider === 'gemini') {
+        console.warn(`Warning: OpenRouter failed (${err.message}); falling back to Gemini (${aiConfig.fallback.model})...`);
+        return await callGeminiJson(prompt, aiConfig.fallback.apiKey, aiConfig.fallback.model);
+      }
+      throw err;
+    }
+  }
+  return await callGeminiJson(prompt, aiConfig.apiKey, aiConfig.model);
+}
+
 async function main() {
+  loadLocalEnv(ROOT);
   const args = parseArgs(process.argv.slice(2));
   const data = JSON.parse(fs.readFileSync(ARTICLES_PATH, 'utf8'));
   const queue = JSON.parse(fs.readFileSync(QUEUE_PATH, 'utf8'));
@@ -508,11 +708,7 @@ async function main() {
     );
 
     if (scan.fetchedDetails.length > 0) {
-      const apiKey = process.env.GEMINI_API_KEY || '';
-      if (!apiKey) {
-        throw new Error('Detected new ChineseTest news, but GEMINI_API_KEY is missing.');
-      }
-      const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+      const aiConfig = resolveAiConfig(process.env, args);
 
       const needsFullSnapshotSync = scan.fetchedDetails.some((d) =>
         /calendar|test\s*date|test\s*center|hsk\s*3\.0|announcement|日历|考试日期/i.test(`${d.title} ${d.bodyText}`)
@@ -542,8 +738,8 @@ async function main() {
           existingSlugs,
         });
 
-        console.log(`Rewriting ChineseTest #${newsDetail.id} in voice "${voice.id}" via ${model}...`);
-        const raw = await callGeminiJson(prompt, apiKey, model);
+        console.log(`Rewriting ChineseTest #${newsDetail.id} in voice "${voice.id}" via ${aiConfig.provider} / ${aiConfig.model}...`);
+        const raw = await callAiJson(prompt, aiConfig);
         const article = normalizeGeneratedArticle(raw, {
           slug: fallbackSlug,
           allowSuggestedSlug: true,
@@ -628,11 +824,7 @@ async function main() {
     throw new Error(`Article slug "${selected.slug}" already exists in articles.json`);
   }
 
-  const apiKey = process.env.GEMINI_API_KEY || '';
-  if (!apiKey) {
-    throw new Error('Missing GEMINI_API_KEY environment variable. Set GEMINI_API_KEY to generate a new AI SEO article.');
-  }
-  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const aiConfig = resolveAiConfig(process.env, args);
   const existingSlugs = articles.map((a) => a.slug);
   const sourceUrl = typeof args['source-url'] === 'string' ? args['source-url'].trim() : '';
   const sourceNotes = typeof args['source-notes'] === 'string' ? args['source-notes'].trim() : '';
@@ -656,8 +848,8 @@ async function main() {
     existingSlugs,
   });
 
-  console.log(`Generating SEO article "${selected.slug}" [${selected.category}] (${voice.id}) via ${model}...`);
-  const raw = await callGeminiJson(prompt, apiKey, model);
+  console.log(`Generating SEO article "${selected.slug}" [${selected.category}] (${voice.id}) via ${aiConfig.provider} / ${aiConfig.model}...`);
+  const raw = await callAiJson(prompt, aiConfig);
   const sourceNewsId = extractNewsId(sourceUrl) || '';
   const article = normalizeGeneratedArticle(raw, {
     slug: selected.slug,
