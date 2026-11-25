@@ -180,7 +180,7 @@
           <div class="score-portal-bar">
             <div class="score-portal-title">
               <strong>Cổng tra cứu điểm thi chính thức ChineseTest (chinesetest.cn/query-score)</strong>
-              <span id="scorePortalHint">Cổng tra cứu đang thu gọn và tải sẵn ngầm — bấm “Mở khung tra điểm” để hiện ngay.</span>
+              <span id="scorePortalHint" class="score-portal-open-only">Nhập Số báo danh (Admission Ticket Number), Họ tên không dấu và mã xác thực trực tiếp bên dưới.</span>
             </div>
             <div class="score-portal-actions">
               <button type="button" class="score-portal-btn is-primary" id="togglePortalBtn" aria-expanded="false" aria-controls="scorePortalFrameWrap">Mở khung tra điểm</button>
@@ -469,7 +469,6 @@
       // 3. Embedded Frame Controls
       var portalCard = document.getElementById('scorePortalCard');
       var frameWrap = document.getElementById('scorePortalFrameWrap');
-      var portalHint = document.getElementById('scorePortalHint');
       var togglePortalBtn = document.getElementById('togglePortalBtn');
       var toggleFrameBtn = document.getElementById('toggleFrameHeightBtn');
       var reloadFrameBtn = document.getElementById('reloadFrameBtn');
@@ -482,11 +481,6 @@
         if (togglePortalBtn) {
           togglePortalBtn.textContent = open ? 'Ẩn khung tra điểm' : 'Mở khung tra điểm';
           togglePortalBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        }
-        if (portalHint) {
-          portalHint.textContent = open
-            ? 'Nhập Số báo danh (Admission Ticket Number), Họ tên không dấu và mã xác thực trực tiếp bên dưới.'
-            : 'Cổng tra cứu đang thu gọn và tải sẵn ngầm — bấm “Mở khung tra điểm” để hiện ngay.';
         }
         if (frameWrap) {
           if (open) {
