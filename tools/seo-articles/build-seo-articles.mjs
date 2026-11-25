@@ -101,6 +101,7 @@ const THEME_INIT_SCRIPT = `  <script>
 function renderHeader(prefix, currentKey) {
   const link = (href, label, key) =>
     `        <a href="${href}"${currentKey === key ? ' aria-current="page"' : ''}>${label}</a>`;
+  const toolActive = currentKey === 'editor' || currentKey === 'compare' || currentKey === 'write';
   return `  <header class="site-header">
     <div class="wrap nav-bar">
       <a class="brand" href="${prefix}" aria-label="Trang chủ HSK Flashcards">
@@ -108,14 +109,36 @@ function renderHeader(prefix, currentKey) {
         <span>HSK Flashcards</span>
       </a>
       <nav class="nav-links" aria-label="Điều hướng cụm trang học HSK">
-${link(`${prefix}`, 'Học HSK cùng AI', 'home')}
+${link(`${prefix}luyen-thi-hsk-1-mien-phi.html`, 'Luyện thi HSK', 'levels')}
+${link(`${prefix}tra-diem-hsk.html`, 'Tra điểm HSK', 'score')}
+${link(`${prefix}tin-tuc-hsk.html`, 'Tin tức HSK', 'news')}
+        <details class="nav-dropdown">
+          <summary${toolActive ? ' class="is-active"' : ''}>
+            <span>Công cụ</span>
+            <svg class="ico ico-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="nav-dropdown-menu">
+${link(`${prefix}sua-cau-tieng-trung-ai.html`, 'Sửa câu AI', 'editor')}
+${link(`${prefix}phan-biet-tu-de-nham-hsk.html`, 'Từ dễ nhầm HSK', 'compare')}
+${link(`${prefix}tap-viet-chu-han-online.html`, 'Tập viết chữ Hán', 'write')}
+          </div>
+        </details>
+      </nav>
+      <div class="nav-actions">
+        <details class="mobile-nav-menu">
+          <summary class="mobile-nav-trigger" aria-label="Mở menu điều hướng" title="Menu trang">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </summary>
+          <nav class="mobile-nav-panel" aria-label="Điều hướng di động">
+${link(`${prefix}`, 'Trang chủ', 'home')}
+${link(`${prefix}luyen-thi-hsk-1-mien-phi.html`, 'Luyện thi HSK 1–6', 'levels')}
 ${link(`${prefix}tra-diem-hsk.html`, 'Tra điểm HSK', 'score')}
 ${link(`${prefix}tin-tuc-hsk.html`, 'Tin tức HSK', 'news')}
 ${link(`${prefix}sua-cau-tieng-trung-ai.html`, 'Sửa câu AI', 'editor')}
-${link(`${prefix}phan-biet-tu-de-nham-hsk.html`, 'Từ dễ nhầm', 'compare')}
+${link(`${prefix}phan-biet-tu-de-nham-hsk.html`, 'Từ dễ nhầm HSK', 'compare')}
 ${link(`${prefix}tap-viet-chu-han-online.html`, 'Tập viết chữ Hán', 'write')}
-      </nav>
-      <div class="nav-actions">
+          </nav>
+        </details>
         <button type="button" class="theme-btn" id="themeToggle" aria-label="Chuyển giao diện sáng tối" title="Chuyển sáng / tối">
           <svg class="ico ico-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
           <svg class="ico ico-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -131,19 +154,31 @@ ${link(`${prefix}tap-viet-chu-han-online.html`, 'Tập viết chữ Hán', 'writ
 
 function renderFooter(prefix) {
   return `  <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <a class="brand" href="${prefix}">
-        <span class="brand-mark" aria-hidden="true">汉</span>
-        <span>HSK Flashcards</span>
-      </a>
-      <nav class="footer-links" aria-label="Liên kết cuối trang">
-        <a href="${prefix}">Học HSK cùng AI</a>
-        <a href="${prefix}tra-diem-hsk.html">Tra điểm HSK</a>
-        <a href="${prefix}tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a>
-        <a href="${prefix}luyen-thi-hsk-1-mien-phi.html">Luyện thi HSK 1–6</a>
-        <a href="${prefix}phan-biet-tu-de-nham-hsk.html">Từ dễ nhầm</a>
-        <a href="${prefix}app-hoc-hsk.html">Mở ứng dụng</a>
-      </nav>
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="${prefix}">
+          <span class="brand-mark" aria-hidden="true">汉</span>
+          <span>HSK Flashcards</span>
+        </a>
+        <p class="footer-desc">Tự học tiếng Trung HSK 1–6 miễn phí cùng Gia sư AI, đề thi thử, flashcard SRS và tra cứu kỳ thi chính thức.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Ôn thi &amp; Công cụ</p>
+        <nav class="footer-links" aria-label="Ôn thi và công cụ HSK">
+          <a href="${prefix}luyen-thi-hsk-1-mien-phi.html">Luyện thi HSK 1–6</a>
+          <a href="${prefix}sua-cau-tieng-trung-ai.html">Sửa câu tiếng Trung AI</a>
+          <a href="${prefix}phan-biet-tu-de-nham-hsk.html">Từ dễ nhầm HSK</a>
+          <a href="${prefix}tap-viet-chu-han-online.html">Tập viết chữ Hán</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Kỳ thi HSK</p>
+        <nav class="footer-links" aria-label="Thông tin kỳ thi HSK">
+          <a href="${prefix}tra-diem-hsk.html">Tra điểm thi HSK</a>
+          <a href="${prefix}tin-tuc-hsk.html">Tin tức &amp; Lịch thi</a>
+          <a href="${prefix}bai-viet/thong-bao-hsk-3-0-moi-nhat-va-cau-truc-bai-thi.html">Thông báo HSK 3.0</a>
+        </nav>
+      </div>
     </div>
   </footer>`;
 }
@@ -247,10 +282,6 @@ ${sources.map((src) => `              <li><a href="${escHtml(src.url)}" target="
         <div class="faq-aside">
           <h2 id="faq-title">Câu hỏi thường gặp</h2>
           <p>Giải đáp nhanh những thắc mắc phổ biến liên quan trực tiếp tới chủ đề bài viết này.</p>
-          <a class="btn-primary" href="../app-hoc-hsk.html">
-            <span>Hỏi thêm Gia sư AI miễn phí</span>
-            <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-          </a>
         </div>
         <div class="faq-list">
 ${faqs.map((f, i) => `          <details${i === 0 ? ' open' : ''}>
