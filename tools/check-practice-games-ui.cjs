@@ -16,7 +16,7 @@ for(const width of [320,390,1440]){
  await page.addInitScript(()=>localStorage.setItem('hsk-studio-target-v1:guest','3'));
  await page.route('https://**/*',r=>r.abort());
  await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
- await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+ await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
  await page.waitForFunction(()=>window.HSKLessons&&window.HSKPracticeGames&&window.HSKStudio,{timeout:25000});
  const coverage=await page.evaluate(()=>[1,2,3,4,5,6].map(level=>({level,triples:HSKPracticeGamesCore.triples(words,level,10).length,sentences:HSKPracticeGamesCore.sentences(words,level,10).length})));
  assert.ok(coverage.every(x=>x.triples>=5&&x.sentences>=5),'each HSK level should have playable rounds: '+JSON.stringify(coverage));

@@ -1,3 +1,13 @@
+## 2026-11-24 — Trang chủ SEO và URL app học HSK
+
+- Đưa thiết kế giới thiệu từ GitHub lên `index.html`. Các trang HSK 1–6 và công cụ giữ URL SEO riêng, dẫn về trang chủ hoặc vào app theo chức năng của nút.
+- Chuyển nguyên tài liệu app sang `app-hoc-hsk.html`. Cập nhật điểm vào offline, công cụ UX UI và bài kiểm tra để kiểm tra đúng tài liệu. PWA giữ ID và phạm vi cũ.
+
+## 2026-11-24 — Tự cập nhật HSK từ GitHub
+
+- `offline.js` tiếp tục kiểm tra máy chủ khi service worker cũ còn chờ áp dụng. Thông báo cập nhật hiện lại khi bản mới hơn tải xong. Không có thay đổi bố cục PC hoặc mobile.
+- `pwa-release-guard.yml` đối chiếu bản công khai trên Cloudflare Pages và GitHub Pages sau mỗi lần push vào `main`. `check-update-dom.cjs` mô phỏng hai bản phát hành liên tiếp và kiểm tra thao tác áp dụng bản mới.
+
 ## 2026-11-17 — Learn Chinese Through Podcast: đợt ngoài danh sách đã xử lý
 
 - Phạm vi: chỉ thêm nội dung vào Luyện nghe Podcast, trên PC và điện thoại. Danh sách 15 video người dùng đã xử lý được loại khỏi đợt này.

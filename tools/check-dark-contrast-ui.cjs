@@ -11,7 +11,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
  try{for(const width of [320,390,1440]){
   const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({body:'{"enabled":false}',contentType:'application/json'}));
-  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKLessons);
+  await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKLessons);
   await page.evaluate(()=>document.documentElement.dataset.theme='dark');
   const check=async label=>{
    await page.mouse.move(0,0);await page.waitForTimeout(400);

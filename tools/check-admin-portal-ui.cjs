@@ -174,8 +174,8 @@ const MIME = {
       assert.equal(savedManifest.features.translator, 'hidden');
       assert.equal(savedManifest.documents.length, 1);
 
-      // 2. Navigate to learner app /index.html in same context and verify enforcement
-      await page.goto(`${origin}/index.html`, { waitUntil: 'domcontentloaded' });
+      // 2. Navigate to learner app /app-hoc-hsk.html in same context and verify enforcement
+      await page.goto(`${origin}/app-hoc-hsk.html`, { waitUntil: 'domcontentloaded' });
       await page.waitForFunction(() => window.HSKStudio && window.HSKLessons && window.HSKResourceSync && !document.getElementById('studioHome')?.hidden);
 
       // Hidden feature: translator buttons hidden

@@ -6,7 +6,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  async function asset(request,editor=false){
   const u=new URL(request.url);if(u.pathname==='/site-design-config.json')return Response.json({enabled:true,endpoint:editorURL+'/api/design',publicOrigins:allowPublic?[publicURL]:[],autoSyncOrigins:autoSync?[publicURL]:[]});
   if(['/account-config.json','/push-config.json'].includes(u.pathname))return Response.json({enabled:false});
-  let file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile())return new Response('missing',{status:404});
+  let file=path.resolve(root,'.'+(u.pathname==='/'?'/app-hoc-hsk.html':u.pathname));if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile())return new Response('missing',{status:404});
   return new Response(fs.readFileSync(file),{headers:{'Content-Type':types[path.extname(file)]||'application/octet-stream'}});
  }
  const env={DESIGN_BUCKET:bucket,FIREBASE_API_KEY:'test-public-key',APP_RELEASE:'test',ASSETS:{fetch:request=>asset(request,true)}};
@@ -18,7 +18,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE});const context=await browser.newContext({viewport:{width:1600,height:1000},serviceWorkers:'block'});
  await context.route('https://identitytoolkit.googleapis.com/**',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({idToken:'browser-owner',refreshToken:'test-refresh',expiresIn:'3600'})}));
  async function editorPage(){const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());await page.goto(editorURL);const login=page.locator('.cloud-login');await page.waitForFunction(()=>document.querySelector('.cloud-login')||document.getElementById('status').textContent.includes('Sẵn sàng'));if(await login.isVisible()){await login.locator('input[type=email]').fill('owner@example.test');await login.locator('input[type=password]').fill('browser-test-password');await login.locator('button.primary').click();}await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Sẵn sàng'));return page;}
- let ordinary=await context.newPage();ordinary.on('pageerror',e=>errors.push(e.message));await ordinary.goto(publicURL+'/index.html');await ordinary.waitForFunction(()=>window.HSKStudio&&document.querySelector('#homeDailyWord h3'));await ordinary.evaluate(()=>{localStorage.setItem('test-learner-sentinel','preserve');window.__node=document.querySelector('#homeDailyWord h3');window.__studio=HSKStudio;});
+ let ordinary=await context.newPage();ordinary.on('pageerror',e=>errors.push(e.message));await ordinary.goto(publicURL+'/app-hoc-hsk.html');await ordinary.waitForFunction(()=>window.HSKStudio&&document.querySelector('#homeDailyWord h3'));await ordinary.evaluate(()=>{localStorage.setItem('test-learner-sentinel','preserve');window.__node=document.querySelector('#homeDailyWord h3');window.__studio=HSKStudio;});
  const syncRelease=async page=>{
   await page.locator('#designSync').evaluate(button=>button.click());
  };
@@ -95,7 +95,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  await other.close();
  await frame.locator('#homeDailyWord h3').click();await page.locator('#field-borderWidth').fill('2');await page.locator('#field-borderWidth').press('Tab');await page.locator('#field-borderStyle').selectOption('solid');await page.locator('#field-borderColor').fill('#2b6cb0');await page.locator('#field-borderColor').press('Tab');await page.locator('#field-animationName').selectOption('hsk-design-fade');await page.locator('#field-animationDuration').fill('350');await page.locator('#field-animationDuration').press('Tab');
  const box=await frame.locator('#homeDailyWord h3').boundingBox(),zoom=(await page.locator('#canvas').boundingBox()).width/1440;await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width/2+12*zoom,box.y+box.height/2+8*zoom,{steps:6});await page.mouse.up();await page.locator('#apply').click();await page.waitForFunction(()=>document.getElementById('cloud-status').textContent.includes('Đã đồng bộ'));const objectConfig=JSON.parse(content);assert.equal(objectConfig.config.pages.home.styles.desktop['word-heading'].borderColor,'#2b6cb0');assert.ok(Math.abs(objectConfig.config.pages.home.styles.desktop['word-heading'].moveX-12)<=1);assert.match(objectConfig.css,/@keyframes hsk-design-fade/);assert.match(objectConfig.css,/animation-duration:350ms/);
- await page.screenshot({path:'/tmp/cloud-designer-editor.png',fullPage:true});await page.close();ordinary=await context.newPage();await ordinary.goto(publicURL+'/index.html');await ordinary.waitForFunction(()=>!document.getElementById('designSync').hidden);await syncRelease(ordinary);await ordinary.waitForFunction(()=>document.querySelector('#homeDailyWord h3')&&getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize==='32px');unavailable=true;await ordinary.reload();await ordinary.waitForFunction(()=>document.querySelector('#homeDailyWord h3')&&getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize==='32px');
+ await page.screenshot({path:'/tmp/cloud-designer-editor.png',fullPage:true});await page.close();ordinary=await context.newPage();await ordinary.goto(publicURL+'/app-hoc-hsk.html');await ordinary.waitForFunction(()=>!document.getElementById('designSync').hidden);await syncRelease(ordinary);await ordinary.waitForFunction(()=>document.querySelector('#homeDailyWord h3')&&getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize==='32px');unavailable=true;await ordinary.reload();await ordinary.waitForFunction(()=>document.querySelector('#homeDailyWord h3')&&getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize==='32px');
  await ordinary.screenshot({path:'/tmp/cloud-designer-release.png',fullPage:true});
  allowPublic=false;const readsBefore=designReads;await ordinary.reload();await ordinary.waitForFunction(expected=>document.querySelector('#homeDailyWord h3')&&getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize===expected,baseline);await ordinary.waitForTimeout(300);assert.equal(designReads,readsBefore,'non-release origin must not fetch or apply cloud CSS');
  allowPublic=true;
@@ -104,7 +104,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  const fresh=await browser.newPage({viewport:{width:1600,height:1000},serviceWorkers:'block'});
  try{
   const preflightsBefore=designPreflights;
-  await fresh.goto(publicURL+'/index.html');
+  await fresh.goto(publicURL+'/app-hoc-hsk.html');
   await fresh.waitForFunction(()=>document.getElementById('hsk-live-design')?.textContent.includes('font-size:32px'));
   assert.equal(designReads,readsBefore+1,'an opted-in release syncs on first visit');
   assert.equal(designPreflights,preflightsBefore,'the first request without an ETag needs no CORS preflight');

@@ -7,7 +7,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
  try{
   const page=await browser.newPage({viewport:{width:390,height:900},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
-  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKDriveExam?.ready&&window.HSKStudio&&document.body.dataset.studioHub==='home',null,{timeout:60000});
+  await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');await page.waitForFunction(()=>window.HSKDriveExam?.ready&&window.HSKStudio&&document.body.dataset.studioHub==='home',null,{timeout:60000});
   const decoded=await page.evaluate(async images=>{const results=[];for(const {name,uri} of images){const img=new Image();img.src=uri;await img.decode();results.push({name,width:img.naturalWidth,height:img.naturalHeight});}return results;},images);
   assert.equal(decoded.length,52);for(const item of decoded)assert.ok(item.width>800&&item.height>1000,'Invalid source page dimensions: '+item.name);
   await page.evaluate(()=>{window.HSKExam.open();window.HSKExam.catalogue();});await page.locator('#examLevel').selectOption('1');

@@ -8,7 +8,7 @@ function wav(){const samples=44100*11,b=Buffer.alloc(44+samples*2);b.write('RIFF
  for(const width of [390,844,1440])for(const theme of ['light','dark']){
  const page=await browser.newPage({viewport:{width,height:width===844?390:900},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
- await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio&&window.HSKLessons);
+ await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio&&window.HSKLessons);
  await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;window.HSKAccountDashboard={user:{uid:'music-test'}};window.HSKStudio.navigate('music');},theme);
  assert.equal(await page.locator('#musicPanel').isVisible(),true);
  if(width<=1024){

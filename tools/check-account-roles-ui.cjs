@@ -23,7 +23,7 @@ const row=rows.find(x=>x.uid===body.uid);
 row.role=body.role;
 return r.fulfill({json:{account:row}});
 });
-await page.route('**/fixture.html',r=>r.fulfill({contentType:'text/html',body:fs.readFileSync('index.html','utf8').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'')}));
+await page.route('**/fixture.html',r=>r.fulfill({contentType:'text/html',body:fs.readFileSync('app-hoc-hsk.html','utf8').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'')}));
 await page.goto('http://127.0.0.1:'+server.address().port+'/fixture.html');
 await page.evaluate(()=>document.body.classList.add('studio-enabled'));
 await page.addScriptTag({url:'http://127.0.0.1:'+server.address().port+'/src/modules/admin/admin.js'});

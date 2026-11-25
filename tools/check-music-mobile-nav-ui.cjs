@@ -17,7 +17,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    const errors=[];page.on('pageerror',error=>errors.push(error.message));
    await page.route('https://**/*',route=>route.abort());
    await page.route('**/account-config.json',route=>route.fulfill({json:{enabled:false}}));
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic&&window.HSKPracticeSelection);
    assert.equal(await page.locator('.home-music-chill').isVisible(),true,'entertainment music has a home shortcut');
    assert.equal(await page.locator('#studioHome .home-music-entry').count(),0,'shared music entry replaces two home shortcuts');

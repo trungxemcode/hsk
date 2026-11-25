@@ -32,7 +32,7 @@ export async function handleDesign(request,env,ctx={},deps={}){
     if(request.headers.get('If-None-Match')===etag)return new Response(null,{status:304,headers:{...headers,ETag:etag}});
     return json({revision,css:saved?.css||'',updatedAt:saved?.updatedAt||null},200,{ETag:etag});
    }
-   return json({mode:'cloud',projectId:'hsk-online-design-v2',release:env.APP_RELEASE||'cloud',revision,applied:saved?.config||null,publicUrl:env.PUBLIC_URL||'https://trungxemcode.github.io/hsk/',firebaseApiKey:env.FIREBASE_API_KEY});
+   return json({mode:'cloud',projectId:'hsk-online-design-v2',release:env.APP_RELEASE||'cloud',revision,applied:saved?.config||null,publicUrl:env.PUBLIC_URL||'https://trungxemcode.github.io/hsk/app-hoc-hsk.html',firebaseApiKey:env.FIREBASE_API_KEY});
   }
   if(url.pathname==='/__designer/chatgpt'&&request.method==='POST'){
    if(origin!==self)return json({error:'Chỉ sửa từ trang editor.'},403);
@@ -62,7 +62,7 @@ export async function handleDesign(request,env,ctx={},deps={}){
   if(url.pathname==='/account-config.json'||url.pathname==='/push-config.json')return json({enabled:false});
   let response=await env.ASSETS.fetch(request);
   const h=new Headers(response.headers);h.set('Cache-Control','no-store');h.set('X-Content-Type-Options','nosniff');h.set('X-Frame-Options','SAMEORIGIN');h.set('Referrer-Policy','same-origin');
-  if(url.pathname==='/index.html')h.set('Content-Security-Policy',"default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; frame-ancestors 'self'; form-action 'self'");
+  if(url.pathname==='/app-hoc-hsk.html')h.set('Content-Security-Policy',"default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; frame-ancestors 'self'; form-action 'self'");
   return new Response(response.body,{status:response.status,headers:h});
  }catch(e){return json({error:e.status?e.message:'Không lưu được giao diện. Bản đã phát hành vẫn được giữ.'},e.status||503);}
 }

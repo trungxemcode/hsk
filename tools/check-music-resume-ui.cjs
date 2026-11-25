@@ -22,7 +22,7 @@ const fixture=require('./music-cloud-fixture.cjs');
     await page.route('https://**/*',r=>r.abort());
     await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
     await fixture(page);
-    await page.goto(origin+'/index.html');
+    await page.goto(origin+'/app-hoc-hsk.html');
     await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);
     await page.evaluate(()=>HSKStudio.navigate('music-play'));
     await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===3);

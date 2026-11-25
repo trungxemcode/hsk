@@ -144,6 +144,12 @@ class VerifiedRelocationTests(TestCase):
   (self.root/'old.js').write_bytes((self.root/'src/backup.js').read_bytes())
   with self.assertRaisesRegex(ValueError,'WEAKENED'): self.verify()
 
+ def test_verified_move_allows_a_different_document_at_the_original_url(self):
+  (self.root/'old.js').write_text('window.Introduction={visible:true};')
+  self.assertEqual(self.verify(),1)
+  (self.root/'src/backup.js').write_text('window.Backup={restore:false};')
+  with self.assertRaisesRegex(ValueError,'WEAKENED'): self.verify()
+
  def test_existing_identical_destination_cannot_disguise_deletion(self):
   self.after['features'][0]['checks'][0]['file']='existing.js'
   with self.assertRaisesRegex(ValueError,'WEAKENED'): self.verify()

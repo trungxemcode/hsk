@@ -85,7 +85,7 @@ def ensure_release_integrity(root=ROOT):
         raise ValueError('OneSignal SDK worker imports a stale offline revision')
     # Ensure all local script and stylesheet references are in the offline
     # catalog. External CDNs and hash/query suffixes are never required.
-    index = (root / 'index.html').read_text(encoding='utf-8')
+    index = '\n'.join((root / name).read_text(encoding='utf-8') for name in ('index.html', 'app-hoc-hsk.html'))
     refs = re.findall(r'<(?:script|link)\b[^>]*(?:src|href)=[\'"]([^\'"]+)[\'"]', index, re.I)
     loader = (root / 'loader.js').read_text(encoding='utf-8')
     refs += re.findall(r"scriptFile\(['\"]([^'\"]+)['\"]\)", loader)

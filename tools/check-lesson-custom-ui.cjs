@@ -148,7 +148,7 @@ const http = require('node:http');
         });
       });
 
-      await page.goto('http://127.0.0.1:' + server.address().port + '/index.html');
+      await page.goto('http://127.0.0.1:' + server.address().port + '/app-hoc-hsk.html');
       await page.waitForFunction(() => window.HSKStudio && window.HSKLessonNav && window.HSKLessonCustom && document.body.dataset.studioHub === 'home', null, { timeout: 60000 });
       await page.evaluate(t => { document.documentElement.dataset.theme = t; }, theme);
       await page.waitForTimeout(200);

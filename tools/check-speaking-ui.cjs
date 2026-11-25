@@ -21,7 +21,7 @@ const MIME = {
   const root = process.cwd();
   const server = http.createServer((req, res) => {
     const reqPath = '.' + new URL(req.url, 'http://127.0.0.1').pathname;
-    const f = path.resolve(root, reqPath === './' ? 'index.html' : reqPath);
+    const f = path.resolve(root, reqPath === './' ? 'app-hoc-hsk.html' : reqPath);
     if (!f.startsWith(root + path.sep) || !fs.existsSync(f) || !fs.statSync(f).isFile()) {
       res.writeHead(404);
       res.end();
@@ -60,7 +60,7 @@ const MIME = {
         });
       });
 
-      await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: 'domcontentloaded' });
+      await page.goto(`http://127.0.0.1:${server.address().port}/app-hoc-hsk.html`, { waitUntil: 'domcontentloaded' });
       await page.waitForFunction(() => window.HSKLessonNav && window.HSKLessons && window.HSKSpeaking && window.HSKRecorder);
 
       await page.evaluate(async () => {

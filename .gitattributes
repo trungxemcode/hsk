@@ -10,6 +10,7 @@ offline.js text eol=lf
 offline-worker.js text eol=lf
 OneSignalSDKWorker.js text eol=lf
 index.html text eol=lf
+app-hoc-hsk.html text eol=lf
 *.css text eol=lf
 *.mjs text eol=lf
 

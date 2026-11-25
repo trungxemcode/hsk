@@ -16,7 +16,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.route('https://**/*',r=>r.abort());
    await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>!!window.HSKLoading?.showAI);
    // Fast requests close immediately after completion, regardless of estimated complexity.
    await page.evaluate(()=>{window.__stopFast=HSKLoading.showAI('AI dịch',{size:1800});});
