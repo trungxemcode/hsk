@@ -89,7 +89,7 @@
 
   <main id="main-content">
     <header class="article-hero" aria-labelledby="hero-title">
-      <div class="wrap article-hero-inner">
+      <div class="wrap article-wrap article-hero-inner">
         <ol class="article-crumb" aria-label="Đường dẫn">
           <li><a href="../">HSK Flashcards</a></li>
           <li><a href="../tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a></li>
@@ -113,7 +113,7 @@
     </header>
 
     <section class="band article-band" aria-label="Nội dung bài viết">
-      <div class="wrap article-shell">
+      <div class="wrap article-wrap article-shell">
         <aside class="article-toc-rail" aria-label="Mục lục bài viết">
           <nav class="article-toc-nav" aria-label="Điều hướng trong bài">
             <p class="article-toc-title">Trong bài viết</p>
@@ -147,46 +147,71 @@
             <h2 id="lich-thi-cuoi-2026-va-nam-2027">Bảng lịch thi HSK 1–6 &amp; HSKK cuối năm 2026 và trọn năm 2027</h2>
             <p>Trên hệ thống mới của ChineseTest (thay thế trang tra cứu cũ goKdInfoOrPlan.do), lịch thi quốc tế HSK cấp 1–6 và khẩu ngữ HSKK được ấn định thống nhất cho cả hai hình thức thi trên giấy (PBT) và thi trên máy tại điểm thi (iBT at-center).</p>
             <p>Dưới đây là lịch thi đợt tháng 12/2026 và toàn bộ 11 đợt thi năm 2027 kèm hạn đăng ký trên hệ thống và ngày mở cổng tra điểm online (dấu ※ là đợt điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc):</p>
-            <div class="article-table-wrap"><table class="article-table"><thead><tr>
-              <th>Đợt thi</th>
-              <th>Ngày thi (Thứ)</th>
-              <th>Hạn ĐK giấy (PBT)</th>
-              <th>Hạn ĐK máy (iBT)</th>
-              <th>Trả điểm giấy</th>
-              <th>Trả điểm máy HSK / HSKK</th>
-            </tr></thead><tbody>
-              <tr><td>12/2026</td><td>13/12/2026 (CN)</td><td>16/11/2026</td><td>03/12/2026</td><td>※15/01/2027</td><td>28/12/2026 · HSKK: 04/01/2027</td></tr>
-              <tr><td>01/2027</td><td>09/01/2027 (T7)</td><td>13/12/2026</td><td>30/12/2026</td><td>※19/02/2027</td><td>25/01/2027 · HSKK: 29/01/2027</td></tr>
-              <tr><td>03/2027</td><td>14/03/2027 (CN)</td><td>15/02/2027</td><td>04/03/2027</td><td>※16/04/2027</td><td>29/03/2027 · HSKK: ※07/04/2027</td></tr>
-              <tr><td>04/2027</td><td>10/04/2027 (T7)</td><td>14/03/2027</td><td>31/03/2027</td><td>※17/05/2027</td><td>26/04/2027 · HSKK: 30/04/2027</td></tr>
-              <tr><td>05/2027</td><td>16/05/2027 (CN)</td><td>19/04/2027</td><td>06/05/2027</td><td>16/06/2027</td><td>31/05/2027 · HSKK: 07/06/2027</td></tr>
-              <tr><td>06/2027</td><td>26/06/2027 (T7)</td><td>30/05/2027</td><td>16/06/2027</td><td>26/07/2027</td><td>12/07/2027 · HSKK: 16/07/2027</td></tr>
-              <tr><td>07/2027</td><td>18/07/2027 (CN)</td><td>21/06/2027</td><td>08/07/2027</td><td>18/08/2027</td><td>02/08/2027 · HSKK: 09/08/2027</td></tr>
-              <tr><td>08/2027</td><td>21/08/2027 (T7)</td><td>25/07/2027</td><td>11/08/2027</td><td>21/09/2027</td><td>06/09/2027 · HSKK: 10/09/2027</td></tr>
-              <tr><td>09/2027</td><td>12/09/2027 (CN)</td><td>16/08/2027</td><td>02/09/2027</td><td>※19/10/2027</td><td>※28/09/2027 · HSKK: ※11/10/2027</td></tr>
-              <tr><td>10/2027</td><td>16/10/2027 (T7)</td><td>19/09/2027</td><td>06/10/2027</td><td>16/11/2027</td><td>01/11/2027 · HSKK: 05/11/2027</td></tr>
-              <tr><td>11/2027</td><td>07/11/2027 (CN)</td><td>11/10/2027</td><td>28/10/2027</td><td>07/12/2027</td><td>22/11/2027 · HSKK: 29/11/2027</td></tr>
-              <tr><td>12/2027</td><td>11/12/2027 (T7)</td><td>14/11/2027</td><td>01/12/2027</td><td>※14/01/2028</td><td>27/12/2027 · HSKK: ※04/01/2028</td></tr>
-            </tbody></table></div>
+            <div class="data-sheet is-calendar" data-table-idx="0">
+              <div class="data-sheet-bar">
+                <div class="data-sheet-filters" role="group" aria-label="Lọc đợt thi theo quý"><button type="button" class="sheet-filter-btn is-active" data-quarter="all" aria-pressed="true">Tất cả (12)</button><button type="button" class="sheet-filter-btn" data-quarter="q1" aria-pressed="false">12/2026 – Q1</button><button type="button" class="sheet-filter-btn" data-quarter="q2" aria-pressed="false">Q2/2027</button><button type="button" class="sheet-filter-btn" data-quarter="q3" aria-pressed="false">Q3/2027</button><button type="button" class="sheet-filter-btn" data-quarter="q4" aria-pressed="false">Q4/2027</button></div>
+                <p class="data-sheet-legend"><span class="legend-mark" aria-hidden="true">※</span><span>Điều chỉnh ngày trả điểm do nghỉ lễ tại Trung Quốc</span></p>
+              </div>
+              <div class="data-sheet-scroll">
+                <table class="article-table article-table-calendar">
+                  <thead>
+                    <tr class="thead-groups">
+                      <th colspan="2" scope="colgroup">Lịch thi</th>
+                      <th colspan="2" scope="colgroup" class="col-group-start">Hạn đăng ký hệ thống</th>
+                      <th colspan="2" scope="colgroup" class="col-group-start">Ngày công bố kết quả</th>
+                    </tr>
+                    <tr class="thead-cols">
+                      <th scope="col">Đợt</th>
+                      <th scope="col">Ngày thi</th>
+                      <th scope="col" class="col-group-start">Giấy (PBT)</th>
+                      <th scope="col">Máy (iBT)</th>
+                      <th scope="col" class="col-group-start">Thi giấy</th>
+                      <th scope="col">Thi máy HSK &amp; HSKK</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <tr data-quarter="q1"><td class="cell-period"><span>12/2026</span></td><td class="cell-exam-date"><span class="cell-date-main">13/12/2026</span><span class="cell-day is-sun">CN</span></td><td class="col-group-start"><span class="cell-date-main">16/11/2026</span></td><td><span class="cell-date-main">03/12/2026</span></td><td class="col-group-start"><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>15/01/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">28/12/2026</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">04/01/2027</span></span></div></td></tr>
+                <tr data-quarter="q1"><td class="cell-period"><span>01/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">09/01/2027</span><span class="cell-day">T7</span></td><td class="col-group-start"><span class="cell-date-main">13/12/2026</span></td><td><span class="cell-date-main">30/12/2026</span></td><td class="col-group-start"><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>19/02/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">25/01/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">29/01/2027</span></span></div></td></tr>
+                <tr data-quarter="q1"><td class="cell-period"><span>03/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">14/03/2027</span><span class="cell-day is-sun">CN</span></td><td class="col-group-start"><span class="cell-date-main">15/02/2027</span></td><td><span class="cell-date-main">04/03/2027</span></td><td class="col-group-start"><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>16/04/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">29/03/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>07/04/2027</span></span></div></td></tr>
+                <tr data-quarter="q2"><td class="cell-period"><span>04/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">10/04/2027</span><span class="cell-day">T7</span></td><td class="col-group-start"><span class="cell-date-main">14/03/2027</span></td><td><span class="cell-date-main">31/03/2027</span></td><td class="col-group-start"><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>17/05/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">26/04/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">30/04/2027</span></span></div></td></tr>
+                <tr data-quarter="q2"><td class="cell-period"><span>05/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">16/05/2027</span><span class="cell-day is-sun">CN</span></td><td class="col-group-start"><span class="cell-date-main">19/04/2027</span></td><td><span class="cell-date-main">06/05/2027</span></td><td class="col-group-start"><span class="cell-date-main">16/06/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">31/05/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">07/06/2027</span></span></div></td></tr>
+                <tr data-quarter="q2"><td class="cell-period"><span>06/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">26/06/2027</span><span class="cell-day">T7</span></td><td class="col-group-start"><span class="cell-date-main">30/05/2027</span></td><td><span class="cell-date-main">16/06/2027</span></td><td class="col-group-start"><span class="cell-date-main">26/07/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">12/07/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">16/07/2027</span></span></div></td></tr>
+                <tr data-quarter="q3"><td class="cell-period"><span>07/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">18/07/2027</span><span class="cell-day is-sun">CN</span></td><td class="col-group-start"><span class="cell-date-main">21/06/2027</span></td><td><span class="cell-date-main">08/07/2027</span></td><td class="col-group-start"><span class="cell-date-main">18/08/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">02/08/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">09/08/2027</span></span></div></td></tr>
+                <tr data-quarter="q3"><td class="cell-period"><span>08/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">21/08/2027</span><span class="cell-day">T7</span></td><td class="col-group-start"><span class="cell-date-main">25/07/2027</span></td><td><span class="cell-date-main">11/08/2027</span></td><td class="col-group-start"><span class="cell-date-main">21/09/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">06/09/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">10/09/2027</span></span></div></td></tr>
+                <tr data-quarter="q3"><td class="cell-period"><span>09/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">12/09/2027</span><span class="cell-day is-sun">CN</span></td><td class="col-group-start"><span class="cell-date-main">16/08/2027</span></td><td><span class="cell-date-main">02/09/2027</span></td><td class="col-group-start"><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>19/10/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>28/09/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>11/10/2027</span></span></div></td></tr>
+                <tr data-quarter="q4"><td class="cell-period"><span>10/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">16/10/2027</span><span class="cell-day">T7</span></td><td class="col-group-start"><span class="cell-date-main">19/09/2027</span></td><td><span class="cell-date-main">06/10/2027</span></td><td class="col-group-start"><span class="cell-date-main">16/11/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">01/11/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">05/11/2027</span></span></div></td></tr>
+                <tr data-quarter="q4"><td class="cell-period"><span>11/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">07/11/2027</span><span class="cell-day is-sun">CN</span></td><td class="col-group-start"><span class="cell-date-main">11/10/2027</span></td><td><span class="cell-date-main">28/10/2027</span></td><td class="col-group-start"><span class="cell-date-main">07/12/2027</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">22/11/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main">29/11/2027</span></span></div></td></tr>
+                <tr data-quarter="q4"><td class="cell-period"><span>12/2027</span></td><td class="cell-exam-date"><span class="cell-date-main">11/12/2027</span><span class="cell-day">T7</span></td><td class="col-group-start"><span class="cell-date-main">14/11/2027</span></td><td><span class="cell-date-main">01/12/2027</span></td><td class="col-group-start"><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>14/01/2028</span></td><td class="cell-result-ibt"><div class="cell-stack"><span class="cell-stack-row"><span class="cell-tag">HSK</span><span class="cell-date-main">27/12/2027</span></span><span class="cell-stack-row"><span class="cell-tag is-hskk">HSKK</span><span class="cell-date-main is-shifted" title="Điều chỉnh ngày trả điểm do trùng kỳ nghỉ lễ tại Trung Quốc"><span class="shift-mark" aria-label="Dời lịch dịp lễ">※</span>04/01/2028</span></span></div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
             <div class="article-tip">
               <svg class="ico tip-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>
-              <p>Lưu ý cực kỳ quan trọng khi săn suất thi tại Việt Nam: Cột “Hạn đăng ký” trên bảng của ChineseTest là hạn khóa sổ cuối cùng của hệ thống quốc tế. Thực tế tại Hà Nội và TP.HCM, các điểm thi thường mở form trước ngày thi khoảng 35–45 ngày và kín chỗ rất sớm — bạn nên canh fanpage điểm thi trước hạn hệ thống ít nhất 2–3 tuần.</p>
+              <div class="tip-content"><p class="tip-title">Lưu ý cực kỳ quan trọng khi săn suất thi tại Việt Nam</p><p class="tip-text">Cột “Hạn đăng ký” trên bảng của ChineseTest là hạn khóa sổ cuối cùng của hệ thống quốc tế. Thực tế tại Hà Nội và TP.HCM, các điểm thi thường mở form trước ngày thi khoảng 35–45 ngày và kín chỗ rất sớm — bạn nên canh fanpage điểm thi trước hạn hệ thống ít nhất 2–3 tuần.</p></div>
             </div>
           </section>
           <section class="article-section" aria-labelledby="lich-thi-hsk-cao-cap-7-9">
             <h2 id="lich-thi-hsk-cao-cap-7-9">Lịch thi HSK cao cấp (HSK 7–9) chính thức năm 2026–2027</h2>
             <p>Bài thi HSK cấp 7–9 dành cho thí sinh trình độ cao cấp (nghiên cứu sinh, biên phiên dịch chuyên sâu, giảng viên tiếng Trung) được tổ chức 2 đợt mỗi năm theo hình thức thi trên máy tại điểm thi (iBT at-center):</p>
-            <div class="article-table-wrap"><table class="article-table"><thead><tr>
-              <th>Đợt thi HSK 7–9</th>
-              <th>Ngày thi</th>
-              <th>Hình thức</th>
-              <th>Hạn đăng ký hệ thống</th>
-              <th>Ngày trả kết quả</th>
-            </tr></thead><tbody>
-              <tr><td>Đợt 2 năm 2026</td><td>22/11/2026 (Chủ nhật)</td><td>iBT tại điểm thi</td><td>08/11/2026</td><td>22/12/2026</td></tr>
-              <tr><td>Đợt 1 năm 2027</td><td>23/05/2027 (Chủ nhật)</td><td>iBT tại điểm thi</td><td>09/05/2027</td><td>23/06/2027</td></tr>
-              <tr><td>Đợt 2 năm 2027</td><td>20/11/2027 (Thứ bảy)</td><td>iBT tại điểm thi</td><td>06/11/2027</td><td>20/12/2027</td></tr>
-            </tbody></table></div>
+            <div class="data-sheet is-compact" data-table-idx="1">
+              <div class="data-sheet-scroll">
+                <table class="article-table">
+                  <thead><tr>
+                    <th scope="col">Đợt thi HSK 7–9</th>
+                    <th scope="col">Ngày thi</th>
+                    <th scope="col">Hình thức</th>
+                    <th scope="col">Hạn đăng ký hệ thống</th>
+                    <th scope="col">Ngày trả kết quả</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td>Đợt 2 năm 2026</td><td>22/11/2026 (Chủ nhật)</td><td>iBT tại điểm thi</td><td>08/11/2026</td><td>22/12/2026</td></tr>
+                    <tr><td>Đợt 1 năm 2027</td><td>23/05/2027 (Chủ nhật)</td><td>iBT tại điểm thi</td><td>09/05/2027</td><td>23/06/2027</td></tr>
+                    <tr><td>Đợt 2 năm 2027</td><td>20/11/2027 (Thứ bảy)</td><td>iBT tại điểm thi</td><td>06/11/2027</td><td>20/12/2027</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </section>
           <section class="article-section" aria-labelledby="luu-y-chuyen-doi-cong-chinesetest">
             <h2 id="luu-y-chuyen-doi-cong-chinesetest">Vì sao bấm link cũ goKdInfoOrPlan.do trên ChineseTest báo không tìm thấy?</h2>
@@ -348,6 +373,53 @@
         }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
         document.querySelectorAll('.article-section').forEach(function (sec) { observer.observe(sec); });
       }
+
+      function normText(s) {
+        return String(s || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[̀-ͯ]/g, '')
+          .replace(/đ/g, 'd');
+      }
+
+      document.querySelectorAll('.data-sheet').forEach(function (sheet) {
+        var filterBtns = sheet.querySelectorAll('[data-quarter]');
+        if (filterBtns.length) {
+          var calRows = sheet.querySelectorAll('tbody tr[data-quarter]');
+          filterBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var q = btn.getAttribute('data-quarter');
+              filterBtns.forEach(function (b) {
+                var active = b === btn;
+                b.classList.toggle('is-active', active);
+                b.setAttribute('aria-pressed', active ? 'true' : 'false');
+              });
+              calRows.forEach(function (row) {
+                row.hidden = q !== 'all' && row.getAttribute('data-quarter') !== q;
+              });
+            });
+          });
+        }
+
+        var searchInput = sheet.querySelector('.table-filter-input');
+        if (searchInput) {
+          var dataRows = Array.prototype.slice.call(sheet.querySelectorAll('tbody tr:not(.table-empty-row)'));
+          var emptyRow = sheet.querySelector('.table-empty-row');
+          var countEl = sheet.querySelector('.table-count');
+          var total = dataRows.length;
+          searchInput.addEventListener('input', function () {
+            var q = normText(searchInput.value.trim());
+            var visible = 0;
+            dataRows.forEach(function (row) {
+              var match = !q || normText(row.textContent).indexOf(q) !== -1;
+              row.hidden = !match;
+              if (match) visible++;
+            });
+            if (emptyRow) emptyRow.hidden = visible !== 0;
+            if (countEl) countEl.textContent = 'Hiển thị ' + visible + '/' + total + ' dòng';
+          });
+        }
+      });
     })();
   </script>
   <script src="../src/seo-offline-prewarm.js" defer></script>

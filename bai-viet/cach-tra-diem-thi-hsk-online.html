@@ -89,7 +89,7 @@
 
   <main id="main-content">
     <header class="article-hero" aria-labelledby="hero-title">
-      <div class="wrap article-hero-inner">
+      <div class="wrap article-wrap article-hero-inner">
         <ol class="article-crumb" aria-label="Đường dẫn">
           <li><a href="../">HSK Flashcards</a></li>
           <li><a href="../tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a></li>
@@ -113,7 +113,7 @@
     </header>
 
     <section class="band article-band" aria-label="Nội dung bài viết">
-      <div class="wrap article-shell">
+      <div class="wrap article-wrap article-shell">
         <aside class="article-toc-rail" aria-label="Mục lục bài viết">
           <nav class="article-toc-nav" aria-label="Điều hướng trong bài">
             <p class="article-toc-title">Trong bài viết</p>
@@ -147,36 +147,43 @@
             <h2 id="bao-lau-co-diem">Thi HSK xong bao lâu thì có điểm online trên ChineseTest?</h2>
             <p>Theo bảng lịch trả kết quả chính thức của ChineseTest, thời gian mở cổng tra cứu điểm trực tuyến phụ thuộc vào hình thức dự thi và từng bài thi viết hay nói:</p>
             <p>Riêng các đợt thi sát dịp Tết Nguyên đán hoặc Quốc khánh Trung Quốc (có ký hiệu ※ trên lịch thi), ngày công bố kết quả có thể lùi thêm khoảng 5–10 ngày.</p>
-            <div class="article-table-wrap"><table class="article-table"><thead><tr>
-              <th>Hình thức bài thi</th>
-              <th>Thời gian công bố điểm online</th>
-              <th>Nhận bảng điểm chứng chỉ</th>
-            </tr></thead><tbody>
-              <tr><td>Thi máy HSK (iBT at-center)</td><td>Khoảng 15 ngày sau ngày thi</td><td>Chứng chỉ gửi về điểm thi sau khoảng 1–1,5 tháng</td></tr>
-              <tr><td>Thi máy khẩu ngữ HSKK (iBT)</td><td>Khoảng 19–22 ngày sau ngày thi (sau HSK vài ngày)</td><td>Hiển thị trên cùng hệ thống tra cứu ChineseTest</td></tr>
-              <tr><td>Thi giấy HSK / HSKK (PBT)</td><td>Khoảng 30 ngày sau ngày thi</td><td>Chứng chỉ gửi về điểm thi sau khoảng 1,5–2 tháng</td></tr>
-            </tbody></table></div>
+            <div class="data-sheet is-compact" data-table-idx="0">
+              <div class="data-sheet-scroll">
+                <table class="article-table">
+                  <thead><tr>
+                    <th scope="col">Hình thức bài thi</th>
+                    <th scope="col">Thời gian công bố điểm online</th>
+                    <th scope="col">Nhận bảng điểm chứng chỉ</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td>Thi máy HSK (iBT at-center)</td><td>Khoảng 15 ngày sau ngày thi</td><td>Chứng chỉ gửi về điểm thi sau khoảng 1–1,5 tháng</td></tr>
+                    <tr><td>Thi máy khẩu ngữ HSKK (iBT)</td><td>Khoảng 19–22 ngày sau ngày thi (sau HSK vài ngày)</td><td>Hiển thị trên cùng hệ thống tra cứu ChineseTest</td></tr>
+                    <tr><td>Thi giấy HSK / HSKK (PBT)</td><td>Khoảng 30 ngày sau ngày thi</td><td>Chứng chỉ gửi về điểm thi sau khoảng 1,5–2 tháng</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </section>
           <section class="article-section" aria-labelledby="cac-buoc-tra-diem">
             <h2 id="cac-buoc-tra-diem">4 bước tra điểm thi HSK online tại chinesetest.cn/query-score</h2>
             <p>Trên giao diện mới của ChineseTest, trang tra điểm trực tiếp nằm tại đường dẫn chinesetest.cn/query-score. Bạn thao tác trên điện thoại hoặc máy tính theo 4 bước:</p>
-            <ul>
-              <li>Bước 1: Mở trang chinesetest.cn/query-score (hoặc vào trang chủ chinesetest.cn rồi bấm mục Score Inquiry).</li>
-              <li>Bước 2: Nhập chính xác Số báo danh (Admission Ticket Number — dãy 18 chữ số in trên thẻ dự thi).</li>
-              <li>Bước 3: Nhập Họ và tên thí sinh viết IN HOA KHÔNG DẤU đúng từng ký tự và dấu cách như trên Thẻ dự thi.</li>
-              <li>Bước 4: Nhập mã kiểm tra hiển thị trên màn hình và bấm Search để xem điểm từng phần Nghe – Đọc – Viết cùng kết quả HSKK.</li>
-            </ul>
+            <ol class="article-steps">
+              <li class="article-step"><span class="step-badge" aria-hidden="true">1</span><div class="step-body"><span class="step-desc">Mở trang chinesetest.cn/query-score (hoặc vào trang chủ chinesetest.cn rồi bấm mục Score Inquiry).</span></div></li>
+              <li class="article-step"><span class="step-badge" aria-hidden="true">2</span><div class="step-body"><span class="step-desc">Nhập chính xác Số báo danh (Admission Ticket Number — dãy 18 chữ số in trên thẻ dự thi).</span></div></li>
+              <li class="article-step"><span class="step-badge" aria-hidden="true">3</span><div class="step-body"><span class="step-desc">Nhập Họ và tên thí sinh viết IN HOA KHÔNG DẤU đúng từng ký tự và dấu cách như trên Thẻ dự thi.</span></div></li>
+              <li class="article-step"><span class="step-badge" aria-hidden="true">4</span><div class="step-body"><span class="step-desc">Nhập mã kiểm tra hiển thị trên màn hình và bấm Search để xem điểm từng phần Nghe – Đọc – Viết cùng kết quả HSKK.</span></div></li>
+            </ol>
             <div class="article-tip">
               <svg class="ico tip-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>
-              <p>Mẹo nhanh: Nếu bạn tự tạo tài khoản lúc đăng ký thi trên chinesetest.cn, bạn có thể đăng nhập thẳng vào trung tâm cá nhân để xem toàn bộ lịch sử thi mà không sợ gõ nhầm dãy 18 số báo danh.</p>
+              <div class="tip-content"><p class="tip-title">Mẹo nhanh</p><p class="tip-text">Nếu bạn tự tạo tài khoản lúc đăng ký thi trên chinesetest.cn, bạn có thể đăng nhập thẳng vào trung tâm cá nhân để xem toàn bộ lịch sử thi mà không sợ gõ nhầm dãy 18 số báo danh.</p></div>
             </div>
           </section>
           <section class="article-section" aria-labelledby="loi-tra-diem-khong-ra">
             <h2 id="loi-tra-diem-khong-ra">3 lỗi khiến bạn tra điểm HSK báo không tìm thấy và cách khắc phục</h2>
-            <ul>
-              <li>Sai khoảng trắng hoặc thứ tự Họ Tên: Thử bỏ khoảng trắng thừa ở cuối tên, kiểm tra viết IN HOA KHÔNG DẤU hoàn toàn đúng theo dòng Name trên thẻ dự thi.</li>
-              <li>Tra điểm HSKK cùng ngày với HSK máy: Theo lịch ChineseTest, điểm HSKK thi máy thường lên hệ thống chậm hơn điểm HSK viết từ 4 đến 7 ngày — hãy đợi đúng ngày Result Releasing Date của cột HSK Speaking Test.</li>
-              <li>Giờ mở cổng bị nghẽn mạng: Khoảng vài giờ đầu tiên trong ngày trả điểm lượng truy cập rất lớn; nếu trang tải chậm, bạn chỉ cần thử lại vào buổi chiều hoặc tối cùng ngày.</li>
+            <ul class="article-bullets">
+              <li><strong class="bullet-lead">Sai khoảng trắng hoặc thứ tự Họ Tên:</strong> Thử bỏ khoảng trắng thừa ở cuối tên, kiểm tra viết IN HOA KHÔNG DẤU hoàn toàn đúng theo dòng Name trên thẻ dự thi.</li>
+              <li><strong class="bullet-lead">Tra điểm HSKK cùng ngày với HSK máy:</strong> Theo lịch ChineseTest, điểm HSKK thi máy thường lên hệ thống chậm hơn điểm HSK viết từ 4 đến 7 ngày — hãy đợi đúng ngày Result Releasing Date của cột HSK Speaking Test.</li>
+              <li><strong class="bullet-lead">Giờ mở cổng bị nghẽn mạng:</strong> Khoảng vài giờ đầu tiên trong ngày trả điểm lượng truy cập rất lớn; nếu trang tải chậm, bạn chỉ cần thử lại vào buổi chiều hoặc tối cùng ngày.</li>
             </ul>
           </section>
           <div class="article-sources">
@@ -329,6 +336,53 @@
         }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
         document.querySelectorAll('.article-section').forEach(function (sec) { observer.observe(sec); });
       }
+
+      function normText(s) {
+        return String(s || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[̀-ͯ]/g, '')
+          .replace(/đ/g, 'd');
+      }
+
+      document.querySelectorAll('.data-sheet').forEach(function (sheet) {
+        var filterBtns = sheet.querySelectorAll('[data-quarter]');
+        if (filterBtns.length) {
+          var calRows = sheet.querySelectorAll('tbody tr[data-quarter]');
+          filterBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var q = btn.getAttribute('data-quarter');
+              filterBtns.forEach(function (b) {
+                var active = b === btn;
+                b.classList.toggle('is-active', active);
+                b.setAttribute('aria-pressed', active ? 'true' : 'false');
+              });
+              calRows.forEach(function (row) {
+                row.hidden = q !== 'all' && row.getAttribute('data-quarter') !== q;
+              });
+            });
+          });
+        }
+
+        var searchInput = sheet.querySelector('.table-filter-input');
+        if (searchInput) {
+          var dataRows = Array.prototype.slice.call(sheet.querySelectorAll('tbody tr:not(.table-empty-row)'));
+          var emptyRow = sheet.querySelector('.table-empty-row');
+          var countEl = sheet.querySelector('.table-count');
+          var total = dataRows.length;
+          searchInput.addEventListener('input', function () {
+            var q = normText(searchInput.value.trim());
+            var visible = 0;
+            dataRows.forEach(function (row) {
+              var match = !q || normText(row.textContent).indexOf(q) !== -1;
+              row.hidden = !match;
+              if (match) visible++;
+            });
+            if (emptyRow) emptyRow.hidden = visible !== 0;
+            if (countEl) countEl.textContent = 'Hiển thị ' + visible + '/' + total + ' dòng';
+          });
+        }
+      });
     })();
   </script>
   <script src="../src/seo-offline-prewarm.js" defer></script>
