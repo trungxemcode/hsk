@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 /**
  * Static SEO News & Guides Generator for HSK Flashcards.
- * Reads content/seo-articles/articles.json and renders:
- *  - tin-tuc-hsk.html (Public News & Guides Hub)
- *  - bai-viet/<slug>.html (Clean SEO article pages with Article + FAQPage + BreadcrumbList JSON-LD)
- *  - sitemap.xml (Preserves core URLs and appends all published articles)
+ * Aligned with PR #482 public site separation:
+ *  - Public homepage: / (index.html)
+ *  - Learning app: /app-hoc-hsk.html
+ *  - Shared stylesheet: src/seo-landing.css
+ *  - News Hub: tin-tuc-hsk.html (/tin-tuc-hsk)
+ *  - Articles: bai-viet/<slug>.html (/bai-viet/<slug>)
+ *  - Sitemap: sitemap.xml
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,18 +30,18 @@ export const CATEGORIES = {
 
 const FORBIDDEN_TERMS = ['hạn mức', 'hạn ngạch', 'xác minh email', 'yêu cầu đăng nhập'];
 
-const CORE_SITEMAP_URLS = [
-  `${BASE_URL}/`,
-  `${BASE_URL}/tin-tuc-hsk`,
-  `${BASE_URL}/luyen-thi-hsk-1-mien-phi`,
-  `${BASE_URL}/luyen-thi-hsk-2-mien-phi`,
-  `${BASE_URL}/luyen-thi-hsk-3-mien-phi`,
-  `${BASE_URL}/luyen-thi-hsk-4-mien-phi`,
-  `${BASE_URL}/luyen-thi-hsk-5-mien-phi`,
-  `${BASE_URL}/luyen-thi-hsk-6-mien-phi`,
-  `${BASE_URL}/sua-cau-tieng-trung-ai`,
-  `${BASE_URL}/phan-biet-tu-de-nham-hsk`,
-  `${BASE_URL}/tap-viet-chu-han-online`,
+export const SUPPORTING_SLUGS = [
+  'luyen-thi-hsk-1-mien-phi',
+  'luyen-thi-hsk-2-mien-phi',
+  'luyen-thi-hsk-3-mien-phi',
+  'luyen-thi-hsk-4-mien-phi',
+  'luyen-thi-hsk-5-mien-phi',
+  'luyen-thi-hsk-6-mien-phi',
+  'sua-cau-tieng-trung-ai',
+  'phan-biet-tu-de-nham-hsk',
+  'tap-viet-chu-han-online',
+  'tin-tuc-hsk',
+  'tra-diem-hsk',
 ];
 
 export function escHtml(value) {
@@ -96,27 +99,28 @@ const THEME_INIT_SCRIPT = `  <script>
   </script>`;
 
 function renderHeader(prefix, currentKey) {
-  const link = (slug, label, key) =>
-    `        <a href="${prefix}${slug}"${currentKey === key ? ' aria-current="page"' : ''}>${label}</a>`;
+  const link = (href, label, key) =>
+    `        <a href="${href}"${currentKey === key ? ' aria-current="page"' : ''}>${label}</a>`;
   return `  <header class="site-header">
     <div class="wrap nav-bar">
-      <a class="brand" href="${BASE_URL}/" aria-label="Mở ứng dụng HSK Flashcards">
+      <a class="brand" href="${prefix}" aria-label="Trang chủ HSK Flashcards">
         <span class="brand-mark" aria-hidden="true">汉</span>
         <span>HSK Flashcards</span>
       </a>
       <nav class="nav-links" aria-label="Điều hướng cụm trang học HSK">
-${link('', 'Học HSK cùng AI', 'hub')}
-${link('tin-tuc-hsk', 'Tin tức &amp; Mẹo HSK', 'news')}
-${link('sua-cau-tieng-trung-ai', 'Sửa câu AI', 'editor')}
-${link('phan-biet-tu-de-nham-hsk', 'Từ dễ nhầm', 'compare')}
-${link('tap-viet-chu-han-online', 'Tập viết chữ Hán', 'write')}
+${link(`${prefix}`, 'Học HSK cùng AI', 'home')}
+${link(`${prefix}tra-diem-hsk.html`, 'Tra điểm HSK', 'score')}
+${link(`${prefix}tin-tuc-hsk.html`, 'Tin tức HSK', 'news')}
+${link(`${prefix}sua-cau-tieng-trung-ai.html`, 'Sửa câu AI', 'editor')}
+${link(`${prefix}phan-biet-tu-de-nham-hsk.html`, 'Từ dễ nhầm', 'compare')}
+${link(`${prefix}tap-viet-chu-han-online.html`, 'Tập viết chữ Hán', 'write')}
       </nav>
       <div class="nav-actions">
         <button type="button" class="theme-btn" id="themeToggle" aria-label="Chuyển giao diện sáng tối" title="Chuyển sáng / tối">
           <svg class="ico ico-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
           <svg class="ico ico-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         </button>
-        <a class="btn-primary" href="${BASE_URL}/app-hoc-hsk">
+        <a class="btn-primary" href="${prefix}app-hoc-hsk.html">
           <span>Vào học ngay</span>
           <svg class="ico" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg>
         </a>
@@ -128,16 +132,17 @@ ${link('tap-viet-chu-han-online', 'Tập viết chữ Hán', 'write')}
 function renderFooter(prefix) {
   return `  <footer class="site-footer">
     <div class="wrap footer-inner">
-      <a class="brand" href="${BASE_URL}/">
+      <a class="brand" href="${prefix}">
         <span class="brand-mark" aria-hidden="true">汉</span>
         <span>HSK Flashcards</span>
       </a>
       <nav class="footer-links" aria-label="Liên kết cuối trang">
         <a href="${prefix}">Học HSK cùng AI</a>
-        <a href="${prefix}tin-tuc-hsk">Tin tức &amp; Mẹo HSK</a>
-        <a href="${prefix}luyen-thi-hsk-1-mien-phi">Luyện thi HSK 1–6</a>
-        <a href="${prefix}phan-biet-tu-de-nham-hsk">Từ dễ nhầm</a>
-        <a href="${BASE_URL}/app-hoc-hsk">Mở ứng dụng</a>
+        <a href="${prefix}tra-diem-hsk.html">Tra điểm HSK</a>
+        <a href="${prefix}tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a>
+        <a href="${prefix}luyen-thi-hsk-1-mien-phi.html">Luyện thi HSK 1–6</a>
+        <a href="${prefix}phan-biet-tu-de-nham-hsk.html">Từ dễ nhầm</a>
+        <a href="${prefix}app-hoc-hsk.html">Mở ứng dụng</a>
       </nav>
     </div>
   </footer>`;
@@ -242,7 +247,7 @@ ${sources.map((src) => `              <li><a href="${escHtml(src.url)}" target="
         <div class="faq-aside">
           <h2 id="faq-title">Câu hỏi thường gặp</h2>
           <p>Giải đáp nhanh những thắc mắc phổ biến liên quan trực tiếp tới chủ đề bài viết này.</p>
-          <a class="btn-primary" href="${BASE_URL}/app-hoc-hsk">
+          <a class="btn-primary" href="../app-hoc-hsk.html">
             <span>Hỏi thêm Gia sư AI miễn phí</span>
             <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </a>
@@ -269,7 +274,7 @@ ${faqs.map((f, i) => `          <details${i === 0 ? ' open' : ''}>
           <p>Khám phá thêm hướng dẫn kỳ thi HSK, mẹo tăng điểm và phân biệt ngữ pháp dễ hiểu.</p>
         </div>
         <div class="hub-links-grid">
-${related.map((r) => `          <a class="hub-link-card" href="./${escHtml(r.slug)}">
+${related.map((r) => `          <a class="hub-link-card" href="./${escHtml(r.slug)}.html">
             <strong><span>${escHtml(r.title)}</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
             <span>${escHtml(r.summary)}</span>
           </a>`).join('\n')}
@@ -324,13 +329,22 @@ ${renderHeader('../', 'news')}
       <span class="hero-watermark" aria-hidden="true">资讯</span>
       <div class="wrap">
         <ol class="crumb" aria-label="Đường dẫn">
-          <li><a href="${BASE_URL}/">HSK Flashcards</a></li>
-          <li><a href="../tin-tuc-hsk">Tin tức &amp; Mẹo HSK</a></li>
+          <li><a href="../">HSK Flashcards</a></li>
+          <li><a href="../tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a></li>
           <li aria-current="page">${escHtml(catLabel)}</li>
         </ol>
         <div class="hero-copy">
           <h1 id="hero-title">${escHtml(article.title)}</h1>
           <p class="hero-lead">${escHtml(article.summary)}</p>
+          <div class="hero-cta-row">
+            <a class="btn-hero-main" href="../app-hoc-hsk.html">
+              <span>Vào học HSK miễn phí ngay</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+            <a class="btn-hero-ghost" href="../tin-tuc-hsk.html">
+              <span>Xem thêm tin tức HSK</span>
+            </a>
+          </div>
           <ul class="hero-proof">
             <li><span>Chuyên mục: ${escHtml(catLabel)}</span></li>
             <li><span>Trọng tâm: ${escHtml(article.hskTag || 'HSK 1–6')}</span></li>
@@ -359,11 +373,11 @@ ${tocHtml}
           <div class="side-cta-box">
             <h3>Học HSK &amp; hỏi Gia sư AI miễn phí</h3>
             <p>Thực hành ngay đề thi thử HSK 1–6, flashcard SRS, sửa câu tiếng Trung và hỏi đáp 1–1 bằng tiếng Việt.</p>
-            <a class="btn-primary" href="${BASE_URL}/app-hoc-hsk">
+            <a class="btn-primary" href="../app-hoc-hsk.html">
               <span>Mở ứng dụng ngay</span>
               <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
             </a>
-            <a class="text-link" href="../tin-tuc-hsk">
+            <a class="text-link" href="../tin-tuc-hsk.html">
               <span>Xem tất cả bài viết HSK</span>
               <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
             </a>
@@ -382,7 +396,7 @@ ${relatedHtml}
             <h2 id="closing-title">${escHtml(cta.heading)}</h2>
             <p>${escHtml(cta.body)}</p>
           </div>
-          <a class="btn-hero-main" href="${BASE_URL}/app-hoc-hsk">
+          <a class="btn-hero-main" href="../app-hoc-hsk.html">
             <span>${escHtml(cta.buttonLabel)}</span>
             <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </a>
@@ -405,7 +419,7 @@ ${renderFooter('../')}
       }
     })();
   </script>
-  <script src="../seo-offline-prewarm.js" defer></script>
+  <script src="../src/seo-offline-prewarm.js" defer></script>
 </body>
 </html>
 `;
@@ -428,10 +442,10 @@ function renderHubHtml(articles) {
       },
       {
         '@type': 'CollectionPage',
-        name: 'Tin tức kỳ thi HSK, mẹo học & ngữ pháp tiếng Trung miễn phí',
+        name: 'Tin tức kỳ thi HSK, lịch thi 2026–2027, điểm thi & ngữ pháp miễn phí',
         url: canonical,
         inLanguage: 'vi',
-        description: 'Tổng hợp tin tức kỳ thi HSK, hướng dẫn tra điểm, thang điểm đậu HSK 1–6, cách đăng ký thi, mẹo học và phân biệt ngữ pháp tiếng Trung dễ hiểu.',
+        description: 'Cập nhật lịch thi & lịch trả điểm HSK từ chinesetest.cn, địa điểm thi tại Việt Nam, thông báo HSK 3.0, thang điểm đậu, mẹo học và ngữ pháp tiếng Trung.',
         mainEntity: {
           '@type': 'ItemList',
           itemListElement: sorted.map((a, idx) => ({
@@ -454,19 +468,19 @@ function renderHubHtml(articles) {
               <span>Cập nhật ${escHtml(formatDateVi(featured.updatedAt || featured.publishedAt))}</span>
               <span>${Number(featured.readMinutes) || 5} phút đọc</span>
             </div>
-            <h2><a href="./bai-viet/${escHtml(featured.slug)}">${escHtml(featured.title)}</a></h2>
+            <h2><a href="./bai-viet/${escHtml(featured.slug)}.html">${escHtml(featured.title)}</a></h2>
             <p>${escHtml(featured.summary)}</p>
-            <a class="btn-primary" href="./bai-viet/${escHtml(featured.slug)}">
-              <span>Đọc hướng dẫn chi tiết</span>
+            <a class="btn-primary" href="./bai-viet/${escHtml(featured.slug)}.html">
+              <span>Đọc thông tin chi tiết</span>
               <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
             </a>
           </div>
           <div class="news-featured-side">
-            <h3>Từ khóa tìm kiếm phổ biến trong bài</h3>
+            <h3>Chủ đề chính trong bài</h3>
             <ul class="news-kw-list">
 ${(featured.keywords || []).slice(0, 5).map((k) => `              <li>${escHtml(k)}</li>`).join('\n')}
             </ul>
-            <a class="text-link" href="${BASE_URL}/">
+            <a class="text-link" href="./app-hoc-hsk.html">
               <span>Vào luyện đề &amp; hỏi Gia sư AI</span>
               <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
             </a>
@@ -482,11 +496,11 @@ ${(featured.keywords || []).slice(0, 5).map((k) => `              <li>${escHtml(
               <span class="news-cat-pill">${escHtml(catLabel)}</span>
               <span>${escHtml(a.hskTag || 'HSK 1–6')}</span>
             </div>
-            <h3><a href="./bai-viet/${escHtml(a.slug)}">${escHtml(a.title)}</a></h3>
+            <h3><a href="./bai-viet/${escHtml(a.slug)}.html">${escHtml(a.title)}</a></h3>
             <p>${escHtml(a.summary)}</p>
             <div class="news-card-foot">
               <span>${escHtml(formatDateVi(a.updatedAt || a.publishedAt))} · ${Number(a.readMinutes) || 5} phút</span>
-              <a class="text-link" href="./bai-viet/${escHtml(a.slug)}">Đọc bài →</a>
+              <a class="text-link" href="./bai-viet/${escHtml(a.slug)}.html">Đọc bài →</a>
             </div>
           </article>`;
   }).join('\n');
@@ -496,8 +510,8 @@ ${(featured.keywords || []).slice(0, 5).map((k) => `              <li>${escHtml(
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Tin tức kỳ thi HSK, tra điểm, mẹo học &amp; ngữ pháp miễn phí | HSK Flashcards</title>
-  <meta name="description" content="Cập nhật hướng dẫn kỳ thi HSK: cách tra điểm thi HSK online, thang điểm đậu HSK 1–6, cách đăng ký &amp; lịch thi, mẹo luyện nghe đọc viết và phân biệt ngữ pháp tiếng Trung.">
+  <title>Tin tức kỳ thi HSK, lịch thi 2026–2027, điểm thi &amp; ngữ pháp | HSK Flashcards</title>
+  <meta name="description" content="Cập nhật chính thức từ chinesetest.cn: lịch thi &amp; lịch trả điểm HSK 2026–2027, danh sách điểm thi tại Việt Nam, thông báo HSK 3.0, cách tra điểm, mẹo học và ngữ pháp HSK.">
   <link rel="canonical" href="${canonical}">
   <link rel="icon" href="./icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="./icon-180.png">
@@ -505,13 +519,13 @@ ${(featured.keywords || []).slice(0, 5).map((k) => `              <li>${escHtml(
   <meta property="og:type" content="website">
   <meta property="og:locale" content="vi_VN">
   <meta property="og:site_name" content="HSK Flashcards">
-  <meta property="og:title" content="Tin tức kỳ thi HSK, tra điểm, mẹo học &amp; ngữ pháp miễn phí">
-  <meta property="og:description" content="Kho bài viết SEO về kỳ thi HSK (tra điểm, điểm đậu, đăng ký thi, thi máy vs thi giấy), mẹo học nhanh, phân biệt từ dễ nhầm và ngữ pháp trọng tâm.">
+  <meta property="og:title" content="Tin tức kỳ thi HSK, lịch thi 2026–2027, điểm thi &amp; ngữ pháp">
+  <meta property="og:description" content="Tổng hợp lịch thi &amp; lịch trả kết quả HSK từ chinesetest.cn, điểm thi Việt Nam, thông báo thay đổi kỳ thi HSK 3.0, mẹo học và phân biệt ngữ pháp.">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${BASE_URL}/icon-512.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tin tức kỳ thi HSK, tra điểm, mẹo học &amp; ngữ pháp miễn phí">
-  <meta name="twitter:description" content="Tra cứu nhanh hướng dẫn thi HSK, tra điểm, điểm đậu HSK 1–6, mẹo làm bài và ngữ pháp tiếng Trung dễ nhớ.">
+  <meta name="twitter:title" content="Tin tức kỳ thi HSK, lịch thi 2026–2027, điểm thi &amp; ngữ pháp">
+  <meta name="twitter:description" content="Tra cứu nhanh lịch thi HSK 2026–2027, lịch trả kết quả, địa điểm thi tại Việt Nam, cấu trúc bài thi và mẹo học HSK.">
   <meta name="twitter:image" content="${BASE_URL}/icon-512.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -529,17 +543,16 @@ ${renderHeader('./', 'news')}
       <span class="hero-watermark" aria-hidden="true">考试</span>
       <div class="wrap">
         <ol class="crumb" aria-label="Đường dẫn">
-          <li><a href="${BASE_URL}/">HSK Flashcards</a></li>
-          <li><a href="./">Học HSK cùng AI</a></li>
+          <li><a href="./">HSK Flashcards</a></li>
           <li aria-current="page">Tin tức &amp; Mẹo HSK</li>
         </ol>
         <div class="hero-copy">
-          <h1 id="hero-title">Tin tức kỳ thi HSK, hướng dẫn tra điểm, mẹo học &amp; ngữ pháp tiếng Trung</h1>
+          <h1 id="hero-title">Tin tức kỳ thi HSK chính thức, lịch thi – trả điểm, mẹo học &amp; ngữ pháp</h1>
           <p class="hero-lead">
-            Tổng hợp đầy đủ thông tin thiết thực cho người tự học HSK 1–6: cách đăng ký thi, theo dõi lịch thi, tra điểm trên chinesetest.cn, thang điểm đậu, mẹo làm bài và phân biệt ngữ pháp hay gài bẫy.
+            Đối chiếu trực tiếp từ cổng chính thức ChineseTest (chinesetest.cn): lịch thi và lịch trả điểm HSK 2026–2027, địa điểm thi tại Việt Nam, thông báo thay đổi kỳ thi HSK 3.0, cùng kho mẹo học và phân biệt ngữ pháp dễ nhớ.
           </p>
           <div class="hero-cta-row">
-            <a class="btn-hero-main" href="${BASE_URL}/app-hoc-hsk">
+            <a class="btn-hero-main" href="./app-hoc-hsk.html">
               <span>Vào luyện thi HSK miễn phí ngay</span>
               <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
             </a>
@@ -555,8 +568,8 @@ ${renderHeader('./', 'news')}
     <section class="band" id="danh-sach-bai-viet" aria-labelledby="list-title">
       <div class="wrap">
         <div class="section-head">
-          <h2 id="list-title">Kho bài viết kỳ thi HSK &amp; cẩm nang tự học</h2>
-          <p>Tìm nhanh theo chủ đề bạn đang quan tâm hoặc gõ từ khóa như “tra điểm”, “đăng ký”, “thang điểm”, “ngữ pháp”, “phân biệt”.</p>
+          <h2 id="list-title">Kho tin tức kỳ thi HSK &amp; cẩm nang tự học</h2>
+          <p>Tìm nhanh theo chủ đề bạn đang quan tâm hoặc gõ từ khóa như “lịch thi 2027”, “HSK 3.0”, “tra điểm”, “điểm thi Việt Nam”, “ngữ pháp”.</p>
         </div>
 
 ${featuredHtml}
@@ -564,7 +577,7 @@ ${featuredHtml}
         <div class="filter-bar">
           <div class="search-input-wrap">
             <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="search" id="newsSearch" class="search-input" placeholder="Tìm bài viết: tra điểm, đăng ký, HSK 4, ngữ pháp..." aria-label="Tìm bài viết HSK">
+            <input type="search" id="newsSearch" class="search-input" placeholder="Tìm bài viết: lịch thi 2027, HSK 3.0, tra điểm, ngữ pháp..." aria-label="Tìm bài viết HSK">
           </div>
           <div class="level-tabs" role="tablist" aria-label="Lọc bài viết theo chuyên mục" style="margin-bottom:0">
             <button type="button" class="level-tab" role="tab" aria-selected="true" data-cat-btn="all">Tất cả (${sorted.length})</button>
@@ -589,18 +602,22 @@ ${cardsHtml}
       <div class="wrap">
         <div class="section-head">
           <h2 id="cluster-title">Thực hành ngay với bộ công cụ học HSK 1–6 miễn phí</h2>
-          <p>Đọc xong mẹo và ngữ pháp, áp dụng liền vào luyện đề, sửa câu AI và flashcard SRS để nhớ chắc hơn.</p>
+          <p>Đọc xong lịch thi và ngữ pháp, áp dụng liền vào luyện đề, sửa câu AI và flashcard SRS để nhớ chắc hơn.</p>
         </div>
         <div class="hub-links-grid">
+          <a class="hub-link-card" href="./tra-diem-hsk.html">
+            <strong><span>Tra điểm thi HSK online trực tiếp</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
+            <span>Mở cổng ChineseTest ngay trên web kèm chuẩn hóa họ tên và tính điểm đậu HSK 1–6.</span>
+          </a>
           <a class="hub-link-card" href="./">
             <strong><span>Học HSK miễn phí cùng Gia sư AI</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
             <span>Hỏi đáp tiếng Trung 1–1 bằng tiếng Việt, giải thích đáp án đề HSK.</span>
           </a>
-          <a class="hub-link-card" href="./sua-cau-tieng-trung-ai">
+          <a class="hub-link-card" href="./sua-cau-tieng-trung-ai.html">
             <strong><span>Sửa câu tiếng Trung bằng AI</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
             <span>Kiểm tra ngữ pháp, sửa lỗi trật tự từ cho phần Viết HSK 3–6.</span>
           </a>
-          <a class="hub-link-card" href="./phan-biet-tu-de-nham-hsk">
+          <a class="hub-link-card" href="./phan-biet-tu-de-nham-hsk.html">
             <strong><span>Phân biệt 16 cặp từ dễ nhầm HSK</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
             <span>Bảng tra cứu có bộ lọc cho 16 cặp từ tiếng Trung hay thi nhất.</span>
           </a>
@@ -615,7 +632,7 @@ ${cardsHtml}
             <h2 id="closing-title">Sẵn sàng luyện thi HSK 1–6 miễn phí cùng Gia sư AI?</h2>
             <p>Mở thẳng ứng dụng trên điện thoại hoặc máy tính — hỗ trợ học offline sau lần mở đầu tiên.</p>
           </div>
-          <a class="btn-hero-main" href="${BASE_URL}/app-hoc-hsk">
+          <a class="btn-hero-main" href="./app-hoc-hsk.html">
             <span>Mở HSK Flashcards miễn phí</span>
             <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </a>
@@ -670,7 +687,7 @@ ${renderFooter('./')}
       });
     })();
   </script>
-  <script src="./seo-offline-prewarm.js" defer></script>
+  <script src="./src/seo-offline-prewarm.js" defer></script>
 </body>
 </html>
 `;
@@ -697,8 +714,11 @@ export function buildAllSeoArticles() {
   }
   fs.writeFileSync(HUB_PATH, renderHubHtml(articles), 'utf8');
 
-  // Update sitemap.xml deterministically
-  const urls = [...CORE_SITEMAP_URLS, ...articles.map((a) => `${BASE_URL}/bai-viet/${a.slug}`)];
+  const urls = [
+    `${BASE_URL}/`,
+    ...SUPPORTING_SLUGS.map((s) => `${BASE_URL}/${s}`),
+    ...articles.map((a) => `${BASE_URL}/bai-viet/${a.slug}`),
+  ];
   const uniqueUrls = [...new Set(urls)];
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
