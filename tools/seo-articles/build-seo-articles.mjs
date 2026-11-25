@@ -630,7 +630,7 @@ ${relatedHtml}
             <h2 id="closing-title">${escHtml(cta.heading)}</h2>
             <p>${escHtml(cta.body)}</p>
           </div>
-          <a class="btn-hero-main" href="../app-hoc-hsk.html">
+          <a class="btn-hero-main" href="../app-hoc-hsk.html${article.slug.includes('phan-biet') ? '#compare' : article.category === 'ngu-phap' ? '#sentence-editor' : '#study4'}">
             <span>${escHtml(cta.buttonLabel)}</span>
             <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </a>
