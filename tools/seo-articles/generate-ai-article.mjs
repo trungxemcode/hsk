@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 /**
- * AI SEO Article Generator for HSK Flashcards (Gemini API + ChineseTest Official Grounding).
+ * AI SEO Article Generator & Multi-Voice News Rewriter for HSK Flashcards.
  *
  * Usage:
- *   GEMINI_API_KEY=... node tools/seo-articles/generate-ai-article.mjs
- *   GEMINI_API_KEY=... node tools/seo-articles/generate-ai-article.mjs --sync-chinesetest --auto-exam-update
+ *   GEMINI_API_KEY=... node tools/seo-articles/generate-ai-article.mjs --auto-news-scan
+ *   GEMINI_API_KEY=... node tools/seo-articles/generate-ai-article.mjs --force-latest-news --voice hoi-dap-thuc-chien
  *   GEMINI_API_KEY=... node tools/seo-articles/generate-ai-article.mjs \
- *     --topic "Cập nhật lịch thi HSK và lịch trả điểm năm 2027" \
- *     --category ky-thi
+ *     --topic "Lộ trình ôn HSK 4 cấp tốc 60 ngày" --category meo-hoc
  *   node tools/seo-articles/generate-ai-article.mjs --list-queue
  */
 import fs from 'node:fs';
@@ -18,7 +17,10 @@ import {
   CHINESETEST_ORIGIN,
   LEGACY_SOURCE_URL,
   SNAPSHOT_PATH,
+  extractNewsId,
   formatChineseTestGroundingSummary,
+  markNewsSeen,
+  scanChineseTestNews,
   syncChineseTestOfficial,
 } from './sync-chinesetest-official.mjs';
 
@@ -26,6 +28,51 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
 const ARTICLES_PATH = path.join(ROOT, 'content/seo-articles/articles.json');
 const QUEUE_PATH = path.join(ROOT, 'content/seo-articles/topic-queue.json');
+
+export const EDITORIAL_VOICES = {
+  'cam-nang-than-thien': {
+    label: 'Cẩm nang người đi trước chia sẻ gần gũi',
+    instructions:
+      'Viết gần gũi, tự nhiên như một người từng tự học và đi thi HSK đang giải thích lại thông tin mới cho người học tại Việt Nam. Mở bài đi thẳng vào tình huống thực tế của thí sinh, câu văn ngắn gọn, đời thường, chỉ rõ tin mới này tác động thế nào đến kế hoạch ôn tập.',
+  },
+  'ban-tin-phan-tich': {
+    label: 'Bản tin phân tích sắc gọn – trọng tâm',
+    instructions:
+      'Viết theo văn phong biên tập viên giáo dục sắc sảo: 2 câu đầu chốt ngay điểm quan trọng nhất, các mục sau bóc tách mạch lạc theo hướng "Điểm thay đổi cốt lõi – Ai chịu ảnh hưởng – Việc cần chuẩn bị ngay", ngôn từ khúc chiết và dễ quét nhanh.',
+  },
+  'hoi-dap-thuc-chien': {
+    label: 'Góc giải đáp thực chiến cho thí sinh sắp thi',
+    instructions:
+      'Viết theo nhịp giải đáp trúng những câu hỏi lo lắng nhất của thí sinh khi đọc tin mới (Ai cần để ý mốc mới? Giấy tờ hay lịch ôn có đổi không? Chỗ nào dễ hiểu nhầm?). Giọng văn dứt khoát, thực tế, ưu tiên hướng dẫn từng bước.',
+  },
+  'ke-chuyen-truyen-cam-hung': {
+    label: 'Góc nhìn xu hướng & truyền động lực học HSK',
+    instructions:
+      'Viết cuốn hút, tích cực, đặt thông tin kỳ thi mới vào bức tranh rộng hơn về du học, học bổng và cơ hội nghề nghiệp tiếng Trung, giúp người đọc vừa nắm chắc dữ kiện chính thống vừa giữ hứng thú tự học mỗi ngày.',
+  },
+};
+
+export function pickEditorialVoice(seedKey = '', requestedVoice = '') {
+  const voiceKeys = Object.keys(EDITORIAL_VOICES);
+  if (requestedVoice && EDITORIAL_VOICES[requestedVoice]) {
+    return { id: requestedVoice, ...EDITORIAL_VOICES[requestedVoice] };
+  }
+  const seed = String(seedKey || Date.now());
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+  }
+  const chosenId = voiceKeys[hash % voiceKeys.length];
+  return { id: chosenId, ...EDITORIAL_VOICES[chosenId] };
+}
+
+export function inferCategoryFromNews(newsDetail) {
+  const combined = `${newsDetail?.title || ''} ${newsDetail?.bodyText || ''}`;
+  const isScoreFocused =
+    /(?:query[- ]score|\bscore\b|result\s*releas|transcript|certificate|成绩|查分|分数线)/i.test(combined) &&
+    !/(?:test\s*calendar|test\s*dates|考试日期|考试日历)/i.test(newsDetail?.title || '');
+  return isScoreFocused ? 'diem-so' : 'ky-thi';
+}
 
 export function slugifyVi(input) {
   return String(input || '')
@@ -92,6 +139,96 @@ export function defaultChineseTestSources(snapshot, category) {
   return list.slice(0, 4);
 }
 
+export function buildNewsRewritePrompt({
+  newsDetail,
+  voice,
+  slug,
+  category,
+  chineseTestSummary,
+  today,
+  existingSlugs,
+}) {
+  const catLabel = CATEGORIES[category] || CATEGORIES['ky-thi'];
+  const tablePreview =
+    Array.isArray(newsDetail?.tables) && newsDetail.tables.length
+      ? '\nBẢNG SỐ LIỆU TRONG BẢN TIN GỐC:\n' +
+        newsDetail.tables
+          .slice(0, 3)
+          .map((t, idx) => {
+            const head = t.heading ? `Bảng ${idx + 1} (${t.heading}):\n` : `Bảng ${idx + 1}:\n`;
+            return head + (t.rows || []).slice(0, 15).map((r) => '  | ' + r.join(' | ')).join('\n');
+          })
+          .join('\n')
+      : '';
+
+  return `Bạn là biên tập viên SEO giàu kinh nghiệm cho trang web học tiếng Trung miễn phí HSK Flashcards (https://hskfreelearningai.pages.dev/).
+
+NHIỆM VỤ: Từ BẢN TIN GỐC MỚI ĐĂNG trên ChineseTest dưới đây, hãy VIẾT LẠI HOÀN TOÀN thành 01 bài báo / bài viết SEO tiếng Việt mang văn phong hoàn toàn mới, tự nhiên như người Việt tìm kiếm trên Google, không sao chép cấu trúc hay dịch từng câu khô cứng của bản gốc.
+
+VĂN PHONG BẮT BUỘC LẦN NÀY — [${voice.label}]:
+${voice.instructions}
+
+BẢN TIN GỐC MỚI TRÊN CHINESETEST (NGUỒN SỰ THẬT DUY NHẤT):
+- Link gốc: ${newsDetail.url}
+- Ngày đăng gốc: ${newsDetail.publishedTime || today}
+- Tiêu đề gốc: ${newsDetail.title}
+- Nội dung chi tiết:
+"""
+${newsDetail.bodyText}
+"""${tablePreview}
+
+${chineseTestSummary ? `DỮ LIỆU ĐỐI CHIẾU THÊM TỪ CHINESETEST (${LEGACY_SOURCE_URL} -> ${CHINESETEST_ORIGIN}):\n"""\n${chineseTestSummary.slice(0, 2200)}\n"""` : ''}
+
+THÔNG TIN XUẤT BẢN:
+- Slug dự kiến (hãy tự đề xuất "suggestedSlug" tiếng Việt không dấu súc tích hơn nếu phù hợp SEO): ${slug}
+- Chuyên mục: ${category} (${catLabel})
+- Ngày cập nhật: ${today}
+- Danh sách slug hiện có để chọn 2–3 bài liên quan trong relatedSlugs: ${existingSlugs.join(', ')}
+
+NGUYÊN TẮC VÀNG (VI PHẠM SẼ BỊ TỪ CHỐI):
+1. CHỈ DÙNG dữ kiện, ngày tháng, con số, địa điểm và quy định có thật trong bản tin gốc / dữ liệu ChineseTest phía trên; TUYỆT ĐỐI KHÔNG tự bịa ngày thi, lệ phí hoặc sự kiện không có trong nguồn.
+2. ĐỔI MỚI VĂN PHONG 100%: Đặt lại tiêu đề H1 hấp dẫn chuẩn tìm kiếm tiếng Việt, sắp xếp lại bố cục 3–4 mục (H2) theo đúng văn phong [${voice.label}], thêm góc nhìn thực tế cho thí sinh tại Việt Nam.
+3. TUYỆT ĐỐI KHÔNG nhắc đến hạn chế ("hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập") và KHÔNG dùng biểu tượng emoji. Nhắc tự nhiên tới việc ôn luyện miễn phí (đề HSK 1–6, flashcard SRS, Gia sư AI giải thích tiếng Việt) trong phần kết và CTA.
+4. Luôn đưa link gốc ${newsDetail.url} vào mảng sources[].
+
+CHỈ TRẢ VỀ ĐÚNG 01 OBJECT JSON HỢP LỆ (không markdown, không giải thích ngoài JSON):
+{
+  "suggestedSlug": "slug-tieng-viet-khong-dau-chuan-seo",
+  "category": "${category}",
+  "categoryLabel": "${catLabel}",
+  "hskTag": "Tin mới ChineseTest",
+  "publishedAt": "${today}",
+  "updatedAt": "${today}",
+  "readMinutes": 5,
+  "featured": false,
+  "title": "Tiêu đề H1 mới hoàn toàn theo văn phong đã chọn",
+  "metaTitle": "Tiêu đề SEO <= 68 ký tự | HSK Flashcards",
+  "metaDescription": "Mô tả SEO 130–160 ký tự khớp ý định tìm kiếm Google của người học Việt",
+  "summary": "Tóm tắt 2 câu đi thẳng vào thông tin mới và lợi ích cho thí sinh.",
+  "keywords": ["từ khóa 1", "từ khóa 2", "từ khóa 3", "từ khóa 4"],
+  "sources": [{ "label": "Thông báo gốc trên ChineseTest", "url": "${newsDetail.url}" }],
+  "sections": [
+    {
+      "id": "muc-1",
+      "heading": "Tiêu đề mục H2 viết theo văn phong mới",
+      "paragraphs": ["Đoạn 1", "Đoạn 2"],
+      "bullets": ["Ý chính 1", "Ý chính 2"],
+      "table": { "headers": ["Mục", "Thông tin chính thức"], "rows": [["Ngày áp dụng", "..."]] },
+      "tip": "Mẹo thực tế ngắn gọn"
+    }
+  ],
+  "faqs": [
+    { "q": "Câu hỏi người Việt hay tìm về tin tức này?", "a": "Câu trả lời rõ ràng, chính xác." }
+  ],
+  "relatedSlugs": ["slug-bai-co-san-1", "slug-bai-co-san-2"],
+  "cta": {
+    "heading": "Lời kêu gọi luyện thi HSK miễn phí liên quan bản tin",
+    "body": "1 câu về Gia sư AI tiếng Việt và kho đề HSK 1–6 miễn phí.",
+    "buttonLabel": "Vào học HSK miễn phí ngay"
+  }
+}`;
+}
+
 export function buildArticlePrompt({
   topic,
   slug,
@@ -101,6 +238,7 @@ export function buildArticlePrompt({
   sourceUrl,
   sourceNotes,
   chineseTestSummary,
+  voice,
   today,
   existingSlugs,
 }) {
@@ -121,10 +259,14 @@ export function buildArticlePrompt({
     ? `NGUỒN DỮ LIỆU CHÍNH THỨC BẮT BUỘC BÁM SÁT (CHỈ ĐƯỢC DÙNG NGÀY THI, HẠN ĐĂNG KÝ, LỊCH TRẢ KẾT QUẢ, ĐỊA ĐIỂM THI VÀ THÔNG BÁO CÓ TRONG DỮ LIỆU DƯỚI ĐÂY; TUYỆT ĐỐI KHÔNG BỊA THÊM LỆ PHÍ HOẶC NGÀY THI NGOÀI DANH SÁCH):\n${combinedBlocks.join('\n\n')}`
     : `KHÔNG có thông báo lịch thi/lệ phí cụ thể đi kèm: TUYỆT ĐỐI KHÔNG tự bịa ngày thi cụ thể, hạn chót đăng ký cụ thể hay số tiền lệ phí cụ thể. Nếu nhắc đến kỳ thi/tra điểm, chỉ nêu quy trình chuẩn và khuyên đối chiếu trực tiếp tại ${CHINESETEST_ORIGIN}.`;
 
+  const voiceBlock = voice
+    ? `\nVĂN PHONG BÀI VIẾT [${voice.label}]: ${voice.instructions}\n`
+    : '';
+
   return `Bạn là biên tập viên SEO chuyên về tiếng Trung HSK cho ứng dụng học miễn phí HSK Flashcards (https://hskfreelearningai.pages.dev/).
 
 Hãy viết 01 bài viết SEO tiếng Việt chất lượng cao, tự nhiên như người Việt nghĩ gì tìm nấy trên Google, dễ đọc, có giá trị thực tế cho người tự học HSK.
-
+${voiceBlock}
 THÔNG TIN ĐẦU BÀI:
 - Chủ đề: ${topic}
 - Slug cố định: ${slug}
@@ -136,7 +278,7 @@ THÔNG TIN ĐẦU BÀI:
 
 QUY TẮC BẮT BUỘC:
 1. ${groundingRule}
-2. KHÔNG nhắc đến các điểm hạn chế như "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập". Nhấn mạnh tính năng miễn phí (Gia sư AI giải đáp tiếng Việt, sửa câu AI, luyện đề HSK 1–6, flashcard SRS, tập viết chữ Hán).
+2. KHÔNG nhắc đến các điểm hạn chế như "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập" và KHÔNG dùng emoji. Nhấn mạnh tính năng miễn phí (Gia sư AI giải đáp tiếng Việt, sửa câu AI, luyện đề HSK 1–6, flashcard SRS, tập viết chữ Hán).
 3. Viết rõ ràng, súc tích, không nhồi từ khóa phản cảm. Có 3 đến 4 mục (sections) rõ ràng; ít nhất 1 bảng dữ liệu/so sánh (table) hoặc ví dụ tiếng Trung chuẩn (chữ Hán giản thể + pinyin có dấu thanh + dịch tiếng Việt); và 2–3 câu hỏi FAQ tự nhiên chuẩn Google Search.
 4. Trích dẫn đúng các URL chính thức của ChineseTest (${CHINESETEST_ORIGIN}/...) hoặc sourceUrl (${sourceUrl || 'nếu có'}) vào mảng sources[] khi bài thuộc chuyên mục ky-thi hoặc diem-so.
 
@@ -188,8 +330,18 @@ CHỈ TRẢ VỀ ĐÚNG 01 OBJECT JSON HỢP LỆ (không markdown, không giả
 }
 
 export function normalizeGeneratedArticle(raw, defaults) {
+  let finalSlug = defaults.slug;
+  if (defaults.allowSuggestedSlug) {
+    const candidate = slugifyVi(raw.suggestedSlug || raw.title || '');
+    if (candidate.length >= 10) {
+      finalSlug = defaults.existingSlugs.includes(candidate)
+        ? `${candidate.slice(0, 62)}-${String(defaults.sourceNewsId || Date.now()).slice(-4)}`
+        : candidate;
+    }
+  }
+
   const article = {
-    slug: defaults.slug,
+    slug: finalSlug,
     category: defaults.category,
     categoryLabel: CATEGORIES[defaults.category],
     hskTag: String(raw.hskTag || defaults.hskTag || 'HSK 1–6').trim(),
@@ -197,6 +349,8 @@ export function normalizeGeneratedArticle(raw, defaults) {
     updatedAt: defaults.today,
     readMinutes: Math.max(3, Math.min(12, Number(raw.readMinutes) || 5)),
     featured: false,
+    ...(defaults.sourceNewsId ? { sourceNewsId: String(defaults.sourceNewsId) } : {}),
+    ...(defaults.editorialVoice ? { editorialVoice: String(defaults.editorialVoice) } : {}),
     title: String(raw.title || '').trim(),
     metaTitle: String(raw.metaTitle || '').trim(),
     metaDescription: String(raw.metaDescription || '').trim(),
@@ -264,7 +418,7 @@ export function normalizeGeneratedArticle(raw, defaults) {
   };
 
   if (defaults.sourceUrl && /^https?:\/\//i.test(defaults.sourceUrl) && !article.sources.some((s) => s.url === defaults.sourceUrl)) {
-    article.sources.unshift({ label: 'Nguồn thông báo chính thức đối chiếu', url: defaults.sourceUrl });
+    article.sources.unshift({ label: 'Thông báo chính thức gốc trên ChineseTest', url: defaults.sourceUrl });
   }
   for (const fallbackSource of defaults.fallbackSources || []) {
     if (!article.sources.some((s) => s.url === fallbackSource.url)) {
@@ -280,27 +434,45 @@ export function normalizeGeneratedArticle(raw, defaults) {
 }
 
 async function callGeminiJson(prompt, apiKey, model) {
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: 0.4,
-        responseMimeType: 'application/json',
-      },
-    }),
-  });
-  if (!response.ok) {
-    const errText = await response.text().catch(() => '');
-    throw new Error(`Gemini API HTTP ${response.status}: ${errText.slice(0, 300)}`);
+  const modelsToTry = Array.from(new Set([model, 'gemini-2.5-flash', 'gemini-2.0-flash'].filter(Boolean)));
+  let lastError;
+
+  for (const candidate of modelsToTry) {
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(candidate)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ role: 'user', parts: [{ text: prompt }] }],
+            generationConfig: {
+              temperature: 0.65,
+              responseMimeType: 'application/json',
+            },
+          }),
+        });
+        if (!response.ok) {
+          const errText = await response.text().catch(() => '');
+          lastError = new Error(`Gemini API (${candidate}) HTTP ${response.status}: ${errText.slice(0, 300)}`);
+          if ((response.status === 429 || response.status >= 500) && attempt < 2) {
+            await new Promise((r) => setTimeout(r, 2000));
+            continue;
+          }
+          break;
+        }
+        const payload = await response.json();
+        const text = payload?.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('').trim();
+        if (!text) throw new Error(`Gemini API (${candidate}) returned empty content`);
+        const cleaned = text.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
+        return JSON.parse(cleaned);
+      } catch (err) {
+        lastError = err;
+        if (attempt < 2) await new Promise((r) => setTimeout(r, 1500));
+      }
+    }
   }
-  const payload = await response.json();
-  const text = payload?.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('').trim();
-  if (!text) throw new Error('Gemini API returned empty content');
-  const cleaned = text.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
-  return JSON.parse(cleaned);
+  throw lastError || new Error('Gemini API request failed');
 }
 
 async function main() {
@@ -309,6 +481,8 @@ async function main() {
   const queue = JSON.parse(fs.readFileSync(QUEUE_PATH, 'utf8'));
   const articles = Array.isArray(data.articles) ? data.articles : [];
   const queueTopics = Array.isArray(queue.topics) ? queue.topics : [];
+  const today = new Date().toISOString().slice(0, 10);
+  const requestedVoice = typeof args.voice === 'string' && args.voice !== 'auto' ? args.voice : '';
 
   if (args['list-queue']) {
     const existing = new Set(articles.map((a) => a.slug));
@@ -318,11 +492,97 @@ async function main() {
     return;
   }
 
-  const prevSnapshot = loadChineseTestSnapshot();
-  let snapshot = prevSnapshot;
-  let chineseTestChanged = false;
+  let snapshot = loadChineseTestSnapshot();
+  const isNewsScanMode = Boolean(args['auto-news-scan'] || args['force-latest-news'] || args['force-news-id']);
 
+  if (isNewsScanMode) {
+    const maxNews = Math.max(1, Math.min(3, Number(args['max-news']) || 1));
+    const scan = await scanChineseTestNews({
+      fetchDetailLimit: maxNews,
+      forceLatest: Boolean(args['force-latest-news']),
+      forceNewsId: typeof args['force-news-id'] === 'string' ? args['force-news-id'] : '',
+      existingArticles: articles,
+    });
+    console.log(
+      `ChineseTest 2h news scan: discovered ${scan.discovered.length} items, ${scan.unseen.length} unseen, fetched ${scan.fetchedDetails.length} details.`
+    );
+
+    if (scan.fetchedDetails.length > 0) {
+      const apiKey = process.env.GEMINI_API_KEY || '';
+      if (!apiKey) {
+        throw new Error('Detected new ChineseTest news, but GEMINI_API_KEY is missing.');
+      }
+      const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+
+      const needsFullSnapshotSync = scan.fetchedDetails.some((d) =>
+        /calendar|test\s*date|test\s*center|hsk\s*3\.0|announcement|日历|考试日期/i.test(`${d.title} ${d.bodyText}`)
+      );
+      if (needsFullSnapshotSync || args['sync-chinesetest']) {
+        try {
+          snapshot = await syncChineseTestOfficial();
+        } catch (err) {
+          console.warn(`Warning: Full ChineseTest snapshot refresh failed (${err.message || err}); using cached snapshot.`);
+        }
+      }
+      const chineseTestSummary = snapshot ? formatChineseTestGroundingSummary(snapshot) : '';
+
+      const publishedSummaries = [];
+      for (const newsDetail of scan.fetchedDetails) {
+        const category = inferCategoryFromNews(newsDetail);
+        const voice = pickEditorialVoice(newsDetail.id, requestedVoice);
+        const existingSlugs = articles.map((a) => a.slug);
+        const fallbackSlug = slugifyVi(newsDetail.title) || `tin-tuc-hsk-chinesetest-${newsDetail.id}`;
+        const prompt = buildNewsRewritePrompt({
+          newsDetail,
+          voice,
+          slug: fallbackSlug,
+          category,
+          chineseTestSummary,
+          today,
+          existingSlugs,
+        });
+
+        console.log(`Rewriting ChineseTest #${newsDetail.id} in voice "${voice.id}" via ${model}...`);
+        const raw = await callGeminiJson(prompt, apiKey, model);
+        const article = normalizeGeneratedArticle(raw, {
+          slug: fallbackSlug,
+          allowSuggestedSlug: true,
+          category,
+          hskTag: 'Tin mới ChineseTest',
+          today,
+          existingSlugs,
+          sourceUrl: newsDetail.url,
+          sourceNewsId: newsDetail.id,
+          editorialVoice: voice.id,
+          fallbackSources: defaultChineseTestSources(snapshot, category),
+        });
+
+        articles.unshift(article);
+        markNewsSeen({
+          id: newsDetail.id,
+          url: newsDetail.url,
+          title: newsDetail.title,
+          articleSlug: article.slug,
+        });
+        publishedSummaries.push(`${article.slug} (${voice.id})`);
+      }
+
+      data.articles = articles;
+      fs.writeFileSync(ARTICLES_PATH, JSON.stringify(data, null, 2) + '\n', 'utf8');
+      const built = buildAllSeoArticles();
+      console.log(`Auto-published ${publishedSummaries.join(', ')}; rebuilt ${built.count} SEO articles (${built.urls} URLs).`);
+      return;
+    }
+
+    if (!args['fallback-queue']) {
+      console.log(`Không phát hiện tin tức mới trên chinesetest.cn (đã quét ${scan.discovered.length} tin).`);
+      return;
+    }
+  }
+
+  let chineseTestChanged = false;
   if (args['sync-chinesetest']) {
+    const prevSnapshot = snapshot;
     try {
       snapshot = await syncChineseTestOfficial();
       chineseTestChanged = Boolean(prevSnapshot?.digest && snapshot?.digest && prevSnapshot.digest !== snapshot.digest);
@@ -332,9 +592,7 @@ async function main() {
     }
   }
 
-  const today = new Date().toISOString().slice(0, 10);
   let selected;
-
   if (args.topic && typeof args.topic === 'string' && args.topic.trim()) {
     const cat = args.category && CATEGORIES[args.category] ? args.category : 'meo-hoc';
     const slug = slugifyVi(args.slug || args.topic);
@@ -379,10 +637,10 @@ async function main() {
   const sourceUrl = typeof args['source-url'] === 'string' ? args['source-url'].trim() : '';
   const sourceNotes = typeof args['source-notes'] === 'string' ? args['source-notes'].trim() : '';
 
-  const useChineseTest =
-    Boolean(args['use-chinesetest']) || selected.category === 'ky-thi' || selected.category === 'diem-so';
+  const useChineseTest = Boolean(args['use-chinesetest']) || selected.category === 'ky-thi' || selected.category === 'diem-so';
   const chineseTestSummary = useChineseTest && snapshot ? formatChineseTestGroundingSummary(snapshot) : '';
   const fallbackSources = useChineseTest && snapshot ? defaultChineseTestSources(snapshot, selected.category) : [];
+  const voice = pickEditorialVoice(selected.slug, requestedVoice);
 
   const prompt = buildArticlePrompt({
     topic: selected.topic,
@@ -393,12 +651,14 @@ async function main() {
     sourceUrl,
     sourceNotes,
     chineseTestSummary,
+    voice,
     today,
     existingSlugs,
   });
 
-  console.log(`Generating SEO article "${selected.slug}" [${selected.category}] via ${model}...`);
+  console.log(`Generating SEO article "${selected.slug}" [${selected.category}] (${voice.id}) via ${model}...`);
   const raw = await callGeminiJson(prompt, apiKey, model);
+  const sourceNewsId = extractNewsId(sourceUrl) || '';
   const article = normalizeGeneratedArticle(raw, {
     slug: selected.slug,
     category: selected.category,
@@ -406,10 +666,15 @@ async function main() {
     today,
     existingSlugs,
     sourceUrl,
+    sourceNewsId,
+    editorialVoice: voice.id,
     fallbackSources,
   });
 
   articles.unshift(article);
+  if (sourceNewsId) {
+    markNewsSeen({ id: sourceNewsId, url: sourceUrl, title: article.title, articleSlug: article.slug });
+  }
   data.articles = articles;
   fs.writeFileSync(ARTICLES_PATH, JSON.stringify(data, null, 2) + '\n', 'utf8');
   const built = buildAllSeoArticles();

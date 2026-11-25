@@ -22,6 +22,7 @@ const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
 export const SNAPSHOT_PATH = path.join(ROOT, 'content/seo-articles/chinesetest-official.json');
+export const SEEN_NEWS_PATH = path.join(ROOT, 'content/seo-articles/seen-news.json');
 export const LEGACY_SOURCE_URL = 'https://www.chinesetest.cn/goKdInfoOrPlan.do';
 export const CHINESETEST_ORIGIN = 'https://www.chinesetest.cn';
 
@@ -115,14 +116,101 @@ export function parseCalendarTables(tables) {
 export function dedupeRepeatedLead(text) {
   const clean = String(text || '').replace(/\s+/g, ' ').trim();
   const half = Math.floor(clean.length / 2);
-  for (let len = half; len >= 15; len--) {
+  for (let len = half; len >= 6; len--) {
     const prefix = clean.slice(0, len).trim();
     const rest = clean.slice(len).trim();
-    if (prefix && rest.startsWith(prefix)) {
+    if (prefix.length >= 6 && (rest === prefix || rest.startsWith(prefix + ' '))) {
       return `${prefix} ${rest.slice(prefix.length).trim()}`.trim();
     }
   }
   return clean;
+}
+
+export function extractNewsId(hrefOrUrl) {
+  const m = /\/news\/([A-Za-z0-9_-]+)/i.exec(String(hrefOrUrl || ''));
+  return m ? m[1] : '';
+}
+
+export function cleanNewsHeadline(rawText) {
+  let s = String(rawText || '').replace(/\s+/g, ' ').trim();
+  s = s.replace(/\s*(?:View Details|查看详情)(?:\s+\d{1,2}\s+\d{4}年\d{1,2}月)?.*$/i, '');
+  s = s.replace(/\s*\d{4}-\d{2}-\d{2}\s*(?:More|更多)?\s*$/i, '');
+  s = s.replace(/\s+(?:More|View Details|Announcement|查看详情|更多)\s*$/i, '');
+  return dedupeRepeatedLead(s).trim();
+}
+
+export function loadSeenNews(seenPath = SEEN_NEWS_PATH) {
+  const empty = { schema: 1, updatedAt: new Date().toISOString().slice(0, 10), seenIds: [], history: [] };
+  if (!fs.existsSync(seenPath)) return empty;
+  try {
+    const parsed = JSON.parse(fs.readFileSync(seenPath, 'utf8'));
+    return {
+      schema: 1,
+      updatedAt: String(parsed?.updatedAt || empty.updatedAt),
+      seenIds: Array.isArray(parsed?.seenIds) ? parsed.seenIds.map((id) => String(id).trim()).filter(Boolean) : [],
+      history: Array.isArray(parsed?.history) ? parsed.history : [],
+    };
+  } catch (_) {
+    return empty;
+  }
+}
+
+export function saveSeenNews(ledger, seenPath = SEEN_NEWS_PATH) {
+  const uniqueIds = Array.from(new Set((ledger?.seenIds || []).map((id) => String(id).trim()).filter(Boolean)));
+  const clean = {
+    schema: 1,
+    updatedAt: new Date().toISOString().slice(0, 10),
+    seenIds: uniqueIds,
+    history: Array.isArray(ledger?.history) ? ledger.history.slice(0, 200) : [],
+  };
+  fs.mkdirSync(path.dirname(seenPath), { recursive: true });
+  fs.writeFileSync(seenPath, JSON.stringify(clean, null, 2) + '\n', 'utf8');
+  return clean;
+}
+
+export function markNewsSeen(item, seenPath = SEEN_NEWS_PATH) {
+  const id = String(item?.id || extractNewsId(item?.url) || '').trim();
+  if (!id) return loadSeenNews(seenPath);
+  const ledger = loadSeenNews(seenPath);
+  if (!ledger.seenIds.includes(id)) ledger.seenIds.unshift(id);
+  const filteredHistory = ledger.history.filter((h) => String(h?.id || '') !== id);
+  filteredHistory.unshift({
+    id,
+    url: item?.url || `${CHINESETEST_ORIGIN}/news/${id}`,
+    title: cleanNewsHeadline(item?.title || '') || `ChineseTest News ${id}`,
+    ...(item?.articleSlug ? { articleSlug: item.articleSlug } : {}),
+    recordedAt: new Date().toISOString().slice(0, 10),
+  });
+  ledger.history = filteredHistory;
+  return saveSeenNews(ledger, seenPath);
+}
+
+export function findUnseenNewsItems(discoveredItems, seenIds = [], existingArticles = []) {
+  const seen = new Set((seenIds || []).map((id) => String(id).trim()).filter(Boolean));
+  for (const art of existingArticles || []) {
+    if (art?.sourceNewsId) seen.add(String(art.sourceNewsId).trim());
+    for (const src of art?.sources || []) {
+      const id = extractNewsId(src?.url);
+      if (id) seen.add(id);
+    }
+  }
+  const byId = new Map();
+  for (const item of discoveredItems || []) {
+    const id = String(item?.id || extractNewsId(item?.url || item?.href) || '').trim();
+    if (!id || seen.has(id) || byId.has(id)) continue;
+    byId.set(id, {
+      id,
+      url: item?.url || `${CHINESETEST_ORIGIN}/news/${id}`,
+      title: cleanNewsHeadline(item?.title || item?.text || ''),
+      foundAt: item?.foundAt || 'chinesetest.cn',
+    });
+  }
+  return Array.from(byId.values()).sort((a, b) => {
+    const na = Number(a.id);
+    const nb = Number(b.id);
+    if (Number.isFinite(na) && Number.isFinite(nb) && na !== nb) return nb - na;
+    return String(b.id).localeCompare(String(a.id));
+  });
 }
 
 export function computeSnapshotDigest(snapshot) {
@@ -192,7 +280,7 @@ async function gotoWithRetry(page, url, attempts = 2) {
   let lastErr;
   for (let i = 0; i < attempts; i++) {
     try {
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 35000 });
+      await page.goto(url, { waitUntil: 'commit', timeout: 25000 });
       return true;
     } catch (err) {
       lastErr = err;
@@ -200,6 +288,181 @@ async function gotoWithRetry(page, url, attempts = 2) {
     }
   }
   throw lastErr;
+}
+
+async function launchChromium() {
+  const { chromium } = require('playwright');
+  const launchOpts = {
+    headless: true,
+    ...(process.env.CHROME_EXECUTABLE ? { executablePath: process.env.CHROME_EXECUTABLE } : {}),
+  };
+  return chromium.launch(launchOpts);
+}
+
+async function fetchNewsDetailPage(ctx, url, fallbackTitle = '') {
+  const detailPage = await ctx.newPage();
+  try {
+    await gotoWithRetry(detailPage, url);
+    await detailPage
+      .waitForFunction(
+        () => {
+          const root = document.querySelector('#__layout') || document.body;
+          const text = root ? (root.innerText || '').trim() : '';
+          return /Published Time|发布时间|Source[：:]|来源[：:]/i.test(text) || text.length > 750;
+        },
+        null,
+        { timeout: 22000 }
+      )
+      .catch(() => {});
+    await detailPage.waitForTimeout(900);
+
+    const raw = await detailPage.evaluate((targetUrl) => {
+      const root = document.querySelector('#__layout') || document.body;
+      const fullText = (root.innerText || '').replace(/\r/g, '').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+      const idx = Math.max(fullText.indexOf('Home > News >'), fullText.indexOf('首页 > 新闻'));
+      const slice = idx !== -1 ? fullText.slice(idx + 13) : fullText.slice(200);
+      const clean = slice.split(/<\s*Previous Article|上一篇|Next Article|下一篇/i)[0].trim();
+      const flat = clean.replace(/\s+/g, ' ').trim();
+      const pubMatch = flat.match(/(?:Published Time|发布时间)[：:]\s*(\d{4}-\d{2}-\d{2})/i);
+      const beforePub = flat.split(/(?:Published Time|发布时间)[：:]/i)[0] || '';
+      const afterSource = clean.split(/(?:Source|来源)[：:][^\n]*/i)[1] || clean;
+      const tables = Array.from(document.querySelectorAll('table')).map((tbl) => {
+        let prev = tbl.previousElementSibling;
+        const headings = [];
+        for (let k = 0; k < 3 && prev; k++) {
+          const t = (prev.innerText || '').replace(/\s+/g, ' ').trim();
+          if (t) headings.unshift(t);
+          prev = prev.previousElementSibling;
+        }
+        const rows = Array.from(tbl.querySelectorAll('tr'))
+          .map((tr) => Array.from(tr.querySelectorAll('th,td')).map((c) => (c.innerText || '').replace(/\s+/g, ' ').trim()))
+          .filter((r) => r.length > 0);
+        return { heading: headings.join(' — '), rows: rows.slice(0, 25) };
+      });
+      return {
+        url: targetUrl,
+        rawTitle: beforePub.trim(),
+        publishedTime: pubMatch ? pubMatch[1] : '',
+        bodyText: afterSource.trim().slice(0, 4500),
+        tables,
+      };
+    }, url);
+
+    const id = extractNewsId(url);
+    return {
+      id,
+      url,
+      title: cleanNewsHeadline(raw.rawTitle) || cleanNewsHeadline(fallbackTitle) || `Thông báo ChineseTest #${id}`,
+      publishedTime: raw.publishedTime || '',
+      bodyText: dedupeRepeatedLead(raw.bodyText),
+      tables: raw.tables || [],
+    };
+  } finally {
+    await detailPage.close();
+  }
+}
+
+export async function scanChineseTestNews({
+  fetchDetailLimit = 1,
+  forceLatest = false,
+  forceNewsId = '',
+  seenIds,
+  existingArticles = [],
+} = {}) {
+  const browser = await launchChromium();
+  const ctx = await browser.newContext();
+  await ctx.route('**hm.baidu.com**', (r) => r.abort());
+  await ctx.route('**soboten.com**', (r) => r.abort());
+
+  try {
+    const discoveredMap = new Map();
+    const collectFromPage = async (targetPage, sourceLabel) => {
+      const anchors = await targetPage.evaluate(() => {
+        return Array.from(document.querySelectorAll('a[href^="/news/"]')).map((a) => ({
+          href: a.getAttribute('href') || '',
+          text: (a.innerText || a.textContent || '').replace(/\s+/g, ' ').trim(),
+        }));
+      });
+      for (const a of anchors) {
+        const id = extractNewsId(a.href);
+        if (!id || discoveredMap.has(id)) continue;
+        discoveredMap.set(id, {
+          id,
+          url: `${CHINESETEST_ORIGIN}/news/${id}`,
+          title: cleanNewsHeadline(a.text),
+          foundAt: sourceLabel,
+        });
+      }
+    };
+
+    const scanUrlInFreshTab = async (url, sourceLabel, readyFn, timeoutMs = 20000) => {
+      const tab = await ctx.newPage();
+      try {
+        await gotoWithRetry(tab, url);
+        await tab.waitForFunction(readyFn, null, { timeout: timeoutMs }).catch(() => {});
+        await tab.waitForTimeout(800);
+        await collectFromPage(tab, sourceLabel);
+      } catch (_) {
+      } finally {
+        await tab.close();
+      }
+    };
+
+    await Promise.all([
+      scanUrlInFreshTab(
+        `${CHINESETEST_ORIGIN}/`,
+        '/',
+        () => document.querySelectorAll('a[href^="/news/"]').length > 0,
+        18000
+      ),
+      scanUrlInFreshTab(
+        `${CHINESETEST_ORIGIN}/news`,
+        '/news',
+        () => document.querySelectorAll('a[href^="/news/"]').length > 5,
+        24000
+      ),
+    ]);
+
+    if (discoveredMap.size <= 3) {
+      await scanUrlInFreshTab(
+        `${CHINESETEST_ORIGIN}/news`,
+        '/news',
+        () => document.querySelectorAll('a[href^="/news/"]').length > 5,
+        25000
+      );
+    }
+
+    const discovered = Array.from(discoveredMap.values()).sort((a, b) => Number(b.id) - Number(a.id));
+    const effectiveSeenIds = Array.isArray(seenIds) ? seenIds : loadSeenNews().seenIds;
+    const unseen = findUnseenNewsItems(discovered, effectiveSeenIds, existingArticles);
+
+    let targets = [];
+    if (forceNewsId && String(forceNewsId).trim()) {
+      const id = extractNewsId(forceNewsId) || String(forceNewsId).trim();
+      const matched = discovered.find((d) => d.id === id);
+      targets = [{ id, url: `${CHINESETEST_ORIGIN}/news/${id}`, title: matched?.title || '' }];
+    } else if (forceLatest) {
+      targets = discovered.slice(0, fetchDetailLimit);
+    } else {
+      targets = unseen.slice(0, fetchDetailLimit);
+    }
+
+    const fetchedDetails = [];
+    for (const target of targets) {
+      try {
+        const detail = await fetchNewsDetailPage(ctx, target.url, target.title);
+        if (detail.bodyText && detail.bodyText.length >= 40) {
+          fetchedDetails.push(detail);
+        }
+      } catch (err) {
+        console.warn(`Warning: Failed fetching detail for ${target.url}: ${err.message || err}`);
+      }
+    }
+
+    return { discovered, unseen, fetchedDetails };
+  } finally {
+    await browser.close();
+  }
 }
 
 export async function syncChineseTestOfficial() {
@@ -210,8 +473,7 @@ export async function syncChineseTestOfficial() {
     } catch (_) {}
   }
 
-  const { chromium } = require('playwright');
-  const browser = await chromium.launch({ headless: true });
+  const browser = await launchChromium();
   const ctx = await browser.newContext();
   await ctx.route('**hm.baidu.com**', (r) => r.abort());
   await ctx.route('**soboten.com**', (r) => r.abort());
@@ -258,7 +520,10 @@ export async function syncChineseTestOfficial() {
       await gotoWithRetry(page, announcementUrl);
       await page
         .waitForFunction(
-          () => /Published Time[：:]\s*\d{4}-\d{2}-\d{2}/i.test((document.querySelector('#__layout') || document.body).innerText),
+          () => {
+            const root = document.querySelector('#__layout') || document.body;
+            return Boolean(root && /Published Time[：:]\s*\d{4}-\d{2}-\d{2}/i.test(root.innerText || ''));
+          },
           null,
           { timeout: 25000 }
         )
@@ -492,19 +757,38 @@ export async function syncChineseTestOfficial() {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  syncChineseTestOfficial()
-    .then((snap) => {
-      const years = Object.entries(snap.calendars)
-        .map(([y, c]) => `${y} (HSK1-6: ${c.hsk1to6.length}, HSK7-9: ${c.hsk7to9.length})`)
-        .join(', ');
-      console.log(`Synced ChineseTest official snapshot -> ${SNAPSHOT_PATH}`);
-      console.log(`- Calendars: ${years}`);
-      console.log(`- Vietnam test centers: ${snap.vietnamTestCenters.length}`);
-      console.log(`- Pinned announcement: ${snap.pinnedAnnouncement.url}`);
-      console.log(`- Digest: ${snap.digest}`);
-    })
-    .catch((err) => {
-      console.error('Failed to sync ChineseTest official data:', err.message || err);
-      process.exit(1);
-    });
+  if (process.argv.includes('--scan-news')) {
+    const articlesFile = path.join(ROOT, 'content/seo-articles/articles.json');
+    const existingArticles = fs.existsSync(articlesFile)
+      ? JSON.parse(fs.readFileSync(articlesFile, 'utf8')).articles || []
+      : [];
+    const fetchLimit = process.argv.includes('--fetch-details') ? 1 : 0;
+    scanChineseTestNews({ fetchDetailLimit: fetchLimit, existingArticles })
+      .then((res) => {
+        console.log(`Scanned ChineseTest news: ${res.discovered.length} items discovered, ${res.unseen.length} unseen.`);
+        for (const item of res.unseen) {
+          console.log(`- [NEW ${item.id}] ${item.title || '(no title)'} (${item.url})`);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed scanning ChineseTest news:', err.message || err);
+        process.exit(1);
+      });
+  } else {
+    syncChineseTestOfficial()
+      .then((snap) => {
+        const years = Object.entries(snap.calendars)
+          .map(([y, c]) => `${y} (HSK1-6: ${c.hsk1to6.length}, HSK7-9: ${c.hsk7to9.length})`)
+          .join(', ');
+        console.log(`Synced ChineseTest official snapshot -> ${SNAPSHOT_PATH}`);
+        console.log(`- Calendars: ${years}`);
+        console.log(`- Vietnam test centers: ${snap.vietnamTestCenters.length}`);
+        console.log(`- Pinned announcement: ${snap.pinnedAnnouncement.url}`);
+        console.log(`- Digest: ${snap.digest}`);
+      })
+      .catch((err) => {
+        console.error('Failed to sync ChineseTest official data:', err.message || err);
+        process.exit(1);
+      });
+  }
 }

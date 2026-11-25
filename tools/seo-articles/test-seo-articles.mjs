@@ -5,16 +5,24 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { buildAllSeoArticles, escHtml, formatDateVi, safeJsonLd, validateArticle } from './build-seo-articles.mjs';
 import {
+  EDITORIAL_VOICES,
   buildArticlePrompt,
+  buildNewsRewritePrompt,
   defaultChineseTestSources,
+  inferCategoryFromNews,
   normalizeGeneratedArticle,
+  pickEditorialVoice,
   pickNextQueueTopic,
   slugifyVi,
 } from './generate-ai-article.mjs';
 import {
   LEGACY_SOURCE_URL,
+  SEEN_NEWS_PATH,
   SNAPSHOT_PATH,
+  cleanNewsHeadline,
   dedupeRepeatedLead,
+  extractNewsId,
+  findUnseenNewsItems,
   formatChineseTestGroundingSummary,
   parseCalendarTables,
 } from './sync-chinesetest-official.mjs';
@@ -74,16 +82,50 @@ test('parseCalendarTables separates HSK 1-6 and HSK 7-9 and excludes YCT/BCT', (
   assert.equal(parsed.hsk7to9[0].resultDate, '22nd December');
 });
 
-test('dedupeRepeatedLead collapses duplicated breadcrumb/headline prefixes', () => {
+test('dedupeRepeatedLead & news scanner helpers extract IDs, clean titles, and filter unseen news', () => {
   assert.equal(
     dedupeRepeatedLead(
       'HSK 3.0 will be officially launched worldwide on December 13, 2026! HSK 3.0 will be officially launched worldwide on December 13, 2026!'
     ),
     'HSK 3.0 will be officially launched worldwide on December 13, 2026!'
   );
+
+  assert.equal(extractNewsId('/news/51619013'), '51619013');
+  assert.equal(extractNewsId('https://www.chinesetest.cn/news/51336883'), '51336883');
+  assert.equal(extractNewsId('/test-centers'), '');
+
+  assert.equal(
+    cleanNewsHeadline('2026年考试日期 2026年考试日期 2025-12-25 More'),
+    '2026年考试日期'
+  );
+  assert.equal(
+    cleanNewsHeadline('2025年考试日期 View Details 07 2025年01月'),
+    '2025年考试日期'
+  );
+
+  const unseen = findUnseenNewsItems(
+    [
+      { href: '/news/51336883', text: 'Existing announcement' },
+      { href: '/news/52000100', text: 'Brand new exam adjustment' },
+      { href: '/news/52000250', text: '2027 Spring Score Notice View Details 10 2026年12月' },
+      { href: '/news/51999999', text: 'Already cited in articles.json' },
+    ],
+    ['51336883'],
+    [{ slug: 'old-art', sources: [{ url: 'https://www.chinesetest.cn/news/51999999' }] }]
+  );
+  assert.deepEqual(
+    unseen.map((u) => u.id),
+    ['52000250', '52000100']
+  );
+  assert.equal(unseen[0].title, '2027 Spring Score Notice');
 });
 
-test('official ChineseTest snapshot exists, references goKdInfoOrPlan.do, and formats grounding summary', () => {
+test('seen-news ledger and official ChineseTest snapshot exist and validate', () => {
+  assert.ok(fs.existsSync(SEEN_NEWS_PATH), 'seen-news.json must exist');
+  const seen = JSON.parse(fs.readFileSync(SEEN_NEWS_PATH, 'utf8'));
+  assert.ok(Array.isArray(seen.seenIds) && seen.seenIds.includes('51336883'));
+  assert.ok(seen.seenIds.includes('51619013'));
+
   assert.ok(fs.existsSync(SNAPSHOT_PATH), 'chinesetest-official.json must exist');
   const snap = JSON.parse(fs.readFileSync(SNAPSHOT_PATH, 'utf8'));
   assert.equal(snap.requestedSourceUrl, LEGACY_SOURCE_URL);
@@ -99,6 +141,48 @@ test('official ChineseTest snapshot exists, references goKdInfoOrPlan.do, and fo
   const sources = defaultChineseTestSources(snap, 'ky-thi');
   assert.ok(sources.length >= 3);
   assert.ok(sources.some((s) => s.url.includes('chinesetest.cn')));
+});
+
+test('pickEditorialVoice rotates across voices and honors explicit override', () => {
+  const voiceKeys = Object.keys(EDITORIAL_VOICES);
+  assert.equal(voiceKeys.length, 4);
+
+  const explicit = pickEditorialVoice('52000100', 'hoi-dap-thuc-chien');
+  assert.equal(explicit.id, 'hoi-dap-thuc-chien');
+
+  const pickedSet = new Set();
+  for (let i = 52000000; i < 52000025; i++) {
+    pickedSet.add(pickEditorialVoice(String(i)).id);
+  }
+  assert.equal(pickedSet.size, 4, 'expected all 4 editorial voices to rotate across seed IDs');
+});
+
+test('buildNewsRewritePrompt rewrites news in fresh Vietnamese voice with strict grounding', () => {
+  const newsDetail = {
+    id: '52000999',
+    url: 'https://www.chinesetest.cn/news/52000999',
+    title: 'Notice on Score Query Window for December HSK',
+    publishedTime: '2026-11-25',
+    bodyText: 'Scores for iBT HSK on Dec 13 will open on query-score on Dec 28, 2026.',
+    tables: [],
+  };
+  assert.equal(inferCategoryFromNews(newsDetail), 'diem-so');
+
+  const voice = pickEditorialVoice('52000999', 'ban-tin-phan-tich');
+  const prompt = buildNewsRewritePrompt({
+    newsDetail,
+    voice,
+    slug: 'thong-bao-tra-diem-hsk-thang-12',
+    category: 'diem-so',
+    chineseTestSummary: 'Nguồn đối chiếu chính thức ChineseTest',
+    today: '2026-11-25',
+    existingSlugs: ['cach-tra-diem-thi-hsk-online'],
+  });
+  assert.match(prompt, /VIẾT LẠI HOÀN TOÀN/);
+  assert.match(prompt, /Bản tin phân tích sắc gọn/);
+  assert.match(prompt, /52000999/);
+  assert.match(prompt, /TUYỆT ĐỐI KHÔNG tự bịa/);
+  assert.match(prompt, /hạn mức/);
 });
 
 test('validateArticle rejects forbidden limitation phrases & invalid categories', () => {
@@ -126,7 +210,7 @@ test('validateArticle rejects forbidden limitation phrases & invalid categories'
   assert.throws(() => validateArticle({ ...base, category: 'unknown' }), /Invalid category/);
 });
 
-test('buildArticlePrompt injects ChineseTest official grounding and normalizeGeneratedArticle sanitizes AI output', () => {
+test('buildArticlePrompt & normalizeGeneratedArticle support suggestedSlug collision resolution and grounding', () => {
   const prompt = buildArticlePrompt({
     topic: 'Lịch thi HSK 2027 mới nhất',
     slug: 'lich-thi-hsk-2027-moi-nhat',
@@ -145,27 +229,34 @@ test('buildArticlePrompt injects ChineseTest official grounding and normalizeGen
 
   const normalized = normalizeGeneratedArticle(
     {
-      title: 'Lịch thi HSK 2027 chính thức trên ChineseTest',
-      metaTitle: 'Lịch thi HSK 2027 chính thức | HSK Flashcards',
-      metaDescription: 'Tra cứu lịch thi HSK 2027 và lịch trả kết quả chính thức từ ChineseTest.',
-      summary: 'Tổng hợp lịch thi và hạn đăng ký HSK 2027.',
-      keywords: ['lịch thi HSK 2027'],
-      sections: [{ heading: 'Các đợt thi đầu năm', paragraphs: ['Thông tin chi tiết từ ChineseTest.'] }],
-      faqs: [{ q: 'Xem lịch thi ở đâu?', a: 'Xem trực tiếp trên cổng ChineseTest.' }],
+      suggestedSlug: 'cach-tra-diem-thi-hsk-online',
+      title: 'Cách tra điểm thi HSK đợt mới nhất nhanh và chuẩn xác',
+      metaTitle: 'Cách tra điểm thi HSK đợt mới nhất | HSK Flashcards',
+      metaDescription: 'Hướng dẫn tra điểm thi HSK đợt mới trên ChineseTest nhanh chóng.',
+      summary: 'Hướng dẫn xem điểm mới trên ChineseTest.',
+      keywords: ['tra điểm HSK'],
+      sections: [{ heading: 'Thời gian mở cổng xem điểm', paragraphs: ['Thông tin chi tiết từ ChineseTest.'] }],
+      faqs: [{ q: 'Xem điểm ở đâu?', a: 'Xem tại chinesetest.cn/query-score.' }],
       relatedSlugs: ['khong-ton-tai'],
     },
     {
-      slug: 'lich-thi-hsk-2027-moi-nhat',
-      category: 'ky-thi',
-      hskTag: 'HSK 1–6',
+      slug: 'fallback-slug',
+      allowSuggestedSlug: true,
+      sourceNewsId: '52000999',
+      editorialVoice: 'hoi-dap-thuc-chien',
+      category: 'diem-so',
+      hskTag: 'Tin mới ChineseTest',
       today: '2026-11-25',
       existingSlugs: ['cach-tra-diem-thi-hsk-online'],
-      sourceUrl: '',
+      sourceUrl: 'https://www.chinesetest.cn/news/52000999',
       fallbackSources: [{ label: 'Lịch thi HSK 2027 (ChineseTest)', url: 'https://www.chinesetest.cn/news/51619013' }],
     }
   );
+  assert.equal(normalized.slug, 'cach-tra-diem-thi-hsk-online-0999');
+  assert.equal(normalized.sourceNewsId, '52000999');
+  assert.equal(normalized.editorialVoice, 'hoi-dap-thuc-chien');
   assert.deepEqual(normalized.relatedSlugs, ['cach-tra-diem-thi-hsk-online']);
-  assert.equal(normalized.sources[0].url, 'https://www.chinesetest.cn/news/51619013');
+  assert.equal(normalized.sources[0].url, 'https://www.chinesetest.cn/news/52000999');
 });
 
 test('pickNextQueueTopic skips already published slugs', () => {

@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "updatedAt": "2026-11-25",
+  "seenIds": [
+    "51619013",
+    "51336883",
+    "50278989",
+    "50278976",
+    "48998697",
+    "48830547",
+    "48403026",
+    "48403021",
+    "48403025",
+    "48181282",
+    "48181291",
+    "48181741"
+  ],
+  "history": [
+    {
+      "id": "51619013",
+      "url": "https://www.chinesetest.cn/news/51619013",
+      "title": "2027 Test Calendar",
+      "recordedAt": "2026-11-25"
+    },
+    {
+      "id": "51336883",
+      "url": "https://www.chinesetest.cn/news/51336883",
+      "title": "HSK 3.0 will be officially launched worldwide on December 13, 2026!",
+      "recordedAt": "2026-11-25"
+    },
+    {
+      "id": "50278989",
+      "url": "https://www.chinesetest.cn/news/50278989",
+      "title": "2026 Test Calendar",
+      "recordedAt": "2026-11-25"
+    }
+  ]
+}
