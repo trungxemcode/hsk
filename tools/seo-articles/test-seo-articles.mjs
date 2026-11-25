@@ -5,14 +5,18 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { buildAllSeoArticles, escHtml, formatDateVi, safeJsonLd, validateArticle } from './build-seo-articles.mjs';
 import {
+  DEFAULT_OPENROUTER_MODEL,
   EDITORIAL_VOICES,
   buildArticlePrompt,
   buildNewsRewritePrompt,
+  callOpenRouterJson,
   defaultChineseTestSources,
+  extractJsonObject,
   inferCategoryFromNews,
   normalizeGeneratedArticle,
   pickEditorialVoice,
   pickNextQueueTopic,
+  resolveAiConfig,
   slugifyVi,
 } from './generate-ai-article.mjs';
 import {
@@ -283,4 +287,61 @@ test('all published articles build cleanly into tin-tuc-hsk.html, bai-viet/*.htm
   const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /https:\/\/hskfreelearningai\.pages\.dev\/tin-tuc-hsk/);
   assert.match(sitemap, /https:\/\/hskfreelearningai\.pages\.dev\/bai-viet\/lich-thi-hsk-va-lich-tra-ket-qua-chinh-thuc/);
+});
+
+test('resolveAiConfig prioritizes OpenRouter with gemma-4-31b-it:free and supports Gemini fallback', () => {
+  assert.equal(DEFAULT_OPENROUTER_MODEL, 'google/gemma-4-31b-it:free');
+
+  const cfg = resolveAiConfig({ OPENROUTER_API_KEY: 'test-or-key', GEMINI_API_KEY: 'test-gem-key' }, {});
+  assert.equal(cfg.provider, 'openrouter');
+  assert.equal(cfg.model, 'google/gemma-4-31b-it:free');
+  assert.equal(cfg.fallback?.provider, 'gemini');
+
+  const customCfg = resolveAiConfig({ OPENROUTER_API_KEY: 'test-or-key', OPENROUTER_MODEL: 'custom/model:free' }, {});
+  assert.equal(customCfg.model, 'custom/model:free');
+
+  const gemOnly = resolveAiConfig({ GEMINI_API_KEY: 'test-gem-key' }, {});
+  assert.equal(gemOnly.provider, 'gemini');
+
+  const forcedGem = resolveAiConfig({ OPENROUTER_API_KEY: 'test-or-key', GEMINI_API_KEY: 'test-gem-key' }, { provider: 'gemini' });
+  assert.equal(forcedGem.provider, 'gemini');
+
+  assert.throws(() => resolveAiConfig({}, {}), /OPENROUTER_API_KEY/);
+});
+
+test('extractJsonObject parses plain, fenced, think-tagged, and prose-wrapped JSON cleanly', () => {
+  assert.deepEqual(extractJsonObject('{"ok":true,"n":2}'), { ok: true, n: 2 });
+  assert.deepEqual(extractJsonObject('<think>reasoning {ignored}</think>\n```json\n{"title":"Lịch thi HSK"}\n```'), {
+    title: 'Lịch thi HSK',
+  });
+  assert.deepEqual(extractJsonObject('Here is your JSON:\n{"text":"Brace } inside string","ok":1}\nDone.'), {
+    text: 'Brace } inside string',
+    ok: 1,
+  });
+});
+
+test('callOpenRouterJson sends correct payload and retries without response_format on HTTP 400', async () => {
+  const calls = [];
+  const fakeFetch = async (url, init) => {
+    const body = JSON.parse(init.body);
+    calls.push({ url, headers: init.headers, body });
+    if (calls.length === 1) {
+      return { ok: false, status: 400, text: async () => 'response_format json_object unsupported' };
+    }
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        choices: [{ message: { content: '```json\n{"title":"Tin mới HSK"}\n```' } }],
+      }),
+    };
+  };
+
+  const result = await callOpenRouterJson('Viết bài JSON', 'test-or-key', undefined, fakeFetch);
+  assert.deepEqual(result, { title: 'Tin mới HSK' });
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0].headers.Authorization, 'Bearer test-or-key');
+  assert.equal(calls[0].body.model, 'google/gemma-4-31b-it:free');
+  assert.deepEqual(calls[0].body.response_format, { type: 'json_object' });
+  assert.equal(calls[1].body.response_format, undefined);
 });
