@@ -1,0 +1,494 @@
+{
+  "schema": 1,
+  "requestedSourceUrl": "https://www.chinesetest.cn/goKdInfoOrPlan.do",
+  "migrationNote": "ChineseTest đã nâng cấp lên nền tảng Nuxt; đường dẫn cũ /goKdInfoOrPlan.do được tách thành /test-centers (địa điểm thi), /test-dates & /news/<id> (lịch thi & lịch trả điểm), /HSK & /regulation (cấu trúc & quy chế) và /news (thông báo mới).",
+  "resolvedUrls": {
+    "testCenters": "https://www.chinesetest.cn/test-centers",
+    "testDates": "https://www.chinesetest.cn/test-dates",
+    "examStructure": "https://www.chinesetest.cn/HSK",
+    "speakingStructure": "https://www.chinesetest.cn/HSKK",
+    "regulations": "https://www.chinesetest.cn/regulation",
+    "news": "https://www.chinesetest.cn/news",
+    "scoreInquiry": "https://www.chinesetest.cn/query-score"
+  },
+  "fetchedDate": "2026-11-25",
+  "pinnedAnnouncement": {
+    "url": "https://www.chinesetest.cn/news/51336883",
+    "title": "HSK 3.0 will be officially launched worldwide on December 13, 2026!",
+    "publishedTime": "2026-09-08",
+    "summary": "HSK 3.0 will be officially launched worldwide on December 13, 2026! This new version represents a comprehensive upgrade of the Chinese Proficiency Test (HSK) and will provide Chinese language learners, teachers of Chinese, and educational institutions worldwide with a more accurate and scientifically grounded basis for assessing Chinese language proficiency."
+  },
+  "syllabusPdfs": [
+    {
+      "label": "Test Syllabus",
+      "url": "https://hsk.cn-bj.ufileos.com/3.0/%E6%96%B0%E7%89%88HSK%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B21219.pdf"
+    },
+    {
+      "label": "Competency Profile",
+      "url": "https://hsk.cn-bj.ufileos.com/3.0/HSK3.0%E8%80%83%E8%AF%95%E8%83%BD%E5%8A%9B%E6%8F%8F%E8%BF%B0.pdf"
+    }
+  ],
+  "calendars": {
+    "2026": {
+      "url": "https://www.chinesetest.cn/news/50278989",
+      "hsk1to6": [
+        {
+          "month": "Jan.",
+          "testDate": "24th January (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "28th December 2025",
+          "regDeadlineIbt": "14th January",
+          "resultDatePbt": "※3rd March",
+          "resultDateIbtHsk": "9th February",
+          "resultDateIbtHskk": "13th February"
+        },
+        {
+          "month": "Mar.",
+          "testDate": "22nd March (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "23rd February",
+          "regDeadlineIbt": "12th March",
+          "resultDatePbt": "22nd April",
+          "resultDateIbtHsk": "7th April",
+          "resultDateIbtHskk": "13th April"
+        },
+        {
+          "month": "Apr.",
+          "testDate": "11th April (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "15th March",
+          "regDeadlineIbt": "1st April",
+          "resultDatePbt": "※15th May",
+          "resultDateIbtHsk": "27th April",
+          "resultDateIbtHskk": "※8th May"
+        },
+        {
+          "month": "May",
+          "testDate": "16th May (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "19th April",
+          "regDeadlineIbt": "6th May",
+          "resultDatePbt": "16th June",
+          "resultDateIbtHsk": "1st June",
+          "resultDateIbtHskk": "5th June"
+        },
+        {
+          "month": "Jun.",
+          "testDate": "28th June (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "1st June",
+          "regDeadlineIbt": "18th June",
+          "resultDatePbt": "28th July",
+          "resultDateIbtHsk": "13th July",
+          "resultDateIbtHskk": "20th July"
+        },
+        {
+          "month": "Jul.",
+          "testDate": "18th July (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "21st June",
+          "regDeadlineIbt": "8th July",
+          "resultDatePbt": "19th August",
+          "resultDateIbtHsk": "3rd August",
+          "resultDateIbtHskk": "7th August"
+        },
+        {
+          "month": "Aug.",
+          "testDate": "23rd August (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "27th July",
+          "regDeadlineIbt": "13th August",
+          "resultDatePbt": "23rd September",
+          "resultDateIbtHsk": "7th September",
+          "resultDateIbtHskk": "14th September"
+        },
+        {
+          "month": "Sep.",
+          "testDate": "13th September (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "17th August",
+          "regDeadlineIbt": "3rd September",
+          "resultDatePbt": "※19th October",
+          "resultDateIbtHsk": "29th September",
+          "resultDateIbtHskk": "※9th October"
+        },
+        {
+          "month": "Oct.",
+          "testDate": "17th October (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "20th September",
+          "regDeadlineIbt": "7th October",
+          "resultDatePbt": "17th November",
+          "resultDateIbtHsk": "2nd November",
+          "resultDateIbtHskk": "6th November"
+        },
+        {
+          "month": "Nov.",
+          "testDate": "7th November (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "11th October",
+          "regDeadlineIbt": "28th October",
+          "resultDatePbt": "7th December",
+          "resultDateIbtHsk": "23rd November",
+          "resultDateIbtHskk": "27th November"
+        },
+        {
+          "month": "Dec.",
+          "testDate": "13th December (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "16th November",
+          "regDeadlineIbt": "3rd December",
+          "resultDatePbt": "※15th January 2027",
+          "resultDateIbtHsk": "28th December",
+          "resultDateIbtHskk": "4th January 2027"
+        }
+      ],
+      "hsk7to9": [
+        {
+          "month": "May.",
+          "testDate": "9th May (Sat)",
+          "format": "iBT at-center",
+          "regDeadline": "25th April",
+          "resultDate": "9th June"
+        },
+        {
+          "month": "Nov.",
+          "testDate": "22nd November (Sun)",
+          "format": "iBT at-center",
+          "regDeadline": "8th November",
+          "resultDate": "22nd December"
+        }
+      ]
+    },
+    "2027": {
+      "url": "https://www.chinesetest.cn/news/51619013",
+      "hsk1to6": [
+        {
+          "month": "Jan.",
+          "testDate": "9th January (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "13th December 2026",
+          "regDeadlineIbt": "30th December 2026",
+          "resultDatePbt": "※19th February",
+          "resultDateIbtHsk": "25th January",
+          "resultDateIbtHskk": "29th January"
+        },
+        {
+          "month": "Mar.",
+          "testDate": "14th March (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "15th February",
+          "regDeadlineIbt": "4th March",
+          "resultDatePbt": "※16th April",
+          "resultDateIbtHsk": "29th March",
+          "resultDateIbtHskk": "※7th April"
+        },
+        {
+          "month": "Apr.",
+          "testDate": "10th April (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "14th March",
+          "regDeadlineIbt": "31st March",
+          "resultDatePbt": "※17th May",
+          "resultDateIbtHsk": "26th April",
+          "resultDateIbtHskk": "30th April"
+        },
+        {
+          "month": "May.",
+          "testDate": "16th May (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "19th April",
+          "regDeadlineIbt": "6th May",
+          "resultDatePbt": "16th June",
+          "resultDateIbtHsk": "31st May",
+          "resultDateIbtHskk": "7th June"
+        },
+        {
+          "month": "Jun.",
+          "testDate": "26th June (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "30th May",
+          "regDeadlineIbt": "16th June",
+          "resultDatePbt": "26th July",
+          "resultDateIbtHsk": "12th July",
+          "resultDateIbtHskk": "16th July"
+        },
+        {
+          "month": "Jul.",
+          "testDate": "18th July (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "21st June",
+          "regDeadlineIbt": "8th July",
+          "resultDatePbt": "18th August",
+          "resultDateIbtHsk": "2nd August",
+          "resultDateIbtHskk": "9th August"
+        },
+        {
+          "month": "Aug.",
+          "testDate": "21st August (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "25th July",
+          "regDeadlineIbt": "11th August",
+          "resultDatePbt": "21st September",
+          "resultDateIbtHsk": "6th September",
+          "resultDateIbtHskk": "10th September"
+        },
+        {
+          "month": "Sep.",
+          "testDate": "12th September (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "16th August",
+          "regDeadlineIbt": "2nd September",
+          "resultDatePbt": "※19th October",
+          "resultDateIbtHsk": "※28th September",
+          "resultDateIbtHskk": "※11th October"
+        },
+        {
+          "month": "Oct.",
+          "testDate": "16th October (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "19th September",
+          "regDeadlineIbt": "6th October",
+          "resultDatePbt": "16th November",
+          "resultDateIbtHsk": "1st November",
+          "resultDateIbtHskk": "5th November"
+        },
+        {
+          "month": "Nov.",
+          "testDate": "7th November (Sun)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "11th October",
+          "regDeadlineIbt": "28th October",
+          "resultDatePbt": "7th December",
+          "resultDateIbtHsk": "22nd November",
+          "resultDateIbtHskk": "29th November"
+        },
+        {
+          "month": "Dec.",
+          "testDate": "11th December (Sat)",
+          "format": "PBT+iBT at-center",
+          "regDeadlinePbt": "14th November",
+          "regDeadlineIbt": "1st December",
+          "resultDatePbt": "※14th January 2028",
+          "resultDateIbtHsk": "27th December",
+          "resultDateIbtHskk": "※4th January 2028"
+        }
+      ],
+      "hsk7to9": [
+        {
+          "month": "May.",
+          "testDate": "23rd May (Sun)",
+          "format": "iBT at-center",
+          "regDeadline": "9th May",
+          "resultDate": "23rd June"
+        },
+        {
+          "month": "Nov.",
+          "testDate": "20th November (Sat)",
+          "format": "iBT at-center",
+          "regDeadline": "6th November",
+          "resultDate": "20th December"
+        }
+      ]
+    }
+  },
+  "vietnamTestCenters": [
+    {
+      "country": "VIET NAM",
+      "city": "河内",
+      "name": "CONFUCIUS INSTITUTE AT HANOI UNIVERSITY",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "Dong Thap Province",
+      "name": "DONG THAP UNIVERSITY",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "Dong Thap Province",
+      "name": "DONG THAP UNIVERSITY(IBT)",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "岘港市",
+      "name": "Dong A University",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "岘港市",
+      "name": "Dong A University（IBT）",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "岘港(Da Nang)",
+      "name": "Duy Tan University",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "岘港",
+      "name": "Duy Tan University(IBT)",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "Quang Ninh",
+      "name": "HALONG UNIVERSITY",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "河内",
+      "name": "Hanoi National University of Education",
+      "types": "HSK,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "河内 HA NOI",
+      "name": "Hanoi Pedagogical University 2",
+      "types": "HSK,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "河内",
+      "name": "Hanoi Pedagogical University 2（IBT）",
+      "types": "HSK,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "海外城市",
+      "name": "Khoa Ngoai ngu - DHTN",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "河内",
+      "name": "PHENIKAA University",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "河内市",
+      "name": "PHENIKAA University",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "太原",
+      "name": "Thai Nguyen University HSK Computer-based Test Center",
+      "types": "HSK,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "AN CUU WARD",
+      "name": "Trường Đại học Ngoại ngữ-Đại học Huế, Việt Nam",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "Hue City",
+      "name": "University of Foreign Languages and International Studies, Hue University(IBT)",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "河内",
+      "name": "University of Mining and Geology -Lang Son Campus",
+      "types": "HSK,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "Lang Son",
+      "name": "University of Mining and Geology -Lang Son Campus(IBT)",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "Hồ Chí Minh",
+      "name": "University of Social Sciences and Humanities, Viet Nam National University -Ho Chi Minh City",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "HANOI",
+      "name": "VIETNAM NATIONAL UNIVERSITY, HANOI COLLEGE OF FOREIGN LANGUAGES",
+      "types": "HSK,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "河内",
+      "name": "VIETNAM NATIONAL UNIVERSITY, HANOI COLLEGE OF FOREIGN LANGUAGES(IBT)",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "乂安省",
+      "name": "Vinh University",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "HO CHI MINH CITY",
+      "name": "ĐAI HOC SU PHAM THANH PHO HOCHI MINH - VIETNAM",
+      "types": "HSK,HSKK,HSKK"
+    },
+    {
+      "country": "VIET NAM",
+      "city": "HO CHI MINH CITY",
+      "name": "ĐAI HOC SU PHAM THANH PHO HOCHI MINH - VIETNAM（IBT）",
+      "types": "HSK,BCT,YCT,HSKK,HSKK"
+    }
+  ],
+  "examStructure": {
+    "levelsSupported": [
+      "Level 1",
+      "Level 2",
+      "Level 3",
+      "Level 4",
+      "Level 5",
+      "Level 6",
+      "Level 7-9"
+    ],
+    "summary": "What is HSK? The Chinese Proficiency Test/HSK is an international standardized test for Chinese language proficiency organized by CTI Co., Ltd. (CTI), a specialized international Chinese language education and testing service company. HSK assesses Chinese learners' abilities to use Chinese as a second language in their daily, academic, and professional lives through a standardized test and evaluation with a uniform grading and scoring system. Why choose HSK? HSK scores have become a requirement to prove Chinese language proficiency for international students to apply for admission, graduation, and scholarship in China. For foreigners looking to work in China, a high HSK score can help demonstrate that proficiency to employers and government officials, and better the chances of obtaining a working visa. The uses of HSK scores can be found at： College enrollment, level learning, course exe"
+  },
+  "recentNews": [
+    {
+      "url": "https://www.chinesetest.cn/news/50278976",
+      "title": "2026年考试日期 2026年考试日期 2025-12-25 More"
+    },
+    {
+      "url": "https://www.chinesetest.cn/news/48998697",
+      "title": "2025年考试日期 2025年考试日期 View Details 07 2025年01月"
+    },
+    {
+      "url": "https://www.chinesetest.cn/news/48830547",
+      "title": "2025年中文水平考试日历发布！ 2025年中文水平考试日历发布！ View Details 22 2024年10月"
+    },
+    {
+      "url": "https://www.chinesetest.cn/news/48403026",
+      "title": "菲律宾第二届HSK留学中国与就业展在马尼拉举办 盛况空前 || 菲律宾第二届HSK留学中国与就业展在马尼拉举办 View Details 07 2024年04月"
+    },
+    {
+      "url": "https://www.chinesetest.cn/news/48403021",
+      "title": "东盟高等教育论坛成功举办! 盛况！中马建交50周年 | 马来西亚第二届HSK留学中国与就业展暨中国-东盟高等教育论坛成功举办 View Details 07 2024年04月"
+    },
+    {
+      "url": "https://www.chinesetest.cn/news/48403025",
+      "title": "文莱首届HSK留学中国交流会暨中文学习测试中心授牌仪式成功举办！ 3月19日，文莱首届HSK留学中国交流会暨中文学习测试中心授牌仪式成功举办。中国驻文莱特命全权大使肖建国，文莱中华中学董事长杨德振、校长许月兰，汉考国际董事长李佩泽应邀出席并致辞，HSK留学展代表团、文莱各华校校长、师生和家长代表等约500人出席活动。 View Details 07 2024年04月"
+    },
+    {
+      "url": "https://www.chinesetest.cn/news/48181282",
+      "title": "同比增长130%，2024年HSK开门红 新年伊始，全球考点马不停蹄投入到为考生提供优质考试服务的工作中。1月，共有57个国家的264个考点举办中文水平考试HSK，考生人数达5.3万人，同比2023年同期增长130%。 View Details 06 2024年02月"
+    },
+    {
+      "url": "https://www.chinesetest.cn/news/48181291",
+      "title": "中文考试服务网移动端正式上线 中文考试服务网移动端适配版今日正式上线！移动端实现掌上便捷操作，让考生随时随地与HSK零距离。 View Details 06 2024年02月"
+    }
+  ],
+  "digest": "1b1a13a7fef1cfc1"
+}

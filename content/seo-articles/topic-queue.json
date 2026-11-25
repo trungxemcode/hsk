@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "topics": [
+    {
+      "slug": "quy-che-phong-thi-hsk-tren-may-va-tren-giay-chinesetest",
+      "category": "ky-thi",
+      "hskTag": "Quy chế ChineseTest",
+      "topic": "Quy chế phòng thi HSK trên giấy (PBT) và trên máy (iBT) theo hướng dẫn chính thức ChineseTest: giấy tờ tùy thân, ảnh thẻ và lưu ý tránh phạm quy",
+      "keywords": ["quy chế thi HSK", "thi HSK trên máy hay trên giấy", "đi thi HSK cần mang gì", "chinesetest quy định"]
+    },
+    {
+      "slug": "cau-truc-bai-thi-khau-ngu-hskk-so-trung-cao-cap",
+      "category": "ky-thi",
+      "hskTag": "HSKK Khẩu ngữ",
+      "topic": "Cấu trúc bài thi nói HSKK Sơ cấp, Trung cấp, Cao cấp trên ChineseTest và mẹo luyện phản xạ nói ghi điểm cao",
+      "keywords": ["cấu trúc đề thi HSKK", "thi HSK kèm HSKK", "kinh nghiệm thi HSKK trung cấp", "luyện nói tiếng Trung AI"]
+    },
+    {
+      "slug": "lo-trinh-tu-hoc-hsk-1-den-hsk-3-cho-nguoi-moi",
+      "category": "meo-hoc",
+      "hskTag": "HSK 1–3",
+      "topic": "Lộ trình tự học HSK 1 đến HSK 3 tại nhà miễn phí cho người mới bắt đầu từ con số 0",
+      "keywords": ["tự học HSK tại nhà", "lộ trình học HSK 1 đến 3", "học tiếng Trung từ con số 0 miễn phí"]
+    },
+    {
+      "slug": "cach-hoc-tu-vung-hsk-lau-quen-bang-flashcard-srs",
+      "category": "meo-hoc",
+      "hskTag": "Từ vựng HSK",
+      "topic": "Cách học từ vựng HSK nhớ lâu không bị quên bằng phương pháp lặp lại ngắt quãng SRS và âm Hán Việt",
+      "keywords": ["cách học từ vựng HSK nhanh thuộc", "học từ vựng tiếng Trung bằng flashcard", "ôn từ vựng SRS"]
+    },
+    {
+      "slug": "phan-biet-de-de-de-trong-tieng-trung-hsk",
+      "category": "ngu-phap",
+      "hskTag": "HSK 2–4",
+      "topic": "Phân biệt 的, 地, 得 (3 chữ đích/đắc) trong tiếng Trung dễ nhớ nhất khi thi HSK",
+      "keywords": ["phân biệt 的 地 得", "cách dùng 的 地 得 tiếng Trung", "ngữ pháp HSK 3"]
+    },
+    {
+      "slug": "meo-lam-phan-viet-sap-xep-cau-hsk-3-va-4",
+      "category": "meo-hoc",
+      "hskTag": "HSK 3–4",
+      "topic": "Mẹo làm phần Viết sắp xếp từ thành câu trong đề thi HSK 3 và HSK 4 ít sai nhất",
+      "keywords": ["mẹo sắp xếp câu HSK 4", "luyện viết HSK 3", "trật tự câu tiếng Trung"]
+    },
+    {
+      "slug": "cach-xin-cap-lai-hoac-gui-chung-chi-diem-hsk-chinesetest",
+      "category": "diem-so",
+      "hskTag": "Chứng chỉ HSK",
+      "topic": "Hướng dẫn xem phiếu điểm HSK trực tuyến và thủ tục liên quan chứng chỉ điểm HSK trên hệ thống ChineseTest",
+      "keywords": ["chứng chỉ HSK bao lâu có", "phiếu điểm HSK", "tra chứng chỉ HSK online"]
+    },
+    {
+      "slug": "phan-biet-bo-ngu-ket-qua-va-bo-ngu-kha-nang-hsk",
+      "category": "ngu-phap",
+      "hskTag": "HSK 3–4",
+      "topic": "Phân biệt bổ ngữ kết quả và bổ ngữ khả năng trong tiếng Trung (看得见, 听不懂, 买不到)",
+      "keywords": ["bổ ngữ kết quả tiếng Trung", "bổ ngữ khả năng tiếng Trung", "ngữ pháp HSK 3 4"]
+    },
+    {
+      "slug": "cach-viet-doan-van-80-chu-hsk-5-an-diem",
+      "category": "meo-hoc",
+      "hskTag": "HSK 5",
+      "topic": "Cách viết đoạn văn 80 chữ trong đề thi HSK 5 mạch lạc, đủ từ khóa và ít lỗi ngữ pháp",
+      "keywords": ["cách viết đoạn văn HSK 5", "mẹo viết 80 chữ HSK 5", "luyện viết HSK 5 miễn phí"]
+    },
+    {
+      "slug": "6-nhom-loi-cau-benh-ngu-hsk-6-thuong-gap",
+      "category": "ngu-phap",
+      "hskTag": "HSK 6",
+      "topic": "6 nhóm lỗi câu bệnh ngữ (语病) hay ra nhất trong Đọc hiểu phần 1 đề thi HSK 6",
+      "keywords": ["câu bệnh ngữ HSK 6", "mẹo tìm câu sai HSK 6", "ngữ pháp HSK 6"]
+    },
+    {
+      "slug": "phan-biet-cai-va-jiu-trong-tieng-trung-hsk",
+      "category": "ngu-phap",
+      "hskTag": "HSK 3–4",
+      "topic": "Phân biệt 才 (cái) và 就 (jiù) chi tiết theo ngữ cảnh thời gian, số lượng và điều kiện",
+      "keywords": ["phân biệt 才 và 就", "cách dùng 就 và 才 tiếng Trung"]
+    },
+    {
+      "slug": "cach-luyen-phat-am-4-thanh-dieu-tieng-trung-chuan",
+      "category": "meo-hoc",
+      "hskTag": "HSK 1–2",
+      "topic": "Cách luyện phát âm 4 thanh điệu tiếng Trung và quy tắc biến điệu 一, 不 chuẩn cho người Việt",
+      "keywords": ["4 thanh điệu tiếng Trung", "quy tắc biến điệu tiếng Trung", "luyện phát âm tiếng Trung miễn phí"]
+    },
+    {
+      "slug": "phan-biet-xiang-yao-hui-neng-keyi-hsk",
+      "category": "ngu-phap",
+      "hskTag": "HSK 1–3",
+      "topic": "Phân biệt 5 động từ năng nguyện hay nhầm nhất: 想, 要, 会, 能, 可以 kèm bài tập ví dụ",
+      "keywords": ["phân biệt 想 và 要", "phân biệt 会 能 可以", "động từ năng nguyện tiếng Trung"]
+    },
+    {
+      "slug": "cach-dung-ai-de-tu-hoc-tieng-trung-hsk-hieu-qua",
+      "category": "meo-hoc",
+      "hskTag": "Học HSK cùng AI",
+      "topic": "5 cách hỏi Gia sư AI giúp tự học tiếng Trung HSK nhanh gấp đôi mà không bị phụ thuộc dịch máy",
+      "keywords": ["học tiếng Trung bằng AI", "cách hỏi AI học HSK", "gia sư AI tiếng Trung miễn phí"]
+    },
+    {
+      "slug": "phan-biet-guo-zhe-le-tro-tu-dong-thai-hsk",
+      "category": "ngu-phap",
+      "hskTag": "HSK 2–3",
+      "topic": "Phân biệt 3 trợ từ động thái 了, 着, 过 trong tiếng Trung kèm ví dụ dễ nhớ",
+      "keywords": ["phân biệt 了 着 过", "trợ từ động thái tiếng Trung", "cách dùng 着 trong tiếng Trung"]
+    },
+    {
+      "slug": "cach-tu-luyen-nghe-tieng-trung-qua-nhac-va-truyen",
+      "category": "meo-hoc",
+      "hskTag": "HSK 1–6",
+      "topic": "Cách luyện nghe tiếng Trung tự nhiên qua bài hát và đọc truyện theo cấp HSK mỗi ngày",
+      "keywords": ["học tiếng Trung qua bài hát", "đọc truyện tiếng Trung có pinyin", "luyện nghe tiếng Trung miễn phí"]
+    },
+    {
+      "slug": "cach-nho-bo-thu-chu-han-nhanh-cho-nguoi-moi",
+      "category": "meo-hoc",
+      "hskTag": "Chữ Hán HSK",
+      "topic": "25 bộ thủ chữ Hán phổ biến nhất giúp người mới học HSK nhớ mặt chữ nhanh và ít quên nét",
+      "keywords": ["bộ thủ chữ Hán phổ biến", "cách nhớ chữ Hán nhanh", "tự học chữ Hán HSK"]
+    },
+    {
+      "slug": "phan-biet-cang-lien-tu-jiu-cai-hai-dou-ye-hsk",
+      "category": "ngu-phap",
+      "hskTag": "HSK 3–4",
+      "topic": "Phân biệt các phó từ hay đi chung với liên từ trong HSK 4: 都, 也, 还, 却, 仍然",
+      "keywords": ["phó từ tiếng Trung HSK 4", "cách dùng 却 trong tiếng Trung", "ngữ pháp HSK 4"]
+    }
+  ]
+}

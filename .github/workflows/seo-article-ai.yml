@@ -1,0 +1,156 @@
+name: AI SEO News Article Draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Chủ đề bài viết (để trống để tự lấy bản tin ChineseTest mới hoặc chủ đề kế tiếp trong topic-queue.json)'
+        required: false
+        default: ''
+      category:
+        description: 'Chuyên mục (auto / ky-thi / diem-so / meo-hoc / ngu-phap)'
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - ky-thi
+          - diem-so
+          - meo-hoc
+          - ngu-phap
+      sync_chinesetest:
+        description: 'Đồng bộ trực tiếp lịch thi, lịch trả điểm, điểm thi Việt Nam & thông báo từ chinesetest.cn trước khi viết'
+        required: false
+        default: true
+        type: boolean
+      source_url:
+        description: 'Link nguồn bổ sung (nếu có thêm thông báo từ điểm thi cụ thể)'
+        required: false
+        default: ''
+      source_notes:
+        description: 'Ghi chú chính thức bổ sung (AI chỉ dùng dữ liệu từ chinesetest.cn & ghi chú này, không tự bịa)'
+        required: false
+        default: ''
+  schedule:
+    # 09:00 sáng Thứ Hai hàng tuần (giờ Việt Nam UTC+7)
+    - cron: '0 2 * * 1'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  draft-seo-article:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies & Playwright Chromium
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check GEMINI_API_KEY secret
+        id: keycheck
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "has_key=false" >> "$GITHUB_OUTPUT"
+            echo "GEMINI_API_KEY secret chưa được cấu hình trong Repository Secrets -> Settings -> Secrets and variables -> Actions."
+            exit 0
+          fi
+          echo "has_key=true" >> "$GITHUB_OUTPUT"
+
+      - name: Sync ChineseTest & generate AI SEO article
+        if: steps.keycheck.outputs.has_key == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          INPUT_TOPIC: ${{ inputs.topic }}
+          INPUT_CATEGORY: ${{ inputs.category }}
+          INPUT_SYNC_CT: ${{ inputs.sync_chinesetest }}
+          INPUT_SOURCE_URL: ${{ inputs.source_url }}
+          INPUT_SOURCE_NOTES: ${{ inputs.source_notes }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          ARGS=()
+          if [ "$EVENT_NAME" = "schedule" ] || [ "$INPUT_SYNC_CT" != "false" ]; then
+            ARGS+=(--sync-chinesetest --auto-exam-update)
+          fi
+          if [ -n "$INPUT_TOPIC" ]; then
+            ARGS+=(--topic "$INPUT_TOPIC")
+          fi
+          if [ -n "$INPUT_CATEGORY" ] && [ "$INPUT_CATEGORY" != "auto" ]; then
+            ARGS+=(--category "$INPUT_CATEGORY")
+          fi
+          if [ -n "$INPUT_SOURCE_URL" ]; then
+            ARGS+=(--source-url "$INPUT_SOURCE_URL")
+          fi
+          if [ -n "$INPUT_SOURCE_NOTES" ]; then
+            ARGS+=(--source-notes "$INPUT_SOURCE_NOTES")
+          fi
+          node tools/seo-articles/generate-ai-article.mjs "${ARGS[@]}"
+
+      - name: Verify SEO generator tests & sync PWA revision
+        if: steps.keycheck.outputs.has_key == 'true'
+        run: |
+          if [ -z "$(git status --porcelain content/seo-articles/articles.json bai-viet/ tin-tuc-hsk.html sitemap.xml)" ]; then
+            echo "Không có bài viết mới để tạo PR."
+            exit 0
+          fi
+          node --test tools/seo-articles/test-seo-articles.mjs
+          python tools/prepare-pwa-release.py --keep-release --note "Thêm bài viết tin tức SEO HSK"
+          node tools/check-seo-entry-dom.cjs
+          python tools/check-pwa-release.py --base origin/main
+          python tools/check-feature-preservation.py --base origin/main
+
+      - name: Create Pull Request for owner review
+        if: steps.keycheck.outputs.has_key == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "$(git status --porcelain content/seo-articles/articles.json)" ]; then
+            exit 0
+          fi
+          SLUG=$(node -e "const d=require('./content/seo-articles/articles.json'); console.log(d.articles[0].slug);")
+          TITLE=$(node -e "const d=require('./content/seo-articles/articles.json'); console.log(d.articles[0].title);")
+          BRANCH="seo/article-${SLUG}-$(date +%Y%m%d%H%M)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add content/seo-articles/ tin-tuc-hsk.html bai-viet/ sitemap.xml app-version.json offline.js offline-worker.js OneSignalSDKWorker.js
+          git commit -m "seo: thêm bài viết AI — ${TITLE}"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "seo: thêm bài viết HSK — ${TITLE}" \
+            --body "$(cat <<EOF
+          ## Bài viết SEO mới do AI soạn bản nháp (đối chiếu ChineseTest)
+
+          - **Tiêu đề:** ${TITLE}
+          - **URL dự kiến:** \`https://hskfreelearningai.pages.dev/bai-viet/${SLUG}\`
+          - **Nguồn đối chiếu kỳ thi:** \`https://www.chinesetest.cn\` (\`content/seo-articles/chinesetest-official.json\`)
+          - **Tự động cập nhật:** \`tin-tuc-hsk.html\`, \`sitemap.xml\`, và PWA revision.
+
+          ## Khai báo giao diện (Layout & UI Scope Declaration)
+          - **Phạm vi thay đổi:** Chỉ thêm bài viết SEO tĩnh trong \`bai-viet/\` và cập nhật danh sách tại \`tin-tuc-hsk.html\`.
+          - **Ứng dụng học chính (\`app-hoc-hsk.html\` — 22 route SPA):** Không thay đổi giao diện.
+
+          > Hãy rà soát nhanh nội dung (đặc biệt ngày thi / điểm thi / nguồn đối chiếu nếu là bài kỳ thi) rồi bấm Merge PR để xuất bản.
+          EOF
+          )"
