@@ -29,6 +29,20 @@ assert.equal(manifest.id, './');
 assert.equal(manifest.scope, './');
 assert.equal(manifest.start_url, './app-hoc-hsk.html');
 
+const expectedHashes = {
+  '': '',
+  'sua-cau-tieng-trung-ai': '#sentence-editor',
+  'tap-viet-chu-han-online': '#writing',
+  'phan-biet-tu-de-nham-hsk': '#ai-qa',
+  'tra-diem-hsk': '#study4',
+  'luyen-thi-hsk-1-mien-phi': '#study4/1',
+  'luyen-thi-hsk-2-mien-phi': '#study4/2',
+  'luyen-thi-hsk-3-mien-phi': '#study4/3',
+  'luyen-thi-hsk-4-mien-phi': '#study4/4',
+  'luyen-thi-hsk-5-mien-phi': '#study4/5',
+  'luyen-thi-hsk-6-mien-phi': '#study4/6',
+};
+
 for (const base of [production, 'https://trungxemcode.github.io/hsk/']) {
   const appURL = new URL(manifest.start_url, base).href;
   for (const slug of ['', ...supportingPages]) {
@@ -37,7 +51,7 @@ for (const base of [production, 'https://trungxemcode.github.io/hsk/']) {
     const { document } = window;
     assert.equal(document.querySelector('link[rel="canonical"]').href, production + slug);
     assert.equal(document.querySelector('.brand').href, base);
-    assert.equal(document.querySelector('a.btn-hero-main').href, appURL);
+    assert.equal(document.querySelector('a.btn-hero-main').href, appURL + (expectedHashes[slug] || ''));
     assert.equal(document.querySelector('#studioHome'), null);
     if (!slug) {
       const links = new Set([...document.querySelectorAll('a')].map(link => link.href));
