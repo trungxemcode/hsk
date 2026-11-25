@@ -261,7 +261,10 @@ function renderArticleHtml(article, bySlug) {
             </div>`);
     }
     if (s.tip) {
-      parts.push(`            <div class="article-tip">${escHtml(s.tip)}</div>`);
+      parts.push(`            <div class="article-tip">
+              <svg class="ico tip-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>
+              <p>${escHtml(s.tip)}</p>
+            </div>`);
     }
     parts.push('          </section>');
     return parts.join('\n');
@@ -304,11 +307,18 @@ ${faqs.map((f, i) => `          <details${i === 0 ? ' open' : ''}>
           <h2 id="related-title">Bài viết liên quan nên đọc tiếp</h2>
           <p>Khám phá thêm hướng dẫn kỳ thi HSK, mẹo tăng điểm và phân biệt ngữ pháp dễ hiểu.</p>
         </div>
-        <div class="hub-links-grid">
-${related.map((r) => `          <a class="hub-link-card" href="./${escHtml(r.slug)}.html">
-            <strong><span>${escHtml(r.title)}</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
-            <span>${escHtml(r.summary)}</span>
-          </a>`).join('\n')}
+        <div class="news-grid related-grid">
+${related.map((r) => {
+  const rCatLabel = r.categoryLabel || CATEGORIES[r.category];
+  return `          <article class="news-card">
+            <h3><a href="./${escHtml(r.slug)}.html">${escHtml(r.title)}</a></h3>
+            <p>${escHtml(r.summary)}</p>
+            <div class="news-card-foot">
+              <span class="cat-badge cat-${escHtml(r.category)}">${escHtml(rCatLabel)}</span>
+              <a class="text-link" href="./${escHtml(r.slug)}.html">Đọc bài →</a>
+            </div>
+          </article>`;
+}).join('\n')}
         </div>
       </div>
     </section>`
@@ -353,64 +363,61 @@ ${THEME_INIT_SCRIPT}
 ${renderHeader('../', 'news')}
 
   <main id="main-content">
-    <section class="hero hero-compact" aria-labelledby="hero-title">
-      <span class="hero-watermark" aria-hidden="true">资讯</span>
-      <div class="wrap">
-        <ol class="crumb" aria-label="Đường dẫn">
+    <header class="article-hero" aria-labelledby="hero-title">
+      <div class="wrap article-hero-inner">
+        <ol class="article-crumb" aria-label="Đường dẫn">
           <li><a href="../">HSK Flashcards</a></li>
           <li><a href="../tin-tuc-hsk.html">Tin tức &amp; Mẹo HSK</a></li>
           <li aria-current="page">${escHtml(catLabel)}</li>
         </ol>
-        <div class="hero-copy">
-          <h1 id="hero-title">${escHtml(article.title)}</h1>
-          <p class="hero-lead">${escHtml(article.summary)}</p>
-          <div class="hero-cta-row">
-            <a class="btn-hero-main" href="../app-hoc-hsk.html">
-              <span>Vào học HSK miễn phí ngay</span>
-              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-            </a>
-            <a class="btn-hero-ghost" href="../tin-tuc-hsk.html">
-              <span>Xem thêm tin tức HSK</span>
-            </a>
+        <h1 id="hero-title">${escHtml(article.title)}</h1>
+        <p class="article-deck">${escHtml(article.summary)}</p>
+        <div class="article-meta-bar">
+          <div class="article-meta-items">
+            <span class="cat-badge cat-${escHtml(article.category)}">${escHtml(catLabel)}</span>
+            <span>${escHtml(article.hskTag || 'HSK 1–6')}</span>
+            <span>Cập nhật ${escHtml(formatDateVi(updatedAt))}</span>
+            <span>Đọc ${Number(article.readMinutes) || 5} phút</span>
+            ${sources.length ? '<span>Đối chiếu ChineseTest</span>' : ''}
           </div>
-          <ul class="hero-proof">
-            <li><span>Chuyên mục: ${escHtml(catLabel)}</span></li>
-            <li><span>Trọng tâm: ${escHtml(article.hskTag || 'HSK 1–6')}</span></li>
-            <li><span>Cập nhật: ${escHtml(formatDateVi(updatedAt))}</span></li>
-            <li><span>Đọc khoảng ${Number(article.readMinutes) || 5} phút</span></li>
-          </ul>
+          <a class="text-link article-back-link" href="../tin-tuc-hsk.html">
+            <span>← Tất cả tin tức HSK</span>
+          </a>
         </div>
       </div>
-    </section>
+    </header>
 
-    <section class="band" aria-label="Nội dung bài viết">
-      <div class="wrap article-layout">
-        <article class="article-body">
-${sectionsHtml}
-${sourcesHtml}
-        </article>
-
-        <aside class="article-sidebar" aria-label="Mục lục và lối tắt học HSK">
-          <nav class="toc-box" aria-label="Mục lục bài viết">
-            <h3>Nội dung chính</h3>
-            <ul class="toc-list">
+    <section class="band article-band" aria-label="Nội dung bài viết">
+      <div class="wrap article-shell">
+        <aside class="article-toc-rail" aria-label="Mục lục bài viết">
+          <nav class="article-toc-nav" aria-label="Điều hướng trong bài">
+            <p class="article-toc-title">Trong bài viết</p>
+            <ul class="article-toc-list">
 ${tocHtml}
             </ul>
+            <div class="article-rail-links">
+              <a href="../tra-diem-hsk.html">Tra điểm thi HSK →</a>
+              <a href="../tin-tuc-hsk.html">← Tất cả bài viết</a>
+            </div>
           </nav>
-
-          <div class="side-cta-box">
-            <h3>Học HSK &amp; hỏi Gia sư AI miễn phí</h3>
-            <p>Thực hành ngay đề thi thử HSK 1–6, flashcard SRS, sửa câu tiếng Trung và hỏi đáp 1–1 bằng tiếng Việt.</p>
-            <a class="btn-primary" href="../app-hoc-hsk.html">
-              <span>Mở ứng dụng ngay</span>
-              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-            </a>
-            <a class="text-link" href="../tin-tuc-hsk.html">
-              <span>Xem tất cả bài viết HSK</span>
-              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-            </a>
-          </div>
         </aside>
+
+        <div class="article-main-col">
+          <details class="article-toc-mobile">
+            <summary>
+              <span>Mục lục bài viết (${article.sections.length} phần)</span>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <ul class="article-toc-list">
+${tocHtml}
+            </ul>
+          </details>
+
+          <article class="article-content">
+${sectionsHtml}
+${sourcesHtml}
+          </article>
+        </div>
       </div>
     </section>
 
@@ -445,6 +452,36 @@ ${renderFooter('../')}
           try { localStorage.setItem('hsk-theme-v1', next); } catch (_) {}
         });
       }
+
+      var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.article-toc-rail .article-toc-list a'));
+      var mobileToc = document.querySelector('.article-toc-mobile');
+      if (mobileToc) {
+        mobileToc.addEventListener('click', function (e) {
+          if (e.target && e.target.closest('a')) mobileToc.open = false;
+        });
+      }
+
+      if (tocLinks.length && 'IntersectionObserver' in window) {
+        var byId = Object.create(null);
+        tocLinks.forEach(function (a) {
+          var id = (a.getAttribute('href') || '').replace(/^#/, '');
+          if (id) byId[id] = a;
+        });
+        var setActive = function (id) {
+          tocLinks.forEach(function (a) { a.classList.toggle('is-active', a === byId[id]); });
+        };
+        setActive(Object.keys(byId)[0]);
+        var observer = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) {
+              var h = entries[i].target.querySelector('h2[id]');
+              if (h && byId[h.id]) setActive(h.id);
+              break;
+            }
+          }
+        }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+        document.querySelectorAll('.article-section').forEach(function (sec) { observer.observe(sec); });
+      }
     })();
   </script>
   <script src="../src/seo-offline-prewarm.js" defer></script>
@@ -456,7 +493,9 @@ ${renderFooter('../')}
 function renderHubHtml(articles) {
   const sorted = [...articles].sort((a, b) => String(b.updatedAt || b.publishedAt).localeCompare(String(a.updatedAt || a.publishedAt)));
   const featured = sorted.find((a) => a.featured) || sorted[0];
+  const dispatchItems = sorted.filter((a) => !featured || a.slug !== featured.slug).slice(0, 3);
   const canonical = `${BASE_URL}/tin-tuc-hsk`;
+  const latestUpdated = sorted[0] ? formatDateVi(sorted[0].updatedAt || sorted[0].publishedAt) : '';
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -488,47 +527,60 @@ function renderHubHtml(articles) {
   };
 
   const featuredHtml = featured
-    ? `        <article class="news-featured" aria-label="Bài viết nổi bật">
-          <div>
-            <div class="news-meta-row">
-              <span class="news-cat-pill">${escHtml(featured.categoryLabel || CATEGORIES[featured.category])}</span>
-              <span>${escHtml(featured.hskTag || 'HSK 1–6')}</span>
-              <span>Cập nhật ${escHtml(formatDateVi(featured.updatedAt || featured.publishedAt))}</span>
-              <span>${Number(featured.readMinutes) || 5} phút đọc</span>
+    ? `        <div class="news-lead-grid">
+          <article class="news-lead-card" aria-label="Tin tiêu điểm">
+            <span class="lead-watermark" aria-hidden="true">讯</span>
+            <div class="lead-body">
+              <h2><a href="./bai-viet/${escHtml(featured.slug)}.html">${escHtml(featured.title)}</a></h2>
+              <p>${escHtml(featured.summary)}</p>
             </div>
-            <h2><a href="./bai-viet/${escHtml(featured.slug)}.html">${escHtml(featured.title)}</a></h2>
-            <p>${escHtml(featured.summary)}</p>
-            <a class="btn-primary" href="./bai-viet/${escHtml(featured.slug)}.html">
-              <span>Đọc thông tin chi tiết</span>
-              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-            </a>
-          </div>
-          <div class="news-featured-side">
-            <h3>Chủ đề chính trong bài</h3>
-            <ul class="news-kw-list">
-${(featured.keywords || []).slice(0, 5).map((k) => `              <li>${escHtml(k)}</li>`).join('\n')}
-            </ul>
-            <a class="text-link" href="./app-hoc-hsk.html">
-              <span>Vào luyện đề &amp; hỏi Gia sư AI</span>
-              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-            </a>
-          </div>
-        </article>`
+            <div class="news-lead-foot">
+              <div class="news-lead-meta">
+                <span class="lead-cat-pill">${escHtml(featured.categoryLabel || CATEGORIES[featured.category])}</span>
+                <span>${escHtml(featured.hskTag || 'HSK 1–6')}</span>
+                <span>Cập nhật ${escHtml(formatDateVi(featured.updatedAt || featured.publishedAt))}</span>
+              </div>
+              <a class="lead-btn" href="./bai-viet/${escHtml(featured.slug)}.html">
+                <span>Đọc chi tiết</span>
+                <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <aside class="news-dispatch" aria-label="Bài viết mới cập nhật">
+            <div class="news-dispatch-head">
+              <h2>Mới cập nhật</h2>
+              <a href="#danh-sach-bai-viet">Tất cả (${sorted.length}) ↓</a>
+            </div>
+            <div class="news-dispatch-list">
+${dispatchItems.map((item) => {
+  const itemCat = item.categoryLabel || CATEGORIES[item.category];
+  return `              <a class="news-dispatch-item" href="./bai-viet/${escHtml(item.slug)}.html">
+                <strong>${escHtml(item.title)}</strong>
+                <p>${escHtml(item.summary)}</p>
+                <div class="dispatch-meta">
+                  <span class="cat-badge cat-${escHtml(item.category)}">${escHtml(itemCat)}</span>
+                  <span>${escHtml(formatDateVi(item.updatedAt || item.publishedAt))} · ${Number(item.readMinutes) || 5} phút</span>
+                </div>
+              </a>`;
+}).join('\n')}
+            </div>
+          </aside>
+        </div>`
     : '';
 
   const cardsHtml = sorted.map((a) => {
     const catLabel = a.categoryLabel || CATEGORIES[a.category];
     const kw = [a.title, a.summary, a.hskTag, catLabel, ...(a.keywords || [])].join(' ');
     return `          <article class="news-card" data-cat="${escHtml(a.category)}" data-kw="${escHtml(kw)}">
-            <div class="news-meta-row">
-              <span class="news-cat-pill">${escHtml(catLabel)}</span>
-              <span>${escHtml(a.hskTag || 'HSK 1–6')}</span>
-            </div>
             <h3><a href="./bai-viet/${escHtml(a.slug)}.html">${escHtml(a.title)}</a></h3>
             <p>${escHtml(a.summary)}</p>
             <div class="news-card-foot">
-              <span>${escHtml(formatDateVi(a.updatedAt || a.publishedAt))} · ${Number(a.readMinutes) || 5} phút</span>
-              <a class="text-link" href="./bai-viet/${escHtml(a.slug)}.html">Đọc bài →</a>
+              <div class="news-card-tags">
+                <span class="cat-badge cat-${escHtml(a.category)}">${escHtml(catLabel)}</span>
+                <span class="news-read-meta">${escHtml(formatDateVi(a.updatedAt || a.publishedAt))} · ${Number(a.readMinutes) || 5}p</span>
+              </div>
+              <a class="text-link" href="./bai-viet/${escHtml(a.slug)}.html">Đọc →</a>
             </div>
           </article>`;
   }).join('\n');
@@ -564,52 +616,43 @@ ${THEME_INIT_SCRIPT}
 ${renderHeader('./', 'news')}
 
   <main id="main-content">
-    <section class="hero hero-compact" aria-labelledby="hero-title">
-      <span class="hero-watermark" aria-hidden="true">考试</span>
+    <header class="news-masthead" aria-labelledby="hero-title">
       <div class="wrap">
-        <ol class="crumb" aria-label="Đường dẫn">
+        <ol class="article-crumb" aria-label="Đường dẫn">
           <li><a href="./">HSK Flashcards</a></li>
           <li aria-current="page">Tin tức &amp; Mẹo HSK</li>
         </ol>
-        <div class="hero-copy">
-          <h1 id="hero-title">Tin tức kỳ thi HSK chính thức, lịch thi – trả điểm, mẹo học &amp; ngữ pháp</h1>
-          <p class="hero-lead">
-            Đối chiếu trực tiếp từ cổng chính thức ChineseTest (chinesetest.cn): lịch thi và lịch trả điểm HSK 2026–2027, địa điểm thi tại Việt Nam, thông báo thay đổi kỳ thi HSK 3.0, cùng kho mẹo học và phân biệt ngữ pháp dễ nhớ.
-          </p>
-          <div class="hero-cta-row">
-            <a class="btn-hero-main" href="./app-hoc-hsk.html">
-              <span>Vào luyện thi HSK miễn phí ngay</span>
-              <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        <div class="news-masthead-row">
+          <div class="news-masthead-copy">
+            <h1 id="hero-title">Tin tức kỳ thi HSK &amp; Cẩm nang tự học</h1>
+            <p>Đối chiếu trực tiếp từ ChineseTest (chinesetest.cn): lịch thi và trả điểm 2026–2027, điểm thi Việt Nam, thông báo HSK 3.0 cùng mẹo học – ngữ pháp trọng tâm.</p>
+          </div>
+          <div class="news-masthead-actions">
+            <a class="btn-secondary" href="./tra-diem-hsk.html">
+              <span>Tra điểm HSK ChineseTest</span>
+              <svg class="ico" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a class="btn-hero-ghost" href="#danh-sach-bai-viet">
-              <span>Xem tất cả bài viết (${sorted.length})</span>
-              <svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-            </a>
+            ${latestUpdated ? `<span class="masthead-sync">Đồng bộ mới nhất: ${escHtml(latestUpdated)}</span>` : ''}
           </div>
         </div>
       </div>
-    </section>
+    </header>
 
-    <section class="band" id="danh-sach-bai-viet" aria-labelledby="list-title">
+    <section class="band news-hub-band" aria-label="Tin nổi bật và kho bài viết HSK">
       <div class="wrap">
-        <div class="section-head">
-          <h2 id="list-title">Kho tin tức kỳ thi HSK &amp; cẩm nang tự học</h2>
-          <p>Tìm nhanh theo chủ đề bạn đang quan tâm hoặc gõ từ khóa như “lịch thi 2027”, “HSK 3.0”, “tra điểm”, “điểm thi Việt Nam”, “ngữ pháp”.</p>
-        </div>
-
 ${featuredHtml}
 
-        <div class="filter-bar">
-          <div class="search-input-wrap">
-            <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="search" id="newsSearch" class="search-input" placeholder="Tìm bài viết: lịch thi 2027, HSK 3.0, tra điểm, ngữ pháp..." aria-label="Tìm bài viết HSK">
+        <div class="news-toolbar" id="danh-sach-bai-viet">
+          <div class="news-tabs" role="tablist" aria-label="Lọc bài viết theo chuyên mục">
+            <button type="button" class="news-tab" role="tab" aria-selected="true" data-cat-btn="all">Tất cả (${sorted.length})</button>
+            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="ky-thi">Kỳ thi &amp; Đăng ký</button>
+            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="diem-so">Điểm số &amp; Tra điểm</button>
+            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="meo-hoc">Mẹo học HSK</button>
+            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="ngu-phap">Phân biệt &amp; Ngữ pháp</button>
           </div>
-          <div class="level-tabs" role="tablist" aria-label="Lọc bài viết theo chuyên mục" style="margin-bottom:0">
-            <button type="button" class="level-tab" role="tab" aria-selected="true" data-cat-btn="all">Tất cả (${sorted.length})</button>
-            <button type="button" class="level-tab" role="tab" aria-selected="false" data-cat-btn="ky-thi">Kỳ thi &amp; Đăng ký</button>
-            <button type="button" class="level-tab" role="tab" aria-selected="false" data-cat-btn="diem-so">Điểm số &amp; Tra điểm</button>
-            <button type="button" class="level-tab" role="tab" aria-selected="false" data-cat-btn="meo-hoc">Mẹo học HSK</button>
-            <button type="button" class="level-tab" role="tab" aria-selected="false" data-cat-btn="ngu-phap">Phân biệt &amp; Ngữ pháp</button>
+          <div class="search-input-wrap news-search-wrap">
+            <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="search" id="newsSearch" class="search-input" placeholder="Tìm lịch thi 2027, HSK 3.0, tra điểm, ngữ pháp..." aria-label="Tìm bài viết HSK">
           </div>
         </div>
 
@@ -620,33 +663,6 @@ ${cardsHtml}
         <p class="empty-state" id="newsEmpty" hidden>
           Không tìm thấy bài viết khớp từ khóa vừa nhập. Bạn có thể mở <strong>Gia sư AI tiếng Trung</strong> trong ứng dụng để hỏi trực tiếp câu hỏi của mình!
         </p>
-      </div>
-    </section>
-
-    <section class="band band-surface" aria-labelledby="cluster-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 id="cluster-title">Thực hành ngay với bộ công cụ học HSK 1–6 miễn phí</h2>
-          <p>Đọc xong lịch thi và ngữ pháp, áp dụng liền vào luyện đề, sửa câu AI và flashcard SRS để nhớ chắc hơn.</p>
-        </div>
-        <div class="hub-links-grid">
-          <a class="hub-link-card" href="./tra-diem-hsk.html">
-            <strong><span>Tra điểm thi HSK online trực tiếp</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
-            <span>Mở cổng ChineseTest ngay trên web kèm chuẩn hóa họ tên và tính điểm đậu HSK 1–6.</span>
-          </a>
-          <a class="hub-link-card" href="./">
-            <strong><span>Học HSK miễn phí cùng Gia sư AI</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
-            <span>Hỏi đáp tiếng Trung 1–1 bằng tiếng Việt, giải thích đáp án đề HSK.</span>
-          </a>
-          <a class="hub-link-card" href="./sua-cau-tieng-trung-ai.html">
-            <strong><span>Sửa câu tiếng Trung bằng AI</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
-            <span>Kiểm tra ngữ pháp, sửa lỗi trật tự từ cho phần Viết HSK 3–6.</span>
-          </a>
-          <a class="hub-link-card" href="./phan-biet-tu-de-nham-hsk.html">
-            <strong><span>Phân biệt 16 cặp từ dễ nhầm HSK</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong>
-            <span>Bảng tra cứu có bộ lọc cho 16 cặp từ tiếng Trung hay thi nhất.</span>
-          </a>
-        </div>
       </div>
     </section>
 
