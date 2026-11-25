@@ -2579,9 +2579,14 @@ html[data-theme="dark"] .tutor-demo {
 }
 
 .score-portal-frame-wrap {
+  position: relative;
   background: var(--seo-white);
   width: 100%;
   min-height: 760px;
+}
+
+.score-portal-mask {
+  display: none;
 }
 
 .score-portal-card.is-collapsed .score-portal-bar {
@@ -2618,10 +2623,50 @@ html[data-theme="dark"] .tutor-demo {
 
   .score-portal-card:not(.is-collapsed):not(.is-expanded) .score-portal-frame {
     margin-top: -314px;
-    margin-left: -18px;
-    width: calc(100% + 90px);
+    margin-left: -16px;
+    width: calc(100% + 88px);
     height: 760px;
   }
+
+  .score-portal-card:not(.is-collapsed):not(.is-expanded) .score-portal-mask {
+    display: block;
+    position: absolute;
+    background: var(--seo-white);
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .score-portal-card:not(.is-collapsed):not(.is-expanded) .score-portal-mask-top {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+  }
+
+  .score-portal-card:not(.is-collapsed):not(.is-expanded) .score-portal-mask-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+  }
+
+  .score-portal-card:not(.is-collapsed):not(.is-expanded) .score-portal-mask-left {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: clamp(1.5rem, 6.5%, 6.5rem);
+  }
+
+  .score-portal-card:not(.is-collapsed):not(.is-expanded) .score-portal-mask-right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: clamp(1.5rem, 6.5%, 6.5rem);
+  }
+}
+
+.score-portal-card.is-expanded .score-portal-mask {
+  display: none;
 }
 
 .score-portal-card.is-expanded .score-portal-frame-wrap {
