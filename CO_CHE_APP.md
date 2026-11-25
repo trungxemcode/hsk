@@ -155,6 +155,8 @@ MutationObserver phải có scope và thao tác idempotent: không gán lại hi
 
 ## 9. PWA, nội dung và quy chuẩn phát hành
 
+Bộ tạo danh mục phát hiện tài nguyên bắt buộc trùng với đường dẫn chuyển hướng trong `_redirects`. URL cũ `/hoc-hsk-cung-ai` tiếp tục dẫn về trang chủ, và trình cài PWA xác minh nội dung tại `index.html`.
+
 Trang chủ public dùng `index.html`. Các nút vào học, URL khởi chạy PWA và bản xem trước giao diện dùng `app-hoc-hsk.html` (Cloudflare Pages hiển thị `/app-hoc-hsk`). Service worker phân tuyến và lưu cả hai tài liệu cùng phạm vi. PWA cũ mở trang gốc ở chế độ standalone sẽ vào app và giữ đường dẫn bài học.
 
 Nguồn danh mục: `tools/pwa-assets.json`, aliases URL cũ và `tools/pwa_assets.py`. `app-version.json`, `offline-worker.js`, `offline.js`, `OneSignalSDKWorker.js` phải đồng bộ qua công cụ, không sửa hash bằng tay. Dữ liệu derived (Drive/audio/ảnh) có chính sách chọn lọc, không cache toàn corpus bừa bãi.

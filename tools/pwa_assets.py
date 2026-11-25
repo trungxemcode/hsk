@@ -46,6 +46,18 @@ def collect_assets(root):
         safe_path(name)
         if name not in files:
             files.append(name)
+    redirects_file = root / '_redirects'
+    if redirects_file.is_file():
+        for line in redirects_file.read_text(encoding='utf-8').splitlines():
+            rule = line.split()
+            if len(rule) not in (2, 3) or not rule[0].startswith('/'):
+                continue
+            if len(rule) == 3 and rule[2] not in ('301', '302', '303', '307', '308'):
+                continue
+            source = rule[0].removeprefix('/')
+            for name in (source, source + '.html'):
+                if name in files:
+                    raise ValueError('PWA asset is redirected on Cloudflare Pages: ' + name)
     for name in files:
         path = root / name
         if not path.is_file() or not path.resolve().is_relative_to(root.resolve()):
