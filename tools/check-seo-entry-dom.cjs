@@ -16,8 +16,12 @@ const manifest = JSON.parse(fs.readFileSync('manifest.webmanifest', 'utf8'));
 const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 const redirects = fs.readFileSync('_redirects', 'utf8');
 
-assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]),
-  [production, ...supportingPages.map(slug => production + slug)]);
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+for (const url of [production, ...supportingPages.map(slug => production + slug), production + 'tin-tuc-hsk']) assert.ok(sitemapUrls.includes(url), url);
+assert.equal(new Set(sitemapUrls).size, sitemapUrls.length);
+assert.ok(!sitemapUrls.includes(production + 'hoc-hsk-cung-ai'));
+const articles = JSON.parse(fs.readFileSync('content/seo-articles/articles.json', 'utf8')).articles;
+for (const article of articles) assert.ok(sitemapUrls.includes(production + 'bai-viet/' + article.slug), article.slug);
 assert.match(redirects, /^\/hoc-hsk-cung-ai \/ 301$/m);
 assert.match(app, /id="studioHome"/);
 assert.equal(manifest.id, './');

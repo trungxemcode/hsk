@@ -1,15 +1,18 @@
 (function () {
   if (!('serviceWorker' in navigator) || !window.isSecureContext) return;
+  var scriptEl = document.currentScript;
+  var baseScopeUrl = (scriptEl && scriptEl.src) ? new URL('./', scriptEl.src).href : new URL('./', location.href).href;
+  var workerUrl = new URL('OneSignalSDKWorker.js', baseScopeUrl).href;
   var started = false;
   function warmOfflineCache() {
     if (started) return;
     started = true;
     try {
-      navigator.serviceWorker.getRegistration('./').then(function (reg) {
+      navigator.serviceWorker.getRegistration(baseScopeUrl).then(function (reg) {
         var activeUrl = reg && (reg.active || reg.waiting || reg.installing) ? (reg.active || reg.waiting || reg.installing).scriptURL : '';
         var needsRegister = !reg || !activeUrl || !new URL(activeUrl, location.href).pathname.endsWith('/OneSignalSDKWorker.js') || reg.updateViaCache !== 'none';
         if (needsRegister) {
-          return navigator.serviceWorker.register('./OneSignalSDKWorker.js', { scope: './', updateViaCache: 'none' });
+          return navigator.serviceWorker.register(workerUrl, { scope: baseScopeUrl, updateViaCache: 'none' });
         }
         return reg;
       }).then(function () {
