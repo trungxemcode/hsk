@@ -313,9 +313,6 @@ ${related.map((r) => `          <a class="hub-link-card" href="./${escHtml(r.slu
   <meta name="twitter:title" content="${escHtml(article.metaTitle)}">
   <meta name="twitter:description" content="${escHtml(article.metaDescription)}">
   <meta name="twitter:image" content="${BASE_URL}/icon-512.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../src/seo-news.css">
 ${THEME_INIT_SCRIPT}
   <script type="application/ld+json">${safeJsonLd({ '@context': 'https://schema.org', '@graph': graph })}</script>
@@ -527,9 +524,6 @@ ${(featured.keywords || []).slice(0, 5).map((k) => `              <li>${escHtml(
   <meta name="twitter:title" content="Tin tức kỳ thi HSK, lịch thi 2026–2027, điểm thi &amp; ngữ pháp">
   <meta name="twitter:description" content="Tra cứu nhanh lịch thi HSK 2026–2027, lịch trả kết quả, địa điểm thi tại Việt Nam, cấu trúc bài thi và mẹo học HSK.">
   <meta name="twitter:image" content="${BASE_URL}/icon-512.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./src/seo-news.css">
 ${THEME_INIT_SCRIPT}
   <script type="application/ld+json">${safeJsonLd(jsonLd)}</script>
