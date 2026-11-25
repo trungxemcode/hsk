@@ -107,15 +107,21 @@ jobs:
           fi
           echo "chrome_bin=$CHROME_BIN" >> "$GITHUB_OUTPUT"
 
-      - name: Check GEMINI_API_KEY secret
+      - name: Check AI API key secret
         id: keycheck
         env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          if [ -z "$GEMINI_API_KEY" ]; then
+          if [ -z "$OPENROUTER_API_KEY" ] && [ -z "$GEMINI_API_KEY" ]; then
             echo "has_key=false" >> "$GITHUB_OUTPUT"
-            echo "GEMINI_API_KEY chưa được cấu hình trong Settings -> Secrets and variables -> Actions."
+            echo "OPENROUTER_API_KEY (hoặc GEMINI_API_KEY) chưa được cấu hình trong Settings -> Secrets and variables -> Actions."
             exit 0
+          fi
+          if [ -n "$OPENROUTER_API_KEY" ]; then
+            echo "Active AI provider: OpenRouter (default model google/gemma-4-31b-it:free)"
+          else
+            echo "Active AI provider: Gemini"
           fi
           echo "has_key=true" >> "$GITHUB_OUTPUT"
 
@@ -124,7 +130,10 @@ jobs:
         env:
           NODE_PATH: /tmp/hsk-seo-deps/node_modules
           CHROME_EXECUTABLE: ${{ steps.browser.outputs.chrome_bin }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'google/gemma-4-31b-it:free' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || '' }}
           EVENT_NAME: ${{ github.event_name }}
           INPUT_MODE: ${{ inputs.mode }}
           INPUT_VOICE: ${{ inputs.voice }}
@@ -215,6 +224,7 @@ jobs:
 
           - **Tiêu đề:** ${TITLE}
           - **Văn phong AI:** \`${VOICE}\`
+          - **Model AI viết lại:** OpenRouter \`${{ vars.OPENROUTER_MODEL || 'google/gemma-4-31b-it:free' }}\` (có fallback Gemini nếu được cấu hình)
           - **URL bài viết:** \`https://hskfreelearningai.pages.dev/bai-viet/${slug}\`
           - **Tự động cập nhật:** \`seen-news.json\`, \`tin-tuc-hsk.html\`, \`sitemap.xml\`, và PWA revision.
 

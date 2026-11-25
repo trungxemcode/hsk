@@ -28,3 +28,9 @@ content/study4-audio/
 
 server/design/.assets/
 server/design/.wrangler/
+
+# Local environment secrets (never commit)
+.env
+.env.local
+.env.*.local
+
