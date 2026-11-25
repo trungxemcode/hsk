@@ -14,7 +14,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
   page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()===404)missing.push(r.url());});
   await page.route('https://**/*',r=>r.abort());
   await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
-  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+  await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
   await page.waitForFunction(()=>window.HSKStudio&&window.HSKMobileUX&&window.HSKAccountBackup&&window.HSKBackupCore&&document.body.dataset.studioHub==='home');
   await page.evaluate(()=>{localStorage.setItem('hsk-flashcards-progress-v1',JSON.stringify({words:{existing:{status:'known',due:123}}}));window.HSKStudio.navigate('account');});
   const payload={version:1,storage:{'hsk-flashcards-progress-v1':JSON.stringify({words:{existing:{status:'unknown',due:999},newword:{status:'known',due:456}}})}};

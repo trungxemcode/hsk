@@ -12,7 +12,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.route('**/account-config.json',route=>route.fulfill({json:{enabled:false}}));
    await page.route('**/handwriting-neural-config.json',route=>route.fulfill({json:{assets:{runtime:{url:'https://cdn.jsdelivr.net/npm/hsk-migration-fixture.js',sha256,bytes:resource.length,type:'text/javascript'}}}}));
    await page.route('https://cdn.jsdelivr.net/npm/hsk-migration-fixture.js',route=>route.fulfill({status:200,headers:{'Access-Control-Allow-Origin':'*','Content-Type':'text/javascript'},body:resource}));
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKLegacyMusicCleanup&&window.HSKVoiceManager);await require('./legacy-music-fixture.cjs')(page);
    await page.evaluate(async bytes=>{
     localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'migration-owner'}));window.HSKAccountDashboard={user:{uid:'migration-owner'}};localStorage.setItem('hsk-user-progress-test','untouched');

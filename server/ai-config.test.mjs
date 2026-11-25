@@ -66,7 +66,7 @@ test('loadTranslationConfig fails closed on HTTP error, network error, bad JSON,
   }), null);
 });
 
-test('loadTranslationConfig binds default global fetch to window/globalThis and loads before module callers in index.html', async () => {
+test('loadTranslationConfig binds default global fetch to window/globalThis and loads before module callers in app-hoc-hsk.html', async () => {
   const calls = [];
   const context = vm.createContext({ URL });
   const vmGlobal = vm.runInContext('this', context);
@@ -84,7 +84,7 @@ test('loadTranslationConfig binds default global fetch to window/globalThis and 
   assert.deepEqual(loaded, { enabled: true, endpoint: 'https://vm.example/translate' });
   assert.equal(calls.length, 1);
 
-  const html = fs.readFileSync(new URL('index.html', root), 'utf8');
+  const html = fs.readFileSync(new URL('app-hoc-hsk.html', root), 'utf8');
   const helperIdx = html.indexOf('./src/utils/ai-config.js');
   assert.ok(helperIdx > 0);
   for (const caller of [

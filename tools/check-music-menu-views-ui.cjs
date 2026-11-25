@@ -14,7 +14,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.route('https://**/*',r=>r.abort());
    await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
    await fixture(page);
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);
    await page.evaluate(()=>{HSKAccountDashboard={user:{uid:'BIvUyItDYJWcLvlhhtYFyj5csBH2',getIdToken:async()=> 'owner'}};HSKStudio.navigate('music-play');});
    await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===3&&document.getElementById('musicPanel').dataset.musicMode==='chill');

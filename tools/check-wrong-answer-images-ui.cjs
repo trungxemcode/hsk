@@ -13,7 +13,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
    page.on('pageerror',e=>errors.push(e.message));
    await page.route('https://**/*',route=>route.abort());
    await page.route('**/account-config.json',route=>route.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>window.HSKWrongAnswerImages&&window.HSKWrongAnswerAI&&window.HSKDriveExam);
    const result=await page.evaluate(async()=>{
     const canvas=document.createElement('canvas');canvas.width=12;canvas.height=12;const d=canvas.getContext('2d');d.fillStyle='#cc00bb';d.fillRect(0,0,12,12);const png=canvas.toDataURL('image/png');

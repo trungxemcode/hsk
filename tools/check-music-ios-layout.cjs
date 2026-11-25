@@ -8,7 +8,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
    page.on('pageerror',e=>errors.push(e.message));
    await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
    const cloudTracks=await require('./music-cloud-fixture.cjs')(page,25);await page.addInitScript(tracks=>localStorage.setItem('hsk-music-links-v1:guest',JSON.stringify(tracks)),cloudTracks);
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);
    await page.evaluate(()=>HSKStudio.navigate('music-play'));
    await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===25);await page.locator('#musicCloudList button').first().click();
    await page.waitForFunction(()=>document.querySelector('#musicPanel').classList.contains('music-player-expanded'));

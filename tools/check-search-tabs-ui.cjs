@@ -16,7 +16,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
    page.on('pageerror',e=>errors.push(e.message));
    await page.route('https://**/*',r=>r.abort());
    await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
-   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+   await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
    await page.waitForFunction(()=>!!window.HSKStudio&&!!window.HSKLessons,{timeout:25000});
    for(const theme of ['light','dark']){
     await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;window.HSKStudio.navigate('search')},theme);

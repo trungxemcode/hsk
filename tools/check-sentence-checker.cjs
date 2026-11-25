@@ -26,7 +26,7 @@ const server=http.createServer((req,res)=>{
     });
     await page.route('https://**/*',route=>route.abort());
     await page.route('**/account-config.json',route=>route.fulfill({json:{enabled:false}}));
-    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+    await page.goto('http://127.0.0.1:'+server.address().port+'/app-hoc-hsk.html');
     await page.waitForFunction(()=>window.HSKStudio&&window.HSKSentenceReview&&document.querySelector('#appLoadStatus')?.hidden,null,{timeout:90000});
     await page.evaluate(()=>window.HSKStudio.navigate('sentence-editor'));
     const editor=page.locator('#sentenceEditor');

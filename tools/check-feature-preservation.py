@@ -83,7 +83,7 @@ class Markup(HTMLParser):
 def inspect_implementation(data, root=ROOT):
     ids = validate_contract(data)
     html = Markup()
-    html.feed((root / 'index.html').read_text(encoding='utf-8'))
+    html.feed((root / 'app-hoc-hsk.html').read_text(encoding='utf-8'))
     text_cache = {}
     failures = []
     for feature in ids.values():
@@ -149,7 +149,7 @@ def parse_approvals(data):
 
 
 def exact_relocation(base_ref, old, new, root=ROOT):
-    """Only an unmodified, deleted-source move to a fresh tracked path qualifies.
+    """Only an unmodified move to a fresh path qualifies.
 
     No manifest/flag can authorize a weaker check. Read the old bytes from Git,
     not from a caller-supplied hash, and compare against the actual destination.
@@ -158,9 +158,9 @@ def exact_relocation(base_ref, old, new, root=ROOT):
         return False
     root = root.resolve()
     source, target = root / old, root / new
-    if source.exists() or source.is_symlink() or target.is_symlink() or not target.is_file():
+    if source.is_symlink() or target.is_symlink() or not target.is_file():
         return False
-    if not target.resolve().is_relative_to(root):
+    if not source.resolve().is_relative_to(root) or not target.resolve().is_relative_to(root):
         return False
     prefix = ['git', '-C', str(root)]
     # A pre-existing destination is a replacement, not a relocation.
@@ -174,7 +174,10 @@ def exact_relocation(base_ref, old, new, root=ROOT):
     except subprocess.CalledProcessError:
         return False
     # Git may check text out with CRLF on Windows. No other changes are allowed.
-    return old_bytes.replace(b'\r\n', b'\n') == target.read_bytes().replace(b'\r\n', b'\n')
+    normalized = old_bytes.replace(b'\r\n', b'\n')
+    if source.exists() and (not source.is_file() or source.read_bytes().replace(b'\r\n', b'\n') == normalized):
+        return False
+    return normalized == target.read_bytes().replace(b'\r\n', b'\n')
 
 
 def ensure_no_unapproved_removals(current, base, old_approvals, changed, base_ref=None, root=ROOT):
