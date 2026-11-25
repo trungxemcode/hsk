@@ -1,9 +1,90 @@
 (function () {
+  var isPagesDev = /\.pages\.dev$/i.test(location.hostname);
+  var CLEAN_SKIP = /(?:\/|^)(?:app-hoc-hsk|admin|index|[\w-]+-notice)\.html$/i;
+
+  function rewriteLinksForCleanUrls() {
+    if (!isPagesDev) return;
+    var anchors = document.querySelectorAll('a[href]');
+    for (var i = 0; i < anchors.length; i++) {
+      var a = anchors[i];
+      var raw = a.getAttribute('href');
+      if (!raw || raw.charAt(0) === '#' || /^(?:mailto:|tel:|javascript:)/i.test(raw)) continue;
+      try {
+        var u = new URL(raw, location.href);
+        if (u.origin !== location.origin || !u.pathname.endsWith('.html') || CLEAN_SKIP.test(u.pathname)) continue;
+        u.pathname = u.pathname.slice(0, -5);
+        a.setAttribute('href', u.pathname + u.search + u.hash);
+      } catch (_) {}
+    }
+  }
+
+  function enableInstantNavigation() {
+    rewriteLinksForCleanUrls();
+    var hasSpecRules = false;
+    try {
+      hasSpecRules = Boolean(window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules'));
+      if (hasSpecRules) {
+        var spec = document.createElement('script');
+        spec.type = 'speculationrules';
+        spec.textContent = JSON.stringify({
+          prerender: [
+            {
+              where: {
+                and: [
+                  { href_matches: '/*' },
+                  { not: { href_matches: '/app-hoc-hsk*' } },
+                  { not: { href_matches: '/admin*' } },
+                  { not: { selector_matches: '[target="_blank"]' } }
+                ]
+              },
+              eagerness: 'moderate'
+            }
+          ]
+        });
+        document.head.appendChild(spec);
+      }
+    } catch (_) {
+      hasSpecRules = false;
+    }
+
+    if (!hasSpecRules) {
+      var prefetched = Object.create(null);
+      var prefetchCount = 0;
+      var prefetchAnchor = function (target) {
+        if (prefetchCount >= 12 || !target || !target.closest) return;
+        var a = target.closest('a[href]');
+        if (!a || a.target === '_blank') return;
+        try {
+          var u = new URL(a.href, location.href);
+          if (u.origin !== location.origin || u.href === location.href || CLEAN_SKIP.test(u.pathname)) return;
+          var key = u.origin + u.pathname + u.search;
+          if (prefetched[key]) return;
+          prefetched[key] = true;
+          prefetchCount++;
+          var link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.as = 'document';
+          link.href = key;
+          document.head.appendChild(link);
+        } catch (_) {}
+      };
+      document.addEventListener('pointerenter', function (e) { prefetchAnchor(e.target); }, { passive: true, capture: true });
+      document.addEventListener('touchstart', function (e) { prefetchAnchor(e.target); }, { passive: true, capture: true });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enableInstantNavigation, { once: true });
+  } else {
+    enableInstantNavigation();
+  }
+
   if (!('serviceWorker' in navigator) || !window.isSecureContext) return;
   var scriptEl = document.currentScript;
   var baseScopeUrl = (scriptEl && scriptEl.src) ? new URL('../', scriptEl.src).href : new URL('./', location.href).href;
   var workerUrl = new URL('OneSignalSDKWorker.js', baseScopeUrl).href;
   var started = false;
+
   function warmOfflineCache() {
     if (started) return;
     started = true;
@@ -26,13 +107,17 @@
       started = false;
     }
   }
+
   function scheduleWarm() {
-    if (typeof requestIdleCallback === 'function') {
-      requestIdleCallback(warmOfflineCache, { timeout: 2500 });
-    } else {
-      setTimeout(warmOfflineCache, 600);
-    }
+    setTimeout(function () {
+      if (typeof requestIdleCallback === 'function') {
+        requestIdleCallback(warmOfflineCache, { timeout: 2000 });
+      } else {
+        warmOfflineCache();
+      }
+    }, 4500);
   }
+
   if (document.readyState === 'complete') scheduleWarm();
   else window.addEventListener('load', scheduleWarm, { once: true });
   window.addEventListener('online', function () {
