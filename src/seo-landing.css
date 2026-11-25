@@ -945,9 +945,9 @@ html[data-theme="dark"] .tutor-demo {
   margin: 0;
   font-family: var(--seo-font-display);
   font-size: clamp(1.7rem, 3.1vw, 2.4rem);
-  font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  line-height: 1.24;
+  letter-spacing: -0.02em;
   text-wrap: balance;
   color: var(--seo-ink-strong);
 }
@@ -955,7 +955,8 @@ html[data-theme="dark"] .tutor-demo {
 .section-head p {
   margin: 0.8rem 0 0;
   font-size: 1.02rem;
-  color: var(--seo-muted);
+  line-height: 1.68;
+  color: var(--seo-ink);
   max-width: 64ch;
 }
 
@@ -1007,8 +1008,9 @@ html[data-theme="dark"] .tutor-demo {
 
 .ai-list p {
   margin: 0;
-  font-size: 0.95rem;
-  color: var(--seo-muted);
+  font-size: 0.96rem;
+  line-height: 1.68;
+  color: var(--seo-ink);
   max-width: 54ch;
 }
 
@@ -1647,12 +1649,17 @@ html[data-theme="dark"] .tutor-demo {
 
 .drill-card {
   background: var(--seo-surface);
-  border: 1px solid var(--seo-line);
+  border: 1px solid var(--seo-line-strong);
   border-radius: var(--seo-radius-md);
+  box-shadow: var(--seo-shadow-sm);
   padding: 1.3rem;
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+}
+
+.band-surface .drill-card {
+  background: var(--seo-surface-soft);
 }
 
 /* Filter bar + Confusable words table/list */
@@ -1703,7 +1710,8 @@ html[data-theme="dark"] .tutor-demo {
 
 .pair-card {
   background: var(--seo-surface);
-  border: 1px solid var(--seo-line);
+  border: 1px solid var(--seo-line-strong);
+  box-shadow: var(--seo-shadow-sm);
   border-radius: var(--seo-radius-lg);
   padding: 1.45rem;
   display: flex;
@@ -1806,8 +1814,9 @@ html[data-theme="dark"] .tutor-demo {
 
 .stroke-card {
   background: var(--seo-surface);
-  border: 1px solid var(--seo-line);
+  border: 1px solid var(--seo-line-strong);
   border-radius: var(--seo-radius-md);
+  box-shadow: var(--seo-shadow-sm);
   padding: 1.35rem;
   display: grid;
   grid-template-columns: 4.5rem minmax(0, 1fr);
@@ -1843,8 +1852,9 @@ html[data-theme="dark"] .tutor-demo {
 
 .stroke-card p {
   margin: 0;
-  font-size: 0.9rem;
-  color: var(--seo-muted);
+  font-size: 0.94rem;
+  line-height: 1.62;
+  color: var(--seo-ink);
 }
 
 .stroke-ex-row {
@@ -1858,7 +1868,7 @@ html[data-theme="dark"] .tutor-demo {
 .hub-links-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;
+  gap: 1.1rem;
 }
 
 .hub-links-grid:has(> :nth-child(4):last-child) {
@@ -1868,36 +1878,53 @@ html[data-theme="dark"] .tutor-demo {
 .hub-link-card {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  padding: 1.15rem 1.25rem;
+  gap: 0.55rem;
+  padding: 1.35rem 1.45rem;
   border-radius: var(--seo-radius-md);
   background: var(--seo-surface);
-  border: 1px solid var(--seo-line);
+  border: 1px solid var(--seo-line-strong);
+  box-shadow: var(--seo-shadow-sm);
   text-decoration: none;
-  transition: border-color 180ms ease, transform 200ms var(--seo-ease-out-expo), box-shadow 180ms ease;
+  transition: border-color 180ms ease, transform 200ms var(--seo-ease-out-expo), box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.band-surface .hub-link-card {
+  background: var(--seo-surface-soft);
 }
 
 .hub-link-card:hover {
   border-color: var(--seo-accent);
+  background: var(--seo-surface);
   transform: translateY(-2px);
-  box-shadow: var(--seo-shadow-sm);
+  box-shadow: var(--seo-shadow-md);
+}
+
+.hub-link-card:hover strong {
+  color: var(--seo-accent-ink);
 }
 
 .hub-link-card strong {
   font-family: var(--seo-font-display);
-  font-size: 1rem;
+  font-size: 1.06rem;
   font-weight: 700;
+  line-height: 1.38;
   color: var(--seo-ink-strong);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.65rem;
+  transition: color 160ms ease;
 }
 
-.hub-link-card span {
-  font-size: 0.87rem;
-  color: var(--seo-muted);
-  line-height: 1.5;
+.hub-link-card strong .ico {
+  color: var(--seo-accent-ink);
+  flex-shrink: 0;
+}
+
+.hub-link-card > span {
+  font-size: 0.94rem;
+  color: var(--seo-ink);
+  line-height: 1.6;
 }
 
 .hub-levels-card {
@@ -1905,10 +1932,14 @@ html[data-theme="dark"] .tutor-demo {
   gap: 0.75rem;
 }
 
+.band-surface .hub-levels-card:hover {
+  background: var(--seo-surface-soft);
+}
+
 .hub-levels-card:hover {
   transform: none;
   border-color: var(--seo-line-strong);
-  box-shadow: none;
+  box-shadow: var(--seo-shadow-sm);
 }
 
 .hub-level-pills {
@@ -1958,25 +1989,40 @@ html[data-theme="dark"] .tutor-demo {
   margin: 0;
   font-family: var(--seo-font-display);
   font-size: clamp(1.7rem, 3vw, 2.3rem);
-  font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  line-height: 1.24;
+  letter-spacing: -0.02em;
   color: var(--seo-ink-strong);
   text-wrap: balance;
 }
 
 .faq-aside p {
   margin: 0.85rem 0 0;
-  color: var(--seo-muted);
-  font-size: 0.98rem;
+  color: var(--seo-ink);
+  font-size: 1rem;
+  line-height: 1.68;
+}
+
+.faq-list {
+  display: grid;
+  gap: 0.75rem;
 }
 
 .faq-list details {
-  border-bottom: 1px solid var(--seo-line);
+  background: var(--seo-surface);
+  border: 1px solid var(--seo-line-strong);
+  border-radius: var(--seo-radius-md);
+  padding: 0 1.25rem;
+  box-shadow: var(--seo-shadow-sm);
+  transition: border-color 160ms ease;
 }
 
-.faq-list details:first-child {
-  border-top: 1px solid var(--seo-line);
+.band-surface .faq-list details {
+  background: var(--seo-surface-soft);
+}
+
+.faq-list details[open] {
+  border-color: var(--seo-accent);
 }
 
 .faq-list summary {
@@ -1985,19 +2031,20 @@ html[data-theme="dark"] .tutor-demo {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.2rem 0.25rem;
+  padding: 1.15rem 0;
   cursor: pointer;
   font-family: var(--seo-font-display);
-  font-size: 1.03rem;
+  font-size: 1.04rem;
   font-weight: 700;
   color: var(--seo-ink-strong);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .faq-list summary::-webkit-details-marker { display: none; }
 
 .faq-list summary .ico {
   color: var(--seo-accent-ink);
+  flex-shrink: 0;
   transition: transform 220ms var(--seo-ease-out-expo);
 }
 
@@ -2006,10 +2053,11 @@ html[data-theme="dark"] .tutor-demo {
 }
 
 .faq-answer {
-  padding: 0 0.25rem 1.25rem;
-  font-size: 0.96rem;
+  padding: 0 0 1.2rem;
+  font-size: 0.97rem;
+  line-height: 1.72;
   color: var(--seo-ink);
-  max-width: 64ch;
+  max-width: none;
 }
 
 .faq-answer p { margin: 0; }
