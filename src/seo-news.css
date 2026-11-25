@@ -2694,7 +2694,7 @@ html[data-theme="dark"] .tutor-demo {
 
 /* Single Article Scientific Reading Layout */
 .article-wrap {
-  width: min(100% - 2.5rem, 76rem);
+  width: var(--container);
 }
 
 .article-hero {
@@ -2704,12 +2704,12 @@ html[data-theme="dark"] .tutor-demo {
 }
 
 .article-hero-inner {
-  width: min(100% - 2.5rem, 76rem);
+  width: var(--container);
 }
 
 .article-hero h1 {
   margin: 0;
-  max-width: 24ch;
+  max-width: none;
   font-family: var(--font-display);
   font-size: clamp(1.72rem, 3vw, 2.38rem);
   font-weight: 700;
@@ -2724,7 +2724,7 @@ html[data-theme="dark"] .tutor-demo {
   font-size: clamp(1rem, 1.25vw, 1.08rem);
   color: var(--muted);
   line-height: 1.7;
-  max-width: 66ch;
+  max-width: 72ch;
   text-wrap: pretty;
 }
 
@@ -2760,8 +2760,8 @@ html[data-theme="dark"] .tutor-demo {
 
 .article-shell {
   display: grid;
-  grid-template-columns: 14rem minmax(0, 1fr);
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 13rem minmax(0, 1fr);
+  gap: clamp(1.25rem, 2.4vw, 1.85rem);
   align-items: start;
 }
 
@@ -2880,12 +2880,12 @@ html[data-theme="dark"] .tutor-demo {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  padding: clamp(1.35rem, 3.2vw, 2.5rem) clamp(1.15rem, 3.4vw, 2.75rem);
+  padding: clamp(1.35rem, 3vw, 2.25rem) clamp(1.15rem, 3vw, 2.35rem);
 }
 
 .article-section {
-  padding-bottom: 2.35rem;
-  margin-bottom: 2.35rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
   border-bottom: 1px solid var(--line);
 }
 
@@ -2893,14 +2893,6 @@ html[data-theme="dark"] .tutor-demo {
   padding-bottom: 0;
   border-bottom: 0;
   margin-bottom: 1.75rem;
-}
-
-.article-section h2,
-.article-section p,
-.article-section ul,
-.article-section ol,
-.article-example {
-  max-width: 66ch;
 }
 
 .article-section h2 {
@@ -2916,7 +2908,7 @@ html[data-theme="dark"] .tutor-demo {
 }
 
 .article-section p {
-  margin: 0 0 1rem;
+  margin: 0 0 0.85rem;
   font-size: 1.01rem;
   line-height: 1.78;
   color: var(--ink);
@@ -3009,7 +3001,7 @@ html[data-theme="dark"] .step-desc {
 /* Scientific Data Sheet & Tables */
 .data-sheet {
   width: 100%;
-  margin: 1.35rem 0 1.45rem;
+  margin: 1.1rem 0 1.35rem;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
   background: var(--surface);
@@ -3021,46 +3013,52 @@ html[data-theme="dark"] .step-desc {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem 1rem;
-  padding: 0.78rem 1rem;
+  gap: 0.6rem 0.9rem;
+  padding: 0.72rem 0.95rem;
   background: var(--surface-soft);
   border-bottom: 1px solid var(--line);
 }
 
 .data-sheet-filters {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.42rem;
-}
-
-.sheet-filter-btn {
-  padding: 0.36rem 0.78rem;
+  gap: 0.2rem;
+  padding: 0.22rem;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--line-strong);
   background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.data-sheet .sheet-filter-btn {
+  padding: 0.34rem 0.76rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
   font-family: var(--font-display);
-  font-size: 0.81rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--ink);
-  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
 }
 
-.sheet-filter-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent-ink);
+.data-sheet .sheet-filter-btn:hover {
+  color: var(--ink-strong);
+  background: var(--surface-soft);
 }
 
-.sheet-filter-btn.is-active {
+.data-sheet .sheet-filter-btn.is-active {
   background: var(--accent);
-  border-color: var(--accent);
   color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(91, 75, 232, 0.26);
 }
 
-html[data-theme="dark"] .sheet-filter-btn.is-active {
+html[data-theme="dark"] .data-sheet .sheet-filter-btn.is-active {
   background: var(--accent-dark);
-  border-color: var(--accent-dark);
   color: var(--paper);
+  box-shadow: none;
 }
 
 .data-sheet-legend {
@@ -3070,6 +3068,7 @@ html[data-theme="dark"] .sheet-filter-btn.is-active {
   gap: 0.38rem;
   font-size: 0.8rem;
   color: var(--muted);
+  white-space: nowrap;
 }
 
 .legend-mark,
@@ -3130,7 +3129,6 @@ html[data-theme="dark"] .sheet-filter-btn.is-active {
 .data-sheet-scroll {
   width: 100%;
   overflow-x: auto;
-  scrollbar-gutter: stable;
 }
 
 .article-table {
@@ -3159,20 +3157,22 @@ html[data-theme="dark"] .sheet-filter-btn.is-active {
 }
 
 .article-table thead tr.thead-groups th {
-  padding: 0.5rem 0.72rem;
-  font-size: 0.74rem;
+  padding: 0.46rem 0.64rem;
+  font-size: 0.73rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--muted);
-  background: color-mix(in srgb, var(--surface-tint) 42%, var(--surface-soft));
+  background: var(--surface-soft);
   border-bottom: 1px solid var(--line);
 }
 
 .article-table thead tr.thead-cols th {
-  padding: 0.56rem 0.72rem;
-  font-size: 0.8rem;
-  background: var(--surface-soft);
+  padding: 0.54rem 0.64rem;
+  font-size: 0.79rem;
+  color: var(--ink-strong);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .article-table .col-group-start {
@@ -3181,8 +3181,8 @@ html[data-theme="dark"] .sheet-filter-btn.is-active {
 
 .article-table-calendar th,
 .article-table-calendar td {
-  padding: 0.62rem 0.64rem;
-  font-size: 0.84rem;
+  padding: 0.58rem 0.56rem;
+  font-size: 0.83rem;
   white-space: nowrap;
 }
 
@@ -3230,6 +3230,17 @@ html[data-theme="dark"] .sheet-filter-btn.is-active {
   font-weight: 500;
 }
 
+td.cell-exam-date .cell-date-main {
+  font-weight: 600;
+  color: var(--ink-strong);
+}
+
+.article-table-calendar tbody td:nth-child(3) .cell-date-main,
+.article-table-calendar tbody td:nth-child(4) .cell-date-main {
+  color: var(--ink);
+  font-weight: 400;
+}
+
 .cell-date-main.is-shifted {
   color: var(--peach-ink);
   font-weight: 600;
@@ -3237,6 +3248,8 @@ html[data-theme="dark"] .sheet-filter-btn.is-active {
 
 .cell-day {
   display: inline-block;
+  min-width: 1.95rem;
+  text-align: center;
   margin-left: 0.34rem;
   padding: 0.08rem 0.36rem;
   border-radius: 5px;
@@ -3312,7 +3325,6 @@ html[data-theme="dark"] .sheet-filter-btn.is-active {
 
 .tip-content {
   min-width: 0;
-  max-width: 66ch;
 }
 
 .tip-title {
