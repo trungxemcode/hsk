@@ -313,7 +313,7 @@ ${related.map((r) => `          <a class="hub-link-card" href="./${escHtml(r.slu
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../src/seo-landing.css">
+  <link rel="stylesheet" href="../src/seo-news.css">
 ${THEME_INIT_SCRIPT}
   <script type="application/ld+json">${safeJsonLd({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
@@ -527,7 +527,7 @@ ${(featured.keywords || []).slice(0, 5).map((k) => `              <li>${escHtml(
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./src/seo-landing.css">
+  <link rel="stylesheet" href="./src/seo-news.css">
 ${THEME_INIT_SCRIPT}
   <script type="application/ld+json">${safeJsonLd(jsonLd)}</script>
 </head>

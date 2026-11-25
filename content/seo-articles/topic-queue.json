@@ -2,20 +2,6 @@
   "schema": 1,
   "topics": [
     {
-      "slug": "quy-che-phong-thi-hsk-tren-may-va-tren-giay-chinesetest",
-      "category": "ky-thi",
-      "hskTag": "Quy chế ChineseTest",
-      "topic": "Quy chế phòng thi HSK trên giấy (PBT) và trên máy (iBT) theo hướng dẫn chính thức ChineseTest: giấy tờ tùy thân, ảnh thẻ và lưu ý tránh phạm quy",
-      "keywords": ["quy chế thi HSK", "thi HSK trên máy hay trên giấy", "đi thi HSK cần mang gì", "chinesetest quy định"]
-    },
-    {
-      "slug": "cau-truc-bai-thi-khau-ngu-hskk-so-trung-cao-cap",
-      "category": "ky-thi",
-      "hskTag": "HSKK Khẩu ngữ",
-      "topic": "Cấu trúc bài thi nói HSKK Sơ cấp, Trung cấp, Cao cấp trên ChineseTest và mẹo luyện phản xạ nói ghi điểm cao",
-      "keywords": ["cấu trúc đề thi HSKK", "thi HSK kèm HSKK", "kinh nghiệm thi HSKK trung cấp", "luyện nói tiếng Trung AI"]
-    },
-    {
       "slug": "lo-trinh-tu-hoc-hsk-1-den-hsk-3-cho-nguoi-moi",
       "category": "meo-hoc",
       "hskTag": "HSK 1–3",
@@ -44,11 +30,11 @@
       "keywords": ["mẹo sắp xếp câu HSK 4", "luyện viết HSK 3", "trật tự câu tiếng Trung"]
     },
     {
-      "slug": "cach-xin-cap-lai-hoac-gui-chung-chi-diem-hsk-chinesetest",
-      "category": "diem-so",
-      "hskTag": "Chứng chỉ HSK",
-      "topic": "Hướng dẫn xem phiếu điểm HSK trực tuyến và thủ tục liên quan chứng chỉ điểm HSK trên hệ thống ChineseTest",
-      "keywords": ["chứng chỉ HSK bao lâu có", "phiếu điểm HSK", "tra chứng chỉ HSK online"]
+      "slug": "kinh-nghiem-thi-hskk-so-cap-va-trung-cap",
+      "category": "ky-thi",
+      "hskTag": "HSKK Khẩu ngữ",
+      "topic": "Kinh nghiệm luyện thi HSKK Sơ cấp và Trung cấp: cấu trúc bài thi nói và mẹo không bị khớp trong phòng thi",
+      "keywords": ["kinh nghiệm thi HSKK", "cấu trúc đề thi HSKK sơ cấp", "luyện nói HSKK trung cấp"]
     },
     {
       "slug": "phan-biet-bo-ngu-ket-qua-va-bo-ngu-kha-nang-hsk",
@@ -86,6 +72,13 @@
       "keywords": ["4 thanh điệu tiếng Trung", "quy tắc biến điệu tiếng Trung", "luyện phát âm tiếng Trung miễn phí"]
     },
     {
+      "slug": "chuan-bi-truoc-ngay-thi-hsk-tranh-mat-diem-oan",
+      "category": "ky-thi",
+      "hskTag": "Kỳ thi HSK",
+      "topic": "Checklist chuẩn bị trước ngày thi HSK: giấy tờ, tâm lý phòng thi và mẹo canh giờ từng phần",
+      "keywords": ["đi thi HSK cần mang gì", "kinh nghiệm vào phòng thi HSK", "lưu ý khi thi HSK"]
+    },
+    {
       "slug": "phan-biet-xiang-yao-hui-neng-keyi-hsk",
       "category": "ngu-phap",
       "hskTag": "HSK 1–3",
@@ -98,6 +91,13 @@
       "hskTag": "Học HSK cùng AI",
       "topic": "5 cách hỏi Gia sư AI giúp tự học tiếng Trung HSK nhanh gấp đôi mà không bị phụ thuộc dịch máy",
       "keywords": ["học tiếng Trung bằng AI", "cách hỏi AI học HSK", "gia sư AI tiếng Trung miễn phí"]
+    },
+    {
+      "slug": "so-sanh-hsk-cu-6-cap-va-hsk-moi-9-cap",
+      "category": "ky-thi",
+      "hskTag": "Tin tức HSK",
+      "topic": "Hiểu đúng về khung HSK 6 cấp hiện hành và HSK 9 cấp mới: người học nên ôn gì lúc này?",
+      "keywords": ["HSK mới 9 cấp", "so sánh HSK cũ và HSK mới", "thi HSK hiện nay dùng đề nào"]
     },
     {
       "slug": "phan-biet-guo-zhe-le-tro-tu-dong-thai-hsk",

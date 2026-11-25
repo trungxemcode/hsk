@@ -226,7 +226,10 @@
     "admin-portal.css",
     "src/modules/admin/admin-portal-core.js",
     "src/modules/admin/admin-portal.js",
-    "src/modules/admin/resource-sync.js"
+    "src/modules/admin/resource-sync.js",
+    "seo-landing.css",
+    "seo-offline-prewarm.js",
+    "hoc-hsk-cung-ai.html"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",

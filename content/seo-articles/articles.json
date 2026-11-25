@@ -54,18 +54,102 @@
               "Trả điểm máy HSK / HSKK"
             ],
             "rows": [
-              ["12/2026", "13/12/2026 (CN)", "16/11/2026", "03/12/2026", "※15/01/2027", "28/12/2026 · HSKK: 04/01/2027"],
-              ["01/2027", "09/01/2027 (T7)", "13/12/2026", "30/12/2026", "※19/02/2027", "25/01/2027 · HSKK: 29/01/2027"],
-              ["03/2027", "14/03/2027 (CN)", "15/02/2027", "04/03/2027", "※16/04/2027", "29/03/2027 · HSKK: ※07/04/2027"],
-              ["04/2027", "10/04/2027 (T7)", "14/03/2027", "31/03/2027", "※17/05/2027", "26/04/2027 · HSKK: 30/04/2027"],
-              ["05/2027", "16/05/2027 (CN)", "19/04/2027", "06/05/2027", "16/06/2027", "31/05/2027 · HSKK: 07/06/2027"],
-              ["06/2027", "26/06/2027 (T7)", "30/05/2027", "16/06/2027", "26/07/2027", "12/07/2027 · HSKK: 16/07/2027"],
-              ["07/2027", "18/07/2027 (CN)", "21/06/2027", "08/07/2027", "18/08/2027", "02/08/2027 · HSKK: 09/08/2027"],
-              ["08/2027", "21/08/2027 (T7)", "25/07/2027", "11/08/2027", "21/09/2027", "06/09/2027 · HSKK: 10/09/2027"],
-              ["09/2027", "12/09/2027 (CN)", "16/08/2027", "02/09/2027", "※19/10/2027", "※28/09/2027 · HSKK: ※11/10/2027"],
-              ["10/2027", "16/10/2027 (T7)", "19/09/2027", "06/10/2027", "16/11/2027", "01/11/2027 · HSKK: 05/11/2027"],
-              ["11/2027", "07/11/2027 (CN)", "11/10/2027", "28/10/2027", "07/12/2027", "22/11/2027 · HSKK: 29/11/2027"],
-              ["12/2027", "11/12/2027 (T7)", "14/11/2027", "01/12/2027", "※14/01/2028", "27/12/2027 · HSKK: ※04/01/2028"]
+              [
+                "12/2026",
+                "13/12/2026 (CN)",
+                "16/11/2026",
+                "03/12/2026",
+                "※15/01/2027",
+                "28/12/2026 · HSKK: 04/01/2027"
+              ],
+              [
+                "01/2027",
+                "09/01/2027 (T7)",
+                "13/12/2026",
+                "30/12/2026",
+                "※19/02/2027",
+                "25/01/2027 · HSKK: 29/01/2027"
+              ],
+              [
+                "03/2027",
+                "14/03/2027 (CN)",
+                "15/02/2027",
+                "04/03/2027",
+                "※16/04/2027",
+                "29/03/2027 · HSKK: ※07/04/2027"
+              ],
+              [
+                "04/2027",
+                "10/04/2027 (T7)",
+                "14/03/2027",
+                "31/03/2027",
+                "※17/05/2027",
+                "26/04/2027 · HSKK: 30/04/2027"
+              ],
+              [
+                "05/2027",
+                "16/05/2027 (CN)",
+                "19/04/2027",
+                "06/05/2027",
+                "16/06/2027",
+                "31/05/2027 · HSKK: 07/06/2027"
+              ],
+              [
+                "06/2027",
+                "26/06/2027 (T7)",
+                "30/05/2027",
+                "16/06/2027",
+                "26/07/2027",
+                "12/07/2027 · HSKK: 16/07/2027"
+              ],
+              [
+                "07/2027",
+                "18/07/2027 (CN)",
+                "21/06/2027",
+                "08/07/2027",
+                "18/08/2027",
+                "02/08/2027 · HSKK: 09/08/2027"
+              ],
+              [
+                "08/2027",
+                "21/08/2027 (T7)",
+                "25/07/2027",
+                "11/08/2027",
+                "21/09/2027",
+                "06/09/2027 · HSKK: 10/09/2027"
+              ],
+              [
+                "09/2027",
+                "12/09/2027 (CN)",
+                "16/08/2027",
+                "02/09/2027",
+                "※19/10/2027",
+                "※28/09/2027 · HSKK: ※11/10/2027"
+              ],
+              [
+                "10/2027",
+                "16/10/2027 (T7)",
+                "19/09/2027",
+                "06/10/2027",
+                "16/11/2027",
+                "01/11/2027 · HSKK: 05/11/2027"
+              ],
+              [
+                "11/2027",
+                "07/11/2027 (CN)",
+                "11/10/2027",
+                "28/10/2027",
+                "07/12/2027",
+                "22/11/2027 · HSKK: 29/11/2027"
+              ],
+              [
+                "12/2027",
+                "11/12/2027 (T7)",
+                "14/11/2027",
+                "01/12/2027",
+                "※14/01/2028",
+                "27/12/2027 · HSKK: ※04/01/2028"
+              ]
             ]
           },
           "tip": "Lưu ý cực kỳ quan trọng khi săn suất thi tại Việt Nam: Cột “Hạn đăng ký” trên bảng của ChineseTest là hạn khóa sổ cuối cùng của hệ thống quốc tế. Thực tế tại Hà Nội và TP.HCM, các điểm thi thường mở form trước ngày thi khoảng 35–45 ngày và kín chỗ rất sớm — bạn nên canh fanpage điểm thi trước hạn hệ thống ít nhất 2–3 tuần."
@@ -77,11 +161,35 @@
             "Bài thi HSK cấp 7–9 dành cho thí sinh trình độ cao cấp (nghiên cứu sinh, biên phiên dịch chuyên sâu, giảng viên tiếng Trung) được tổ chức 2 đợt mỗi năm theo hình thức thi trên máy tại điểm thi (iBT at-center):"
           ],
           "table": {
-            "headers": ["Đợt thi HSK 7–9", "Ngày thi", "Hình thức", "Hạn đăng ký hệ thống", "Ngày trả kết quả"],
+            "headers": [
+              "Đợt thi HSK 7–9",
+              "Ngày thi",
+              "Hình thức",
+              "Hạn đăng ký hệ thống",
+              "Ngày trả kết quả"
+            ],
             "rows": [
-              ["Đợt 2 năm 2026", "22/11/2026 (Chủ nhật)", "iBT tại điểm thi", "08/11/2026", "22/12/2026"],
-              ["Đợt 1 năm 2027", "23/05/2027 (Chủ nhật)", "iBT tại điểm thi", "09/05/2027", "23/06/2027"],
-              ["Đợt 2 năm 2027", "20/11/2027 (Thứ bảy)", "iBT tại điểm thi", "06/11/2027", "20/12/2027"]
+              [
+                "Đợt 2 năm 2026",
+                "22/11/2026 (Chủ nhật)",
+                "iBT tại điểm thi",
+                "08/11/2026",
+                "22/12/2026"
+              ],
+              [
+                "Đợt 1 năm 2027",
+                "23/05/2027 (Chủ nhật)",
+                "iBT tại điểm thi",
+                "09/05/2027",
+                "23/06/2027"
+              ],
+              [
+                "Đợt 2 năm 2027",
+                "20/11/2027 (Thứ bảy)",
+                "iBT tại điểm thi",
+                "06/11/2027",
+                "20/12/2027"
+              ]
             ]
           }
         },
@@ -178,14 +286,42 @@
             "Để ôn tập hiệu quả mà không bị hoang mang trước các bản tin thay đổi kỳ thi, bạn cần nắm rõ cấu trúc kỹ năng cốt lõi đang được kiểm tra ở từng cấp độ trên hệ thống ChineseTest:"
           ],
           "table": {
-            "headers": ["Nhóm cấp độ", "Các phần kỹ năng chính", "Trọng tâm đánh giá năng lực"],
+            "headers": [
+              "Nhóm cấp độ",
+              "Các phần kỹ năng chính",
+              "Trọng tâm đánh giá năng lực"
+            ],
             "rows": [
-              ["HSK 1 & HSK 2", "Nghe hiểu + Đọc hiểu (có hỗ trợ Pinyin)", "Từ vựng giao tiếp hằng ngày, nghe phản xạ câu ngắn, hỏi đáp thông tin cơ bản"],
-              ["HSK 3", "Nghe hiểu + Đọc hiểu + Viết (kèm HSKK Sơ cấp)", "Đọc chữ Hán trực tiếp không cần pinyin, sắp xếp từ thành câu, viết chữ đúng ngữ cảnh"],
-              ["HSK 4", "Nghe hiểu + Đọc hiểu + Viết câu (kèm HSKK Trung cấp)", "Cặp liên từ logic, đọc hiểu đoạn văn ngắn, sắp xếp thứ tự câu và đặt câu theo tranh"],
-              ["HSK 5", "Nghe hiểu + Đọc hiểu sâu + Viết đoạn (kèm HSKK Cao cấp)", "Nghe hội thoại dài, phân biệt từ gần nghĩa học thuật, viết đoạn văn nghị luận/miêu tả"],
-              ["HSK 6", "Nghe hiểu + Đọc chuyên sâu + Viết tóm tắt (kèm HSKK Cao cấp)", "Nhận diện lỗi ngữ pháp, thành ngữ, hiểu văn bản báo chí – khoa học và tóm tắt nội dung"],
-              ["HSK 7–9", "Nghe + Đọc + Viết + Dịch + Nói tích hợp (thi máy iBT)", "Đánh giá năng lực học thuật, chuyên môn và giao tiếp chuyên sâu bậc cao cấp"]
+              [
+                "HSK 1 & HSK 2",
+                "Nghe hiểu + Đọc hiểu (có hỗ trợ Pinyin)",
+                "Từ vựng giao tiếp hằng ngày, nghe phản xạ câu ngắn, hỏi đáp thông tin cơ bản"
+              ],
+              [
+                "HSK 3",
+                "Nghe hiểu + Đọc hiểu + Viết (kèm HSKK Sơ cấp)",
+                "Đọc chữ Hán trực tiếp không cần pinyin, sắp xếp từ thành câu, viết chữ đúng ngữ cảnh"
+              ],
+              [
+                "HSK 4",
+                "Nghe hiểu + Đọc hiểu + Viết câu (kèm HSKK Trung cấp)",
+                "Cặp liên từ logic, đọc hiểu đoạn văn ngắn, sắp xếp thứ tự câu và đặt câu theo tranh"
+              ],
+              [
+                "HSK 5",
+                "Nghe hiểu + Đọc hiểu sâu + Viết đoạn (kèm HSKK Cao cấp)",
+                "Nghe hội thoại dài, phân biệt từ gần nghĩa học thuật, viết đoạn văn nghị luận/miêu tả"
+              ],
+              [
+                "HSK 6",
+                "Nghe hiểu + Đọc chuyên sâu + Viết tóm tắt (kèm HSKK Cao cấp)",
+                "Nhận diện lỗi ngữ pháp, thành ngữ, hiểu văn bản báo chí – khoa học và tóm tắt nội dung"
+              ],
+              [
+                "HSK 7–9",
+                "Nghe + Đọc + Viết + Dịch + Nói tích hợp (thi máy iBT)",
+                "Đánh giá năng lực học thuật, chuyên môn và giao tiếp chuyên sâu bậc cao cấp"
+              ]
             ]
           },
           "tip": "Dù ôn theo đề HSK 1–6 hay chuẩn bị nền tảng cho khung 3.0, 80% điểm số vẫn quyết định bởi độ chắc từ vựng theo ngữ cảnh, phản xạ nghe câu dài và khả năng tự đặt câu đúng ngữ pháp — đây đều là những kỹ năng bạn có thể rèn miễn phí hằng ngày cùng Gia sư AI."
@@ -260,22 +396,82 @@
             "Bảng dưới đây tổng hợp các đơn vị tổ chức thi HSK/HSKK tại Việt Nam đang hiển thị trên hệ thống ChineseTest:"
           ],
           "table": {
-            "headers": ["Khu vực", "Đơn vị điểm thi trên ChineseTest", "Hình thức & bài thi ghi nhận"],
+            "headers": [
+              "Khu vực",
+              "Đơn vị điểm thi trên ChineseTest",
+              "Hình thức & bài thi ghi nhận"
+            ],
             "rows": [
-              ["Hà Nội", "Viện Khổng Tử tại Trường Đại học Hà Nội (HANU)", "HSK, HSKK, YCT, BCT"],
-              ["Hà Nội", "Trường Đại học Ngoại ngữ – ĐHQGHN (ULIS)", "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"],
-              ["Hà Nội", "Trường Đại học Sư phạm Hà Nội (HNUE)", "HSK, HSKK"],
-              ["Hà Nội", "Trường Đại học Phenikaa", "HSK, HSKK, YCT, BCT"],
-              ["Vĩnh Phúc / Hà Nội", "Trường Đại học Sư phạm Hà Nội 2 (HPU2)", "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK, YCT"],
-              ["Thái Nguyên", "Khoa Ngoại ngữ & Trung tâm thi máy HSK – Đại học Thái Nguyên", "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"],
-              ["Quảng Ninh", "Trường Đại học Hạ Long (Halong University)", "HSK, HSKK, YCT, BCT"],
-              ["Lạng Sơn", "Trường ĐH Mỏ – Địa chất (Phân hiệu Lạng Sơn)", "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"],
-              ["Nghệ An", "Trường Đại học Vinh (Vinh University)", "HSK, HSKK, YCT, BCT"],
-              ["Thừa Thiên Huế", "Trường Đại học Ngoại ngữ – Đại học Huế (HUFLIS)", "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"],
-              ["Đà Nẵng", "Trường Đại học Duy Tân & Trường Đại học Đông Á", "Đều có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"],
-              ["TP. Hồ Chí Minh", "Trường Đại học Sư phạm TP.HCM (HCMUE)", "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"],
-              ["TP. Hồ Chí Minh", "Trường ĐH Khoa học Xã hội & Nhân văn – ĐHQG TP.HCM", "HSK, HSKK, YCT, BCT"],
-              ["Đồng Tháp", "Trường Đại học Đồng Tháp (Dong Thap University)", "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"]
+              [
+                "Hà Nội",
+                "Viện Khổng Tử tại Trường Đại học Hà Nội (HANU)",
+                "HSK, HSKK, YCT, BCT"
+              ],
+              [
+                "Hà Nội",
+                "Trường Đại học Ngoại ngữ – ĐHQGHN (ULIS)",
+                "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"
+              ],
+              [
+                "Hà Nội",
+                "Trường Đại học Sư phạm Hà Nội (HNUE)",
+                "HSK, HSKK"
+              ],
+              [
+                "Hà Nội",
+                "Trường Đại học Phenikaa",
+                "HSK, HSKK, YCT, BCT"
+              ],
+              [
+                "Vĩnh Phúc / Hà Nội",
+                "Trường Đại học Sư phạm Hà Nội 2 (HPU2)",
+                "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK, YCT"
+              ],
+              [
+                "Thái Nguyên",
+                "Khoa Ngoại ngữ & Trung tâm thi máy HSK – Đại học Thái Nguyên",
+                "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"
+              ],
+              [
+                "Quảng Ninh",
+                "Trường Đại học Hạ Long (Halong University)",
+                "HSK, HSKK, YCT, BCT"
+              ],
+              [
+                "Lạng Sơn",
+                "Trường ĐH Mỏ – Địa chất (Phân hiệu Lạng Sơn)",
+                "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"
+              ],
+              [
+                "Nghệ An",
+                "Trường Đại học Vinh (Vinh University)",
+                "HSK, HSKK, YCT, BCT"
+              ],
+              [
+                "Thừa Thiên Huế",
+                "Trường Đại học Ngoại ngữ – Đại học Huế (HUFLIS)",
+                "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"
+              ],
+              [
+                "Đà Nẵng",
+                "Trường Đại học Duy Tân & Trường Đại học Đông Á",
+                "Đều có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"
+              ],
+              [
+                "TP. Hồ Chí Minh",
+                "Trường Đại học Sư phạm TP.HCM (HCMUE)",
+                "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"
+              ],
+              [
+                "TP. Hồ Chí Minh",
+                "Trường ĐH Khoa học Xã hội & Nhân văn – ĐHQG TP.HCM",
+                "HSK, HSKK, YCT, BCT"
+              ],
+              [
+                "Đồng Tháp",
+                "Trường Đại học Đồng Tháp (Dong Thap University)",
+                "Có cả điểm thi giấy & điểm thi máy (IBT) — HSK, HSKK"
+              ]
             ]
           },
           "tip": "Mẹo chọn điểm thi: Nếu các điểm thi tại trung tâm Hà Nội hoặc TP.HCM khóa cổng quá nhanh, bạn có thể theo dõi thêm lịch mở đăng ký của các điểm thi lân cận có phòng máy IBT như ĐH Sư phạm Hà Nội 2, ĐH Thái Nguyên, ĐH Hạ Long hoặc ĐH Đồng Tháp."
@@ -360,11 +556,27 @@
             "Riêng các đợt thi sát dịp Tết Nguyên đán hoặc Quốc khánh Trung Quốc (có ký hiệu ※ trên lịch thi), ngày công bố kết quả có thể lùi thêm khoảng 5–10 ngày."
           ],
           "table": {
-            "headers": ["Hình thức bài thi", "Thời gian công bố điểm online", "Nhận bảng điểm chứng chỉ"],
+            "headers": [
+              "Hình thức bài thi",
+              "Thời gian công bố điểm online",
+              "Nhận bảng điểm chứng chỉ"
+            ],
             "rows": [
-              ["Thi máy HSK (iBT at-center)", "Khoảng 15 ngày sau ngày thi", "Chứng chỉ gửi về điểm thi sau khoảng 1–1,5 tháng"],
-              ["Thi máy khẩu ngữ HSKK (iBT)", "Khoảng 19–22 ngày sau ngày thi (sau HSK vài ngày)", "Hiển thị trên cùng hệ thống tra cứu ChineseTest"],
-              ["Thi giấy HSK / HSKK (PBT)", "Khoảng 30 ngày sau ngày thi", "Chứng chỉ gửi về điểm thi sau khoảng 1,5–2 tháng"]
+              [
+                "Thi máy HSK (iBT at-center)",
+                "Khoảng 15 ngày sau ngày thi",
+                "Chứng chỉ gửi về điểm thi sau khoảng 1–1,5 tháng"
+              ],
+              [
+                "Thi máy khẩu ngữ HSKK (iBT)",
+                "Khoảng 19–22 ngày sau ngày thi (sau HSK vài ngày)",
+                "Hiển thị trên cùng hệ thống tra cứu ChineseTest"
+              ],
+              [
+                "Thi giấy HSK / HSKK (PBT)",
+                "Khoảng 30 ngày sau ngày thi",
+                "Chứng chỉ gửi về điểm thi sau khoảng 1,5–2 tháng"
+              ]
             ]
           }
         },
@@ -447,14 +659,49 @@
             "Mỗi kỹ năng trong bài thi HSK (Nghe, Đọc, Viết) đều được chấm trên thang 100 điểm. HSK 1 và HSK 2 gồm 2 kỹ năng nên tổng điểm là 200; từ HSK 3 đến HSK 6 gồm đủ 3 kỹ năng nên tổng điểm tối đa là 300."
           ],
           "table": {
-            "headers": ["Cấp độ", "Kỹ năng thi", "Tổng điểm", "Mức điểm đạt"],
+            "headers": [
+              "Cấp độ",
+              "Kỹ năng thi",
+              "Tổng điểm",
+              "Mức điểm đạt"
+            ],
             "rows": [
-              ["HSK 1", "Nghe (100) + Đọc (100)", "200 điểm", "Từ 120 điểm trở lên (60%)"],
-              ["HSK 2", "Nghe (100) + Đọc (100)", "200 điểm", "Từ 120 điểm trở lên (60%)"],
-              ["HSK 3", "Nghe (100) + Đọc (100) + Viết (100)", "300 điểm", "Từ 180 điểm trở lên (60%)"],
-              ["HSK 4", "Nghe (100) + Đọc (100) + Viết (100)", "300 điểm", "Từ 180 điểm trở lên (60%)"],
-              ["HSK 5", "Nghe (100) + Đọc (100) + Viết (100)", "300 điểm", "Không ghi đậu/rớt; mốc phổ biến ≥ 180 điểm"],
-              ["HSK 6", "Nghe (100) + Đọc (100) + Viết (100)", "300 điểm", "Không ghi đậu/rớt; mốc phổ biến ≥ 180 điểm"]
+              [
+                "HSK 1",
+                "Nghe (100) + Đọc (100)",
+                "200 điểm",
+                "Từ 120 điểm trở lên (60%)"
+              ],
+              [
+                "HSK 2",
+                "Nghe (100) + Đọc (100)",
+                "200 điểm",
+                "Từ 120 điểm trở lên (60%)"
+              ],
+              [
+                "HSK 3",
+                "Nghe (100) + Đọc (100) + Viết (100)",
+                "300 điểm",
+                "Từ 180 điểm trở lên (60%)"
+              ],
+              [
+                "HSK 4",
+                "Nghe (100) + Đọc (100) + Viết (100)",
+                "300 điểm",
+                "Từ 180 điểm trở lên (60%)"
+              ],
+              [
+                "HSK 5",
+                "Nghe (100) + Đọc (100) + Viết (100)",
+                "300 điểm",
+                "Không ghi đậu/rớt; mốc phổ biến ≥ 180 điểm"
+              ],
+              [
+                "HSK 6",
+                "Nghe (100) + Đọc (100) + Viết (100)",
+                "300 điểm",
+                "Không ghi đậu/rớt; mốc phổ biến ≥ 180 điểm"
+              ]
             ]
           },
           "tip": "Điểm cộng lớn của kỳ thi HSK: HSK không áp dụng điểm liệt cho từng kỹ năng riêng lẻ. Bạn chỉ cần tổng điểm cộng lại đạt mốc yêu cầu (ví dụ 180/300 ở HSK 3–4) là đạt — nhưng nếu xin học bổng, nhiều trường vẫn ưu tiên bảng điểm đều các kỹ năng và điểm từ 210–240 trở lên."
@@ -595,13 +842,37 @@
           "id": "nhom-cau-co-ban",
           "heading": "5 mẫu câu xương sống từ HSK 1 đến HSK 3",
           "table": {
-            "headers": ["Cấu trúc", "Công thức gọn", "Ví dụ chuẩn & nghĩa"],
+            "headers": [
+              "Cấu trúc",
+              "Công thức gọn",
+              "Ví dụ chuẩn & nghĩa"
+            ],
             "rows": [
-              ["So sánh hơn 比", "A + 比 + B + Tính từ (+ 一点儿/得多)", "今天比昨天冷一点儿。(Hôm nay lạnh hơn hôm qua một chút.)"],
-              ["Song song 一边…一边…", "Chủ ngữ + 一边 V1 + 一边 V2", "我喜欢一边听音乐一边学汉语。(Tôi thích vừa nghe nhạc vừa học tiếng Trung.)"],
-              ["Tăng tiến 越来越…", "Chủ ngữ + 越来越 + Tính từ/Động từ tâm lý", "你的汉语说得越来越好了。(Tiếng Trung của bạn nói ngày càng tốt rồi.)"],
-              ["Câu chữ 把 (tác động)", "Chủ ngữ + 把 + Tân ngữ + Động từ + Kết quả", "请把窗户关上。(Xin hãy đóng cửa sổ lại.)"],
-              ["Câu chữ 被 (bị động)", "Đối tượng + 被 (+ Tác nhân) + Động từ + Kết quả", "我的手机被弟弟拿走了。(Điện thoại tôi bị em trai cầm đi rồi.)"]
+              [
+                "So sánh hơn 比",
+                "A + 比 + B + Tính từ (+ 一点儿/得多)",
+                "今天比昨天冷一点儿。(Hôm nay lạnh hơn hôm qua một chút.)"
+              ],
+              [
+                "Song song 一边…一边…",
+                "Chủ ngữ + 一边 V1 + 一边 V2",
+                "我喜欢一边听音乐一边学汉语。(Tôi thích vừa nghe nhạc vừa học tiếng Trung.)"
+              ],
+              [
+                "Tăng tiến 越来越…",
+                "Chủ ngữ + 越来越 + Tính từ/Động từ tâm lý",
+                "你的汉语说得越来越好了。(Tiếng Trung của bạn nói ngày càng tốt rồi.)"
+              ],
+              [
+                "Câu chữ 把 (tác động)",
+                "Chủ ngữ + 把 + Tân ngữ + Động từ + Kết quả",
+                "请把窗户关上。(Xin hãy đóng cửa sổ lại.)"
+              ],
+              [
+                "Câu chữ 被 (bị động)",
+                "Đối tượng + 被 (+ Tác nhân) + Động từ + Kết quả",
+                "我的手机被弟弟拿走了。(Điện thoại tôi bị em trai cầm đi rồi.)"
+              ]
             ]
           },
           "tip": "Mẹo tránh sai câu chữ 把 và 被: Động từ phía sau tuyệt đối không đứng trơ một mình mà phải đi kèm thành phần kết quả/trạng thái như 完, 好, 上, 走, 了."
@@ -610,13 +881,37 @@
           "id": "nhom-lien-tu-hsk4",
           "heading": "5 cặp liên từ quyết định điểm Đọc & Viết HSK 4",
           "table": {
-            "headers": ["Cặp liên từ", "Ý nghĩa tiếng Việt", "Ví dụ chuẩn HSK 4"],
+            "headers": [
+              "Cặp liên từ",
+              "Ý nghĩa tiếng Việt",
+              "Ví dụ chuẩn HSK 4"
+            ],
             "rows": [
-              ["虽然…，但是…", "Mặc dù…, nhưng…", "虽然工作很忙，但是他每天坚持复习。(Mặc dù bận việc nhưng anh ấy ôn mỗi ngày.)"],
-              ["不仅/不但…，而且…", "Không những…, mà còn…", "这个网站不仅免费，而且有AI辅导。(Web này không chỉ miễn phí mà còn có AI kèm.)"],
-              ["只要…，就…", "Chỉ cần…, thì…", "只要坚持练习，就一定能通过HSK。(Chỉ cần kiên trì luyện là nhất định đỗ HSK.)"],
-              ["只有…，才…", "Chỉ có…, mới…", "只有多听多说，才能提高口语。(Chỉ có nghe nói nhiều mới nâng được khẩu ngữ.)"],
-              ["不管/无论…，都…", "Bất kể/Dù…, đều…", "不管遇到什么困难，我们都不要放弃。(Dù gặp khó khăn gì chúng ta đều đừng bỏ cuộc.)"]
+              [
+                "虽然…，但是…",
+                "Mặc dù…, nhưng…",
+                "虽然工作很忙，但是他每天坚持复习。(Mặc dù bận việc nhưng anh ấy ôn mỗi ngày.)"
+              ],
+              [
+                "不仅/不但…，而且…",
+                "Không những…, mà còn…",
+                "这个网站不仅免费，而且有AI辅导。(Web này không chỉ miễn phí mà còn có AI kèm.)"
+              ],
+              [
+                "只要…，就…",
+                "Chỉ cần…, thì…",
+                "只要坚持练习，就一定能通过HSK。(Chỉ cần kiên trì luyện là nhất định đỗ HSK.)"
+              ],
+              [
+                "只有…，才…",
+                "Chỉ có…, mới…",
+                "只有多听多说，才能提高口语。(Chỉ có nghe nói nhiều mới nâng được khẩu ngữ.)"
+              ],
+              [
+                "不管/无论…，都…",
+                "Bất kể/Dù…, đều…",
+                "不管遇到什么困难，我们都不要放弃。(Dù gặp khó khăn gì chúng ta đều đừng bỏ cuộc.)"
+              ]
             ]
           }
         },
@@ -676,14 +971,42 @@
           "id": "bang-6-cap-tu-kinh-dien",
           "heading": "Tóm tắt quy tắc nhìn 3 giây chọn đúng cho 6 cặp từ hay thi nhất",
           "table": {
-            "headers": ["Cặp từ dễ nhầm", "Dấu hiệu nhận biết nhanh", "Ví dụ chuẩn"],
+            "headers": [
+              "Cặp từ dễ nhầm",
+              "Dấu hiệu nhận biết nhanh",
+              "Ví dụ chuẩn"
+            ],
             "rows": [
-              ["不 vs 没", "不: hiện tại/tương lai/ý muốn · 没: quá khứ / đi với 有", "昨天没去 (hôm qua không đi) · 明天不去 (mai không đi)"],
-              ["了 vs 过", "了: hành động xong/thay đổi · 过: từng trải nghiệm", "他去过上海 (anh ấy từng đến Thượng Hải)"],
-              ["有点儿 vs 一点儿", "有点儿 đứng TRƯỚC tính từ · 一点儿 đứng SAU tính từ", "有点儿贵 (hơi đắt) · 便宜一点儿 (rẻ hơn chút)"],
-              ["还是 vs 或者", "还是: câu hỏi lựa chọn · 或者: câu kể bình thường", "你坐地铁还是打车？(Bạn đi tàu điện hay gọi xe?)"],
-              ["就 vs 才", "就: sớm/nhanh/ít · 才: muộn/chậm/nhiều", "八点就来了 (mới 8h đã đến) · 十点才来 (tận 10h mới đến)"],
-              ["适合 vs 合适", "适合 (động từ) có tân ngữ sau · 合适 (tính từ) không có tân ngữ", "这件衣服很适合你 / 这件衣服很合适"]
+              [
+                "不 vs 没",
+                "不: hiện tại/tương lai/ý muốn · 没: quá khứ / đi với 有",
+                "昨天没去 (hôm qua không đi) · 明天不去 (mai không đi)"
+              ],
+              [
+                "了 vs 过",
+                "了: hành động xong/thay đổi · 过: từng trải nghiệm",
+                "他去过上海 (anh ấy từng đến Thượng Hải)"
+              ],
+              [
+                "有点儿 vs 一点儿",
+                "有点儿 đứng TRƯỚC tính từ · 一点儿 đứng SAU tính từ",
+                "有点儿贵 (hơi đắt) · 便宜一点儿 (rẻ hơn chút)"
+              ],
+              [
+                "还是 vs 或者",
+                "还是: câu hỏi lựa chọn · 或者: câu kể bình thường",
+                "你坐地铁还是打车？(Bạn đi tàu điện hay gọi xe?)"
+              ],
+              [
+                "就 vs 才",
+                "就: sớm/nhanh/ít · 才: muộn/chậm/nhiều",
+                "八点就来了 (mới 8h đã đến) · 十点才来 (tận 10h mới đến)"
+              ],
+              [
+                "适合 vs 合适",
+                "适合 (động từ) có tân ngữ sau · 合适 (tính từ) không có tân ngữ",
+                "这件衣服很适合你 / 这件衣服很合适"
+              ]
             ]
           }
         },
@@ -716,6 +1039,120 @@
         "heading": "Gặp cặp từ nào khác làm bạn phân vân? Hỏi thẳng Gia sư AI",
         "body": "Mở mục Hỏi đáp AI hoặc bảng So sánh từ dễ nhầm trên HSK Flashcards để xem giải thích tiếng Việt kèm ví dụ cụ thể.",
         "buttonLabel": "Hỏi Gia sư AI miễn phí ngay"
+      }
+    },
+    {
+      "slug": "huong-dan-dang-ky-thi-hsk-va-lich-thi",
+      "category": "ky-thi",
+      "categoryLabel": "Kỳ thi & Đăng ký",
+      "hskTag": "Kỳ thi HSK",
+      "publishedAt": "2026-11-24",
+      "updatedAt": "2026-11-24",
+      "readMinutes": 6,
+      "featured": false,
+      "title": "Cách đăng ký thi HSK tại Việt Nam, hồ sơ cần chuẩn bị & kinh nghiệm chọn thi máy hay thi giấy",
+      "metaTitle": "Cách đăng ký thi HSK tại Việt Nam & theo dõi lịch thi mới nhất | HSK Flashcards",
+      "metaDescription": "Hướng dẫn quy trình đăng ký thi HSK tại Việt Nam, danh sách các điểm thi chính thức, giấy tờ cần mang vào phòng thi, so sánh thi máy vs thi giấy và lưu ý săn suất thi.",
+      "summary": "Toàn bộ quy trình đăng ký thi HSK cho người thi lần đầu: cần chuẩn bị ảnh thẻ và giấy tờ gì, nên chọn thi máy tính hay thi giấy và cách theo dõi lịch mở cổng chính xác từ các điểm thi lớn.",
+      "keywords": [
+        "cách đăng ký thi HSK",
+        "đăng ký thi HSK ở đâu",
+        "lịch thi HSK mới nhất",
+        "thi HSK trên máy tính hay trên giấy",
+        "điểm thi HSK tại Việt Nam"
+      ],
+      "sources": [
+        {
+          "label": "Cổng đăng ký & lịch thi quốc tế ChineseTest",
+          "url": "https://www.chinesetest.cn/"
+        }
+      ],
+      "sections": [
+        {
+          "id": "cac-diem-thi-tai-viet-nam",
+          "heading": "Các điểm thi HSK chính thức phổ biến tại Việt Nam",
+          "paragraphs": [
+            "Lịch mở cổng đăng ký, số lượng suất thi và lệ phí từng đợt được từng điểm thi công bố riêng (thường mở trước ngày thi khoảng 1 đến 1,5 tháng và hết suất rất nhanh ở các thành phố lớn).",
+            "Bạn nên theo dõi trực tiếp fanpage hoặc website chính thức của các điểm thi uy tín gần khu vực mình sinh sống để cập nhật đúng ngày giờ mở link đăng ký:"
+          ],
+          "bullets": [
+            "Khu vực miền Bắc: Trường Đại học Ngoại ngữ – ĐHQGHN (ULIS), Viện Khổng Tử tại Đại học Hà Nội (HANU), Đại học Thái Nguyên, Đại học Thành Đông (Hải Dương), Trường Ngoại ngữ – ĐH Sư phạm Hà Nội 2.",
+            "Khu vực miền Trung: Trường Đại học Ngoại ngữ – Đại học Huế, Trường Đại học Duy Tân (Đà Nẵng).",
+            "Khu vực miền Nam: Trường Đại học Sư phạm TP.HCM (HCMUE)."
+          ],
+          "tip": "Lưu ý quan trọng: Không chuyển khoản lệ phí cho cá nhân không rõ nguồn gốc. Luôn đối chiếu ngày thi, lệ phí và số tài khoản trực tiếp trên thông báo chính thức của điểm thi và tài khoản chinesetest.cn."
+        },
+        {
+          "id": "quy-trinh-dang-ky",
+          "heading": "Quy trình 5 bước đăng ký thi HSK cho người mới",
+          "bullets": [
+            "Bước 1 — Chuẩn bị sẵn hồ sơ mềm: Ảnh thẻ nền trắng rõ mặt (chuẩn tỉ lệ 3x4 hoặc 4x6, dung lượng nhẹ dưới 100KB–200KB tùy yêu cầu điểm thi) và ảnh chụp CCCD/Hộ chiếu còn hạn.",
+            "Bước 2 — Tạo tài khoản trên chinesetest.cn: Điền chính xác Họ tên in hoa không dấu, ngày sinh, quốc tịch và số CCCD/Hộ chiếu (trùng khớp 100% giấy tờ sẽ mang vào phòng thi).",
+            "Bước 3 — Canh giờ mở cổng & chọn cấp thi/điểm thi: Nhiều điểm thi yêu cầu điền form của điểm thi trước hoặc đăng ký trực tiếp trên chinesetest.cn theo thông báo từng đợt.",
+            "Bước 4 — Đóng lệ phí đúng hạn: Chuyển khoản đúng cú pháp điểm thi hướng dẫn và giữ lại biên lai xác nhận.",
+            "Bước 5 — In thẻ dự thi & kiểm tra phòng thi: Trước ngày thi khoảng 5–7 ngày, tải và in thẻ dự thi, đối chiếu kỹ họ tên, số giấy tờ và giờ có mặt."
+          ]
+        },
+        {
+          "id": "thi-may-hay-thi-giay",
+          "heading": "Nên chọn thi HSK trên máy tính (IBT) hay trên giấy (PBT)?",
+          "paragraphs": [
+            "Nội dung, độ khó và giá trị chứng chỉ của thi máy và thi giấy hoàn toàn giống nhau. Sự khác biệt nằm ở trải nghiệm làm bài — chọn đúng hình thức hợp với mình giúp bạn tiết kiệm rất nhiều thời gian."
+          ],
+          "table": {
+            "headers": [
+              "Tiêu chí",
+              "Thi trên máy tính (IBT)",
+              "Thi trên giấy (PBT)"
+            ],
+            "rows": [
+              [
+                "Phần Viết (HSK 3–6)",
+                "Gõ pinyin chọn chữ Hán — không sợ quên nét",
+                "Phải viết tay chữ Hán hoàn toàn trên giấy"
+              ],
+              [
+                "Phần Nghe",
+                "Đeo tai nghe riêng, âm thanh rõ và ít tạp âm",
+                "Nghe loa phòng thi, dễ bị ảnh hưởng xung quanh"
+              ],
+              [
+                "Ghi chú & gạch chân",
+                "Không gạch trực tiếp lên đề như trên giấy",
+                "Dễ gạch chân từ khóa khi đọc đoạn văn dài"
+              ],
+              [
+                "Thời gian có điểm",
+                "Nhanh hơn (thường khoảng 15 ngày)",
+                "Lâu hơn (thường khoảng 30 ngày)"
+              ]
+            ]
+          }
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Thi HSK có bắt buộc phải đăng ký thi theo thứ tự từ HSK 1 lên không?",
+          "a": "Không bắt buộc. Bạn có thể đăng ký thẳng HSK 3, HSK 4 hoặc HSK 5 nếu trình độ hiện tại của bạn đã đáp ứng được cấp đó."
+        },
+        {
+          "q": "Khi đi thi HSK cần mang theo những giấy tờ gì?",
+          "a": "Cần mang bản gốc CCCD hoặc Hộ chiếu trùng khớp thông tin đăng ký và Thẻ dự thi đã in sẵn. Nếu thi trên giấy cần mang thêm bút chì 2B và tẩy."
+        },
+        {
+          "q": "Người mới nên chuẩn bị trước khi thi máy tính HSK thế nào?",
+          "a": "Hãy tập gõ bộ gõ Pinyin tiếng Trung trên máy tính cho quen tay và luyện làm đề trực tiếp trên màn hình với HSK Flashcards để quen nhịp nhìn và bấm đáp án."
+        }
+      ],
+      "relatedSlugs": [
+        "thang-diem-dau-hsk-1-den-6",
+        "cach-tra-diem-thi-hsk-online",
+        "meo-luyen-nghe-va-doc-hieu-hsk-tang-diem-nhanh"
+      ],
+      "cta": {
+        "heading": "Đã chọn được đợt thi? Bắt đầu luyện đề miễn phí ngay hôm nay",
+        "body": "Luyện quen thao tác làm bài trên màn hình với kho đề HSK 1–6 miễn phí, flashcard SRS và Gia sư AI giải đáp tiếng Trung.",
+        "buttonLabel": "Vào luyện thi HSK 1–6 miễn phí"
       }
     }
   ]

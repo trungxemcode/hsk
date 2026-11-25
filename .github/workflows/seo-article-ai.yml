@@ -205,16 +205,6 @@ jobs:
           git add content/seo-articles/ tin-tuc-hsk.html bai-viet/ sitemap.xml app-version.json offline.js offline-worker.js OneSignalSDKWorker.js
           git commit -m "seo: tự động đăng bài HSK (${VOICE}) — ${TITLE}"
 
-          if [ "$PUBLISH_MODE" != "pr-review" ]; then
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:refs/heads/main; then
-              echo "PUBLISHED DIRECTLY TO main: ${TITLE}"
-              exit 0
-            fi
-            echo "Direct push to protected main blocked; falling back to auto-merge Pull Request."
-          fi
-
           git push -u origin "$BRANCH"
           PR_URL=$(gh pr create \
             --base main \
@@ -235,5 +225,5 @@ jobs:
           )")
 
           if [ "$PUBLISH_MODE" != "pr-review" ]; then
-            gh pr merge "$PR_URL" --auto --squash --delete-branch || gh pr merge "$PR_URL" --squash --delete-branch || true
+            gh pr merge "$PR_URL" --auto --squash --delete-branch || true
           fi
