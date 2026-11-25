@@ -2609,8 +2609,31 @@ html[data-theme="dark"] .tutor-demo {
   background: var(--seo-white);
 }
 
+@media (min-width: 769px) {
+  .score-portal-card:not(.is-collapsed):not(.is-expanded) .score-portal-frame-wrap {
+    height: 185px;
+    min-height: 185px;
+    overflow: hidden;
+  }
+
+  .score-portal-card:not(.is-collapsed):not(.is-expanded) .score-portal-frame {
+    margin-top: -314px;
+    margin-left: -18px;
+    width: calc(100% + 90px);
+    height: 760px;
+  }
+}
+
+.score-portal-card.is-expanded .score-portal-frame-wrap {
+  height: auto;
+  min-height: 760px;
+}
+
 .score-portal-card.is-expanded .score-portal-frame {
-  height: 1080px;
+  margin-top: 0;
+  margin-left: 0;
+  width: 100%;
+  height: 960px;
 }
 
 .score-portal-note {
@@ -2661,11 +2684,7 @@ html[data-theme="dark"] .tutor-demo {
   }
 }
 
-@media (max-width: 600px) {
-  .calc-inputs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
+@media (max-width: 768px) {
   .score-portal-card:not(.is-collapsed) .score-portal-frame-wrap {
     min-height: 640px;
   }
@@ -2676,5 +2695,11 @@ html[data-theme="dark"] .tutor-demo {
 
   .score-portal-card.is-expanded .score-portal-frame {
     height: 920px;
+  }
+}
+
+@media (max-width: 600px) {
+  .calc-inputs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

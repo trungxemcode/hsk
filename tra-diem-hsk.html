@@ -184,7 +184,7 @@
             </div>
             <div class="score-portal-actions">
               <button type="button" class="score-portal-btn is-primary" id="togglePortalBtn" aria-expanded="false" aria-controls="scorePortalFrameWrap">Mở khung tra điểm</button>
-              <button type="button" class="score-portal-btn score-portal-open-only" id="toggleFrameHeightBtn">Mở rộng khung</button>
+              <button type="button" class="score-portal-btn score-portal-open-only" id="toggleFrameHeightBtn">Xem đầy đủ</button>
               <button type="button" class="score-portal-btn score-portal-open-only" id="reloadFrameBtn">Tải lại cổng</button>
               <a class="score-portal-btn" href="https://www.chinesetest.cn/query-score" target="_blank" rel="noopener noreferrer">Mở tab mới</a>
             </div>
@@ -506,7 +506,7 @@
       if (toggleFrameBtn && portalCard) {
         toggleFrameBtn.addEventListener('click', function () {
           var expanded = portalCard.classList.toggle('is-expanded');
-          toggleFrameBtn.textContent = expanded ? 'Thu gọn khung' : 'Mở rộng khung';
+          toggleFrameBtn.textContent = expanded ? 'Thu gọn về ô nhập' : 'Xem đầy đủ';
         });
       }
       if (reloadFrameBtn && scoreFrame) {
