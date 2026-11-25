@@ -18,8 +18,38 @@
     }
   }
 
+  function bindNavDropdowns() {
+    var menus = document.querySelectorAll('details.nav-dropdown, details.mobile-nav-menu');
+    if (!menus.length) return;
+    for (var i = 0; i < menus.length; i++) {
+      menus[i].addEventListener('toggle', function () {
+        if (!this.open) return;
+        for (var j = 0; j < menus.length; j++) {
+          if (menus[j] !== this && menus[j].open) menus[j].open = false;
+        }
+      });
+    }
+    document.addEventListener('click', function (e) {
+      var picked = e.target && e.target.closest && e.target.closest('.nav-dropdown-menu a, .mobile-nav-panel a');
+      for (var k = 0; k < menus.length; k++) {
+        if (menus[k].open && (picked || !menus[k].contains(e.target))) menus[k].open = false;
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      for (var k = 0; k < menus.length; k++) {
+        if (menus[k].open) {
+          menus[k].open = false;
+          var sum = menus[k].querySelector('summary');
+          if (sum && sum.focus) sum.focus();
+        }
+      }
+    });
+  }
+
   function enableInstantNavigation() {
     rewriteLinksForCleanUrls();
+    bindNavDropdowns();
     var hasSpecRules = false;
     try {
       hasSpecRules = Boolean(window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules'));
