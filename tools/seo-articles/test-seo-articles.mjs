@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { buildAllSeoArticles, escHtml, formatDateVi, safeJsonLd, validateArticle } from './build-seo-articles.mjs';
+import { buildAllSeoArticles, escHtml, formatDateVi, safeJsonLd, selectClusterArticles, validateArticle } from './build-seo-articles.mjs';
 import {
   DEFAULT_OPENROUTER_MODEL,
   EDITORIAL_VOICES,
@@ -274,15 +274,38 @@ test('pickNextQueueTopic skips already published slugs', () => {
   assert.equal(next?.slug, 'c');
 });
 
-test('all published articles build cleanly into tin-tuc-hsk.html, bai-viet/*.html, and sitemap.xml', () => {
+test('all published articles build cleanly into tin-tuc-hsk.html, bai-viet/*.html, 9 cluster bands, and sitemap.xml', () => {
   const result = buildAllSeoArticles();
   assert.ok(result.count >= 8, 'expected at least 8 seed SEO articles');
+
+  const articles = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/seo-articles/articles.json'), 'utf8')).articles;
+  for (const key of ['index', 'compare', 'editor', 'hsk1', 'hsk2', 'hsk3', 'hsk4', 'hsk5', 'hsk6']) {
+    const selected = selectClusterArticles(articles, key, 3);
+    assert.equal(selected.length, 3, `expected 3 cluster articles for ${key}`);
+  }
 
   const hubHtml = fs.readFileSync(path.join(ROOT, 'tin-tuc-hsk.html'), 'utf8');
   assert.match(hubHtml, /<link rel="canonical" href="https:\/\/hskfreelearningai\.pages\.dev\/tin-tuc-hsk">/);
   assert.match(hubHtml, /data-cat-btn="ky-thi"/);
+  assert.match(hubHtml, /id="newsLoadMoreBtn"/);
+  assert.match(hubHtml, /data-in-lead="1"/);
   assert.match(hubHtml, /app-hoc-hsk\.html/);
   assert.match(hubHtml, /seo-offline-prewarm\.js/);
+
+  for (const file of [
+    'index.html',
+    'phan-biet-tu-de-nham-hsk.html',
+    'sua-cau-tieng-trung-ai.html',
+    'luyen-thi-hsk-1-mien-phi.html',
+    'luyen-thi-hsk-2-mien-phi.html',
+    'luyen-thi-hsk-3-mien-phi.html',
+    'luyen-thi-hsk-4-mien-phi.html',
+    'luyen-thi-hsk-5-mien-phi.html',
+    'luyen-thi-hsk-6-mien-phi.html',
+  ]) {
+    const pageHtml = fs.readFileSync(path.join(ROOT, file), 'utf8');
+    assert.equal((pageHtml.match(/class="cluster-card"/g) || []).length, 3, `expected 3 cluster cards in ${file}`);
+  }
 
   const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /https:\/\/hskfreelearningai\.pages\.dev\/tin-tuc-hsk/);
