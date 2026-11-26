@@ -395,9 +395,38 @@ async function main() {
 
   if (args.approve) {
     const draftId = String(args['draft-id'] || '').trim();
-    if (!draftId) throw new Error('Thiếu --draft-id khi chạy --approve');
+    const articleJsonB64 = typeof args['article-json-base64'] === 'string' ? args['article-json-base64'].trim() : '';
     const rating = args.rating ? Number(args.rating) : null;
     const comment = typeof args.comment === 'string' ? args.comment : '';
+
+    if (articleJsonB64) {
+      const decodedRaw = JSON.parse(Buffer.from(articleJsonB64, 'base64').toString('utf8'));
+      const existingSlugs = articles.map((a) => a.slug);
+      const normalized = normalizeGeneratedArticle(decodedRaw, {
+        slug: decodedRaw.slug || slugifyVi(decodedRaw.title),
+        category: decodedRaw.category || 'meo-hoc',
+        hskTag: decodedRaw.hskTag || 'HSK 1–6',
+        today,
+        existingSlugs,
+        editorialVoice: decodedRaw.editorialVoice || '',
+        fallbackSources: [],
+      });
+      const finalSlug = resolveUniqueArticleSlug(decodedRaw.slug || normalized.slug, articles);
+      const publishedArticle = {
+        ...normalized,
+        slug: finalSlug,
+        publishedAt: decodedRaw.publishedAt || today,
+        updatedAt: today,
+      };
+      validateArticle(publishedArticle);
+      articlesData.articles = [publishedArticle, ...articles.filter((a) => a.slug !== finalSlug)];
+      fs.writeFileSync(ARTICLES_PATH, JSON.stringify(articlesData, null, 2) + '\n', 'utf8');
+      const built = buildAllSeoArticles();
+      console.log(`APPROVED "${draftId || publishedArticle.slug}" (CF bridge) -> published "${publishedArticle.slug}" (${built.count} SEO articles, ${built.urls} URLs).`);
+      return;
+    }
+
+    if (!draftId) throw new Error('Thiếu --draft-id khi chạy --approve');
     const { publishedArticle } = approveDraftIntoArticles({
       draftsData,
       articlesData,

@@ -1,9 +1,9 @@
 name: Google Trends SEO Drafts & Editorial Publisher
 
 on:
-  schedule:
-    # Tự động quét Google Trends/Suggest VN và sinh 2 bài nháp không trùng mỗi 2 tiếng
-    - cron: '35 */2 * * *'
+  # Lịch quét Google Trends & sinh bài nháp tự động mỗi 2 tiếng (`35 */2 * * *`)
+  # đã chuyển sang Cloudflare Worker `hsk-seo-editorial` để chạy đúng giờ và không bị rate-limit OpenRouter.
+  # Workflow GitHub Actions này nhận lệnh `approve` để build HTML tĩnh + Topic Clusters + PWA PR.
   workflow_dispatch:
     inputs:
       action:
@@ -42,6 +42,10 @@ on:
         default: ''
       csv_base64:
         description: 'Nội dung file CSV Google Trends mã hóa base64 (tùy chọn)'
+        required: false
+        default: ''
+      article_json_b64:
+        description: 'JSON bài viết đã duyệt từ Cloudflare R2 mã hóa base64 (tùy chọn)'
         required: false
         default: ''
       publish_mode:
@@ -130,6 +134,7 @@ jobs:
           INPUT_COMMENT: ${{ inputs.comment }}
           INPUT_QUERIES: ${{ inputs.custom_queries }}
           INPUT_CSV_B64: ${{ inputs.csv_base64 }}
+          INPUT_ARTICLE_B64: ${{ inputs.article_json_b64 }}
         run: |
           ACTION="$INPUT_ACTION"
           if [ "$EVENT_NAME" = "schedule" ] || [ -z "$ACTION" ]; then
@@ -140,6 +145,7 @@ jobs:
           ARGS=()
           if [ "$ACTION" = "approve" ]; then
             ARGS+=(--approve --draft-id "$INPUT_DRAFT_ID")
+            if [ -n "$INPUT_ARTICLE_B64" ]; then ARGS+=(--article-json-base64 "$INPUT_ARTICLE_B64"); fi
             if [ -n "$INPUT_RATING" ]; then ARGS+=(--rating "$INPUT_RATING"); fi
             if [ -n "$INPUT_COMMENT" ]; then ARGS+=(--comment "$INPUT_COMMENT"); fi
           elif [ "$ACTION" = "rewrite" ]; then
@@ -190,7 +196,8 @@ jobs:
           PUBLISH_MODE: ${{ inputs.publish_mode || 'auto-publish' }}
           DRAFT_ID: ${{ inputs.draft_id }}
         run: |
-          if [ -z "$(git status --porcelain content/seo-articles/articles.json bai-viet/ tin-tuc-hsk.html sitemap.xml)" ]; then
+          CLUSTER_FILES=(index.html phan-biet-tu-de-nham-hsk.html sua-cau-tieng-trung-ai.html luyen-thi-hsk-1-mien-phi.html luyen-thi-hsk-2-mien-phi.html luyen-thi-hsk-3-mien-phi.html luyen-thi-hsk-4-mien-phi.html luyen-thi-hsk-5-mien-phi.html luyen-thi-hsk-6-mien-phi.html)
+          if [ -z "$(git status --porcelain content/seo-articles/articles.json bai-viet/ tin-tuc-hsk.html sitemap.xml "${CLUSTER_FILES[@]}")" ]; then
             echo "Không có thay đổi bài viết xuất bản."
             exit 0
           fi
@@ -207,7 +214,7 @@ jobs:
           python tools/check-pwa-release.py --base origin/main
           python tools/check-feature-preservation.py --base origin/main
 
-          git add content/seo-articles/articles.json tin-tuc-hsk.html bai-viet/ sitemap.xml app-version.json offline.js offline-worker.js OneSignalSDKWorker.js
+          git add content/seo-articles/articles.json tin-tuc-hsk.html bai-viet/ sitemap.xml "${CLUSTER_FILES[@]}" app-version.json offline.js offline-worker.js OneSignalSDKWorker.js
           git commit -m "seo: xuất bản bài đã duyệt — ${TITLE}"
           git push -u origin "$BRANCH"
 

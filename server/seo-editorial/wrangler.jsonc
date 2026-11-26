@@ -1,0 +1,35 @@
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "hsk-seo-editorial",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-31",
+  "workers_dev": true,
+  "ai": {
+    "binding": "AI"
+  },
+  "r2_buckets": [
+    {
+      "binding": "SEO_BUCKET",
+      "bucket_name": "hsk-music-library"
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "35 */2 * * *"
+    ]
+  },
+  "vars": {
+    "FIREBASE_API_KEY": "AIzaSyAQlltCY7fZzNUnVkaiOusYSwa0LO5a6ko",
+    "ALLOWED_ORIGINS": "https://hskfreelearningai.pages.dev,https://trungxemcode.github.io",
+    "PUBLISHED_ARTICLES_URL": "https://hskfreelearningai.pages.dev/content/seo-articles/articles.json",
+    "CF_WRITER_MODEL": "@cf/google/gemma-4-26b-a4b-it",
+    "CF_WRITER_FALLBACK_MODEL": "@cf/qwen/qwen3.8-27b",
+    "CF_REVIEWER_1_MODEL": "@cf/qwen/qwen3.8-27b",
+    "CF_REVIEWER_2_MODEL": "@cf/mistralai/mistral-small-3.1-24b-instruct",
+    "XKIRO_REVIEW_MODEL_1": "cohere/command-a-plus",
+    "XKIRO_REVIEW_MODEL_2": "mistralai/mistral-large-2512",
+    "XKIRO_REVIEW_MODEL_2_FALLBACK": "deepseek/deepseek-v4.1-flash",
+    "DEFAULT_CRON_COUNT": "1",
+    "MAX_PENDING_DRAFTS": "24"
+  }
+}

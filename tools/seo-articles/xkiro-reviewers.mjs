@@ -207,26 +207,46 @@ export async function runDualXkiroReview({
   const results = [];
   for (const reviewer of cfg.reviewers) {
     const { systemPrompt, userPrompt } = buildReviewerPrompt(reviewer, article, trendQuery);
-    try {
-      const raw = await callXkiroJson({
-        apiUrl: cfg.apiUrl,
-        apiKey: cfg.apiKey,
-        model: reviewer.model,
-        systemPrompt,
-        userPrompt,
-        fetchImpl,
-      });
-      results.push(normalizeReviewerResult(reviewer, raw));
-    } catch (err) {
+    const candidateModels =
+      reviewer.id === 'mistral-large-3'
+        ? Array.from(new Set([reviewer.model, env.XKIRO_REVIEW_MODEL_2_FALLBACK || 'deepseek/deepseek-v4.1-flash'].filter(Boolean)))
+        : [reviewer.model];
+
+    let parsedRaw = null;
+    let usedModel = reviewer.model;
+    let lastErr = null;
+    for (const candidateModel of candidateModels) {
+      try {
+        parsedRaw = await callXkiroJson({
+          apiUrl: cfg.apiUrl,
+          apiKey: cfg.apiKey,
+          model: candidateModel,
+          systemPrompt,
+          userPrompt,
+          fetchImpl,
+        });
+        usedModel = candidateModel;
+        break;
+      } catch (err) {
+        lastErr = err;
+        if (!/HTTP (?:400|404)/.test(String(err?.message || ''))) {
+          break;
+        }
+      }
+    }
+
+    if (parsedRaw) {
+      results.push(normalizeReviewerResult({ ...reviewer, model: usedModel }, parsedRaw));
+    } else {
       results.push({
         id: reviewer.id,
         label: reviewer.label,
-        model: reviewer.model,
+        model: usedModel,
         role: reviewer.role,
         status: 'error',
         score: null,
         verdict: 'error',
-        summary: `Chưa gọi được ${reviewer.label}: ${err.message}`,
+        summary: `Chưa gọi được ${reviewer.label}: ${lastErr?.message || 'unknown error'}`,
         strengths: [],
         issues: [],
         mustFix: [],
