@@ -6,10 +6,6 @@ on:
     - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
-      queue_url:
-        description: 'Endpoint hàng đợi bài đã duyệt trên Cloudflare Worker'
-        required: false
-        default: 'https://hsk-seo-editorial.trung-hsk668.workers.dev/public/approved-queue'
       publish_mode:
         description: 'Cách xuất bản bài viết'
         required: false
@@ -29,6 +25,7 @@ concurrency:
 
 jobs:
   publish-approved:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -48,15 +45,28 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Sync approved SEO articles from Cloudflare Queue
+      - name: Check for a pending publication PR
+        id: pending
         env:
-          QUEUE_URL: ${{ inputs.queue_url || 'https://hsk-seo-editorial.trung-hsk668.workers.dev/public/approved-queue' }}
-        run: node tools/seo-articles/seo-editorial-pipeline.mjs --sync-approved-from-url "$QUEUE_URL"
+          GH_TOKEN: ${{ secrets.SEO_PUBLISH_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          count=$(gh pr list --base main --state open --limit 100 --json headRefName \
+            --jq '[.[] | select(.headRefName | startswith("seo/auto-publish-"))] | length')
+          if [ "$count" -gt 0 ]; then
+            echo 'A publication PR is already awaiting merge.'
+            echo 'open=true' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Sync approved SEO articles from Cloudflare Queue
+        if: steps.pending.outputs.open != 'true'
+        run: node tools/seo-articles/seo-editorial-pipeline.mjs --sync-approved-from-url
 
       - name: Verify, bump PWA & open auto-publish PR if articles changed
+        if: steps.pending.outputs.open != 'true'
         env:
           GH_TOKEN: ${{ secrets.SEO_PUBLISH_TOKEN || secrets.GITHUB_TOKEN }}
           PUBLISH_MODE: ${{ inputs.publish_mode || 'auto-publish' }}
+          HAS_PUBLISH_TOKEN: ${{ secrets.SEO_PUBLISH_TOKEN != '' }}
         run: |
           CLUSTER_FILES=(index.html phan-biet-tu-de-nham-hsk.html sua-cau-tieng-trung-ai.html luyen-thi-hsk-1-mien-phi.html luyen-thi-hsk-2-mien-phi.html luyen-thi-hsk-3-mien-phi.html luyen-thi-hsk-4-mien-phi.html luyen-thi-hsk-5-mien-phi.html luyen-thi-hsk-6-mien-phi.html)
           if [ -z "$(git status --porcelain content/seo-articles/articles.json bai-viet/ tin-tuc-hsk.html sitemap.xml "${CLUSTER_FILES[@]}")" ]; then
@@ -66,7 +76,7 @@ jobs:
 
           SLUG=$(node -e "const d=require('./content/seo-articles/articles.json'); console.log(d.articles[0].slug);")
           TITLE=$(node -e "const d=require('./content/seo-articles/articles.json'); console.log(d.articles[0].title);")
-          BRANCH="seo/auto-publish-${SLUG}-$(date +%Y%m%d%H%M)"
+          BRANCH="seo/auto-publish-${SLUG}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
@@ -98,6 +108,13 @@ jobs:
           EOF
           )")
 
-          if [ "$PUBLISH_MODE" != "pr-review" ]; then
-            gh pr merge "$PR_URL" --auto --squash --delete-branch || true
+          if [ "$PUBLISH_MODE" = "pr-review" ]; then
+            exit 0
+          fi
+          if [ "$HAS_PUBLISH_TOKEN" != "true" ]; then
+            echo "::notice::Approve the generated CI workflows in the publication PR, then merge when checks pass: $PR_URL"
+            exit 0
+          fi
+          if ! gh pr merge "$PR_URL" --auto --squash --delete-branch; then
+            echo "::warning::GitHub did not enable auto-merge. Review the publication PR after CI: $PR_URL"
           fi

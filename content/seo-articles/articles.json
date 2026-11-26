@@ -2,6 +2,141 @@
   "schema": 1,
   "articles": [
     {
+      "slug": "khi-nao-dung-er-va-liang",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "readMinutes": 4,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Khi nào dùng 二 và 两? Cách nói số 2, hai món và hai giờ",
+      "metaTitle": "Khi nào dùng 二 và 两 trong tiếng Trung? | HSK Flashcards",
+      "metaDescription": "Phân biệt 二 và 两 qua cách đọc số, gọi món, nói giờ và ngày tháng. Có bảng chữ Hán, Pinyin và bài tập để tự kiểm tra.",
+      "summary": "二 (èr) dùng khi đọc chữ số 2, đọc những số như 22 hoặc nói thứ tự như “lần thứ hai”. 两 (liǎng) thường đứng trước lượng từ khi nói số lượng, như “hai cốc”. Cách chọn rõ nhất trong câu 两点二十二分 (liǎng diǎn èrshí’èr fēn) — 2 giờ 22 phút.",
+      "keywords": [
+        "khi nào dùng 二 và 两",
+        "phân biệt èr và liǎng",
+        "số 2 trong tiếng Trung",
+        "cách nói hai giờ tiếng Trung"
+      ],
+      "sources": [
+        {
+          "label": "PREP, bài về 二 và 两, dùng để khảo sát câu hỏi người học và đối chiếu cách đọc số thập phân",
+          "url": "https://prepedu.com/vi/blog/phan-biet-er-va-liang-trong-tieng-trung"
+        },
+        {
+          "label": "WordSwing, *两 or 二: two*, phần lượng từ, giờ và số thứ tự",
+          "url": "https://hsk.wordswing.com/grammar/liang-er/"
+        },
+        {
+          "label": "HanziStack, *Two in numbers and quantities*, phần số có tận cùng là 2 đứng trước lượng từ",
+          "url": "https://char.hanzistack.com/grammar/vs-er-vs-liang-two-in-numbers-and-quantities"
+        }
+      ],
+      "sections": [
+        {
+          "id": "muc-1",
+          "heading": "Trong quán, phân biệt hai cốc với món số 2",
+          "paragraphs": [
+            "我要两杯热茶。 (Wǒ yào liǎng bēi rè chá.) — Tôi muốn hai cốc trà nóng. 杯 (bēi) là lượng từ dùng để đếm theo cốc. 两 cho người nghe biết cần chuẩn bị bao nhiêu cốc.",
+            "我要二号套餐。 (Wǒ yào èr hào tàocān.) — Tôi muốn suất ăn số 2. 二号 (èr hào) là nhãn trên thực đơn. Câu chỉ xác định loại suất ăn. Nếu cần hai suất thuộc loại này, có thể nói 我要两份二号套餐。 (Wǒ yào liǎng fèn èr hào tàocān.) — Tôi muốn hai suất ăn số 2. Trong cùng một cụm, 两份 cho biết số lượng và 二号 cho biết mã món."
+          ]
+        },
+        {
+          "id": "muc-2",
+          "heading": "Trên lịch và đồng hồ, đọc theo đơn vị đi sau số",
+          "paragraphs": [
+            "我们下午两点开始，练两个小时。 (Wǒmen xiàwǔ liǎng diǎn kāishǐ, liàn liǎng ge xiǎoshí.) — Chúng tôi bắt đầu lúc 2 giờ chiều và luyện tập trong hai tiếng. Hai cụm đều dùng 两, nhưng 点 cho biết giờ bắt đầu, còn 个小时 chỉ thời lượng."
+          ],
+          "table": {
+            "headers": [
+              "Cần diễn đạt",
+              "Chữ Hán",
+              "Pinyin",
+              "Cách hiểu"
+            ],
+            "rows": [
+              [
+                "2 giờ chiều",
+                "下午两点",
+                "xiàwǔ liǎng diǎn",
+                "Mốc giờ trong ngày"
+              ],
+              [
+                "Hai tiếng",
+                "两个小时",
+                "liǎng ge xiǎoshí",
+                "Khoảng thời gian kéo dài"
+              ],
+              [
+                "Tháng Hai",
+                "二月",
+                "èryuè",
+                "Tháng mang số thứ tự 2"
+              ],
+              [
+                "Hai tháng",
+                "两个月",
+                "liǎng ge yuè",
+                "Khoảng thời gian hoặc số lượng tháng"
+              ],
+              [
+                "Lần thứ hai",
+                "第二次",
+                "dì-èr cì",
+                "Thứ tự của lần thực hiện"
+              ],
+              [
+                "Hai lần",
+                "两次",
+                "liǎng cì",
+                "Số lần thực hiện"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "muc-3",
+          "heading": "Với 12 hoặc 22 món, đọc trọn số trước khi thêm lượng từ",
+          "paragraphs": [
+            "Mẹo “thấy lượng từ thì chọn 两” áp dụng tốt khi số lượng là đúng hai. Với 十二份 (shí’èr fèn, 12 suất) và 二十二份 (èrshí’èr fèn, 22 suất), hãy đọc trọn 十二 hoặc 二十二 rồi thêm 份. Chữ số 2 nằm trong cách đọc cả con số nên vẫn dùng 二.",
+            "Khi nghe, tập nhận ra cả cụm số trước. 两份 chỉ hai suất. 二十二份 bắt đầu bằng cả cụm 二十二 và chỉ hai mươi hai suất. Sự khác biệt quan trọng nhất ở quầy gọi món là số thực tế cần chuẩn bị."
+          ]
+        },
+        {
+          "id": "muc-4",
+          "heading": "Kiểm tra bằng một tình huống đặt phòng và một ngày hẹn",
+          "paragraphs": [
+            "Điền 二 hoặc 两 vào ba chỗ trống trong 我订了__间房，__月__号入住。 Nghĩa cần diễn đạt là “Tôi đặt hai phòng, nhận phòng ngày 2 tháng 2”.",
+            "Đáp án là 我订了两间房，二月二号入住。 (Wǒ dìng le liǎng jiān fáng, èryuè èr hào rùzhù.) Hai phòng là số lượng nên dùng 两 trước 间. Tháng Hai và ngày mùng hai là hai phần của ngày trên lịch nên dùng 二 ở cả hai chỗ."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Đọc hai chữ số 2 đứng liền nhau trong một mã thì sao?",
+          "a": "Nếu đang đọc lần lượt từng chữ số, đọc èr, èr. Cách đọc èrshí’èr dùng khi hiểu “22” là một con số hoàn chỉnh, chẳng hạn 22 suất."
+        },
+        {
+          "q": "Đọc 2,2 trong tiếng Trung thế nào?",
+          "a": "Đọc 二点二 (èr diǎn èr). Trong số thập phân, 点 là dấu phân cách phần nguyên với phần thập phân. Với giờ trên đồng hồ, 两点 (liǎng diǎn) có nghĩa là 2 giờ."
+        }
+      ],
+      "relatedSlugs": [
+        "lich-thi-hsk-va-lich-tra-ket-qua-chinh-thuc",
+        "thong-bao-hsk-3-0-moi-nhat-va-cau-truc-bai-thi",
+        "danh-sach-dia-diem-thi-hsk-tai-viet-nam-va-cach-dang-ky"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261126144503-khi-nao-dung-er-va-liang"
+    },
+    {
       "slug": "lich-thi-hsk-va-lich-tra-ket-qua-chinh-thuc",
       "category": "ky-thi",
       "categoryLabel": "Kỳ thi & Đăng ký",

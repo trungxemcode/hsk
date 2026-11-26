@@ -358,18 +358,28 @@ test('syncApprovedQueueIntoArticles imports approved articles cleanly and stays 
       },
     },
   ];
+  queueItems.push({
+    id: 'draft-queue-older',
+    approvedAt: '2026-11-26T13:00:00.000Z',
+    article: {
+      ...queueItems[0].article,
+      slug: 'cach-dung-de-trong-tieng-trung',
+      title: 'Cách dùng 的 trong tiếng Trung',
+    },
+  });
+  queueItems.reverse();
   const articlesData = {
     schema: 1,
     articles: [{ slug: 'bai-co-san', title: 'Bài viết có sẵn' }],
   };
 
   const first = syncApprovedQueueIntoArticles({ queueItems, articlesData, today: '2026-11-26' });
-  assert.equal(first.added.length, 1);
-  assert.equal(first.added[0].sourceDraftId, 'draft-queue-newest');
-  assert.equal(articlesData.articles.length, 2);
+  assert.equal(first.added.length, 2);
+  assert.equal(articlesData.articles[0].sourceDraftId, 'draft-queue-newest');
+  assert.equal(articlesData.articles.length, 3);
   assert.equal(articlesData.articles[0].slug, 'cach-dung-tu-yi-dian-trong-tieng-trung');
 
   const second = syncApprovedQueueIntoArticles({ queueItems, articlesData, today: '2026-11-26' });
   assert.equal(second.added.length, 0);
-  assert.equal(articlesData.articles.length, 2);
+  assert.equal(articlesData.articles.length, 3);
 });

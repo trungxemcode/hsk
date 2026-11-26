@@ -297,8 +297,9 @@ export function syncApprovedQueueIntoArticles({ queueItems = [], articlesData, t
   );
 
   const added = [];
-  // Iterate oldest-to-newest so newer approved items sit at index 0 after unshift.
-  const ordered = [...(Array.isArray(queueItems) ? queueItems : [])].reverse();
+  // Place the latest approval first regardless of when each draft was created.
+  const ordered = [...(Array.isArray(queueItems) ? queueItems : [])]
+    .sort((a, b) => String(a?.approvedAt || '').localeCompare(String(b?.approvedAt || '')));
 
   for (const item of ordered) {
     const draftId = String(item?.id || '').trim();
@@ -373,14 +374,18 @@ async function main() {
         : defaultQueueUrl;
     const res = await fetch(queueUrl, {
       headers: { Accept: 'application/json' },
+      redirect: 'error',
       signal: AbortSignal.timeout(15000),
     });
     if (!res.ok) {
       throw new Error(`Không tải được approved queue (${res.status}): ${queueUrl}`);
     }
     const payload = await res.json();
+    if (payload?.ok !== true || !Array.isArray(payload.items) || payload.count !== payload.items.length) {
+      throw new Error('Phản hồi hàng đợi SEO không đúng định dạng.');
+    }
     const { added } = syncApprovedQueueIntoArticles({
-      queueItems: Array.isArray(payload?.items) ? payload.items : [],
+      queueItems: payload.items,
       articlesData,
       today,
     });

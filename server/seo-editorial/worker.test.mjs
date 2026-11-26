@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
+  callWriterJson,
   collectTrendTopicsWorker,
   extractCfAiText,
   extractJsonObject,
+  runAuditRound,
 } from './pipeline-core.mjs';
 import {
   WRITER_STANDARD_ID,
@@ -914,4 +916,37 @@ test('OpenRouter-first pipeline runs Writer + Round 1 + Round 2 with zero Cloudf
   ]);
   assert.equal(body.createdDrafts[0].aiReviews.provider, 'openrouter');
   assert.equal(body.createdDrafts[0].aiReviews.finalVerdict, 'APPROVED');
+});
+
+test('configured authoring and review fall back to Workers AI when external providers fail', async () => {
+  const ai = createMockAi();
+  const providerCalls = [];
+  const env = {
+    AI: ai,
+    OPENROUTER_API_KEY: 'test-openrouter-key',
+    XKIRO_API_KEY: 'test-xkiro-key',
+    CF_WRITER_MODEL: '@cf/google/gemma-4-26b-a4b-it',
+    CF_REVIEWER_1_MODEL: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+  };
+  const fetchImpl = async (url) => {
+    assert.equal(ai.calls.length, 0, 'External providers are tried before Workers AI');
+    providerCalls.push(new URL(url).hostname);
+    return new Response('Temporarily unavailable', { status: 503 });
+  };
+
+  const written = await callWriterJson({ prompt: 'Viết bài HSK', env, fetchImpl });
+  assert.equal(written.provider, 'cloudflare-ai');
+  assert.equal(written.model, env.CF_WRITER_MODEL);
+  assert.ok(providerCalls.length > 0);
+  assert.ok(providerCalls.every((host) => host === 'openrouter.ai'));
+  assert.deepEqual(ai.calls, [env.CF_WRITER_MODEL]);
+
+  providerCalls.length = 0;
+  ai.calls.length = 0;
+  const audit = await runAuditRound({ article: written.data, env, fetchImpl });
+  assert.equal(providerCalls[0], 'api.xkiro.com');
+  assert.ok(providerCalls.slice(1).includes('openrouter.ai'));
+  assert.equal(audit.model, `cf-ai:${env.CF_REVIEWER_1_MODEL}`);
+  assert.equal(audit.status, 'completed');
+  assert.deepEqual(ai.calls, [env.CF_REVIEWER_1_MODEL]);
 });
