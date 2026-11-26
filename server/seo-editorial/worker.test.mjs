@@ -5,6 +5,21 @@ import {
   extractCfAiText,
   extractJsonObject,
 } from './pipeline-core.mjs';
+import {
+  WRITER_STANDARD_ID,
+  WRITER_SYSTEM_PROMPT,
+  buildStandardRevisionWriterPrompt,
+  buildStandardTrendWriterPrompt,
+  selectWriterStyle,
+} from './writer-standard.mjs';
+import {
+  AUDIT_PROTOCOL_ID,
+  AUDITOR_SYSTEM_PROMPT,
+  buildAuditorPrompt,
+  computeAuditScoreAndVerdict,
+  sanitizeAuditFeedbackForWriter,
+  selectRoundChallenges,
+} from './audit-protocol.mjs';
 import worker, { handleSeoEditorialFetch, runScheduledEditorial } from './worker.mjs';
 
 function createMemoryR2() {
@@ -93,15 +108,48 @@ function createMockAi({ failPrimary = false } = {}) {
         throw new Error('Primary simulated failure');
       }
       const prompt = String(input?.messages?.[1]?.content || '');
-      if (prompt.includes('Kiểm duyệt bài viết SEO')) {
+      const sys = String(input?.messages?.[0]?.content || '');
+      if (sys.includes(AUDIT_PROTOCOL_ID) || prompt.includes('ĐỀ BÀI CẦN KHÓA ĐỘC LẬP')) {
+        const isRound1 = prompt.includes('Vòng 1/2');
         return {
           response: JSON.stringify({
-            score: 89,
-            verdict: 'pass',
-            summary: 'Chữ Hán, Pinyin và ngữ pháp chuẩn xác, bảng 2 dòng gọn.',
+            lockedIntent: 'Phân biệt cách dùng xin lỗi tiếng Trung',
+            targetAudience: 'Người học HSK 1-3 tại Việt Nam',
+            scores: {
+              A: { score: 13, evidence: 'Trả lời đúng trọng tâm.' },
+              B: { score: isRound1 ? 8 : 15, evidence: isRound1 ? 'Thiếu biến điệu thanh 3.' : 'Đã chuẩn xác.' },
+              C: { score: 12, evidence: 'Giải thích đủ.' },
+              D: { score: 10, evidence: 'Có bảng so sánh.' },
+              E: { score: 9, evidence: 'Ví dụ minh họa rõ.' },
+              F: { score: 9, evidence: 'Metadata chuẩn.' },
+              G: { score: 7, evidence: 'Bố cục mạch lạc.' },
+              H: { score: 6, evidence: 'Đúng văn phong chuẩn mực.' },
+              I: { score: 5, evidence: 'Dễ áp dụng.' },
+              J: { score: 4, evidence: 'Không bịa đặt.' },
+            },
+            hardFails: [],
+            seriousUnintentionalError: false,
+            wrongSearchIntent: false,
+            unverifiedCriticalClaims: [],
+            challengeResults: [
+              { id: isRound1 ? '5.1' : '5.2', group: 'Độ sâu ngữ nghĩa', result: 'Pass', finding: 'Nội dung bám sát tiếng Trung.' },
+            ],
+            errors: isRound1
+              ? [
+                  {
+                    code: 'ERR-01',
+                    severity: 'Major',
+                    location: 'muc-1',
+                    excerpt: 'duìbuqǐ',
+                    reason: 'Cần bổ sung ghi chú biến điệu thanh 3 khi đi cạnh thanh nhẹ.',
+                    evidence: 'Mục 6 kiểm tra Pinyin',
+                    fix: 'Thêm lưu ý đọc tự nhiên và ví dụ giao tiếp.',
+                    affectedCategories: ['B'],
+                  },
+                ]
+              : [],
             strengths: ['Đủ ví dụ Hán - Pinyin - Việt'],
-            issues: [],
-            mustFix: [],
+            summary: isRound1 ? 'Cần bổ sung chi tiết ngữ âm ở muc-1.' : 'Đạt chuẩn xuất bản sau khi chỉnh sửa.',
           }),
         };
       }
@@ -109,7 +157,15 @@ function createMockAi({ failPrimary = false } = {}) {
         choices: [
           {
             message: {
-              content: `<think>Suy nghĩ nháp</think>\n\`\`\`json\n${JSON.stringify(makeMockArticleJson())}\n\`\`\``,
+              content: `<think>Suy nghĩ nháp</think>\n\`\`\`json\n${JSON.stringify({
+                writerBrief: {
+                  searchIntent: 'Phân biệt và sử dụng mẫu câu xin lỗi tiếng Trung',
+                  targetAudience: 'Người học HSK 1–3 tại Việt Nam',
+                  styleId: 'educational-how-to',
+                  primaryKeyword: 'xin lỗi trong tiếng trung',
+                },
+                ...makeMockArticleJson(),
+              })}\n\`\`\``,
             },
           },
         ],
@@ -231,8 +287,14 @@ test('Cloudflare worker enforces auth, CORS, scan-trends, rewrite, approve, reje
   assert.equal(scanJson.createdDrafts.length, 1);
   const created = scanJson.createdDrafts[0];
   assert.equal(created.article.sections[0].id, 'muc-1-phan-biet');
-  assert.equal(created.aiReviews.averageScore, 89);
+  assert.equal(created.aiReviews.writerStandard, WRITER_STANDARD_ID);
+  assert.equal(created.aiReviews.protocol, AUDIT_PROTOCOL_ID);
+  assert.equal(created.aiReviews.autoPolished, true);
   assert.equal(created.aiReviews.reviewers.length, 2);
+  assert.equal(created.aiReviews.reviewers[0].auditVerdict, 'REVISION_REQUIRED');
+  assert.equal(created.aiReviews.reviewers[1].auditVerdict, 'APPROVED');
+  assert.equal(created.aiReviews.averageScore, 90);
+  assert.ok(created.writerBrief?.styleId);
 
   // Rewrite bumps version to 2
   const rwRes = await handleSeoEditorialFetch(
@@ -275,6 +337,101 @@ test('Cloudflare worker enforces auth, CORS, scan-trends, rewrite, approve, reje
   assert.equal(cronResult.lastRun.trigger, 'cron');
   assert.equal(cronResult.createdCount ?? cronResult.createdIds.length, 1);
   assert.ok(typeof worker.scheduled === 'function');
+});
+
+test('Role separation: Writer prompts never contain Auditor rules/challenges and Auditor prompts never contain Writer standard', () => {
+  const style = selectWriterStyle({ topic: 'Phân biệt 对不起 và 不好意思', query: 'xin lỗi trong tiếng trung', category: 'ngu-phap' });
+  assert.equal(style.id, 'informative-expert');
+
+  const trendPrompt = buildStandardTrendWriterPrompt({
+    topic: 'Phân biệt 对不起 và 不好意思',
+    slug: 'phan-biet-duibuqi-buhaoyisi',
+    category: 'ngu-phap',
+    hskTag: 'HSK 1–3',
+    trendQuery: 'xin lỗi trong tiếng trung',
+    trendSource: 'google-trends',
+    style,
+    existingSlugs: [],
+    today: '2026-11-26',
+  });
+  const revPrompt = buildStandardRevisionWriterPrompt({
+    draft: { version: 1, trendQuery: 'xin lỗi trong tiếng trung', article: makeMockArticleJson() },
+    sanitizedFeedback: 'Điểm từng hạng mục: A: 13/14 · B: 10/16\n- [Major] Vị trí: muc-1 | Lỗi: Thiếu lưu ý biến điệu.',
+    adminComment: '',
+    today: '2026-11-26',
+  });
+
+  for (const writerText of [WRITER_SYSTEM_PROMPT, trendPrompt, revPrompt]) {
+    assert.ok(!/SEO-AUDITOR-01|PROVISIONAL_PASS|Ngân hàng kiểm tra|Phép thử thay thế chủ đề|HF-01|85\/100/i.test(writerText));
+  }
+
+  const auditorPrompt = buildAuditorPrompt({
+    round: 1,
+    article: makeMockArticleJson(),
+    writerBrief: { styleId: 'informative-expert' },
+    trendQuery: 'xin lỗi trong tiếng trung',
+    category: 'ngu-phap',
+  });
+  assert.ok(!/SEO-WRITER-01/i.test(AUDITOR_SYSTEM_PROMPT));
+  assert.ok(!/SEO-WRITER-01/i.test(auditorPrompt));
+
+  const r1Challenges = selectRoundChallenges(1, { category: 'ky-thi', query: 'lịch thi hsk 2027' }).map((c) => c.id);
+  const r2Challenges = selectRoundChallenges(2, { category: 'ky-thi', query: 'lịch thi hsk 2027' }).map((c) => c.id);
+  assert.ok(r1Challenges.length >= 3 && r2Challenges.length >= 3);
+  assert.equal(r1Challenges.some((id) => r2Challenges.includes(id)), false);
+});
+
+test('Audit scoring enforces Round 1 cap, 60% category floor, Hard Fail REJECTED, caps 59/69, and firewall stripping', () => {
+  const fullScores = {
+    A: { score: 14, evidence: 'Tốt' },
+    B: { score: 16, evidence: 'Tốt' },
+    C: { score: 14, evidence: 'Tốt' },
+    D: { score: 12, evidence: 'Tốt' },
+    E: { score: 10, evidence: 'Tốt' },
+    F: { score: 10, evidence: 'Tốt' },
+    G: { score: 8, evidence: 'Tốt' },
+    H: { score: 7, evidence: 'Tốt' },
+    I: { score: 5, evidence: 'Tốt' },
+    J: { score: 4, evidence: 'Tốt' },
+  };
+
+  // Round 1 NEVER returns APPROVED even with 100/100
+  const r1 = computeAuditScoreAndVerdict({ scores: fullScores, hardFails: [], challengeResults: [{ id: '5.1', group: 'Độ sâu', result: 'Pass', finding: 'Phép thử thay thế chủ đề OK' }] }, { round: 1 });
+  assert.equal(r1.score, 100);
+  assert.equal(r1.auditVerdict, 'PROVISIONAL_PASS');
+
+  // Round 2 returns APPROVED when >= 85 and all categories >= 60%
+  const r2 = computeAuditScoreAndVerdict({ scores: fullScores, hardFails: [] }, { round: 2 });
+  assert.equal(r2.auditVerdict, 'APPROVED');
+
+  // Round 2 with total = 98 but J = 2/4 (< 60%) -> REVISION_REQUIRED
+  const floorFail = computeAuditScoreAndVerdict({
+    scores: { ...fullScores, J: { score: 2, evidence: 'Thiếu nhất quán' } },
+    hardFails: [],
+  }, { round: 2 });
+  assert.equal(floorFail.score, 98);
+  assert.deepEqual(floorFail.below60Categories, ['J']);
+  assert.equal(floorFail.auditVerdict, 'REVISION_REQUIRED');
+
+  // Hard Fail overrides score -> REJECTED
+  const hfFail = computeAuditScoreAndVerdict({
+    scores: fullScores,
+    hardFails: [{ code: 'HF-02', location: 'muc-2', reason: 'Tự tạo số liệu.' }],
+  }, { round: 2 });
+  assert.equal(hfFail.auditVerdict, 'REJECTED');
+
+  // Score caps 59 & 69
+  assert.equal(computeAuditScoreAndVerdict({ scores: fullScores, seriousUnintentionalError: true }, { round: 2 }).score, 59);
+  assert.equal(computeAuditScoreAndVerdict({ scores: fullScores, wrongSearchIntent: true }, { round: 2 }).score, 69);
+
+  // Firewall strips challengeResults and protocol rules before passing to Writer
+  const sanitized = sanitizeAuditFeedbackForWriter({
+    ...r1,
+    status: 'completed',
+    errors: [{ code: 'ERR-01', severity: 'Major', location: 'muc-1', excerpt: 'x', reason: 'Thiếu ngoại lệ', fix: 'Thêm ngoại lệ' }],
+  });
+  assert.match(sanitized, /Thiếu ngoại lệ/);
+  assert.ok(!/5\.1|Phép thử thay thế chủ đề|PROVISIONAL_PASS|SEO-AUDITOR-01|HF-01/.test(sanitized));
 });
 
 test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council review, dedup, hourly cap, and strict pending_review boundary', async () => {
@@ -485,7 +642,10 @@ test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council revie
   assert.equal(sc.status, 'pending_review');
   assert.equal(sc.requiresAdminApproval, true);
   assert.equal(sc.pushedToGithub, false);
-  assert.equal(sc.aiReviews.averageScore, 89);
+  assert.equal(sc.aiReviews.averageScore, 90);
+  assert.equal(sc.aiReviews.status, 'completed');
+  assert.equal(ai.calls.length, 2);
+  assert.ok(sc.aiReviews.reviewers.every((review) => !Object.hasOwn(review, 'challengeResults')));
   assert.equal(sc.aiReviews.reviewers.length, 2);
 
   // Verify draft appears in Admin /api/drafts with authorSource === 'chatgpt' and pipeline[0] === 'chatgpt'
@@ -499,7 +659,15 @@ test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council revie
   assert.equal(adminDraftsJson.draftsData.drafts.length, 1);
   assert.equal(adminDraftsJson.draftsData.drafts[0].authorSource, 'chatgpt');
   assert.equal(adminDraftsJson.draftsData.drafts[0].status, 'pending_review');
-  assert.equal(adminDraftsJson.draftsData.drafts[0].aiReviews.pipeline[0], 'chatgpt');
+  const submittedDraft = adminDraftsJson.draftsData.drafts[0];
+  assert.equal(submittedDraft.article.title, 'Cách nói xin lỗi trong tiếng Trung tự nhiên');
+  assert.equal(submittedDraft.article.sections[0].paragraphs[0], makeMockArticleJson().sections[0].paragraphs[0]);
+  assert.equal(submittedDraft.aiReviews.pipeline[0], 'chatgpt');
+  assert.equal(submittedDraft.aiReviews.protocol, AUDIT_PROTOCOL_ID);
+  assert.equal(submittedDraft.aiReviews.writerStandard, null);
+  assert.equal(submittedDraft.aiReviews.round1Verdict, 'REVISION_REQUIRED');
+  assert.equal(submittedDraft.aiReviews.finalVerdict, 'APPROVED');
+  assert.equal(submittedDraft.aiReviews.autoPolished, false);
 
   // 9. Duplicate submission rejected (isError: true, code: duplicate_topic)
   const dupRes = await handleSeoEditorialFetch(
@@ -589,4 +757,3 @@ test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council revie
   );
   assert.equal(blockedRes.status, 503);
 });
-

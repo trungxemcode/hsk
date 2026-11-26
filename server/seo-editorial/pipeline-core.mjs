@@ -1,9 +1,23 @@
 /**
  * Web-Standard ESM Core for Cloudflare Worker `hsk-seo-editorial`.
- * Runs Google Trends / Suggest VN collection, 3-layer deduplication,
- * Gemma 4 drafting, 2-tier AI reviewer council (xKiro / Workers AI),
- * auto-polishing, and draft lifecycle state transitions.
+ * Enforces strict role separation between:
+ * - Writer AI (`SEO-WRITER-01` via `./writer-standard.mjs`)
+ * - Independent Two-Round Auditor AI (`SEO-AUDITOR-01` via `./audit-protocol.mjs`)
  */
+import {
+  WRITER_STANDARD_ID,
+  WRITER_SYSTEM_PROMPT,
+  buildStandardRevisionWriterPrompt,
+  buildStandardTrendWriterPrompt,
+  selectWriterStyle,
+} from './writer-standard.mjs';
+import {
+  AUDIT_PROTOCOL_ID,
+  AUDITOR_SYSTEM_PROMPT,
+  buildAuditorPrompt,
+  computeAuditScoreAndVerdict,
+  sanitizeAuditFeedbackForWriter,
+} from './audit-protocol.mjs';
 
 export const CATEGORIES = Object.freeze({
   'ky-thi': 'Kỳ thi & Đăng ký',
@@ -778,86 +792,15 @@ export function evaluateDraftQuality(article) {
   return { score: Math.min(100, score), checks, warnings };
 }
 
-export function buildTrendDraftPrompt({
-  topic,
-  slug,
-  category,
-  hskTag,
-  trendQuery,
-  trendSource,
-  trendSpike,
-  voice,
-  existingSlugs = [],
-  today,
-}) {
-  const voiceBlock = voice ? `\nPHONG CÁCH VIẾT: ${voice.label}\n${voice.instructions}\n` : '';
-  return `Bạn là biên tập viên tiếng Trung HSK hàng đầu tại Việt Nam cho ứng dụng học miễn phí HSK Flashcards (https://hskfreelearningai.pages.dev).
-Hãy viết MỘT BÀI SEO HOÀN CHỈNH BẰNG TIẾNG VIỆT, NỘI DUNG GỐC 100% dựa trên chủ đề đang được tìm kiếm nhiều tại Việt Nam.
-
-THÔNG TIN CHỦ ĐỀ XU HƯỚNG:
-- Truy vấn xu hướng: "${trendQuery || topic}" (Nguồn: ${trendSource || 'google-trends'}${trendSpike ? ` · Mức độ: ${trendSpike}` : ''})
-- Chủ đề bài viết: "${topic}"
-- Slug dự kiến: "${slug}"
-- Chuyên mục: "${category}" (${CATEGORIES[category] || 'Mẹo học HSK'})
-- Nhãn HSK gợi ý: "${hskTag || 'HSK 1–6'}"
-- Ngày xuất bản: "${today}"
-${voiceBlock}
-NGUYÊN TẮC CHẤT LƯỢNG BẮT BUỘC:
-1. Viết cho người Việt học tiếng Trung thực tế và luyện thi HSK 1–6: giải thích bản chất ngắn gọn, chỉ rõ lỗi người Việt hay mắc và cách sửa chuẩn bản xứ.
-2. Mỗi ví dụ tiếng Trung PHẢI kèm đủ Chữ Hán giản thể + Pinyin có dấu thanh điệu chuẩn (ā á ǎ à, ē é ě è...) + nghĩa tiếng Việt tự nhiên.
-3. Có 3–4 mục (sections), ít nhất 1 bảng so sánh/tổng hợp gồm 3–6 dòng (tối đa 6 dòng mỗi bảng), ít nhất 1 khối "example" (han, py, vi), ít nhất 1 "tip" và 2–3 "faqs".
-4. Tuyệt đối không sao chép văn bản từ trang web khác và không dùng từ "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".
-5. Các id của section phải bắt đầu bằng chữ cái (ví dụ: "muc-1", "muc-2", "muc-3").
-6. Chọn 2–3 relatedSlugs phù hợp từ: ${existingSlugs.slice(0, 10).join(', ')}.
-
-TRẢ VỀ DUY NHẤT MỘT JSON OBJECT HỢP LỆ (không markdown bọc ngoài):
-{
-  "title": "...",
-  "metaTitle": "... | HSK Flashcards",
-  "metaDescription": "...",
-  "summary": "...",
-  "hskTag": "${hskTag || 'HSK 1–6'}",
-  "readMinutes": 6,
-  "keywords": ["...", "...", "..."],
-  "sections": [
-    {
-      "id": "muc-1",
-      "heading": "...",
-      "paragraphs": ["...", "..."],
-      "bullets": ["..."],
-      "table": { "headers": ["...", "...", "..."], "rows": [["...", "...", "..."]] },
-      "example": { "han": "...", "py": "...", "vi": "..." },
-      "tip": "..."
-    }
-  ],
-  "faqs": [{ "q": "...", "a": "..." }],
-  "relatedSlugs": [],
-  "cta": { "heading": "...", "body": "...", "buttonLabel": "..." }
-}`;
+export function buildTrendDraftPrompt(opts) {
+  return buildStandardTrendWriterPrompt(opts);
 }
 
-export function buildRewriteDraftPrompt({ draft, comment, rating, existingSlugs = [], today }) {
-  const prevFeedback = (draft.reviewHistory || [])
-    .slice(-4)
-    .map((h, i) => `- Lần ${i + 1} (${h.at || ''}): ${h.rating ? `${h.rating}/5 sao — ` : ''}${h.comment || '(không ghi chú)'}`)
-    .join('\n');
-
-  return `Bạn là biên tập viên tiếng Trung HSK đang chỉnh sửa lại một bài viết SEO theo góp ý trực tiếp của Admin.
-
-NHẬN XÉT MỚI NHẤT CỦA ADMIN (${rating ? `Đánh giá ${rating}/5 sao` : 'Yêu cầu viết lại'}):
-"""
-${comment || 'Nâng cấp độ sâu, ví dụ Hán – Pinyin – Việt và độ tự nhiên tiếng Việt.'}
-"""
-${prevFeedback ? `\nLỊCH SỬ GÓP Ý TRƯỚC ĐÓ:\n${prevFeedback}\n` : ''}
-BẢN NHÁP HIỆN TẠI (version ${draft.version || 1}, chủ đề: "${draft.trendQuery || draft.article?.title}"):
-${JSON.stringify(draft.article)}
-
-YÊU CẦU:
-1. Giải quyết triệt để mọi điểm Admin vừa góp ý.
-2. Giữ JSON đầy đủ, Chữ Hán giản thể + Pinyin chuẩn thanh điệu + nghĩa tiếng Việt tự nhiên, mỗi bảng <= 6 dòng, đủ example, tip và 2–3 faqs.
-3. Ngày cập nhật: "${today}". Không dùng từ cấm. Có thể chọn relatedSlugs từ: ${existingSlugs.slice(0, 10).join(', ')}.
-
-TRẢ VỀ DUY NHẤT JSON OBJECT HỢP LỆ có thêm "revisionSummary".`;
+export function buildRewriteDraftPrompt(opts) {
+  return buildStandardRevisionWriterPrompt({
+    ...opts,
+    adminComment: opts?.adminComment ?? opts?.comment ?? '',
+  });
 }
 
 async function runCfAiJson({ aiBinding, model, systemPrompt, userPrompt, maxTokens = 4096, temperature = 0.6 }) {
@@ -876,7 +819,19 @@ async function runCfAiJson({ aiBinding, model, systemPrompt, userPrompt, maxToke
   if (/(?:gemma-4|qwen3\.8)/i.test(String(model || ''))) {
     payload.chat_template_kwargs = { enable_thinking: false };
   }
-  const result = await aiBinding.run(model, payload);
+  let timerId = null;
+  const timeoutMs = 35000;
+  let result;
+  try {
+    result = await Promise.race([
+      aiBinding.run(model, payload),
+      new Promise((_, reject) => {
+        timerId = setTimeout(() => reject(new Error(`Workers AI (${model}) timed out after ${timeoutMs}ms`)), timeoutMs);
+      }),
+    ]);
+  } finally {
+    if (timerId) clearTimeout(timerId);
+  }
   const text = extractCfAiText(result);
   if (!text) {
     throw new Error(`Workers AI (${model}) returned empty response`);
@@ -917,7 +872,7 @@ async function runOpenRouterJson({ apiKey, model, systemPrompt, userPrompt, fetc
   return extractJsonObject(text);
 }
 
-async function runXkiroJson({ apiKey, model, systemPrompt, userPrompt, fetchImpl = fetch }) {
+async function runXkiroJson({ apiKey, model, systemPrompt, userPrompt, fetchImpl = fetch, maxTokens = 1400 }) {
   const res = await fetchImpl(XKIRO_API_URL, {
     method: 'POST',
     headers: {
@@ -926,14 +881,14 @@ async function runXkiroJson({ apiKey, model, systemPrompt, userPrompt, fetchImpl
     },
     body: JSON.stringify({
       model,
-      temperature: 0.25,
-      max_tokens: 900,
+      temperature: 0.2,
+      max_tokens: maxTokens,
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt },
       ],
     }),
-    signal: AbortSignal.timeout(30000),
+    signal: AbortSignal.timeout(35000),
   });
   if (!res.ok) {
     const errText = await res.text().catch(() => '');
@@ -946,13 +901,12 @@ async function runXkiroJson({ apiKey, model, systemPrompt, userPrompt, fetchImpl
 }
 
 export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
-  const systemPrompt =
-    'Bạn là biên tập viên SEO tiếng Việt cho HSK Flashcards. Xuất NGAY 01 JSON object hợp lệ gọn gàng, không suy nghĩ dài, không kèm giải thích hay markdown.';
+  const systemPrompt = WRITER_SYSTEM_PROMPT;
   const cfModels = Array.from(
     new Set([
       env.CF_WRITER_MODEL || '@cf/google/gemma-4-26b-a4b-it',
-      env.CF_WRITER_FALLBACK_MODEL || '@cf/qwen/qwen3.8-27b',
-      '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      env.CF_WRITER_FALLBACK_MODEL || '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      '@cf/qwen/qwen3.8-27b',
     ].filter(Boolean))
   );
 
@@ -964,7 +918,7 @@ export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
         model,
         systemPrompt,
         userPrompt: prompt,
-        maxTokens: 2400,
+        maxTokens: 2100,
         temperature: 0.55,
       });
       return { data, provider: 'cloudflare-ai', model };
@@ -995,158 +949,261 @@ export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
   throw lastError || new Error('All AI writer providers failed');
 }
 
-function normalizeReviewerResult(meta, raw, providerUsed, modelUsed) {
-  const numScore = Number(raw?.score);
-  const score = Number.isFinite(numScore) ? Math.max(0, Math.min(100, Math.round(numScore))) : 80;
-  const mustFix = Array.isArray(raw?.mustFix) ? raw.mustFix.map((x) => String(x || '').trim()).filter(Boolean) : [];
-  const issues = Array.isArray(raw?.issues) ? raw.issues.map((x) => String(x || '').trim()).filter(Boolean) : [];
-  const strengths = Array.isArray(raw?.strengths) ? raw.strengths.map((x) => String(x || '').trim()).filter(Boolean) : [];
-  const rawVerdict = String(raw?.verdict || '').toLowerCase();
-  const verdict = rawVerdict === 'revise' || mustFix.length > 0 || score < 82 ? 'revise' : 'pass';
+export async function runAuditRound({
+  round = 1,
+  article,
+  writerBrief = null,
+  trendQuery = '',
+  category = '',
+  env = {},
+  fetchImpl = fetch,
+}) {
+  const effectiveRound = Number(round) === 2 ? 2 : 1;
+  const xkiroKey = String(env.XKIRO_API_KEY || env.SECONDARY_AI_API_KEY || '').trim();
+  const cfReviewer1 = env.CF_REVIEWER_1_MODEL || '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+  const cfReviewer2 = env.CF_REVIEWER_2_MODEL || '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 
+  const spec =
+    effectiveRound === 1
+      ? {
+          id: 'command-a-plus',
+          label: xkiroKey ? 'Command A+ / Llama 3.3 (Vòng 1)' : 'Llama 3.3 70B (Vòng 1)',
+          role: 'Kiểm duyệt sơ bộ · Search Intent & Ngôn ngữ HSK',
+          xkiroModels: xkiroKey ? [env.XKIRO_REVIEW_MODEL_1 || 'cohere/command-a-plus'] : [],
+          cfModels: [cfReviewer1, '@cf/aisingapore/gemma-sea-lion-v4-27b-it'],
+        }
+      : {
+          id: 'mistral-large-3',
+          label: xkiroKey ? 'Mistral / DeepSeek (Vòng 2)' : 'Llama 3.3 70B Độc lập (Vòng 2)',
+          role: 'Kiểm duyệt độc lập · Thang điểm 100 & Phê duyệt',
+          xkiroModels: xkiroKey
+            ? [env.XKIRO_REVIEW_MODEL_2 || 'mistralai/mistral-large-2512', env.XKIRO_REVIEW_MODEL_2_FALLBACK || 'deepseek/deepseek-v4.1-flash']
+            : [],
+          cfModels: [cfReviewer2, '@cf/aisingapore/gemma-sea-lion-v4-27b-it'],
+        };
+
+  const userPrompt = buildAuditorPrompt({
+    round: effectiveRound,
+    reviewerLabel: spec.label,
+    reviewerRole: spec.role,
+    article,
+    writerBrief,
+    trendQuery,
+    category: category || article?.category || 'meo-hoc',
+  });
+
+  let rawReport = null;
+  let providerUsed = '';
+  let modelUsed = spec.cfModels[0];
+  let lastErr = null;
+
+  for (const m of spec.xkiroModels) {
+    try {
+      rawReport = await runXkiroJson({
+        apiKey: xkiroKey,
+        model: m,
+        systemPrompt: AUDITOR_SYSTEM_PROMPT,
+        userPrompt,
+        fetchImpl,
+        maxTokens: 1400,
+      });
+      providerUsed = 'xkiro';
+      modelUsed = m;
+      break;
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+
+  if (!rawReport) {
+    for (const m of spec.cfModels) {
+      try {
+        rawReport = await runCfAiJson({
+          aiBinding: env.AI,
+          model: m,
+          systemPrompt: AUDITOR_SYSTEM_PROMPT,
+          userPrompt,
+          maxTokens: 1100,
+          temperature: 0.2,
+        });
+        providerUsed = 'cf-ai';
+        modelUsed = m;
+        break;
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+  }
+
+  if (!rawReport) {
+    return {
+      id: spec.id,
+      round: effectiveRound,
+      protocol: AUDIT_PROTOCOL_ID,
+      label: spec.label,
+      model: modelUsed,
+      role: spec.role,
+      status: 'error',
+      score: null,
+      rawTotal: null,
+      band: 'Error',
+      auditVerdict: 'ERROR',
+      verdict: 'error',
+      categoryBreakdown: null,
+      below60Categories: [],
+      hardFails: [],
+      appliedCaps: [],
+      unverifiedCriticalClaims: [],
+      challengeResults: [],
+      errors: [],
+      strengths: [],
+      issues: [],
+      mustFix: [],
+      summary: `Chưa gọi được lớp kiểm duyệt Vòng ${effectiveRound}: ${lastErr?.message || 'unknown error'}`,
+      reviewedAt: new Date().toISOString(),
+    };
+  }
+
+  const computed = computeAuditScoreAndVerdict(rawReport, { round: effectiveRound });
   return {
-    id: meta.id,
-    label: meta.label,
+    id: spec.id,
+    label: spec.label,
     model: `${providerUsed}:${modelUsed}`,
-    role: meta.role,
+    role: spec.role,
     status: 'completed',
-    score,
-    verdict,
-    summary: String(raw?.summary || '').trim() || (verdict === 'pass' ? 'Đạt chuẩn kiểm duyệt.' : 'Cần chỉnh sửa thêm.'),
-    strengths,
-    issues,
-    mustFix,
+    ...computed,
     reviewedAt: new Date().toISOString(),
   };
 }
 
-export async function runReviewerCouncil({ article, trendQuery = '', env = {}, fetchImpl = fetch }) {
+export async function runTwoRoundEditorialPipeline({
+  initialArticle,
+  writerBrief = null,
+  authorSource = 'writer-seo-01',
+  trendQuery = '',
+  category = 'meo-hoc',
+  hskTag = 'HSK 1–6',
+  styleId = '',
+  today,
+  existingSlugs = [],
+  env = {},
+  fetchImpl = fetch,
+}) {
+  let currentArticle = initialArticle;
+  let currentBrief = writerBrief;
   const xkiroKey = String(env.XKIRO_API_KEY || env.SECONDARY_AI_API_KEY || '').trim();
-  const cfReviewer1 = env.CF_REVIEWER_1_MODEL || '@cf/qwen/qwen3.8-27b';
-  const cfReviewer2 = env.CF_REVIEWER_2_MODEL || '@cf/mistralai/mistral-small-3.1-24b-instruct';
 
-  const specs = [
-    {
-      id: 'command-a-plus',
-      label: xkiroKey ? 'Command A+ / Qwen 3.8' : 'Qwen 3.8 (Workers AI)',
-      role: 'Chuyên gia Ngữ pháp & Pinyin HSK',
-      focus:
-        'Kiểm tra độ chính xác của chữ Hán giản thể, dấu thanh điệu Pinyin (ā á ǎ à...), giải thích ngữ pháp HSK và lỗi dịch máy ở người Việt.',
-      xkiroModels: xkiroKey ? [env.XKIRO_REVIEW_MODEL_1 || 'cohere/command-a-plus'] : [],
-      cfModels: [cfReviewer1, '@cf/meta/llama-3.3-70b-instruct-fp8-fast'],
-    },
-    {
-      id: 'mistral-large-3',
-      label: xkiroKey ? 'Mistral / DeepSeek Review' : 'Mistral Small 3.1 (Workers AI)',
-      role: 'Biên tập viên SEO & Độ tự nhiên tiếng Việt',
-      focus:
-        'Kiểm tra metaTitle 35–75 ký tự, metaDescription 110–170 ký tự, tiếng Việt tự nhiên, mỗi bảng <= 6 dòng, đủ ví dụ 3 lớp và FAQ.',
-      xkiroModels: xkiroKey
-        ? [env.XKIRO_REVIEW_MODEL_2 || 'mistralai/mistral-large-2512', env.XKIRO_REVIEW_MODEL_2_FALLBACK || 'deepseek/deepseek-v4.1-flash']
-        : [],
-      cfModels: [cfReviewer2],
-    },
-  ];
+  // Vòng 1 — Kiểm duyệt sơ bộ (SEO-AUDITOR-01; tối đa PROVISIONAL_PASS)
+  const tR1 = Date.now();
+  const round1 = await runAuditRound({
+    round: 1,
+    article: currentArticle,
+    writerBrief: currentBrief,
+    trendQuery,
+    category,
+    env,
+    fetchImpl,
+  });
+  const round1Ms = Date.now() - tR1;
 
-  const results = await Promise.all(
-    specs.map(async (spec) => {
-      const systemPrompt = `Bạn là "${spec.role}" trong hội đồng kiểm duyệt bài SEO tiếng Trung HSK cho người Việt trước khi gửi tới Admin duyệt cuối.
-Chuyên môn trọng tâm: ${spec.focus}
-Xuất NGAY 01 JSON object hợp lệ ngắn gọn (không markdown):
-{
-  "score": 88,
-  "verdict": "pass",
-  "summary": "Nhận xét tổng quan 1-2 câu bằng tiếng Việt",
-  "strengths": ["Điểm mạnh 1"],
-  "issues": ["Gợi ý nhỏ nếu có"],
-  "mustFix": []
-}`;
-      const userPrompt = `Kiểm duyệt bài viết SEO tiếng Trung sau (từ khóa: "${trendQuery || article?.title || ''}"):
+  // Vòng sửa của Người viết (SEO-WRITER-01) chỉ nhận phản hồi đã lọc qua tường lửa
+  let autoPolished = false;
+  let polishSummary = '';
+  let revisionMs = 0;
+  const hasTerminalReject = (round1.hardFails || []).some((hf) => hf.code === 'HF-01' || hf.code === 'HF-02');
+  const usesInternalWriter = authorSource === 'writer-seo-01';
+  const shouldRevise =
+    usesInternalWriter &&
+    round1.status === 'completed' &&
+    !hasTerminalReject &&
+    (round1.auditVerdict === 'REVISION_REQUIRED' ||
+      (Array.isArray(round1.mustFix) && round1.mustFix.length > 0));
 
-${JSON.stringify(article)}
-
-Quy tắc chấm điểm:
-- score >= 82 và verdict = "pass" nếu chữ Hán/Pinyin/ngữ pháp chuẩn, tiếng Việt tự nhiên, bảng <= 6 dòng, đủ ví dụ & FAQ.
-- verdict = "revise" nếu có lỗi sai Pinyin/nghĩa hoặc thiếu ví dụ/bảng.`;
-
-      let reviewed = null;
-      let lastErr = null;
-
-      for (const m of spec.xkiroModels) {
-        try {
-          const raw = await runXkiroJson({ apiKey: xkiroKey, model: m, systemPrompt, userPrompt, fetchImpl });
-          reviewed = normalizeReviewerResult(spec, raw, 'xkiro', m);
-          break;
-        } catch (err) {
-          lastErr = err;
+  if (shouldRevise) {
+    const sanitizedFeedback = sanitizeAuditFeedbackForWriter(round1);
+    if (sanitizedFeedback) {
+      const tRev = Date.now();
+      try {
+        const revisionPrompt = buildStandardRevisionWriterPrompt({
+          draft: {
+            version: 1,
+            trendQuery,
+            category: currentArticle.category,
+            editorialVoice: styleId || currentArticle.editorialVoice || '',
+            writerBrief: currentBrief,
+            article: currentArticle,
+          },
+          sanitizedFeedback,
+          adminComment: '',
+          rating: null,
+          existingSlugs,
+          today,
+        });
+        const revised = await callWriterJson({ prompt: revisionPrompt, env, fetchImpl });
+        currentArticle = normalizeArticle(revised.data, {
+          slug: currentArticle.slug,
+          topic: currentArticle.title,
+          category: currentArticle.category || category,
+          hskTag: currentArticle.hskTag || hskTag,
+          today,
+          existingSlugs,
+          editorialVoice: styleId || currentArticle.editorialVoice || '',
+        });
+        if (revised.data?.writerBrief && typeof revised.data.writerBrief === 'object') {
+          currentBrief = revised.data.writerBrief;
         }
+        autoPolished = true;
+        polishSummary = String(
+          revised.data?.revisionSummary || `Đã chỉnh sửa theo ${round1.errors?.length || round1.mustFix?.length || 0} lỗi Vòng 1.`
+        ).trim();
+      } catch (err) {
+        polishSummary = `Chưa tự chỉnh sửa được sau Vòng 1 (${err.message}); giữ bản gốc để Vòng 2 đánh giá.`;
+      } finally {
+        revisionMs = Date.now() - tRev;
       }
+    }
+  }
 
-      if (!reviewed) {
-        for (const m of spec.cfModels) {
-          try {
-            const raw = await runCfAiJson({
-              aiBinding: env.AI,
-              model: m,
-              systemPrompt,
-              userPrompt,
-              maxTokens: 750,
-              temperature: 0.2,
-            });
-            reviewed = normalizeReviewerResult(spec, raw, 'cf-ai', m);
-            break;
-          } catch (err) {
-            lastErr = err;
-          }
-        }
-      }
+  // Vòng 2 — Kiểm duyệt độc lập lại từ đầu với bộ thử thách khác
+  const tR2 = Date.now();
+  const round2 = await runAuditRound({
+    round: 2,
+    article: currentArticle,
+    writerBrief: currentBrief,
+    trendQuery,
+    category,
+    env,
+    fetchImpl,
+  });
+  const round2Ms = Date.now() - tR2;
 
-      if (!reviewed) {
-        reviewed = {
-          id: spec.id,
-          label: spec.label,
-          model: spec.cfModels[0],
-          role: spec.role,
-          status: 'error',
-          score: null,
-          verdict: 'error',
-          summary: `Chưa gọi được lớp kiểm duyệt: ${lastErr?.message || 'unknown error'}`,
-          strengths: [],
-          issues: [],
-          mustFix: [],
-          reviewedAt: new Date().toISOString(),
-        };
-      }
+  const reviewers = [round1, round2];
+  const completedCount = reviewers.filter((r) => r.status === 'completed').length;
+  const finalScore = typeof round2.score === 'number' ? round2.score : round1.score;
+  const finalVerdict = round2.status === 'completed' ? round2.auditVerdict : round1.auditVerdict;
 
-      return reviewed;
-    })
-  );
-
-  const scored = results.filter((r) => typeof r.score === 'number');
-  const averageScore = scored.length ? Math.round(scored.reduce((a, b) => a + b.score, 0) / scored.length) : null;
-  const needsAutoPolish = results.some(
-    (r) => r.status === 'completed' && ((Array.isArray(r.mustFix) && r.mustFix.length > 0) || r.score < 78)
-  );
-  const combinedFeedback = results
-    .filter((r) => r.status === 'completed')
-    .map((r) => {
-      const items = [...r.mustFix.map((x) => `[Bắt buộc sửa] ${x}`), ...r.issues];
-      return `### ${r.label} (${r.model} · ${r.score}/100 · ${r.verdict})\nTóm tắt: ${r.summary}\n${items.map((x) => `- ${x}`).join('\n')}`;
-    })
-    .join('\n\n');
-
-  return {
-    status: scored.length === specs.length ? 'completed' : scored.length > 0 ? 'partial' : 'error',
+  const aiReviews = {
+    protocol: AUDIT_PROTOCOL_ID,
+    writerStandard: usesInternalWriter ? WRITER_STANDARD_ID : null,
+    status: completedCount === 2 ? 'completed' : completedCount === 1 ? 'partial' : 'error',
     provider: xkiroKey ? 'xkiro+cf' : 'cloudflare-ai',
-    pipeline: ['gemma-4', specs[0].id, specs[1].id, 'admin'],
-    averageScore,
-    needsAutoPolish,
-    autoPolished: false,
-    polishSummary: '',
-    combinedFeedback,
+    pipeline: [authorSource, 'audit-round-1', 'audit-round-2', 'admin'],
+    round1Verdict: round1.auditVerdict,
+    finalVerdict,
+    averageScore: finalScore,
+    needsAutoPolish: shouldRevise,
+    autoPolished,
+    polishSummary,
+    stageTimings: { round1Ms, revisionMs, round2Ms },
+    combinedFeedback: [round1, round2]
+      .filter((r) => r.status === 'completed')
+      .map((r) => `${r.label} (${r.auditVerdict} · ${r.score}/100):\n${sanitizeAuditFeedbackForWriter(r)}`)
+      .join('\n\n'),
     reviewedAt: new Date().toISOString(),
-    reviewers: results,
+    reviewers,
   };
+
+  return { article: currentArticle, writerBrief: currentBrief, aiReviews };
 }
 
 export async function generateDraftForTopic({
@@ -1156,8 +1213,12 @@ export async function generateDraftForTopic({
   env = {},
   fetchImpl = fetch,
 }) {
-  const voice = pickEditorialVoice(picked.slug);
-  const prompt = buildTrendDraftPrompt({
+  const style = selectWriterStyle({
+    topic: picked.topic,
+    query: picked.query,
+    category: picked.category,
+  });
+  const prompt = buildStandardTrendWriterPrompt({
     topic: picked.topic,
     slug: picked.slug,
     category: picked.category,
@@ -1165,50 +1226,37 @@ export async function generateDraftForTopic({
     trendQuery: picked.query,
     trendSource: picked.source,
     trendSpike: picked.spike,
-    voice,
+    style,
     existingSlugs,
     today,
   });
 
   const written = await callWriterJson({ prompt, env, fetchImpl });
-  let article = normalizeArticle(written.data, {
+  const initialBrief = written.data?.writerBrief && typeof written.data.writerBrief === 'object'
+    ? written.data.writerBrief
+    : { styleId: style.id, styleReason: style.reason, primaryKeyword: picked.query };
+  const initialArticle = normalizeArticle(written.data, {
     slug: picked.slug,
     topic: picked.topic,
     category: picked.category,
     hskTag: picked.hskTag,
     today,
     existingSlugs,
-    editorialVoice: voice.id,
+    editorialVoice: style.id,
   });
 
-  const aiReviews = await runReviewerCouncil({ article, trendQuery: picked.query, env, fetchImpl });
-  if (aiReviews.needsAutoPolish) {
-    try {
-      const polishPrompt = `Bạn là biên tập viên chính (Gemma 4). Hội đồng kiểm duyệt vừa rà soát bài viết và nêu điểm cần sửa:
-${aiReviews.combinedFeedback}
-
-BẢN THẢO HIỆN TẠI:
-${JSON.stringify(article)}
-
-Hãy sửa triệt để mọi mục [Bắt buộc sửa], giữ chữ Hán + Pinyin chuẩn thanh điệu + nghĩa tiếng Việt, mỗi bảng <= 6 dòng, đủ example, tip và 2–3 faqs. Trả về DUY NHẤT JSON object bài viết kèm "polishSummary".`;
-      const polished = await callWriterJson({ prompt: polishPrompt, env, fetchImpl });
-      article = normalizeArticle(polished.data, {
-        slug: article.slug,
-        topic: picked.topic,
-        category: article.category,
-        hskTag: article.hskTag,
-        today,
-        existingSlugs,
-        editorialVoice: voice.id,
-      });
-      aiReviews.autoPolished = true;
-      aiReviews.polishSummary = String(
-        polished.data?.polishSummary || 'Gemma 4 đã tự chỉnh sửa theo góp ý của 2 lớp kiểm duyệt.'
-      ).trim();
-    } catch (err) {
-      aiReviews.polishSummary = `Chưa tự chỉnh sửa được (${err.message}); giữ bản đã rà soát.`;
-    }
-  }
+  const { article, writerBrief, aiReviews } = await runTwoRoundEditorialPipeline({
+    initialArticle,
+    writerBrief: initialBrief,
+    trendQuery: picked.query,
+    category: picked.category,
+    hskTag: picked.hskTag,
+    styleId: style.id,
+    today,
+    existingSlugs,
+    env,
+    fetchImpl,
+  });
 
   const nowIso = new Date().toISOString();
   const stamp = nowIso.replace(/[-:TZ.]/g, '').slice(0, 14);
@@ -1217,7 +1265,7 @@ Hãy sửa triệt để mọi mục [Bắt buộc sửa], giữ chữ Hán + Pi
     {
       action: 'generated',
       rating: null,
-      comment: `Sinh trên Cloudflare (${written.model}) từ ${picked.source}${picked.spike ? ` (${picked.spike})` : ''}`,
+      comment: `Sinh trên Cloudflare (${written.model} · ${WRITER_STANDARD_ID} [${style.id}]) từ ${picked.source}${picked.spike ? ` (${picked.spike})` : ''}`,
       at: nowIso,
     },
   ];
@@ -1225,7 +1273,7 @@ Hãy sửa triệt để mọi mục [Bắt buộc sửa], giữ chữ Hán + Pi
     reviewHistory.push({
       action: 'ai_reviewed',
       rating: null,
-      comment: aiReviews.reviewers.map((r) => `${r.label}: ${r.score ?? 'err'}`).join(' · '),
+      comment: aiReviews.reviewers.map((r) => `${r.label}: ${r.auditVerdict} (${r.score ?? 'err'})`).join(' · '),
       revisionSummary: aiReviews.autoPolished ? aiReviews.polishSummary : '',
       at: new Date().toISOString(),
     });
@@ -1242,7 +1290,8 @@ Hãy sửa triệt để mọi mục [Bắt buộc sửa], giữ chữ Hán + Pi
     trendSpike: picked.spike || '',
     category: article.category,
     hskTag: article.hskTag,
-    editorialVoice: voice.id,
+    editorialVoice: style.id,
+    writerBrief,
     aiReviews,
     quality: evaluateDraftQuality(article),
     rating: null,
@@ -1262,46 +1311,48 @@ export async function rewriteDraftRecord({
   env = {},
   fetchImpl = fetch,
 }) {
-  const prompt = buildRewriteDraftPrompt({ draft, comment, rating, existingSlugs, today });
+  const prevFeedback = draft?.aiReviews?.reviewers?.length
+    ? draft.aiReviews.reviewers.map((r) => sanitizeAuditFeedbackForWriter(r)).filter(Boolean).join('\n\n')
+    : '';
+  const prompt = buildStandardRevisionWriterPrompt({
+    draft,
+    sanitizedFeedback: prevFeedback,
+    adminComment: comment,
+    rating,
+    existingSlugs,
+    today,
+  });
   const rewritten = await callWriterJson({ prompt, env, fetchImpl });
-  let updatedArticle = normalizeArticle(rewritten.data, {
+  const initialBrief = rewritten.data?.writerBrief && typeof rewritten.data.writerBrief === 'object'
+    ? rewritten.data.writerBrief
+    : (draft.writerBrief || { styleId: draft.editorialVoice || 'educational-how-to' });
+  const initialArticle = normalizeArticle(rewritten.data, {
     slug: draft.article?.slug || slugifyVi(draft.trendQuery),
     topic: draft.article?.title || draft.trendQuery,
     category: draft.category || draft.article?.category || 'meo-hoc',
     hskTag: draft.hskTag || draft.article?.hskTag || 'HSK 1–6',
     today,
     existingSlugs,
-    editorialVoice: draft.editorialVoice || '',
+    editorialVoice: draft.editorialVoice || initialBrief.styleId || '',
   });
 
-  const aiReviews = await runReviewerCouncil({
-    article: updatedArticle,
-    trendQuery: draft.trendQuery || updatedArticle.title,
+  const { article: updatedArticle, writerBrief, aiReviews } = await runTwoRoundEditorialPipeline({
+    initialArticle,
+    writerBrief: initialBrief,
+    trendQuery: draft.trendQuery || initialArticle.title,
+    category: draft.category || initialArticle.category || 'meo-hoc',
+    hskTag: draft.hskTag || initialArticle.hskTag || 'HSK 1–6',
+    styleId: draft.editorialVoice || initialBrief.styleId || '',
+    today,
+    existingSlugs,
     env,
     fetchImpl,
   });
 
-  if (aiReviews.needsAutoPolish) {
-    try {
-      const polishPrompt = `Hãy hoàn thiện bản viết lại dựa trên góp ý kiểm duyệt:\n${aiReviews.combinedFeedback}\n\n${JSON.stringify(updatedArticle)}\nTrả về JSON object bài viết kèm "polishSummary".`;
-      const polished = await callWriterJson({ prompt: polishPrompt, env, fetchImpl });
-      updatedArticle = normalizeArticle(polished.data, {
-        slug: updatedArticle.slug,
-        topic: updatedArticle.title,
-        category: updatedArticle.category,
-        hskTag: updatedArticle.hskTag,
-        today,
-        existingSlugs,
-        editorialVoice: draft.editorialVoice || '',
-      });
-      aiReviews.autoPolished = true;
-      aiReviews.polishSummary = String(polished.data?.polishSummary || 'Đã tự hoàn thiện sau kiểm duyệt.').trim();
-    } catch (_) {}
-  }
-
   const nowIso = new Date().toISOString();
   const numericRating = rating ? Math.max(1, Math.min(5, Math.round(Number(rating)))) : draft.rating || null;
   draft.article = updatedArticle;
+  draft.writerBrief = writerBrief;
   draft.version = (draft.version || 1) + 1;
   draft.status = 'pending_review';
   draft.updatedAt = nowIso;

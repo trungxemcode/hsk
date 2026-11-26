@@ -17,7 +17,7 @@ import {
   isDuplicateTopic,
   isQueryAllowed,
   normalizeArticle,
-  runReviewerCouncil,
+  runTwoRoundEditorialPipeline,
   slugifyVi,
 } from './pipeline-core.mjs';
 
@@ -401,13 +401,14 @@ export async function submitChatgptDraft({
 
   if (shouldRunCouncil) {
     try {
-      aiReviews = await runReviewerCouncil({
-        article,
+      ({ aiReviews } = await runTwoRoundEditorialPipeline({
+        initialArticle: article,
+        authorSource: 'chatgpt',
         trendQuery,
+        category: article.category,
         env,
         fetchImpl,
-      });
-      aiReviews.pipeline = ['chatgpt', aiReviews.reviewers?.[0]?.id || 'command-a-plus', aiReviews.reviewers?.[1]?.id || 'mistral-large-3', 'admin'];
+      }));
     } catch (err) {
       aiReviews = {
         status: 'error',
@@ -539,7 +540,9 @@ export async function submitChatgptDraft({
         score: r.score,
         verdict: r.verdict,
         summary: r.summary,
-        mustFix: r.mustFix || [],
+        mustFix: (r.errors || [])
+          .filter(({ severity }) => severity === 'Critical' || severity === 'Major')
+          .map(({ location, reason, fix }) => [location, reason, fix].filter(Boolean).join(' · ')),
       })),
     },
     quota: {

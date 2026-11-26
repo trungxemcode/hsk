@@ -540,39 +540,94 @@
       if (!r || r.status === 'skipped' || r.status === 'error') return '';
       return r.verdict === 'pass' ? ' is-done' : ' is-revise';
     };
-    const scoreSuffix = (r) => (typeof r?.score === 'number' ? ` (${r.score})` : r?.status === 'skipped' ? ' (bỏ qua)' : '');
-    const label1 = rev1?.label || 'Command A+ / Qwen 3.8';
-    const label2 = rev2?.label || 'Mistral Large 3';
+    const verdictBadge = (r) => {
+      if (!r) return '';
+      if (r.status === 'skipped') return ' (bỏ qua)';
+      const v = r.auditVerdict ? ` · ${r.auditVerdict}` : '';
+      return typeof r.score === 'number' ? ` (${r.score}/100${v})` : v;
+    };
+    const label1 = rev1?.label || 'Vòng 1';
+    const label2 = rev2?.label || 'Vòng 2';
     const adminClass = draft.status === 'approved' ? ' is-done' : draft.status === 'pending_review' ? ' is-active' : '';
     const writerLabel = isChatgptDraft(draft)
-      ? `1. ${escHtml(draft.authorModel || 'ChatGPT Plus')} viết`
-      : '1. Gemma 4 viết';
+      ? `1. ${draft.authorModel || 'ChatGPT Plus'} viết`
+      : draft.aiReviews?.writerStandard
+        ? `1. Viết bài (${draft.aiReviews.writerStandard})`
+        : '1. Gemma 4 viết';
 
     return [
-      `<span class="rev-pipe-step is-done">${writerLabel}</span>`,
-      `<span class="rev-pipe-step${stepClass(rev1)}">2. ${escHtml(label1)}${escHtml(scoreSuffix(rev1))}</span>`,
-      `<span class="rev-pipe-step${stepClass(rev2)}">3. ${escHtml(label2)}${escHtml(scoreSuffix(rev2))}</span>`,
+      `<span class="rev-pipe-step is-done">${escHtml(writerLabel)}</span>`,
+      `<span class="rev-pipe-step${stepClass(rev1)}">2. ${escHtml(label1)}${escHtml(verdictBadge(rev1))}</span>`,
+      `<span class="rev-pipe-step${stepClass(rev2)}">3. ${escHtml(label2)}${escHtml(verdictBadge(rev2))}</span>`,
       `<span class="rev-pipe-step${adminClass}">4. ${draft.status === 'approved' ? 'Admin đã duyệt ✓' : 'Admin duyệt cuối'}</span>`,
     ].join('');
+  }
+
+  function renderCategoryRubricTable(catMap) {
+    if (!catMap || typeof catMap !== 'object') return '';
+    const rows = Object.values(catMap).map((c) => `<tr>
+      <td><strong>${escHtml(c.code)}</strong></td>
+      <td>${escHtml(c.name)}</td>
+      <td><strong>${escHtml(c.score)} / ${escHtml(c.max)}</strong></td>
+      <td>${escHtml(c.evidence || '—')}</td>
+    </tr>`).join('');
+    if (!rows) return '';
+    return `<div class="rev-table-scroll" style="margin:0.65rem 0">
+      <table class="rev-table">
+        <thead><tr><th>Mã</th><th>Hạng mục</th><th>Điểm</th><th>Bằng chứng</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
   }
 
   function renderAuditHtml(draft) {
     const q = draft.quality || { score: 0, checks: [], warnings: [] };
     const aiRev = draft.aiReviews;
-    const councilTitle = aiRev?.provider === 'cloudflare-ai'
-      ? 'Hội đồng kiểm duyệt Cloudflare Workers AI'
-      : 'Hội đồng kiểm duyệt AI (xKiro / Cloudflare)';
+    const wb = draft.writerBrief;
+    const writerBriefHtml = wb && typeof wb === 'object'
+      ? `<div class="rev-meta-box">
+          <strong>Hồ sơ bàn giao người viết (${escHtml(aiRev?.writerStandard || 'SEO-WRITER-01')})</strong>
+          <span><strong>Văn phong:</strong> ${escHtml(wb.styleId || draft.editorialVoice || '—')}${wb.styleReason ? ` — ${escHtml(wb.styleReason)}` : ''}</span>
+          ${wb.searchIntent ? `<span><strong>Search Intent:</strong> ${escHtml(wb.searchIntent)}${wb.targetAudience ? ` · <strong>Độc giả:</strong> ${escHtml(wb.targetAudience)}` : ''}</span>` : ''}
+          ${Array.isArray(wb.unverifiedNotes) && wb.unverifiedNotes.length ? `<span><strong>Lưu ý chưa xác minh:</strong> ${escHtml(wb.unverifiedNotes.join('; '))}</span>` : ''}
+        </div>`
+      : '';
+
+    const councilTitle = aiRev?.protocol
+      ? `Hội đồng kiểm duyệt độc lập 2 vòng (${aiRev.protocol})`
+      : (aiRev?.provider === 'cloudflare-ai' ? 'Hội đồng kiểm duyệt Cloudflare Workers AI' : 'Hội đồng kiểm duyệt AI (xKiro / Cloudflare)');
+
     const councilHtml = aiRev && Array.isArray(aiRev.reviewers) && aiRev.reviewers.length
       ? `<div>
           <h3>${escHtml(councilTitle)}</h3>
-          ${aiRev.autoPolished ? `<div class="rev-tip" style="margin-bottom:0.75rem"><strong>Gemma 4 đã tự hoàn thiện vòng 2 theo góp ý xKiro:</strong> ${escHtml(aiRev.polishSummary || '')}</div>` : ''}
+          ${aiRev.autoPolished ? `<div class="rev-tip" style="margin-bottom:0.75rem"><strong>Người viết đã chỉnh sửa giữa Vòng 1 &amp; Vòng 2 (qua tường lửa phản hồi):</strong> ${escHtml(aiRev.polishSummary || '')}</div>` : ''}
           <div class="rev-council-grid">
             ${aiRev.reviewers.map((r) => {
-              const badgeClass = r.verdict === 'pass' ? 'is-ok' : r.verdict === 'revise' ? 'is-warn' : r.status === 'error' ? 'is-fail' : '';
+              const badgeClass = r.auditVerdict === 'APPROVED' || r.verdict === 'pass'
+                ? 'is-ok'
+                : r.auditVerdict === 'REJECTED' || r.status === 'error'
+                  ? 'is-fail'
+                  : r.verdict === 'revise'
+                    ? 'is-warn'
+                    : '';
               const badgeLabel = typeof r.score === 'number'
-                ? `${r.score}/100 · ${r.verdict === 'pass' ? 'Đạt' : 'Cần sửa'}`
+                ? `${r.score}/100${r.band ? ` (${r.band})` : ''} · ${r.auditVerdict || (r.verdict === 'pass' ? 'Đạt' : 'Cần sửa')}`
                 : r.status === 'skipped' ? 'Chưa bật / Bỏ qua' : 'Lỗi gọi API';
+
+              const structuredErrors = Array.isArray(r.errors) ? r.errors : [];
+              const hardFailsHtml = Array.isArray(r.hardFails) && r.hardFails.length
+                ? `<ul class="rev-council-list is-warn">${r.hardFails.map((hf) => `<li><strong>[${escHtml(hf.code)}]</strong> ${escHtml(hf.location ? `${hf.location}: ` : '')}${escHtml(hf.reason || hf.label)}</li>`).join('')}</ul>`
+                : '';
+              const errorsHtml = structuredErrors.length
+                ? `<ul class="rev-council-list is-warn">${structuredErrors.map((e) => `<li><strong>[${escHtml(e.code)} · ${escHtml(e.severity)} · ${escHtml(e.location)}]</strong> ${escHtml(e.reason)}${e.fix ? ` <em>(Sửa: ${escHtml(e.fix)})</em>` : ''}</li>`).join('')}</ul>`
+                : '';
               const allIssues = [...(r.mustFix || []).map((x) => `[Bắt buộc] ${x}`), ...(r.issues || [])];
+              const legacyIssuesHtml = !structuredErrors.length && allIssues.length
+                ? `<ul class="rev-council-list is-warn">${allIssues.map((iss) => `<li>! ${escHtml(iss)}</li>`).join('')}</ul>`
+                : '';
+              const challengesHtml = Array.isArray(r.challengeResults) && r.challengeResults.length
+                ? `<div class="rev-table-scroll" style="margin-top:0.5rem"><table class="rev-table"><thead><tr><th>Phép thử</th><th>Nhóm</th><th>Kết quả</th><th>Phát hiện</th></tr></thead><tbody>${r.challengeResults.map((ch) => `<tr><td>${escHtml(ch.id)}</td><td>${escHtml(ch.group)}</td><td>${escHtml(ch.result)}</td><td>${escHtml(ch.finding)}</td></tr>`).join('')}</tbody></table></div>`
+                : '';
               const feedbackText = allIssues.length ? `${r.label}: ${allIssues.join('; ')}` : '';
               return `<div class="rev-council-card">
                 <div class="rev-council-head">
@@ -583,14 +638,19 @@
                   <span class="rev-tag ${badgeClass}">${escHtml(badgeLabel)}</span>
                 </div>
                 <p class="rev-council-summary">${escHtml(r.summary || '')}</p>
+                ${Array.isArray(r.below60Categories) && r.below60Categories.length ? `<p style="font-size:0.8rem;color:var(--rev-amber);margin:0.25rem 0">Hạng mục dưới 60%: <strong>${escHtml(r.below60Categories.join(', '))}</strong></p>` : ''}
+                ${renderCategoryRubricTable(r.categoryBreakdown)}
                 ${(r.strengths || []).length ? `<ul class="rev-council-list is-ok">${r.strengths.map((s) => `<li>✓ ${escHtml(s)}</li>`).join('')}</ul>` : ''}
-                ${allIssues.length ? `<ul class="rev-council-list is-warn">${allIssues.map((iss) => `<li>! ${escHtml(iss)}</li>`).join('')}</ul>` : ''}
+                ${hardFailsHtml}
+                ${errorsHtml}
+                ${legacyIssuesHtml}
+                ${challengesHtml}
                 ${feedbackText ? `<button type="button" class="rev-quick-chip" data-use-ai-feedback="${escHtml(feedbackText)}">+ Đưa góp ý ${escHtml(r.label)} vào ô viết lại</button>` : ''}
               </div>`;
             }).join('')}
           </div>
         </div>`
-      : '<div><h3>Hội đồng kiểm duyệt xKiro</h3><p style="color:var(--rev-muted)">Bản nháp này chưa có kết quả kiểm duyệt từ Command A+ &amp; Mistral Large 3.</p></div>';
+      : '<div><h3>Hội đồng kiểm duyệt AI</h3><p style="color:var(--rev-muted)">Bản nháp này chưa có kết quả kiểm duyệt AI.</p></div>';
 
     const checksHtml = (q.checks || []).length
       ? `<ul class="rev-audit-list is-ok">${q.checks.map((c) => `<li>✓ ${escHtml(c)}</li>`).join('')}</ul>`
@@ -607,6 +667,7 @@
       : '<p>Chưa có lịch sử chỉnh sửa.</p>';
 
     return `<div class="rev-audit-grid">
+      ${writerBriefHtml}
       ${councilHtml}
       <div><h3>Điểm kiểm định tự động: ${escHtml(q.score)} / 100</h3>${checksHtml}</div>
       <div><h3>Điểm cần lưu ý trước khi duyệt</h3>${warningsHtml}</div>
