@@ -976,6 +976,100 @@ button { cursor: pointer; }
   gap: 0.55rem;
 }
 
+.rev-btn.is-chatgpt {
+  background: var(--rev-emerald-bg);
+  color: var(--rev-emerald);
+  border-color: var(--rev-emerald-line);
+}
+
+.rev-btn.is-chatgpt:hover {
+  border-color: var(--rev-emerald);
+}
+
+.rev-tag.is-chatgpt,
+.rev-chatgpt-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--rev-emerald-bg);
+  color: var(--rev-emerald);
+  border: 1px solid var(--rev-emerald-line);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.rev-modal.rev-modal-wide {
+  width: min(96vw, 720px);
+}
+
+.rev-cgpt-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.rev-cgpt-settings {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  background: var(--rev-surface-soft);
+  border: 1px solid var(--rev-line);
+  border-radius: 12px;
+}
+
+.rev-cgpt-save-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.rev-copy-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.4rem;
+}
+
+.rev-copy-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+}
+
+.rev-copy-row .rev-btn {
+  flex: none;
+  white-space: nowrap;
+}
+
+.rev-prompt-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+}
+
+#cgptHourlyPromptInput {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.rev-cgpt-steps {
+  margin: 0;
+  padding: 0.8rem 1rem 0.8rem 1.85rem;
+  background: var(--rev-surface-tint);
+  border: 1px solid var(--rev-line);
+  border-radius: 12px;
+  font-size: 0.82rem;
+  display: grid;
+  gap: 0.38rem;
+}
+
 @media (max-width: 900px) {
   .rev-mobile-switch { display: flex; }
   .rev-workspace { grid-template-columns: 1fr; }
@@ -995,4 +1089,5 @@ button { cursor: pointer; }
   .rev-topbar { padding: 0.65rem 0.8rem; }
   .rev-modal-grid { grid-template-columns: 1fr; }
   .rev-decision-dock { position: static; }
+  .rev-copy-row { flex-wrap: wrap; }
 }

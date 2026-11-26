@@ -45,6 +45,14 @@
   let currentRating = 0;
   let csvFileContent = '';
   let pollTimer = null;
+  let chatgptGatewayState = null;
+  let chatgptKeyRevealed = false;
+
+  function isChatgptDraft(draft) {
+    if (!draft || typeof draft !== 'object') return false;
+    if (draft.authorSource === 'chatgpt') return true;
+    return String(draft.trendSource || '').toLowerCase().startsWith('chatgpt');
+  }
 
   function escHtml(value) {
     return String(value ?? '')
@@ -457,10 +465,11 @@
       const score = d.quality?.score ?? '—';
       const spike = d.trendSpike ? ` · ${escHtml(d.trendSpike)}` : '';
       const stars = d.rating ? ` · ${d.rating}★` : '';
-      const xkiroAvg = typeof d.aiReviews?.averageScore === 'number' ? ` · xKiro ${d.aiReviews.averageScore}` : '';
+      const xkiroAvg = typeof d.aiReviews?.averageScore === 'number' ? ` · AI ${d.aiReviews.averageScore}` : '';
+      const cgptChip = isChatgptDraft(d) ? '<span class="rev-chatgpt-chip">ChatGPT</span> ' : '';
       return `<button type="button" class="rev-draft-card${selected}" data-draft-id="${escHtml(d.id)}">
         <div class="rev-card-top">
-          <span class="rev-card-source">${escHtml(d.trendSource || 'google-trends')}${spike} · v${escHtml(d.version || 1)}</span>
+          <span class="rev-card-source">${cgptChip}${escHtml(d.trendSource || 'google-trends')}${spike} · v${escHtml(d.version || 1)}</span>
           <span class="rev-card-score">SEO ${escHtml(score)}${escHtml(xkiroAvg)}${stars}</span>
         </div>
         <h3 class="rev-card-title">${escHtml(d.article?.title || d.trendQuery)}</h3>
@@ -535,9 +544,12 @@
     const label1 = rev1?.label || 'Command A+ / Qwen 3.8';
     const label2 = rev2?.label || 'Mistral Large 3';
     const adminClass = draft.status === 'approved' ? ' is-done' : draft.status === 'pending_review' ? ' is-active' : '';
+    const writerLabel = isChatgptDraft(draft)
+      ? `1. ${escHtml(draft.authorModel || 'ChatGPT Plus')} viết`
+      : '1. Gemma 4 viết';
 
     return [
-      '<span class="rev-pipe-step is-done">1. Gemma 4 viết</span>',
+      `<span class="rev-pipe-step is-done">${writerLabel}</span>`,
       `<span class="rev-pipe-step${stepClass(rev1)}">2. ${escHtml(label1)}${escHtml(scoreSuffix(rev1))}</span>`,
       `<span class="rev-pipe-step${stepClass(rev2)}">3. ${escHtml(label2)}${escHtml(scoreSuffix(rev2))}</span>`,
       `<span class="rev-pipe-step${adminClass}">4. ${draft.status === 'approved' ? 'Admin đã duyệt ✓' : 'Admin duyệt cuối'}</span>`,
@@ -656,6 +668,7 @@
 
     $('draftBadges').innerHTML = [
       `<span class="rev-tag ${statusTone}">${escHtml(STATUS_LABELS[draft.status] || draft.status)}</span>`,
+      isChatgptDraft(draft) ? `<span class="rev-tag is-chatgpt">ChatGPT · ${escHtml(draft.authorModel || 'ChatGPT Plus')}</span>` : '',
       `<span class="rev-tag ${scoreTone}">SEO ${escHtml(score)}/100</span>`,
       ...xkiroBadges,
       draft.aiReviews?.autoPolished ? '<span class="rev-tag is-accent">Đã tự chỉnh sửa vòng 2</span>' : '',
@@ -963,6 +976,177 @@
   $('emptyGithubBtn')?.addEventListener('click', () => openModal('githubModal'));
   $('openScanModalBtn')?.addEventListener('click', () => openModal('scanModal'));
   $('emptyScanBtn')?.addEventListener('click', () => openModal('scanModal'));
+  $('openChatgptModalBtn')?.addEventListener('click', () => {
+    openModal('chatgptModal');
+    loadChatgptGatewayConfig().catch((err) => {
+      setStatusMsg($('cgptModalStatus'), err.message || 'Không tải được cấu hình Cổng ChatGPT.', 'is-err');
+    });
+  });
+
+  function buildHourlyChatgptPrompt() {
+    return [
+      'Mỗi giờ một lần, hãy dùng kết nối MCP HSK SEO Editorial để tự động tạo và nộp ĐÚNG 01 bài viết SEO tiếng Trung HSK vào hàng đợi Chờ duyệt (KHÔNG push lên GitHub):',
+      '1. Gọi công cụ get_seo_brief (count: 5). Nếu quota.canSubmitNow = false thì dừng và báo lý do cho tôi.',
+      '2. Chọn 1 chủ đề mới hấp dẫn nhất từ suggestedTopics (tuyệt đối không trùng với doNotDuplicate).',
+      '3. Viết bài SEO tiếng Việt 100% nội dung gốc cho người Việt học HSK 1–6: metaTitle dài 35–75 ký tự kết thúc bằng " | HSK Flashcards", metaDescription 110–170 ký tự, 3–4 sections (id bắt đầu bằng chữ thường), ít nhất 1 bảng 3–6 dòng, ít nhất 1 example đủ Chữ Hán giản thể + Pinyin chuẩn dấu thanh điệu + nghĩa tiếng Việt tự nhiên, ít nhất 1 tip ghi nhớ, 2–3 faqs và 2–3 relatedSlugs lấy từ availableRelatedSlugs. Cấm dùng từ "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".',
+      '4. Gọi submit_seo_draft để nộp bài vào trạng thái pending_review (đợi Hội đồng AI chấm điểm phụ và đợi tôi duyệt trong Phòng Duyệt Bài).',
+      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, điểm SEO tự động và điểm Hội đồng AI.',
+    ].join('\n');
+  }
+
+  function renderChatgptGatewayModal() {
+    const cfg = chatgptGatewayState;
+    const promptEl = $('cgptHourlyPromptInput');
+    if (promptEl && !promptEl.value) {
+      promptEl.value = buildHourlyChatgptPrompt();
+    }
+    if (!cfg) return;
+
+    const statusPill = $('cgptStatusPill');
+    if (statusPill) {
+      statusPill.className = `rev-tag ${cfg.enabled && cfg.keyConfigured ? 'is-ok' : cfg.enabled ? 'is-warn' : 'is-fail'}`;
+      statusPill.textContent = !cfg.enabled
+        ? 'Đang tạm tắt'
+        : cfg.keyConfigured
+          ? 'Đang mở · Chờ duyệt bắt buộc'
+          : 'Chưa tạo khóa kết nối';
+    }
+    if ($('cgptQuotaPill')) {
+      $('cgptQuotaPill').textContent = `Giờ qua: ${cfg.recentHourlyCount ?? 0}/${cfg.hourlyLimit ?? 2} bài`;
+    }
+    if ($('cgptTotalPill')) {
+      $('cgptTotalPill').textContent = `Bài ChatGPT: ${cfg.totalChatgptDrafts ?? 0} (${cfg.pendingChatgptDrafts ?? 0} chờ duyệt)`;
+    }
+    if ($('cgptLastSubPill')) {
+      $('cgptLastSubPill').textContent = cfg.lastSubmission?.at
+        ? `Nộp gần nhất: ${formatTimeVi(cfg.lastSubmission.at)}`
+        : 'Chưa có lượt nộp từ ChatGPT';
+    }
+
+    if ($('cgptEnabledChk')) $('cgptEnabledChk').checked = cfg.enabled !== false;
+    if ($('cgptAiReviewChk')) $('cgptAiReviewChk').checked = cfg.runAiReview !== false;
+    if ($('cgptHourlyLimitSelect')) $('cgptHourlyLimitSelect').value = String(cfg.hourlyLimit || 2);
+
+    const keyVal = cfg.keyConfigured ? (chatgptKeyRevealed ? cfg.apiKey : cfg.maskedKey) : '';
+    if ($('cgptKeyDisplay')) $('cgptKeyDisplay').value = keyVal;
+    if ($('cgptToggleKeyBtn')) $('cgptToggleKeyBtn').textContent = chatgptKeyRevealed ? 'Ẩn' : 'Hiện';
+
+    const maskedMcpUrl = cfg.keyConfigured
+      ? `${CLOUDFLARE_EDITORIAL_URL}/api/chatgpt/k/${cfg.maskedKey}/mcp`
+      : '';
+    if ($('cgptMcpSecretInput')) {
+      $('cgptMcpSecretInput').value = cfg.keyConfigured
+        ? (chatgptKeyRevealed ? cfg.endpoints?.mcpSecretUrl || '' : maskedMcpUrl)
+        : '';
+    }
+    if ($('cgptOpenApiInput')) {
+      $('cgptOpenApiInput').value = cfg.endpoints?.openapiUrl || `${CLOUDFLARE_EDITORIAL_URL}/api/chatgpt/openapi.json`;
+    }
+    if ($('cgptMcpBearerInput')) {
+      $('cgptMcpBearerInput').value = cfg.endpoints?.mcpBearerUrl || `${CLOUDFLARE_EDITORIAL_URL}/mcp`;
+    }
+  }
+
+  async function loadChatgptGatewayConfig() {
+    const st = $('cgptModalStatus');
+    setStatusMsg(st, 'Đang tải cấu hình Cổng ChatGPT từ Cloudflare…');
+    if ($('cgptHourlyPromptInput')) {
+      $('cgptHourlyPromptInput').value = buildHourlyChatgptPrompt();
+    }
+    const res = await fetch(`${CLOUDFLARE_EDITORIAL_URL}/api/chatgpt-gateway/config?t=${Date.now()}`, {
+      headers: await cfHeaders(false),
+      cache: 'no-store',
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data?.error || `Cloudflare Worker HTTP ${res.status}`);
+    }
+    chatgptGatewayState = data;
+    renderChatgptGatewayModal();
+    setStatusMsg(st, '');
+  }
+
+  $('cgptToggleKeyBtn')?.addEventListener('click', () => {
+    chatgptKeyRevealed = !chatgptKeyRevealed;
+    renderChatgptGatewayModal();
+  });
+
+  $('cgptRotateKeyBtn')?.addEventListener('click', async () => {
+    if (
+      chatgptGatewayState?.keyConfigured &&
+      !window.confirm('Tạo khóa mới sẽ làm mất hiệu lực URL MCP cũ đang dán trong ChatGPT. Bạn muốn tiếp tục đổi khóa?')
+    ) {
+      return;
+    }
+    const btn = $('cgptRotateKeyBtn');
+    const st = $('cgptModalStatus');
+    btn.disabled = true;
+    setStatusMsg(st, 'Đang tạo khóa bảo mật mới trên Cloudflare R2…');
+    try {
+      const data = await callCloudflareEditorialPost('/api/chatgpt-gateway/rotate', {});
+      chatgptGatewayState = data;
+      chatgptKeyRevealed = false;
+      renderChatgptGatewayModal();
+      setStatusMsg(st, 'Đã tạo khóa mới! Bấm “Copy URL MCP” để dán vào ChatGPT Web Plus.', 'is-ok');
+    } catch (err) {
+      setStatusMsg(st, err.message || 'Không tạo được khóa mới.', 'is-err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  $('cgptSettingsForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = $('cgptSaveSettingsBtn');
+    const st = $('cgptModalStatus');
+    btn.disabled = true;
+    setStatusMsg(st, 'Đang lưu cấu hình Cổng ChatGPT…');
+    try {
+      const data = await callCloudflareEditorialPost('/api/chatgpt-gateway/settings', {
+        enabled: Boolean($('cgptEnabledChk')?.checked),
+        runAiReview: Boolean($('cgptAiReviewChk')?.checked),
+        hourlyLimit: Number($('cgptHourlyLimitSelect')?.value) || 2,
+      });
+      chatgptGatewayState = data;
+      renderChatgptGatewayModal();
+      setStatusMsg(st, 'Đã lưu cấu hình Cổng ChatGPT lên Cloudflare.', 'is-ok');
+    } catch (err) {
+      setStatusMsg(st, err.message || 'Lưu cấu hình thất bại.', 'is-err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.querySelectorAll('[data-copy-target]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.getAttribute('data-copy-target');
+      const secretField = btn.getAttribute('data-copy-secret');
+      let text = '';
+      if (secretField && chatgptGatewayState?.endpoints?.[secretField]) {
+        text = chatgptGatewayState.endpoints[secretField];
+      } else {
+        text = $(targetId)?.value || '';
+      }
+      if (!text) {
+        setStatusMsg($('cgptModalStatus'), 'Chưa có khóa kết nối. Hãy bấm “Tạo / Đổi khóa” trước.', 'is-warn');
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(text);
+        const orig = btn.textContent;
+        btn.textContent = 'Đã copy ✓';
+        setTimeout(() => {
+          btn.textContent = orig;
+        }, 1600);
+      } catch (_) {
+        const el = $(targetId);
+        if (el) {
+          el.select();
+          document.execCommand?.('copy');
+        }
+      }
+    });
+  });
 
   $('githubConfigForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();

@@ -10,6 +10,15 @@ import {
   generateDraftForTopic,
   rewriteDraftRecord,
 } from './pipeline-core.mjs';
+import {
+  buildAdminGatewayConfigResponse,
+  generateGatewayKey,
+  getPrimaryGatewayKey,
+  handleChatgptGatewayRoute,
+  matchChatgptRoute,
+  readGatewayConfig,
+  writeGatewayConfig,
+} from './chatgpt-gateway.mjs';
 
 const R2_DRAFTS_KEY = 'seo-editorial/drafts.json';
 const R2_SNAPSHOT_KEY = 'seo-editorial/trends-snapshot.json';
@@ -205,6 +214,19 @@ export async function runScanTrendsPipeline(
 
 export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
   const fetchImpl = deps.fetchImpl || fetch;
+  const url = new URL(request.url);
+
+  const chatgptRoute = matchChatgptRoute(url.pathname);
+  if (chatgptRoute) {
+    return handleChatgptGatewayRoute(request, chatgptRoute, {
+      env,
+      fetchImpl,
+      readDrafts: () => readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts()),
+      writeDrafts: (nextDraftsData) => writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, nextDraftsData),
+      fetchPublished: () => fetchPublishedArticles(env, fetchImpl),
+    });
+  }
+
   const origin = request.headers.get('Origin') || '';
   if (origin && !isOriginAllowed(origin, env)) {
     return new Response('Origin not allowed', { status: 403 });
@@ -216,8 +238,9 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
     return new Response(null, { status: 204, headers: baseHeaders });
   }
 
-  const url = new URL(request.url);
   if (url.pathname === '/health' && request.method === 'GET') {
+    const gwCfg = await readGatewayConfig(env.SEO_BUCKET, env);
+    const primaryKey = getPrimaryGatewayKey(env, gwCfg);
     return json({
       ok: true,
       service: 'hsk-seo-editorial',
@@ -226,6 +249,13 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       hasR2: Boolean(env.SEO_BUCKET),
       hasXkiro: Boolean(env.XKIRO_API_KEY || env.SECONDARY_AI_API_KEY),
       hasOpenRouter: Boolean(env.OPENROUTER_API_KEY),
+      chatgptGateway: {
+        enabled: gwCfg.enabled !== false,
+        keyConfigured: Boolean(primaryKey.key),
+        hourlyLimit: gwCfg.hourlyLimit,
+        runAiReview: gwCfg.runAiReview !== false,
+        protocols: ['mcp-streamable-http', 'rest-openapi-3.1'],
+      },
       models: {
         writer: env.CF_WRITER_MODEL || '@cf/google/gemma-4-26b-a4b-it',
         writerFallback: env.CF_WRITER_FALLBACK_MODEL || '@cf/qwen/qwen3.8-27b',
@@ -348,6 +378,71 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       draftsData.updatedAt = nowIso;
       await writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, draftsData);
       return json({ ok: true, draft, article: draft.article, draftsData });
+    }
+
+    if (url.pathname === '/api/chatgpt-gateway/config' && request.method === 'GET') {
+      const [storedConfig, draftsData] = await Promise.all([
+        readGatewayConfig(env.SEO_BUCKET, env),
+        readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts()),
+      ]);
+      return json(
+        buildAdminGatewayConfigResponse({
+          baseUrl: url.origin,
+          env,
+          storedConfig,
+          drafts: draftsData.drafts || [],
+        })
+      );
+    }
+
+    if (url.pathname === '/api/chatgpt-gateway/rotate' && request.method === 'POST') {
+      const [storedConfig, draftsData] = await Promise.all([
+        readGatewayConfig(env.SEO_BUCKET, env),
+        readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts()),
+      ]);
+      const nowIso = new Date().toISOString();
+      const nextConfig = {
+        ...storedConfig,
+        enabled: true,
+        apiKey: generateGatewayKey(),
+        rotatedAt: nowIso,
+        updatedAt: nowIso,
+      };
+      await writeGatewayConfig(env.SEO_BUCKET, nextConfig);
+      return json(
+        buildAdminGatewayConfigResponse({
+          baseUrl: url.origin,
+          env,
+          storedConfig: nextConfig,
+          drafts: draftsData.drafts || [],
+        })
+      );
+    }
+
+    if (url.pathname === '/api/chatgpt-gateway/settings' && request.method === 'POST') {
+      const payload = await request.json().catch(() => ({}));
+      const [storedConfig, draftsData] = await Promise.all([
+        readGatewayConfig(env.SEO_BUCKET, env),
+        readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts()),
+      ]);
+      const nowIso = new Date().toISOString();
+      const hourlyNum = Number(payload?.hourlyLimit);
+      const nextConfig = {
+        ...storedConfig,
+        enabled: typeof payload?.enabled === 'boolean' ? payload.enabled : storedConfig.enabled,
+        runAiReview: typeof payload?.runAiReview === 'boolean' ? payload.runAiReview : storedConfig.runAiReview,
+        hourlyLimit: Number.isFinite(hourlyNum) && hourlyNum >= 1 ? Math.min(6, Math.round(hourlyNum)) : storedConfig.hourlyLimit,
+        updatedAt: nowIso,
+      };
+      await writeGatewayConfig(env.SEO_BUCKET, nextConfig);
+      return json(
+        buildAdminGatewayConfigResponse({
+          baseUrl: url.origin,
+          env,
+          storedConfig: nextConfig,
+          drafts: draftsData.drafts || [],
+        })
+      );
     }
 
     return json({ error: 'Not found' }, 404);
