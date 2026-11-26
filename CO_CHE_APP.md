@@ -249,6 +249,8 @@ Hỏi đáp AI dùng mức Thấp (Gemini 3.1 Flash-Lite), Trung bình (3.5 Flas
 
 Admin duyệt bài ở Phòng Duyệt Bài. Worker lưu trạng thái trên R2, rồi GitHub Actions định kỳ đọc hàng đợi, dựng trang HTML và mở PR. Nếu có PR xuất bản đang mở, lượt đồng bộ giữ lại bài mới trong hàng đợi để xử lý ở lượt sau. Việc deploy Worker từ main và việc xuất bản bài là hai workflow riêng.
 
+Worker ưu tiên model OpenRouter miễn phí khi viết bài. Hai vòng kiểm duyệt thử xKiro nếu đã cấu hình, sau đó thử OpenRouter. Workers AI là phương án dự phòng cho cả hai luồng.
+
 ### API kho nhạc: gắn đúng loại caller
 
 Base là `music-config.json.cloudEndpoint` (runner dùng hằng riêng nêu trên). Đọc handler để lấy schema/thông báo lỗi hiện tại, không sao chép payload cũ từ tài liệu.
