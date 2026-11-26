@@ -1,0 +1,103 @@
+name: Auto-Publish Approved SEO Articles (Zero-Token)
+
+on:
+  schedule:
+    # Tự động đồng bộ các bài đã Admin duyệt từ Cloudflare R2 mỗi 15 phút (không cần PAT)
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      queue_url:
+        description: 'Endpoint hàng đợi bài đã duyệt trên Cloudflare Worker'
+        required: false
+        default: 'https://hsk-seo-editorial.trung-hsk668.workers.dev/public/approved-queue'
+      publish_mode:
+        description: 'Cách xuất bản bài viết'
+        required: false
+        default: 'auto-publish'
+        type: choice
+        options:
+          - auto-publish
+          - pr-review
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: seo-auto-publish-approved
+  cancel-in-progress: false
+
+jobs:
+  publish-approved:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SEO_PUBLISH_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Sync approved SEO articles from Cloudflare Queue
+        env:
+          QUEUE_URL: ${{ inputs.queue_url || 'https://hsk-seo-editorial.trung-hsk668.workers.dev/public/approved-queue' }}
+        run: node tools/seo-articles/seo-editorial-pipeline.mjs --sync-approved-from-url "$QUEUE_URL"
+
+      - name: Verify, bump PWA & open auto-publish PR if articles changed
+        env:
+          GH_TOKEN: ${{ secrets.SEO_PUBLISH_TOKEN || secrets.GITHUB_TOKEN }}
+          PUBLISH_MODE: ${{ inputs.publish_mode || 'auto-publish' }}
+        run: |
+          CLUSTER_FILES=(index.html phan-biet-tu-de-nham-hsk.html sua-cau-tieng-trung-ai.html luyen-thi-hsk-1-mien-phi.html luyen-thi-hsk-2-mien-phi.html luyen-thi-hsk-3-mien-phi.html luyen-thi-hsk-4-mien-phi.html luyen-thi-hsk-5-mien-phi.html luyen-thi-hsk-6-mien-phi.html)
+          if [ -z "$(git status --porcelain content/seo-articles/articles.json bai-viet/ tin-tuc-hsk.html sitemap.xml "${CLUSTER_FILES[@]}")" ]; then
+            echo "Không có bài viết mới đã duyệt cần xuất bản."
+            exit 0
+          fi
+
+          SLUG=$(node -e "const d=require('./content/seo-articles/articles.json'); console.log(d.articles[0].slug);")
+          TITLE=$(node -e "const d=require('./content/seo-articles/articles.json'); console.log(d.articles[0].title);")
+          BRANCH="seo/auto-publish-${SLUG}-$(date +%Y%m%d%H%M)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+
+          npm install --no-audit --no-fund --prefix /tmp/hsk-seo-deps jsdom
+          NODE_PATH=/tmp/hsk-seo-deps/node_modules node --test tools/seo-articles/test-seo-articles.mjs tools/seo-articles/test-seo-editorial.mjs
+          python tools/prepare-pwa-release.py --keep-release --note "Xuất bản bài SEO đã duyệt: ${TITLE}"
+          NODE_PATH=/tmp/hsk-seo-deps/node_modules node tools/check-seo-entry-dom.cjs
+          python tools/check-pwa-release.py --base origin/main
+          python tools/check-feature-preservation.py --base origin/main
+
+          git add content/seo-articles/articles.json tin-tuc-hsk.html bai-viet/ sitemap.xml "${CLUSTER_FILES[@]}" app-version.json offline.js offline-worker.js OneSignalSDKWorker.js
+          git commit -m "seo: xuất bản tự động bài đã duyệt — ${TITLE}"
+          git push -u origin "$BRANCH"
+
+          PR_URL=$(gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "seo: xuất bản tự động bài đã duyệt — ${TITLE}" \
+            --body "$(cat <<EOF
+          ## Tự động xuất bản bài SEO đã được Admin duyệt (Zero-Token Queue)
+          - **Tiêu đề mới nhất:** ${TITLE}
+          - **URL bài viết:** \`https://hskfreelearningai.pages.dev/bai-viet/${SLUG}\`
+          - **Chế độ:** \`${PUBLISH_MODE}\`
+
+          ## Khai báo giao diện (Layout & UI Scope Declaration)
+          - Chỉ cập nhật bài viết SEO tĩnh trong \`bai-viet/\`, \`tin-tuc-hsk.html\`, \`sitemap.xml\` và cụm 9 bài liên quan.
+          - Không thay đổi giao diện ứng dụng \`app-hoc-hsk.html\`.
+          EOF
+          )")
+
+          if [ "$PUBLISH_MODE" != "pr-review" ]; then
+            gh pr merge "$PR_URL" --auto --squash --delete-branch || true
+          fi

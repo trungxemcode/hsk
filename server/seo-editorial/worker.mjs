@@ -266,6 +266,44 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
     });
   }
 
+  if (url.pathname === '/public/approved-queue' && request.method === 'GET') {
+    const draftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
+    const drafts = Array.isArray(draftsData?.drafts) ? draftsData.drafts : [];
+    const items = drafts
+      .filter(
+        (d) =>
+          d &&
+          d.status === 'approved' &&
+          d.article &&
+          typeof d.article === 'object' &&
+          String(d.article.title || '').trim() &&
+          Array.isArray(d.article.sections) &&
+          d.article.sections.length >= 1
+      )
+      .map((d) => ({
+        id: d.id,
+        approvedAt: d.approvedAt || d.updatedAt || '',
+        publishedSlug: d.publishedSlug || d.article.slug || '',
+        article: d.article,
+      }));
+    return Response.json(
+      {
+        ok: true,
+        count: items.length,
+        updatedAt: draftsData?.updatedAt || '',
+        items,
+      },
+      {
+        status: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-store',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      }
+    );
+  }
+
   try {
     await requireAdmin(request, env, fetchImpl);
 
@@ -365,6 +403,7 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       draft.article.publishedAt = draft.article.publishedAt || today;
       draft.article.updatedAt = today;
       draft.status = 'approved';
+      draft.publishState = 'queued';
       draft.approvedAt = nowIso;
       draft.updatedAt = nowIso;
       draft.publishedSlug = draft.article.slug;
@@ -378,7 +417,13 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       });
       draftsData.updatedAt = nowIso;
       await writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, draftsData);
-      return json({ ok: true, draft, article: draft.article, draftsData });
+      return json({
+        ok: true,
+        draft,
+        article: draft.article,
+        draftsData,
+        autoPublishMode: 'zero-token-queue',
+      });
     }
 
     if (url.pathname === '/api/chatgpt-gateway/config' && request.method === 'GET') {

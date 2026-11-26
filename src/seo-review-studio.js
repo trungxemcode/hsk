@@ -1005,8 +1005,8 @@
       } else {
         setStatusMsg(
           st,
-          'Đã đánh dấu ĐÃ DUYỆT trên Cloudflare R2. Hãy bấm “Kết nối GitHub” để nạp Token và đẩy bài lên trang công khai.',
-          'is-warn'
+          'Đã duyệt & đưa vào hàng đợi xuất bản tự động! GitHub Actions sẽ tự lấy bài từ Cloudflare, build HTML và đăng lên web mà không cần cài GitHub Token.',
+          'is-ok'
         );
       }
     } catch (err) {

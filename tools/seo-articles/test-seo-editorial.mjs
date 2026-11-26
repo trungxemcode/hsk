@@ -14,6 +14,7 @@ import {
   buildTrendDraftPrompt,
   evaluateDraftQuality,
   rejectDraftRecord,
+  syncApprovedQueueIntoArticles,
 } from './seo-editorial-pipeline.mjs';
 import {
   XKIRO_API_URL,
@@ -328,4 +329,47 @@ test('runDualXkiroReview runs Command A+ then Mistral Large 3, detects revise & 
     today: '2026-11-26',
   });
   assert.match(polishPrompt, /Sửa thanh điệu cho 不好意思/);
+});
+
+test('syncApprovedQueueIntoArticles imports approved articles cleanly and stays idempotent across runs', () => {
+  const queueItems = [
+    {
+      id: 'draft-queue-newest',
+      approvedAt: '2026-11-26T15:00:00.000Z',
+      article: {
+        slug: 'cach-dung-tu-yi-dian-trong-tieng-trung',
+        category: 'ngu-phap',
+        title: 'Cách dùng 一点儿 và 有点儿 trong tiếng Trung không bị nhầm',
+        metaTitle: 'Cách dùng 一点儿 và 有点儿 trong tiếng Trung | HSK Flashcards',
+        metaDescription: 'Phân biệt chính xác vị trí và sắc thái giữa 一点儿 và 有点儿 khi nói và thi HSK.',
+        summary: 'Tổng hợp vị trí đứng sau tính từ và trước tính từ kèm ví dụ Hán Pinyin Việt.',
+        sections: [
+          {
+            id: 'muc-1',
+            heading: 'Điểm khác biệt cốt lõi',
+            paragraphs: ['有点儿 đứng trước tính từ, 一点儿 đứng sau tính từ hoặc động từ.'],
+          },
+          {
+            id: 'muc-2',
+            heading: 'Ví dụ phân biệt thực tế',
+            paragraphs: ['Dùng đúng sắc thái khen chê hay nhờ vả.'],
+          },
+        ],
+      },
+    },
+  ];
+  const articlesData = {
+    schema: 1,
+    articles: [{ slug: 'bai-co-san', title: 'Bài viết có sẵn' }],
+  };
+
+  const first = syncApprovedQueueIntoArticles({ queueItems, articlesData, today: '2026-11-26' });
+  assert.equal(first.added.length, 1);
+  assert.equal(first.added[0].sourceDraftId, 'draft-queue-newest');
+  assert.equal(articlesData.articles.length, 2);
+  assert.equal(articlesData.articles[0].slug, 'cach-dung-tu-yi-dian-trong-tieng-trung');
+
+  const second = syncApprovedQueueIntoArticles({ queueItems, articlesData, today: '2026-11-26' });
+  assert.equal(second.added.length, 0);
+  assert.equal(articlesData.articles.length, 2);
 });

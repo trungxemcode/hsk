@@ -106,10 +106,10 @@
       <section class="rev-main" aria-label="Chi tiết & phê duyệt bài viết">
         <div class="rev-empty" id="emptyState">
           <h2>Chưa có bài viết nào trong bộ lọc này</h2>
-          <p id="emptyStateText">Bạn có thể bấm “Quét Trends &amp; Sinh bài” để AI lấy từ khóa tìm kiếm nổi bật từ Google Trends VN tạo 2 bài nháp mới ngay lập tức, hoặc bấm “Kết nối GitHub” nếu chưa nạp token.</p>
+          <p id="emptyStateText">Bạn có thể bấm “Quét Trends &amp; Sinh bài” để AI lấy từ khóa tìm kiếm nổi bật từ Google Trends VN tạo bài nháp mới ngay lập tức (không cần cài GitHub Token).</p>
           <div class="rev-empty-actions">
-            <button type="button" class="rev-btn is-primary" id="emptyScanBtn">Quét Trends &amp; Sinh 2 bài ngay</button>
-            <button type="button" class="rev-btn" id="emptyGithubBtn">Cài kết nối GitHub</button>
+            <button type="button" class="rev-btn is-primary" id="emptyScanBtn">Quét Trends &amp; Sinh bài ngay</button>
+            <button type="button" class="rev-btn" id="emptyGithubBtn">Kết nối GitHub (Tùy chọn)</button>
           </div>
         </div>
 
@@ -173,11 +173,11 @@
   <dialog class="rev-modal" id="githubModal" aria-labelledby="githubModalTitle">
     <form class="rev-modal-card" id="githubConfigForm" method="dialog">
       <div class="rev-modal-head">
-        <h2 id="githubModalTitle">Kết nối GitHub Actions (Cài 1 lần)</h2>
+        <h2 id="githubModalTitle">Kết nối GitHub Actions (Tùy chọn — Không cần cài cũng tự xuất bản)</h2>
         <button type="button" class="rev-close-btn" data-close-modal="githubModal" aria-label="Đóng">✕</button>
       </div>
       <p class="rev-modal-desc">
-        Dùng GitHub Fine-Grained Token cho repo này (chỉ cần quyền <strong>Actions: Read &amp; Write</strong> và <strong>Contents: Read</strong>). Khi chọn lưu đồng bộ, token nằm trong kho dữ liệu riêng tài khoản Admin trên Firebase — bạn đăng nhập bằng Email + Mật khẩu trên thiết bị mới sẽ tự nhận kết nối ngay.
+        <strong>Không cần tạo Token:</strong> mỗi bài bạn bấm <strong>✓ Duyệt &amp; Tự động xuất bản</strong> đã được đưa thẳng vào hàng đợi Cloudflare để GitHub Actions tự đồng bộ và đăng lên web. Chỉ cần nhập Fine-Grained Token (quyền <strong>Actions: Read &amp; Write</strong> và <strong>Contents: Read</strong>) nếu bạn muốn kích chạy build ngay lập tức trong 1 phút.
       </p>
       <div class="rev-modal-grid">
         <div class="rev-field">
