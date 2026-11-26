@@ -138,11 +138,24 @@
                 <span class="copy-tag" id="reversedCopyTag">Chép dạng đảo</span>
               </button>
             </div>
+            <ol class="score-helper-steps">
+              <li>Bấm <strong>Chép dạng chuẩn</strong> (hoặc <strong>dạng đảo</strong>) — khung tra điểm bên dưới sẽ tự mở sẵn để bạn dán tên và nhập số báo danh.</li>
+              <li>Sau khi ChineseTest trả bảng điểm, bôi đen chép kết quả rồi bấm <strong>“Dán điểm từ ChineseTest”</strong> ở khung bên phải để tự điền và nhận lộ trình ôn.</li>
+            </ol>
           </div>
 
           <div class="score-calc-card" id="tinh-diem-hsk">
             <h3>Tính nhanh tổng điểm đậu HSK 1–6 &amp; HSKK</h3>
             <p>Chọn cấp độ HSK và nhập điểm Nghe, Đọc, Viết vừa tra được để kiểm tra ngưỡng đạt và tìm kỹ năng cần gỡ điểm.</p>
+            <div class="calc-import-bar">
+              <button type="button" class="calc-import-btn" id="pasteScoreBtn">Dán điểm từ ChineseTest</button>
+              <button type="button" class="calc-import-toggle" id="togglePasteBoxBtn" aria-expanded="false" aria-controls="pasteScoreWrap">hoặc dán tay</button>
+              <span class="calc-import-status" id="pasteScoreStatus" aria-live="polite"></span>
+            </div>
+            <div class="calc-paste-wrap" id="pasteScoreWrap" hidden>
+              <label class="sr-only" for="pasteScoreInput">Dán đoạn bảng điểm copy từ ChineseTest</label>
+              <textarea id="pasteScoreInput" class="calc-paste-input" rows="2" placeholder="Dán đoạn điểm vừa copy từ ChineseTest vào đây (VD: HSK4 Listening 70 Reading 65 Writing 55)..."></textarea>
+            </div>
             <div class="level-tabs" role="tablist" aria-label="Chọn cấp độ HSK để tính điểm" style="margin-bottom:0">
               <button type="button" class="level-tab" role="tab" aria-selected="false" data-calc-lvl="1">HSK 1</button>
               <button type="button" class="level-tab" role="tab" aria-selected="false" data-calc-lvl="2">HSK 2</button>
@@ -172,6 +185,16 @@
             <div class="calc-result is-pass" id="calcResult" aria-live="polite">
               <span id="calcSummaryText">Tổng điểm HSK 4: <strong>190 / 300</strong> · Kỹ năng cần cải thiện nhất: Viết (55 điểm).</span>
               <span class="calc-badge" id="calcBadge">Đạt chuẩn (≥ 180)</span>
+            </div>
+            <div class="calc-next-actions" id="calcNextActions">
+              <a class="calc-action-btn" id="calcRetakeBtn" href="./app-hoc-hsk.html#study4/4">
+                <strong id="calcRetakeTitle">Rèn kỹ lại HSK 4</strong>
+                <span id="calcRetakeSub">Củng cố Viết (55đ) &amp; luyện đề</span>
+              </a>
+              <a class="calc-action-btn is-primary" id="calcAdvanceBtn" href="./app-hoc-hsk.html#learn/5">
+                <strong id="calcAdvanceTitle">Học tiếp lên HSK 5</strong>
+                <span id="calcAdvanceSub">Mở từ vựng &amp; lộ trình HSK 5</span>
+              </a>
             </div>
           </div>
         </div>
@@ -343,134 +366,7 @@
         });
       }
 
-      // 1. Vietnamese Name Normalizer for ChineseTest Score Inquiry
-      var nameInput = document.getElementById('viNameInput');
-      var normalOut = document.getElementById('normalNameOut');
-      var reversedOut = document.getElementById('reversedNameOut');
-      var copyNormalBtn = document.getElementById('copyNormalBtn');
-      var copyReversedBtn = document.getElementById('copyReversedBtn');
-
-      function normalizeExamName(raw) {
-        var clean = String(raw || '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/[đĐ]/g, 'D')
-          .toUpperCase()
-          .replace(/[^A-Z0-9\s]/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim();
-        return clean;
-      }
-
-      function updateNamePreview() {
-        var norm = normalizeExamName(nameInput ? nameInput.value : '') || 'NGUYEN MINH ANH';
-        var parts = norm.split(' ');
-        var rev = parts.length > 1 ? parts.slice(1).join(' ') + ' ' + parts[0] : norm;
-        if (normalOut) normalOut.textContent = norm;
-        if (reversedOut) reversedOut.textContent = rev;
-        if (copyNormalBtn) copyNormalBtn.setAttribute('data-copy-value', norm);
-        if (copyReversedBtn) copyReversedBtn.setAttribute('data-copy-value', rev);
-      }
-
-      function bindCopy(btn, tagId, defaultLabel) {
-        if (!btn) return;
-        btn.addEventListener('click', function () {
-          var val = btn.getAttribute('data-copy-value') || '';
-          var tag = document.getElementById(tagId);
-          var done = function () {
-            btn.classList.add('is-copied');
-            if (tag) tag.textContent = 'Đã chép!';
-            setTimeout(function () {
-              btn.classList.remove('is-copied');
-              if (tag) tag.textContent = defaultLabel;
-            }, 1600);
-          };
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(val).then(done).catch(done);
-          } else {
-            done();
-          }
-        });
-      }
-
-      if (nameInput) nameInput.addEventListener('input', updateNamePreview);
-      bindCopy(copyNormalBtn, 'normalCopyTag', 'Chép dạng chuẩn');
-      bindCopy(copyReversedBtn, 'reversedCopyTag', 'Chép dạng đảo');
-
-      // 2. HSK 1-6 & HSKK Score Calculator
-      var calcLvl = 4;
-      var calcTabs = document.querySelectorAll('[data-calc-lvl]');
-      var listenEl = document.getElementById('scoreListen');
-      var readEl = document.getElementById('scoreRead');
-      var writeEl = document.getElementById('scoreWrite');
-      var hskkEl = document.getElementById('scoreHskk');
-      var writeField = document.getElementById('writeField');
-      var calcResultEl = document.getElementById('calcResult');
-      var calcSummaryEl = document.getElementById('calcSummaryText');
-      var calcBadgeEl = document.getElementById('calcBadge');
-
-      function clampScore(el) {
-        if (!el || el.value === '') return 0;
-        var n = Number(el.value);
-        if (!Number.isFinite(n)) return 0;
-        return Math.max(0, Math.min(100, Math.round(n)));
-      }
-
-      function recalcScore() {
-        var hasWrite = calcLvl >= 3;
-        if (writeField) writeField.hidden = !hasWrite;
-        var l = clampScore(listenEl);
-        var r = clampScore(readEl);
-        var w = hasWrite ? clampScore(writeEl) : 0;
-        var total = l + r + w;
-        var maxScore = hasWrite ? 300 : 200;
-        var passMark = hasWrite ? 180 : 120;
-        var passed = total >= passMark;
-
-        var skills = [
-          { name: 'Nghe', val: l },
-          { name: 'Đọc', val: r },
-        ];
-        if (hasWrite) skills.push({ name: 'Viết', val: w });
-        skills.sort(function (a, b) { return a.val - b.val; });
-
-        var hskkText = '';
-        if (hskkEl && hskkEl.value !== '') {
-          var hk = clampScore(hskkEl);
-          hskkText = ' · HSKK: ' + hk + '/100 (' + (hk >= 60 ? 'Đạt' : 'Cần ≥ 60') + ')';
-        }
-
-        if (calcResultEl) {
-          calcResultEl.classList.remove('is-pass', 'is-fail');
-          calcResultEl.classList.add(passed ? 'is-pass' : 'is-fail');
-        }
-        if (calcSummaryEl) {
-          var prefix = 'Tổng điểm HSK ' + calcLvl + ': <strong>' + total + ' / ' + maxScore + '</strong> (không điểm liệt từng phần). ';
-          var detail = 'Kỹ năng thấp nhất: ' + skills[0].name + ' (' + skills[0].val + ' điểm)' + hskkText + '.';
-          calcSummaryEl.innerHTML = prefix + detail;
-        }
-        if (calcBadgeEl) {
-          if (calcLvl >= 5) {
-            calcBadgeEl.textContent = passed ? 'Mốc tốt (≥ 180)' : 'Cần ôn thêm (< 180)';
-          } else {
-            calcBadgeEl.textContent = passed ? 'Đạt chuẩn (≥ ' + passMark + ')' : 'Chưa đạt (< ' + passMark + ')';
-          }
-        }
-      }
-
-      calcTabs.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          calcLvl = Number(btn.getAttribute('data-calc-lvl')) || 4;
-          calcTabs.forEach(function (b) { b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
-          recalcScore();
-        });
-      });
-      [listenEl, readEl, writeEl, hskkEl].forEach(function (el) {
-        if (el) el.addEventListener('input', recalcScore);
-      });
-      recalcScore();
-
-      // 3. Embedded Frame Controls
+      // 0. Embedded Frame Controls (declared early so copy chips can auto-open portal)
       var portalCard = document.getElementById('scorePortalCard');
       var frameWrap = document.getElementById('scorePortalFrameWrap');
       var togglePortalBtn = document.getElementById('togglePortalBtn');
@@ -518,6 +414,342 @@
           scoreFrame.setAttribute('src', 'https://www.chinesetest.cn/query-score');
         });
       }
+
+      // 1. Vietnamese Name Normalizer for ChineseTest Score Inquiry
+      var nameInput = document.getElementById('viNameInput');
+      var normalOut = document.getElementById('normalNameOut');
+      var reversedOut = document.getElementById('reversedNameOut');
+      var copyNormalBtn = document.getElementById('copyNormalBtn');
+      var copyReversedBtn = document.getElementById('copyReversedBtn');
+
+      function normalizeExamName(raw) {
+        var clean = String(raw || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[đĐ]/g, 'D')
+          .toUpperCase()
+          .replace(/[^A-Z0-9\s]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        return clean;
+      }
+
+      function updateNamePreview() {
+        var norm = normalizeExamName(nameInput ? nameInput.value : '') || 'NGUYEN MINH ANH';
+        var parts = norm.split(' ');
+        var rev = parts.length > 1 ? parts.slice(1).join(' ') + ' ' + parts[0] : norm;
+        if (normalOut) normalOut.textContent = norm;
+        if (reversedOut) reversedOut.textContent = rev;
+        if (copyNormalBtn) copyNormalBtn.setAttribute('data-copy-value', norm);
+        if (copyReversedBtn) copyReversedBtn.setAttribute('data-copy-value', rev);
+      }
+
+      function bindCopy(btn, tagId, defaultLabel) {
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          var val = btn.getAttribute('data-copy-value') || '';
+          var tag = document.getElementById(tagId);
+          if (portalCard && portalCard.classList.contains('is-collapsed')) {
+            setPortalOpen(true);
+          }
+          var done = function () {
+            btn.classList.add('is-copied');
+            if (tag) tag.textContent = 'Đã chép!';
+            setTimeout(function () {
+              btn.classList.remove('is-copied');
+              if (tag) tag.textContent = defaultLabel;
+            }, 1600);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(val).then(done).catch(done);
+          } else {
+            done();
+          }
+        });
+      }
+
+      if (nameInput) nameInput.addEventListener('input', updateNamePreview);
+      bindCopy(copyNormalBtn, 'normalCopyTag', 'Chép dạng chuẩn');
+      bindCopy(copyReversedBtn, 'reversedCopyTag', 'Chép dạng đảo');
+
+      // 2. HSK 1-6 & HSKK Score Calculator + ChineseTest Score Importer + Next-Step CTAs
+      var calcLvl = 4;
+      var calcTabs = document.querySelectorAll('[data-calc-lvl]');
+      var listenEl = document.getElementById('scoreListen');
+      var readEl = document.getElementById('scoreRead');
+      var writeEl = document.getElementById('scoreWrite');
+      var hskkEl = document.getElementById('scoreHskk');
+      var writeField = document.getElementById('writeField');
+      var calcResultEl = document.getElementById('calcResult');
+      var calcSummaryEl = document.getElementById('calcSummaryText');
+      var calcBadgeEl = document.getElementById('calcBadge');
+      var calcRetakeBtn = document.getElementById('calcRetakeBtn');
+      var calcRetakeTitle = document.getElementById('calcRetakeTitle');
+      var calcRetakeSub = document.getElementById('calcRetakeSub');
+      var calcAdvanceBtn = document.getElementById('calcAdvanceBtn');
+      var calcAdvanceTitle = document.getElementById('calcAdvanceTitle');
+      var calcAdvanceSub = document.getElementById('calcAdvanceSub');
+      var pasteScoreBtn = document.getElementById('pasteScoreBtn');
+      var togglePasteBtn = document.getElementById('togglePasteBoxBtn');
+      var pasteWrapEl = document.getElementById('pasteScoreWrap');
+      var pasteInputEl = document.getElementById('pasteScoreInput');
+      var pasteStatusEl = document.getElementById('pasteScoreStatus');
+
+      function clampScore(el) {
+        if (!el || el.value === '') return 0;
+        var n = Number(el.value);
+        if (!Number.isFinite(n)) return 0;
+        return Math.max(0, Math.min(100, Math.round(n)));
+      }
+
+      function setPasteStatus(msg, tone) {
+        if (!pasteStatusEl) return;
+        pasteStatusEl.textContent = msg || '';
+        pasteStatusEl.classList.remove('is-ok', 'is-warn');
+        if (tone) pasteStatusEl.classList.add(tone);
+      }
+
+      function setPasteWrapOpen(open) {
+        if (pasteWrapEl) pasteWrapEl.hidden = !open;
+        if (togglePasteBtn) togglePasteBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      function parseChineseTestScoreText(raw, currentLevel) {
+        var text = String(raw || '').trim();
+        if (!text) return { level: null, listen: null, read: null, write: null, hskk: null, appliedCount: 0 };
+
+        var level = null;
+        var lvlMatch = text.match(/HSK\s*(?:\(\s*Level\s*|\s*Level\s*|\s*cấp\s*)?([1-6])(?!\d)/i);
+        if (lvlMatch) {
+          level = Number(lvlMatch[1]);
+        } else {
+          var zhMap = { '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6 };
+          var zhLvlMatch = text.match(/([一二三四五六])级/);
+          if (zhLvlMatch) level = zhMap[zhLvlMatch[1]] || null;
+        }
+
+        function pickLabeled(re) {
+          var m = text.match(re);
+          if (!m) return null;
+          var n = Number(m[1]);
+          return Number.isFinite(n) && n >= 0 && n <= 100 ? Math.round(n) : null;
+        }
+
+        var listen = pickLabeled(/(?:^|[^a-zA-ZÀ-ỹ])(?:listening|听力|nghe)\s*[:：\-]?\s*(\d{1,3})(?!\d)/i);
+        var read = pickLabeled(/(?:^|[^a-zA-ZÀ-ỹ])(?:reading|阅读|đọc|doc)\s*[:：\-]?\s*(\d{1,3})(?!\d)/i);
+        var write = pickLabeled(/(?:^|[^a-zA-ZÀ-ỹ])(?:writing|写作|viết|viet)\s*[:：\-]?\s*(\d{1,3})(?!\d)/i);
+        var hskk = pickLabeled(/(?:^|[^a-zA-ZÀ-ỹ])(?:hskk(?:\s*(?:sơ|trung|cao)\s*cấp|\s*(?:beginner|intermediate|advanced))?|口试|khẩu\s*ngữ|khau\s*ngu)\s*[:：\-]?\s*(\d{1,3})(?!\d)/i);
+
+        if (listen === null && read === null && write === null && hskk === null) {
+          var cleaned = text
+            .replace(/(\d{1,3})\s*\/\s*(?:100|200|300)\b/g, ' $1 ')
+            .replace(/\b\d{4}[-/.]\d{1,2}[-/.]\d{1,2}\b/g, ' ')
+            .replace(/\b\d{1,2}[-/.]\d{1,2}[-/.]\d{4}\b/g, ' ')
+            .replace(/\b\d{5,}\b/g, ' ')
+            .replace(/HSK\s*(?:\(\s*Level\s*|\s*Level\s*|\s*cấp\s*)?[1-6]/gi, ' ')
+            .replace(/[一二三四五六]级/g, ' ');
+          var nums = (cleaned.match(/\b\d{1,3}\b/g) || [])
+            .map(Number)
+            .filter(function (n) { return Number.isFinite(n) && n >= 0 && n <= 100; });
+          var targetLevel = level || currentLevel || 4;
+          if (targetLevel <= 2 && nums.length >= 2) {
+            listen = nums[0];
+            read = nums[1];
+            if (nums.length >= 3 && nums[2] !== listen + read) hskk = nums[2];
+          } else if (targetLevel >= 3 && nums.length >= 3) {
+            listen = nums[0];
+            read = nums[1];
+            write = nums[2];
+            if (nums.length >= 4 && nums[3] !== listen + read + write) hskk = nums[3];
+          } else if (nums.length === 2 && !level) {
+            listen = nums[0];
+            read = nums[1];
+          }
+        }
+
+        var finalLvl = level || currentLevel || 4;
+        var appliedCount = (listen !== null ? 1 : 0)
+          + (read !== null ? 1 : 0)
+          + (finalLvl >= 3 && write !== null ? 1 : 0)
+          + (hskk !== null ? 1 : 0);
+
+        return { level: level, listen: listen, read: read, write: write, hskk: hskk, appliedCount: appliedCount };
+      }
+
+      function recalcScore() {
+        var hasWrite = calcLvl >= 3;
+        if (writeField) writeField.hidden = !hasWrite;
+        var l = clampScore(listenEl);
+        var r = clampScore(readEl);
+        var w = hasWrite ? clampScore(writeEl) : 0;
+        var total = l + r + w;
+        var maxScore = hasWrite ? 300 : 200;
+        var passMark = hasWrite ? 180 : 120;
+        var passed = total >= passMark;
+
+        var skills = [
+          { name: 'Nghe', val: l },
+          { name: 'Đọc', val: r },
+        ];
+        if (hasWrite) skills.push({ name: 'Viết', val: w });
+        skills.sort(function (a, b) { return a.val - b.val; });
+        var weakest = skills[0];
+
+        var hskkText = '';
+        if (hskkEl && hskkEl.value !== '') {
+          var hk = clampScore(hskkEl);
+          hskkText = ' · HSKK: ' + hk + '/100 (' + (hk >= 60 ? 'Đạt' : 'Cần ≥ 60') + ')';
+        }
+
+        if (calcResultEl) {
+          calcResultEl.classList.remove('is-pass', 'is-fail');
+          calcResultEl.classList.add(passed ? 'is-pass' : 'is-fail');
+        }
+        if (calcSummaryEl) {
+          var prefix = 'Tổng điểm HSK ' + calcLvl + ': <strong>' + total + ' / ' + maxScore + '</strong> (không điểm liệt từng phần). ';
+          var detail = 'Kỹ năng thấp nhất: ' + weakest.name + ' (' + weakest.val + ' điểm)' + hskkText + '.';
+          calcSummaryEl.innerHTML = prefix + detail;
+        }
+        if (calcBadgeEl) {
+          if (calcLvl >= 5) {
+            calcBadgeEl.textContent = passed ? 'Mốc tốt (≥ 180)' : 'Cần ôn thêm (< 180)';
+          } else {
+            calcBadgeEl.textContent = passed ? 'Đạt chuẩn (≥ ' + passMark + ')' : 'Chưa đạt (< ' + passMark + ')';
+          }
+        }
+
+        if (calcRetakeBtn && calcRetakeTitle && calcRetakeSub && calcAdvanceBtn && calcAdvanceTitle && calcAdvanceSub) {
+          calcRetakeBtn.setAttribute('href', './app-hoc-hsk.html#study4/' + calcLvl);
+          calcRetakeBtn.classList.remove('is-primary', 'is-combo');
+          calcAdvanceBtn.classList.remove('is-primary', 'is-combo');
+
+          if (passed) {
+            calcRetakeTitle.textContent = 'Rèn kỹ lại HSK ' + calcLvl;
+            calcRetakeSub.textContent = 'Củng cố ' + weakest.name + ' (' + weakest.val + 'đ) & luyện đề';
+            calcAdvanceBtn.classList.add('is-primary');
+            if (calcLvl < 6) {
+              var nextLvl = calcLvl + 1;
+              calcAdvanceBtn.setAttribute('href', './app-hoc-hsk.html#learn/' + nextLvl);
+              calcAdvanceTitle.textContent = 'Học tiếp lên HSK ' + nextLvl;
+              calcAdvanceSub.textContent = 'Mở từ vựng & lộ trình HSK ' + nextLvl;
+            } else {
+              calcAdvanceBtn.setAttribute('href', './app-hoc-hsk.html#sentence-editor');
+              calcAdvanceTitle.textContent = 'Nâng band điểm HSK 6';
+              calcAdvanceSub.textContent = 'Luyện sửa câu AI & đọc nâng cao';
+            }
+          } else {
+            calcRetakeBtn.classList.add('is-primary');
+            calcRetakeTitle.textContent = 'Học lại & rèn kỹ HSK ' + calcLvl;
+            calcRetakeSub.textContent = 'Gỡ điểm ' + weakest.name + ' (' + weakest.val + 'đ) & ôn đề thi';
+            calcAdvanceBtn.classList.add('is-combo');
+            if (calcLvl < 6) {
+              var nextLvlFail = calcLvl + 1;
+              calcAdvanceBtn.setAttribute('href', './app-hoc-hsk.html#practice/' + calcLvl);
+              calcAdvanceTitle.textContent = 'Học tiếp HSK ' + nextLvlFail + ' + Ôn lại HSK ' + calcLvl;
+              calcAdvanceSub.textContent = 'Học lên kết hợp vá lỗ hổng HSK ' + calcLvl;
+            } else {
+              calcAdvanceBtn.setAttribute('href', './app-hoc-hsk.html#practice/6');
+              calcAdvanceTitle.textContent = 'Luyện nâng cao + Ôn lại HSK 6';
+              calcAdvanceSub.textContent = 'Ôn SRS từ vựng kết hợp sửa câu AI';
+            }
+          }
+        }
+      }
+
+      function applyParsedScore(raw) {
+        var parsed = parseChineseTestScoreText(raw, calcLvl);
+        if (!parsed.appliedCount) return false;
+        if (parsed.level && parsed.level >= 1 && parsed.level <= 6) {
+          calcLvl = parsed.level;
+          calcTabs.forEach(function (b) {
+            b.setAttribute('aria-selected', Number(b.getAttribute('data-calc-lvl')) === calcLvl ? 'true' : 'false');
+          });
+        }
+        if (listenEl && parsed.listen !== null) listenEl.value = String(parsed.listen);
+        if (readEl && parsed.read !== null) readEl.value = String(parsed.read);
+        if (writeEl && calcLvl >= 3 && parsed.write !== null) writeEl.value = String(parsed.write);
+        if (hskkEl && parsed.hskk !== null) hskkEl.value = String(parsed.hskk);
+        recalcScore();
+        var summaryParts = ['HSK ' + calcLvl];
+        if (parsed.listen !== null) summaryParts.push('Nghe ' + parsed.listen);
+        if (parsed.read !== null) summaryParts.push('Đọc ' + parsed.read);
+        if (calcLvl >= 3 && parsed.write !== null) summaryParts.push('Viết ' + parsed.write);
+        if (parsed.hskk !== null) summaryParts.push('HSKK ' + parsed.hskk);
+        setPasteStatus('Đã điền: ' + summaryParts.join(' · '), 'is-ok');
+        return true;
+      }
+
+      if (pasteScoreBtn) {
+        pasteScoreBtn.addEventListener('click', function () {
+          var openManualFallback = function (msg) {
+            setPasteWrapOpen(true);
+            if (pasteInputEl) pasteInputEl.focus();
+            setPasteStatus(msg || 'Bấm Ctrl+V vào ô bên dưới để dán kết quả từ ChineseTest.', 'is-warn');
+          };
+          if (navigator.clipboard && navigator.clipboard.readText) {
+            navigator.clipboard.readText().then(function (clipText) {
+              if (applyParsedScore(clipText)) {
+                setPasteWrapOpen(false);
+              } else {
+                openManualFallback('Chưa thấy điểm trong clipboard — dán trực tiếp đoạn bảng điểm vào ô bên dưới.');
+              }
+            }).catch(function () {
+              openManualFallback();
+            });
+          } else {
+            openManualFallback();
+          }
+        });
+      }
+
+      if (togglePasteBtn) {
+        togglePasteBtn.addEventListener('click', function () {
+          var nextOpen = pasteWrapEl ? pasteWrapEl.hidden : true;
+          setPasteWrapOpen(nextOpen);
+          if (nextOpen && pasteInputEl) pasteInputEl.focus();
+        });
+      }
+
+      if (pasteInputEl) {
+        pasteInputEl.addEventListener('paste', function (event) {
+          var pasted = event.clipboardData ? event.clipboardData.getData('text') : '';
+          if (pasted) {
+            setTimeout(function () {
+              if (!applyParsedScore(pasteInputEl.value)) {
+                setPasteStatus('Chưa nhận diện được điểm — thử copy cả dòng Nghe / Đọc / Viết từ ChineseTest.', 'is-warn');
+              }
+            }, 0);
+          }
+        });
+        pasteInputEl.addEventListener('input', function () {
+          var val = pasteInputEl.value.trim();
+          if (!val) {
+            setPasteStatus('', '');
+            return;
+          }
+          if (!applyParsedScore(val)) {
+            setPasteStatus('Chưa nhận diện được điểm — thử copy cả dòng Nghe / Đọc / Viết từ ChineseTest.', 'is-warn');
+          }
+        });
+      }
+
+      calcTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          calcLvl = Number(btn.getAttribute('data-calc-lvl')) || 4;
+          calcTabs.forEach(function (b) { b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+          setPasteStatus('', '');
+          recalcScore();
+        });
+      });
+      [listenEl, readEl, writeEl, hskkEl].forEach(function (el) {
+        if (el) {
+          el.addEventListener('input', function () {
+            setPasteStatus('', '');
+            recalcScore();
+          });
+        }
+      });
+      recalcScore();
     })();
   </script>
   <script src="./seo-offline-prewarm.js" defer></script>
