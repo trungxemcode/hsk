@@ -807,3 +807,111 @@ test('Public GET /public/approved-queue exposes ONLY approved articles without a
   assert.equal(body.items[0].writerBrief, undefined);
   assert.equal(body.items[0].rating, undefined);
 });
+
+test('OpenRouter-first pipeline runs Writer + Round 1 + Round 2 with zero Cloudflare Neurons when OPENROUTER_API_KEY is set', async () => {
+  const r2 = createMemoryR2();
+  const ai = createMockAi();
+  const openrouterCalls = [];
+  const openrouterReasoningFlags = [];
+  let simulated400Done = false;
+  const fetchImpl = async (url, init) => {
+    const u = String(url);
+    if (u.includes('openrouter.ai')) {
+      const body = JSON.parse(init.body);
+      if (!simulated400Done) {
+        simulated400Done = true;
+        openrouterReasoningFlags.push(body.reasoning);
+        return new Response('reasoning unsupported', { status: 400 });
+      }
+      openrouterCalls.push(body.model);
+      openrouterReasoningFlags.push(body.reasoning);
+      const sys = String(body.messages?.[0]?.content || '');
+      if (sys.includes(AUDIT_PROTOCOL_ID)) {
+        return Response.json({
+          choices: [
+            {
+              message: {
+                content: JSON.stringify({
+                  lockedIntent: 'Xin lỗi trong tiếng Trung',
+                  targetAudience: 'Người tự học HSK',
+                  scores: {
+                    A: { score: 13, evidence: 'Trực diện' },
+                    B: { score: 15, evidence: 'Chuẩn' },
+                    C: { score: 13, evidence: 'Đủ sâu' },
+                    D: { score: 11, evidence: 'Có giá trị' },
+                    E: { score: 9, evidence: 'Logic tốt' },
+                    F: { score: 9, evidence: 'SEO chuẩn' },
+                    G: { score: 7, evidence: 'Mạch lạc' },
+                    H: { score: 7, evidence: 'Đúng văn phong' },
+                    I: { score: 5, evidence: 'Ứng dụng cao' },
+                    J: { score: 4, evidence: 'Minh bạch' },
+                  },
+                  hardFails: [],
+                  challengeResults: [{ id: '5.1', group: 'Độ sâu', result: 'Pass', finding: 'Đạt' }],
+                  errors: [],
+                  strengths: ['Ví dụ rõ ràng'],
+                  summary: 'Đạt chuẩn xuất bản.',
+                }),
+              },
+            },
+          ],
+        });
+      }
+      return Response.json({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                writerBrief: { styleId: 'educational-how-to', primaryKeyword: 'xin lỗi tiếng trung' },
+                ...makeMockArticleJson(),
+              }),
+            },
+          },
+        ],
+      });
+    }
+    return createMockFetch()(url, init);
+  };
+
+  const env = {
+    AI: ai,
+    SEO_BUCKET: r2,
+    OPENROUTER_API_KEY: 'sk-or-test-000000',
+    OPENROUTER_WRITER_MODEL: 'google/gemma-4-26b-a4b-it:free',
+    OPENROUTER_REVIEW_MODEL_1: 'nvidia/nemotron-3.5-lightning:free',
+    OPENROUTER_REVIEW_MODEL_2: 'nvidia/nemotron-3-ultra-550b-a55b:free',
+    FIREBASE_API_KEY: 'test-fb-key',
+    ALLOWED_ORIGINS: 'https://hskfreelearningai.pages.dev',
+  };
+
+  const res = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/scan-trends', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer fake-admin-id-token',
+        'Content-Type': 'application/json',
+        Origin: 'https://hskfreelearningai.pages.dev',
+      },
+      body: JSON.stringify({ count: 1 }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.equal(ai.calls.length, 0, 'Must consume ZERO Cloudflare Workers AI neurons when OpenRouter succeeds');
+  assert.deepEqual(openrouterCalls, [
+    'google/gemma-4-26b-a4b-it:free',
+    'nvidia/nemotron-3.5-lightning:free',
+    'nvidia/nemotron-3-ultra-550b-a55b:free',
+  ]);
+  assert.deepEqual(openrouterReasoningFlags, [
+    { enabled: false },
+    undefined,
+    { enabled: false },
+    { enabled: false },
+  ]);
+  assert.equal(body.createdDrafts[0].aiReviews.provider, 'openrouter');
+  assert.equal(body.createdDrafts[0].aiReviews.finalVerdict, 'APPROVED');
+});

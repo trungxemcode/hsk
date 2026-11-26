@@ -839,26 +839,46 @@ async function runCfAiJson({ aiBinding, model, systemPrompt, userPrompt, maxToke
   return extractJsonObject(text);
 }
 
-async function runOpenRouterJson({ apiKey, model, systemPrompt, userPrompt, fetchImpl = fetch }) {
-  const res = await fetchImpl(OPENROUTER_API_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://hskfreelearningai.pages.dev/',
-      'X-Title': 'HSK Flashcards Cloudflare Editorial',
-    },
-    body: JSON.stringify({
+async function runOpenRouterJson({
+  apiKey,
+  model,
+  systemPrompt,
+  userPrompt,
+  fetchImpl = fetch,
+  maxTokens = 4000,
+  temperature = 0.55,
+}) {
+  const sendRequest = async (includeReasoning) => {
+    const body = {
       model,
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt },
       ],
-      temperature: 0.6,
-      max_tokens: 2600,
-    }),
-    signal: AbortSignal.timeout(45000),
-  });
+      temperature,
+      max_tokens: maxTokens,
+    };
+    if (includeReasoning) {
+      body.reasoning = { enabled: false };
+    }
+    return fetchImpl(OPENROUTER_API_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://hskfreelearningai.pages.dev/',
+        'X-Title': 'HSK Flashcards Cloudflare Editorial',
+      },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(22000),
+    });
+  };
+
+  let res = await sendRequest(true);
+  if (res.status === 400) {
+    // Some OpenRouter free models reject `reasoning`; retry once without it.
+    res = await sendRequest(false);
+  }
   if (!res.ok) {
     const errText = await res.text().catch(() => '');
     throw new Error(`OpenRouter (${model}) HTTP ${res.status}: ${errText.slice(0, 180)}`);
@@ -902,6 +922,39 @@ async function runXkiroJson({ apiKey, model, systemPrompt, userPrompt, fetchImpl
 
 export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
   const systemPrompt = WRITER_SYSTEM_PROMPT;
+  let lastError;
+
+  // Priority 1 (0 Cloudflare Neurons): OpenRouter Free models when OPENROUTER_API_KEY is configured.
+  const orKey = String(env.OPENROUTER_API_KEY || '').trim();
+  if (orKey) {
+    const orModels = Array.from(
+      new Set([
+        env.OPENROUTER_WRITER_MODEL || 'nvidia/nemotron-3.5-lightning:free',
+        'nvidia/nemotron-3.5-lightning:free',
+        'nvidia/nemotron-3.5-super-vl:free',
+        'google/gemma-4-26b-a4b-it:free',
+        'baidu/ernie-5.5-flash-preview:free',
+      ].filter(Boolean))
+    );
+    for (const model of orModels) {
+      try {
+        const data = await runOpenRouterJson({
+          apiKey: orKey,
+          model,
+          systemPrompt,
+          userPrompt: prompt,
+          fetchImpl,
+          maxTokens: 4000,
+          temperature: 0.55,
+        });
+        return { data, provider: 'openrouter', model };
+      } catch (err) {
+        lastError = err;
+      }
+    }
+  }
+
+  // Priority 2 (fallback only): Cloudflare Workers AI.
   const cfModels = Array.from(
     new Set([
       env.CF_WRITER_MODEL || '@cf/google/gemma-4-26b-a4b-it',
@@ -910,7 +963,6 @@ export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
     ].filter(Boolean))
   );
 
-  let lastError;
   for (const model of cfModels) {
     try {
       const data = await runCfAiJson({
@@ -924,25 +976,6 @@ export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
       return { data, provider: 'cloudflare-ai', model };
     } catch (err) {
       lastError = err;
-    }
-  }
-
-  const orKey = String(env.OPENROUTER_API_KEY || '').trim();
-  if (orKey) {
-    const orModels = ['google/gemma-4-31b-it:free', 'baidu/ernie-5.5-flash-preview:free', 'nvidia/nemotron-3-ultra-550b-a55b:free'];
-    for (const model of orModels) {
-      try {
-        const data = await runOpenRouterJson({
-          apiKey: orKey,
-          model,
-          systemPrompt,
-          userPrompt: prompt,
-          fetchImpl,
-        });
-        return { data, provider: 'openrouter', model };
-      } catch (err) {
-        lastError = err;
-      }
     }
   }
 
@@ -960,6 +993,7 @@ export async function runAuditRound({
 }) {
   const effectiveRound = Number(round) === 2 ? 2 : 1;
   const xkiroKey = String(env.XKIRO_API_KEY || env.SECONDARY_AI_API_KEY || '').trim();
+  const orKey = String(env.OPENROUTER_API_KEY || '').trim();
   const cfReviewer1 = env.CF_REVIEWER_1_MODEL || '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
   const cfReviewer2 = env.CF_REVIEWER_2_MODEL || '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 
@@ -967,17 +1001,39 @@ export async function runAuditRound({
     effectiveRound === 1
       ? {
           id: 'command-a-plus',
-          label: xkiroKey ? 'Command A+ / Llama 3.3 (Vòng 1)' : 'Llama 3.3 70B (Vòng 1)',
+          label: xkiroKey ? 'Command A+ (Vòng 1)' : orKey ? 'OpenRouter (Vòng 1)' : 'Llama 3.3 70B (Vòng 1)',
           role: 'Kiểm duyệt sơ bộ · Search Intent & Ngôn ngữ HSK',
           xkiroModels: xkiroKey ? [env.XKIRO_REVIEW_MODEL_1 || 'cohere/command-a-plus'] : [],
+          orModels: orKey
+            ? Array.from(
+                new Set([
+                  env.OPENROUTER_REVIEW_MODEL_1 || 'nvidia/nemotron-3.5-lightning:free',
+                  'nvidia/nemotron-3.5-lightning:free',
+                  'nvidia/nemotron-3.5-super-vl:free',
+                  'google/gemma-4-26b-a4b-it:free',
+                  'baidu/ernie-5.5-flash-preview:free',
+                ].filter(Boolean))
+              )
+            : [],
           cfModels: [cfReviewer1, '@cf/aisingapore/gemma-sea-lion-v4-27b-it'],
         }
       : {
           id: 'mistral-large-3',
-          label: xkiroKey ? 'Mistral / DeepSeek (Vòng 2)' : 'Llama 3.3 70B Độc lập (Vòng 2)',
+          label: xkiroKey ? 'Mistral / DeepSeek (Vòng 2)' : orKey ? 'OpenRouter Độc lập (Vòng 2)' : 'Llama 3.3 70B Độc lập (Vòng 2)',
           role: 'Kiểm duyệt độc lập · Thang điểm 100 & Phê duyệt',
           xkiroModels: xkiroKey
             ? [env.XKIRO_REVIEW_MODEL_2 || 'mistralai/mistral-large-2512', env.XKIRO_REVIEW_MODEL_2_FALLBACK || 'deepseek/deepseek-v4.1-flash']
+            : [],
+          orModels: orKey
+            ? Array.from(
+                new Set([
+                  env.OPENROUTER_REVIEW_MODEL_2 || 'nvidia/nemotron-3.5-lightning:free',
+                  'nvidia/nemotron-3.5-lightning:free',
+                  'nvidia/nemotron-3.5-super-vl:free',
+                  'google/gemma-4-26b-a4b-it:free',
+                  'baidu/ernie-5.5-flash-preview:free',
+                ].filter(Boolean))
+              )
             : [],
           cfModels: [cfReviewer2, '@cf/aisingapore/gemma-sea-lion-v4-27b-it'],
         };
@@ -994,9 +1050,10 @@ export async function runAuditRound({
 
   let rawReport = null;
   let providerUsed = '';
-  let modelUsed = spec.cfModels[0];
+  let modelUsed = spec.orModels[0] || spec.cfModels[0];
   let lastErr = null;
 
+  // Priority 1: xKiro (0 CF Neurons)
   for (const m of spec.xkiroModels) {
     try {
       rawReport = await runXkiroJson({
@@ -1015,6 +1072,29 @@ export async function runAuditRound({
     }
   }
 
+  // Priority 2: OpenRouter Free (0 CF Neurons)
+  if (!rawReport) {
+    for (const m of spec.orModels) {
+      try {
+        rawReport = await runOpenRouterJson({
+          apiKey: orKey,
+          model: m,
+          systemPrompt: AUDITOR_SYSTEM_PROMPT,
+          userPrompt,
+          fetchImpl,
+          maxTokens: 2400,
+          temperature: 0.2,
+        });
+        providerUsed = 'openrouter';
+        modelUsed = m;
+        break;
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+  }
+
+  // Priority 3: Cloudflare Workers AI fallback
   if (!rawReport) {
     for (const m of spec.cfModels) {
       try {
@@ -1035,12 +1115,21 @@ export async function runAuditRound({
     }
   }
 
+  const finalLabel =
+    providerUsed === 'xkiro'
+      ? (effectiveRound === 1 ? 'Command A+ (Vòng 1)' : 'Mistral / DeepSeek (Vòng 2)')
+      : providerUsed === 'openrouter'
+        ? (effectiveRound === 1 ? 'OpenRouter (Vòng 1)' : 'OpenRouter Độc lập (Vòng 2)')
+        : providerUsed === 'cf-ai'
+          ? (effectiveRound === 1 ? 'Llama 3.3 70B (Vòng 1)' : 'Llama 3.3 70B Độc lập (Vòng 2)')
+          : spec.label;
+
   if (!rawReport) {
     return {
       id: spec.id,
       round: effectiveRound,
       protocol: AUDIT_PROTOCOL_ID,
-      label: spec.label,
+      label: finalLabel,
       model: modelUsed,
       role: spec.role,
       status: 'error',
@@ -1067,7 +1156,7 @@ export async function runAuditRound({
   const computed = computeAuditScoreAndVerdict(rawReport, { round: effectiveRound });
   return {
     id: spec.id,
-    label: spec.label,
+    label: finalLabel,
     model: `${providerUsed}:${modelUsed}`,
     role: spec.role,
     status: 'completed',
@@ -1182,11 +1271,24 @@ export async function runTwoRoundEditorialPipeline({
   const finalScore = typeof round2.score === 'number' ? round2.score : round1.score;
   const finalVerdict = round2.status === 'completed' ? round2.auditVerdict : round1.auditVerdict;
 
+  const usedProviders = Array.from(
+    new Set(
+      reviewers
+        .filter((r) => r.status === 'completed' && typeof r.model === 'string' && r.model.includes(':'))
+        .map((r) => r.model.split(':')[0])
+    )
+  );
+  const overallProvider = usedProviders.length === 1
+    ? (usedProviders[0] === 'cf-ai' ? 'cloudflare-ai' : usedProviders[0])
+    : usedProviders.length > 1
+      ? usedProviders.map((p) => (p === 'cf-ai' ? 'cf' : p)).join('+')
+      : (xkiroKey ? 'xkiro' : String(env.OPENROUTER_API_KEY || '').trim() ? 'openrouter' : 'cloudflare-ai');
+
   const aiReviews = {
     protocol: AUDIT_PROTOCOL_ID,
     writerStandard: usesInternalWriter ? WRITER_STANDARD_ID : null,
     status: completedCount === 2 ? 'completed' : completedCount === 1 ? 'partial' : 'error',
-    provider: xkiroKey ? 'xkiro+cf' : 'cloudflare-ai',
+    provider: overallProvider,
     pipeline: [authorSource, 'audit-round-1', 'audit-round-2', 'admin'],
     round1Verdict: round1.auditVerdict,
     finalVerdict,
