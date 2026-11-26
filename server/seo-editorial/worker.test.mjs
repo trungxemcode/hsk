@@ -757,3 +757,53 @@ test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council revie
   );
   assert.equal(blockedRes.status, 503);
 });
+
+test('Public GET /public/approved-queue exposes ONLY approved articles without auth and strips internal fields', async () => {
+  const r2 = createMemoryR2();
+  const sampleArt = makeMockArticleJson('Bài SEO đã duyệt xuất bản tự động');
+  await r2.put(
+    'seo-editorial/drafts.json',
+    JSON.stringify({
+      schema: 1,
+      updatedAt: '2026-11-26T14:50:00.000Z',
+      drafts: [
+        {
+          id: 'draft-approved-1',
+          status: 'approved',
+          approvedAt: '2026-11-26T14:50:00.000Z',
+          publishedSlug: 'bai-seo-da-duyet',
+          rating: 5,
+          trendQuery: 'xin lỗi tiếng trung',
+          writerBrief: { styleId: 'educational-how-to' },
+          aiReviews: { averageScore: 92, reviewers: [{ challengeResults: [{ id: '5.1' }] }] },
+          reviewHistory: [{ action: 'approved', comment: 'Internal note' }],
+          article: { ...sampleArt, slug: 'bai-seo-da-duyet' },
+        },
+        {
+          id: 'draft-pending-2',
+          status: 'pending_review',
+          article: { ...sampleArt, slug: 'bai-cho-duyet' },
+        },
+        {
+          id: 'draft-rejected-3',
+          status: 'rejected',
+          article: { ...sampleArt, slug: 'bai-bi-tu-choi' },
+        },
+      ],
+    })
+  );
+
+  const env = { SEO_BUCKET: r2 };
+  const res = await handleSeoEditorialFetch(new Request('https://seo.workers.dev/public/approved-queue'), env, {});
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.equal(body.ok, true);
+  assert.equal(body.count, 1);
+  assert.equal(body.items.length, 1);
+  assert.equal(body.items[0].id, 'draft-approved-1');
+  assert.equal(body.items[0].article.slug, 'bai-seo-da-duyet');
+  assert.equal(body.items[0].aiReviews, undefined);
+  assert.equal(body.items[0].reviewHistory, undefined);
+  assert.equal(body.items[0].writerBrief, undefined);
+  assert.equal(body.items[0].rating, undefined);
+});

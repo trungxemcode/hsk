@@ -4,6 +4,15 @@
   "policy": "append-only; remove only after a separate user-authorized approval PR has landed on main",
   "features": [
     {
+      "id": "seo-approved-publication-queue",
+      "name": "Xuất bản bài SEO đã được Admin duyệt",
+      "checks": [
+        {"kind": "contains", "file": "server/seo-editorial/worker.mjs", "value": "/public/approved-queue"},
+        {"kind": "contains", "file": "tools/seo-articles/seo-editorial-pipeline.mjs", "value": "syncApprovedQueueIntoArticles"},
+        {"kind": "contains", "file": ".github/workflows/seo-publish-approved.yml", "value": "seo/auto-publish-"}
+      ]
+    },
+    {
       "id": "sentence-editor",
       "name": "Công cụ Sửa câu tiếng Trung",
       "checks": [

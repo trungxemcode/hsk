@@ -12,7 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CATEGORIES, buildAllSeoArticles, validateArticle } from './build-seo-articles.mjs';
-import { collectTrendTopics } from './fetch-google-trends.mjs';
+import { collectTrendTopics, normalizeTextForMatch } from './fetch-google-trends.mjs';
 import {
   callAiJson,
   loadLocalEnv,
@@ -287,6 +287,64 @@ export function rejectDraftRecord({ draftsData, draftId, comment = '', rating = 
   return draft;
 }
 
+export function syncApprovedQueueIntoArticles({ queueItems = [], articlesData, today }) {
+  const articles = Array.isArray(articlesData?.articles) ? articlesData.articles : [];
+  const effectiveToday = today || new Date().toISOString().slice(0, 10);
+  const existingSlugs = new Set(articles.map((a) => String(a?.slug || '').trim()).filter(Boolean));
+  const existingDraftIds = new Set(articles.map((a) => String(a?.sourceDraftId || '').trim()).filter(Boolean));
+  const existingTitleNorms = new Set(
+    articles.map((a) => normalizeTextForMatch(a?.title || '')).filter(Boolean)
+  );
+
+  const added = [];
+  // Place the latest approval first regardless of when each draft was created.
+  const ordered = [...(Array.isArray(queueItems) ? queueItems : [])]
+    .sort((a, b) => String(a?.approvedAt || '').localeCompare(String(b?.approvedAt || '')));
+
+  for (const item of ordered) {
+    const draftId = String(item?.id || '').trim();
+    const rawArticle = item?.article;
+    if (!rawArticle || typeof rawArticle !== 'object' || !String(rawArticle.title || '').trim()) {
+      continue;
+    }
+
+    const rawSlug = slugifyVi(item?.publishedSlug || rawArticle.slug || rawArticle.title);
+    const titleNorm = normalizeTextForMatch(rawArticle.title);
+    if (draftId && existingDraftIds.has(draftId)) continue;
+    if (rawSlug && existingSlugs.has(rawSlug)) continue;
+    if (titleNorm && existingTitleNorms.has(titleNorm)) continue;
+
+    const currentSlugs = articles.map((a) => a.slug);
+    const normalized = normalizeGeneratedArticle(rawArticle, {
+      slug: rawSlug || slugifyVi(rawArticle.title),
+      category: rawArticle.category || 'meo-hoc',
+      hskTag: rawArticle.hskTag || 'HSK 1–6',
+      today: effectiveToday,
+      existingSlugs: currentSlugs,
+      editorialVoice: rawArticle.editorialVoice || '',
+      fallbackSources: [],
+    });
+    const finalSlug = resolveUniqueArticleSlug(rawSlug || normalized.slug, articles);
+    const publishedArticle = {
+      ...normalized,
+      slug: finalSlug,
+      ...(draftId ? { sourceDraftId: draftId } : {}),
+      publishedAt: rawArticle.publishedAt || effectiveToday,
+      updatedAt: effectiveToday,
+    };
+    validateArticle(publishedArticle);
+
+    articles.unshift(publishedArticle);
+    existingSlugs.add(finalSlug);
+    if (draftId) existingDraftIds.add(draftId);
+    if (titleNorm) existingTitleNorms.add(titleNorm);
+    added.push(publishedArticle);
+  }
+
+  articlesData.articles = articles;
+  return { added, totalArticles: articles.length };
+}
+
 function readJsonSafe(filePath, fallback) {
   if (!fs.existsSync(filePath)) return fallback;
   try {
@@ -307,6 +365,39 @@ async function main() {
   const articles = Array.isArray(articlesData.articles) ? articlesData.articles : [];
   const queueTopics = Array.isArray(queueData.topics) ? queueData.topics : [];
   const drafts = Array.isArray(draftsData.drafts) ? draftsData.drafts : [];
+
+  if (args['sync-approved-from-url']) {
+    const defaultQueueUrl = 'https://hsk-seo-editorial.trung-hsk668.workers.dev/public/approved-queue';
+    const queueUrl =
+      typeof args['sync-approved-from-url'] === 'string' && /^https?:\/\//i.test(args['sync-approved-from-url'])
+        ? args['sync-approved-from-url'].trim()
+        : defaultQueueUrl;
+    const res = await fetch(queueUrl, {
+      headers: { Accept: 'application/json' },
+      redirect: 'error',
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!res.ok) {
+      throw new Error(`Không tải được approved queue (${res.status}): ${queueUrl}`);
+    }
+    const payload = await res.json();
+    if (payload?.ok !== true || !Array.isArray(payload.items) || payload.count !== payload.items.length) {
+      throw new Error('Phản hồi hàng đợi SEO không đúng định dạng.');
+    }
+    const { added } = syncApprovedQueueIntoArticles({
+      queueItems: payload.items,
+      articlesData,
+      today,
+    });
+    if (!added.length) {
+      console.log('No new approved SEO articles to publish.');
+      return;
+    }
+    fs.writeFileSync(ARTICLES_PATH, JSON.stringify(articlesData, null, 2) + '\n', 'utf8');
+    const built = buildAllSeoArticles();
+    console.log(`SYNCED ${added.length} approved article(s): ${added.map((a) => a.slug).join(', ')} (${built.count} total, ${built.urls} URLs).`);
+    return;
+  }
 
   if (args.approve) {
     const draftId = String(args['draft-id'] || '').trim();
