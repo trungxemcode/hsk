@@ -1154,6 +1154,936 @@
         "body": "Luyện quen thao tác làm bài trên màn hình với kho đề HSK 1–6 miễn phí, flashcard SRS và Gia sư AI giải đáp tiếng Trung.",
         "buttonLabel": "Vào luyện thi HSK 1–6 miễn phí"
       }
+    },
+    {
+      "slug": "cac-loai-tu-trong-tieng-trung-co-ban",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "Ngữ pháp HSK 1–4",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "readMinutes": 9,
+      "featured": false,
+      "title": "Các loại từ trong tiếng Trung: Phân loại 11 từ loại, vị trí trong câu và lỗi hay gặp",
+      "metaTitle": "Các loại từ trong tiếng Trung: 11 từ loại, vị trí & lỗi hay gặp | HSK Flashcards",
+      "metaDescription": "Tổng hợp đầy đủ 11 từ loại trong tiếng Trung (6 thực từ, 5 hư từ) kèm chức năng, ví dụ Hán tự – Pinyin – tiếng Việt, công thức trật tự câu và 4 lỗi sai người Việt hay mắc.",
+      "summary": "Hệ thống hóa 11 từ loại tiếng Trung thành 2 nhóm Thực từ và Hư từ, kèm bảng nhận biết, trật tự sắp xếp thành phần câu chuẩn HSK và 4 lỗi dịch từng chữ cần tránh.",
+      "keywords": [
+        "các loại từ trong tiếng Trung",
+        "từ loại tiếng Trung",
+        "thực từ và hư từ tiếng Trung",
+        "trật tự câu tiếng Trung cơ bản",
+        "ngữ pháp HSK 1 đến 4"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "thuc-tu-tieng-trung",
+          "heading": "Nhóm 1: 6 Thực từ tiếng Trung (có nghĩa từ vựng độc lập)",
+          "paragraphs": [
+            "Thực từ (实词 – shící) là nhóm từ mang ý nghĩa cụ thể, có thể đứng làm thành phần chính trong câu như chủ ngữ, vị ngữ, tân ngữ hoặc định ngữ. Nắm chắc 6 thực từ giúp bạn phân tích cấu trúc câu đọc hiểu HSK rất nhanh."
+          ],
+          "table": {
+            "headers": [
+              "Từ loại",
+              "Chức năng chính",
+              "Ví dụ Hán – Pinyin – Việt"
+            ],
+            "rows": [
+              [
+                "Danh từ (名词)",
+                "Làm chủ ngữ, tân ngữ, định ngữ",
+                "学生 (xuésheng – học sinh), 北京 (Běijīng), 明天 (míngtiān)"
+              ],
+              [
+                "Động từ (动词)",
+                "Làm vị ngữ chỉ hành động/trạng thái",
+                "学 (xué – học), 买 (mǎi – mua), 喜欢 (xǐhuan – thích)"
+              ],
+              [
+                "Tính từ (形容词)",
+                "Miêu tả tính chất; hay đi sau 很",
+                "大 (dà – to), 好看 (hǎokàn – đẹp), 认真 (rènzhēn – chăm chỉ)"
+              ],
+              [
+                "Số từ (数词)",
+                "Đếm số lượng, thứ tự, phần trăm",
+                "一 (yī), 二十 (èrshí), 第一 (dì-yī – thứ nhất)"
+              ],
+              [
+                "Lượng từ (量词)",
+                "Đi giữa số từ/đại từ chỉ định và danh từ",
+                "个人 (gè rén), 本书 (běn shū), 一杯茶 (yì bēi chá)"
+              ],
+              [
+                "Đại từ (代词)",
+                "Thay thế người, vật, nơi chốn, câu hỏi",
+                "我 (wǒ), 这儿 (zhèr – đây), 什么 (shénme), 怎么 (zěnme)"
+              ]
+            ]
+          },
+          "tip": "Quy tắc vàng cho người mới: giữa Số từ/这/那 với Danh từ gần như luôn phải có Lượng từ ở giữa (一本书, 那个地方), không nói thẳng 一书 hay 那人."
+        },
+        {
+          "id": "hu-tu-tieng-trung",
+          "heading": "Nhóm 2: 5 Hư từ tiếng Trung (quyết định ngữ pháp và sắc thái câu)",
+          "paragraphs": [
+            "Hư từ (虚词 – xūcí) không chỉ sự vật hay hành động cụ thể mà nối kết các thực từ lại thành câu tự nhiên. Trong đề thi HSK từ cấp 2 trở lên, phần lớn câu bẫy điền từ đều nằm ở nhóm hư từ này."
+          ],
+          "table": {
+            "headers": [
+              "Từ loại",
+              "Vai trò trong câu",
+              "Ví dụ phổ biến & cách dùng"
+            ],
+            "rows": [
+              [
+                "Phó từ (副词)",
+                "Đứng trước động từ/tính từ để bổ nghĩa",
+                "很 (rất), 都 (đều), 也 (cũng), 已经 (đã), 才 (mới)"
+              ],
+              [
+                "Giới từ (介词)",
+                "Mở đầu cụm thời gian, nơi chốn, đối tượng",
+                "在 (tại), 给 (cho), 跟 (với), 对 (đối với), 把 / 被"
+              ],
+              [
+                "Liên từ (连词)",
+                "Nối từ, cụm từ hoặc hai vế câu",
+                "和 (và), 因为…所以…, 虽然…但是…, 还是 / 或者"
+              ],
+              [
+                "Trợ từ (助词)",
+                "Gắn cấu trúc câu hoặc diễn đạt thời thể",
+                "的, 地, 得 (kết cấu); 了, 着, 过 (động thái); 吗, 呢 (ngữ khí)"
+              ],
+              [
+                "Thán từ (叹词)",
+                "Bộc lộ cảm xúc, đáp lời đầu câu",
+                "哎呀 (āiyā – ôi chao), 喂 (wéi – alo), 嗯 (ǹg – ừ)"
+              ]
+            ]
+          },
+          "example": {
+            "han": "昨天他在图书馆非常认真地复习了三本HSK教材。",
+            "py": "Zuótiān tā zài túshūguǎn fēicháng rènzhēn de fùxí le sān běn HSK jiàocái.",
+            "vi": "Hôm qua anh ấy đã ôn tập 3 cuốn giáo trình HSK rất chăm chỉ tại thư viện. (Có đủ Danh từ chỉ thời gian, Đại từ, Giới từ, Phó từ, Tính từ + 地, Động từ + 了, Số từ, Lượng từ)."
+          }
+        },
+        {
+          "id": "vi-tri-tu-loai-trong-cau",
+          "heading": "Trật tự chuẩn của 11 từ loại trong một câu tiếng Trung hoàn chỉnh",
+          "paragraphs": [
+            "Tiếng Việt thường đặt nơi chốn và thời gian ở cuối câu, còn tiếng Trung ưu tiên đưa bối cảnh lên trước hành động. Khi viết câu hoặc làm bài sắp xếp từ HSK 3–4, bạn hãy đối chiếu theo khung trật tự chuẩn dưới đây:"
+          ],
+          "bullets": [
+            "1. Khung câu cơ bản: Chủ ngữ + Thời gian + Địa điểm / Cụm giới từ (在/跟/给/对) + Phó từ + Động từ + Bổ ngữ / 了·着·过 + (Số + Lượng + Định ngữ) + Tân ngữ.",
+            "2. Vị trí Định ngữ (cụm bổ nghĩa cho Danh từ): luôn đứng TRƯỚC danh từ chính và thường nối bằng 的, ví dụ 新买的汉语词典 (từ điển tiếng Hán mới mua).",
+            "3. Vị trí Trạng ngữ (cụm bổ nghĩa cho Động từ): thời gian, nơi chốn, phó từ mức độ, cách thức (+ 地) đều đứng TRƯỚC động từ chính.",
+            "4. Vị trí Bổ ngữ (kết quả, mức độ, khả năng): chỉ kết quả hay trình độ của hành động nên đứng SAU động từ (写完, 看懂, 说得很流利)."
+          ],
+          "example": {
+            "han": "明天早上我在宿舍跟同学一起准备听力练习。",
+            "py": "Míngtiān zǎoshang wǒ zài sùshè gēn tóngxué yìqǐ zhǔnbèi tīnglì liànxí.",
+            "vi": "Sáng mai tôi sẽ cùng bạn học chuẩn bị bài luyện nghe ở ký túc xá. (Thời gian + Chủ ngữ + Địa điểm + Đối tượng + Phó từ + Động từ + Tân ngữ)."
+          }
+        },
+        {
+          "id": "loi-sai-tu-loai-nguoi-viet",
+          "heading": "4 lỗi sai từ loại người Việt hay mắc khi đặt câu",
+          "paragraphs": [
+            "Đa số lỗi sai ở trình độ sơ trung cấp không đến từ việc thiếu từ vựng mà xuất phát từ thói quen giữ nguyên trật tự từ loại tiếng Việt khi dịch sang tiếng Trung."
+          ],
+          "bullets": [
+            "Đặt tính từ đứng sau danh từ: nói nhầm thành *衣服漂亮 thay vì 漂亮的衣服 (quần áo đẹp) hoặc *茶热 thay vì 热茶 (trà nóng).",
+            "Ghép phó từ 很 trực tiếp với động từ hành động thường: không nói *我很看书 hay *我很吃米饭 (很 chỉ đi với tính từ và một số động từ tâm lý như 喜欢, 想, 希望).",
+            "Đưa cụm giới từ 在 + nơi chốn ra cuối câu: không nói *我学习在图书馆 mà phải đưa lên trước động từ: 我在图书馆学习.",
+            "Dùng phó từ 很 vào câu hỏi hoặc câu phủ định có đối chiếu không cần thiết, hoặc quên chữ 很 trước tính từ vị ngữ đơn âm tiết (nên nói 今天很热 thay vì nói cộc lốc 今天热 dễ mang nghĩa so sánh ngầm)."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Một từ tiếng Trung có thể kiêm nhiều từ loại cùng lúc không?",
+          "a": "Có rất nhiều từ kiêm loại (兼类词) trong tiếng Trung. Ví dụ 工作 vừa là danh từ (công việc: 找工作) vừa là động từ (làm việc: 在银行工作); 方便 vừa là tính từ (tiện lợi) vừa có thể dùng như động từ trong ngữ cảnh trang trọng. Bạn luôn cần nhìn vị trí của từ đó trong câu để xác định từ loại."
+        },
+        {
+          "q": "Tính từ vị ngữ lúc nào cũng phải thêm 很 hay sao?",
+          "a": "Trong câu trần thuật đơn giản không có ý so sánh (như 今天很冷 – hôm nay lạnh), thêm 很 giúp câu cân đối tự nhiên và 很 lúc này mang nghĩa nhẹ gần như \"khá\". Nếu bạn cố ý so sánh hai đối tượng ngầm hiểu (hôm nay lạnh hơn hôm qua) hoặc dùng câu hỏi/phủ định (今天冷吗？/ 今天不冷) thì không cần 很."
+        },
+        {
+          "q": "Đứng trước động từ vừa có Thời gian vừa có Nơi chốn thì từ nào trước?",
+          "a": "Thông thường Thời gian đứng trước Chủ ngữ hoặc ngay sau Chủ ngữ, rồi mới đến Địa điểm (今天我在家学习 hoặc 我今天在家学习 đều chuẩn), nhưng địa điểm không đứng trước thời gian trong câu tự nhiên."
+        }
+      ],
+      "relatedSlugs": [
+        "phan-biet-de-de-de-trong-tieng-trung-hsk",
+        "10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac",
+        "tong-hop-ngu-phap-hsk-quan-trong-hay-thi"
+      ],
+      "cta": {
+        "heading": "Thực hành ghép đúng trật tự 11 từ loại ngay trên trình duyệt",
+        "body": "Mở game Sắp xếp câu hoặc nhập câu tiếng Trung của bạn vào Sửa câu AI trên HSK Flashcards để được chỉ ra từng lỗi vị trí từ loại miễn phí.",
+        "buttonLabel": "Luyện đặt câu & sửa lỗi AI"
+      }
+    },
+    {
+      "slug": "phan-biet-de-de-de-trong-tieng-trung-hsk",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "Ngữ pháp HSK 2–4",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "readMinutes": 8,
+      "featured": false,
+      "title": "Phân biệt 的, 地, 得 trong tiếng Trung: Công thức 3 giây chọn đúng kèm bài tập HSK",
+      "metaTitle": "Phân biệt 的, 地, 得 trong tiếng Trung dễ nhớ kèm bài tập HSK | HSK Flashcards",
+      "metaDescription": "Hướng dẫn phân biệt 3 trợ từ kết cấu 的, 地, 得 (đều đọc là de) bằng công thức 3 giây theo từ đứng liền sau, kèm quy tắc lược 的, lặp động từ với 得 và 4 câu luyện thi HSK.",
+      "summary": "Chỉ cần nhìn từ loại đứng ngay sau chỗ trống là chọn chính xác 的, 地 hay 得 trong vòng 3 giây. Bài viết tổng hợp đầy đủ ngoại lệ hay gặp và 4 câu bài tập tự chấm chuẩn HSK 3–4.",
+      "keywords": [
+        "phân biệt 的 地 得",
+        "cách dùng 的 地 得 tiếng Trung",
+        "trợ từ kết cấu tiếng Trung",
+        "ngữ pháp HSK 3",
+        "bài tập 的 地 得"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "bang-so-sanh-3-chu-de",
+          "heading": "Công thức 3 giây phân biệt 的, 地, 得 qua từ đứng sau",
+          "paragraphs": [
+            "Cả ba trợ từ kết cấu 的, 地 và 得 khi đọc nhẹ đều phát âm là \"de\", nên người học thường gõ nhầm khi nhắn tin hoặc chọn sai trong phần Đọc – Viết HSK. Mẹo nhanh nhất là nhìn thẳng vào loại từ đứng liền sau chữ đó:"
+          ],
+          "table": {
+            "headers": [
+              "Trợ từ",
+              "Công thức chuẩn",
+              "Từ đứng liền sau",
+              "Ví dụ cùng gốc 认真 (chăm chỉ)"
+            ],
+            "rows": [
+              [
+                "的 (白勺的)",
+                "Định ngữ + 的 + Danh từ",
+                "Danh từ / cụm danh từ",
+                "认真的学生 (học sinh chăm chỉ)"
+              ],
+              [
+                "地 (土也地)",
+                "Trạng ngữ + 地 + Động từ",
+                "Động từ hành động",
+                "认真地学习 (học tập một cách chăm chỉ)"
+              ],
+              [
+                "得 (双人得)",
+                "Động/Tính từ + 得 + Bổ ngữ",
+                "Tính từ / cụm mức độ",
+                "学得很认真 (học rất chăm chỉ)"
+              ]
+            ]
+          },
+          "tip": "Nhớ mẹo trực quan theo bộ thủ tiếng Trung: 的 (bộ Bạch) gắn với Danh từ; 地 (bộ Thổ, có chữ 也) đi trước Động từ làm trạng ngữ hành động; 得 (bộ Xích đôi) đứng sau Động từ để nhận xét kết quả/mức độ."
+        },
+        {
+          "id": "cach-dung-chi-tiet-tung-chu",
+          "heading": "Chi tiết cách dùng chuẩn và các quy tắc bắt buộc khi viết câu",
+          "paragraphs": [
+            "Hiểu công thức gốc giúp bạn làm đúng 80% câu cơ bản; để ăn trọn 20% câu phân loại ở HSK 3–4, cần nắm thêm ba quy tắc vận dụng thực tế dưới đây:"
+          ],
+          "bullets": [
+            "Khi nào NÊN lược bỏ 的: trong quan hệ gia đình, người thân, tập thể thân thuộc (我妈妈, 我们学校, 他朋友) hoặc cụm danh từ ghép quen thuộc (汉语词典, 中国茶) không cần chen 的 vào giữa.",
+            "Quy tắc lặp động từ với 得 khi có Tân ngữ: không nói *他说汉语得很流利. Khi động từ có tân ngữ đi kèm, bạn phải lặp động từ: 他说汉语说得很流利, hoặc đưa tân ngữ lên trước: 他汉语说得很流利.",
+            "Cách dùng 地 cho tự nhiên: với trạng ngữ một âm tiết (快, 慢), tiếng Trung ít đứng trơ *快地走 mà thường lặp tính từ (慢慢地走, 高高兴兴地回家) hoặc ghép phó từ (认真地看, 仔细地检查).",
+            "得 phủ định như thế nào: phần phủ định 不 đặt ở sau 得 (làm bổ ngữ trạng thái: 说得不好 – nói chưa tốt), KHÔNG đặt phủ định trước 得 để nói *不说得好 khi muốn nhận xét trình độ."
+          ],
+          "example": {
+            "han": "她写汉字写得很工整，而且每天都认真地复习。",
+            "py": "Tā xiě Hànzì xiě de hěn gōngzhěng, érqiě měitiān dōu rènzhēn de fùxí.",
+            "vi": "Cô ấy viết chữ Hán rất ngay ngắn, hơn nữa ngày nào cũng ôn tập một cách chăm chỉ."
+          }
+        },
+        {
+          "id": "bay-thuong-gap-va-am-doc-khac-cua-de",
+          "heading": "4 bẫy ngữ pháp và cách đọc khác của chữ 得 hay gây nhầm",
+          "paragraphs": [
+            "Trong đề thi HSK và văn bản đời sống, hai chữ 的 và 得 còn mang thêm nghĩa khác không phải lúc nào cũng là trợ từ \"de\"."
+          ],
+          "bullets": [
+            "3 âm đọc của chữ 得: ngoài \"de\" (trợ từ bổ ngữ: 跑得快), 得 đọc là \"dé\" khi làm động từ mang nghĩa đạt được/bị (得到, 得了100分), và đọc là \"děi\" khi làm động từ năng nguyện nghĩa là \"phải\" (我得走了 – tôi phải đi rồi).",
+            "Nhầm cấu trúc nhấn mạnh 是…的 với sở hữu: câu 我是坐高铁来的 nhấn mạnh phương thức đã đi tàu cao tốc; 的 cuối câu không đứng trước danh từ mà khép khung nhấn mạnh.",
+            "Chèn nhầm 很 vào trước Bổ ngữ trạng thái hay sau 地: không nói *他很认真地得学习 mà phó từ mức độ đứng trước 地/tính từ (非常认真地学习) hoặc đứng sau 得 (学得非常认真).",
+            "Lược nhầm 的 trong cụm sở hữu có định ngữ dài: 我昨天买的那件衣服 không được bỏ 的 cuối cụm định ngữ."
+          ]
+        },
+        {
+          "id": "bai-tap-tu-kiem-tra-nhanh",
+          "heading": "4 câu tự kiểm tra nhanh (kèm đáp án giải thích)",
+          "paragraphs": [
+            "Thử tự chọn 的, 地 hoặc 得 cho từng chỗ trống trước khi xem phần giải thích ngay bên dưới mỗi câu:"
+          ],
+          "bullets": [
+            "1. 他高兴 ( ___ ) 跑进了教室。 → Đáp án: 地 (sau chỗ trống là động từ 跑 tiến vào, phía trước là trạng thái cảm xúc khi thực hiện động tác).",
+            "2. 妹妹唱 ( ___ ) 真好听。 → Đáp án: 得 (trước chỗ trống là động từ 唱, phía sau là cụm nhận xét mức độ hát hay 真好听).",
+            "3. 这是我新买 ( ___ ) 词典。 → Đáp án: 的 (đứng liền sau là danh từ 词典, phía trước là định ngữ 新买).",
+            "4. 老师把这个问题讲 ( ___ ) 非常清楚。 → Đáp án: 得 (đứng sau động từ 讲 để dẫn ra mức độ giải thích rõ ràng 非常清楚)."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Người Trung Quốc nhắn tin đôi khi toàn dùng 的 thay cho 地 và 得 có sao không?",
+          "a": "Trong chat nhanh hằng ngày một số người bản xứ đôi khi gõ tắt bằng 的, nhưng trong bài thi viết HSK, hồ sơ học bổng hay văn bản chuẩn mực thì phân biệt sai 的, 地, 得 sẽ bị trừ điểm ngữ pháp ngay. Hãy luyện thói quen gõ chuẩn ngay từ đầu."
+        },
+        {
+          "q": "Nếu sau tính từ là 地 rồi một tính từ khác nữa thì dùng sao?",
+          "a": "Thực chất 地 luôn dẫn động từ (kể cả cụm động từ như 发生改变 – thay đổi). Nếu hai thành phần cùng bổ nghĩa cho danh từ phía sau (nhiều định ngữ), bạn vẫn dùng 的 ở cuối trước danh từ chính."
+        },
+        {
+          "q": "Làm sao phân biệt 得 của bổ ngữ trạng thái (说得很好) với bổ ngữ khả năng (看得见)?",
+          "a": "Bổ ngữ trạng thái mô tả thực tế hành động diễn ra như thế nào (thường có phó từ 很, 真, 非常 đi kèm ở giữa: 说得很流利). Bổ ngữ khả năng chỉ có thể làm được hay không, phủ định bằng 不 (看不见) và nghi vấn dùng 吗 hoặc dạng khẳng-phủ định 看得见看不见."
+        }
+      ],
+      "relatedSlugs": [
+        "cac-loai-tu-trong-tieng-trung-co-ban",
+        "10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac",
+        "tong-hop-ngu-phap-hsk-quan-trong-hay-thi"
+      ],
+      "cta": {
+        "heading": "Thử viết 3 câu chứa 的, 地, 得 để AI kiểm tra độ chuẩn",
+        "body": "Mở Sửa câu AI trên HSK Flashcards hoặc vào mục Từ dễ nhầm HSK để ôn lại hàng chục cặp trợ từ và bổ ngữ hay sai nhất.",
+        "buttonLabel": "Kiểm tra câu với AI miễn phí"
+      }
+    },
+    {
+      "slug": "cau-chu-ba-va-cau-chu-bei-trong-tieng-trung",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "Ngữ pháp HSK 3–5",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "readMinutes": 8,
+      "featured": false,
+      "title": "Câu chữ 把 (bǎ) và câu chữ 被 (bèi) trong tiếng Trung: Công thức, phân biệt & 5 lỗi hay mất điểm",
+      "metaTitle": "Câu chữ 把 và câu chữ 被 trong tiếng Trung: Công thức & lỗi sai | HSK Flashcards",
+      "metaDescription": "Phân biệt bản chất câu chữ 把 (chủ động xử lý) và câu chữ 被 (bị động), 4 điều kiện dùng bắt buộc, vị trí phủ định/động từ năng nguyện và 5 lỗi sai thí sinh HSK 3–5 hay mắc.",
+      "summary": "Nắm trọn công thức câu chữ 把 và câu chữ 被 qua một cặp ví dụ song song, hiểu rõ 4 điều kiện bắt buộc để không bao giờ đặt thiếu thành phần sau động từ trong đề thi HSK.",
+      "keywords": [
+        "câu chữ 把 trong tiếng Trung",
+        "câu chữ 被 trong tiếng Trung",
+        "phân biệt 把 và 被",
+        "ngữ pháp HSK 3 4 5",
+        "lỗi sai câu chữ 把"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "ban-chat-va-bang-doi-chieu",
+          "heading": "Bản chất và bảng đối chiếu câu chữ 把 vs câu chữ 被",
+          "paragraphs": [
+            "Cả câu chữ 把 và câu chữ 被 đều xoay quanh việc một hành động tác động trực tiếp làm thay đổi vị trí, trạng thái hoặc kết quả của đối tượng, nhưng góc nhìn người nói hoàn toàn ngược nhau: 把 đứng từ phía NGƯỜI THỰC HIỆN (xử lý đối tượng nào đó), còn 被 đứng từ phía ĐỐI TƯỢNG CHỊU TÁC ĐỘNG (bị làm sao đó)."
+          ],
+          "table": {
+            "headers": [
+              "Tiêu chí",
+              "Câu chữ 把 (chủ động tác động)",
+              "Câu chữ 被 (bị động)"
+            ],
+            "rows": [
+              [
+                "Công thức",
+                "Chủ thể + 把 + Đối tượng + ĐT + Kết quả",
+                "Đối tượng + 被 (+ Tác nhân) + ĐT + Kết quả"
+              ],
+              [
+                "Trọng tâm",
+                "Nhấn mạnh cách xử lý đối tượng ra kết quả mới",
+                "Nhấn mạnh đối tượng chịu kết quả (thường bất lợi)"
+              ],
+              [
+                "Lược tác nhân?",
+                "Không (chủ thể đầu câu luôn phải nêu rõ)",
+                "Được (có thể lược tác nhân: 手机被拿走了)"
+              ],
+              [
+                "Vị trí 没/不, 想/要",
+                "Đứng TRƯỚC 把: 没把作业做完",
+                "Đứng TRƯỚC 被: 没被老师批评"
+              ],
+              [
+                "Cùng 1 sự việc",
+                "弟弟把手机拿走了。(Em trai cầm ĐT đi rồi.)",
+                "手机被弟弟拿走了。(ĐT bị em trai cầm đi rồi.)"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "dieu-kien-dung-cau-chu-ba",
+          "heading": "4 điều kiện bắt buộc để câu chữ 把 không bị sai ngữ pháp",
+          "paragraphs": [
+            "Nhiều người học hiểu nghĩa 把 là \"đem/lấy\" rồi dịch bừa mọi câu động từ–tân ngữ thành câu chữ 把. Thực tế trong HSK 3–5, một câu dùng 把 chuẩn phải thỏa đủ cả 4 điều kiện sau:"
+          ],
+          "bullets": [
+            "1. Tân ngữ sau 把 phải xác định: người nghe và người nói đều biết đang nói cái gì (那本书, 我的手机, 作业), không dùng tân ngữ mơ hồ kiểu *把一本书买.",
+            "2. Động từ phải có tính tác động, làm thay đổi trạng thái hoặc vị trí vật thể: tránh dùng 把 với động từ nhận thức/tâm lý hay tồn tại như 是, 有, 在, 觉得, 知道, 喜欢.",
+            "3. Phía sau động từ KHÔNG được đứng trơ một mình: bắt buộc phải có kết quả (做完), xu hướng (拿来), giới từ điểm đến (放在桌子上, 送给朋友), lặp động từ (整理一下) hoặc 了 biểu thị thay đổi.",
+            "4. Phó từ phủ định và động từ năng nguyện đứng trước 把: nói 请不要把门关上 hoặc 我想把礼物寄给他, tuyệt đối không chui vào sau 把 (*把门不关上)."
+          ],
+          "example": {
+            "han": "请你先把这份资料发给经理，别把重要日期写错了。",
+            "py": "Qǐng nǐ xiān bǎ zhè fèn zīliào fā gěi jīnglǐ, bié bǎ zhòngyào rìqī xiěcuò le.",
+            "vi": "Phiền bạn gửi trước bản tài liệu này cho giám đốc, đừng viết nhầm ngày quan trọng nhé."
+          },
+          "tip": "Mẹo sửa nhanh câu chữ 把 trong phần Viết HSK: kiểm tra xem cuối động từ đã có ít nhất một trong các đuôi 完 / 好 / 错 / 走 / 在 / 到 / 给 / 了 chưa; nếu động từ đang đứng trụi ở cuối câu thì chắc chắn câu đó thiếu thành phần!"
+        },
+        {
+          "id": "luu-y-cau-chu-bei",
+          "heading": "Lưu ý thực tế khi dùng câu chữ 被 (và 叫, 让 trong khẩu ngữ)",
+          "paragraphs": [
+            "Câu chữ 被 giống câu bị động trong tiếng Việt nhưng phạm vi dùng hẹp và nghiêm ngặt hơn: động từ phía sau cũng bắt buộc có phần xử lý/kết quả đi kèm, không đứng trơ một chữ.",
+            "Trong giao tiếp thân mật hằng ngày, người bản xứ hay thay 被 bằng 叫 hoặc 让 khi có nêu rõ tác nhân (我的电脑让弟弟弄坏了). Lưu ý quan trọng: nếu lược tác nhân thì chỉ dùng được 被 (书被借走了), không thể lược tác nhân sau 叫 hay 让."
+          ],
+          "bullets": [
+            "Không lạm dụng 被 cho các việc trung tính hoặc may mắn kiểu dịch từ tiếng Anh (\"I was invited\" / \"Tôi được khen\"): tiếng Trung hay dùng chủ động hoặc câu chữ 把 / bị động ý nghĩa tự nhiên (他表扬了我 hoặc 我受到了表扬) trừ ngữ cảnh trang trọng nhấn mạnh nguồn tác động.",
+            "Nếu câu có hai tân ngữ như 偷走 + 手机 (bị lấy trộm điện thoại) khi người chịu thiệt là 我, mẫu chuẩn là 我的手机被偷了 hoặc 我被小偷偷走了手机."
+          ]
+        },
+        {
+          "id": "nam-loi-sai-mat-diem-ba-bei",
+          "heading": "5 lỗi sai kinh điển khiến thí sinh HSK mất điểm với 把 và 被",
+          "paragraphs": [
+            "Đối chiếu nhanh 5 lỗi hay bị đánh dấu sai nhất trong bài sắp xếp từ và viết đoạn văn HSK:"
+          ],
+          "table": {
+            "headers": [
+              "Lỗi thường gặp",
+              "Câu sai (✗)",
+              "Câu sửa chuẩn (✓)"
+            ],
+            "rows": [
+              [
+                "Động từ đứng trơ cuối câu",
+                "他把房间打扫。",
+                "他把房间打扫干净了。"
+              ],
+              [
+                "Đặt phó từ phủ định sai chỗ",
+                "我把药没吃。",
+                "我没把药吃了 / 我把药忘了吃。"
+              ],
+              [
+                "Lược tân ngữ tác nhân sau 让/叫",
+                "杯子让打碎了。",
+                "杯子被（他）打碎了。"
+              ],
+              [
+                "Dùng 把 với động từ không tác động",
+                "我把英语非常喜欢。",
+                "我非常喜欢英语。"
+              ],
+              [
+                "Chèn lại đại từ sau động từ",
+                "他把行李搬上去它了。",
+                "他把行李搬上去了。"
+              ]
+            ]
+          }
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Động từ 一下 hoặc 了 nhẹ ở cuối câu chữ 把 có tính là đủ thành phần không?",
+          "a": "Có. Với những việc tác động nhẹ hoặc dặn dò mang tính gợi ý, người bản xứ thường dùng 把…V一下 hoặc 把…V了 (như 请把房间收拾一下, 他把那杯水喝了) là hoàn toàn đúng ngữ pháp."
+        },
+        {
+          "q": "Câu chữ 被 có luôn mang nghĩa xấu không?",
+          "a": "Truyền thống thì 被 hay dùng cho việc không mong muốn (bị ướt, bị mất, bị mắng), nhưng tiếng Trung hiện đại hoàn toàn có thể dùng 被 trong tin tức hoặc ngữ cảnh trung lập/tích cực như 被大学录取了 (được đại học tuyển thẳng). Tuy vậy trong giao tiếp hằng ngày nếu việc tốt không cần nhấn mạnh bị động thì nói chủ động vẫn tự nhiên hơn."
+        },
+        {
+          "q": "Trong câu chữ 把, từ ở dạng phó từ như 先, 都, 已经 đặt ở đâu?",
+          "a": "Đặt ngay trước 把: 他已经把问题解决了 (anh ấy đã giải quyết xong vấn đề rồi), đừng đặt sau 把."
+        }
+      ],
+      "relatedSlugs": [
+        "tong-hop-ngu-phap-hsk-quan-trong-hay-thi",
+        "10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac",
+        "phan-biet-guo-zhe-le-tro-tu-dong-thai-hsk"
+      ],
+      "cta": {
+        "heading": "Luyện câu chữ 把 và 被 ngay trong đề thi HSK 3–4 thật",
+        "body": "Thử làm phần Viết sắp xếp câu và hỏi Gia sư AI kiểm tra ngay các câu có 把 và 被 để không bao giờ đặt sai vị trí 没/已经 hay thiếu bổ ngữ kết quả.",
+        "buttonLabel": "Vào luyện viết & sửa câu AI"
+      }
+    },
+    {
+      "slug": "phan-biet-guo-zhe-le-tro-tu-dong-thai-hsk",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "Ngữ pháp HSK 2–4",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "readMinutes": 8,
+      "featured": false,
+      "title": "Phân biệt 了 (le), 着 (zhe), 过 (guo) trong tiếng Trung: Đúng bản chất, hết nhầm khi nói và thi HSK",
+      "metaTitle": "Phân biệt 了, 着, 过 (trợ từ động thái) tiếng Trung chi tiết | HSK Flashcards",
+      "metaDescription": "Hiểu đúng bản chất 3 trợ từ động thái 了, 着, 过: phân biệt 了1 và 了2, so sánh 着 với 正在, phân biệt 他去了 vs 他去过 và tránh 4 lỗi sai phổ biến khi phủ định bằng 没.",
+      "summary": "Đừng dịch máy móc 了 là \"quá khứ\" nữa! Bài viết bóc tách bản chất 3 trợ từ động thái 了, 着, 过 qua các cặp câu đối chiếu sát thực tế để bạn chọn đúng ngay trong giao tiếp và thi HSK.",
+      "keywords": [
+        "phân biệt 了 着 过",
+        "trợ từ động thái tiếng Trung",
+        "cách dùng 了 trong tiếng Trung",
+        "cách dùng 着 trong tiếng Trung",
+        "ngữ pháp HSK 2 3"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "ban-chat-tro-tu-dong-thai",
+          "heading": "Vì sao dịch máy móc 了 = quá khứ làm bạn sai liên tục? Bảng gốc 3 trợ từ",
+          "paragraphs": [
+            "Tiếng Trung không chia thì (quá khứ/tương lai) như tiếng Anh mà diễn đạt trạng thái hoàn thành, tiếp diễn hay từng trải của hành động qua 3 trợ từ động thái 了, 着, 过. Thậm chí 了 có thể xuất hiện cho việc ở tương lai (明天吃了饭再去 – mai ăn cơm xong rồi đi)."
+          ],
+          "table": {
+            "headers": [
+              "Trợ từ",
+              "Bản chất cốt lõi",
+              "Ví dụ chuẩn",
+              "Phủ định tương ứng"
+            ],
+            "rows": [
+              [
+                "了 (le)",
+                "Hành động hoàn thành hoặc xuất hiện biến đổi mới",
+                "门开了。(Cửa đã mở / mở ra rồi.)",
+                "没(有) + Động từ (BỎ 了)"
+              ],
+              [
+                "着 (zhe)",
+                "Trạng thái tĩnh kéo dài sau hành động",
+                "门开着呢。(Cửa đang mở sẵn đó.)",
+                "没(有) + Động từ + 着"
+              ],
+              [
+                "过 (guo)",
+                "Từng có trải nghiệm trong quá khứ (nay đã xong)",
+                "我去过上海。(Tôi từng đi Thượng Hải.)",
+                "没(有) + Động từ + 过 (GIỮ 过)"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "phan-biet-le1-le2-va-phu-dinh",
+          "heading": "Phân biệt nhanh 了1 (sau động từ) và 了2 (cuối câu) & quy tắc dùng 没",
+          "paragraphs": [
+            "Cùng một chữ 了 nhưng đứng ở hai vị trí trong câu sẽ phục vụ hai mục đích khác nhau rõ rệt:"
+          ],
+          "bullets": [
+            "了1 đứng ngay sau Động từ (ĐT + 了 + Tân ngữ): nhấn mạnh hành động đó đã hoàn tất, thường đi kèm số lượng xác định hoặc làm nền cho hành động tiếp theo (我买了两张票 / 看了电影我就回家).",
+            "了2 đứng ở CUỐI CÂU: báo hiệu một tình huống hay thay đổi mới vừa xuất hiện (下雨了 – trời mưa rồi, 我现在喜欢喝茶了 – giờ tôi thích uống trà rồi).",
+            "Câu song hành 了1 + 了2: có thể xuất hiện cả hai nếu hành động đã xong một khoảng và vẫn kéo dài đến hiện tại (我学了两年汉语了 – tôi đã học tiếng Trung được 2 năm rồi và vẫn đang học).",
+            "Quy tắc vàng khi phủ định bằng 没(有): phải BỎ 了 đi! Nói 昨天我没去 (hôm qua tôi không đi), không nói *昨天我没去了."
+          ],
+          "example": {
+            "han": "他买了一本新书，但是还没看，书现在在桌子上放着。",
+            "py": "Tā mǎi le yì běn xīn shū, dànshì hái méi kàn, shū xiànzài zài zhuōzi shàng fàngzhe.",
+            "vi": "Anh ấy đã mua một cuốn sách mới nhưng vẫn chưa đọc, cuốn sách hiện đang nằm trên bàn."
+          }
+        },
+        {
+          "id": "so-sanh-zhe-voi-zhengzai-va-guo-voi-le",
+          "heading": "Đối chiếu hay gặp trong đề thi: 着 vs 正在, và 去过 vs 去了",
+          "paragraphs": [
+            "Đề HSK 2–4 rất chuộng đặt hai cặp cấu trúc dễ nhầm này cạnh nhau để kiểm tra độ tinh tế của người học:"
+          ],
+          "table": {
+            "headers": [
+              "Cặp đối chiếu",
+              "Câu A (và tình huống thật)",
+              "Câu B (và tình huống thật)"
+            ],
+            "rows": [
+              [
+                "着 vs 正在",
+                "门开着。(Cửa đang ở trạng thái mở sẵn.)",
+                "他在开门。(Anh ấy đang đẩy/mở cửa.)"
+              ],
+              [
+                "了 vs 过",
+                "他去北京了。(Anh ấy đi Bắc Kinh rồi — có thể vẫn ở đó.)",
+                "他去过北京。(Anh ấy từng đi Bắc Kinh — giờ không còn ở đó.)"
+              ],
+              [
+                "Phủ định 没…了 vs 没…过",
+                "昨天他没来上课。(Hôm qua bạn ấy vắng — bỏ 了.)",
+                "他没吃过北京烤鸭。(Bạn ấy chưa từng ăn vịt quay Bắc Kinh — giữ 过.)"
+              ],
+              [
+                "V着V着 (ngữ pháp HSK 3)",
+                "我听着听着就睡着了。(Đang nghe dở thì ngủ thiếp đi.)",
+                "Không thay thế bằng *听了听了 hoặc *听过听过."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "bon-loi-sai-thuong-gap",
+          "heading": "4 lỗi sai hay mất điểm với 了, 着, 过 và mẹo nhớ nhanh",
+          "paragraphs": [
+            "Kiểm tra xem mình có vô tình mắc một trong 4 thói quen sau không:"
+          ],
+          "bullets": [
+            "Nhét 了 vào thói quen lặp lại thường xuyên: không nói *我每天六点起床了 nếu muốn kể thói quen hằng ngày, hãy bỏ 了 (我每天六点起床).",
+            "Giữ nguyên 了 sau 没(有) như tiếng Việt \"chưa làm rồi\": câu *还没到了 sai, chuẩn là 还没到.",
+            "Quên mất không thể dùng 着 cho động tác tức thời không giữ được trạng thái (như 死, 结束, 认识): nói 认识了 (đã quen biết), không nói *认识着.",
+            "Dùng nhầm 了 khi kể trải nghiệm đời người kiểu \"từng làm gì đó trước đây\": để hỏi ai đã từng ăn món gì hay đi nước nào, phải dùng 过 (你去过中国吗？) chứ không hỏi *你去了中国吗？."
+          ],
+          "tip": "Câu thần chú ôn nhanh: 没 + V không có 了; 没 + V phải giữ 过; hành động đã xong dùng 了; trạng thái còn nguyên dùng 着."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Động từ 每天 (mỗi ngày) hoặc 常常 (thường xuyên) có dùng được 了 không?",
+          "a": "Thói quen lặp đi lặp lại thuần túy thì không thêm 了 sau động từ. Chỉ có trường hợp kết hợp thành cụm 2 vế như 每天吃了早饭就去上班 (mỗi ngày ăn sáng xong là đi làm) thì 了 mới đứng giữa để chỉ hành động 1 hoàn tất trước hành động 2."
+        },
+        {
+          "q": "Tại sao có câu vừa có 没 vừa có 了 như 现在没下雨了?",
+          "a": "Ở đây 了 là trợ từ ngữ khí ở cuối câu (了2) mang nghĩa \"thay đổi trạng thái\": trước đó đang mưa, bây giờ đã tạnh (\"giờ không mưa nữa rồi\"). Khác với hành động đơn thuần không xảy ra thì bắt buộc bỏ 了1 sau động từ."
+        },
+        {
+          "q": "着 còn đọc âm nào khác ngoài \"zhe\" không?",
+          "a": "Có. Trong từ 睡着 (shuìzháo – ngủ thiếp đi), 找着 (zhǎozháo – tìm thấy) nó đọc là zháo (kết quả); trong 着急 (zháojí – sốt ruột) đọc là zháo; ngoài ra có thể đọc zhuó trong 穿着 (chuānzhuó – cách ăn mặc)."
+        }
+      ],
+      "relatedSlugs": [
+        "phan-biet-cac-cap-tu-hay-nham-khi-thi-hsk",
+        "cau-chu-ba-va-cau-chu-bei-trong-tieng-trung",
+        "10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac"
+      ],
+      "cta": {
+        "heading": "Ôn trọn bộ ngữ pháp HSK 2–4 trên Flashcards & AI",
+        "body": "Vào chuyên mục Từ dễ nhầm HSK hoặc làm đề HSK 2–3 trực tiếp trên HSK Flashcards để luyện nhuần nhuyễn cách chọn 了, 着, 过.",
+        "buttonLabel": "Vào ôn từ dễ nhầm & làm đề"
+      }
+    },
+    {
+      "slug": "phan-biet-xiang-yao-hui-neng-keyi-hsk",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "Từ dễ nhầm HSK 1–3",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "readMinutes": 8,
+      "featured": false,
+      "title": "Phân biệt 想, 要, 会, 能, 可以 trong tiếng Trung: Nói chuẩn ý muốn, khả năng và xin phép",
+      "metaTitle": "Phân biệt 想, 要, 会, 能, 可以 trong tiếng Trung (HSK 1–3) | HSK Flashcards",
+      "metaDescription": "Phân biệt chi tiết 5 động từ năng nguyện hay nhầm nhất khi học tiếng Trung HSK 1–3: 想 và 要 (ý muốn, dự định), 会 · 能 · 可以 (kỹ năng, điều kiện, xin phép) kèm 4 lỗi giao tiếp hay gặp.",
+      "summary": "Chỉ cần nhầm lẫn giữa 想/要 hay 会/能/可以 là câu tiếng Trung dễ trở nên gượng gạo hoặc thiếu lịch sự. Bảng đối chiếu dưới đây phân định rạch ròi 5 động từ năng nguyện cốt lõi HSK 1–3.",
+      "keywords": [
+        "phân biệt 想 và 要",
+        "phân biệt 会 能 可以",
+        "động từ năng nguyện tiếng Trung",
+        "cách dùng 可以 và 能",
+        "ngữ pháp HSK 1 2 3"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "phan-biet-xiang-va-yao",
+          "heading": "Cặp 1: Phân biệt 想 (xiǎng) và 要 (yào) — Ý muốn nhẹ vs Quyết định dứt khoát",
+          "paragraphs": [
+            "Cả 想 và 要 đều hay được dịch sang tiếng Việt là \"muốn\", nhưng trong giao tiếp thật của người Trung Quốc mức độ chủ động và phép lịch sự khác nhau khá rõ:"
+          ],
+          "table": {
+            "headers": [
+              "Khía cạnh",
+              "想 (xiǎng)",
+              "要 (yào)"
+            ],
+            "rows": [
+              [
+                "Mức độ ý muốn",
+                "Muốn, nghĩ đến (ý định nhẹ, mang tính mong ước)",
+                "Muốn làm/cần làm ngay (quyết tâm cao, chắc chắn)"
+              ],
+              [
+                "Gọi món / mua đồ",
+                "Lịch sự hơn khi nói ý định: 我想喝热茶。",
+                "Trực tiếp, dứt khoát khi chốt đơn: 我要一杯咖啡。"
+              ],
+              [
+                "Phủ định giao tiếp",
+                "不想 (không muốn — từ chối nhẹ nhàng)",
+                "不要 (đừng! không được! — giọng rất gắt/mệnh lệnh)"
+              ],
+              [
+                "Nghĩa mở rộng",
+                "\"Nhớ ai/cái gì\" (我想家人) hoặc \"nghĩ rằng\"",
+                "\"Cần/tốn\" (要半个小时) hoặc \"sắp sửa\" (快要下雨了)"
+              ]
+            ]
+          },
+          "example": {
+            "han": "我本来想去北京旅游，不过妈妈要我先把期末考试考好。",
+            "py": "Wǒ běnlái xiǎng qù Běijīng lǚyóu, bùguò māma yào wǒ xiān bǎ qīmò kǎoshì kǎohǎo.",
+            "vi": "Vốn dĩ tôi muốn đi Bắc Kinh du lịch, nhưng mẹ yêu cầu tôi thi tốt kỳ cuối trước đã."
+          },
+          "tip": "Mẹo giao tiếp quan trọng: Khi từ chối lời mời (như không muốn uống rượu, không lấy túi nilon), hãy dùng 不用了 hoặc 我不想喝; tránh nói thẳng 我不要 vì dễ nghe hơi cộc với người mới quen."
+        },
+        {
+          "id": "phan-biet-hui-neng-keyi",
+          "heading": "Bộ ba kinh điển: 会 (huì), 能 (néng), 可以 (kěyǐ)",
+          "paragraphs": [
+            "Ba từ này đều mang nghĩa tương đương \"có thể / biết làm\" trong tiếng Việt, nhưng tiếng Trung tách làm ba tầng nghĩa riêng biệt: kỹ năng học được, điều kiện thực tế và sự cho phép."
+          ],
+          "table": {
+            "headers": [
+              "Ngữ cảnh",
+              "会 (huì)",
+              "能 (néng)",
+              "可以 (kěyǐ)"
+            ],
+            "rows": [
+              [
+                "Kỹ năng học được",
+                "我会说汉语。(Biết nói qua học tập)",
+                "Chỉ dùng khi khen mức cao/nhấn điều kiện",
+                "Ít dùng cho kỹ năng bẩm sinh/học được"
+              ],
+              [
+                "Điều kiện cho phép",
+                "Không dùng",
+                "今天我太累了，不能加班。(Sức khỏe/thời gian)",
+                "Dùng được nhưng 能 chuẩn hơn khi nói năng lực"
+              ],
+              [
+                "Xin phép / cho phép",
+                "Không dùng",
+                "Dùng được trong câu hỏi thân mật",
+                "这里可以拍照吗？(Chuẩn nhất khi xin phép)"
+              ],
+              [
+                "Dự đoán tương lai",
+                "明天会下雨吗？(Khả năng xảy ra cao)",
+                "Không dùng để đoán thời tiết",
+                "Không dùng"
+              ],
+              [
+                "Cấm đoán / từ chối",
+                "Không dùng",
+                "博物馆里不能抽烟。(Cấm theo quy định)",
+                "这里不可以停车。(Không được phép)"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "bon-loi-nham-lan-nguoi-viet-hay-mac",
+          "heading": "4 lỗi sai người Việt hay mắc với nhóm động từ năng nguyện",
+          "paragraphs": [
+            "Phần lớn người học ở HSK 1–2 dễ bị sai ở các ngữ cảnh thực tế sau:"
+          ],
+          "bullets": [
+            "Dùng 能 thay cho 会 khi kể khả năng biết ngoại ngữ/kỹ năng: giới thiệu bản thân nên nói 我会说一点儿汉语 (tôi biết nói chút tiếng Trung), không dịch từng chữ từ \"I can\" thành *我能说一点儿汉语 khi chỉ muốn nói năng lực ngôn ngữ.",
+            "Dùng *你不要 đứng trước tính từ hoặc việc khuyên nhẹ: thay vì *你不要生气 mà nên nói 你别生气 hoặc đừng dùng 不要 tùy tiện với cấp trên/khách hàng.",
+            "Dùng *我会来 nếu muốn nói điều kiện thực tế cho phép: muốn báo \"chiều nay tôi thu xếp đến được\" thì nói 今天下午我能来; còn 会来 nghĩa là dự đoán \"tôi sẽ đến\".",
+            "Quên trật tự phủ định: mọi từ năng nguyện đều đặt 不 đứng ngay trước nó (不会, 不能, 不可以), và câu hỏi có 还是 / 吗 không ghép 很 vào các động từ năng nguyện trừ 想 (很想) và 会 (很会说话)."
+          ]
+        },
+        {
+          "id": "meo-chon-nhanh-trong-de-hsk",
+          "heading": "3 bước nhìn câu hỏi chọn đúng giữa 会, 能, 可以 trong 5 giây",
+          "paragraphs": [
+            "Khi gặp câu điền khuyết hay sắp xếp câu ở đề thi HSK 2–3, bạn chỉ cần rà nhanh theo 3 bước:"
+          ],
+          "bullets": [
+            "1. Kiểm tra yếu tố \"học mới biết\" hay \"dự đoán thời tiết/sắp xảy ra\": có tên ngôn ngữ, kỹ năng (说汉语, 游泳, 写汉字, 做菜) hoặc phó từ tương lai → ưu tiên 会.",
+            "2. Kiểm tra lý do khách quan (bị ốm, bận việc, hết thời gian, đạt con số tối đa như 一分钟能打80个字) → chọn 能.",
+            "3. Kiểm tra tình huống lịch sự \"xin phép / cho phép / gợi ý\" (…吗？ ở nơi công cộng, văn phòng, hoặc đưa đề nghị 你也可以试试) → chọn 可以."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Có thể ghép cả 想 và 要 thành 想要 (xiǎngyào) được không?",
+          "a": "Được, và rất phổ biến trong văn nói khi muốn nhấn mạnh cả mong muốn lẫn mong cầu sở hữu một vật gì đó (ví dụ 我想要那本笔记本 – tôi muốn lấy cuốn sổ đó), sắc thái mềm hơn là chỉ dùng 要 trơ."
+        },
+        {
+          "q": "Nói \"xin lỗi tôi không làm được việc này\" nên dùng 不会 hay 不能?",
+          "a": "Tùy lý do: nếu bạn chưa từng học nên không biết cách làm (ví dụ chưa biết sửa phần mềm) thì nói 我不会; nếu bạn biết làm nhưng kẹt lịch, thiếu thời gian hay sức khỏe không cho phép thì nói 我不能."
+        },
+        {
+          "q": "Vì sao thấy người bản xứ dùng 不能 trên biển cấm nhiều hơn 不可以?",
+          "a": "Cả hai đều có thể dùng để cấm đoán, nhưng trên biển báo công cộng ngắn gọn (như 禁止吸烟 hoặc 不能带宠物), 不能 mang tính quy tắc khách quan dứt khoát hơn, còn 不可以 thường nghe như giọng nhắc nhở trực tiếp giữa người với người."
+        }
+      ],
+      "relatedSlugs": [
+        "phan-biet-cac-cap-tu-hay-nham-khi-thi-hsk",
+        "cac-loai-tu-trong-tieng-trung-co-ban",
+        "10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac"
+      ],
+      "cta": {
+        "heading": "So sánh hàng chục cặp từ dễ nhầm theo từng cấp HSK",
+        "body": "Mở trang Từ dễ nhầm HSK hoặc hỏi trực tiếp Gia sư AI miễn phí nếu bạn còn phân vân khi áp dụng 想, 要, 会, 能, 可以 vào câu văn thật.",
+        "buttonLabel": "Mở kho Từ dễ nhầm HSK"
+      }
+    },
+    {
+      "slug": "10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "Lỗi sai HSK 1–4",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "readMinutes": 9,
+      "featured": false,
+      "title": "10 lỗi sai ngữ pháp tiếng Trung cơ bản người Việt hay mắc nhất (kèm câu sửa chuẩn HSK)",
+      "metaTitle": "10 lỗi sai ngữ pháp tiếng Trung cơ bản người Việt hay mắc | HSK Flashcards",
+      "metaDescription": "Tổng hợp 10 lỗi ngữ pháp tiếng Trung kinh điển người Việt hay mắc từ HSK 1 đến HSK 4 (đặt tính từ, dùng 是, vị trí thời gian/nơi chốn, 不 và 没, động từ ly hợp) kèm câu sửa chuẩn.",
+      "summary": "Rà soát ngay 10 lỗi ngữ pháp do ảnh hưởng từ thói quen tiếng Việt khiến người học dễ mất điểm oan ở phần Viết và Giao tiếp HSK 1–4, kèm cặp câu Sai – Chuẩn đối chiếu trực diện.",
+      "keywords": [
+        "lỗi sai ngữ pháp tiếng Trung",
+        "những lỗi sai khi học tiếng Trung",
+        "ngữ pháp tiếng Trung cơ bản",
+        "sửa lỗi câu tiếng Trung",
+        "động từ ly hợp tiếng Trung"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "nhom-5-loi-trat-tu-cau-va-dich-tung-chu",
+          "heading": "Nhóm 1: 5 lỗi trật tự câu & dịch từng chữ từ tiếng Việt",
+          "paragraphs": [
+            "Do từ vựng tiếng Việt và tiếng Trung có nhiều nét tương đồng Hán Việt, người mới học rất dễ giữ nguyên thứ tự chữ tiếng Việt mà bỏ qua quy tắc ngược vị trí định ngữ và trạng ngữ của tiếng Trung:"
+          ],
+          "table": {
+            "headers": [
+              "Lỗi sai số",
+              "Câu sai do dịch từng chữ (✗)",
+              "Câu chuẩn (✓) & lý do ngắn"
+            ],
+            "rows": [
+              [
+                "1. Tính từ sau danh từ",
+                "我喜欢书新。",
+                "我喜欢新书。(Định ngữ luôn đứng trước danh từ)"
+              ],
+              [
+                "2. Bỏ quên lượng từ",
+                "我买了三苹果。",
+                "我买了三个苹果。(Số/这/那 + Lượng từ + Danh từ)"
+              ],
+              [
+                "3. Thời gian & Nơi chốn cuối câu",
+                "我学习汉语在学校昨天。",
+                "昨天我在学校学习汉语。(Bối cảnh đặt trước ĐT)"
+              ],
+              [
+                "4. Dùng 是 nối với tính từ",
+                "她是很漂亮。",
+                "她很漂亮。(Tính từ vị ngữ KHÔNG dùng chung 是)"
+              ],
+              [
+                "5. Tính từ trần thuật thiếu 很",
+                "我忙。(nghe cụt/đang so sánh)",
+                "我很忙。(Thêm 很 làm câu trần thuật tự nhiên)"
+              ]
+            ]
+          },
+          "tip": "Mẹo loại lỗi số 4 ngay lập tức: trong tiếng Trung chỉ nói 是…的 để nhấn mạnh (这件衣服是红色的), tuyệt đối không ghép thẳng Chủ ngữ + 是 + Tính từ (*今天是很冷)."
+        },
+        {
+          "id": "nhom-5-loi-phu-dinh-so-sanh-va-dong-tu",
+          "heading": "Nhóm 2: 5 lỗi phủ định, so sánh và động từ ly hợp hay gài bẫy HSK",
+          "paragraphs": [
+            "Lên tới HSK 2–4, năm lỗi dưới đây là nguyên nhân hàng đầu khiến câu viết tưởng như đúng nhưng lại bị máy chấm điểm trừ nặng:"
+          ],
+          "table": {
+            "headers": [
+              "Lỗi sai số",
+              "Câu sai hay gặp (✗)",
+              "Câu chuẩn (✓) & lý do ngắn"
+            ],
+            "rows": [
+              [
+                "6. Dùng 不 cho 有 / quá khứ",
+                "我不有时间 / 昨天他不来。",
+                "我没有时间 / 昨天他没来。(有 và việc đã qua dùng 没)"
+              ],
+              [
+                "7. Nhét 很 vào câu so sánh 比",
+                "他比我很高。",
+                "他比我高得多。(Câu 比 không đi với 很/非常)"
+              ],
+              [
+                "8. Giữ 了 sau 没(有)",
+                "今天早上我没吃早饭了。",
+                "今天早上我没吃早饭。(Phủ định hành động bỏ 了)"
+              ],
+              [
+                "9. Đưa tân ngữ sau ĐT ly hợp",
+                "我想见面他 / 请帮忙我。",
+                "我想跟他见面 / 请帮我一下。(Đưa lên trước hoặc tách)"
+              ],
+              [
+                "10. Nhầm 还是 với 或者",
+                "你想喝茶或者咖啡？",
+                "你想喝茶还是咖啡？(Câu hỏi dùng 还是; câu kể dùng 或者)"
+              ]
+            ]
+          },
+          "example": {
+            "han": "他比我高一点儿，明天我想跟他在咖啡馆见面，你喝茶还是喝咖啡？",
+            "py": "Tā bǐ wǒ gāo yìdiǎnr, míngtiān wǒ xiǎng gēn tā zài kāfēiguǎn jiànmiàn, nǐ hē chá háishi hē kāfēi?",
+            "vi": "Anh ấy cao hơn tôi một chút, ngày mai tôi muốn gặp anh ấy ở quán cà phê, bạn uống trà hay cà phê?"
+          }
+        },
+        {
+          "id": "quy-trinh-3-buoc-tu-ra-loi",
+          "heading": "Quy trình 3 bước tự rà lỗi chỉ mất 15 giây trước khi bấm nộp bài",
+          "paragraphs": [
+            "Trước khi kết thúc bài viết câu HSK 3–5 hoặc gửi tin nhắn cho người bản xứ, hãy tập phản xạ rà nhanh đúng 3 điểm chốt này:"
+          ],
+          "bullets": [
+            "1. Quét thứ tự 3 khối lớn: Thời gian — Địa điểm/Giới từ — Động từ đã đứng đúng trước hành động chưa?",
+            "2. Quét từ bẫy: có thấy *是很, *比…很, *不有, *没…了, *见面他 hay nhầm 的/地/得 đứng sai chỗ không?",
+            "3. Chạy thử qua công cụ Sửa câu tiếng Trung AI trên HSK Flashcards: hệ thống sẽ gạch chân chỗ sai và gợi ý câu tự nhiên đúng ngữ cảnh người bản xứ dùng."
+          ]
+        },
+        {
+          "id": "cach-sua-tan-goc-khong-lap-lai",
+          "heading": "Cách sửa tận gốc để không lặp lại 10 lỗi này khi vào phòng thi",
+          "paragraphs": [
+            "Chỉ đọc danh sách lỗi một lần rất dễ quên ngay ngày hôm sau. Cách hiệu quả nhất là chọn ra đúng 2–3 lỗi mà chính bạn hay vướng (ví dụ hay quên tách động từ ly hợp 见面/结婚/帮忙 hoặc hay nhầm 没 với 了), tự đặt lại mỗi lỗi 3 câu mới hoàn toàn rồi đọc thành tiếng 5 lần.",
+            "Khi luyện đề trên HSK Flashcards, mỗi câu bị sai bạn chỉ cần nhấn lưu vào Sổ từ/Ôn câu sai để hệ thống lặp lại ngắt quãng SRS nhắc lại sau 1 ngày, 3 ngày và 7 ngày."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Động từ ly hợp nào dễ dùng sai tân ngữ nhất ở HSK 2–4?",
+          "a": "Nhóm gặp nhiều nhất là 见面 (gặp mặt → 跟他见面), 帮忙 (giúp đỡ → 帮我的忙 hoặc 帮我), 结婚 (kết hôn → 跟她结婚), 聊天 (trò chuyện → 跟朋友聊天) và 跑步/游泳 (câu thời lượng phải tách: 游了一个小时泳)."
+        },
+        {
+          "q": "Trong câu so sánh 比 không dùng được 很, vậy muốn nói \"hơn rất nhiều\" thì dùng từ nào?",
+          "a": "Bạn đặt cụm mức độ ra SAU tính từ thay vì đặt trước nó: A 比 B + Tính từ + 得多 hoặc 多了 (nhiều hơn hẳn), hoặc 一点儿 / 一些 (một chút), ví dụ 今天比昨天凉快多了."
+        },
+        {
+          "q": "Nói 他比我差不多 được không?",
+          "a": "Không chuẩn. Để nói hai người ngang nhau hay gần bằng nhau, người Trung Quốc dùng 跟…差不多: 他跟我差不多高 (anh ấy cao xấp xỉ tôi), không dùng 比."
+        }
+      ],
+      "relatedSlugs": [
+        "cac-loai-tu-trong-tieng-trung-co-ban",
+        "phan-biet-de-de-de-trong-tieng-trung-hsk",
+        "cau-chu-ba-va-cau-chu-bei-trong-tieng-trung"
+      ],
+      "cta": {
+        "heading": "Dán câu tiếng Trung bạn tự viết để AI bắt lỗi trong 3 giây",
+        "body": "Công cụ Sửa câu tiếng Trung AI miễn phí trên HSK Flashcards giúp bạn chỉ ra từng lỗi trật tự câu, hư từ và cách diễn đạt tự nhiên trước khi bước vào kỳ thi.",
+        "buttonLabel": "Mở Sửa câu AI miễn phí"
+      }
     }
   ]
 }
