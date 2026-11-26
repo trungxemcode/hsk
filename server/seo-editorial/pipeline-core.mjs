@@ -350,7 +350,7 @@ function scoreTrendCandidate(item) {
   return score;
 }
 
-function buildExistingCorpus(publishedArticles = [], drafts = []) {
+export function buildExistingCorpus(publishedArticles = [], drafts = []) {
   const norms = new Set();
   const slugs = new Set();
   const tokenSets = [];
@@ -378,7 +378,7 @@ function buildExistingCorpus(publishedArticles = [], drafts = []) {
   return { norms, slugs, tokenSets };
 }
 
-function isDuplicateTopic(query, explicitSlug, corpus) {
+export function isDuplicateTopic(query, explicitSlug, corpus) {
   const norm = normalizeTextForMatch(query);
   const slug = explicitSlug || slugifyVi(query);
   if (!norm || !slug) return true;
@@ -1079,6 +1079,7 @@ export async function runAuditRound({
 export async function runTwoRoundEditorialPipeline({
   initialArticle,
   writerBrief = null,
+  authorSource = 'writer-seo-01',
   trendQuery = '',
   category = 'meo-hoc',
   hskTag = 'HSK 1–6',
@@ -1110,7 +1111,9 @@ export async function runTwoRoundEditorialPipeline({
   let polishSummary = '';
   let revisionMs = 0;
   const hasTerminalReject = (round1.hardFails || []).some((hf) => hf.code === 'HF-01' || hf.code === 'HF-02');
+  const usesInternalWriter = authorSource === 'writer-seo-01';
   const shouldRevise =
+    usesInternalWriter &&
     round1.status === 'completed' &&
     !hasTerminalReject &&
     (round1.auditVerdict === 'REVISION_REQUIRED' ||
@@ -1181,10 +1184,10 @@ export async function runTwoRoundEditorialPipeline({
 
   const aiReviews = {
     protocol: AUDIT_PROTOCOL_ID,
-    writerStandard: WRITER_STANDARD_ID,
+    writerStandard: usesInternalWriter ? WRITER_STANDARD_ID : null,
     status: completedCount === 2 ? 'completed' : completedCount === 1 ? 'partial' : 'error',
     provider: xkiroKey ? 'xkiro+cf' : 'cloudflare-ai',
-    pipeline: ['writer-seo-01', 'audit-round-1', 'audit-round-2', 'admin'],
+    pipeline: [authorSource, 'audit-round-1', 'audit-round-2', 'admin'],
     round1Verdict: round1.auditVerdict,
     finalVerdict,
     averageScore: finalScore,

@@ -30,6 +30,7 @@
     "XKIRO_REVIEW_MODEL_2": "mistralai/mistral-large-2512",
     "XKIRO_REVIEW_MODEL_2_FALLBACK": "deepseek/deepseek-v4.1-flash",
     "DEFAULT_CRON_COUNT": "1",
-    "MAX_PENDING_DRAFTS": "24"
+    "MAX_PENDING_DRAFTS": "24",
+    "CHATGPT_MAX_PER_HOUR": "2"
   }
 }

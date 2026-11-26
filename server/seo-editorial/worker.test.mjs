@@ -433,3 +433,327 @@ test('Audit scoring enforces Round 1 cap, 60% category floor, Hard Fail REJECTED
   assert.match(sanitized, /Thiếu ngoại lệ/);
   assert.ok(!/5\.1|Phép thử thay thế chủ đề|PROVISIONAL_PASS|SEO-AUDITOR-01|HF-01/.test(sanitized));
 });
+
+test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council review, dedup, hourly cap, and strict pending_review boundary', async () => {
+  const r2 = createMemoryR2();
+  const ai = createMockAi();
+  const fetchImpl = createMockFetch();
+  const env = {
+    AI: ai,
+    SEO_BUCKET: r2,
+    FIREBASE_API_KEY: 'test-fb-key',
+    ALLOWED_ORIGINS: 'https://hskfreelearningai.pages.dev',
+    PUBLISHED_ARTICLES_URL: 'https://hskfreelearningai.pages.dev/content/seo-articles/articles.json',
+    CHATGPT_MAX_PER_HOUR: '2',
+  };
+
+  const adminHeaders = {
+    Authorization: 'Bearer fake-admin-id-token',
+    'Content-Type': 'application/json',
+    Origin: 'https://hskfreelearningai.pages.dev',
+  };
+
+  // 1. OpenAPI schema is public and leaks no secret
+  const oaRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt/openapi.json'),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(oaRes.status, 200);
+  const oaJson = await oaRes.json();
+  assert.equal(oaJson.openapi, '3.1.0');
+  assert.ok(oaJson.paths['/api/chatgpt/brief']);
+  assert.ok(oaJson.paths['/api/chatgpt/drafts']);
+
+  // 2. Before key rotation, gateway rejects calls with 503
+  const uninitRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt/brief', {
+      headers: { Authorization: 'Bearer wrong-key' },
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(uninitRes.status, 503);
+
+  // 3. Admin rotates gateway key via Firebase-authenticated endpoint
+  const rotRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt-gateway/rotate', {
+      method: 'POST',
+      headers: adminHeaders,
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(rotRes.status, 200);
+  const rotJson = await rotRes.json();
+  assert.equal(rotJson.ok, true);
+  assert.ok(rotJson.apiKey.startsWith('hsk_cgpt_'));
+  assert.ok(rotJson.endpoints.mcpSecretUrl.includes(`/api/chatgpt/k/${rotJson.apiKey}/mcp`));
+
+  const mcpUrl = rotJson.endpoints.mcpSecretUrl;
+
+  // 4. Wrong key rejected with 401
+  const badKeyRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt/k/hsk_cgpt_invalid/mcp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'ping' }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(badKeyRes.status, 401);
+
+  // 5. ChatGPT key MUST NOT be able to call Admin /api/approve
+  const bypassApproveRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/approve', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${rotJson.apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ draftId: 'draft-1' }),
+    }),
+    env,
+    {},
+    {
+      fetchImpl: async (u) => {
+        if (String(u).includes('accounts:lookup')) {
+          return Response.json({ error: { message: 'INVALID_ID_TOKEN' } }, { status: 400 });
+        }
+        return fetchImpl(u);
+      },
+    }
+  );
+  assert.equal(bypassApproveRes.status, 401);
+
+  // 6. MCP Streamable HTTP: GET text/event-stream -> 405, initialize -> 200, notification -> 202
+  const sseRes = await handleSeoEditorialFetch(
+    new Request(mcpUrl, { method: 'GET', headers: { Accept: 'text/event-stream' } }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(sseRes.status, 405);
+
+  const initRes = await handleSeoEditorialFetch(
+    new Request(mcpUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'initialize',
+        params: { protocolVersion: '2025-03-26', clientInfo: { name: 'chatgpt-web', version: '1.0' } },
+      }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(initRes.status, 200);
+  const initJson = await initRes.json();
+  assert.equal(initJson.result.protocolVersion, '2025-03-26');
+  assert.equal(initJson.result.serverInfo.name, 'hsk-seo-editorial-chatgpt-gateway');
+
+  const notifRes = await handleSeoEditorialFetch(
+    new Request(mcpUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(notifRes.status, 202);
+
+  const toolsRes = await handleSeoEditorialFetch(
+    new Request(mcpUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/list' }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  const toolsJson = await toolsRes.json();
+  assert.deepEqual(
+    toolsJson.result.tools.map((t) => t.name),
+    ['get_seo_brief', 'submit_seo_draft', 'list_chatgpt_drafts']
+  );
+
+  // 7. MCP get_seo_brief returns non-duplicate suggestions + strict approvalPolicy
+  const briefRes = await handleSeoEditorialFetch(
+    new Request(mcpUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 3,
+        method: 'tools/call',
+        params: { name: 'get_seo_brief', arguments: { count: 3 } },
+      }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  const briefJson = await briefRes.json();
+  assert.equal(briefJson.result.isError, false);
+  assert.equal(briefJson.result.structuredContent.approvalPolicy.canPublishDirectly, false);
+  assert.equal(briefJson.result.structuredContent.quota.canSubmitNow, true);
+  assert.ok(briefJson.result.structuredContent.suggestedTopics.length >= 1);
+
+  // 8. MCP submit_seo_draft creates pending_review draft + runs AI reviewer council (cannot self-approve)
+  const submitRes = await handleSeoEditorialFetch(
+    new Request(mcpUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 4,
+        method: 'tools/call',
+        params: {
+          name: 'submit_seo_draft',
+          arguments: {
+            trendQuery: 'xin lỗi trong tiếng trung',
+            trendSpike: 'ChatGPT mỗi giờ',
+            authorModel: 'ChatGPT Plus',
+            status: 'approved', // malicious override attempt must be ignored
+            article: makeMockArticleJson('Cách nói xin lỗi trong tiếng Trung tự nhiên'),
+          },
+        },
+      }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  const submitJson = await submitRes.json();
+  assert.equal(submitJson.result.isError, false);
+  const sc = submitJson.result.structuredContent;
+  assert.equal(sc.ok, true);
+  assert.equal(sc.status, 'pending_review');
+  assert.equal(sc.requiresAdminApproval, true);
+  assert.equal(sc.pushedToGithub, false);
+  assert.equal(sc.aiReviews.averageScore, 90);
+  assert.equal(sc.aiReviews.status, 'completed');
+  assert.equal(ai.calls.length, 2);
+  assert.ok(sc.aiReviews.reviewers.every((review) => !Object.hasOwn(review, 'challengeResults')));
+  assert.equal(sc.aiReviews.reviewers.length, 2);
+
+  // Verify draft appears in Admin /api/drafts with authorSource === 'chatgpt' and pipeline[0] === 'chatgpt'
+  const adminDraftsRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/drafts', { headers: adminHeaders }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  const adminDraftsJson = await adminDraftsRes.json();
+  assert.equal(adminDraftsJson.draftsData.drafts.length, 1);
+  assert.equal(adminDraftsJson.draftsData.drafts[0].authorSource, 'chatgpt');
+  assert.equal(adminDraftsJson.draftsData.drafts[0].status, 'pending_review');
+  const submittedDraft = adminDraftsJson.draftsData.drafts[0];
+  assert.equal(submittedDraft.article.title, 'Cách nói xin lỗi trong tiếng Trung tự nhiên');
+  assert.equal(submittedDraft.article.sections[0].paragraphs[0], makeMockArticleJson().sections[0].paragraphs[0]);
+  assert.equal(submittedDraft.aiReviews.pipeline[0], 'chatgpt');
+  assert.equal(submittedDraft.aiReviews.protocol, AUDIT_PROTOCOL_ID);
+  assert.equal(submittedDraft.aiReviews.writerStandard, null);
+  assert.equal(submittedDraft.aiReviews.round1Verdict, 'REVISION_REQUIRED');
+  assert.equal(submittedDraft.aiReviews.finalVerdict, 'APPROVED');
+  assert.equal(submittedDraft.aiReviews.autoPolished, false);
+
+  // 9. Duplicate submission rejected (isError: true, code: duplicate_topic)
+  const dupRes = await handleSeoEditorialFetch(
+    new Request(mcpUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 5,
+        method: 'tools/call',
+        params: {
+          name: 'submit_seo_draft',
+          arguments: {
+            trendQuery: 'xin lỗi trong tiếng trung',
+            article: makeMockArticleJson('Cách nói xin lỗi trong tiếng Trung tự nhiên'),
+          },
+        },
+      }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  const dupJson = await dupRes.json();
+  assert.equal(dupJson.result.isError, true);
+  assert.equal(dupJson.result.structuredContent.code, 'duplicate_topic');
+
+  // 10. REST Bearer 2nd submission succeeds (201), 3rd hits hourly limit (429)
+  const rest2Res = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt/drafts', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${rotJson.apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        trendQuery: 'phân biệt bộ thủ tiếng trung thường gặp',
+        article: makeMockArticleJson('Phân biệt 12 bộ thủ tiếng Trung thường gặp cho người mới'),
+      }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(rest2Res.status, 201);
+
+  const rest3Res = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt/drafts', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${rotJson.apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        trendQuery: 'lộ trình tự học hsk 4 trong 6 tháng',
+        article: makeMockArticleJson('Lộ trình tự học HSK 4 trong 6 tháng cho người đi làm'),
+      }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(rest3Res.status, 429);
+  const rest3Json = await rest3Res.json();
+  assert.equal(rest3Json.code, 'hourly_limit_reached');
+
+  // 11. Admin disables gateway -> immediate 503 kill switch
+  const disableRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt-gateway/settings', {
+      method: 'POST',
+      headers: adminHeaders,
+      body: JSON.stringify({ enabled: false }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(disableRes.status, 200);
+
+  const blockedRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt/brief', {
+      headers: { Authorization: `Bearer ${rotJson.apiKey}` },
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(blockedRes.status, 503);
+});

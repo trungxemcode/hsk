@@ -63,6 +63,7 @@
       </div>
       <div class="rev-topbar-actions">
         <button type="button" class="rev-btn is-accent-soft" id="openScanModalBtn">Quét Trends &amp; Sinh bài</button>
+        <button type="button" class="rev-btn is-chatgpt" id="openChatgptModalBtn">Cổng ChatGPT</button>
         <button type="button" class="rev-btn" id="refreshDataBtn">Làm mới</button>
         <button type="button" class="rev-btn" id="openGithubModalBtn">Kết nối GitHub</button>
         <button type="button" class="rev-btn is-icon" id="revThemeToggle" aria-label="Đổi giao diện sáng tối" title="Đổi sáng / tối">☾</button>
@@ -239,6 +240,102 @@
         <button type="submit" class="rev-btn is-primary" id="triggerScanBtn">Chạy quét Trends &amp; Sinh bài</button>
       </div>
     </form>
+  </dialog>
+
+  <dialog class="rev-modal rev-modal-wide" id="chatgptModal" aria-labelledby="chatgptModalTitle">
+    <div class="rev-modal-card">
+      <div class="rev-modal-head">
+        <h2 id="chatgptModalTitle">Cổng ChatGPT Plus — Tự động lên bài SEO mỗi giờ</h2>
+        <button type="button" class="rev-close-btn" data-close-modal="chatgptModal" aria-label="Đóng">✕</button>
+      </div>
+      <p class="rev-modal-desc">
+        Kết nối <strong>ChatGPT Web Plus (Custom MCP Server + Scheduled Tasks)</strong> trực tiếp vào hàng đợi <strong>Chờ duyệt</strong> trên Cloudflare R2. Cổng này <strong>chỉ cho nộp bài nháp &amp; xem góp ý</strong> — tuyệt đối không có quyền tự duyệt hay push lên GitHub.
+      </p>
+
+      <div class="rev-cgpt-stats" id="cgptStatsRow">
+        <span class="rev-tag" id="cgptStatusPill">Đang tải…</span>
+        <span class="rev-tag" id="cgptQuotaPill">Giờ qua: —</span>
+        <span class="rev-tag" id="cgptTotalPill">Tổng bài ChatGPT: 0</span>
+        <span class="rev-tag" id="cgptLastSubPill">Chưa có lượt nộp</span>
+      </div>
+
+      <form class="rev-cgpt-settings" id="cgptSettingsForm">
+        <div class="rev-modal-grid">
+          <div class="rev-field">
+            <label for="cgptHourlyLimitSelect">Giới hạn tối đa mỗi giờ</label>
+            <select id="cgptHourlyLimitSelect">
+              <option value="1">1 bài / giờ</option>
+              <option value="2" selected>2 bài / giờ (khuyên dùng)</option>
+              <option value="3">3 bài / giờ</option>
+              <option value="4">4 bài / giờ</option>
+            </select>
+          </div>
+          <div class="rev-field">
+            <label>Khóa bảo mật cổng ChatGPT</label>
+            <div class="rev-copy-row">
+              <input id="cgptKeyDisplay" type="text" readonly placeholder="Chưa tạo khóa — bấm Tạo khóa">
+              <button type="button" class="rev-btn" id="cgptToggleKeyBtn">Hiện</button>
+              <button type="button" class="rev-btn is-accent-soft" id="cgptRotateKeyBtn">Tạo / Đổi khóa</button>
+            </div>
+          </div>
+        </div>
+        <label class="rev-check-row">
+          <input id="cgptEnabledChk" type="checkbox" checked>
+          <span>Bật cổng tiếp nhận bài từ ChatGPT (tắt để tạm khóa ngay lập tức)</span>
+        </label>
+        <label class="rev-check-row">
+          <input id="cgptAiReviewChk" type="checkbox" checked>
+          <span>Chạy Hội đồng kiểm duyệt AI (Qwen/Mistral/xKiro) chấm điểm phụ khi ChatGPT nộp bài (~15–30 giây)</span>
+        </label>
+        <div class="rev-cgpt-save-row">
+          <button type="submit" class="rev-btn is-primary" id="cgptSaveSettingsBtn">Lưu cấu hình cổng</button>
+          <span class="rev-status-msg" id="cgptModalStatus" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <div class="rev-field">
+        <label for="cgptMcpSecretInput">1. URL MCP cho ChatGPT Web Plus (chọn <strong>No authentication</strong> khi thêm vào <code>chatgpt.com/plugins</code>)</label>
+        <div class="rev-copy-row">
+          <input id="cgptMcpSecretInput" type="text" readonly placeholder="Bấm Tạo / Đổi khóa để lấy URL MCP riêng tư">
+          <button type="button" class="rev-btn" data-copy-target="cgptMcpSecretInput" data-copy-secret="mcpSecretUrl">Copy URL MCP</button>
+        </div>
+      </div>
+
+      <div class="rev-modal-grid">
+        <div class="rev-field">
+          <label for="cgptOpenApiInput">2. OpenAPI 3.1 (REST / Make / n8n)</label>
+          <div class="rev-copy-row">
+            <input id="cgptOpenApiInput" type="text" readonly>
+            <button type="button" class="rev-btn" data-copy-target="cgptOpenApiInput">Copy</button>
+          </div>
+        </div>
+        <div class="rev-field">
+          <label for="cgptMcpBearerInput">3. URL MCP chuẩn Bearer Token</label>
+          <div class="rev-copy-row">
+            <input id="cgptMcpBearerInput" type="text" readonly>
+            <button type="button" class="rev-btn" data-copy-target="cgptMcpBearerInput">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-field">
+        <div class="rev-prompt-head">
+          <label for="cgptHourlyPromptInput">4. Prompt dán vào ChatGPT Plus Scheduled Tasks (chạy mỗi giờ)</label>
+          <button type="button" class="rev-btn is-accent-soft" data-copy-target="cgptHourlyPromptInput">Copy Prompt hẹn giờ</button>
+        </div>
+        <textarea id="cgptHourlyPromptInput" rows="6" readonly></textarea>
+      </div>
+
+      <ol class="rev-cgpt-steps">
+        <li>Trên <strong>ChatGPT Web Plus</strong>, mở <code>chatgpt.com/plugins</code> (hoặc <em>Settings → Apps → Developer mode</em>) → <strong>Add custom MCP server</strong> → dán <strong>URL MCP</strong> ở mục 1 → chọn <strong>No authentication</strong> → <strong>Create</strong>.</li>
+        <li>Mở mục <strong>Scheduled (Lịch hẹn giờ)</strong> trong ChatGPT Plus, chọn chạy lặp lại <strong>mỗi giờ</strong>, gắn plugin vừa tạo (<code>@HSK SEO Editorial</code>) và dán <strong>Prompt hẹn giờ</strong> ở mục 4.</li>
+        <li>Mỗi giờ bài mới sẽ tự hiện trong tab <strong>Chờ duyệt</strong> của trang này kèm nhãn <strong>ChatGPT</strong> và điểm Hội đồng AI — chỉ khi bạn bấm <strong>✓ Duyệt &amp; Tự động xuất bản</strong> bài mới được push lên GitHub.</li>
+      </ol>
+
+      <div class="rev-modal-foot">
+        <button type="button" class="rev-btn" data-close-modal="chatgptModal">Đóng</button>
+      </div>
+    </div>
   </dialog>
 
   <script src="./src/seo-review-studio.js"></script>
