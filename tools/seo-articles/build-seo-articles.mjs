@@ -111,7 +111,7 @@ function renderHeader(prefix, currentKey) {
       <nav class="nav-links" aria-label="Điều hướng cụm trang học HSK">
 ${link(`${prefix}luyen-thi-hsk-1-mien-phi.html`, 'Luyện thi HSK', 'levels')}
 ${link(`${prefix}tra-diem-hsk.html`, 'Tra điểm HSK', 'score')}
-${link(`${prefix}tin-tuc-hsk.html`, 'Tin tức HSK', 'news')}
+${link(`${prefix}tin-tuc-hsk.html`, 'Cẩm nang HSK', 'news')}
         <details class="nav-dropdown">
           <summary${toolActive ? ' class="is-active"' : ''}>
             <span>Công cụ</span>
@@ -133,7 +133,7 @@ ${link(`${prefix}tap-viet-chu-han-online.html`, 'Tập viết chữ Hán', 'writ
 ${link(`${prefix}`, 'Trang chủ', 'home')}
 ${link(`${prefix}luyen-thi-hsk-1-mien-phi.html`, 'Luyện thi HSK 1–6', 'levels')}
 ${link(`${prefix}tra-diem-hsk.html`, 'Tra điểm HSK', 'score')}
-${link(`${prefix}tin-tuc-hsk.html`, 'Tin tức HSK', 'news')}
+${link(`${prefix}tin-tuc-hsk.html`, 'Cẩm nang HSK', 'news')}
 ${link(`${prefix}sua-cau-tieng-trung-ai.html`, 'Sửa câu AI', 'editor')}
 ${link(`${prefix}phan-biet-tu-de-nham-hsk.html`, 'Từ dễ nhầm HSK', 'compare')}
 ${link(`${prefix}tap-viet-chu-han-online.html`, 'Tập viết chữ Hán', 'write')}
@@ -740,8 +740,14 @@ function renderHubHtml(articles) {
   const sorted = [...articles].sort((a, b) => String(b.updatedAt || b.publishedAt).localeCompare(String(a.updatedAt || a.publishedAt)));
   const featured = sorted.find((a) => a.featured) || sorted[0];
   const dispatchItems = sorted.filter((a) => !featured || a.slug !== featured.slug).slice(0, 3);
+  const leadSlugs = new Set([featured?.slug, ...dispatchItems.map((i) => i.slug)].filter(Boolean));
   const canonical = `${BASE_URL}/tin-tuc-hsk`;
   const latestUpdated = sorted[0] ? formatDateVi(sorted[0].updatedAt || sorted[0].publishedAt) : '';
+
+  const catCounts = { 'ky-thi': 0, 'diem-so': 0, 'meo-hoc': 0, 'ngu-phap': 0 };
+  for (const a of sorted) {
+    if (catCounts[a.category] !== undefined) catCounts[a.category]++;
+  }
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -750,7 +756,7 @@ function renderHubHtml(articles) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'HSK Flashcards', item: `${BASE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Tin tức & Mẹo thi HSK', item: canonical },
+          { '@type': 'ListItem', position: 2, name: 'Cẩm nang & Tin tức HSK', item: canonical },
         ],
       },
       {
@@ -803,7 +809,6 @@ ${dispatchItems.map((item) => {
   const itemCat = item.categoryLabel || CATEGORIES[item.category];
   return `              <a class="news-dispatch-item" href="./bai-viet/${escHtml(item.slug)}.html">
                 <strong>${escHtml(item.title)}</strong>
-                <p>${escHtml(item.summary)}</p>
                 <div class="dispatch-meta">
                   <span class="cat-badge cat-${escHtml(item.category)}">${escHtml(itemCat)}</span>
                   <span>${escHtml(formatDateVi(item.updatedAt || item.publishedAt))} · ${Number(item.readMinutes) || 5} phút</span>
@@ -818,7 +823,8 @@ ${dispatchItems.map((item) => {
   const cardsHtml = sorted.map((a) => {
     const catLabel = a.categoryLabel || CATEGORIES[a.category];
     const kw = [a.title, a.summary, a.hskTag, catLabel, ...(a.keywords || [])].join(' ');
-    return `          <article class="news-card" data-cat="${escHtml(a.category)}" data-kw="${escHtml(kw)}">
+    const inLeadAttr = leadSlugs.has(a.slug) ? ' data-in-lead="1"' : '';
+    return `          <article class="news-card" data-cat="${escHtml(a.category)}" data-kw="${escHtml(kw)}"${inLeadAttr}>
             <h3><a href="./bai-viet/${escHtml(a.slug)}.html">${escHtml(a.title)}</a></h3>
             <p>${escHtml(a.summary)}</p>
             <div class="news-card-foot">
@@ -836,7 +842,7 @@ ${dispatchItems.map((item) => {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Tin tức kỳ thi HSK, lịch thi 2026–2027, điểm thi &amp; ngữ pháp | HSK Flashcards</title>
+  <title>Cẩm nang HSK: Lịch thi 2026–2027, điểm thi &amp; ngữ pháp | HSK Flashcards</title>
   <meta name="description" content="Cập nhật chính thức từ chinesetest.cn: lịch thi &amp; lịch trả điểm HSK 2026–2027, danh sách điểm thi tại Việt Nam, thông báo HSK 3.0, cách tra điểm, mẹo học và ngữ pháp HSK.">
   <link rel="canonical" href="${canonical}">
   <link rel="icon" href="./icon-192.png" type="image/png">
@@ -845,12 +851,12 @@ ${dispatchItems.map((item) => {
   <meta property="og:type" content="website">
   <meta property="og:locale" content="vi_VN">
   <meta property="og:site_name" content="HSK Flashcards">
-  <meta property="og:title" content="Tin tức kỳ thi HSK, lịch thi 2026–2027, điểm thi &amp; ngữ pháp">
+  <meta property="og:title" content="Cẩm nang HSK: Lịch thi 2026–2027, điểm thi &amp; ngữ pháp">
   <meta property="og:description" content="Tổng hợp lịch thi &amp; lịch trả kết quả HSK từ chinesetest.cn, điểm thi Việt Nam, thông báo thay đổi kỳ thi HSK 3.0, mẹo học và phân biệt ngữ pháp.">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${BASE_URL}/icon-512.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tin tức kỳ thi HSK, lịch thi 2026–2027, điểm thi &amp; ngữ pháp">
+  <meta name="twitter:title" content="Cẩm nang HSK: Lịch thi 2026–2027, điểm thi &amp; ngữ pháp">
   <meta name="twitter:description" content="Tra cứu nhanh lịch thi HSK 2026–2027, lịch trả kết quả, địa điểm thi tại Việt Nam, cấu trúc bài thi và mẹo học HSK.">
   <meta name="twitter:image" content="${BASE_URL}/icon-512.png">
   <link rel="stylesheet" href="./src/seo-news.css">
@@ -866,12 +872,12 @@ ${renderHeader('./', 'news')}
       <div class="wrap">
         <ol class="article-crumb" aria-label="Đường dẫn">
           <li><a href="./">HSK Flashcards</a></li>
-          <li aria-current="page">Tin tức &amp; Mẹo HSK</li>
+          <li aria-current="page">Cẩm nang HSK</li>
         </ol>
         <div class="news-masthead-row">
           <div class="news-masthead-copy">
-            <h1 id="hero-title">Tin tức kỳ thi HSK &amp; Cẩm nang tự học</h1>
-            <p>Đối chiếu trực tiếp từ ChineseTest (chinesetest.cn): lịch thi và trả điểm 2026–2027, điểm thi Việt Nam, thông báo HSK 3.0 cùng mẹo học – ngữ pháp trọng tâm.</p>
+            <h1 id="hero-title">Cẩm nang &amp; Tin tức kỳ thi HSK</h1>
+            <p>Đối chiếu trực tiếp từ ChineseTest (chinesetest.cn): lịch thi và trả điểm 2026–2027, điểm thi Việt Nam, thông báo HSK 3.0 cùng hệ thống bài ngữ pháp – phân biệt trọng tâm.</p>
           </div>
           <div class="news-masthead-actions">
             <a class="btn-secondary" href="./tra-diem-hsk.html">
@@ -891,19 +897,27 @@ ${featuredHtml}
         <div class="news-toolbar" id="danh-sach-bai-viet">
           <div class="news-tabs" role="tablist" aria-label="Lọc bài viết theo chuyên mục">
             <button type="button" class="news-tab" role="tab" aria-selected="true" data-cat-btn="all">Tất cả (${sorted.length})</button>
-            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="ky-thi">Kỳ thi &amp; Đăng ký</button>
-            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="diem-so">Điểm số &amp; Tra điểm</button>
-            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="meo-hoc">Mẹo học HSK</button>
-            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="ngu-phap">Phân biệt &amp; Ngữ pháp</button>
+            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="ngu-phap">Phân biệt &amp; Ngữ pháp (${catCounts['ngu-phap']})</button>
+            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="ky-thi">Kỳ thi &amp; Đăng ký (${catCounts['ky-thi']})</button>
+            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="diem-so">Điểm số &amp; Tra điểm (${catCounts['diem-so']})</button>
+            <button type="button" class="news-tab" role="tab" aria-selected="false" data-cat-btn="meo-hoc">Mẹo học HSK (${catCounts['meo-hoc']})</button>
           </div>
           <div class="search-input-wrap news-search-wrap">
             <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="search" id="newsSearch" class="search-input" placeholder="Tìm lịch thi 2027, HSK 3.0, tra điểm, ngữ pháp..." aria-label="Tìm bài viết HSK">
+            <input type="search" id="newsSearch" class="search-input" placeholder="Tìm lịch thi 2027, HSK 3.0, từ loại, lỗi sai..." aria-label="Tìm bài viết HSK">
           </div>
         </div>
 
         <div class="news-grid" id="newsGrid">
 ${cardsHtml}
+        </div>
+
+        <div class="news-pagination" id="newsPagination" hidden>
+          <span class="news-page-status" id="newsPageStatus" aria-live="polite"></span>
+          <div class="news-load-actions">
+            <button type="button" class="news-load-btn is-primary" id="newsLoadMoreBtn">Xem thêm bài viết</button>
+            <button type="button" class="news-load-btn" id="newsShowAllBtn">Xem tất cả</button>
+          </div>
         </div>
 
         <p class="empty-state" id="newsEmpty" hidden>
@@ -941,10 +955,16 @@ ${renderFooter('./')}
         });
       }
 
+      var PAGE_SIZE = 6;
+      var visibleLimit = PAGE_SIZE;
       var searchEl = document.getElementById('newsSearch');
       var catBtns = document.querySelectorAll('[data-cat-btn]');
       var cards = Array.prototype.slice.call(document.querySelectorAll('#newsGrid .news-card'));
       var emptyEl = document.getElementById('newsEmpty');
+      var paginationEl = document.getElementById('newsPagination');
+      var pageStatusEl = document.getElementById('newsPageStatus');
+      var loadMoreBtn = document.getElementById('newsLoadMoreBtn');
+      var showAllBtn = document.getElementById('newsShowAllBtn');
       var activeCat = 'all';
 
       function norm(s) {
@@ -953,31 +973,296 @@ ${renderFooter('./')}
 
       function applyFilter() {
         var q = norm(searchEl ? searchEl.value.trim() : '');
-        var shown = 0;
+        var matched = [];
         cards.forEach(function (card) {
           var okCat = activeCat === 'all' || card.getAttribute('data-cat') === activeCat;
           var okQ = !q || norm(card.getAttribute('data-kw')).indexOf(q) !== -1;
-          var vis = okCat && okQ;
-          card.hidden = !vis;
-          if (vis) shown++;
+          var skipDuplicateLead = activeCat === 'all' && !q && card.getAttribute('data-in-lead') === '1';
+          if (okCat && okQ && !skipDuplicateLead) {
+            matched.push(card);
+          } else {
+            card.hidden = true;
+          }
         });
-        if (emptyEl) emptyEl.hidden = shown > 0;
+
+        var shownCount = Math.min(matched.length, visibleLimit);
+        matched.forEach(function (card, idx) {
+          card.hidden = idx >= shownCount;
+        });
+
+        if (emptyEl) emptyEl.hidden = matched.length > 0;
+
+        var remaining = matched.length - shownCount;
+        if (paginationEl) {
+          paginationEl.hidden = remaining <= 0;
+        }
+        if (pageStatusEl) {
+          pageStatusEl.textContent = 'Đang hiển thị ' + shownCount + ' / ' + matched.length + ' bài viết';
+        }
+        if (loadMoreBtn) {
+          var nextBatch = Math.min(PAGE_SIZE, remaining);
+          loadMoreBtn.textContent = 'Xem thêm ' + nextBatch + ' bài viết';
+        }
+        if (showAllBtn) {
+          showAllBtn.textContent = 'Xem tất cả (' + matched.length + ')';
+        }
       }
 
-      if (searchEl) searchEl.addEventListener('input', applyFilter);
+      if (searchEl) {
+        searchEl.addEventListener('input', function () {
+          visibleLimit = PAGE_SIZE;
+          applyFilter();
+        });
+      }
       catBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
           activeCat = btn.getAttribute('data-cat-btn') || 'all';
+          visibleLimit = PAGE_SIZE;
           catBtns.forEach(function (b) { b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
           applyFilter();
         });
       });
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function () {
+          visibleLimit += PAGE_SIZE;
+          applyFilter();
+        });
+      }
+      if (showAllBtn) {
+        showAllBtn.addEventListener('click', function () {
+          visibleLimit = cards.length;
+          applyFilter();
+        });
+      }
+
+      applyFilter();
     })();
   </script>
   <script src="./src/seo-offline-prewarm.js" defer></script>
 </body>
 </html>
 `;
+}
+
+const TOPIC_CLUSTER_PAGES = [
+  {
+    key: 'index',
+    file: 'index.html',
+    bandClass: 'band band-surface',
+    sectionId: 'cam-nang-hsk',
+    heading: 'Cẩm nang tự học & kỳ thi HSK chọn lọc',
+    subtitle: 'Tổng hợp bài hướng dẫn ngữ pháp cốt lõi, mẹo tránh lỗi người Việt và lịch ChineseTest cập nhật mới nhất.',
+    preferredSlugs: [
+      'cac-loai-tu-trong-tieng-trung-co-ban',
+      'lich-thi-hsk-va-lich-tra-ket-qua-chinh-thuc',
+      '10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac',
+    ],
+    preferredCategories: ['ngu-phap', 'ky-thi', 'meo-hoc'],
+  },
+  {
+    key: 'compare',
+    file: 'phan-biet-tu-de-nham-hsk.html',
+    bandClass: 'band',
+    sectionId: 'bai-viet-phan-biet-lien-quan',
+    heading: 'Bài hướng dẫn phân biệt chuyên sâu nên đọc tiếp',
+    subtitle: 'Đi sâu vào từng nhóm từ hay gài bẫy trong đề thi HSK kèm bảng đối chiếu và ví dụ Pinyin – tiếng Việt.',
+    preferredSlugs: [
+      'phan-biet-de-de-de-trong-tieng-trung-hsk',
+      'phan-biet-guo-zhe-le-tro-tu-dong-thai-hsk',
+      'phan-biet-xiang-yao-hui-neng-keyi-hsk',
+      'phan-biet-cac-cap-tu-hay-nham-khi-thi-hsk',
+    ],
+    preferredCategories: ['ngu-phap'],
+  },
+  {
+    key: 'editor',
+    file: 'sua-cau-tieng-trung-ai.html',
+    bandClass: 'band band-surface',
+    sectionId: 'bai-viet-sua-loi-lien-quan',
+    heading: 'Cẩm nang tránh lỗi ngữ pháp & đặt câu chuẩn HSK',
+    subtitle: 'Nắm chắc các lỗi người Việt hay mắc nhất trước khi viết câu HSK 3–5 hoặc đưa vào Sửa câu AI.',
+    preferredSlugs: [
+      '10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac',
+      'cac-loai-tu-trong-tieng-trung-co-ban',
+      'cau-chu-ba-va-cau-chu-bei-trong-tieng-trung',
+      'tong-hop-ngu-phap-hsk-quan-trong-hay-thi',
+    ],
+    preferredCategories: ['ngu-phap', 'meo-hoc'],
+  },
+  {
+    key: 'hsk1',
+    file: 'luyen-thi-hsk-1-mien-phi.html',
+    bandClass: 'band',
+    sectionId: 'cam-nang-hsk-1',
+    heading: 'Bài đọc nền tảng dành riêng cho người học HSK 1',
+    subtitle: 'Củng cố từ loại tiếng Trung, động từ năng nguyện cơ bản và tránh các lỗi dịch từng chữ thường gặp.',
+    preferredSlugs: [
+      'cac-loai-tu-trong-tieng-trung-co-ban',
+      'phan-biet-xiang-yao-hui-neng-keyi-hsk',
+      '10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac',
+    ],
+    preferredCategories: ['ngu-phap', 'meo-hoc'],
+  },
+  {
+    key: 'hsk2',
+    file: 'luyen-thi-hsk-2-mien-phi.html',
+    bandClass: 'band',
+    sectionId: 'cam-nang-hsk-2',
+    heading: 'Bài đọc trọng tâm giúp vững nền tảng HSK 2',
+    subtitle: 'Hiểu đúng bản chất trợ từ 了/着/过, phân biệt 想/要/会/能/可以 và sửa 10 lỗi câu cơ bản.',
+    preferredSlugs: [
+      'phan-biet-guo-zhe-le-tro-tu-dong-thai-hsk',
+      'phan-biet-xiang-yao-hui-neng-keyi-hsk',
+      '10-loi-sai-ngu-phap-tieng-trung-co-ban-nguoi-viet-hay-mac',
+    ],
+    preferredCategories: ['ngu-phap', 'meo-hoc'],
+  },
+  {
+    key: 'hsk3',
+    file: 'luyen-thi-hsk-3-mien-phi.html',
+    bandClass: 'band',
+    sectionId: 'cam-nang-hsk-3',
+    heading: 'Bài đọc chuyên sâu cho lộ trình HSK 3',
+    subtitle: 'Xử lý gọn 3 chữ 的/地/得, câu chữ 把/被 và các trợ từ động thái hay ra nhất trong đề HSK 3.',
+    preferredSlugs: [
+      'phan-biet-de-de-de-trong-tieng-trung-hsk',
+      'cau-chu-ba-va-cau-chu-bei-trong-tieng-trung',
+      'phan-biet-guo-zhe-le-tro-tu-dong-thai-hsk',
+    ],
+    preferredCategories: ['ngu-phap', 'meo-hoc'],
+  },
+  {
+    key: 'hsk4',
+    file: 'luyen-thi-hsk-4-mien-phi.html',
+    bandClass: 'band',
+    sectionId: 'cam-nang-hsk-4',
+    heading: 'Bài đọc tăng điểm Đọc & Viết HSK 4',
+    subtitle: 'Hệ thống cấu trúc câu chữ 把/被, phân biệt 的/地/得 và 10 khung ngữ pháp trọng tâm HSK 4.',
+    preferredSlugs: [
+      'tong-hop-ngu-phap-hsk-quan-trong-hay-thi',
+      'cau-chu-ba-va-cau-chu-bei-trong-tieng-trung',
+      'phan-biet-de-de-de-trong-tieng-trung-hsk',
+    ],
+    preferredCategories: ['ngu-phap', 'meo-hoc'],
+  },
+  {
+    key: 'hsk5',
+    file: 'luyen-thi-hsk-5-mien-phi.html',
+    bandClass: 'band',
+    sectionId: 'cam-nang-hsk-5',
+    heading: 'Cẩm nang chiến lược & cấu trúc nâng cao cho HSK 5',
+    subtitle: 'Nâng tốc độ đọc hiểu – viết đoạn và theo dõi chuẩn thang điểm, lịch thi chính thức.',
+    preferredSlugs: [
+      'meo-luyen-nghe-va-doc-hieu-hsk-tang-diem-nhanh',
+      'cau-chu-ba-va-cau-chu-bei-trong-tieng-trung',
+      'thang-diem-dau-hsk-1-den-6',
+    ],
+    preferredCategories: ['meo-hoc', 'ngu-phap', 'diem-so'],
+  },
+  {
+    key: 'hsk6',
+    file: 'luyen-thi-hsk-6-mien-phi.html',
+    bandClass: 'band',
+    sectionId: 'cam-nang-hsk-6',
+    heading: 'Cẩm nang luyện đề & thông tin kỳ thi HSK 6 – HSK 3.0',
+    subtitle: 'Tổng hợp mẹo xử lý bài đọc dài, quy chế điểm xét học bổng và lộ trình HSK 7–9 mới.',
+    preferredSlugs: [
+      'thong-bao-hsk-3-0-moi-nhat-va-cau-truc-bai-thi',
+      'meo-luyen-nghe-va-doc-hieu-hsk-tang-diem-nhanh',
+      'thang-diem-dau-hsk-1-den-6',
+    ],
+    preferredCategories: ['ky-thi', 'meo-hoc', 'diem-so'],
+  },
+];
+
+export function selectClusterArticles(articles, pageKey, limit = 3) {
+  const cfg = TOPIC_CLUSTER_PAGES.find((p) => p.key === pageKey || p.file === pageKey);
+  const sorted = [...articles].sort((a, b) =>
+    String(b.updatedAt || b.publishedAt).localeCompare(String(a.updatedAt || a.publishedAt))
+  );
+  const bySlug = new Map(sorted.map((a) => [a.slug, a]));
+  const picked = [];
+  const seen = new Set();
+
+  const pushUnique = (item) => {
+    if (!item || seen.has(item.slug) || picked.length >= limit) return;
+    seen.add(item.slug);
+    picked.push(item);
+  };
+
+  if (pageKey === 'index') {
+    for (const cat of cfg.preferredCategories) {
+      const newestCat = sorted.find((a) => a.category === cat && !seen.has(a.slug));
+      pushUnique(newestCat);
+    }
+  }
+
+  for (const slug of cfg?.preferredSlugs || []) {
+    pushUnique(bySlug.get(slug));
+  }
+
+  for (const cat of cfg?.preferredCategories || []) {
+    for (const art of sorted) {
+      if (art.category === cat) pushUnique(art);
+    }
+  }
+
+  for (const art of sorted) {
+    pushUnique(art);
+  }
+
+  return picked.slice(0, limit);
+}
+
+function renderClusterBlock(cfg, selectedArticles) {
+  const cards = selectedArticles
+    .map((a) => {
+      const catLabel = a.categoryLabel || CATEGORIES[a.category];
+      return `          <a class="cluster-card" href="./bai-viet/${escHtml(a.slug)}.html">
+            <h3>${escHtml(a.title)}</h3>
+            <p>${escHtml(a.summary)}</p>
+            <div class="cluster-card-foot">
+              <span class="cluster-cat is-${escHtml(a.category)}">${escHtml(catLabel)}</span>
+              <span class="cluster-read">Đọc bài →</span>
+            </div>
+          </a>`;
+    })
+    .join('\n');
+
+  return `<!-- SEO_CLUSTER:START -->
+    <section class="${cfg.bandClass}" id="${cfg.sectionId}" aria-labelledby="${cfg.sectionId}-title">
+      <div class="wrap">
+        <div class="cluster-head-row">
+          <div class="section-head">
+            <h2 id="${cfg.sectionId}-title">${escHtml(cfg.heading)}</h2>
+            <p>${escHtml(cfg.subtitle)}</p>
+          </div>
+          <a class="cluster-all-link" href="./tin-tuc-hsk.html">Xem tất cả cẩm nang →</a>
+        </div>
+        <div class="cluster-grid">
+${cards}
+        </div>
+      </div>
+    </section>
+    <!-- SEO_CLUSTER:END -->`;
+}
+
+export function syncTopicClusters(articles) {
+  let updatedPages = 0;
+  for (const cfg of TOPIC_CLUSTER_PAGES) {
+    const filePath = path.join(ROOT, cfg.file);
+    if (!fs.existsSync(filePath)) continue;
+    const html = fs.readFileSync(filePath, 'utf8');
+    const markerRe = /<!--\s*SEO_CLUSTER:START\s*-->[\s\S]*?<!--\s*SEO_CLUSTER:END\s*-->/;
+    if (!markerRe.test(html)) continue;
+    const picked = selectClusterArticles(articles, cfg.key, 3);
+    const nextHtml = html.replace(markerRe, renderClusterBlock(cfg, picked));
+    if (nextHtml !== html) {
+      fs.writeFileSync(filePath, nextHtml, 'utf8');
+      updatedPages++;
+    }
+  }
+  return updatedPages;
 }
 
 export function buildAllSeoArticles() {
@@ -1000,6 +1285,7 @@ export function buildAllSeoArticles() {
     fs.writeFileSync(path.join(OUT_DIR, `${article.slug}.html`), html, 'utf8');
   }
   fs.writeFileSync(HUB_PATH, renderHubHtml(articles), 'utf8');
+  const clustersSynced = syncTopicClusters(articles);
 
   const urls = [
     `${BASE_URL}/`,
@@ -1014,10 +1300,10 @@ export function buildAllSeoArticles() {
     '\n</urlset>\n';
   fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
 
-  return { count: articles.length, urls: uniqueUrls.length };
+  return { count: articles.length, urls: uniqueUrls.length, clustersSynced };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const res = buildAllSeoArticles();
-  console.log(`Built tin-tuc-hsk.html + ${res.count} SEO articles in bai-viet/ + sitemap.xml (${res.urls} URLs)`);
+  console.log(`Built tin-tuc-hsk.html + ${res.count} SEO articles in bai-viet/ + ${res.clustersSynced} cluster bands + sitemap.xml (${res.urls} URLs)`);
 }
