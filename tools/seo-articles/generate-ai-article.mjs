@@ -17,6 +17,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CATEGORIES, buildAllSeoArticles, validateArticle } from './build-seo-articles.mjs';
 import {
+  WRITER_STANDARD_ID,
+  WRITER_STYLES,
+  WRITER_SYSTEM_PROMPT,
+  selectWriterStyle,
+} from '../../server/seo-editorial/writer-standard.mjs';
+import {
   CHINESETEST_ORIGIN,
   LEGACY_SOURCE_URL,
   SNAPSHOT_PATH,
@@ -26,6 +32,8 @@ import {
   scanChineseTestNews,
   syncChineseTestOfficial,
 } from './sync-chinesetest-official.mjs';
+
+export { WRITER_STANDARD_ID, WRITER_STYLES, selectWriterStyle };
 
 export const DEFAULT_OPENROUTER_MODEL = 'google/gemma-4-31b-it:free';
 export const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash';
@@ -218,10 +226,10 @@ THÔNG TIN XUẤT BẢN:
 - Ngày cập nhật: ${today}
 - Danh sách slug hiện có để chọn 2–3 bài liên quan trong relatedSlugs: ${existingSlugs.join(', ')}
 
-NGUYÊN TẮC VÀNG (VI PHẠM SẼ BỊ TỪ CHỐI):
+NGUYÊN TẮC VÀNG (${WRITER_STANDARD_ID} — VI PHẠM SẼ BỊ TỪ CHỐI):
 1. CHỈ DÙNG dữ kiện, ngày tháng, con số, địa điểm và quy định có thật trong bản tin gốc / dữ liệu ChineseTest phía trên; TUYỆT ĐỐI KHÔNG tự bịa ngày thi, lệ phí hoặc sự kiện không có trong nguồn.
-2. ĐỔI MỚI VĂN PHONG 100%: Đặt lại tiêu đề H1 hấp dẫn chuẩn tìm kiếm tiếng Việt, sắp xếp lại bố cục 3–4 mục (H2) theo đúng văn phong [${voice.label}], thêm góc nhìn thực tế cho thí sinh tại Việt Nam.
-3. TUYỆT ĐỐI KHÔNG nhắc đến hạn chế ("hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập") và KHÔNG dùng biểu tượng emoji. Nhắc tự nhiên tới việc ôn luyện miễn phí (đề HSK 1–6, flashcard SRS, Gia sư AI giải thích tiếng Việt) trong phần kết và CTA.
+2. ĐỔI MỚI VĂN PHONG 100%: Đặt lại tiêu đề H1 hấp dẫn chuẩn tìm kiếm tiếng Việt, sắp xếp lại bố cục 3–4 mục (H2) theo đúng văn phong [${voice.label}], thêm góc nhìn thực tế cho thí sinh tại Việt Nam. KHÔNG dùng đại từ trò chuyện ("mình/bạn nhé/nha") hay cụm sáo rỗng AI.
+3. TUYỆT ĐỐI KHÔNG nhắc đến hạn chế ("hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập"), KHÔNG tự chấm điểm/duyệt bài và KHÔNG dùng biểu tượng emoji. Nhắc tự nhiên tới việc ôn luyện miễn phí (đề HSK 1–6, flashcard SRS, Gia sư AI giải thích tiếng Việt) trong phần kết và CTA.
 4. Luôn đưa link gốc ${newsDetail.url} vào mảng sources[].
 
 CHỈ TRẢ VỀ ĐÚNG 01 OBJECT JSON HỢP LỆ (không markdown, không giải thích ngoài JSON):
@@ -309,10 +317,10 @@ THÔNG TIN ĐẦU BÀI:
 - Ngày cập nhật: ${today}
 - Danh sách slug bài viết hiện có để chọn 2–3 bài liên quan trong relatedSlugs: ${existingSlugs.join(', ')}
 
-QUY TẮC BẮT BUỘC:
+QUY TẮC BẮT BUỘC (${WRITER_STANDARD_ID}):
 1. ${groundingRule}
-2. KHÔNG nhắc đến các điểm hạn chế như "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập" và KHÔNG dùng emoji. Nhấn mạnh tính năng miễn phí (Gia sư AI giải đáp tiếng Việt, sửa câu AI, luyện đề HSK 1–6, flashcard SRS, tập viết chữ Hán).
-3. Viết rõ ràng, súc tích, không nhồi từ khóa phản cảm. Có 3 đến 4 mục (sections) rõ ràng; ít nhất 1 bảng dữ liệu/so sánh (table) hoặc ví dụ tiếng Trung chuẩn (chữ Hán giản thể + pinyin có dấu thanh + dịch tiếng Việt); và 2–3 câu hỏi FAQ tự nhiên chuẩn Google Search.
+2. KHÔNG nhắc đến các điểm hạn chế như "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập", KHÔNG dùng văn phong trò chuyện ("mình/bạn nhé/nha"), KHÔNG dùng từ sáo rỗng cường điệu, KHÔNG tự chấm điểm/duyệt bài và KHÔNG dùng emoji. Nhấn mạnh tính năng miễn phí có thật (Gia sư AI giải đáp tiếng Việt, sửa câu AI, luyện đề HSK 1–6, flashcard SRS, tập viết chữ Hán).
+3. Viết rõ ràng, súc tích, không nhồi từ khóa phản cảm. Có 3 đến 4 mục (sections) rõ ràng; ít nhất 1 bảng dữ liệu/so sánh (table <= 6 dòng) khi cần đối chiếu hoặc ví dụ tiếng Trung chuẩn (chữ Hán giản thể + pinyin có dấu thanh + dịch tiếng Việt); và 2–3 câu hỏi FAQ mang giá trị bổ sung chuẩn Google Search.
 4. Trích dẫn đúng các URL chính thức của ChineseTest (${CHINESETEST_ORIGIN}/...) hoặc sourceUrl (${sourceUrl || 'nếu có'}) vào mảng sources[] khi bài thuộc chuyên mục ky-thi hoặc diem-so.
 
 CHỈ TRẢ VỀ ĐÚNG 01 OBJECT JSON HỢP LỆ (không markdown, không giải thích ngoài JSON) theo cấu trúc:
@@ -571,8 +579,7 @@ export async function callOpenRouterJson(prompt, apiKey, model = DEFAULT_OPENROU
           messages: [
             {
               role: 'system',
-              content:
-                'Bạn là biên tập viên SEO tiếng Việt cho HSK Flashcards. Chỉ trả về duy nhất 01 object JSON hợp lệ, không kèm giải thích hay markdown.',
+              content: WRITER_SYSTEM_PROMPT,
             },
             { role: 'user', content: prompt },
           ],

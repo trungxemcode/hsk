@@ -8,25 +8,34 @@
  * Step 4: Admin makes the final publish / rewrite decision on the private review studio.
  */
 import { extractJsonObject } from './generate-ai-article.mjs';
+import {
+  AUDIT_PROTOCOL_ID,
+  AUDITOR_SYSTEM_PROMPT,
+  buildAuditorPrompt,
+  computeAuditScoreAndVerdict,
+  sanitizeAuditFeedbackForWriter,
+} from '../../server/seo-editorial/audit-protocol.mjs';
 
 export const XKIRO_API_URL = 'https://api.xkiro.com/v1/chat/completions';
 
 export const DEFAULT_XKIRO_REVIEWERS = Object.freeze([
   {
     id: 'command-a-plus',
+    round: 1,
     label: 'Command A+',
     model: 'cohere/command-a-plus',
-    role: 'Chuyên gia Ngữ pháp & Pinyin HSK',
+    role: 'Vòng 1 · Kiểm duyệt sơ bộ Ngữ pháp, Pinyin & Search Intent',
     focus:
-      'Kiểm tra độ chính xác của chữ Hán giản thể, dấu thanh điệu Pinyin (ā á ǎ à...), giải thích ngữ pháp HSK, sự khớp nghĩa giữa câu tiếng Trung và tiếng Việt, và các lỗi dịch máy thường gặp ở người Việt.',
+      'Thực hiện Kiểm duyệt Vòng 1 (SEO-AUDITOR-01): khóa Search Intent độc lập, soát chữ Hán giản thể, dấu thanh điệu Pinyin, ngoại lệ ngữ pháp HSK và ví dụ.',
   },
   {
     id: 'mistral-large-3',
+    round: 2,
     label: 'Mistral Large 3',
     model: 'mistralai/mistral-large-2512',
-    role: 'Biên tập viên SEO & Độ tự nhiên tiếng Việt',
+    role: 'Vòng 2 · Kiểm duyệt độc lập Thang 100 điểm & Phê duyệt',
     focus:
-      'Kiểm tra bố cục SEO (metaTitle 35–75 ký tự, metaDescription 110–170 ký tự), văn phong tiếng Việt tự nhiên không sáo rỗng AI, mỗi bảng <= 6 dòng dễ quét, đủ FAQ/CTA thực tế, và tuyệt đối không chứa các cụm bị cấm ("hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập").',
+      'Thực hiện Kiểm duyệt Vòng 2 độc lập (SEO-AUDITOR-01): rà soát lại toàn bài như bản thảo mới, chấm thang điểm 100 (A..J), kiểm tra Hard Fail và quyết định APPROVED / REVISION_REQUIRED / REJECTED.',
   },
 ]);
 
@@ -115,50 +124,32 @@ export async function callXkiroJson({
   throw lastError || new Error(`xKiro (${model}) request failed`);
 }
 
-export function buildReviewerPrompt(reviewer, article, trendQuery = '') {
+export function buildReviewerPrompt(reviewer, article, trendQuery = '', extra = {}) {
+  const round = Number(extra?.round || reviewer?.round) === 2 ? 2 : 1;
   return {
-    systemPrompt: `Bạn là ${reviewer.label} giữ vai trò "${reviewer.role}" trong hội đồng kiểm duyệt chất lượng bài viết SEO tiếng Trung HSK cho người Việt trước khi gửi tới Admin duyệt cuối.
-Chuyên môn trọng tâm của bạn: ${reviewer.focus}
-Hãy đánh giá trung thực, khắt khe nhưng mang tính xây dựng, chỉ trả về DUY NHẤT một JSON object hợp lệ (không markdown ngoài JSON) theo schema:
-{
-  "score": 88,
-  "verdict": "pass" | "revise",
-  "summary": "Nhận xét tổng quan 1-2 câu bằng tiếng Việt",
-  "strengths": ["Điểm mạnh 1", "Điểm mạnh 2"],
-  "issues": ["Điểm cần lưu ý hoặc còn yếu nếu có"],
-  "mustFix": ["Lỗi sai nghiêm trọng bắt buộc AI viết lại phải sửa, để [] nếu không có"]
-}`,
-    userPrompt: `Hãy kiểm duyệt bài viết SEO tiếng Trung sau (từ khóa xu hướng: "${trendQuery || article?.title || ''}"):
-
-${JSON.stringify(article, null, 2)}
-
-Quy tắc chấm điểm:
-- score >= 82 và verdict = "pass" nếu chính xác chữ Hán/Pinyin/ngữ pháp, tiếng Việt tự nhiên, bảng <= 6 dòng, đủ ví dụ và FAQ, không có lỗi cấm.
-- verdict = "revise" và liệt kê rõ mustFix[] nếu phát hiện sai Pinyin, sai nghĩa Hán–Việt, văn mẫu cứng nhắc, thiếu ví dụ/bảng, bảng > 6 dòng, hoặc chứa từ cấm ("hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập").`,
+    systemPrompt: AUDITOR_SYSTEM_PROMPT,
+    userPrompt: buildAuditorPrompt({
+      round,
+      reviewerLabel: reviewer.label,
+      reviewerRole: reviewer.role,
+      article,
+      writerBrief: extra?.writerBrief || null,
+      trendQuery,
+      category: extra?.category || article?.category || 'meo-hoc',
+    }),
   };
 }
 
 function normalizeReviewerResult(reviewer, raw) {
-  const numScore = Number(raw?.score);
-  const score = Number.isFinite(numScore) ? Math.max(0, Math.min(100, Math.round(numScore))) : 75;
-  const mustFix = Array.isArray(raw?.mustFix) ? raw.mustFix.map((x) => String(x || '').trim()).filter(Boolean) : [];
-  const issues = Array.isArray(raw?.issues) ? raw.issues.map((x) => String(x || '').trim()).filter(Boolean) : [];
-  const strengths = Array.isArray(raw?.strengths) ? raw.strengths.map((x) => String(x || '').trim()).filter(Boolean) : [];
-  const rawVerdict = String(raw?.verdict || '').toLowerCase();
-  const verdict = rawVerdict === 'revise' || mustFix.length > 0 || score < 82 ? 'revise' : 'pass';
-
+  const round = Number(reviewer?.round) === 2 ? 2 : 1;
+  const computed = computeAuditScoreAndVerdict(raw, { round });
   return {
     id: reviewer.id,
     label: reviewer.label,
     model: reviewer.model,
     role: reviewer.role,
     status: 'completed',
-    score,
-    verdict,
-    summary: String(raw?.summary || '').trim() || (verdict === 'pass' ? 'Đạt chuẩn kiểm duyệt.' : 'Cần chỉnh sửa thêm.'),
-    strengths,
-    issues,
-    mustFix,
+    ...computed,
     reviewedAt: new Date().toISOString(),
   };
 }
@@ -256,26 +247,29 @@ export async function runDualXkiroReview({
   }
 
   const scored = results.filter((r) => typeof r.score === 'number');
+  const round2 = results.find((r) => r.round === 2 && typeof r.score === 'number');
   const averageScore = scored.length
     ? Math.round(scored.reduce((acc, r) => acc + r.score, 0) / scored.length)
     : null;
+  const finalScore = round2 ? round2.score : averageScore;
   const needsAutoPolish = results.some(
-    (r) => r.status === 'completed' && (r.verdict === 'revise' || r.score < 82 || r.mustFix.length > 0)
+    (r) =>
+      r.status === 'completed' &&
+      (r.auditVerdict === 'REVISION_REQUIRED' || r.verdict === 'revise' || r.score < 85 || r.mustFix.length > 0)
   );
   const combinedFeedback = results
     .filter((r) => r.status === 'completed')
-    .map((r) => {
-      const items = [...r.mustFix.map((x) => `[Bắt buộc sửa] ${x}`), ...r.issues];
-      return `### ${r.label} (${r.model} · ${r.score}/100 · ${r.verdict})\nTóm tắt: ${r.summary}\n${items.map((x) => `- ${x}`).join('\n')}`;
-    })
+    .map((r) => `### ${r.label} (${r.model} · ${r.score}/100 · ${r.auditVerdict || r.verdict})\n${sanitizeAuditFeedbackForWriter(r)}`)
     .join('\n\n');
 
   const completedCount = scored.length;
   return {
+    protocol: AUDIT_PROTOCOL_ID,
     status: completedCount === cfg.reviewers.length ? 'completed' : completedCount > 0 ? 'partial' : 'error',
     provider: 'xkiro',
-    pipeline: ['gemma-4', 'command-a-plus', 'mistral-large-3', 'admin'],
+    pipeline: ['writer-seo-01', 'command-a-plus', 'mistral-large-3', 'admin'],
     averageScore,
+    finalScore,
     needsAutoPolish,
     autoPolished: false,
     polishSummary: '',

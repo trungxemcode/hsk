@@ -23,6 +23,12 @@ import {
   slugifyVi,
 } from './generate-ai-article.mjs';
 import { runDualXkiroReview } from './xkiro-reviewers.mjs';
+import {
+  WRITER_STANDARD_ID,
+  buildStandardRevisionWriterPrompt,
+  buildStandardTrendWriterPrompt,
+  selectWriterStyle,
+} from '../../server/seo-editorial/writer-standard.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
@@ -121,105 +127,15 @@ export function evaluateDraftQuality(article) {
   };
 }
 
-export function buildTrendDraftPrompt({
-  topic,
-  slug,
-  category,
-  hskTag,
-  trendQuery,
-  trendSource,
-  trendSpike,
-  voice,
-  existingSlugs = [],
-  today,
-}) {
-  const voiceBlock = voice
-    ? `\nPHONG CÁCH VIẾT: ${voice.label}\n${voice.instructions}\n`
-    : '';
-  return `Bạn là biên tập viên tiếng Trung HSK hàng đầu tại Việt Nam cho ứng dụng học miễn phí HSK Flashcards (https://hskfreelearningai.pages.dev).
-Hãy viết MỘT BÀI SEO HOÀN CHỈNH BẰNG TIẾNG VIỆT, NỘI DUNG GỐC 100% dựa trên chủ đề đang được tìm kiếm nhiều tại Việt Nam.
-
-THÔNG TIN CHỦ ĐỀ XU HƯỚNG:
-- Truy vấn xu hướng: "${trendQuery || topic}" (Nguồn: ${trendSource || 'google-trends'}${trendSpike ? ` · Mức độ: ${trendSpike}` : ''})
-- Chủ đề bài viết: "${topic}"
-- Slug dự kiến: "${slug}"
-- Chuyên mục: "${category}" (${CATEGORIES[category] || 'Mẹo học HSK'})
-- Nhãn HSK gợi ý: "${hskTag || 'HSK 1–6'}"
-- Ngày xuất bản: "${today}"
-${voiceBlock}
-NGUYÊN TẮC CHẤT LƯỢNG BẮT BUỘC:
-1. Viết cho người Việt học tiếng Trung thực tế và luyện thi HSK 1–6: giải thích bản chất ngắn gọn, chỉ rõ lỗi người Việt hay mắc và cách dùng chuẩn bản xứ.
-2. Mỗi ví dụ tiếng Trung PHẢI kèm đủ Chữ Hán giản thể + Pinyin có dấu thanh điệu chuẩn (ā á ǎ à, ē é ě è...) + nghĩa tiếng Việt tự nhiên.
-3. Có 3–4 mục (<sections>), ít nhất 1 bảng tổng hợp/so sánh gồm 3–6 dòng (TUYỆT ĐỐI KHÔNG vượt quá 6 dòng mỗi bảng), ít nhất 1 khối "example" chuẩn 3 trường (han, py, vi), ít nhất 1 hộp "tip" và 2–3 câu hỏi "faqs".
-4. Tuyệt đối không sao chép văn bản từ bất kỳ trang web nào khác.
-5. Trong CTA cuối bài nhắc tự nhiên rằng HSK Flashcards hoàn toàn miễn phí trên trình duyệt (Gia sư AI, Sửa câu AI, Từ dễ nhầm, Luyện đề HSK 1–6). KHÔNG bao giờ nhắc "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".
-6. Nếu có danh sách bullets đánh số bước, ghi rõ "1. Tiêu đề: nội dung...". Không dùng HTML tag trong chuỗi JSON.
-7. Chỉ chọn relatedSlugs từ các slug hiện có sau nếu phù hợp: ${existingSlugs.slice(0, 12).join(', ')}.
-
-TRẢ VỀ DUY NHẤT MỘT JSON OBJECT HỢP LỆ THEO ĐÚNG CẤU TRÚC:
-{
-  "title": "...",
-  "metaTitle": "... | HSK Flashcards",
-  "metaDescription": "...",
-  "summary": "...",
-  "hskTag": "${hskTag || 'HSK 1–6'}",
-  "readMinutes": 7,
-  "keywords": ["...", "...", "..."],
-  "sections": [
-    {
-      "id": "muc-1",
-      "heading": "...",
-      "paragraphs": ["...", "..."],
-      "bullets": ["..."],
-      "table": { "headers": ["...", "...", "..."], "rows": [["...", "...", "..."]] },
-      "example": { "han": "...", "py": "...", "vi": "..." },
-      "tip": "..."
-    }
-  ],
-  "faqs": [{ "q": "...", "a": "..." }],
-  "relatedSlugs": [],
-  "cta": { "heading": "...", "body": "...", "buttonLabel": "..." }
-}`;
+export function buildTrendDraftPrompt(opts) {
+  return buildStandardTrendWriterPrompt(opts);
 }
 
-export function buildRewriteDraftPrompt({ draft, comment, rating, existingSlugs = [], today }) {
-  const prevFeedback = (draft.reviewHistory || [])
-    .slice(-4)
-    .map((h, i) => `- Lần ${i + 1} (${h.at || ''}): ${h.rating ? `${h.rating}/5 sao — ` : ''}${h.comment || '(không ghi chú)'}`)
-    .join('\n');
-
-  return `Bạn là biên tập viên tiếng Trung HSK đang chỉnh sửa lại một bài viết SEO theo phản hồi trực tiếp của Chủ sở hữu trang web.
-
-NHẬN XÉT MỚI NHẤT CỦA NGƯỜI DUYỆT (${rating ? `Đánh giá ${rating}/5 sao` : 'Yêu cầu viết lại'}):
-"""
-${comment || 'Hãy nâng cấp toàn diện độ sâu, tính tự nhiên, ví dụ Hán – Pinyin – Việt và độ chính xác ngữ pháp cho bài viết.'}
-"""
-${prevFeedback ? `\nLỊCH SỬ GÓP Ý TRƯỚC ĐÓ:\n${prevFeedback}\n` : ''}
-BẢN NHÁP HIỆN TẠI CẦN SỬA (version ${draft.version || 1}, chủ đề: "${draft.trendQuery || draft.article?.title}"):
-${JSON.stringify(draft.article, null, 2)}
-
-YÊU CẦU KHI VIẾT LẠI:
-1. Giải quyết TRIỆT ĐỂ mọi điểm người duyệt vừa góp ý trong phần nhận xét ở trên.
-2. Giữ định dạng JSON bài viết đầy đủ, chính xác Chữ Hán giản thể + Pinyin có thanh điệu chuẩn + nghĩa tiếng Việt tự nhiên.
-3. Giữ mỗi bảng tối đa 6 dòng, có ít nhất 1 khối "example" chuẩn (han, py, vi), 1 "tip", và 2–3 "faqs".
-4. Ngày cập nhật: "${today}". KHÔNG nhắc các từ cấm: "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".
-5. Có thể chọn relatedSlugs từ: ${existingSlugs.slice(0, 12).join(', ')}.
-
-TRẢ VỀ DUY NHẤT JSON OBJECT GỒM:
-{
-  "revisionSummary": "Tóm tắt 1-2 câu những gì đã chỉnh sửa theo góp ý của người duyệt",
-  "title": "...",
-  "metaTitle": "...",
-  "metaDescription": "...",
-  "summary": "...",
-  "hskTag": "...",
-  "readMinutes": 7,
-  "keywords": ["..."],
-  "sections": [...],
-  "faqs": [...],
-  "relatedSlugs": [...],
-  "cta": { "heading": "...", "body": "...", "buttonLabel": "..." }
-}`;
+export function buildRewriteDraftPrompt(opts) {
+  return buildStandardRevisionWriterPrompt({
+    ...opts,
+    adminComment: opts?.adminComment ?? opts?.comment ?? '',
+  });
 }
 
 export function resolveUniqueArticleSlug(desiredSlug, existingArticles = []) {
@@ -232,21 +148,20 @@ export function resolveUniqueArticleSlug(desiredSlug, existingArticles = []) {
 }
 
 export function buildAutoPolishPrompt({ article, trendQuery, reviewBundle, existingSlugs = [], today }) {
-  return `Bạn là Gemma 4 (biên tập viên chính). Hai chuyên gia xKiro (Command A+ kiểm tra tiếng Trung/Pinyin/ngữ pháp và Mistral Large 3 kiểm tra SEO/độ tự nhiên tiếng Việt) vừa rà soát bài viết và chỉ ra những điểm cần hoàn thiện.
-
-NHẬN XÉT CỦA HỘI ĐỒNG KIỂM DUYỆT xKIRO:
-${reviewBundle?.combinedFeedback || 'Hãy rà soát lại Pinyin, ví dụ Hán–Việt, độ sâu ngữ pháp và tính tự nhiên tiếng Việt.'}
-
-BẢN THẢO HIỆN TẠI (từ khóa xu hướng: "${trendQuery || article?.title}"):
-${JSON.stringify(article, null, 2)}
-
-YÊU CẦU TỰ HOÀN THIỆN:
-1. Sửa TRIỆT ĐỂ mọi lỗi được nêu trong mục [Bắt buộc sửa] và xử lý các góp ý còn lại của Command A+ & Mistral Large 3.
-2. Đảm bảo chữ Hán giản thể, dấu thanh điệu Pinyin (ā á ǎ à...), nghĩa tiếng Việt chính xác 100%, mỗi bảng <= 6 dòng, đủ ví dụ 3 lớp, tip và 2–3 FAQs.
-3. Ngày cập nhật: "${today}". KHÔNG dùng từ cấm ("hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập").
-4. Có thể chọn relatedSlugs từ: ${existingSlugs.slice(0, 12).join(', ')}.
-
-TRẢ VỀ DUY NHẤT JSON OBJECT HỢP LỆ (giữ đầy đủ cấu trúc bài viết + thêm "polishSummary": "Tóm tắt ngắn điểm đã sửa theo xKiro").`;
+  return buildStandardRevisionWriterPrompt({
+    draft: {
+      version: 1,
+      trendQuery: trendQuery || article?.title,
+      category: article?.category || 'meo-hoc',
+      editorialVoice: article?.editorialVoice || '',
+      article,
+    },
+    sanitizedFeedback: reviewBundle?.combinedFeedback || 'Hãy rà soát lại Pinyin, ví dụ Hán–Việt, độ sâu ngữ pháp và tính tự nhiên tiếng Việt.',
+    adminComment: '',
+    rating: null,
+    existingSlugs,
+    today,
+  });
 }
 
 export async function runXkiroReviewAndPolish({
@@ -577,7 +492,7 @@ async function main() {
   const createdIds = [];
 
   for (const picked of collected.topics) {
-    const voice = pickEditorialVoice(picked.slug);
+    const style = selectWriterStyle({ topic: picked.topic, query: picked.query, category: picked.category });
     const prompt = buildTrendDraftPrompt({
       topic: picked.topic,
       slug: picked.slug,
@@ -586,20 +501,23 @@ async function main() {
       trendQuery: picked.query,
       trendSource: picked.source,
       trendSpike: picked.spike,
-      voice,
+      style,
       existingSlugs,
       today,
     });
 
-    console.log(`Generating trend draft "${picked.query}" [${picked.source}] via ${aiConfig.provider} / ${aiConfig.model}...`);
+    console.log(`Generating trend draft "${picked.query}" [${picked.source}] (${WRITER_STANDARD_ID}:${style.id}) via ${aiConfig.provider} / ${aiConfig.model}...`);
     const raw = await callAiJson(prompt, aiConfig);
+    const writerBrief = raw?.writerBrief && typeof raw.writerBrief === 'object'
+      ? raw.writerBrief
+      : { styleId: style.id, styleReason: style.reason, primaryKeyword: picked.query };
     const initialArticle = normalizeGeneratedArticle(raw, {
       slug: picked.slug,
       category: picked.category,
       hskTag: picked.hskTag,
       today,
       existingSlugs,
-      editorialVoice: voice.id,
+      editorialVoice: style.id,
       fallbackSources: [],
     });
 
@@ -608,7 +526,7 @@ async function main() {
       trendQuery: picked.query,
       category: picked.category,
       hskTag: picked.hskTag,
-      editorialVoice: voice.id,
+      editorialVoice: style.id,
       today,
       existingSlugs,
       aiConfig,
@@ -623,7 +541,7 @@ async function main() {
       {
         action: 'generated',
         rating: null,
-        comment: `Sinh tự động bởi Gemma 4 từ ${picked.source}${picked.spike ? ` (${picked.spike})` : ''}`,
+        comment: `Sinh tự động bởi Gemma 4 (${WRITER_STANDARD_ID}:${style.id}) từ ${picked.source}${picked.spike ? ` (${picked.spike})` : ''}`,
         at: nowIso,
       },
     ];
@@ -648,7 +566,8 @@ async function main() {
       trendSpike: picked.spike || '',
       category: article.category,
       hskTag: article.hskTag,
-      editorialVoice: voice.id,
+      editorialVoice: style.id,
+      writerBrief,
       aiReviews: reviewed.aiReviews,
       quality: evaluateDraftQuality(article),
       rating: null,

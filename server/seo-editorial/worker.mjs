@@ -178,6 +178,7 @@ export async function runScanTrendsPipeline(
     trigger,
     status: runError ? 'error' : 'completed',
     durationMs: Date.now() - startedMs,
+    stageTimings: createdDrafts[0]?.aiReviews?.stageTimings || null,
     pendingCount: drafts.filter((d) => d.status === 'pending_review').length,
     createdCount: createdDrafts.length,
     createdIds: createdDrafts.map((d) => d.id),
