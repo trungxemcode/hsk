@@ -6,6 +6,7 @@
   const DEFAULT_DRAFT_BRANCH = 'seo-drafts-state';
   const CLOUDFLARE_EDITORIAL_URL = 'https://hsk-seo-editorial.trung-hsk668.workers.dev';
   const WORKFLOW_FILE = 'seo-trends-drafts.yml';
+  const PUBLISH_WORKFLOW_FILE = 'seo-publish-approved.yml';
   const FIRESTORE_DOC_ID = 'seo-editorial-gh-bridge';
   const SESSION_STORAGE_KEY = 'hsk-seo-review-session-v1';
   const LOCAL_GH_KEY = 'hsk-seo-review-gh-local-v1';
@@ -328,20 +329,20 @@
     throw new Error(`Không tải được ${filePath} từ GitHub (kiểm tra Token hoặc tên nhánh).`);
   }
 
-  async function fetchLatestWorkflowRuns() {
+  async function fetchLatestWorkflowRuns(workflowFile = WORKFLOW_FILE) {
     if (!ghConfig.token) return [];
-    const url = `https://api.github.com/repos/${encodeURIComponent(ghConfig.owner)}/${encodeURIComponent(ghConfig.repo)}/actions/workflows/${WORKFLOW_FILE}/runs?per_page=4&t=${Date.now()}`;
+    const url = `https://api.github.com/repos/${encodeURIComponent(ghConfig.owner)}/${encodeURIComponent(ghConfig.repo)}/actions/workflows/${workflowFile}/runs?per_page=4&t=${Date.now()}`;
     const res = await fetch(url, { headers: githubHeaders(), cache: 'no-store' });
     if (!res.ok) return [];
     const payload = await res.json();
     return Array.isArray(payload?.workflow_runs) ? payload.workflow_runs : [];
   }
 
-  async function dispatchEditorialWorkflow(inputs) {
+  async function dispatchEditorialWorkflow(inputs, workflowFile = WORKFLOW_FILE) {
     if (!ghConfig.token) {
       throw new Error('Cần kết nối GitHub Fine-Grained Token trước khi duyệt hoặc sinh bài.');
     }
-    const url = `https://api.github.com/repos/${encodeURIComponent(ghConfig.owner)}/${encodeURIComponent(ghConfig.repo)}/actions/workflows/${WORKFLOW_FILE}/dispatches`;
+    const url = `https://api.github.com/repos/${encodeURIComponent(ghConfig.owner)}/${encodeURIComponent(ghConfig.repo)}/actions/workflows/${workflowFile}/dispatches`;
     const res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -403,12 +404,12 @@
     }
   }
 
-  function scheduleWorkflowPolling() {
+  function scheduleWorkflowPolling(workflowFile = WORKFLOW_FILE) {
     if (pollTimer) return;
     pollTimer = setTimeout(async () => {
       pollTimer = null;
       if (!authSession || !ghConfig.token) return;
-      const runs = await fetchLatestWorkflowRuns();
+      const runs = await fetchLatestWorkflowRuns(workflowFile);
       renderWorkflowStatus(runs);
       if (runs[0]?.status === 'completed') {
         await reloadEditorialData();
@@ -988,7 +989,18 @@
       renderDraftList();
       renderSelectedDraft();
 
-      if (ghConfig.token && cfRes?.article) {
+      if (cfRes?.autoPublishMode === 'zero-token-queue') {
+        setStatusMsg(st, 'Đã duyệt và đưa vào hàng đợi xuất bản.', 'is-ok');
+        if (ghConfig.token) {
+          try {
+            await dispatchEditorialWorkflow({ publish_mode: 'auto-publish' }, PUBLISH_WORKFLOW_FILE);
+            setStatusMsg(st, 'Đã duyệt và gửi lệnh đồng bộ hàng đợi tới GitHub Actions.', 'is-ok');
+            scheduleWorkflowPolling(PUBLISH_WORKFLOW_FILE);
+          } catch (_) {
+            setStatusMsg(st, 'Bài đã vào hàng đợi. GitHub sẽ thử đồng bộ theo lịch.', 'is-warn');
+          }
+        }
+      } else if (ghConfig.token && cfRes?.article) {
         setStatusMsg(st, 'Đã duyệt trên Cloudflare R2! Đang gửi lệnh xuất bản HTML tĩnh tới GitHub Actions…');
         await dispatchEditorialWorkflow({
           action: 'approve',
@@ -1003,11 +1015,7 @@
         renderWorkflowStatus(runs, cfLastRun);
         scheduleWorkflowPolling();
       } else {
-        setStatusMsg(
-          st,
-          'Đã duyệt & đưa vào hàng đợi xuất bản tự động! GitHub Actions sẽ tự lấy bài từ Cloudflare, build HTML và đăng lên web mà không cần cài GitHub Token.',
-          'is-ok'
-        );
+        setStatusMsg(st, 'Đã lưu phê duyệt trên Cloudflare R2. Worker đang chạy bản chưa hỗ trợ đồng bộ hàng đợi.', 'is-warn');
       }
     } catch (err) {
       setStatusMsg(st, err.message || 'Chưa xử lý được lệnh.', 'is-err');
