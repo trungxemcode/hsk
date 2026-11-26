@@ -1,0 +1,28 @@
+name: Deploy SEO editorial MCP once
+on:
+  push:
+    branches: [deploy/seo-editorial-mcp-e1f587a]
+    paths: [.github/workflows/deploy-seo-editorial-mcp-once.yml]
+permissions:
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test server/seo-editorial/worker.test.mjs
+      - name: Deploy SEO editorial Worker
+        run: npx --yes wrangler@4.168.0 deploy --config server/seo-editorial/wrangler.jsonc --keep-vars
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Configure the draft-submission credential
+        run: printf '%s' "$SEO_INGEST_CREDENTIAL" | npx --yes wrangler@4.168.0 secret put CHATGPT_SEO_INGEST_KEY --config server/seo-editorial/wrangler.jsonc
+        env:
+          SEO_INGEST_CREDENTIAL: ${{ secrets.SEO_EDITORIAL_MCP_INGEST_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
