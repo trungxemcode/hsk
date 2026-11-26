@@ -22,6 +22,7 @@ import {
   resolveAiConfig,
   slugifyVi,
 } from './generate-ai-article.mjs';
+import { runDualXkiroReview } from './xkiro-reviewers.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
@@ -230,6 +231,84 @@ export function resolveUniqueArticleSlug(desiredSlug, existingArticles = []) {
   return `${base}-${n}`;
 }
 
+export function buildAutoPolishPrompt({ article, trendQuery, reviewBundle, existingSlugs = [], today }) {
+  return `Bạn là Gemma 4 (biên tập viên chính). Hai chuyên gia xKiro (Command A+ kiểm tra tiếng Trung/Pinyin/ngữ pháp và Mistral Large 3 kiểm tra SEO/độ tự nhiên tiếng Việt) vừa rà soát bài viết và chỉ ra những điểm cần hoàn thiện.
+
+NHẬN XÉT CỦA HỘI ĐỒNG KIỂM DUYỆT xKIRO:
+${reviewBundle?.combinedFeedback || 'Hãy rà soát lại Pinyin, ví dụ Hán–Việt, độ sâu ngữ pháp và tính tự nhiên tiếng Việt.'}
+
+BẢN THẢO HIỆN TẠI (từ khóa xu hướng: "${trendQuery || article?.title}"):
+${JSON.stringify(article, null, 2)}
+
+YÊU CẦU TỰ HOÀN THIỆN:
+1. Sửa TRIỆT ĐỂ mọi lỗi được nêu trong mục [Bắt buộc sửa] và xử lý các góp ý còn lại của Command A+ & Mistral Large 3.
+2. Đảm bảo chữ Hán giản thể, dấu thanh điệu Pinyin (ā á ǎ à...), nghĩa tiếng Việt chính xác 100%, mỗi bảng <= 6 dòng, đủ ví dụ 3 lớp, tip và 2–3 FAQs.
+3. Ngày cập nhật: "${today}". KHÔNG dùng từ cấm ("hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập").
+4. Có thể chọn relatedSlugs từ: ${existingSlugs.slice(0, 12).join(', ')}.
+
+TRẢ VỀ DUY NHẤT JSON OBJECT HỢP LỆ (giữ đầy đủ cấu trúc bài viết + thêm "polishSummary": "Tóm tắt ngắn điểm đã sửa theo xKiro").`;
+}
+
+export async function runXkiroReviewAndPolish({
+  article,
+  trendQuery,
+  category,
+  hskTag,
+  editorialVoice,
+  today,
+  existingSlugs = [],
+  aiConfig,
+  args = {},
+  env = process.env,
+  fetchImpl = fetch,
+}) {
+  let finalArticle = article;
+  const reviewBundle = await runDualXkiroReview({
+    article: finalArticle,
+    trendQuery,
+    env,
+    args,
+    fetchImpl,
+  });
+
+  const canPolish = Boolean(
+    reviewBundle.needsAutoPolish &&
+    !args['no-auto-polish'] &&
+    aiConfig
+  );
+
+  if (canPolish) {
+    try {
+      console.log(`xKiro council flagged revisions (avg=${reviewBundle.averageScore}/100); Gemma 4 auto-polishing...`);
+      const polishPrompt = buildAutoPolishPrompt({
+        article: finalArticle,
+        trendQuery,
+        reviewBundle,
+        existingSlugs,
+        today,
+      });
+      const polishedRaw = await callAiJson(polishPrompt, aiConfig);
+      finalArticle = normalizeGeneratedArticle(polishedRaw, {
+        slug: finalArticle.slug,
+        category: category || finalArticle.category || 'meo-hoc',
+        hskTag: hskTag || finalArticle.hskTag || 'HSK 1–6',
+        today,
+        existingSlugs,
+        editorialVoice: editorialVoice || finalArticle.editorialVoice || '',
+        fallbackSources: [],
+      });
+      reviewBundle.autoPolished = true;
+      reviewBundle.polishSummary = String(
+        polishedRaw?.polishSummary || 'Gemma 4 đã tự chỉnh sửa theo góp ý của Command A+ và Mistral Large 3.'
+      ).trim();
+    } catch (err) {
+      reviewBundle.polishSummary = `Chưa tự chỉnh sửa được (${err.message}); giữ bản đã qua 2 lớp rà soát xKiro.`;
+    }
+  }
+
+  return { article: finalArticle, aiReviews: reviewBundle };
+}
+
 export function approveDraftIntoArticles({ draftsData, articlesData, draftId, rating = null, comment = '', today }) {
   const drafts = Array.isArray(draftsData?.drafts) ? draftsData.drafts : [];
   const draft = drafts.find((d) => d.id === draftId);
@@ -359,7 +438,7 @@ async function main() {
     const prompt = buildRewriteDraftPrompt({ draft, comment, rating, existingSlugs, today });
     console.log(`Rewriting draft "${draftId}" (v${(draft.version || 1) + 1}) via ${aiConfig.provider} / ${aiConfig.model}...`);
     const raw = await callAiJson(prompt, aiConfig);
-    const updatedArticle = normalizeGeneratedArticle(raw, {
+    const updatedArticleDraft = normalizeGeneratedArticle(raw, {
       slug: draft.article?.slug || slugifyVi(draft.trendQuery),
       category: draft.category || draft.article?.category || 'meo-hoc',
       hskTag: draft.hskTag || draft.article?.hskTag || 'HSK 1–6',
@@ -369,12 +448,26 @@ async function main() {
       fallbackSources: [],
     });
 
+    const reviewed = await runXkiroReviewAndPolish({
+      article: updatedArticleDraft,
+      trendQuery: draft.trendQuery || updatedArticleDraft.title,
+      category: draft.category || updatedArticleDraft.category || 'meo-hoc',
+      hskTag: draft.hskTag || updatedArticleDraft.hskTag || 'HSK 1–6',
+      editorialVoice: draft.editorialVoice || '',
+      today,
+      existingSlugs,
+      aiConfig,
+      args,
+    });
+    const updatedArticle = reviewed.article;
+
     const nowIso = new Date().toISOString();
     draft.article = updatedArticle;
     draft.version = (draft.version || 1) + 1;
     draft.status = 'pending_review';
     draft.updatedAt = nowIso;
     draft.rating = rating;
+    draft.aiReviews = reviewed.aiReviews;
     draft.quality = evaluateDraftQuality(updatedArticle);
     draft.reviewHistory = Array.isArray(draft.reviewHistory) ? draft.reviewHistory : [];
     draft.reviewHistory.push({
@@ -384,10 +477,19 @@ async function main() {
       revisionSummary: String(raw?.revisionSummary || 'Đã viết lại toàn bộ bài theo góp ý').trim(),
       at: nowIso,
     });
+    if (reviewed.aiReviews?.status && reviewed.aiReviews.status !== 'skipped') {
+      draft.reviewHistory.push({
+        action: 'ai_reviewed',
+        rating: null,
+        comment: `xKiro (${reviewed.aiReviews.reviewers.map((r) => `${r.label}: ${r.score ?? 'err'}`).join(' · ')})`,
+        revisionSummary: reviewed.aiReviews.autoPolished ? reviewed.aiReviews.polishSummary : '',
+        at: new Date().toISOString(),
+      });
+    }
     draftsData.updatedAt = nowIso;
 
     fs.writeFileSync(DRAFTS_PATH, JSON.stringify(draftsData, null, 2) + '\n', 'utf8');
-    console.log(`REWRITTEN "${draftId}" -> v${draft.version} (SEO quality score: ${draft.quality.score}/100).`);
+    console.log(`REWRITTEN "${draftId}" -> v${draft.version} (SEO score: ${draft.quality.score}/100, xKiro avg: ${reviewed.aiReviews?.averageScore ?? 'skipped'}).`);
     return;
   }
 
@@ -462,7 +564,7 @@ async function main() {
 
     console.log(`Generating trend draft "${picked.query}" [${picked.source}] via ${aiConfig.provider} / ${aiConfig.model}...`);
     const raw = await callAiJson(prompt, aiConfig);
-    const article = normalizeGeneratedArticle(raw, {
+    const initialArticle = normalizeGeneratedArticle(raw, {
       slug: picked.slug,
       category: picked.category,
       hskTag: picked.hskTag,
@@ -472,9 +574,40 @@ async function main() {
       fallbackSources: [],
     });
 
+    const reviewed = await runXkiroReviewAndPolish({
+      article: initialArticle,
+      trendQuery: picked.query,
+      category: picked.category,
+      hskTag: picked.hskTag,
+      editorialVoice: voice.id,
+      today,
+      existingSlugs,
+      aiConfig,
+      args,
+    });
+    const article = reviewed.article;
+
     const nowIso = new Date().toISOString();
     const stamp = nowIso.replace(/[-:TZ.]/g, '').slice(0, 14);
     const draftId = `draft-${stamp}-${article.slug.slice(0, 36)}`;
+    const reviewHistory = [
+      {
+        action: 'generated',
+        rating: null,
+        comment: `Sinh tự động bởi Gemma 4 từ ${picked.source}${picked.spike ? ` (${picked.spike})` : ''}`,
+        at: nowIso,
+      },
+    ];
+    if (reviewed.aiReviews?.status && reviewed.aiReviews.status !== 'skipped') {
+      reviewHistory.push({
+        action: 'ai_reviewed',
+        rating: null,
+        comment: `xKiro (${reviewed.aiReviews.reviewers.map((r) => `${r.label}: ${r.score ?? 'err'}`).join(' · ')})`,
+        revisionSummary: reviewed.aiReviews.autoPolished ? reviewed.aiReviews.polishSummary : '',
+        at: new Date().toISOString(),
+      });
+    }
+
     const draft = {
       id: draftId,
       status: 'pending_review',
@@ -487,16 +620,10 @@ async function main() {
       category: article.category,
       hskTag: article.hskTag,
       editorialVoice: voice.id,
+      aiReviews: reviewed.aiReviews,
       quality: evaluateDraftQuality(article),
       rating: null,
-      reviewHistory: [
-        {
-          action: 'generated',
-          rating: null,
-          comment: `Sinh tự động từ ${picked.source}${picked.spike ? ` (${picked.spike})` : ''}`,
-          at: nowIso,
-        },
-      ],
+      reviewHistory,
       article,
       publishedSlug: '',
       approvedAt: '',

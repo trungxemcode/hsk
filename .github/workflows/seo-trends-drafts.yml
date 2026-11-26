@@ -118,6 +118,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || '' }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          XKIRO_API_KEY: ${{ secrets.XKIRO_API_KEY || secrets.SECONDARY_AI_API_KEY }}
+          XKIRO_REVIEW_MODEL_1: ${{ vars.XKIRO_REVIEW_MODEL_1 || 'cohere/command-a-plus' }}
+          XKIRO_REVIEW_MODEL_2: ${{ vars.XKIRO_REVIEW_MODEL_2 || 'mistralai/mistral-large-2512' }}
           EVENT_NAME: ${{ github.event_name }}
           INPUT_ACTION: ${{ inputs.action }}
           INPUT_COUNT: ${{ inputs.count || '2' }}

@@ -404,10 +404,11 @@
       const score = d.quality?.score ?? '—';
       const spike = d.trendSpike ? ` · ${escHtml(d.trendSpike)}` : '';
       const stars = d.rating ? ` · ${d.rating}★` : '';
+      const xkiroAvg = typeof d.aiReviews?.averageScore === 'number' ? ` · xKiro ${d.aiReviews.averageScore}` : '';
       return `<button type="button" class="rev-draft-card${selected}" data-draft-id="${escHtml(d.id)}">
         <div class="rev-card-top">
           <span class="rev-card-source">${escHtml(d.trendSource || 'google-trends')}${spike} · v${escHtml(d.version || 1)}</span>
-          <span class="rev-card-score">${escHtml(score)}/100${stars}</span>
+          <span class="rev-card-score">SEO ${escHtml(score)}${escHtml(xkiroAvg)}${stars}</span>
         </div>
         <h3 class="rev-card-title">${escHtml(d.article?.title || d.trendQuery)}</h3>
         <span class="rev-card-query">Từ khóa: ${escHtml(d.trendQuery || '—')}</span>
@@ -470,8 +471,57 @@
     </article>`;
   }
 
+  function renderPipelineStripHtml(draft) {
+    const rev1 = (draft.aiReviews?.reviewers || []).find((r) => r.id === 'command-a-plus') || draft.aiReviews?.reviewers?.[0];
+    const rev2 = (draft.aiReviews?.reviewers || []).find((r) => r.id === 'mistral-large-3') || draft.aiReviews?.reviewers?.[1];
+    const stepClass = (r) => {
+      if (!r || r.status === 'skipped' || r.status === 'error') return '';
+      return r.verdict === 'pass' ? ' is-done' : ' is-revise';
+    };
+    const scoreSuffix = (r) => (typeof r?.score === 'number' ? ` (${r.score})` : r?.status === 'skipped' ? ' (bỏ qua)' : '');
+    const adminClass = draft.status === 'approved' ? ' is-done' : draft.status === 'pending_review' ? ' is-active' : '';
+
+    return [
+      '<span class="rev-pipe-step is-done">1. Gemma 4 viết</span>',
+      `<span class="rev-pipe-step${stepClass(rev1)}">2. Command A+ kiểm${escHtml(scoreSuffix(rev1))}</span>`,
+      `<span class="rev-pipe-step${stepClass(rev2)}">3. Mistral Large 3 duyệt${escHtml(scoreSuffix(rev2))}</span>`,
+      `<span class="rev-pipe-step${adminClass}">4. ${draft.status === 'approved' ? 'Admin đã duyệt ✓' : 'Admin duyệt cuối'}</span>`,
+    ].join('');
+  }
+
   function renderAuditHtml(draft) {
     const q = draft.quality || { score: 0, checks: [], warnings: [] };
+    const aiRev = draft.aiReviews;
+    const councilHtml = aiRev && Array.isArray(aiRev.reviewers) && aiRev.reviewers.length
+      ? `<div>
+          <h3>Hội đồng kiểm duyệt xKiro (Command A+ &amp; Mistral Large 3)</h3>
+          ${aiRev.autoPolished ? `<div class="rev-tip" style="margin-bottom:0.75rem"><strong>Gemma 4 đã tự hoàn thiện vòng 2 theo góp ý xKiro:</strong> ${escHtml(aiRev.polishSummary || '')}</div>` : ''}
+          <div class="rev-council-grid">
+            ${aiRev.reviewers.map((r) => {
+              const badgeClass = r.verdict === 'pass' ? 'is-ok' : r.verdict === 'revise' ? 'is-warn' : r.status === 'error' ? 'is-fail' : '';
+              const badgeLabel = typeof r.score === 'number'
+                ? `${r.score}/100 · ${r.verdict === 'pass' ? 'Đạt' : 'Cần sửa'}`
+                : r.status === 'skipped' ? 'Chưa bật / Bỏ qua' : 'Lỗi gọi API';
+              const allIssues = [...(r.mustFix || []).map((x) => `[Bắt buộc] ${x}`), ...(r.issues || [])];
+              const feedbackText = allIssues.length ? `${r.label}: ${allIssues.join('; ')}` : '';
+              return `<div class="rev-council-card">
+                <div class="rev-council-head">
+                  <div>
+                    <strong>${escHtml(r.label)}</strong>
+                    <small>${escHtml(r.role || '')} · <code>${escHtml(r.model || '')}</code></small>
+                  </div>
+                  <span class="rev-tag ${badgeClass}">${escHtml(badgeLabel)}</span>
+                </div>
+                <p class="rev-council-summary">${escHtml(r.summary || '')}</p>
+                ${(r.strengths || []).length ? `<ul class="rev-council-list is-ok">${r.strengths.map((s) => `<li>✓ ${escHtml(s)}</li>`).join('')}</ul>` : ''}
+                ${allIssues.length ? `<ul class="rev-council-list is-warn">${allIssues.map((iss) => `<li>! ${escHtml(iss)}</li>`).join('')}</ul>` : ''}
+                ${feedbackText ? `<button type="button" class="rev-quick-chip" data-use-ai-feedback="${escHtml(feedbackText)}">+ Đưa góp ý ${escHtml(r.label)} vào ô viết lại</button>` : ''}
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`
+      : '<div><h3>Hội đồng kiểm duyệt xKiro</h3><p style="color:var(--rev-muted)">Bản nháp này chưa có kết quả kiểm duyệt từ Command A+ &amp; Mistral Large 3.</p></div>';
+
     const checksHtml = (q.checks || []).length
       ? `<ul class="rev-audit-list is-ok">${q.checks.map((c) => `<li>✓ ${escHtml(c)}</li>`).join('')}</ul>`
       : '<p>Chưa có checklist đạt chuẩn.</p>';
@@ -487,6 +537,7 @@
       : '<p>Chưa có lịch sử chỉnh sửa.</p>';
 
     return `<div class="rev-audit-grid">
+      ${councilHtml}
       <div><h3>Điểm kiểm định tự động: ${escHtml(q.score)} / 100</h3>${checksHtml}</div>
       <div><h3>Điểm cần lưu ý trước khi duyệt</h3>${warningsHtml}</div>
       <div><h3>Từ khóa SEO</h3><p>${escHtml((draft.article?.keywords || []).join(' · '))}</p></div>
@@ -535,11 +586,22 @@
     const statusTone = draft.status === 'approved' ? 'is-ok' : draft.status === 'rejected' ? 'is-fail' : 'is-accent';
     const score = draft.quality?.score ?? 0;
     const scoreTone = score >= 85 ? 'is-ok' : score >= 65 ? 'is-warn' : 'is-fail';
+    const xkiroBadges = (draft.aiReviews?.reviewers || []).map((r) => {
+      if (typeof r.score !== 'number') return '';
+      const tone = r.verdict === 'pass' ? 'is-ok' : 'is-warn';
+      return `<span class="rev-tag ${tone}">${escHtml(r.label)}: ${escHtml(r.score)}/100</span>`;
+    });
+
+    if ($('pipelineStrip')) {
+      $('pipelineStrip').innerHTML = renderPipelineStripHtml(draft);
+    }
 
     $('draftBadges').innerHTML = [
       `<span class="rev-tag ${statusTone}">${escHtml(STATUS_LABELS[draft.status] || draft.status)}</span>`,
       `<span class="rev-tag ${scoreTone}">SEO ${escHtml(score)}/100</span>`,
-      `<span class="rev-tag">Phiên bản v${escHtml(draft.version || 1)}</span>`,
+      ...xkiroBadges,
+      draft.aiReviews?.autoPolished ? '<span class="rev-tag is-accent">Đã tự chỉnh sửa vòng 2</span>' : '',
+      `<span class="rev-tag">v${escHtml(draft.version || 1)}</span>`,
       `<span class="rev-tag">${escHtml(draft.trendSource || 'google-trends')}${draft.trendSpike ? ` · ${escHtml(draft.trendSpike)}` : ''}</span>`,
       draft.publishedSlug ? `<span class="rev-tag is-ok">/bai-viet/${escHtml(draft.publishedSlug)}</span>` : '',
     ].filter(Boolean).join('');
@@ -547,6 +609,16 @@
     $('tabPreview').innerHTML = renderArticlePreviewHtml(draft);
     $('tabAudit').innerHTML = renderAuditHtml(draft);
     $('tabTrends').innerHTML = renderTrendsHtml();
+
+    $('tabAudit').querySelectorAll('[data-use-ai-feedback]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const snippet = btn.getAttribute('data-use-ai-feedback') || '';
+        const area = $('reviewCommentInput');
+        if (!area || !snippet) return;
+        area.value = area.value.trim() ? `${area.value.trim()}\n- ${snippet}` : `- ${snippet}`;
+        area.focus();
+      });
+    });
 
     $('tabPreview').hidden = activeViewTab !== 'preview';
     $('tabAudit').hidden = activeViewTab !== 'audit';

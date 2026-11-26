@@ -9,11 +9,18 @@ import {
 } from './fetch-google-trends.mjs';
 import {
   approveDraftIntoArticles,
+  buildAutoPolishPrompt,
   buildRewriteDraftPrompt,
   buildTrendDraftPrompt,
   evaluateDraftQuality,
   rejectDraftRecord,
 } from './seo-editorial-pipeline.mjs';
+import {
+  XKIRO_API_URL,
+  callXkiroJson,
+  resolveXkiroReviewConfig,
+  runDualXkiroReview,
+} from './xkiro-reviewers.mjs';
 
 test('parseGoogleTrendsCsv parses Vietnamese and English Google Trends CSV exports cleanly', () => {
   const viCsv = [
@@ -207,4 +214,118 @@ test('buildTrendDraftPrompt, buildRewriteDraftPrompt, approveDraftIntoArticles, 
   const rejectData = { schema: 1, updatedAt: '', drafts: [structuredClone(draft)] };
   rejectDraftRecord({ draftsData: rejectData, draftId: draft.id, comment: 'Trùng ý', rating: 2 });
   assert.equal(rejectData.drafts[0].status, 'rejected');
+});
+
+test('resolveXkiroReviewConfig and callXkiroJson target api.xkiro.com with Command A+ and Mistral Large 3', async () => {
+  const skipped = resolveXkiroReviewConfig({}, {});
+  assert.equal(skipped.enabled, false);
+
+  const cfg = resolveXkiroReviewConfig({ SECONDARY_AI_API_KEY: 'xkiro-secret-key-123456' }, {});
+  assert.equal(cfg.enabled, true);
+  assert.equal(cfg.apiUrl, XKIRO_API_URL);
+  assert.equal(cfg.reviewers[0].model, 'cohere/command-a-plus');
+  assert.equal(cfg.reviewers[1].model, 'mistralai/mistral-large-2512');
+
+  const calls = [];
+  const fakeFetch = async (url, init) => {
+    const payload = JSON.parse(init.body);
+    calls.push({ url, auth: init.headers.Authorization, payload });
+    if (calls.length === 1) {
+      return new Response('json_object unsupported', { status: 400 });
+    }
+    return Response.json({
+      choices: [{ message: { content: '```json\n{"score":91,"verdict":"pass","summary":"OK"}\n```' } }],
+    });
+  };
+
+  const parsed = await callXkiroJson({
+    apiKey: 'xkiro-secret-key-123456',
+    model: 'cohere/command-a-plus',
+    systemPrompt: 'sys',
+    userPrompt: 'usr',
+    fetchImpl: fakeFetch,
+  });
+  assert.equal(parsed.score, 91);
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0].url, 'https://api.xkiro.com/v1/chat/completions');
+  assert.equal(calls[0].auth, 'Bearer xkiro-secret-key-123456');
+  assert.deepEqual(calls[0].payload.response_format, { type: 'json_object' });
+  assert.equal(calls[1].payload.response_format, undefined);
+});
+
+test('runDualXkiroReview runs Command A+ then Mistral Large 3, detects revise & builds auto-polish prompt', async () => {
+  const sampleArticle = {
+    slug: 'xin-loi-trong-tieng-trung',
+    category: 'meo-hoc',
+    title: 'Cách nói xin lỗi trong tiếng Trung',
+    metaTitle: 'Cách nói xin lỗi trong tiếng Trung | HSK Flashcards',
+    metaDescription: 'Phân biệt 对不起 và 不好意思 cho người Việt.',
+    summary: 'Tóm tắt.',
+    publishedAt: '2026-11-26',
+    sections: [{ id: 'm1', heading: 'Bảng so sánh', paragraphs: ['...'] }],
+  };
+
+  const skipRes = await runDualXkiroReview({ article: sampleArticle, trendQuery: 'xin lỗi trong tiếng trung', env: {} });
+  assert.equal(skipRes.status, 'skipped');
+  assert.equal(skipRes.needsAutoPolish, false);
+  assert.equal(skipRes.reviewers.length, 2);
+
+  const modelsCalled = [];
+  const dualFetch = async (_url, init) => {
+    const body = JSON.parse(init.body);
+    modelsCalled.push(body.model);
+    if (body.model === 'cohere/command-a-plus') {
+      return Response.json({
+        choices: [{
+          message: {
+            content: JSON.stringify({
+              score: 76,
+              verdict: 'revise',
+              summary: 'Cần sửa dấu thanh điệu Pinyin.',
+              strengths: ['Ví dụ sát thực tế'],
+              issues: ['Thiếu thanh 3 biến điệu'],
+              mustFix: ['Sửa thanh điệu cho 不好意思'],
+            }),
+          },
+        }],
+      });
+    }
+    return Response.json({
+      choices: [{
+        message: {
+          content: JSON.stringify({
+            score: 88,
+            verdict: 'pass',
+            summary: 'Bố cục SEO và tiếng Việt tự nhiên.',
+            strengths: ['Không sáo rỗng'],
+            issues: [],
+            mustFix: [],
+          }),
+        },
+      }],
+    });
+  };
+
+  const dualRes = await runDualXkiroReview({
+    article: sampleArticle,
+    trendQuery: 'xin lỗi trong tiếng trung',
+    env: { XKIRO_API_KEY: 'test-key-long-enough' },
+    fetchImpl: dualFetch,
+  });
+
+  assert.deepEqual(modelsCalled, ['cohere/command-a-plus', 'mistralai/mistral-large-2512']);
+  assert.equal(dualRes.status, 'completed');
+  assert.equal(dualRes.averageScore, 82);
+  assert.equal(dualRes.needsAutoPolish, true);
+  assert.match(dualRes.combinedFeedback, /Command A\+/);
+  assert.match(dualRes.combinedFeedback, /Mistral Large 3/);
+
+  const polishPrompt = buildAutoPolishPrompt({
+    article: sampleArticle,
+    trendQuery: 'xin lỗi trong tiếng trung',
+    reviewBundle: dualRes,
+    existingSlugs: [],
+    today: '2026-11-26',
+  });
+  assert.match(polishPrompt, /Sửa thanh điệu cho 不好意思/);
 });

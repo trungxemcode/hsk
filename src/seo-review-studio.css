@@ -737,6 +737,99 @@ button { cursor: pointer; }
   font-size: 0.86rem;
 }
 
+.rev-viewer-meta {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.rev-pipeline-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+}
+
+.rev-pipe-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.16rem 0.52rem;
+  border-radius: 7px;
+  border: 1px solid var(--rev-line);
+  background: var(--rev-surface-soft);
+  color: var(--rev-muted);
+  font-weight: 700;
+}
+
+.rev-pipe-step.is-done {
+  background: var(--rev-emerald-bg);
+  border-color: var(--rev-emerald-line);
+  color: var(--rev-emerald);
+}
+
+.rev-pipe-step.is-revise {
+  background: var(--rev-amber-bg);
+  border-color: var(--rev-amber-line);
+  color: var(--rev-amber);
+}
+
+.rev-pipe-step.is-active {
+  background: var(--rev-accent-soft);
+  border-color: var(--rev-accent);
+  color: var(--rev-accent-ink);
+}
+
+.rev-council-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.rev-council-card {
+  border: 1px solid var(--rev-line-strong);
+  background: var(--rev-surface-soft);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.rev-council-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.rev-council-head strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.rev-council-head small {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--rev-muted);
+}
+
+.rev-council-summary {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
+.rev-council-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.82rem;
+  display: grid;
+  gap: 0.22rem;
+}
+
+.rev-council-list.is-ok li { color: var(--rev-emerald); }
+.rev-council-list.is-warn li { color: var(--rev-amber); }
+
 /* Decision Dock */
 .rev-decision-dock {
   background: var(--rev-surface);
@@ -886,6 +979,7 @@ button { cursor: pointer; }
 @media (max-width: 900px) {
   .rev-mobile-switch { display: flex; }
   .rev-workspace { grid-template-columns: 1fr; }
+  .rev-council-grid { grid-template-columns: 1fr; }
   .rev-sidebar {
     position: static;
     max-height: none;
