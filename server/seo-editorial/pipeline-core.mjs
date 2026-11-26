@@ -336,7 +336,7 @@ function scoreTrendCandidate(item) {
   return score;
 }
 
-function buildExistingCorpus(publishedArticles = [], drafts = []) {
+export function buildExistingCorpus(publishedArticles = [], drafts = []) {
   const norms = new Set();
   const slugs = new Set();
   const tokenSets = [];
@@ -364,7 +364,7 @@ function buildExistingCorpus(publishedArticles = [], drafts = []) {
   return { norms, slugs, tokenSets };
 }
 
-function isDuplicateTopic(query, explicitSlug, corpus) {
+export function isDuplicateTopic(query, explicitSlug, corpus) {
   const norm = normalizeTextForMatch(query);
   const slug = explicitSlug || slugifyVi(query);
   if (!norm || !slug) return true;
