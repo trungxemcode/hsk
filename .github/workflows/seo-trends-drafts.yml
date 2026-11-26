@@ -1,0 +1,230 @@
+name: Google Trends SEO Drafts & Editorial Publisher
+
+on:
+  schedule:
+    # Tự động quét Google Trends/Suggest VN và sinh 2 bài nháp không trùng mỗi 2 tiếng
+    - cron: '35 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Thao tác biên tập'
+        required: true
+        default: 'scan-trends'
+        type: choice
+        options:
+          - scan-trends
+          - approve
+          - rewrite
+          - reject
+      count:
+        description: 'Số bài sinh mỗi lượt (scan-trends)'
+        required: false
+        default: '2'
+      max_pending:
+        description: 'Tối đa số bài chờ duyệt giữ trong hàng đợi'
+        required: false
+        default: '24'
+      draft_id:
+        description: 'ID bản nháp (dùng cho approve / rewrite / reject)'
+        required: false
+        default: ''
+      rating:
+        description: 'Điểm đánh giá 1-5 sao (tùy chọn)'
+        required: false
+        default: ''
+      comment:
+        description: 'Nhận xét / yêu cầu AI viết lại (dùng cho rewrite hoặc approve/reject)'
+        required: false
+        default: ''
+      custom_queries:
+        description: 'Từ khóa gợi ý bổ sung (tùy chọn, phân tách bằng dòng mới)'
+        required: false
+        default: ''
+      csv_base64:
+        description: 'Nội dung file CSV Google Trends mã hóa base64 (tùy chọn)'
+        required: false
+        default: ''
+      publish_mode:
+        description: 'Cách xuất bản khi duyệt bài'
+        required: false
+        default: 'auto-publish'
+        type: choice
+        options:
+          - auto-publish
+          - pr-review
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: seo-trends-editorial
+  cancel-in-progress: false
+
+jobs:
+  editorial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SEO_PUBLISH_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check AI API secret
+        id: keycheck
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ACTION_NAME: ${{ inputs.action || 'scan-trends' }}
+        run: |
+          if [ "$ACTION_NAME" = "approve" ] || [ "$ACTION_NAME" = "reject" ]; then
+            echo "has_key=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ -z "$OPENROUTER_API_KEY" ] && [ -z "$GEMINI_API_KEY" ]; then
+            echo "has_key=false" >> "$GITHUB_OUTPUT"
+            echo "OPENROUTER_API_KEY (hoặc GEMINI_API_KEY) chưa được cấu hình."
+            exit 0
+          fi
+          echo "has_key=true" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare draft state from branch seo-drafts-state
+        if: steps.keycheck.outputs.has_key == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin seo-drafts-state:refs/remotes/origin/seo-drafts-state || true
+          if git rev-parse --verify origin/seo-drafts-state >/dev/null 2>&1; then
+            git checkout origin/seo-drafts-state -- content/seo-articles/drafts.json content/seo-articles/trends-snapshot.json
+          fi
+
+      - name: Run SEO editorial pipeline
+        if: steps.keycheck.outputs.has_key == 'true'
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'google/gemma-4-31b-it:free' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || '' }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_ACTION: ${{ inputs.action }}
+          INPUT_COUNT: ${{ inputs.count || '2' }}
+          INPUT_MAX_PENDING: ${{ inputs.max_pending || '24' }}
+          INPUT_DRAFT_ID: ${{ inputs.draft_id }}
+          INPUT_RATING: ${{ inputs.rating }}
+          INPUT_COMMENT: ${{ inputs.comment }}
+          INPUT_QUERIES: ${{ inputs.custom_queries }}
+          INPUT_CSV_B64: ${{ inputs.csv_base64 }}
+        run: |
+          ACTION="$INPUT_ACTION"
+          if [ "$EVENT_NAME" = "schedule" ] || [ -z "$ACTION" ]; then
+            ACTION="scan-trends"
+          fi
+          echo "editorial_action=$ACTION" >> "$GITHUB_ENV"
+
+          ARGS=()
+          if [ "$ACTION" = "approve" ]; then
+            ARGS+=(--approve --draft-id "$INPUT_DRAFT_ID")
+            if [ -n "$INPUT_RATING" ]; then ARGS+=(--rating "$INPUT_RATING"); fi
+            if [ -n "$INPUT_COMMENT" ]; then ARGS+=(--comment "$INPUT_COMMENT"); fi
+          elif [ "$ACTION" = "rewrite" ]; then
+            ARGS+=(--rewrite --draft-id "$INPUT_DRAFT_ID" --comment "$INPUT_COMMENT")
+            if [ -n "$INPUT_RATING" ]; then ARGS+=(--rating "$INPUT_RATING"); fi
+          elif [ "$ACTION" = "reject" ]; then
+            ARGS+=(--reject --draft-id "$INPUT_DRAFT_ID")
+            if [ -n "$INPUT_RATING" ]; then ARGS+=(--rating "$INPUT_RATING"); fi
+            if [ -n "$INPUT_COMMENT" ]; then ARGS+=(--comment "$INPUT_COMMENT"); fi
+          else
+            ARGS+=(--scan-trends --count "$INPUT_COUNT" --max-pending "$INPUT_MAX_PENDING")
+            if [ -n "$INPUT_QUERIES" ]; then ARGS+=(--queries "$INPUT_QUERIES"); fi
+            if [ -n "$INPUT_CSV_B64" ]; then ARGS+=(--csv-base64 "$INPUT_CSV_B64"); fi
+          fi
+
+          node tools/seo-articles/seo-editorial-pipeline.mjs "${ARGS[@]}"
+
+      - name: Save updated drafts state to branch seo-drafts-state
+        if: steps.keycheck.outputs.has_key == 'true'
+        run: |
+          mkdir -p /tmp/seo-drafts-wt
+          if git rev-parse --verify origin/seo-drafts-state >/dev/null 2>&1; then
+            git worktree add -B seo-drafts-state /tmp/seo-drafts-wt origin/seo-drafts-state
+          else
+            git worktree add -B seo-drafts-state /tmp/seo-drafts-wt HEAD
+          fi
+          cp content/seo-articles/drafts.json /tmp/seo-drafts-wt/content/seo-articles/drafts.json
+          cp content/seo-articles/trends-snapshot.json /tmp/seo-drafts-wt/content/seo-articles/trends-snapshot.json
+
+          pushd /tmp/seo-drafts-wt >/dev/null
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/seo-articles/drafts.json content/seo-articles/trends-snapshot.json
+          if ! git diff --cached --quiet; then
+            git commit -m "drafts(${{ env.editorial_action }}): cập nhật hàng đợi bài viết SEO"
+            git push origin HEAD:seo-drafts-state
+          fi
+          popd >/dev/null
+          git worktree remove --force /tmp/seo-drafts-wt || true
+
+          # Giữ nguyên hai file trạng thái trên main không bị thay đổi khi mở PR
+          git checkout -- content/seo-articles/drafts.json content/seo-articles/trends-snapshot.json
+
+      - name: Verify, bump PWA & open auto-publish PR on approve
+        if: steps.keycheck.outputs.has_key == 'true' && env.editorial_action == 'approve'
+        env:
+          GH_TOKEN: ${{ secrets.SEO_PUBLISH_TOKEN || secrets.GITHUB_TOKEN }}
+          PUBLISH_MODE: ${{ inputs.publish_mode || 'auto-publish' }}
+          DRAFT_ID: ${{ inputs.draft_id }}
+        run: |
+          if [ -z "$(git status --porcelain content/seo-articles/articles.json bai-viet/ tin-tuc-hsk.html sitemap.xml)" ]; then
+            echo "Không có thay đổi bài viết xuất bản."
+            exit 0
+          fi
+
+          SLUG=$(node -e "const d=require('./content/seo-articles/articles.json'); console.log(d.articles[0].slug);")
+          TITLE=$(node -e "const d=require('./content/seo-articles/articles.json'); console.log(d.articles[0].title);")
+          BRANCH="seo/approved-${SLUG}-$(date +%Y%m%d%H%M)"
+          git checkout -b "$BRANCH"
+
+          npm install --no-audit --no-fund --prefix /tmp/hsk-seo-deps jsdom
+          NODE_PATH=/tmp/hsk-seo-deps/node_modules node --test tools/seo-articles/test-seo-articles.mjs tools/seo-articles/test-seo-editorial.mjs
+          python tools/prepare-pwa-release.py --keep-release --note "Xuất bản bài SEO đã duyệt: ${TITLE}"
+          NODE_PATH=/tmp/hsk-seo-deps/node_modules node tools/check-seo-entry-dom.cjs
+          python tools/check-pwa-release.py --base origin/main
+          python tools/check-feature-preservation.py --base origin/main
+
+          git add content/seo-articles/articles.json tin-tuc-hsk.html bai-viet/ sitemap.xml app-version.json offline.js offline-worker.js OneSignalSDKWorker.js
+          git commit -m "seo: xuất bản bài đã duyệt — ${TITLE}"
+          git push -u origin "$BRANCH"
+
+          PR_URL=$(gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "seo: xuất bản bài đã duyệt — ${TITLE}" \
+            --body "$(cat <<EOF
+          ## Bài viết SEO đã được Admin duyệt từ Phòng Biên tập
+          - **Draft ID:** \`${DRAFT_ID}\`
+          - **Tiêu đề:** ${TITLE}
+          - **URL bài viết:** \`https://hskfreelearningai.pages.dev/bai-viet/${SLUG}\`
+          - **Chế độ:** \`${PUBLISH_MODE}\`
+
+          ## Khai báo giao diện (Layout & UI Scope Declaration)
+          - Chỉ thêm bài viết SEO tĩnh trong \`bai-viet/\`, \`tin-tuc-hsk.html\` và \`sitemap.xml\`.
+          - Không thay đổi giao diện công khai hay ứng dụng \`app-hoc-hsk.html\`.
+          EOF
+          )")
+
+          if [ "$PUBLISH_MODE" != "pr-review" ]; then
+            gh pr merge "$PR_URL" --auto --squash --delete-branch || true
+          fi

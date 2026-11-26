@@ -618,7 +618,7 @@ export async function callOpenRouterJson(prompt, apiKey, model = DEFAULT_OPENROU
   throw lastError || new Error('OpenRouter API request failed');
 }
 
-async function callGeminiJson(prompt, apiKey, model) {
+export async function callGeminiJson(prompt, apiKey, model) {
   const modelsToTry = Array.from(new Set([model, DEFAULT_GEMINI_MODEL, 'gemini-2.0-flash'].filter(Boolean)));
   let lastError;
 
