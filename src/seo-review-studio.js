@@ -4,6 +4,7 @@
   const DEFAULT_REPO_OWNER = 'trungxemcode';
   const DEFAULT_REPO_NAME = 'hsk';
   const DEFAULT_DRAFT_BRANCH = 'seo-drafts-state';
+  const CLOUDFLARE_EDITORIAL_URL = 'https://hsk-seo-editorial.trung-hsk668.workers.dev';
   const WORKFLOW_FILE = 'seo-trends-drafts.yml';
   const FIRESTORE_DOC_ID = 'seo-editorial-gh-bridge';
   const SESSION_STORAGE_KEY = 'hsk-seo-review-session-v1';
@@ -35,6 +36,7 @@
   };
   let draftsData = { schema: 1, updatedAt: '', drafts: [] };
   let trendsSnapshot = { schema: 1, fetchedAt: '', sources: [], topics: [] };
+  let cfLastRun = null;
   let selectedDraftId = '';
   let lastRenderedDraftId = '';
   let statusFilter = 'pending_review';
@@ -265,6 +267,42 @@
     return headers;
   }
 
+  async function cfHeaders(withJson = false) {
+    const idToken = await ensureValidIdToken();
+    const headers = {
+      Authorization: `Bearer ${idToken}`,
+    };
+    if (withJson) {
+      headers['Content-Type'] = 'application/json';
+    }
+    return headers;
+  }
+
+  async function fetchCloudflareEditorialState() {
+    const res = await fetch(`${CLOUDFLARE_EDITORIAL_URL}/api/drafts?t=${Date.now()}`, {
+      headers: await cfHeaders(false),
+      cache: 'no-store',
+    });
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData?.error || `Cloudflare Worker HTTP ${res.status}`);
+    }
+    return await res.json();
+  }
+
+  async function callCloudflareEditorialPost(endpoint, payload) {
+    const res = await fetch(`${CLOUDFLARE_EDITORIAL_URL}${endpoint}`, {
+      method: 'POST',
+      headers: await cfHeaders(true),
+      body: JSON.stringify(payload || {}),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data?.error || `Cloudflare Worker HTTP ${res.status}`);
+    }
+    return data;
+  }
+
   async function fetchRepoJsonFile(filePath, fallbackRef = 'main') {
     const refsToTry = [ghConfig.draftBranch || DEFAULT_DRAFT_BRANCH];
     if (fallbackRef && !refsToTry.includes(fallbackRef)) refsToTry.push(fallbackRef);
@@ -313,13 +351,28 @@
     }
   }
 
-  function renderWorkflowStatus(runs = []) {
+  function renderWorkflowStatus(runs = [], lastRun = cfLastRun) {
     const badge = $('workflowRunBadge');
     const link = $('workflowRunLink');
     if (!badge || !link) return;
     if (!runs.length) {
-      badge.hidden = true;
       link.hidden = true;
+      if (lastRun?.at) {
+        badge.hidden = false;
+        badge.classList.remove('is-running', 'is-ok', 'is-fail');
+        if (lastRun.status === 'generating') {
+          badge.classList.add('is-running');
+          badge.textContent = 'Cloudflare AI đang sinh bài nháp…';
+        } else if (lastRun.error) {
+          badge.classList.add('is-fail');
+          badge.textContent = `Cloudflare chạy lỗi: ${lastRun.error}`;
+        } else {
+          badge.classList.add('is-ok');
+          badge.textContent = `Cloudflare (${lastRun.trigger || 'cron'}): ${formatTimeVi(lastRun.at)}`;
+        }
+      } else {
+        badge.hidden = true;
+      }
       return;
     }
     const latest = runs[0];
@@ -327,11 +380,11 @@
     badge.classList.remove('is-running', 'is-ok', 'is-fail');
     if (latest.status !== 'completed') {
       badge.classList.add('is-running');
-      badge.textContent = `Đang chạy AI / xuất bản (${latest.status})…`;
+      badge.textContent = `Đang xuất bản tĩnh (${latest.status})…`;
       scheduleWorkflowPolling();
     } else if (latest.conclusion === 'success') {
       badge.classList.add('is-ok');
-      badge.textContent = `Tác vụ gần nhất xong (${formatTimeVi(latest.updated_at)})`;
+      badge.textContent = `Xuất bản xong (${formatTimeVi(latest.updated_at)})`;
     } else {
       badge.classList.add('is-fail');
       badge.textContent = `Tác vụ gần nhất lỗi (${latest.conclusion || 'failed'})`;
@@ -479,12 +532,14 @@
       return r.verdict === 'pass' ? ' is-done' : ' is-revise';
     };
     const scoreSuffix = (r) => (typeof r?.score === 'number' ? ` (${r.score})` : r?.status === 'skipped' ? ' (bỏ qua)' : '');
+    const label1 = rev1?.label || 'Command A+ / Qwen 3.8';
+    const label2 = rev2?.label || 'Mistral Large 3';
     const adminClass = draft.status === 'approved' ? ' is-done' : draft.status === 'pending_review' ? ' is-active' : '';
 
     return [
       '<span class="rev-pipe-step is-done">1. Gemma 4 viết</span>',
-      `<span class="rev-pipe-step${stepClass(rev1)}">2. Command A+ kiểm${escHtml(scoreSuffix(rev1))}</span>`,
-      `<span class="rev-pipe-step${stepClass(rev2)}">3. Mistral Large 3 duyệt${escHtml(scoreSuffix(rev2))}</span>`,
+      `<span class="rev-pipe-step${stepClass(rev1)}">2. ${escHtml(label1)}${escHtml(scoreSuffix(rev1))}</span>`,
+      `<span class="rev-pipe-step${stepClass(rev2)}">3. ${escHtml(label2)}${escHtml(scoreSuffix(rev2))}</span>`,
       `<span class="rev-pipe-step${adminClass}">4. ${draft.status === 'approved' ? 'Admin đã duyệt ✓' : 'Admin duyệt cuối'}</span>`,
     ].join('');
   }
@@ -492,9 +547,12 @@
   function renderAuditHtml(draft) {
     const q = draft.quality || { score: 0, checks: [], warnings: [] };
     const aiRev = draft.aiReviews;
+    const councilTitle = aiRev?.provider === 'cloudflare-ai'
+      ? 'Hội đồng kiểm duyệt Cloudflare Workers AI'
+      : 'Hội đồng kiểm duyệt AI (xKiro / Cloudflare)';
     const councilHtml = aiRev && Array.isArray(aiRev.reviewers) && aiRev.reviewers.length
       ? `<div>
-          <h3>Hội đồng kiểm duyệt xKiro (Command A+ &amp; Mistral Large 3)</h3>
+          <h3>${escHtml(councilTitle)}</h3>
           ${aiRev.autoPolished ? `<div class="rev-tip" style="margin-bottom:0.75rem"><strong>Gemma 4 đã tự hoàn thiện vòng 2 theo góp ý xKiro:</strong> ${escHtml(aiRev.polishSummary || '')}</div>` : ''}
           <div class="rev-council-grid">
             ${aiRev.reviewers.map((r) => {
@@ -643,17 +701,27 @@
     const refreshBtn = $('refreshDataBtn');
     if (refreshBtn) refreshBtn.disabled = true;
     try {
-      const [loadedDrafts, loadedSnapshot, runs] = await Promise.all([
-        fetchRepoJsonFile('content/seo-articles/drafts.json', 'main').catch(() => ({ schema: 1, updatedAt: '', drafts: [] })),
-        fetchRepoJsonFile('content/seo-articles/trends-snapshot.json', 'main').catch(() => ({ schema: 1, fetchedAt: '', sources: [], topics: [] })),
-        fetchLatestWorkflowRuns().catch(() => []),
-      ]);
+      let loadedDrafts = null;
+      let loadedSnapshot = null;
+      cfLastRun = null;
+
+      try {
+        const cfState = await fetchCloudflareEditorialState();
+        loadedDrafts = cfState?.draftsData || { schema: 1, updatedAt: '', drafts: [] };
+        loadedSnapshot = cfState?.trendsSnapshot || { schema: 1, fetchedAt: '', sources: [], topics: [] };
+        cfLastRun = cfState?.lastRun || null;
+      } catch (_) {
+        loadedDrafts = await fetchRepoJsonFile('content/seo-articles/drafts.json', 'main').catch(() => ({ schema: 1, updatedAt: '', drafts: [] }));
+        loadedSnapshot = await fetchRepoJsonFile('content/seo-articles/trends-snapshot.json', 'main').catch(() => ({ schema: 1, fetchedAt: '', sources: [], topics: [] }));
+      }
+
+      const runs = await fetchLatestWorkflowRuns().catch(() => []);
       draftsData = loadedDrafts;
       trendsSnapshot = loadedSnapshot;
       updateCounters();
       renderDraftList();
       renderSelectedDraft();
-      renderWorkflowStatus(runs);
+      renderWorkflowStatus(runs, cfLastRun);
     } finally {
       if (refreshBtn) refreshBtn.disabled = false;
     }
@@ -795,32 +863,80 @@
 
     const buttons = [$('approveBtn'), $('rewriteBtn'), $('rejectBtn')];
     buttons.forEach((b) => { if (b) b.disabled = true; });
-    setStatusMsg(st, 'Đang gửi lệnh tới GitHub Actions…');
+    setStatusMsg(
+      st,
+      action === 'rewrite'
+        ? 'Đang gửi góp ý tới Cloudflare AI để viết lại & kiểm duyệt lại…'
+        : action === 'approve'
+          ? 'Đang xác nhận duyệt bài trên Cloudflare R2…'
+          : 'Đang cập nhật trạng thái từ chối trên Cloudflare R2…'
+    );
 
     try {
-      await dispatchEditorialWorkflow({
-        action,
-        draft_id: draft.id,
-        rating: currentRating ? String(currentRating) : '',
-        comment,
-        publish_mode: 'auto-publish',
-      });
-
-      if (action === 'approve') {
-        setStatusMsg(st, 'Đã duyệt! GitHub Actions đang kiểm định SEO, build HTML và tự động xuất bản live…', 'is-ok');
-      } else if (action === 'rewrite') {
-        setStatusMsg(st, 'Đã gửi yêu cầu viết lại! AI đang tạo phiên bản mới theo góp ý của bạn…', 'is-ok');
+      if (action === 'rewrite') {
+        const cfRes = await callCloudflareEditorialPost('/api/rewrite', {
+          draftId: draft.id,
+          comment,
+          rating: currentRating || null,
+        });
+        if (cfRes?.draftsData) draftsData = cfRes.draftsData;
         $('reviewCommentInput').value = '';
-      } else {
-        setStatusMsg(st, 'Đã đánh dấu từ chối bản nháp và cập nhật bộ chống trùng lặp.', 'is-ok');
-        $('reviewCommentInput').value = '';
+        updateCounters();
+        renderDraftList();
+        renderSelectedDraft();
+        setStatusMsg(st, `Đã viết lại xong phiên bản v${cfRes?.draft?.version || (draft.version || 1) + 1} và cập nhật đánh giá AI!`, 'is-ok');
+        return;
       }
 
-      const runs = await fetchLatestWorkflowRuns();
-      renderWorkflowStatus(runs);
-      scheduleWorkflowPolling();
+      if (action === 'reject') {
+        const cfRes = await callCloudflareEditorialPost('/api/reject', {
+          draftId: draft.id,
+          comment,
+          rating: currentRating || null,
+        });
+        if (cfRes?.draftsData) draftsData = cfRes.draftsData;
+        $('reviewCommentInput').value = '';
+        updateCounters();
+        renderDraftList();
+        renderSelectedDraft();
+        setStatusMsg(st, 'Đã từ chối bản nháp và cập nhật bộ chống trùng lặp trên Cloudflare R2.', 'is-ok');
+        return;
+      }
+
+      // action === 'approve'
+      const cfRes = await callCloudflareEditorialPost('/api/approve', {
+        draftId: draft.id,
+        comment,
+        rating: currentRating || null,
+      });
+      if (cfRes?.draftsData) draftsData = cfRes.draftsData;
+      updateCounters();
+      renderDraftList();
+      renderSelectedDraft();
+
+      if (ghConfig.token && cfRes?.article) {
+        setStatusMsg(st, 'Đã duyệt trên Cloudflare R2! Đang gửi lệnh xuất bản HTML tĩnh tới GitHub Actions…');
+        await dispatchEditorialWorkflow({
+          action: 'approve',
+          draft_id: draft.id,
+          article_json_b64: encodeUtf8Base64(JSON.stringify(cfRes.article)),
+          rating: currentRating ? String(currentRating) : '',
+          comment,
+          publish_mode: 'auto-publish',
+        });
+        setStatusMsg(st, 'Đã duyệt! GitHub Actions đang kiểm định SEO, build HTML và tự động xuất bản live…', 'is-ok');
+        const runs = await fetchLatestWorkflowRuns();
+        renderWorkflowStatus(runs, cfLastRun);
+        scheduleWorkflowPolling();
+      } else {
+        setStatusMsg(
+          st,
+          'Đã đánh dấu ĐÃ DUYỆT trên Cloudflare R2. Hãy bấm “Kết nối GitHub” để nạp Token và đẩy bài lên trang công khai.',
+          'is-warn'
+        );
+      }
     } catch (err) {
-      setStatusMsg(st, err.message || 'Chưa gửi được lệnh.', 'is-err');
+      setStatusMsg(st, err.message || 'Chưa xử lý được lệnh.', 'is-err');
     } finally {
       buttons.forEach((b) => { if (b) b.disabled = false; });
     }
@@ -903,21 +1019,28 @@
     const st = $('scanModalStatus');
     const btn = $('triggerScanBtn');
     btn.disabled = true;
-    setStatusMsg(st, 'Đang kích hoạt bộ quét Google Trends VN & AI viết bài…');
+    setStatusMsg(st, 'Đang quét Google Trends VN & chạy hội đồng AI trên Cloudflare (khoảng 30–60 giây)…');
     try {
-      await dispatchEditorialWorkflow({
-        action: 'scan-trends',
-        count: $('scanCountInput').value || '2',
-        custom_queries: $('scanQueriesInput').value.trim(),
-        csv_base64: csvFileContent ? encodeUtf8Base64(csvFileContent) : '',
+      const cfRes = await callCloudflareEditorialPost('/api/scan-trends', {
+        count: Math.max(1, Math.min(2, Number($('scanCountInput').value) || 1)),
+        customQueries: $('scanQueriesInput').value.trim(),
+        csvText: csvFileContent || '',
       });
-      setStatusMsg(st, 'Đã gửi lệnh sinh bài nháp! Kết quả sẽ tự động cập nhật sau ~30–60 giây.', 'is-ok');
-      const runs = await fetchLatestWorkflowRuns();
-      renderWorkflowStatus(runs);
-      scheduleWorkflowPolling();
+      if (cfRes?.draftsData) draftsData = cfRes.draftsData;
+      if (cfRes?.trendsSnapshot) trendsSnapshot = cfRes.trendsSnapshot;
+      if (cfRes?.lastRun) cfLastRun = cfRes.lastRun;
+      if (cfRes?.createdIds?.[0]) {
+        selectedDraftId = cfRes.createdIds[0];
+      }
+      updateCounters();
+      renderDraftList();
+      renderSelectedDraft();
+      renderWorkflowStatus([], cfLastRun);
+      const createdCount = cfRes?.createdIds?.length || 0;
+      setStatusMsg(st, `Đã sinh xong ${createdCount} bài nháp mới từ Google Trends và lưu trên Cloudflare R2!`, 'is-ok');
       setTimeout(() => closeModal('scanModal'), 700);
     } catch (err) {
-      setStatusMsg(st, err.message || 'Không kích hoạt được workflow.', 'is-err');
+      setStatusMsg(st, err.message || 'Không chạy được bộ quét Cloudflare.', 'is-err');
     } finally {
       btn.disabled = false;
     }

@@ -552,65 +552,75 @@ export function resolveAiConfig(env = process.env, args = {}) {
 }
 
 export async function callOpenRouterJson(prompt, apiKey, model = DEFAULT_OPENROUTER_MODEL, fetchImpl = fetch) {
-  let useResponseFormat = true;
+  const modelsToTry = Array.from(
+    new Set([
+      model,
+      'google/gemma-4-26b-a4b-it:free',
+      'baidu/ernie-5.5-flash-preview:free',
+      'nvidia/nemotron-3-ultra-550b-a55b:free',
+    ].filter(Boolean))
+  );
   let lastError;
 
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      const payloadBody = {
-        model,
-        messages: [
-          {
-            role: 'system',
-            content:
-              'Bạn là biên tập viên SEO tiếng Việt cho HSK Flashcards. Chỉ trả về duy nhất 01 object JSON hợp lệ, không kèm giải thích hay markdown.',
+  for (const activeModel of modelsToTry) {
+    let useResponseFormat = true;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const payloadBody = {
+          model: activeModel,
+          messages: [
+            {
+              role: 'system',
+              content:
+                'Bạn là biên tập viên SEO tiếng Việt cho HSK Flashcards. Chỉ trả về duy nhất 01 object JSON hợp lệ, không kèm giải thích hay markdown.',
+            },
+            { role: 'user', content: prompt },
+          ],
+          temperature: 0.65,
+        };
+        if (useResponseFormat) {
+          payloadBody.response_format = { type: 'json_object' };
+        }
+
+        const response = await fetchImpl(OPENROUTER_API_URL, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': 'https://hskfreelearningai.pages.dev/',
+            'X-Title': 'HSK Flashcards SEO News Rewriter',
           },
-          { role: 'user', content: prompt },
-        ],
-        temperature: 0.65,
-      };
-      if (useResponseFormat) {
-        payloadBody.response_format = { type: 'json_object' };
-      }
+          body: JSON.stringify(payloadBody),
+        });
 
-      const response = await fetchImpl(OPENROUTER_API_URL, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-          'HTTP-Referer': 'https://hskfreelearningai.pages.dev/',
-          'X-Title': 'HSK Flashcards SEO News Rewriter',
-        },
-        body: JSON.stringify(payloadBody),
-      });
-
-      if (!response.ok) {
-        const errText = await response.text().catch(() => '');
-        lastError = new Error(`OpenRouter API (${model}) HTTP ${response.status}: ${errText.slice(0, 300)}`);
-        if (response.status === 400 && useResponseFormat) {
-          useResponseFormat = false;
-          continue;
+        if (!response.ok) {
+          const errText = await response.text().catch(() => '');
+          lastError = new Error(`OpenRouter API (${activeModel}) HTTP ${response.status}: ${errText.slice(0, 300)}`);
+          if (response.status === 400 && useResponseFormat) {
+            useResponseFormat = false;
+            continue;
+          }
+          if ((response.status === 429 || response.status >= 500) && attempt < 2) {
+            await new Promise((r) => setTimeout(r, 1500));
+            continue;
+          }
+          break;
         }
-        if ((response.status === 429 || response.status >= 500) && attempt < 3) {
-          await new Promise((r) => setTimeout(r, 2500 * attempt));
-          continue;
-        }
-        break;
-      }
 
-      const payload = await response.json();
-      const rawContent = payload?.choices?.[0]?.message?.content;
-      const text = Array.isArray(rawContent)
-        ? rawContent.map((p) => (typeof p === 'string' ? p : p?.text || '')).join('').trim()
-        : String(rawContent || '').trim();
-      if (!text) {
-        throw new Error(`OpenRouter API (${model}) returned empty content`);
-      }
-      return extractJsonObject(text);
-    } catch (err) {
-      lastError = err;
-      if (attempt < 3) {
-        await new Promise((r) => setTimeout(r, 2000 * attempt));
+        const payload = await response.json();
+        const rawContent = payload?.choices?.[0]?.message?.content;
+        const text = Array.isArray(rawContent)
+          ? rawContent.map((p) => (typeof p === 'string' ? p : p?.text || '')).join('').trim()
+          : String(rawContent || '').trim();
+        if (!text) {
+          throw new Error(`OpenRouter API (${activeModel}) returned empty content`);
+        }
+        return extractJsonObject(text);
+      } catch (err) {
+        lastError = err;
+        if (attempt < 2) {
+          await new Promise((r) => setTimeout(r, 1200));
+        }
       }
     }
   }
