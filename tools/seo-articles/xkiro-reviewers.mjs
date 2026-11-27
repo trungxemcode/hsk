@@ -14,7 +14,7 @@ import {
   buildAuditorPrompt,
   computeAuditScoreAndVerdict,
   sanitizeAuditFeedbackForWriter,
-} from '../../server/seo-editorial/audit-protocol.mjs';
+} from './audit-protocol.mjs';
 
 export const XKIRO_API_URL = 'https://api.xkiro.com/v1/chat/completions';
 

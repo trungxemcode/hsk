@@ -22,7 +22,7 @@ import {
   WRITER_STYLES,
   WRITER_SYSTEM_PROMPT,
   selectWriterStyle,
-} from '../../server/seo-editorial/writer-standard.mjs';
+} from './writer-standard.mjs';
 import {
   CHINESETEST_ORIGIN,
   LEGACY_SOURCE_URL,

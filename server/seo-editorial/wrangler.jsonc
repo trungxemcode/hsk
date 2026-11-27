@@ -4,9 +4,6 @@
   "main": "worker.mjs",
   "compatibility_date": "2026-10-31",
   "workers_dev": true,
-  "ai": {
-    "binding": "AI"
-  },
   "r2_buckets": [
     {
       "binding": "SEO_BUCKET",
@@ -14,25 +11,12 @@
     }
   ],
   "triggers": {
-    "crons": [
-      "35 */2 * * *"
-    ]
+    "crons": []
   },
   "vars": {
     "FIREBASE_API_KEY": "AIzaSyAQlltCY7fZzNUnVkaiOusYSwa0LO5a6ko",
     "ALLOWED_ORIGINS": "https://hskfreelearningai.pages.dev,https://trungxemcode.github.io",
     "PUBLISHED_ARTICLES_URL": "https://hskfreelearningai.pages.dev/content/seo-articles/articles.json",
-    "OPENROUTER_WRITER_MODEL": "nvidia/nemotron-3.5-lightning:free",
-    "OPENROUTER_REVIEW_MODEL_1": "nvidia/nemotron-3.5-lightning:free",
-    "OPENROUTER_REVIEW_MODEL_2": "nvidia/nemotron-3.5-lightning:free",
-    "CF_WRITER_MODEL": "@cf/google/gemma-4-26b-a4b-it",
-    "CF_WRITER_FALLBACK_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-    "CF_REVIEWER_1_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-    "CF_REVIEWER_2_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-    "XKIRO_REVIEW_MODEL_1": "cohere/command-a-plus",
-    "XKIRO_REVIEW_MODEL_2": "mistralai/mistral-large-2512",
-    "XKIRO_REVIEW_MODEL_2_FALLBACK": "deepseek/deepseek-v4.1-flash",
-    "DEFAULT_CRON_COUNT": "1",
     "MAX_PENDING_DRAFTS": "24",
     "CHATGPT_MAX_PER_HOUR": "2"
   }

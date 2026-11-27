@@ -29,7 +29,7 @@ import {
   buildStandardRevisionWriterPrompt,
   buildStandardTrendWriterPrompt,
   selectWriterStyle,
-} from '../../server/seo-editorial/writer-standard.mjs';
+} from './writer-standard.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');

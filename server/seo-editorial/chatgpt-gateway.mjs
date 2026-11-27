@@ -8,7 +8,6 @@
  *   Only Admin authenticated via Firebase ID Token in `studio-duyet-bai-7f9k2x.html`
  *   can approve and push to GitHub.
  */
-import { EDITORIAL_DEPTH_RULES } from './writer-standard.mjs';
 import {
   CATEGORIES,
   buildExistingCorpus,
@@ -18,7 +17,6 @@ import {
   isDuplicateTopic,
   isQueryAllowed,
   normalizeArticle,
-  runTwoRoundEditorialPipeline,
   slugifyVi,
 } from './pipeline-core.mjs';
 
@@ -35,7 +33,7 @@ export function defaultGatewayConfig(env = {}) {
     enabled: true,
     apiKey: '',
     hourlyLimit: Number.isFinite(envHourly) && envHourly >= 1 ? Math.min(6, Math.round(envHourly)) : 2,
-    runAiReview: true,
+    runAiReview: false,
     updatedAt: '',
     rotatedAt: '',
     lastSubmission: null,
@@ -183,7 +181,7 @@ export function buildGatewayCorsHeaders(origin = '') {
     Vary: 'Origin',
     'Cache-Control': 'no-store',
     'X-Content-Type-Options': 'nosniff',
-    'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Authorization, Content-Type, Accept, Mcp-Session-Id, Mcp-Protocol-Version, X-ChatGPT-Ingest-Key',
     'Access-Control-Expose-Headers': 'Mcp-Session-Id',
   });
@@ -201,6 +199,7 @@ export function buildAdminGatewayConfigResponse({ baseUrl, env, storedConfig, dr
 
   return {
     ok: true,
+    mode: 'chatgpt-only',
     enabled: storedConfig.enabled !== false,
     keyConfigured: Boolean(primary.key),
     keySource: primary.source,
@@ -209,7 +208,7 @@ export function buildAdminGatewayConfigResponse({ baseUrl, env, storedConfig, dr
     hourlyLimit: storedConfig.hourlyLimit,
     recentHourlyCount: hourly.count,
     retryAfterMinutes: hourly.count >= storedConfig.hourlyLimit ? hourly.retryAfterMinutes : 0,
-    runAiReview: storedConfig.runAiReview !== false,
+    runAiReview: false,
     maxPending,
     pendingCount,
     totalChatgptDrafts: chatgptDrafts.length,
@@ -264,6 +263,20 @@ export async function buildChatgptBrief({
     trendQuery: d.trendQuery || '',
   }));
 
+  const pendingRevisionRequests = drafts
+    .filter((d) => d && d.status === 'pending_review' && d.revisionRequest && d.revisionRequest.comment)
+    .slice(0, 10)
+    .map((d) => ({
+      draftId: d.id,
+      version: d.version || 1,
+      slug: d.article?.slug || '',
+      title: d.article?.title || d.trendQuery || '',
+      trendQuery: d.trendQuery || '',
+      rating: d.revisionRequest.rating || d.rating || null,
+      comment: d.revisionRequest.comment,
+      requestedAt: d.revisionRequest.requestedAt || d.updatedAt || '',
+    }));
+
   return {
     ok: true,
     fetchedAt: collected.fetchedAt,
@@ -281,7 +294,8 @@ export async function buildChatgptBrief({
       pendingCount,
       maxPending,
     },
-    aiReviewEnabled: storedConfig.runAiReview !== false,
+    aiReviewEnabled: false,
+    pendingRevisionRequests,
     suggestedTopics: collected.topics.map((t) => ({
       query: t.query,
       topic: t.topic,
@@ -301,11 +315,11 @@ export async function buildChatgptBrief({
       recentDrafts: existingDrafts,
     },
     editorialRules: [
-      'Viết 100% nội dung gốc bằng tiếng Việt tự nhiên cho người Việt học tiếng Trung HSK 1–6 (không dịch máy, không mở bài rập khuôn).',
+      'Viết 100% nội dung gốc bằng tiếng Việt tự nhiên cho người Việt học tiếng Trung HSK 1–6 (đi thẳng vào trọng tâm, phân biệt rõ ngữ cảnh/ngoại lệ, không mở bài rập khuôn kiểu AI).',
       'metaTitle dài 35–75 ký tự, kết thúc bằng " | HSK Flashcards". metaDescription dài 110–170 ký tự.',
-      ...EDITORIAL_DEPTH_RULES,
+      'Triển khai bài viết đủ chiều sâu: ví dụ đối chiếu cụ thể (Chữ Hán giản thể – Pinyin đúng thanh điệu – nghĩa tiếng Việt), phân tích lỗi người Việt hay mắc phải, bảng đối chiếu/tóm tắt rõ ràng, tip ghi nhớ và FAQs thực tế.',
       'TUYỆT ĐỐI không dùng các cụm từ cấm: "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".',
-      'Chọn 2–3 relatedSlugs nằm trong danh sách availableRelatedSlugs.',
+      'Chọn 2–3 relatedSlugs nằm trong danh sách availableRelatedSlugs. Nếu có pendingRevisionRequests, ưu tiên gọi update_seo_draft để sửa bài đang chờ Admin trước.',
     ],
   };
 }
@@ -395,71 +409,27 @@ export async function submitChatgptDraft({
     );
   }
 
-  const quality = evaluateDraftQuality(article);
-  const shouldRunCouncil = storedConfig.runAiReview !== false;
-  let aiReviews = null;
-
-  if (shouldRunCouncil) {
-    try {
-      ({ aiReviews } = await runTwoRoundEditorialPipeline({
-        initialArticle: article,
-        authorSource: 'chatgpt',
-        trendQuery,
-        category: article.category,
-        env,
-        fetchImpl,
-      }));
-    } catch (err) {
-      aiReviews = {
-        status: 'error',
-        provider: 'cloudflare-ai',
-        pipeline: ['chatgpt', 'command-a-plus', 'mistral-large-3', 'admin'],
-        averageScore: null,
-        needsAutoPolish: false,
-        autoPolished: false,
-        polishSummary: '',
-        combinedFeedback: '',
-        reviewedAt: new Date().toISOString(),
-        reviewers: [
-          {
-            id: 'council-error',
-            label: 'Hội đồng kiểm duyệt AI',
-            model: 'fallback',
-            role: 'Kiểm duyệt phụ',
-            status: 'error',
-            score: null,
-            verdict: 'error',
-            summary: `Chưa chấm được điểm phụ (${err?.message || 'timeout'}), bài vẫn đã vào hàng đợi Chờ duyệt.`,
-            strengths: [],
-            issues: [],
-            mustFix: [],
-            reviewedAt: new Date().toISOString(),
-          },
-        ],
-      };
-    }
-  } else {
-    aiReviews = {
-      status: 'skipped',
-      provider: 'chatgpt-only',
-      pipeline: ['chatgpt', 'admin'],
-      averageScore: null,
-      needsAutoPolish: false,
-      autoPolished: false,
-      polishSummary: '',
-      combinedFeedback: '',
-      reviewedAt: new Date().toISOString(),
-      reviewers: [],
-    };
-  }
-
   const nowIso = new Date().toISOString();
+  const quality = evaluateDraftQuality(article);
+  const aiReviews = {
+    status: 'skipped',
+    provider: 'chatgpt-only',
+    pipeline: ['chatgpt', 'admin'],
+    averageScore: null,
+    needsAutoPolish: false,
+    autoPolished: false,
+    polishSummary: '',
+    combinedFeedback: '',
+    reviewedAt: nowIso,
+    reviewers: [],
+  };
+
   const stamp = nowIso.replace(/[-:TZ.]/g, '').slice(0, 14);
   const draftId = `draft-cgpt-${stamp}-${article.slug.slice(0, 32)}`;
   const authorModel = String(payload?.authorModel || 'ChatGPT Plus').trim().slice(0, 64) || 'ChatGPT Plus';
   const authorNote = String(payload?.authorNote || '').trim().slice(0, 300);
   const trendSource = String(payload?.trendSource || 'chatgpt-web').trim().slice(0, 48) || 'chatgpt-web';
-  const trendSpike = String(payload?.trendSpike || 'Hẹn giờ mỗi giờ').trim().slice(0, 48);
+  const trendSpike = String(payload?.trendSpike || 'ChatGPT').trim().slice(0, 48);
 
   const reviewHistory = [
     {
@@ -469,14 +439,6 @@ export async function submitChatgptDraft({
       at: nowIso,
     },
   ];
-  if (aiReviews && aiReviews.status !== 'skipped' && Array.isArray(aiReviews.reviewers) && aiReviews.reviewers.length) {
-    reviewHistory.push({
-      action: 'ai_reviewed',
-      rating: null,
-      comment: aiReviews.reviewers.map((r) => `${r.label}: ${r.score ?? 'err'}`).join(' · '),
-      at: new Date().toISOString(),
-    });
-  }
 
   // Hard-locked to pending_review. Never allows direct publish or approval.
   const draft = {
@@ -493,6 +455,7 @@ export async function submitChatgptDraft({
     category: article.category,
     hskTag: article.hskTag,
     editorialVoice: article.editorialVoice || 'chatgpt-editorial',
+    revisionRequest: null,
     aiReviews,
     quality,
     rating: null,
@@ -516,7 +479,7 @@ export async function submitChatgptDraft({
       slug: article.slug,
       title: article.title,
       seoScore: quality.score,
-      councilAverage: aiReviews?.averageScore ?? null,
+      councilAverage: null,
     },
   };
   await writeConfig(nextConfig).catch(() => {});
@@ -527,23 +490,15 @@ export async function submitChatgptDraft({
     status: 'pending_review',
     requiresAdminApproval: true,
     pushedToGithub: false,
-    message: 'Đã tiếp nhận bài viết từ ChatGPT, chạy kiểm định & lưu vào hàng đợi Chờ duyệt. Bài sẽ chỉ được push lên GitHub khi Admin duyệt trong Phòng Duyệt Bài.',
+    message: 'Đã tiếp nhận bài viết từ ChatGPT vào hàng đợi Chờ duyệt. Bài sẽ chỉ được push lên GitHub khi Admin duyệt trong Phòng Duyệt Bài.',
     slug: article.slug,
     title: article.title,
     category: article.category,
     quality,
     aiReviews: {
-      status: aiReviews?.status || 'skipped',
-      averageScore: aiReviews?.averageScore ?? null,
-      reviewers: (aiReviews?.reviewers || []).map((r) => ({
-        label: r.label,
-        score: r.score,
-        verdict: r.verdict,
-        summary: r.summary,
-        mustFix: (r.errors || [])
-          .filter(({ severity }) => severity === 'Critical' || severity === 'Major')
-          .map(({ location, reason, fix }) => [location, reason, fix].filter(Boolean).join(' · ')),
-      })),
+      status: 'skipped',
+      averageScore: null,
+      reviewers: [],
     },
     quota: {
       hourlyUsed: hourly.count + 1,
@@ -551,6 +506,144 @@ export async function submitChatgptDraft({
       pendingCount: pendingCount + 1,
       maxPending,
     },
+  };
+}
+
+export async function updateChatgptDraft({
+  payload,
+  storedConfig,
+  draftsData,
+  publishedArticles = [],
+  writeDrafts,
+  writeConfig,
+}) {
+  const draftId = String(payload?.draftId || '').trim();
+  if (!draftId) {
+    throw Object.assign(new Error('Thiếu draftId của bài viết cần cập nhật.'), { status: 400, code: 'missing_draft_id' });
+  }
+  const drafts = Array.isArray(draftsData?.drafts) ? draftsData.drafts : [];
+  const idx = drafts.findIndex((d) => d && d.id === draftId);
+  if (idx < 0) {
+    throw Object.assign(new Error(`Không tìm thấy bản nháp "${draftId}".`), { status: 404, code: 'draft_not_found' });
+  }
+  const existing = drafts[idx];
+  if (existing.status !== 'pending_review') {
+    throw Object.assign(
+      new Error(`Bản nháp "${draftId}" đang ở trạng thái "${existing.status}", chỉ bài Chờ duyệt (pending_review) mới cập nhật được.`),
+      { status: 409, code: 'draft_not_pending' }
+    );
+  }
+
+  const rawArticle = unwrapIncomingArticle(payload);
+  const trendQuery = String(payload?.trendQuery || existing.trendQuery || rawArticle.title || '').trim();
+  if (!isQueryAllowed(trendQuery) || !isQueryAllowed(rawArticle.title)) {
+    throw Object.assign(
+      new Error('Chủ đề không phù hợp bộ lọc nội dung học thuật HSK.'),
+      { status: 400, code: 'topic_blocked' }
+    );
+  }
+
+  const inferred = inferCategoryAndTag(trendQuery || rawArticle.title);
+  const existingSlugs = publishedArticles.map((a) => a.slug).filter(Boolean);
+  const today = new Date().toISOString().slice(0, 10);
+  const nextSlug = slugifyVi(rawArticle.slug || rawArticle.suggestedSlug || payload?.slug || existing.article?.slug || rawArticle.title);
+
+  let article;
+  try {
+    article = normalizeArticle(rawArticle, {
+      slug: nextSlug,
+      topic: rawArticle.title,
+      category: CATEGORIES[rawArticle.category]
+        ? rawArticle.category
+        : (CATEGORIES[payload?.category] ? payload.category : (existing.category || inferred.category)),
+      hskTag: rawArticle.hskTag || payload?.hskTag || existing.hskTag || inferred.hskTag,
+      today,
+      existingSlugs,
+      editorialVoice: String(payload?.editorialVoice || rawArticle.editorialVoice || existing.editorialVoice || 'chatgpt-editorial'),
+    });
+  } catch (err) {
+    throw Object.assign(new Error(`Bài viết cập nhật chưa đạt chuẩn cấu trúc SEO: ${err.message}`), {
+      status: 400,
+      code: 'validation_failed',
+    });
+  }
+
+  const nowIso = new Date().toISOString();
+  const quality = evaluateDraftQuality(article);
+  const authorModel = String(payload?.authorModel || existing.authorModel || 'ChatGPT Plus').trim().slice(0, 64) || 'ChatGPT Plus';
+  const revisionSummary = String(payload?.revisionSummary || payload?.authorNote || '').trim().slice(0, 400)
+    || 'ChatGPT đã viết lại bài theo góp ý Admin';
+  const prevComment = existing.revisionRequest?.comment || '';
+  const nextVersion = Number(existing.version || 1) + 1;
+
+  const reviewHistory = Array.isArray(existing.reviewHistory) ? existing.reviewHistory.slice() : [];
+  reviewHistory.push({
+    action: 'revised_by_chatgpt',
+    rating: existing.rating || null,
+    comment: prevComment ? `Sửa theo góp ý Admin ("${prevComment.slice(0, 160)}")` : `Cập nhật qua Cổng ChatGPT (${authorModel})`,
+    revisionSummary,
+    at: nowIso,
+  });
+
+  const updatedDraft = {
+    ...existing,
+    status: 'pending_review',
+    version: nextVersion,
+    updatedAt: nowIso,
+    authorSource: 'chatgpt',
+    authorModel,
+    trendQuery,
+    category: article.category,
+    hskTag: article.hskTag,
+    revisionRequest: null,
+    aiReviews: {
+      status: 'skipped',
+      provider: 'chatgpt-only',
+      pipeline: ['chatgpt', 'admin'],
+      averageScore: null,
+      needsAutoPolish: false,
+      autoPolished: false,
+      polishSummary: '',
+      combinedFeedback: '',
+      reviewedAt: nowIso,
+      reviewers: [],
+    },
+    quality,
+    reviewHistory,
+    article,
+  };
+
+  drafts[idx] = updatedDraft;
+  draftsData.drafts = drafts;
+  draftsData.updatedAt = nowIso;
+  await writeDrafts(draftsData);
+
+  const nextConfig = {
+    ...storedConfig,
+    updatedAt: nowIso,
+    lastSubmission: {
+      at: nowIso,
+      draftId,
+      slug: article.slug,
+      title: article.title,
+      seoScore: quality.score,
+      councilAverage: null,
+    },
+  };
+  await writeConfig(nextConfig).catch(() => {});
+
+  return {
+    ok: true,
+    draftId,
+    version: nextVersion,
+    status: 'pending_review',
+    requiresAdminApproval: true,
+    pushedToGithub: false,
+    message: `Đã cập nhật bài "${article.title}" lên phiên bản v${nextVersion} trong hàng đợi Chờ duyệt.`,
+    slug: article.slug,
+    title: article.title,
+    category: article.category,
+    quality,
   };
 }
 
@@ -573,7 +666,7 @@ export function listChatgptDrafts({ drafts = [], onlyChatgpt = true, status = 'a
     drafts: filtered.slice(0, maxItems).map((d) => ({
       id: d.id,
       status: d.status,
-      authorSource: isChatgptDraft(d) ? 'chatgpt' : 'cloudflare-cron',
+      authorSource: isChatgptDraft(d) ? 'chatgpt' : 'legacy',
       version: d.version || 1,
       createdAt: d.createdAt,
       updatedAt: d.updatedAt,
@@ -584,6 +677,7 @@ export function listChatgptDrafts({ drafts = [], onlyChatgpt = true, status = 'a
       seoScore: d.quality?.score ?? null,
       councilAverage: d.aiReviews?.averageScore ?? null,
       rating: d.rating || null,
+      revisionRequest: d.revisionRequest || null,
       publishedSlug: d.publishedSlug || '',
       latestNote: Array.isArray(d.reviewHistory) && d.reviewHistory.length
         ? d.reviewHistory[d.reviewHistory.length - 1]?.comment || ''
@@ -747,6 +841,49 @@ export function getMcpToolsDefinition() {
       },
     },
     {
+      name: 'update_seo_draft',
+      description:
+        'Cập nhật / viết lại 01 bài nháp đang ở trạng thái pending_review theo góp ý của Admin (xem danh sách cần sửa trong get_seo_brief -> pendingRevisionRequests hoặc list_chatgpt_drafts). Không thể sửa bài đã duyệt.',
+      inputSchema: {
+        type: 'object',
+        required: ['draftId', 'article'],
+        properties: {
+          draftId: { type: 'string', description: 'ID bản nháp đang chờ duyệt cần viết lại.' },
+          revisionSummary: { type: 'string', description: 'Tóm tắt ngắn gọn các phần đã sửa theo góp ý Admin.' },
+          authorModel: { type: 'string', description: 'Tên phiên bản ChatGPT chỉnh sửa (mặc định "ChatGPT Plus").' },
+          trendQuery: { type: 'string', description: 'Từ khóa chính (tùy chọn).' },
+          article: {
+            type: 'object',
+            required: ['title', 'metaTitle', 'metaDescription', 'summary', 'sections', 'faqs'],
+            properties: {
+              slug: { type: 'string' },
+              category: { type: 'string', enum: ['ky-thi', 'diem-so', 'meo-hoc', 'ngu-phap'] },
+              hskTag: { type: 'string' },
+              title: { type: 'string' },
+              metaTitle: { type: 'string' },
+              metaDescription: { type: 'string' },
+              summary: { type: 'string' },
+              readMinutes: { type: 'integer', minimum: 3, maximum: 12, default: 6 },
+              keywords: { type: 'array', items: { type: 'string' } },
+              sections: { type: 'array', minItems: 2, maxItems: 7 },
+              faqs: { type: 'array' },
+              relatedSlugs: { type: 'array', items: { type: 'string' } },
+              cta: { type: 'object' },
+              sources: { type: 'array' },
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+      annotations: {
+        title: 'Viết lại bài nháp theo góp ý Admin',
+        readOnlyHint: false,
+        destructiveHint: false,
+        idempotentHint: false,
+        openWorldHint: false,
+      },
+    },
+    {
       name: 'list_chatgpt_drafts',
       description:
         'Xem trạng thái các bài nháp SEO (chờ duyệt, đã duyệt xuất bản, từ chối), điểm SEO và nhận xét của Hội đồng AI / Admin. Chỉ đọc, không thể duyệt hoặc push lên GitHub.',
@@ -878,6 +1015,23 @@ export function buildChatgptOpenApiSpec(baseUrl = 'https://hsk-seo-editorial.tru
             },
           },
         },
+        put: {
+          operationId: 'updateSeoDraft',
+          summary: 'Viết lại 1 bài nháp pending_review theo góp ý Admin',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: { type: 'object', required: ['draftId', 'article'] },
+              },
+            },
+          },
+          responses: {
+            200: { description: 'Đã cập nhật phiên bản mới vào hàng đợi Chờ duyệt' },
+            404: { description: 'Không tìm thấy bản nháp' },
+            409: { description: 'Bài nháp không ở trạng thái pending_review' },
+          },
+        },
       },
     },
   };
@@ -975,6 +1129,19 @@ async function handleSingleMcpRpc(rpc, context) {
           writeDrafts: context.writeDrafts,
           writeConfig: context.writeConfig,
           fetchImpl: context.fetchImpl,
+        });
+      } else if (toolName === 'update_seo_draft') {
+        const [draftsData, publishedArticles] = await Promise.all([
+          context.readDrafts(),
+          context.fetchPublished(),
+        ]);
+        data = await updateChatgptDraft({
+          payload: args,
+          storedConfig: context.storedConfig,
+          draftsData,
+          publishedArticles,
+          writeDrafts: context.writeDrafts,
+          writeConfig: context.writeConfig,
         });
       } else {
         return jsonRpcError(rpc.id, -32601, `Unknown tool: ${toolName}`);
@@ -1181,6 +1348,23 @@ export async function handleChatgptGatewayRoute(request, route, context) {
         fetchImpl: context.fetchImpl,
       });
       return Response.json(created, { status: 201, headers });
+    }
+
+    if (route.kind === 'drafts' && request.method === 'PUT') {
+      const payload = await readBoundedJsonBody(request);
+      const [draftsData, publishedArticles] = await Promise.all([
+        context.readDrafts(),
+        context.fetchPublished(),
+      ]);
+      const updated = await updateChatgptDraft({
+        payload,
+        storedConfig,
+        draftsData,
+        publishedArticles,
+        writeDrafts: context.writeDrafts,
+        writeConfig: enrichedContext.writeConfig,
+      });
+      return Response.json(updated, { status: 200, headers });
     }
 
     return Response.json({ ok: false, error: 'Method or route not allowed on ChatGPT Gateway.' }, { status: 405, headers });
