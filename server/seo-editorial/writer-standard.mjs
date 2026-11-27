@@ -199,6 +199,7 @@ export function buildStandardRevisionWriterPrompt({
   rating = null,
   existingSlugs = [],
   today,
+  retryHint = '',
 }) {
   const styleId = draft?.editorialVoice || draft?.writerBrief?.styleId || '';
   const style = selectWriterStyle({
@@ -208,20 +209,46 @@ export function buildStandardRevisionWriterPrompt({
     requestedStyle: styleId,
   });
 
+  const trimmedAdmin = String(adminComment || '').trim();
+  const trimmedFeedback = String(sanitizedFeedback || '').trim();
+  const trimmedRetry = String(retryHint || '').trim();
+
   const feedbackParts = [];
-  if (sanitizedFeedback && String(sanitizedFeedback).trim()) {
-    feedbackParts.push(`CÁC LỖI CẦN KHẮC PHỤC (kèm bằng chứng & vị trí):\n${String(sanitizedFeedback).trim()}`);
-  }
-  if (adminComment && String(adminComment).trim()) {
+  if (trimmedAdmin) {
     feedbackParts.push(
-      `GÓP Ý TRỰC TIẾP CỦA ADMIN${rating ? ` (${rating}/5 sao)` : ''}:\n"""\n${String(adminComment).trim()}\n"""`
+      `MỆNH LỆNH BẮT BUỘC TỪ ADMIN (ƯU TIÊN SỐ 1 — PHẢI THỰC HIỆN TRIỆT ĐỂ)${rating ? ` [Admin chấm ${rating}/5 sao]` : ''}:
+"""
+${trimmedAdmin}
+"""
+YÊU CẦU ĐẶC BIỆT ĐỐI VỚI MỆNH LỆNH ADMIN:
+- Phải tái cấu trúc, viết mới và mở rộng nội dung thực chất để giải quyết triệt để từng điểm Admin góp ý; TUYỆT ĐỐI KHÔNG giữ nguyên khung cũ rồi chỉ sửa vài chữ bề mặt.
+- Nếu Admin yêu cầu viết dài hơn, chi tiết hơn, thiếu thông tin, thiếu bối cảnh/ví dụ/kết luận: hãy mở rộng thành 4–6 mục H2 ("sections") đầy đặn (~1.000–1.500 từ tổng thể) kèm giải thích rõ bản chất, ví dụ Chữ Hán – Pinyin – Việt sát ngữ cảnh, bảng/gạch đầu dòng và phần kết luận hoặc ứng dụng rõ ràng.
+- Mở đầu trường "revisionSummary" bằng việc nêu rõ đã xử lý từng điểm Admin yêu cầu ở những mục nào.`
     );
-  }
-  if (!feedbackParts.length) {
-    feedbackParts.push('Nâng cấp độ sâu chuyên môn, chuẩn xác Chữ Hán – Pinyin – Việt, ngoại lệ ngữ pháp và tính tự nhiên tiếng Việt.');
+    if (trimmedRetry) {
+      feedbackParts.push(`CẢNH BÁO VIẾT LẠI BẮT BUỘC:\n${trimmedRetry}`);
+    }
+    if (trimmedFeedback) {
+      const compactFeedback = trimmedFeedback.length > 900
+        ? `${trimmedFeedback.slice(0, 900)}\n...(lược bớt phần phụ)`
+        : trimmedFeedback;
+      feedbackParts.push(
+        `LƯU Ý PHỤ TỪ KIỂM ĐỊNH TRƯỚC (chỉ để vá lỗi Pinyin/dữ kiện đi kèm — TUYỆT ĐỐI KHÔNG cắt ngắn hay làm sai lệch mệnh lệnh Admin ở trên):\n${compactFeedback}`
+      );
+    }
+  } else {
+    if (trimmedFeedback) {
+      feedbackParts.push(`CÁC LỖI CẦN KHẮC PHỤC (kèm bằng chứng & vị trí):\n${trimmedFeedback}`);
+    }
+    if (trimmedRetry) {
+      feedbackParts.push(`CẢNH BÁO VIẾT LẠI BẮT BUỘC:\n${trimmedRetry}`);
+    }
+    if (!feedbackParts.length) {
+      feedbackParts.push('Nâng cấp độ sâu chuyên môn, chuẩn xác Chữ Hán – Pinyin – Việt, ngoại lệ ngữ pháp và tính tự nhiên tiếng Việt.');
+    }
   }
 
-  return `Nhiệm vụ: Chỉnh sửa bản thảo bài SEO theo quy chuẩn ${WRITER_STANDARD_ID} để xử lý triệt để các lỗi được chỉ ra.
+  return `Nhiệm vụ: Chỉnh sửa bản thảo bài SEO theo quy chuẩn ${WRITER_STANDARD_ID} để xử lý triệt để các yêu cầu được chỉ ra.
 
 VĂN PHONG CHỦ ĐẠO CẦN GIỮ VỮNG — [${style.label}]:
 ${style.instructions}
@@ -232,15 +259,15 @@ BẢN THẢO HIỆN TẠI (version ${draft?.version || 1}, từ khóa: "${draft?
 ${JSON.stringify(draft?.article || {})}
 
 YÊU CẦU KHI SỬA BÀI:
-1. Sửa tận gốc từng lỗi được nêu theo đúng vị trí; khi thay đổi một luận điểm, rà soát các đoạn, bảng và ví dụ phụ thuộc để đảm bảo nhất quán toàn bài (không chỉ đổi chữ bề mặt).
+1. ${trimmedAdmin ? 'Thực hiện triệt để Mệnh lệnh Admin trước tiên; tái cấu trúc hoặc thêm section mới khi cần để giải quyết tận gốc vấn đề, bảo đảm mọi đoạn, bảng và ví dụ nhất quán toàn bài.' : 'Sửa tận gốc từng lỗi được nêu theo đúng vị trí; khi thay đổi một luận điểm, rà soát các đoạn, bảng và ví dụ phụ thuộc để đảm bảo nhất quán toàn bài (không chỉ đổi chữ bề mặt).'}
 2. Giữ chuẩn tiếng Việt ${WRITER_STANDARD_ID} (không đại từ trò chuyện, không từ sáo rỗng, không cường điệu, không bịa nguồn/số liệu, không dùng cụm "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập").
-3. Kiểm tra lại Chữ Hán giản thể, dấu thanh điệu Pinyin, nghĩa tiếng Việt, các bảng (<= 6 dòng), ví dụ và FAQs.
+3. Mọi phần tử trong "paragraphs" và "bullets" PHẢI là chuỗi văn bản (string), KHÔNG trả object lồng bên trong. Kiểm tra lại Chữ Hán giản thể, dấu thanh điệu Pinyin, nghĩa tiếng Việt, các bảng (<= 6 dòng), ví dụ và FAQs.
 4. Ngày cập nhật: "${today}". Chỉ chọn "relatedSlugs" từ: ${existingSlugs.slice(0, 10).join(', ')}.
 5. Không tự chấm điểm hoặc tự kết luận bài đạt chuẩn xuất bản.
 
 TRẢ VỀ DUY NHẤT 01 JSON OBJECT GỒM:
 {
-  "revisionSummary": "Tóm tắt ngắn gọn các phần nội dung đã sửa tận gốc",
+  "revisionSummary": "Nêu rõ đã sửa/mở rộng những phần nào theo góp ý",
   "writerBrief": ${JSON.stringify(draft?.writerBrief || { styleId: style.id, primaryKeyword: draft?.trendQuery || '' })},
   "title": "...",
   "metaTitle": "...",

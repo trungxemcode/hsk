@@ -5,6 +5,9 @@ import {
   collectTrendTopicsWorker,
   extractCfAiText,
   extractJsonObject,
+  measureRewriteChange,
+  normalizeArticle,
+  rewriteDraftRecord,
   runAuditRound,
 } from './pipeline-core.mjs';
 import {
@@ -1121,4 +1124,201 @@ test('concurrent /api/rewrite preserves /api/approve made while AI rewrite is in
     { fetchImpl }
   );
   assert.equal(conflictRes.status, 409);
+});
+
+test('buildStandardRevisionWriterPrompt puts adminComment first and preserves role separation', () => {
+  const prompt = buildStandardRevisionWriterPrompt({
+    draft: {
+      version: 1,
+      trendQuery: 'giới thiệu bản thân bằng tiếng trung xin việc',
+      article: makeMockArticleJson('Giới thiệu bản thân'),
+    },
+    sanitizedFeedback: 'Cần sửa Pinyin chữ míngzi trong bảng.',
+    adminComment: 'Bài viết còn cụt và thiếu thông tin kinh nghiệm, học vấn, điểm mạnh khi xin việc.',
+    rating: 2,
+    existingSlugs: ['cac-loai-tu-trong-tieng-trung-co-ban'],
+    today: '2026-11-27',
+  });
+
+  const adminIdx = prompt.indexOf('MỆNH LỆNH BẮT BUỘC TỪ ADMIN');
+  const secIdx = prompt.indexOf('LƯU Ý PHỤ TỪ KIỂM ĐỊNH TRƯỚC');
+  assert.ok(adminIdx !== -1 && secIdx !== -1 && adminIdx < secIdx, 'adminComment must precede secondary auditor notes');
+  assert.ok(prompt.includes('[Admin chấm 2/5 sao]'));
+  assert.equal(prompt.includes(AUDIT_PROTOCOL_ID), false, 'Writer prompt must never leak Auditor protocol ID');
+});
+
+test('normalizeArticle stringifies object bullets and paragraphs without [object Object]', () => {
+  const raw = {
+    ...makeMockArticleJson('Kiểm tra định dạng bullets'),
+    sections: [
+      {
+        id: 'sec-1',
+        heading: 'Mẫu câu xin việc',
+        paragraphs: [
+          'Đoạn mở đầu bình thường.',
+          { heading: 'Kinh nghiệm làm việc', text: 'Nêu số năm làm việc và thành tích ngắn gọn.' },
+        ],
+        bullets: [
+          { han: '我有三年工作经验。', py: 'Wǒ yǒu sān nián gōngzuò jīngyàn.', vi: 'Tôi có 3 năm kinh nghiệm làm việc.' },
+          { label: 'Mục tiêu', detail: 'Mong muốn gắn bó lâu dài với công ty.' },
+        ],
+      },
+      {
+        id: 'sec-2',
+        heading: 'Kết luận',
+        paragraphs: ['Tổng kết ngắn gọn.'],
+      },
+    ],
+  };
+
+  const normalized = normalizeArticle(raw, { today: '2026-11-27', existingSlugs: [] });
+  const serialized = JSON.stringify(normalized);
+  assert.equal(serialized.includes('[object Object]'), false, 'Must never serialize objects as [object Object]');
+  assert.ok(normalized.sections[0].bullets[0].includes('我有三年工作经验。'));
+  assert.ok(normalized.sections[0].bullets[1].includes('Mục tiêu: Mong muốn gắn bó lâu dài'));
+  assert.ok(normalized.sections[0].paragraphs[1].includes('Kinh nghiệm làm việc: Nêu số năm làm việc'));
+});
+
+test('rewriteDraftRecord retries lazy near-identical rewrites and forwards adminComment into auto-polish', async () => {
+  const originalArticle = {
+    ...makeMockArticleJson('Giới thiệu bản thân bằng tiếng Trung xin việc'),
+    slug: 'gioi-thieu-ban-than-xin-viec',
+  };
+  const draft = {
+    id: 'draft-lazy-check',
+    version: 1,
+    status: 'pending_review',
+    trendQuery: 'giới thiệu bản thân bằng tiếng trung xin việc',
+    category: 'meo-hoc',
+    hskTag: 'HSK 1–3',
+    article: originalArticle,
+    aiReviews: {
+      reviewers: [
+        { label: 'Vòng 1', score: 85, auditVerdict: 'PROVISIONAL_PASS', summary: 'Tạm ổn.', mustFix: ['Kiểm tra Pinyin míngzi'] },
+      ],
+    },
+    reviewHistory: [],
+  };
+
+  const writerPrompts = [];
+  let writerCallCount = 0;
+
+  const fetchImpl = async (url, init) => {
+    const u = String(url);
+    if (!u.includes('openrouter.ai')) {
+      return new Response('ok', { status: 200 });
+    }
+    const body = JSON.parse(init.body);
+    const sys = String(body.messages?.[0]?.content || '');
+    const userMsg = String(body.messages?.[1]?.content || '');
+
+    if (sys.includes(AUDIT_PROTOCOL_ID)) {
+      const roundNum = writerCallCount >= 2 ? 1 : 0;
+      const needsPolish = userMsg.includes('Kiểm tra và đánh giá') && !writerPrompts.some((p) => p.isAutoPolish);
+      return Response.json({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                lockedIntent: 'Giới thiệu bản thân khi xin việc',
+                targetAudience: 'Người học HSK',
+                scores: {
+                  A: { score: 13, evidence: 'Tốt' },
+                  B: { score: 15, evidence: 'Chuẩn' },
+                  C: { score: 13, evidence: 'Đủ sâu' },
+                  D: { score: 11, evidence: 'Có giá trị' },
+                  E: { score: 9, evidence: 'Logic' },
+                  F: { score: 9, evidence: 'SEO' },
+                  G: { score: 7, evidence: 'Mạch lạc' },
+                  H: { score: 7, evidence: 'Tự nhiên' },
+                  I: { score: 5, evidence: 'Ứng dụng' },
+                  J: { score: 4, evidence: 'Minh bạch' },
+                },
+                hardFails: [],
+                challengeResults: [],
+                errors: roundNum === 1 && needsPolish ? [{ code: 'M1', severity: 'Minor', location: 'Mục 2', reason: 'Cần thêm 1 câu ví dụ', fix: 'Thêm ví dụ' }] : [],
+                strengths: ['Đầy đủ'],
+                summary: 'Đạt chuẩn.',
+              }),
+            },
+          },
+        ],
+      });
+    }
+
+    writerCallCount += 1;
+    const isAutoPolish = !userMsg.includes('CẢNH BÁO VIẾT LẠI BẮT BUỘC') && writerCallCount >= 3;
+    writerPrompts.push({ call: writerCallCount, isAutoPolish, userMsg, temp: body.temperature, maxTokens: body.max_tokens });
+
+    if (writerCallCount === 1) {
+      // Simulate lazy first attempt: returns nearly identical article as original
+      return Response.json({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                revisionSummary: 'Chỉnh sửa nhẹ câu chữ.',
+                writerBrief: { styleId: 'educational-how-to', primaryKeyword: 'giới thiệu bản thân xin việc' },
+                ...originalArticle,
+              }),
+            },
+          },
+        ],
+      });
+    }
+
+    // Second (escalated retry) and third (auto-polish) calls return rich 5-section article
+    return Response.json({
+      choices: [
+        {
+          message: {
+            content: JSON.stringify({
+              revisionSummary: 'Đã mở rộng 5 mục gồm họ tên, học vấn, kinh nghiệm, điểm mạnh và kết thúc phỏng vấn.',
+              writerBrief: { styleId: 'educational-how-to', primaryKeyword: 'giới thiệu bản thân xin việc' },
+              title: 'Hướng dẫn giới thiệu bản thân bằng tiếng Trung xin việc đầy đủ 5 phần',
+              metaTitle: 'Giới thiệu bản thân bằng tiếng Trung xin việc | HSK Flashcards',
+              metaDescription: 'Mẫu câu và cấu trúc giới thiệu bản thân bằng tiếng Trung khi phỏng vấn xin việc từ họ tên, học vấn đến kinh nghiệm và mục tiêu.',
+              summary: 'Tổng hợp cấu trúc 5 phần giúp bạn trả lời trọn vẹn câu hỏi giới thiệu bản thân khi đi phỏng vấn tiếng Trung.',
+              hskTag: 'HSK 1–3',
+              readMinutes: 7,
+              keywords: ['giới thiệu bản thân tiếng trung xin việc'],
+              sections: [
+                { id: 'muc-1', heading: '1. Chào hỏi và nêu họ tên, quê quán', paragraphs: ['Mở đầu phần phỏng vấn bằng lời chào lịch sự, tên đầy đủ và nơi sinh sống để tạo ấn tượng chuyên nghiệp ngay từ đầu.'] },
+                { id: 'muc-2', heading: '2. Trình bày học vấn, chuyên ngành và bằng cấp', paragraphs: ['Nêu rõ trường đại học, chuyên ngành tốt nghiệp và chứng chỉ ngoại ngữ HSK đang sở hữu để nhà tuyển dụng đánh giá nền tảng.'] },
+                { id: 'muc-3', heading: '3. Kinh nghiệm làm việc và thành tích nổi bật', paragraphs: ['Giới thiệu số năm kinh nghiệm, vị trí từng đảm nhận và kết quả cụ thể bạn đã tạo ra ở công ty trước.'] },
+                { id: 'muc-4', heading: '4. Điểm mạnh cá nhân và lý do ứng tuyển', paragraphs: ['Trình bày kỹ năng phù hợp vị trí tuyển dụng và động lực muốn gắn bó lâu dài với doanh nghiệp.'] },
+                { id: 'muc-5', heading: '5. Câu kết thúc lịch sự và lỗi cần tránh', paragraphs: ['Cảm ơn nhà tuyển dụng đã lắng nghe và kiểm tra lại thanh điệu Pinyin của các từ khóa quan trọng trước buổi phỏng vấn.'] },
+              ],
+              faqs: originalArticle.faqs,
+              relatedSlugs: [],
+              cta: originalArticle.cta,
+            }),
+          },
+        },
+      ],
+    });
+  };
+
+  const env = {
+    OPENROUTER_API_KEY: 'sk-or-test-retry',
+    OPENROUTER_WRITER_MODEL: 'nvidia/nemotron-3.5-lightning:free',
+  };
+
+  const updated = await rewriteDraftRecord({
+    draft,
+    comment: 'Bài viết cung cấp quá ít thông tin và chưa đủ dài, chỉ mới nói giới thiệu tên.',
+    rating: 1,
+    existingSlugs: [],
+    today: '2026-11-27',
+    env,
+    fetchImpl,
+  });
+
+  assert.ok(writerCallCount >= 2, 'Must detect lazy first attempt and run escalated retry');
+  assert.ok(writerPrompts[1].userMsg.includes('CẢNH BÁO VIẾT LẠI BẮT BUỘC'), 'Escalated retry must include retryHint');
+  assert.ok(writerPrompts.every((p) => p.userMsg.includes('MỆNH LỆNH BẮT BUỘC TỪ ADMIN')), 'Auto-polish must also receive adminComment');
+  assert.equal(updated.version, 2);
+  assert.equal(updated.article.sections.length, 5);
+  const diff = measureRewriteChange(originalArticle, updated.article, '');
+  assert.ok(diff.newChars > diff.oldChars && diff.tokenOverlap < 0.78);
 });
