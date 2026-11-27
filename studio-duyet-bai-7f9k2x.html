@@ -57,12 +57,11 @@
       <div class="rev-topbar-left">
         <span class="rev-brand-mark" aria-hidden="true">汉</span>
         <div class="rev-topbar-title">
-          <strong>Phòng Duyệt SEO &amp; Trends</strong>
+          <strong>Phòng Duyệt SEO · Cổng ChatGPT</strong>
           <span id="adminEmailBadge">Admin</span>
         </div>
       </div>
       <div class="rev-topbar-actions">
-        <button type="button" class="rev-btn is-accent-soft" id="openScanModalBtn">Quét Trends &amp; Sinh bài</button>
         <button type="button" class="rev-btn is-chatgpt" id="openChatgptModalBtn">Cổng ChatGPT</button>
         <button type="button" class="rev-btn" id="refreshDataBtn">Làm mới</button>
         <button type="button" class="rev-btn" id="openGithubModalBtn">Kết nối GitHub</button>
@@ -78,8 +77,7 @@
         <span class="rev-pill is-rejected">Từ chối: <strong id="countRejected">0</strong></span>
       </div>
       <div class="rev-run-info">
-        <span id="lastScanLabel">Chưa có dữ liệu quét Trends</span>
-        <button type="button" class="rev-workflow-pill is-bg-running" id="bgRewritePill" hidden></button>
+        <span id="lastScanLabel">Chế độ chỉ dùng Cổng ChatGPT</span>
         <span class="rev-workflow-pill" id="workflowRunBadge" hidden></span>
         <a class="rev-run-link" id="workflowRunLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Xem log Actions ↗</a>
       </div>
@@ -107,9 +105,9 @@
       <section class="rev-main" aria-label="Chi tiết & phê duyệt bài viết">
         <div class="rev-empty" id="emptyState">
           <h2>Chưa có bài viết nào trong bộ lọc này</h2>
-          <p id="emptyStateText">Bạn có thể bấm “Quét Trends &amp; Sinh bài” để AI lấy từ khóa tìm kiếm nổi bật từ Google Trends VN tạo bài nháp mới ngay lập tức (không cần cài GitHub Token).</p>
+          <p id="emptyStateText">Hệ thống chỉ tiếp nhận bài viết SEO từ <strong>Cổng ChatGPT</strong>. Hãy mở “Cổng ChatGPT” để lấy URL MCP hoặc prompt hẹn giờ nộp bài vào hàng đợi Chờ duyệt.</p>
           <div class="rev-empty-actions">
-            <button type="button" class="rev-btn is-primary" id="emptyScanBtn">Quét Trends &amp; Sinh bài ngay</button>
+            <button type="button" class="rev-btn is-primary" id="emptyChatgptBtn">Mở Cổng ChatGPT</button>
             <button type="button" class="rev-btn" id="emptyGithubBtn">Kết nối GitHub (Tùy chọn)</button>
           </div>
         </div>
@@ -117,20 +115,18 @@
         <div class="rev-viewer" id="draftViewer" hidden>
           <div class="rev-viewer-head">
             <div class="rev-viewer-meta">
-              <div class="rev-pipeline-strip" id="pipelineStrip" aria-label="Chuỗi kiểm duyệt 4 bước"></div>
+              <div class="rev-pipeline-strip" id="pipelineStrip" aria-label="Quy trình duyệt bài 3 bước"></div>
               <div class="rev-viewer-badges" id="draftBadges"></div>
             </div>
             <div class="rev-subtabs" role="tablist" aria-label="Chế độ xem chi tiết">
               <button type="button" class="rev-subtab is-active" data-view-tab="preview">Xem trước bài viết</button>
-              <button type="button" class="rev-subtab" data-view-tab="audit">Kiểm định AI &amp; Lịch sử</button>
-              <button type="button" class="rev-subtab" data-view-tab="trends">Xu hướng đã quét</button>
+              <button type="button" class="rev-subtab" data-view-tab="audit">Kiểm định SEO &amp; Lịch sử</button>
             </div>
           </div>
 
           <div class="rev-viewer-body">
             <div class="rev-pane" id="tabPreview"></div>
             <div class="rev-pane" id="tabAudit" hidden></div>
-            <div class="rev-pane" id="tabTrends" hidden></div>
           </div>
 
           <div class="rev-decision-dock" id="reviewDock">
@@ -155,13 +151,14 @@
             </div>
 
             <div class="rev-comment-wrap">
-              <label class="sr-only" for="reviewCommentInput">Nhận xét hoặc yêu cầu AI viết lại</label>
-              <textarea id="reviewCommentInput" rows="3" placeholder="Ghi nhận xét của bạn (nếu chưa đạt, ghi rõ cần sửa chỗ nào rồi bấm “Yêu cầu AI viết lại”)..."></textarea>
+              <label class="sr-only" for="reviewCommentInput">Nhận xét hoặc yêu cầu ChatGPT sửa</label>
+              <textarea id="reviewCommentInput" rows="3" placeholder="Ghi góp ý cần sửa rồi bấm “Gửi góp ý cho ChatGPT sửa” để lưu yêu cầu vào Cổng ChatGPT..."></textarea>
             </div>
 
             <div class="rev-decision-actions">
               <button type="button" class="rev-btn is-approve" id="approveBtn">✓ Duyệt &amp; Tự động xuất bản</button>
-              <button type="button" class="rev-btn is-rewrite" id="rewriteBtn">✎ Yêu cầu AI viết lại</button>
+              <button type="button" class="rev-btn is-rewrite" id="rewriteBtn">💬 Gửi góp ý cho ChatGPT sửa</button>
+              <button type="button" class="rev-btn is-accent-soft" id="copyChatgptFixBtn" hidden>📋 Copy lệnh sửa cho ChatGPT</button>
               <button type="button" class="rev-btn is-reject" id="rejectBtn">✕ Loại bỏ bài nháp</button>
             </div>
             <p class="rev-status-msg" id="actionStatus" role="status" aria-live="polite"></p>
@@ -169,7 +166,6 @@
         </div>
       </section>
     </main>
-    <div class="rev-toast-stack" id="bgToastStack" aria-live="polite" aria-label="Thông báo AI viết lại ngầm"></div>
   </div>
 
   <dialog class="rev-modal" id="githubModal" aria-labelledby="githubModalTitle">
@@ -207,39 +203,6 @@
       <div class="rev-modal-foot">
         <button type="button" class="rev-btn" data-close-modal="githubModal">Hủy</button>
         <button type="submit" class="rev-btn is-primary" id="saveGithubBtn">Lưu &amp; Tải danh sách nháp</button>
-      </div>
-    </form>
-  </dialog>
-
-  <dialog class="rev-modal" id="scanModal" aria-labelledby="scanModalTitle">
-    <form class="rev-modal-card" id="scanForm" method="dialog">
-      <div class="rev-modal-head">
-        <h2 id="scanModalTitle">Quét Google Trends VN &amp; Sinh bài nháp ngay</h2>
-        <button type="button" class="rev-close-btn" data-close-modal="scanModal" aria-label="Đóng">✕</button>
-      </div>
-      <p class="rev-modal-desc">
-        Ngoài lịch tự động mỗi 2 giờ (sinh 2 bài không trùng lặp), bạn có thể bấm quét ngay hoặc tải file <code>.csv</code> vừa xuất từ trang Google Trends để AI viết đúng các từ khóa đang tăng mạnh.
-      </p>
-      <div class="rev-field">
-        <label for="scanCountInput">Số bài viết nháp muốn sinh</label>
-        <select id="scanCountInput">
-          <option value="1">1 bài nháp</option>
-          <option value="2" selected>2 bài nháp (khuyên dùng)</option>
-          <option value="3">3 bài nháp</option>
-        </select>
-      </div>
-      <div class="rev-field">
-        <label for="scanCsvFileInput">Tải file CSV từ Google Trends (tùy chọn)</label>
-        <input id="scanCsvFileInput" type="file" accept=".csv,text/csv">
-      </div>
-      <div class="rev-field">
-        <label for="scanQueriesInput">Hoặc dán nhanh danh sách cụm từ muốn ưu tiên (mỗi dòng 1 cụm, tùy chọn)</label>
-        <textarea id="scanQueriesInput" rows="3" placeholder="Ví dụ:&#10;xin lỗi trong tiếng trung&#10;tiếng trung công xưởng&#10;giới thiệu bản thân tiếng trung"></textarea>
-      </div>
-      <p class="rev-status-msg" id="scanModalStatus" role="status"></p>
-      <div class="rev-modal-foot">
-        <button type="button" class="rev-btn" data-close-modal="scanModal">Đóng</button>
-        <button type="submit" class="rev-btn is-primary" id="triggerScanBtn">Chạy quét Trends &amp; Sinh bài</button>
       </div>
     </form>
   </dialog>
@@ -284,10 +247,6 @@
         <label class="rev-check-row">
           <input id="cgptEnabledChk" type="checkbox" checked>
           <span>Bật cổng tiếp nhận bài từ ChatGPT (tắt để tạm khóa ngay lập tức)</span>
-        </label>
-        <label class="rev-check-row">
-          <input id="cgptAiReviewChk" type="checkbox" checked>
-          <span>Chạy Hội đồng kiểm duyệt AI (Qwen/Mistral/xKiro) chấm điểm phụ khi ChatGPT nộp bài (~15–30 giây)</span>
         </label>
         <div class="rev-cgpt-save-row">
           <button type="submit" class="rev-btn is-primary" id="cgptSaveSettingsBtn">Lưu cấu hình cổng</button>

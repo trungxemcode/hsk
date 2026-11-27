@@ -5,7 +5,7 @@
   const DEFAULT_REPO_NAME = 'hsk';
   const DEFAULT_DRAFT_BRANCH = 'seo-drafts-state';
   const CLOUDFLARE_EDITORIAL_URL = 'https://hsk-seo-editorial.trung-hsk668.workers.dev';
-  const WORKFLOW_FILE = 'seo-trends-drafts.yml';
+  const WORKFLOW_FILE = 'seo-publish-approved.yml';
   const PUBLISH_WORKFLOW_FILE = 'seo-publish-approved.yml';
   const FIRESTORE_DOC_ID = 'seo-editorial-gh-bridge';
   const SESSION_STORAGE_KEY = 'hsk-seo-review-session-v1';
@@ -36,33 +36,19 @@
     syncCloud: true,
   };
   let draftsData = { schema: 1, updatedAt: '', drafts: [] };
-  let trendsSnapshot = { schema: 1, fetchedAt: '', sources: [], topics: [] };
-  let cfLastRun = null;
   let selectedDraftId = '';
   let lastRenderedDraftId = '';
   let statusFilter = 'pending_review';
   let searchQuery = '';
   let activeViewTab = 'preview';
   let currentRating = 0;
-  let csvFileContent = '';
   let pollTimer = null;
   let chatgptGatewayState = null;
   let chatgptKeyRevealed = false;
   const draftComments = new Map();
   const draftRatings = new Map();
   const draftActionBusy = new Map();
-  const backgroundRewrites = new Map();
   const draftActionNotices = new Map();
-  let rewriteToasts = [];
-  let toastSeq = 0;
-
-  function getDraftRewriteState(draftId) {
-    return draftId ? (backgroundRewrites.get(draftId) || null) : null;
-  }
-
-  function getRunningRewrites() {
-    return Array.from(backgroundRewrites.values()).filter((job) => job?.status === 'running');
-  }
 
   function mergeSingleDraftIntoLocal(updatedDraft) {
     if (!updatedDraft || typeof updatedDraft !== 'object' || !updatedDraft.id) return;
@@ -101,112 +87,25 @@
     });
   }
 
-  function dismissRewriteToast(toastId) {
-    rewriteToasts = rewriteToasts.filter((t) => t.id !== toastId);
-    renderRewriteToasts();
-  }
-
-  function dismissRewriteToastsForDraft(draftId) {
+  function selectDraft(draftId, { openMobileReview = false } = {}) {
     if (!draftId) return;
-    const prevLen = rewriteToasts.length;
-    rewriteToasts = rewriteToasts.filter((t) => t.draftId !== draftId);
-    if (rewriteToasts.length !== prevLen) renderRewriteToasts();
-  }
-
-  function renderRewriteToasts() {
-    const stack = $('bgToastStack');
-    if (!stack) return;
-    if (!rewriteToasts.length) {
-      stack.innerHTML = '';
-      return;
-    }
-    stack.innerHTML = rewriteToasts.map((t) => {
-      const toneCls = t.tone === 'is-err' ? 'is-err' : 'is-ok';
-      const headText = t.tone === 'is-err' ? 'AI viết lại gặp lỗi' : 'AI đã viết lại xong';
-      return `<div class="rev-toast ${toneCls}" role="status" data-toast-id="${t.id}">
-        <div class="rev-toast-head">
-          <strong>${escHtml(headText)} · ${escHtml(t.title)}</strong>
-          <button type="button" class="rev-toast-close" data-dismiss-toast="${t.id}" aria-label="Đóng thông báo">✕</button>
-        </div>
-        <p class="rev-toast-body">${escHtml(t.message)}</p>
-        <div class="rev-toast-actions">
-          <button type="button" class="rev-btn is-primary" data-jump-draft="${escHtml(t.draftId)}">Xem bài ngay</button>
-        </div>
-      </div>`;
-    }).join('');
-
-    stack.querySelectorAll('[data-dismiss-toast]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        dismissRewriteToast(Number(btn.getAttribute('data-dismiss-toast')));
-      });
-    });
-    stack.querySelectorAll('[data-jump-draft]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-jump-draft') || '';
-        selectDraft(targetId, { openMobileReview: true, revealIfHidden: true });
-      });
-    });
-  }
-
-  function pushRewriteToast({ draftId, title, tone, message }) {
-    rewriteToasts = rewriteToasts.filter((t) => t.draftId !== draftId);
-    rewriteToasts.unshift({
-      id: ++toastSeq,
-      draftId,
-      title: title || draftId,
-      tone: tone || 'is-ok',
-      message: message || '',
-    });
-    if (rewriteToasts.length > 4) rewriteToasts = rewriteToasts.slice(0, 4);
-    renderRewriteToasts();
-  }
-
-  function renderBgRewriteSummary() {
-    const pill = $('bgRewritePill');
-    if (!pill) return;
-    const running = getRunningRewrites();
-    if (!running.length) {
-      pill.hidden = true;
-      pill.innerHTML = '';
-      delete pill.dataset.targetDraftId;
-      return;
-    }
-    pill.hidden = false;
-    const first = running[0];
-    pill.dataset.targetDraftId = first.draftId;
-    pill.innerHTML = running.length === 1
-      ? `<span class="rev-pulse-dot" aria-hidden="true"></span><span>AI đang viết lại ngầm: ${escHtml(first.title)}</span>`
-      : `<span class="rev-pulse-dot" aria-hidden="true"></span><span>AI đang viết lại ngầm (${running.length} bài)</span>`;
-  }
-
-  function selectDraft(draftId, { openMobileReview = false, revealIfHidden = false } = {}) {
-    if (!draftId) return;
-    if (revealIfHidden) {
-      const target = (draftsData?.drafts || []).find((d) => d && d.id === draftId);
-      const visible = getFilteredDrafts().some((d) => d.id === draftId);
-      if (target && !visible) {
-        if (searchQuery) {
-          searchQuery = '';
-          if ($('draftSearchInput')) $('draftSearchInput').value = '';
-        }
-        statusFilter = target.status || 'all';
-        document.querySelectorAll('.rev-filter-chip').forEach((b) => {
-          b.classList.toggle('is-active', (b.getAttribute('data-status-filter') || '') === statusFilter);
-        });
-      }
-    }
-    const bgJob = getDraftRewriteState(draftId);
-    if (bgJob && bgJob.status === 'done') {
-      backgroundRewrites.delete(draftId);
-    }
-    dismissRewriteToastsForDraft(draftId);
     selectedDraftId = draftId;
     renderDraftList();
     renderSelectedDraft();
-    renderBgRewriteSummary();
     if (openMobileReview) {
       syncMobilePane('review');
     }
+  }
+
+  function buildChatgptFixCommand(draft) {
+    const reqComment = draft?.revisionRequest?.comment || draftComments.get(draft?.id) || '';
+    return [
+      'Hãy dùng kết nối MCP HSK SEO Editorial để viết lại và cập nhật bản nháp đang chờ duyệt này:',
+      `- draftId: "${draft?.id || ''}"`,
+      `- Tiêu đề hiện tại: "${draft?.article?.title || draft?.trendQuery || ''}"`,
+      `- Góp ý cần sửa của Admin: "${reqComment}"`,
+      `Yêu cầu: Sửa triệt để toàn bài theo góp ý trên với tiếng Việt tự nhiên, đủ chiều sâu và ví dụ đối chiếu, sau đó gọi update_seo_draft truyền đúng draftId "${draft?.id || ''}" cùng article hoàn chỉnh để cập nhật phiên bản mới (KHÔNG gọi submit_seo_draft tạo bài trùng).`,
+    ].join('\n');
   }
 
   function isChatgptDraft(draft) {
@@ -520,28 +419,13 @@
     }
   }
 
-  function renderWorkflowStatus(runs = [], lastRun = cfLastRun) {
+  function renderWorkflowStatus(runs = []) {
     const badge = $('workflowRunBadge');
     const link = $('workflowRunLink');
     if (!badge || !link) return;
     if (!runs.length) {
       link.hidden = true;
-      if (lastRun?.at) {
-        badge.hidden = false;
-        badge.classList.remove('is-running', 'is-ok', 'is-fail');
-        if (lastRun.status === 'generating') {
-          badge.classList.add('is-running');
-          badge.textContent = 'Cloudflare AI đang sinh bài nháp…';
-        } else if (lastRun.error) {
-          badge.classList.add('is-fail');
-          badge.textContent = `Cloudflare chạy lỗi: ${lastRun.error}`;
-        } else {
-          badge.classList.add('is-ok');
-          badge.textContent = `Cloudflare (${lastRun.trigger || 'cron'}): ${formatTimeVi(lastRun.at)}`;
-        }
-      } else {
-        badge.hidden = true;
-      }
+      badge.hidden = true;
       return;
     }
     const latest = runs[0];
@@ -588,11 +472,10 @@
     $('countRejected').textContent = String(rejected);
 
     const lastScan = $('lastScanLabel');
-    if (trendsSnapshot?.fetchedAt) {
-      const srcStr = (trendsSnapshot.sources || []).join(', ') || 'Google Trends / Suggest VN';
-      lastScan.textContent = `Quét Trends: ${formatTimeVi(trendsSnapshot.fetchedAt)} (${srcStr})`;
-    } else {
-      lastScan.textContent = 'Chưa có lượt quét Trends nào trên nhánh nháp';
+    if (lastScan) {
+      lastScan.textContent = draftsData?.updatedAt
+        ? `Cổng ChatGPT · Cập nhật ${formatTimeVi(draftsData.updatedAt)}`
+        : 'Chế độ chỉ nhận bài qua Cổng ChatGPT';
     }
   }
 
@@ -623,28 +506,21 @@
 
     listEl.innerHTML = items.map((d) => {
       const selected = d.id === selectedDraftId ? ' is-selected' : '';
-      const bgJob = getDraftRewriteState(d.id);
-      const rewritingCls = bgJob?.status === 'running' ? ' is-rewriting' : '';
       const score = d.quality?.score ?? '—';
       const spike = d.trendSpike ? ` · ${escHtml(d.trendSpike)}` : '';
       const stars = d.rating ? ` · ${d.rating}★` : '';
-      const xkiroAvg = typeof d.aiReviews?.averageScore === 'number' ? ` · AI ${d.aiReviews.averageScore}` : '';
       const cgptChip = isChatgptDraft(d) ? '<span class="rev-chatgpt-chip">ChatGPT</span> ' : '';
-      const bgBadge = bgJob?.status === 'running'
-        ? '<span class="rev-card-bg-badge is-running"><span class="rev-pulse-dot" aria-hidden="true"></span>Đang viết lại ngầm…</span>'
-        : bgJob?.status === 'done'
-          ? `<span class="rev-card-bg-badge is-done">✨ Mới viết lại (v${escHtml(bgJob.newVersion || d.version || 2)})</span>`
-          : bgJob?.status === 'error'
-            ? '<span class="rev-card-bg-badge is-err">! Viết lại lỗi</span>'
-            : '';
-      return `<button type="button" class="rev-draft-card${selected}${rewritingCls}" data-draft-id="${escHtml(d.id)}">
+      const revBadge = d.status === 'pending_review' && d.revisionRequest?.comment
+        ? '<span class="rev-card-bg-badge is-warn">💬 Chờ ChatGPT sửa</span>'
+        : '';
+      return `<button type="button" class="rev-draft-card${selected}" data-draft-id="${escHtml(d.id)}">
         <div class="rev-card-top">
-          <span class="rev-card-source">${cgptChip}${escHtml(d.trendSource || 'google-trends')}${spike} · v${escHtml(d.version || 1)}</span>
-          <span class="rev-card-score">Kỹ thuật ${escHtml(score)}${escHtml(xkiroAvg)}${stars}</span>
+          <span class="rev-card-source">${cgptChip}${escHtml(d.trendSource || 'chatgpt-web')}${spike} · v${escHtml(d.version || 1)}</span>
+          <span class="rev-card-score">Kỹ thuật ${escHtml(score)}${stars}</span>
         </div>
         <h3 class="rev-card-title">${escHtml(d.article?.title || d.trendQuery)}</h3>
         <span class="rev-card-query">Từ khóa: ${escHtml(d.trendQuery || '—')}</span>
-        ${bgBadge}
+        ${revBadge}
       </button>`;
     }).join('');
 
@@ -698,32 +574,21 @@
   }
 
   function renderPipelineStripHtml(draft) {
-    const rev1 = (draft.aiReviews?.reviewers || []).find((r) => r.id === 'command-a-plus') || draft.aiReviews?.reviewers?.[0];
-    const rev2 = (draft.aiReviews?.reviewers || []).find((r) => r.id === 'mistral-large-3') || draft.aiReviews?.reviewers?.[1];
-    const stepClass = (r) => {
-      if (!r || r.status === 'skipped' || r.status === 'error') return '';
-      return r.verdict === 'pass' ? ' is-done' : ' is-revise';
-    };
-    const verdictBadge = (r) => {
-      if (!r) return '';
-      if (r.status === 'skipped') return ' (bỏ qua)';
-      const v = r.auditVerdict ? ` · ${r.auditVerdict}` : '';
-      return typeof r.score === 'number' ? ` (${r.score}/100${v})` : v;
-    };
-    const label1 = rev1?.label || 'Vòng 1';
-    const label2 = rev2?.label || 'Vòng 2';
-    const adminClass = draft.status === 'approved' ? ' is-done' : draft.status === 'pending_review' ? ' is-active' : '';
-    const writerLabel = isChatgptDraft(draft)
-      ? `1. ${draft.authorModel || 'ChatGPT Plus'} viết`
-      : draft.aiReviews?.writerStandard
-        ? `1. Viết bài (${draft.aiReviews.writerStandard})`
-        : '1. Gemma 4 viết';
+    const score = draft.quality?.score ?? 0;
+    const seoClass = score >= 80 ? 'is-done' : 'is-revise';
+    const waitingChatgpt = draft.status === 'pending_review' && Boolean(draft.revisionRequest?.comment);
+    const adminClass = draft.status === 'approved' ? ' is-done' : waitingChatgpt ? ' is-revise' : draft.status === 'pending_review' ? ' is-active' : '';
+    const adminLabel = draft.status === 'approved'
+      ? '3. Admin đã duyệt ✓'
+      : waitingChatgpt
+        ? '3. Chờ ChatGPT sửa theo góp ý'
+        : '3. Admin duyệt cuối';
+    const writerLabel = `1. ${draft.authorModel || 'ChatGPT Plus'} nộp (v${draft.version || 1})`;
 
     return [
       `<span class="rev-pipe-step is-done">${escHtml(writerLabel)}</span>`,
-      `<span class="rev-pipe-step${stepClass(rev1)}">2. ${escHtml(label1)}${escHtml(verdictBadge(rev1))}</span>`,
-      `<span class="rev-pipe-step${stepClass(rev2)}">3. ${escHtml(label2)}${escHtml(verdictBadge(rev2))}</span>`,
-      `<span class="rev-pipe-step${adminClass}">4. ${draft.status === 'approved' ? 'Admin đã duyệt ✓' : 'Admin duyệt cuối'}</span>`,
+      `<span class="rev-pipe-step ${seoClass}">2. Kiểm định SEO (${escHtml(score)}/100)</span>`,
+      `<span class="rev-pipe-step${adminClass}">${escHtml(adminLabel)}</span>`,
     ].join('');
   }
 
@@ -761,10 +626,17 @@
       ? `Hội đồng kiểm duyệt độc lập 2 vòng (${aiRev.protocol})`
       : (aiRev?.provider === 'cloudflare-ai' ? 'Hội đồng kiểm duyệt Cloudflare Workers AI' : 'Hội đồng kiểm duyệt AI (xKiro / Cloudflare)');
 
+    const revReqHtml = draft.revisionRequest?.comment
+      ? `<div class="rev-meta-box" style="border-color:var(--rev-amber-line);background:var(--rev-amber-bg)">
+          <strong style="color:var(--rev-amber)">Góp ý đang chờ ChatGPT sửa (${escHtml(formatTimeVi(draft.revisionRequest.requestedAt))})</strong>
+          <span style="color:var(--rev-ink)">${escHtml(draft.revisionRequest.comment)}</span>
+        </div>`
+      : '';
+
     const councilHtml = aiRev && Array.isArray(aiRev.reviewers) && aiRev.reviewers.length
       ? `<div>
           <h3>${escHtml(councilTitle)}</h3>
-          ${aiRev.autoPolished ? `<div class="rev-tip" style="margin-bottom:0.75rem"><strong>Người viết đã chỉnh sửa giữa Vòng 1 &amp; Vòng 2 (qua tường lửa phản hồi):</strong> ${escHtml(aiRev.polishSummary || '')}</div>` : ''}
+          ${aiRev.autoPolished ? `<div class="rev-tip" style="margin-bottom:0.75rem"><strong>Chỉnh sửa giữa Vòng 1 &amp; Vòng 2:</strong> ${escHtml(aiRev.polishSummary || '')}</div>` : ''}
           <div class="rev-council-grid">
             ${aiRev.reviewers.map((r) => {
               const badgeClass = r.auditVerdict === 'APPROVED' || r.verdict === 'pass'
@@ -776,7 +648,7 @@
                     : '';
               const badgeLabel = typeof r.score === 'number'
                 ? `${r.score}/100${r.band ? ` (${r.band})` : ''} · ${r.auditVerdict || (r.verdict === 'pass' ? 'Đạt' : 'Cần sửa')}`
-                : r.status === 'skipped' ? 'Chưa bật / Bỏ qua' : 'Lỗi gọi API';
+                : r.status === 'skipped' ? 'Đã bỏ qua' : 'Lỗi gọi API';
 
               const structuredErrors = Array.isArray(r.errors) ? r.errors : [];
               const hardFailsHtml = Array.isArray(r.hardFails) && r.hardFails.length
@@ -792,7 +664,6 @@
               const challengesHtml = Array.isArray(r.challengeResults) && r.challengeResults.length
                 ? `<div class="rev-table-scroll" style="margin-top:0.5rem"><table class="rev-table"><thead><tr><th>Phép thử</th><th>Nhóm</th><th>Kết quả</th><th>Phát hiện</th></tr></thead><tbody>${r.challengeResults.map((ch) => `<tr><td>${escHtml(ch.id)}</td><td>${escHtml(ch.group)}</td><td>${escHtml(ch.result)}</td><td>${escHtml(ch.finding)}</td></tr>`).join('')}</tbody></table></div>`
                 : '';
-              const feedbackText = allIssues.length ? `${r.label}: ${allIssues.join('; ')}` : '';
               return `<div class="rev-council-card">
                 <div class="rev-council-head">
                   <div>
@@ -809,12 +680,11 @@
                 ${errorsHtml}
                 ${legacyIssuesHtml}
                 ${challengesHtml}
-                ${feedbackText ? `<button type="button" class="rev-quick-chip" data-use-ai-feedback="${escHtml(feedbackText)}">+ Đưa góp ý ${escHtml(r.label)} vào ô viết lại</button>` : ''}
               </div>`;
             }).join('')}
           </div>
         </div>`
-      : '<div><h3>Hội đồng kiểm duyệt AI</h3><p style="color:var(--rev-muted)">Bản nháp này chưa có kết quả kiểm duyệt AI.</p></div>';
+      : '<div><h3>Quy trình biên tập</h3><p style="color:var(--rev-muted)">Chỉ tiếp nhận &amp; cập nhật bài từ <strong>Cổng ChatGPT</strong> — không chạy AI tự viết phụ trợ.</p></div>';
 
     const checksHtml = (q.checks || []).length
       ? `<ul class="rev-audit-list is-ok">${q.checks.map((c) => `<li>✓ ${escHtml(c)}</li>`).join('')}</ul>`
@@ -826,31 +696,18 @@
       ? draft.reviewHistory.slice().reverse().map((h) => `<div class="rev-history-item">
           <strong>${escHtml(h.action)} · ${escHtml(formatTimeVi(h.at))}${h.rating ? ` · ${h.rating}/5★` : ''}</strong>
           <span>${escHtml(h.comment || '')}</span>
-          ${h.revisionSummary ? `<span style="color:var(--rev-emerald)">AI đã sửa: ${escHtml(h.revisionSummary)}</span>` : ''}
+          ${h.revisionSummary ? `<span style="color:var(--rev-emerald)">Tóm tắt sửa: ${escHtml(h.revisionSummary)}</span>` : ''}
         </div>`).join('')
       : '<p>Chưa có lịch sử chỉnh sửa.</p>';
 
     return `<div class="rev-audit-grid">
+      ${revReqHtml}
       ${writerBriefHtml}
       ${councilHtml}
       <div><h3>Điểm kiểm định tự động: ${escHtml(q.score)} / 100</h3>${checksHtml}</div>
       <div><h3>Điểm cần lưu ý trước khi duyệt</h3>${warningsHtml}</div>
       <div><h3>Từ khóa SEO</h3><p>${escHtml((draft.article?.keywords || []).join(' · '))}</p></div>
-      <div><h3>Lịch sử duyệt &amp; viết lại</h3><div style="display:grid;gap:0.5rem">${historyHtml}</div></div>
-    </div>`;
-  }
-
-  function renderTrendsHtml() {
-    const topics = trendsSnapshot?.topics || [];
-    if (!topics.length) {
-      return '<p>Chưa có snapshot xu hướng từ Google Trends / Suggest VN. Bấm “Quét Trends & Sinh bài” để chạy thu thập ngay.</p>';
-    }
-    return `<div>
-      <p><strong>Lần quét gần nhất:</strong> ${escHtml(formatTimeVi(trendsSnapshot.fetchedAt))} · <strong>Nguồn:</strong> ${escHtml((trendsSnapshot.sources || []).join(', ') || '—')}</p>
-      <div class="rev-table-scroll"><table class="rev-table">
-        <thead><tr><th>Cụm từ tìm kiếm</th><th>Nguồn &amp; Tăng trưởng</th><th>Chuyên mục gợi ý</th><th>Điểm xếp hạng</th></tr></thead>
-        <tbody>${topics.map((t) => `<tr><td><strong>${escHtml(t.query)}</strong></td><td>${escHtml(t.source)}${t.spike ? ` (${escHtml(t.spike)})` : ''}</td><td>${escHtml(CATEGORY_LABELS[t.category] || t.category)}</td><td>${escHtml(t.score)}</td></tr>`).join('')}</tbody>
-      </table></div>
+      <div><h3>Lịch sử duyệt &amp; sửa bài</h3><div style="display:grid;gap:0.5rem">${historyHtml}</div></div>
     </div>`;
   }
 
@@ -894,32 +751,18 @@
     $('draftBadges').innerHTML = [
       `<span class="rev-tag ${statusTone}">${escHtml(STATUS_LABELS[draft.status] || draft.status)}</span>`,
       isChatgptDraft(draft) ? `<span class="rev-tag is-chatgpt">ChatGPT · ${escHtml(draft.authorModel || 'ChatGPT Plus')}</span>` : '',
+      draft.status === 'pending_review' && draft.revisionRequest?.comment ? '<span class="rev-tag is-warn">Chờ ChatGPT sửa</span>' : '',
       `<span class="rev-tag ${scoreTone}">Kỹ thuật ${escHtml(score)}/100</span>`,
-      ...xkiroBadges,
-      draft.aiReviews?.autoPolished ? '<span class="rev-tag is-accent">Đã tự chỉnh sửa vòng 2</span>' : '',
       `<span class="rev-tag">v${escHtml(draft.version || 1)}</span>`,
-      `<span class="rev-tag">${escHtml(draft.trendSource || 'google-trends')}${draft.trendSpike ? ` · ${escHtml(draft.trendSpike)}` : ''}</span>`,
+      `<span class="rev-tag">${escHtml(draft.trendSource || 'chatgpt-web')}${draft.trendSpike ? ` · ${escHtml(draft.trendSpike)}` : ''}</span>`,
       draft.publishedSlug ? `<span class="rev-tag is-ok">/bai-viet/${escHtml(draft.publishedSlug)}</span>` : '',
     ].filter(Boolean).join('');
 
     $('tabPreview').innerHTML = renderArticlePreviewHtml(draft);
     $('tabAudit').innerHTML = renderAuditHtml(draft);
-    $('tabTrends').innerHTML = renderTrendsHtml();
-
-    $('tabAudit').querySelectorAll('[data-use-ai-feedback]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const snippet = btn.getAttribute('data-use-ai-feedback') || '';
-        const area = $('reviewCommentInput');
-        if (!area || !snippet) return;
-        area.value = area.value.trim() ? `${area.value.trim()}\n- ${snippet}` : `- ${snippet}`;
-        if (selectedDraftId) draftComments.set(selectedDraftId, area.value);
-        area.focus();
-      });
-    });
 
     $('tabPreview').hidden = activeViewTab !== 'preview';
     $('tabAudit').hidden = activeViewTab !== 'audit';
-    $('tabTrends').hidden = activeViewTab !== 'trends';
 
     const switchedDraft = lastRenderedDraftId !== draft.id;
     lastRenderedDraftId = draft.id;
@@ -934,12 +777,11 @@
       commentArea.value = draftComments.get(draft.id) || '';
     }
 
-    const bgJob = getDraftRewriteState(draft.id);
     const notice = draftActionNotices.get(draft.id);
-    if (bgJob?.status === 'running') {
-      setStatusMsg($('actionStatus'), bgJob.message || 'AI đang viết lại ngầm… Bạn có thể chuyển sang xem & duyệt bài khác ngay.', 'is-warn');
-    } else if (notice) {
+    if (notice) {
       setStatusMsg($('actionStatus'), notice.text, notice.tone);
+    } else if (draft.revisionRequest?.comment) {
+      setStatusMsg($('actionStatus'), `Đang chờ ChatGPT sửa theo góp ý: "${draft.revisionRequest.comment}"`, 'is-warn');
     } else if (switchedDraft) {
       setStatusMsg($('actionStatus'), '');
     }
@@ -951,17 +793,16 @@
     const target = draft || getFilteredDrafts().find((d) => d.id === selectedDraftId) || null;
     if (!target) return;
     const isApproved = target.status === 'approved';
-    const isRewriting = getDraftRewriteState(target.id)?.status === 'running';
     const isBusy = draftActionBusy.has(target.id);
-    const disabled = isApproved || isRewriting || isBusy;
+    const disabled = isApproved || isBusy;
 
     if ($('approveBtn')) $('approveBtn').disabled = disabled;
-    if ($('rewriteBtn')) {
-      $('rewriteBtn').disabled = disabled;
-      $('rewriteBtn').textContent = isRewriting ? '✎ Đang viết lại ngầm…' : '✎ Yêu cầu AI viết lại';
-    }
+    if ($('rewriteBtn')) $('rewriteBtn').disabled = disabled;
     if ($('rejectBtn')) $('rejectBtn').disabled = disabled;
-    if ($('reviewCommentInput')) $('reviewCommentInput').disabled = isRewriting || isBusy;
+    if ($('reviewCommentInput')) $('reviewCommentInput').disabled = isBusy;
+    if ($('copyChatgptFixBtn')) {
+      $('copyChatgptFixBtn').hidden = !(target.status === 'pending_review' && target.revisionRequest?.comment);
+    }
   }
 
   async function reloadEditorialData() {
@@ -969,27 +810,20 @@
     if (refreshBtn) refreshBtn.disabled = true;
     try {
       let loadedDrafts = null;
-      let loadedSnapshot = null;
-      cfLastRun = null;
 
       try {
         const cfState = await fetchCloudflareEditorialState();
         loadedDrafts = cfState?.draftsData || { schema: 1, updatedAt: '', drafts: [] };
-        loadedSnapshot = cfState?.trendsSnapshot || { schema: 1, fetchedAt: '', sources: [], topics: [] };
-        cfLastRun = cfState?.lastRun || null;
       } catch (_) {
         loadedDrafts = await fetchRepoJsonFile('content/seo-articles/drafts.json', 'main').catch(() => ({ schema: 1, updatedAt: '', drafts: [] }));
-        loadedSnapshot = await fetchRepoJsonFile('content/seo-articles/trends-snapshot.json', 'main').catch(() => ({ schema: 1, fetchedAt: '', sources: [], topics: [] }));
       }
 
       const runs = await fetchLatestWorkflowRuns().catch(() => []);
       draftsData = loadedDrafts;
-      trendsSnapshot = loadedSnapshot;
       updateCounters();
       renderDraftList();
       renderSelectedDraft();
-      renderBgRewriteSummary();
-      renderWorkflowStatus(runs, cfLastRun);
+      renderWorkflowStatus(runs);
     } finally {
       if (refreshBtn) refreshBtn.disabled = false;
     }
@@ -1056,21 +890,9 @@
     draftComments.clear();
     draftRatings.clear();
     draftActionBusy.clear();
-    backgroundRewrites.clear();
     draftActionNotices.clear();
-    rewriteToasts = [];
-    renderBgRewriteSummary();
-    renderRewriteToasts();
     $('studioApp').hidden = true;
     $('authGate').hidden = false;
-  });
-
-  $('bgRewritePill')?.addEventListener('click', () => {
-    const running = getRunningRewrites();
-    if (!running.length) return;
-    const currentIdx = running.findIndex((j) => j.draftId === selectedDraftId);
-    const nextJob = currentIdx >= 0 ? running[(currentIdx + 1) % running.length] : running[0];
-    selectDraft(nextJob.draftId, { openMobileReview: true, revealIfHidden: true });
   });
 
   $('revThemeToggle')?.addEventListener('click', () => {
@@ -1143,105 +965,6 @@
     });
   });
 
-  function startBackgroundRewrite(draft, comment, rating) {
-    const draftId = draft.id;
-    const title = draft.article?.title || draft.trendQuery || draftId;
-    const prevVersion = Number(draft.version || 1);
-    const runningMsg = 'AI đang viết lại & kiểm duyệt 2 vòng chạy ngầm… Bạn có thể chuyển sang xem & duyệt bài khác ngay.';
-
-    draftComments.set(draftId, comment);
-    if (rating) draftRatings.set(draftId, rating);
-    backgroundRewrites.set(draftId, {
-      draftId,
-      title,
-      startedAt: Date.now(),
-      status: 'running',
-      targetVersion: prevVersion + 1,
-      comment,
-      message: runningMsg,
-    });
-    setDraftNotice(draftId, runningMsg, 'is-warn');
-    renderDraftList();
-    renderBgRewriteSummary();
-    syncActionDockForCurrentDraft();
-
-    (async () => {
-      try {
-        const cfRes = await callCloudflareEditorialPost('/api/rewrite', {
-          draftId,
-          comment,
-          rating: rating || null,
-        });
-        const updatedDraft = cfRes?.draft
-          || (Array.isArray(cfRes?.draftsData?.drafts) ? cfRes.draftsData.drafts.find((d) => d && d.id === draftId) : null);
-        if (updatedDraft) {
-          mergeSingleDraftIntoLocal(updatedDraft);
-        } else if (cfRes?.draftsData) {
-          draftsData = cfRes.draftsData;
-        }
-        const newVersion = updatedDraft?.version || prevVersion + 1;
-        const okMsg = `Đã viết lại xong phiên bản v${newVersion} và cập nhật đánh giá AI!`;
-
-        draftComments.delete(draftId);
-        draftRatings.delete(draftId);
-        setDraftNotice(draftId, okMsg, 'is-ok');
-
-        if (selectedDraftId === draftId) {
-          backgroundRewrites.delete(draftId);
-          if ($('reviewCommentInput')) $('reviewCommentInput').value = '';
-          updateCounters();
-          renderDraftList();
-          renderSelectedDraft();
-          renderBgRewriteSummary();
-        } else {
-          backgroundRewrites.set(draftId, {
-            draftId,
-            title: updatedDraft?.article?.title || title,
-            finishedAt: Date.now(),
-            status: 'done',
-            newVersion,
-            message: okMsg,
-          });
-          updateCounters();
-          renderDraftList();
-          renderBgRewriteSummary();
-          pushRewriteToast({
-            draftId,
-            title: updatedDraft?.article?.title || title,
-            tone: 'is-ok',
-            message: okMsg,
-          });
-        }
-      } catch (err) {
-        const errMsg = err?.message || 'Chưa viết lại được bài nháp.';
-        draftComments.set(draftId, comment);
-        setDraftNotice(draftId, errMsg, 'is-err');
-        backgroundRewrites.set(draftId, {
-          draftId,
-          title,
-          finishedAt: Date.now(),
-          status: 'error',
-          message: errMsg,
-        });
-        renderDraftList();
-        renderBgRewriteSummary();
-        if (selectedDraftId === draftId) {
-          if ($('reviewCommentInput') && !$('reviewCommentInput').value.trim()) {
-            $('reviewCommentInput').value = comment;
-          }
-          syncActionDockForCurrentDraft();
-        } else {
-          pushRewriteToast({
-            draftId,
-            title,
-            tone: 'is-err',
-            message: errMsg,
-          });
-        }
-      }
-    })();
-  }
-
   async function handleEditorialAction(action) {
     const items = getFilteredDrafts();
     const draft = items.find((d) => d.id === selectedDraftId);
@@ -1252,17 +975,13 @@
     const rating = currentRating || null;
     const st = $('actionStatus');
 
-    if (getDraftRewriteState(targetDraftId)?.status === 'running' || draftActionBusy.has(targetDraftId)) {
+    if (draftActionBusy.has(targetDraftId)) {
       return;
     }
 
-    if (action === 'rewrite') {
-      if (!comment) {
-        setStatusMsg(st, 'Hãy nhập góp ý hoặc chọn chip gợi ý để AI biết cần sửa điểm nào.', 'is-warn');
-        $('reviewCommentInput').focus();
-        return;
-      }
-      startBackgroundRewrite(draft, comment, rating);
+    if (action === 'rewrite' && !comment) {
+      setStatusMsg(st, 'Hãy nhập góp ý hoặc chọn chip gợi ý cần sửa để gửi cho ChatGPT.', 'is-warn');
+      $('reviewCommentInput').focus();
       return;
     }
 
@@ -1270,12 +989,40 @@
     syncActionDockForCurrentDraft();
     setDraftNotice(
       targetDraftId,
-      action === 'approve'
-        ? 'Đang xác nhận duyệt bài trên Cloudflare R2…'
-        : 'Đang cập nhật trạng thái từ chối trên Cloudflare R2…'
+      action === 'rewrite'
+        ? 'Đang lưu góp ý vào hàng đợi Cổng ChatGPT trên Cloudflare R2…'
+        : action === 'approve'
+          ? 'Đang xác nhận duyệt bài trên Cloudflare R2…'
+          : 'Đang cập nhật trạng thái từ chối trên Cloudflare R2…'
     );
 
     try {
+      if (action === 'rewrite') {
+        const cfRes = await callCloudflareEditorialPost('/api/rewrite', {
+          draftId: targetDraftId,
+          comment,
+          rating,
+        });
+        if (cfRes?.draft) {
+          mergeSingleDraftIntoLocal(cfRes.draft);
+        } else if (cfRes?.draftsData) {
+          draftsData = cfRes.draftsData;
+        }
+        draftComments.delete(targetDraftId);
+        if (selectedDraftId === targetDraftId && $('reviewCommentInput')) {
+          $('reviewCommentInput').value = '';
+        }
+        updateCounters();
+        renderDraftList();
+        renderSelectedDraft();
+        setDraftNotice(
+          targetDraftId,
+          'Đã lưu góp ý chờ ChatGPT sửa! ChatGPT sẽ tự thấy yêu cầu ở lượt get_seo_brief tiếp theo, hoặc bấm “Copy lệnh sửa cho ChatGPT” để gửi ngay.',
+          'is-ok'
+        );
+        return;
+      }
+
       if (action === 'reject') {
         const cfRes = await callCloudflareEditorialPost('/api/reject', {
           draftId: targetDraftId,
@@ -1330,22 +1077,8 @@
             setDraftNotice(targetDraftId, 'Bài đã vào hàng đợi. GitHub sẽ thử đồng bộ theo lịch.', 'is-warn');
           }
         }
-      } else if (ghConfig.token && cfRes?.article) {
-        setDraftNotice(targetDraftId, 'Đã duyệt trên Cloudflare R2! Đang gửi lệnh xuất bản HTML tĩnh tới GitHub Actions…');
-        await dispatchEditorialWorkflow({
-          action: 'approve',
-          draft_id: targetDraftId,
-          article_json_b64: encodeUtf8Base64(JSON.stringify(cfRes.article)),
-          rating: rating ? String(rating) : '',
-          comment,
-          publish_mode: 'auto-publish',
-        });
-        setDraftNotice(targetDraftId, 'Đã duyệt! GitHub Actions đang kiểm định SEO, build HTML và tự động xuất bản live…', 'is-ok');
-        const runs = await fetchLatestWorkflowRuns();
-        renderWorkflowStatus(runs, cfLastRun);
-        scheduleWorkflowPolling();
       } else {
-        setDraftNotice(targetDraftId, 'Đã lưu phê duyệt trên Cloudflare R2. Worker đang chạy bản chưa hỗ trợ đồng bộ hàng đợi.', 'is-warn');
+        setDraftNotice(targetDraftId, 'Đã duyệt & đưa vào hàng đợi xuất bản tự động! GitHub Actions sẽ tự lấy bài từ Cloudflare và đăng lên web.', 'is-ok');
       }
     } catch (err) {
       setDraftNotice(targetDraftId, err.message || 'Chưa xử lý được lệnh.', 'is-err');
@@ -1358,6 +1091,23 @@
   $('approveBtn')?.addEventListener('click', () => handleEditorialAction('approve'));
   $('rewriteBtn')?.addEventListener('click', () => handleEditorialAction('rewrite'));
   $('rejectBtn')?.addEventListener('click', () => handleEditorialAction('reject'));
+  $('copyChatgptFixBtn')?.addEventListener('click', async () => {
+    const draft = getFilteredDrafts().find((d) => d.id === selectedDraftId);
+    if (!draft) return;
+    const cmdText = buildChatgptFixCommand(draft);
+    try {
+      await navigator.clipboard.writeText(cmdText);
+      const btn = $('copyChatgptFixBtn');
+      const orig = btn.textContent;
+      btn.textContent = 'Đã copy lệnh ✓';
+      setStatusMsg($('actionStatus'), 'Đã copy lệnh sửa bài! Dán thẳng vào ChatGPT đang gắn MCP HSK SEO Editorial để ChatGPT cập nhật bản mới.', 'is-ok');
+      setTimeout(() => {
+        if (btn) btn.textContent = orig;
+      }, 1800);
+    } catch (_) {
+      window.prompt('Copy lệnh gửi ChatGPT:', cmdText);
+    }
+  });
 
   // Modals
   function openModal(id) {
@@ -1374,23 +1124,23 @@
 
   $('openGithubModalBtn')?.addEventListener('click', () => openModal('githubModal'));
   $('emptyGithubBtn')?.addEventListener('click', () => openModal('githubModal'));
-  $('openScanModalBtn')?.addEventListener('click', () => openModal('scanModal'));
-  $('emptyScanBtn')?.addEventListener('click', () => openModal('scanModal'));
-  $('openChatgptModalBtn')?.addEventListener('click', () => {
+  const openChatgptModal = () => {
     openModal('chatgptModal');
     loadChatgptGatewayConfig().catch((err) => {
       setStatusMsg($('cgptModalStatus'), err.message || 'Không tải được cấu hình Cổng ChatGPT.', 'is-err');
     });
-  });
+  };
+  $('openChatgptModalBtn')?.addEventListener('click', openChatgptModal);
+  $('emptyChatgptBtn')?.addEventListener('click', openChatgptModal);
 
   function buildHourlyChatgptPrompt() {
     return [
-      'Mỗi giờ một lần, hãy dùng kết nối MCP HSK SEO Editorial để tự động tạo và nộp ĐÚNG 01 bài viết SEO tiếng Trung HSK vào hàng đợi Chờ duyệt (KHÔNG push lên GitHub):',
-      '1. Gọi công cụ get_seo_brief (count: 5). Nếu quota.canSubmitNow = false thì dừng và báo lý do cho tôi.',
-      '2. Chọn 1 chủ đề mới hấp dẫn nhất từ suggestedTopics (tuyệt đối không trùng với doNotDuplicate).',
-      '3. Viết theo editorialRules trong brief. Trả lời thẳng từ đầu, chia mục theo nội dung, giải thích đủ để người đọc tự áp dụng. Bài phân biệt cần vài cặp ví dụ cho thấy đổi từ thì nghĩa hoặc cách dùng đổi thế nào. Chỉ thêm bảng, mẹo hoặc FAQ khi có ích.',
-      '4. Gọi submit_seo_draft để nộp bài vào trạng thái pending_review (đợi Hội đồng AI chấm điểm phụ và đợi tôi duyệt trong Phòng Duyệt Bài).',
-      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, điểm kỹ thuật và điểm Hội đồng AI.',
+      'Mỗi giờ một lần, hãy dùng kết nối MCP HSK SEO Editorial để xử lý bài viết SEO tiếng Trung HSK trong hàng đợi Chờ duyệt (KHÔNG push lên GitHub):',
+      '1. Gọi công cụ get_seo_brief (count: 5). Nếu có mục trong pendingRevisionRequests, ưu tiên sửa bài theo góp ý của Admin rồi gọi update_seo_draft (truyền đúng draftId và article đã sửa).',
+      '2. Nếu quota.canSubmitNow = true, chọn 1 chủ đề mới hấp dẫn nhất từ suggestedTopics (tuyệt đối không trùng với doNotDuplicate).',
+      '3. Viết theo editorialRules trong brief: trả lời thẳng từ đầu, chia mục rõ ràng, phân tích sâu bản chất & ngoại lệ, ví dụ Chữ Hán – Pinyin – Việt chuẩn thanh điệu, bảng/mẹo/FAQ thực tế.',
+      '4. Gọi submit_seo_draft để nộp bài vào trạng thái pending_review (chờ Admin duyệt trong Phòng Duyệt Bài).',
+      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, điểm kỹ thuật SEO và kết quả xử lý pendingRevisionRequests (nếu có).',
     ].join('\n');
   }
 
@@ -1424,7 +1174,6 @@
     }
 
     if ($('cgptEnabledChk')) $('cgptEnabledChk').checked = cfg.enabled !== false;
-    if ($('cgptAiReviewChk')) $('cgptAiReviewChk').checked = cfg.runAiReview !== false;
     if ($('cgptHourlyLimitSelect')) $('cgptHourlyLimitSelect').value = String(cfg.hourlyLimit || 2);
 
     const keyVal = cfg.keyConfigured ? (chatgptKeyRevealed ? cfg.apiKey : cfg.maskedKey) : '';
@@ -1504,7 +1253,6 @@
     try {
       const data = await callCloudflareEditorialPost('/api/chatgpt-gateway/settings', {
         enabled: Boolean($('cgptEnabledChk')?.checked),
-        runAiReview: Boolean($('cgptAiReviewChk')?.checked),
         hourlyLimit: Number($('cgptHourlyLimitSelect')?.value) || 2,
       });
       chatgptGatewayState = data;
@@ -1581,59 +1329,6 @@
       setStatusMsg(st, err.message || 'Lưu cấu hình thất bại.', 'is-err');
     } finally {
       saveBtn.disabled = false;
-    }
-  });
-
-  $('scanCsvFileInput')?.addEventListener('change', (e) => {
-    const file = e.target.files?.[0];
-    if (!file) {
-      csvFileContent = '';
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      csvFileContent = String(reader.result || '');
-      setStatusMsg($('scanModalStatus'), `Đã nạp file CSV "${file.name}" (${csvFileContent.length} ký tự).`, 'is-ok');
-    };
-    reader.readAsText(file, 'utf-8');
-  });
-
-  $('scanForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const st = $('scanModalStatus');
-    const btn = $('triggerScanBtn');
-    btn.disabled = true;
-    setStatusMsg(st, 'Đang quét Google Trends VN & chạy hội đồng AI trên Cloudflare (khoảng 30–60 giây)…');
-    try {
-      const cfRes = await callCloudflareEditorialPost('/api/scan-trends', {
-        count: Math.max(1, Math.min(2, Number($('scanCountInput').value) || 1)),
-        customQueries: $('scanQueriesInput').value.trim(),
-        csvText: csvFileContent || '',
-      });
-      if (cfRes?.draftsData) draftsData = cfRes.draftsData;
-      if (cfRes?.trendsSnapshot) trendsSnapshot = cfRes.trendsSnapshot;
-      if (cfRes?.lastRun) cfLastRun = cfRes.lastRun;
-      if (cfRes?.createdIds?.[0]) {
-        selectedDraftId = cfRes.createdIds[0];
-      }
-      updateCounters();
-      renderDraftList();
-      renderSelectedDraft();
-      renderWorkflowStatus([], cfLastRun);
-      const createdCount = cfRes?.createdIds?.length || 0;
-      setStatusMsg(st, `Đã sinh xong ${createdCount} bài nháp mới từ Google Trends và lưu trên Cloudflare R2!`, 'is-ok');
-      setTimeout(() => closeModal('scanModal'), 700);
-    } catch (err) {
-      setStatusMsg(st, err.message || 'Không chạy được bộ quét Cloudflare.', 'is-err');
-    } finally {
-      btn.disabled = false;
-    }
-  });
-
-  window.addEventListener('beforeunload', (event) => {
-    if (getRunningRewrites().length > 0) {
-      event.preventDefault();
-      event.returnValue = '';
     }
   });
 

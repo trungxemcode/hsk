@@ -1,15 +1,12 @@
 /**
- * Cloudflare Worker `hsk-seo-editorial`:
- * - Runs scheduled Google Trends VN + Suggest scan every 2 hours (minute 35).
- * - Stores drafts & trends snapshot in R2 under isolated `seo-editorial/` prefix.
+ * Cloudflare Worker `hsk-seo-editorial` (ChatGPT-Only Editorial Gateway):
+ * - Exposes ChatGPT Web Plus MCP & REST endpoints to read SEO briefs, submit new drafts,
+ *   and revise pending drafts requested by Admin.
+ * - Stores drafts & gateway configuration in Cloudflare R2 under `seo-editorial/`.
  * - Exposes Admin-only API endpoints authenticated via Firebase ID Token (`identity()`).
+ * - Exposes public read-only `GET /public/approved-queue` for zero-token GitHub Actions publishing.
  */
 import { identity } from '../music/worker.mjs';
-import {
-  collectTrendTopicsWorker,
-  generateDraftForTopic,
-  rewriteDraftRecord,
-} from './pipeline-core.mjs';
 import {
   buildAdminGatewayConfigResponse,
   generateGatewayKey,
@@ -21,8 +18,6 @@ import {
 } from './chatgpt-gateway.mjs';
 
 const R2_DRAFTS_KEY = 'seo-editorial/drafts.json';
-const R2_SNAPSHOT_KEY = 'seo-editorial/trends-snapshot.json';
-const R2_LASTRUN_KEY = 'seo-editorial/last-run.json';
 
 function emptyDrafts() {
   return { schema: 1, updatedAt: '', drafts: [] };
@@ -56,10 +51,6 @@ function corsHeaders(origin, env) {
     headers.set('Access-Control-Allow-Origin', origin);
   }
   return headers;
-}
-
-function cloneJson(value) {
-  return JSON.parse(JSON.stringify(value));
 }
 
 async function readR2Json(bucket, key, fallback) {
@@ -108,123 +99,6 @@ async function requireAdmin(request, env, fetchImpl = fetch) {
   return actor;
 }
 
-export async function runScanTrendsPipeline(
-  env,
-  { count, maxPending, customQueries = '', csvText = '', trigger = 'manual', fetchImpl = fetch } = {}
-) {
-  const draftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
-  const drafts = Array.isArray(draftsData.drafts) ? draftsData.drafts : [];
-  const effectiveMaxPending = Math.max(2, Number(maxPending || env.MAX_PENDING_DRAFTS) || 24);
-  const requestedCount = Math.max(1, Math.min(2, Number(count || env.DEFAULT_CRON_COUNT) || 1));
-  const pendingCount = drafts.filter((d) => d.status === 'pending_review').length;
-  const publishedArticles = await fetchPublishedArticles(env, fetchImpl);
-
-  const collected = await collectTrendTopicsWorker({
-    publishedArticles,
-    drafts,
-    count: pendingCount >= effectiveMaxPending ? 0 : requestedCount,
-    customQueries,
-    csvText,
-    fetchImpl,
-  });
-
-  const trendsSnapshot = {
-    schema: 1,
-    fetchedAt: collected.fetchedAt,
-    geo: 'VN',
-    sources: collected.sources,
-    rawCount: collected.rawCount,
-    topics: collected.topics.map((t) => ({
-      query: t.query,
-      slug: t.slug,
-      category: t.category,
-      hskTag: t.hskTag,
-      spike: t.spike,
-      source: t.source,
-      score: t.score,
-    })),
-  };
-  await writeR2Json(env.SEO_BUCKET, R2_SNAPSHOT_KEY, trendsSnapshot);
-
-  const createdDrafts = [];
-  const existingSlugs = publishedArticles.map((a) => a.slug).filter(Boolean);
-  const today = new Date().toISOString().slice(0, 10);
-  const startedMs = Date.now();
-  let runError = '';
-
-  await writeR2Json(env.SEO_BUCKET, R2_LASTRUN_KEY, {
-    at: new Date().toISOString(),
-    trigger,
-    status: 'generating',
-    pickedTopics: collected.topics.map((t) => t.query),
-    createdCount: 0,
-    createdIds: [],
-    error: '',
-  });
-
-  if (pendingCount < effectiveMaxPending && collected.topics.length > 0) {
-    for (const picked of collected.topics) {
-      try {
-        const draft = await generateDraftForTopic({
-          picked,
-          existingSlugs,
-          today,
-          env,
-          fetchImpl,
-        });
-        drafts.unshift(draft);
-        createdDrafts.push(draft);
-      } catch (err) {
-        runError = String(err?.message || err);
-        break;
-      }
-    }
-    if (createdDrafts.length > 0) {
-      const latestDraftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
-      const latestDrafts = Array.isArray(latestDraftsData.drafts) ? latestDraftsData.drafts : [];
-      const createdIdSet = new Set(createdDrafts.map((d) => d.id));
-      const mergedDrafts = [
-        ...createdDrafts,
-        ...latestDrafts.filter((d) => d && !createdIdSet.has(d.id)),
-      ];
-      drafts.splice(0, drafts.length, ...mergedDrafts);
-      draftsData.drafts = mergedDrafts;
-      draftsData.updatedAt = new Date().toISOString();
-      await writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, draftsData);
-    }
-  }
-
-  const lastRun = {
-    at: new Date().toISOString(),
-    trigger,
-    status: runError ? 'error' : 'completed',
-    durationMs: Date.now() - startedMs,
-    stageTimings: createdDrafts[0]?.aiReviews?.stageTimings || null,
-    pendingCount: drafts.filter((d) => d.status === 'pending_review').length,
-    createdCount: createdDrafts.length,
-    createdIds: createdDrafts.map((d) => d.id),
-    skippedReason:
-      pendingCount >= effectiveMaxPending
-        ? `pending_queue_full(${pendingCount}/${effectiveMaxPending})`
-        : (!collected.topics.length ? 'no_unique_topics' : ''),
-    error: runError,
-  };
-  await writeR2Json(env.SEO_BUCKET, R2_LASTRUN_KEY, lastRun);
-
-  if (runError && createdDrafts.length === 0) {
-    throw Object.assign(new Error(runError), { status: 502 });
-  }
-
-  return {
-    ok: true,
-    createdIds: lastRun.createdIds,
-    createdDrafts,
-    draftsData,
-    trendsSnapshot,
-    lastRun,
-  };
-}
-
 export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
   const fetchImpl = deps.fetchImpl || fetch;
   const url = new URL(request.url);
@@ -257,23 +131,13 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
     return json({
       ok: true,
       service: 'hsk-seo-editorial',
-      cron: '35 */2 * * *',
-      hasAI: Boolean(env.AI),
+      mode: 'chatgpt-only',
       hasR2: Boolean(env.SEO_BUCKET),
-      hasXkiro: Boolean(env.XKIRO_API_KEY || env.SECONDARY_AI_API_KEY),
-      hasOpenRouter: Boolean(env.OPENROUTER_API_KEY),
       chatgptGateway: {
         enabled: gwCfg.enabled !== false,
         keyConfigured: Boolean(primaryKey.key),
         hourlyLimit: gwCfg.hourlyLimit,
-        runAiReview: gwCfg.runAiReview !== false,
         protocols: ['mcp-streamable-http', 'rest-openapi-3.1'],
-      },
-      models: {
-        writer: env.CF_WRITER_MODEL || '@cf/google/gemma-4-26b-a4b-it',
-        writerFallback: env.CF_WRITER_FALLBACK_MODEL || '@cf/qwen/qwen3.8-27b',
-        reviewer1: env.CF_REVIEWER_1_MODEL || '@cf/qwen/qwen3.8-27b',
-        reviewer2: env.CF_REVIEWER_2_MODEL || '@cf/mistralai/mistral-small-3.1-24b-instruct',
       },
     });
   }
@@ -320,25 +184,21 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
     await requireAdmin(request, env, fetchImpl);
 
     if (url.pathname === '/api/drafts' && request.method === 'GET') {
-      const [draftsData, trendsSnapshot, lastRun] = await Promise.all([
-        readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts()),
-        readR2Json(env.SEO_BUCKET, R2_SNAPSHOT_KEY, emptySnapshot()),
-        readR2Json(env.SEO_BUCKET, R2_LASTRUN_KEY, null),
-      ]);
-      return json({ ok: true, draftsData, trendsSnapshot, lastRun });
+      const draftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
+      return json({
+        ok: true,
+        mode: 'chatgpt-only',
+        draftsData,
+        trendsSnapshot: emptySnapshot(),
+        lastRun: null,
+      });
     }
 
     if (url.pathname === '/api/scan-trends' && request.method === 'POST') {
-      const payload = await request.json().catch(() => ({}));
-      const result = await runScanTrendsPipeline(env, {
-        count: payload?.count,
-        maxPending: payload?.maxPending,
-        customQueries: typeof payload?.customQueries === 'string' ? payload.customQueries : '',
-        csvText: typeof payload?.csvText === 'string' ? payload.csvText : '',
-        trigger: 'manual',
-        fetchImpl,
-      });
-      return json(result);
+      return json(
+        { error: 'Đã tắt các AI tự viết bài nội bộ. Chỉ tiếp nhận bài qua Cổng ChatGPT.' },
+        410
+      );
     }
 
     if (url.pathname === '/api/rewrite' && request.method === 'POST') {
@@ -346,44 +206,39 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       const draftId = String(payload?.draftId || '').trim();
       if (!draftId) return json({ error: 'Thiếu draftId.' }, 400);
 
+      const comment = String(payload?.comment || '').trim();
+      if (!comment) {
+        return json({ error: 'Hãy nhập góp ý cần sửa để gửi cho ChatGPT.' }, 400);
+      }
+
       const draftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
       const drafts = Array.isArray(draftsData.drafts) ? draftsData.drafts : [];
-      const draft = drafts.find((d) => d.id === draftId);
+      const draft = drafts.find((d) => d && d.id === draftId);
       if (!draft) return json({ error: `Không tìm thấy bản nháp "${draftId}".` }, 404);
       if (draft.status === 'approved') {
-        return json({ error: 'Bài nháp này đã được duyệt, không thể viết lại.' }, 409);
+        return json({ error: 'Bài nháp này đã được duyệt, không thể yêu cầu sửa.' }, 409);
       }
 
-      const publishedArticles = await fetchPublishedArticles(env, fetchImpl);
-      const existingSlugs = publishedArticles.map((a) => a.slug).filter(Boolean);
-      const today = new Date().toISOString().slice(0, 10);
-
-      const workingDraft = cloneJson(draft);
-      await rewriteDraftRecord({
-        draft: workingDraft,
-        comment: typeof payload?.comment === 'string' ? payload.comment : '',
-        rating: payload?.rating || null,
-        existingSlugs,
-        today,
-        env,
-        fetchImpl,
+      const nowIso = new Date().toISOString();
+      const numericRating = payload?.rating ? Math.max(1, Math.min(5, Math.round(Number(payload.rating)))) : draft.rating || null;
+      draft.status = 'pending_review';
+      draft.rating = numericRating;
+      draft.updatedAt = nowIso;
+      draft.revisionRequest = {
+        comment,
+        rating: numericRating,
+        requestedAt: nowIso,
+      };
+      draft.reviewHistory = Array.isArray(draft.reviewHistory) ? draft.reviewHistory : [];
+      draft.reviewHistory.push({
+        action: 'revision_requested_for_chatgpt',
+        rating: numericRating,
+        comment,
+        at: nowIso,
       });
-
-      const latestDraftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
-      const latestDrafts = Array.isArray(latestDraftsData.drafts) ? latestDraftsData.drafts : [];
-      const latestIdx = latestDrafts.findIndex((d) => d.id === draftId);
-      if (latestIdx >= 0 && latestDrafts[latestIdx]?.status === 'approved') {
-        return json({ error: 'Bài nháp này vừa được duyệt trong lúc AI đang viết lại.' }, 409);
-      }
-      if (latestIdx >= 0) {
-        latestDrafts[latestIdx] = workingDraft;
-      } else {
-        latestDrafts.unshift(workingDraft);
-      }
-      latestDraftsData.drafts = latestDrafts;
-      latestDraftsData.updatedAt = new Date().toISOString();
-      await writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, latestDraftsData);
-      return json({ ok: true, draft: workingDraft, draftsData: latestDraftsData });
+      draftsData.updatedAt = nowIso;
+      await writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, draftsData);
+      return json({ ok: true, mode: 'chatgpt-revision-request', draft, draftsData });
     }
 
     if (url.pathname === '/api/reject' && request.method === 'POST') {
@@ -393,12 +248,13 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
 
       const draftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
       const drafts = Array.isArray(draftsData.drafts) ? draftsData.drafts : [];
-      const draft = drafts.find((d) => d.id === draftId);
+      const draft = drafts.find((d) => d && d.id === draftId);
       if (!draft) return json({ error: `Không tìm thấy bản nháp "${draftId}".` }, 404);
 
       const nowIso = new Date().toISOString();
       const numericRating = payload?.rating ? Math.max(1, Math.min(5, Math.round(Number(payload.rating)))) : draft.rating || null;
       draft.status = 'rejected';
+      draft.revisionRequest = null;
       draft.updatedAt = nowIso;
       draft.rating = numericRating;
       draft.reviewHistory = Array.isArray(draft.reviewHistory) ? draft.reviewHistory : [];
@@ -420,7 +276,7 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
 
       const draftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
       const drafts = Array.isArray(draftsData.drafts) ? draftsData.drafts : [];
-      const draft = drafts.find((d) => d.id === draftId);
+      const draft = drafts.find((d) => d && d.id === draftId);
       if (!draft) return json({ error: `Không tìm thấy bản nháp "${draftId}".` }, 404);
       if (!draft.article) return json({ error: 'Bản nháp thiếu nội dung article.' }, 400);
 
@@ -432,6 +288,7 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       draft.article.updatedAt = today;
       draft.status = 'approved';
       draft.publishState = 'queued';
+      draft.revisionRequest = null;
       draft.approvedAt = nowIso;
       draft.updatedAt = nowIso;
       draft.publishedSlug = draft.article.slug;
@@ -478,6 +335,7 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       const nextConfig = {
         ...storedConfig,
         enabled: true,
+        runAiReview: false,
         apiKey: generateGatewayKey(),
         rotatedAt: nowIso,
         updatedAt: nowIso,
@@ -504,7 +362,7 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       const nextConfig = {
         ...storedConfig,
         enabled: typeof payload?.enabled === 'boolean' ? payload.enabled : storedConfig.enabled,
-        runAiReview: typeof payload?.runAiReview === 'boolean' ? payload.runAiReview : storedConfig.runAiReview,
+        runAiReview: false,
         hourlyLimit: Number.isFinite(hourlyNum) && hourlyNum >= 1 ? Math.min(6, Math.round(hourlyNum)) : storedConfig.hourlyLimit,
         updatedAt: nowIso,
       };
@@ -526,29 +384,6 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
   }
 }
 
-export async function runScheduledEditorial(env, fetchImpl = fetch) {
-  try {
-    return await runScanTrendsPipeline(env, {
-      count: Number(env.DEFAULT_CRON_COUNT) || 1,
-      trigger: 'cron',
-      fetchImpl,
-    });
-  } catch (err) {
-    const lastRun = {
-      at: new Date().toISOString(),
-      trigger: 'cron',
-      createdCount: 0,
-      createdIds: [],
-      error: String(err?.message || err),
-    };
-    await writeR2Json(env.SEO_BUCKET, R2_LASTRUN_KEY, lastRun).catch(() => {});
-    return { ok: false, lastRun };
-  }
-}
-
 export default {
   fetch: handleSeoEditorialFetch,
-  scheduled(controller, env, ctx) {
-    ctx.waitUntil(runScheduledEditorial(env));
-  },
 };
