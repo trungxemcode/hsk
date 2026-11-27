@@ -581,6 +581,96 @@ function sanitizeForbiddenText(text) {
   return out.trim();
 }
 
+function stringifyContentItem(item) {
+  if (item == null) return '';
+  if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
+    const text = sanitizeForbiddenText(String(item)).trim();
+    return /^\[object\s+object\]$/i.test(text) ? '' : text;
+  }
+  if (Array.isArray(item)) {
+    return item.map((el) => stringifyContentItem(el)).filter(Boolean).join(' — ');
+  }
+  if (typeof item === 'object') {
+    if (typeof item.han === 'string' && item.han.trim()) {
+      const han = sanitizeForbiddenText(item.han);
+      const py = item.py ? sanitizeForbiddenText(item.py) : '';
+      const vi = item.vi ? sanitizeForbiddenText(item.vi) : '';
+      return `${han}${py ? ` (${py})` : ''}${vi ? `: ${vi}` : ''}`.trim();
+    }
+    const head = item.label || item.title || item.heading || item.term || item.name || item.key || '';
+    const body = item.text || item.content || item.description || item.detail || item.value || item.meaning || '';
+    if (head && body) {
+      return `${sanitizeForbiddenText(head)}: ${sanitizeForbiddenText(body)}`.trim();
+    }
+    return Object.values(item).map((v) => stringifyContentItem(v)).filter(Boolean).join(' — ');
+  }
+  return '';
+}
+
+function collectArticleTextForDiff(article) {
+  if (!article || typeof article !== 'object') return '';
+  const parts = [article.title || '', article.summary || ''];
+  for (const sec of Array.isArray(article.sections) ? article.sections : []) {
+    if (!sec || typeof sec !== 'object') continue;
+    parts.push(sec.heading || '');
+    for (const p of Array.isArray(sec.paragraphs) ? sec.paragraphs : []) parts.push(stringifyContentItem(p));
+    for (const b of Array.isArray(sec.bullets) ? sec.bullets : []) parts.push(stringifyContentItem(b));
+    if (sec.table && Array.isArray(sec.table.rows)) {
+      for (const r of sec.table.rows) parts.push(stringifyContentItem(r));
+    }
+    if (sec.example && typeof sec.example === 'object') {
+      parts.push(sec.example.han || '', sec.example.py || '', sec.example.vi || '');
+    }
+    if (sec.tip) parts.push(sec.tip);
+  }
+  for (const f of Array.isArray(article.faqs) ? article.faqs : []) {
+    if (f) parts.push(f.q || '', f.a || '');
+  }
+  return parts.map((x) => String(x || '').trim()).filter(Boolean).join(' ');
+}
+
+function tokenizeWordsSet(text) {
+  const tokens = String(text || '').toLowerCase().match(/[\p{L}\p{N}]+/gu) || [];
+  return new Set(tokens);
+}
+
+export function measureRewriteChange(oldArticle, newArticle, adminComment = '') {
+  const oldText = collectArticleTextForDiff(oldArticle);
+  const newText = collectArticleTextForDiff(newArticle);
+  const oldSet = tokenizeWordsSet(oldText);
+  const newSet = tokenizeWordsSet(newText);
+
+  let intersection = 0;
+  for (const w of oldSet) {
+    if (newSet.has(w)) intersection += 1;
+  }
+  const union = oldSet.size + newSet.size - intersection;
+  const tokenOverlap = union > 0 ? intersection / union : 0;
+
+  const oldSections = Array.isArray(oldArticle?.sections) ? oldArticle.sections.length : 0;
+  const newSections = Array.isArray(newArticle?.sections) ? newArticle.sections.length : 0;
+  const oldChars = oldText.length;
+  const newChars = newText.length;
+  const wantsExpansion = /(dài|ngắn|ít thông tin|thiếu|cụt|chi tiết|sâu|mở rộng|bổ sung|thêm|kết luận|ví dụ|sơ sài)/i.test(
+    String(adminComment || '')
+  );
+  const hasAdminComment = Boolean(String(adminComment || '').trim());
+  const needsRetry =
+    hasAdminComment &&
+    ((tokenOverlap >= 0.78 && newSections <= oldSections) ||
+      (wantsExpansion && newChars < Math.max(oldChars * 1.25, 2200) && newSections <= oldSections));
+
+  return {
+    oldChars,
+    newChars,
+    oldSections,
+    newSections,
+    tokenOverlap,
+    wantsExpansion,
+    needsRetry,
+  };
+}
+
 export function normalizeArticle(raw, defaults = {}) {
   const category = CATEGORIES[raw?.category] ? raw.category : (CATEGORIES[defaults.category] ? defaults.category : 'meo-hoc');
   const existingSlugs = Array.isArray(defaults.existingSlugs) ? defaults.existingSlugs : [];
@@ -599,17 +689,17 @@ export function normalizeArticle(raw, defaults = {}) {
         heading: sanitizeForbiddenText(s?.heading || `Phần ${idx + 1}`),
       };
       if (Array.isArray(s?.paragraphs) && s.paragraphs.length) {
-        clean.paragraphs = s.paragraphs.map((p) => sanitizeForbiddenText(p)).filter(Boolean);
+        clean.paragraphs = s.paragraphs.map((p) => stringifyContentItem(p)).filter(Boolean);
       }
       if (Array.isArray(s?.bullets) && s.bullets.length) {
-        clean.bullets = s.bullets.map((b) => sanitizeForbiddenText(b)).filter(Boolean);
+        clean.bullets = s.bullets.map((b) => stringifyContentItem(b)).filter(Boolean);
       }
       if (s?.table && Array.isArray(s.table.headers) && s.table.headers.length && Array.isArray(s.table.rows) && s.table.rows.length) {
-        const headers = s.table.headers.map((h) => sanitizeForbiddenText(h)).filter(Boolean);
+        const headers = s.table.headers.map((h) => stringifyContentItem(h)).filter(Boolean);
         const rows = s.table.rows
           .slice(0, 6)
           .map((r) => {
-            const arr = Array.isArray(r) ? r.map((c) => sanitizeForbiddenText(c)) : [];
+            const arr = Array.isArray(r) ? r.map((c) => stringifyContentItem(c)) : [];
             while (arr.length < headers.length) arr.push('—');
             return arr.slice(0, headers.length);
           })
@@ -920,14 +1010,21 @@ async function runXkiroJson({ apiKey, model, systemPrompt, userPrompt, fetchImpl
   return extractJsonObject(text);
 }
 
-export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
+export async function callWriterJson({
+  prompt,
+  env = {},
+  fetchImpl = fetch,
+  maxTokens = 4000,
+  temperature = 0.55,
+  skipModels = [],
+}) {
   const systemPrompt = WRITER_SYSTEM_PROMPT;
   let lastError;
 
   // Priority 1 (0 Cloudflare Neurons): OpenRouter Free models when OPENROUTER_API_KEY is configured.
   const orKey = String(env.OPENROUTER_API_KEY || '').trim();
   if (orKey) {
-    const orModels = Array.from(
+    const rawOrModels = Array.from(
       new Set([
         env.OPENROUTER_WRITER_MODEL || 'nvidia/nemotron-3.5-lightning:free',
         'nvidia/nemotron-3.5-lightning:free',
@@ -936,6 +1033,10 @@ export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
         'baidu/ernie-5.5-flash-preview:free',
       ].filter(Boolean))
     );
+    const skipSet = new Set(Array.isArray(skipModels) ? skipModels : []);
+    const preferredOr = rawOrModels.filter((m) => !skipSet.has(m));
+    const deprioritizedOr = rawOrModels.filter((m) => skipSet.has(m));
+    const orModels = [...preferredOr, ...deprioritizedOr];
     for (const model of orModels) {
       try {
         const data = await runOpenRouterJson({
@@ -944,8 +1045,8 @@ export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
           systemPrompt,
           userPrompt: prompt,
           fetchImpl,
-          maxTokens: 4000,
-          temperature: 0.55,
+          maxTokens,
+          temperature,
         });
         return { data, provider: 'openrouter', model };
       } catch (err) {
@@ -970,8 +1071,8 @@ export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
         model,
         systemPrompt,
         userPrompt: prompt,
-        maxTokens: 2100,
-        temperature: 0.55,
+        maxTokens: Math.min(2600, maxTokens),
+        temperature,
       });
       return { data, provider: 'cloudflare-ai', model };
     } catch (err) {
@@ -1173,6 +1274,7 @@ export async function runTwoRoundEditorialPipeline({
   category = 'meo-hoc',
   hskTag = 'HSK 1–6',
   styleId = '',
+  adminComment = '',
   today,
   existingSlugs = [],
   env = {},
@@ -1223,13 +1325,19 @@ export async function runTwoRoundEditorialPipeline({
             article: currentArticle,
           },
           sanitizedFeedback,
-          adminComment: '',
+          adminComment,
           rating: null,
           existingSlugs,
           today,
         });
-        const revised = await callWriterJson({ prompt: revisionPrompt, env, fetchImpl });
-        currentArticle = normalizeArticle(revised.data, {
+        const revised = await callWriterJson({
+          prompt: revisionPrompt,
+          env,
+          fetchImpl,
+          maxTokens: adminComment ? 4600 : 4000,
+          temperature: adminComment ? 0.6 : 0.55,
+        });
+        const candidateArticle = normalizeArticle(revised.data, {
           slug: currentArticle.slug,
           topic: currentArticle.title,
           category: currentArticle.category || category,
@@ -1238,13 +1346,19 @@ export async function runTwoRoundEditorialPipeline({
           existingSlugs,
           editorialVoice: styleId || currentArticle.editorialVoice || '',
         });
-        if (revised.data?.writerBrief && typeof revised.data.writerBrief === 'object') {
-          currentBrief = revised.data.writerBrief;
+        const polishDiff = measureRewriteChange(currentArticle, candidateArticle, adminComment);
+        if (polishDiff.wantsExpansion && polishDiff.newChars < polishDiff.oldChars * 0.8) {
+          polishSummary = `Giữ nguyên bản đã mở rộng theo góp ý Admin (bản auto-polish bị thu ngắn ${polishDiff.oldChars} -> ${polishDiff.newChars} ký tự).`;
+        } else {
+          currentArticle = candidateArticle;
+          if (revised.data?.writerBrief && typeof revised.data.writerBrief === 'object') {
+            currentBrief = revised.data.writerBrief;
+          }
+          autoPolished = true;
+          polishSummary = String(
+            revised.data?.revisionSummary || `Đã chỉnh sửa theo ${round1.errors?.length || round1.mustFix?.length || 0} lỗi Vòng 1.`
+          ).trim();
         }
-        autoPolished = true;
-        polishSummary = String(
-          revised.data?.revisionSummary || `Đã chỉnh sửa theo ${round1.errors?.length || round1.mustFix?.length || 0} lỗi Vòng 1.`
-        ).trim();
       } catch (err) {
         polishSummary = `Chưa tự chỉnh sửa được sau Vòng 1 (${err.message}); giữ bản gốc để Vòng 2 đánh giá.`;
       } finally {
@@ -1424,19 +1538,72 @@ export async function rewriteDraftRecord({
     existingSlugs,
     today,
   });
-  const rewritten = await callWriterJson({ prompt, env, fetchImpl });
-  const initialBrief = rewritten.data?.writerBrief && typeof rewritten.data.writerBrief === 'object'
-    ? rewritten.data.writerBrief
-    : (draft.writerBrief || { styleId: draft.editorialVoice || 'educational-how-to' });
-  const initialArticle = normalizeArticle(rewritten.data, {
+  const normOpts = {
     slug: draft.article?.slug || slugifyVi(draft.trendQuery),
     topic: draft.article?.title || draft.trendQuery,
     category: draft.category || draft.article?.category || 'meo-hoc',
     hskTag: draft.hskTag || draft.article?.hskTag || 'HSK 1–6',
     today,
     existingSlugs,
+    editorialVoice: draft.editorialVoice || draft.writerBrief?.styleId || '',
+  };
+
+  let rewritten = await callWriterJson({
+    prompt,
+    env,
+    fetchImpl,
+    maxTokens: comment ? 4600 : 4000,
+    temperature: comment ? 0.65 : 0.55,
+  });
+  let initialBrief = rewritten.data?.writerBrief && typeof rewritten.data.writerBrief === 'object'
+    ? rewritten.data.writerBrief
+    : (draft.writerBrief || { styleId: draft.editorialVoice || 'educational-how-to' });
+  let initialArticle = normalizeArticle(rewritten.data, {
+    ...normOpts,
     editorialVoice: draft.editorialVoice || initialBrief.styleId || '',
   });
+
+  const firstChange = measureRewriteChange(draft.article, initialArticle, comment);
+  if (firstChange.needsRetry) {
+    const targetSections = Math.min(6, Math.max(4, firstChange.oldSections + 1));
+    const retryHint = `Lần viết lại đầu tiên vẫn quá gần hoặc quá ngắn so với bản cũ (${firstChange.oldSections} mục / ${firstChange.oldChars} ký tự -> ${firstChange.newSections} mục / ${firstChange.newChars} ký tự, độ trùng từ ${Math.round(firstChange.tokenOverlap * 100)}%). BẮT BUỘC phải viết lại hoàn toàn thành ${targetSections}–6 mục H2 mới, mở rộng kiến thức thực tế (~1.000–1.500 từ) và giải quyết trực diện từng ý trong góp ý Admin.`;
+    const escalatedPrompt = buildStandardRevisionWriterPrompt({
+      draft,
+      sanitizedFeedback: prevFeedback,
+      adminComment: comment,
+      rating,
+      existingSlugs,
+      today,
+      retryHint,
+    });
+    try {
+      const retryWritten = await callWriterJson({
+        prompt: escalatedPrompt,
+        env,
+        fetchImpl,
+        maxTokens: 5000,
+        temperature: 0.72,
+        skipModels: rewritten.provider === 'openrouter' && rewritten.model ? [rewritten.model] : [],
+      });
+      const retryBrief = retryWritten.data?.writerBrief && typeof retryWritten.data.writerBrief === 'object'
+        ? retryWritten.data.writerBrief
+        : initialBrief;
+      const retryArticle = normalizeArticle(retryWritten.data, {
+        ...normOpts,
+        editorialVoice: draft.editorialVoice || retryBrief.styleId || '',
+      });
+      const retryChange = measureRewriteChange(draft.article, retryArticle, comment);
+      const isBetter =
+        retryChange.newSections > firstChange.newSections ||
+        retryChange.newChars > firstChange.newChars * 1.1 ||
+        retryChange.tokenOverlap < firstChange.tokenOverlap - 0.08;
+      if (isBetter) {
+        rewritten = retryWritten;
+        initialBrief = retryBrief;
+        initialArticle = retryArticle;
+      }
+    } catch (_) {}
+  }
 
   const { article: updatedArticle, writerBrief, aiReviews } = await runTwoRoundEditorialPipeline({
     initialArticle,
@@ -1445,6 +1612,7 @@ export async function rewriteDraftRecord({
     category: draft.category || initialArticle.category || 'meo-hoc',
     hskTag: draft.hskTag || initialArticle.hskTag || 'HSK 1–6',
     styleId: draft.editorialVoice || initialBrief.styleId || '',
+    adminComment: comment,
     today,
     existingSlugs,
     env,

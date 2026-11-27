@@ -48,6 +48,166 @@
   let pollTimer = null;
   let chatgptGatewayState = null;
   let chatgptKeyRevealed = false;
+  const draftComments = new Map();
+  const draftRatings = new Map();
+  const draftActionBusy = new Map();
+  const backgroundRewrites = new Map();
+  const draftActionNotices = new Map();
+  let rewriteToasts = [];
+  let toastSeq = 0;
+
+  function getDraftRewriteState(draftId) {
+    return draftId ? (backgroundRewrites.get(draftId) || null) : null;
+  }
+
+  function getRunningRewrites() {
+    return Array.from(backgroundRewrites.values()).filter((job) => job?.status === 'running');
+  }
+
+  function mergeSingleDraftIntoLocal(updatedDraft) {
+    if (!updatedDraft || typeof updatedDraft !== 'object' || !updatedDraft.id) return;
+    if (!draftsData || typeof draftsData !== 'object') {
+      draftsData = { schema: 1, updatedAt: '', drafts: [] };
+    }
+    const list = Array.isArray(draftsData.drafts) ? draftsData.drafts.slice() : [];
+    const idx = list.findIndex((d) => d && d.id === updatedDraft.id);
+    if (idx >= 0) {
+      list[idx] = updatedDraft;
+    } else {
+      list.unshift(updatedDraft);
+    }
+    draftsData.drafts = list;
+    draftsData.updatedAt = updatedDraft.updatedAt || new Date().toISOString();
+  }
+
+  function setDraftNotice(draftId, text, tone = '') {
+    if (!draftId) return;
+    if (text) {
+      draftActionNotices.set(draftId, { text, tone });
+    } else {
+      draftActionNotices.delete(draftId);
+    }
+    if (selectedDraftId === draftId) {
+      setStatusMsg($('actionStatus'), text, tone);
+    }
+  }
+
+  function syncMobilePane(pane) {
+    $('revWorkspace')?.setAttribute('data-mobile-pane', pane);
+    document.querySelectorAll('.rev-mob-tab').forEach((t) => {
+      const on = t.getAttribute('data-mob-pane') === pane;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
+  function dismissRewriteToast(toastId) {
+    rewriteToasts = rewriteToasts.filter((t) => t.id !== toastId);
+    renderRewriteToasts();
+  }
+
+  function dismissRewriteToastsForDraft(draftId) {
+    if (!draftId) return;
+    const prevLen = rewriteToasts.length;
+    rewriteToasts = rewriteToasts.filter((t) => t.draftId !== draftId);
+    if (rewriteToasts.length !== prevLen) renderRewriteToasts();
+  }
+
+  function renderRewriteToasts() {
+    const stack = $('bgToastStack');
+    if (!stack) return;
+    if (!rewriteToasts.length) {
+      stack.innerHTML = '';
+      return;
+    }
+    stack.innerHTML = rewriteToasts.map((t) => {
+      const toneCls = t.tone === 'is-err' ? 'is-err' : 'is-ok';
+      const headText = t.tone === 'is-err' ? 'AI viết lại gặp lỗi' : 'AI đã viết lại xong';
+      return `<div class="rev-toast ${toneCls}" role="status" data-toast-id="${t.id}">
+        <div class="rev-toast-head">
+          <strong>${escHtml(headText)} · ${escHtml(t.title)}</strong>
+          <button type="button" class="rev-toast-close" data-dismiss-toast="${t.id}" aria-label="Đóng thông báo">✕</button>
+        </div>
+        <p class="rev-toast-body">${escHtml(t.message)}</p>
+        <div class="rev-toast-actions">
+          <button type="button" class="rev-btn is-primary" data-jump-draft="${escHtml(t.draftId)}">Xem bài ngay</button>
+        </div>
+      </div>`;
+    }).join('');
+
+    stack.querySelectorAll('[data-dismiss-toast]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        dismissRewriteToast(Number(btn.getAttribute('data-dismiss-toast')));
+      });
+    });
+    stack.querySelectorAll('[data-jump-draft]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-jump-draft') || '';
+        selectDraft(targetId, { openMobileReview: true, revealIfHidden: true });
+      });
+    });
+  }
+
+  function pushRewriteToast({ draftId, title, tone, message }) {
+    rewriteToasts = rewriteToasts.filter((t) => t.draftId !== draftId);
+    rewriteToasts.unshift({
+      id: ++toastSeq,
+      draftId,
+      title: title || draftId,
+      tone: tone || 'is-ok',
+      message: message || '',
+    });
+    if (rewriteToasts.length > 4) rewriteToasts = rewriteToasts.slice(0, 4);
+    renderRewriteToasts();
+  }
+
+  function renderBgRewriteSummary() {
+    const pill = $('bgRewritePill');
+    if (!pill) return;
+    const running = getRunningRewrites();
+    if (!running.length) {
+      pill.hidden = true;
+      pill.innerHTML = '';
+      delete pill.dataset.targetDraftId;
+      return;
+    }
+    pill.hidden = false;
+    const first = running[0];
+    pill.dataset.targetDraftId = first.draftId;
+    pill.innerHTML = running.length === 1
+      ? `<span class="rev-pulse-dot" aria-hidden="true"></span><span>AI đang viết lại ngầm: ${escHtml(first.title)}</span>`
+      : `<span class="rev-pulse-dot" aria-hidden="true"></span><span>AI đang viết lại ngầm (${running.length} bài)</span>`;
+  }
+
+  function selectDraft(draftId, { openMobileReview = false, revealIfHidden = false } = {}) {
+    if (!draftId) return;
+    if (revealIfHidden) {
+      const target = (draftsData?.drafts || []).find((d) => d && d.id === draftId);
+      const visible = getFilteredDrafts().some((d) => d.id === draftId);
+      if (target && !visible) {
+        if (searchQuery) {
+          searchQuery = '';
+          if ($('draftSearchInput')) $('draftSearchInput').value = '';
+        }
+        statusFilter = target.status || 'all';
+        document.querySelectorAll('.rev-filter-chip').forEach((b) => {
+          b.classList.toggle('is-active', (b.getAttribute('data-status-filter') || '') === statusFilter);
+        });
+      }
+    }
+    const bgJob = getDraftRewriteState(draftId);
+    if (bgJob && bgJob.status === 'done') {
+      backgroundRewrites.delete(draftId);
+    }
+    dismissRewriteToastsForDraft(draftId);
+    selectedDraftId = draftId;
+    renderDraftList();
+    renderSelectedDraft();
+    renderBgRewriteSummary();
+    if (openMobileReview) {
+      syncMobilePane('review');
+    }
+  }
 
   function isChatgptDraft(draft) {
     if (!draft || typeof draft !== 'object') return false;
@@ -463,32 +623,34 @@
 
     listEl.innerHTML = items.map((d) => {
       const selected = d.id === selectedDraftId ? ' is-selected' : '';
+      const bgJob = getDraftRewriteState(d.id);
+      const rewritingCls = bgJob?.status === 'running' ? ' is-rewriting' : '';
       const score = d.quality?.score ?? '—';
       const spike = d.trendSpike ? ` · ${escHtml(d.trendSpike)}` : '';
       const stars = d.rating ? ` · ${d.rating}★` : '';
       const xkiroAvg = typeof d.aiReviews?.averageScore === 'number' ? ` · AI ${d.aiReviews.averageScore}` : '';
       const cgptChip = isChatgptDraft(d) ? '<span class="rev-chatgpt-chip">ChatGPT</span> ' : '';
-      return `<button type="button" class="rev-draft-card${selected}" data-draft-id="${escHtml(d.id)}">
+      const bgBadge = bgJob?.status === 'running'
+        ? '<span class="rev-card-bg-badge is-running"><span class="rev-pulse-dot" aria-hidden="true"></span>Đang viết lại ngầm…</span>'
+        : bgJob?.status === 'done'
+          ? `<span class="rev-card-bg-badge is-done">✨ Mới viết lại (v${escHtml(bgJob.newVersion || d.version || 2)})</span>`
+          : bgJob?.status === 'error'
+            ? '<span class="rev-card-bg-badge is-err">! Viết lại lỗi</span>'
+            : '';
+      return `<button type="button" class="rev-draft-card${selected}${rewritingCls}" data-draft-id="${escHtml(d.id)}">
         <div class="rev-card-top">
           <span class="rev-card-source">${cgptChip}${escHtml(d.trendSource || 'google-trends')}${spike} · v${escHtml(d.version || 1)}</span>
           <span class="rev-card-score">SEO ${escHtml(score)}${escHtml(xkiroAvg)}${stars}</span>
         </div>
         <h3 class="rev-card-title">${escHtml(d.article?.title || d.trendQuery)}</h3>
         <span class="rev-card-query">Từ khóa: ${escHtml(d.trendQuery || '—')}</span>
+        ${bgBadge}
       </button>`;
     }).join('');
 
     listEl.querySelectorAll('.rev-draft-card').forEach((btn) => {
       btn.addEventListener('click', () => {
-        selectedDraftId = btn.getAttribute('data-draft-id') || '';
-        renderDraftList();
-        renderSelectedDraft();
-        $('revWorkspace')?.setAttribute('data-mobile-pane', 'review');
-        document.querySelectorAll('.rev-mob-tab').forEach((t) => {
-          const on = t.getAttribute('data-mob-pane') === 'review';
-          t.classList.toggle('is-active', on);
-          t.setAttribute('aria-selected', on ? 'true' : 'false');
-        });
+        selectDraft(btn.getAttribute('data-draft-id') || '', { openMobileReview: true });
       });
     });
   }
@@ -749,6 +911,7 @@
         const area = $('reviewCommentInput');
         if (!area || !snippet) return;
         area.value = area.value.trim() ? `${area.value.trim()}\n- ${snippet}` : `- ${snippet}`;
+        if (selectedDraftId) draftComments.set(selectedDraftId, area.value);
         area.focus();
       });
     });
@@ -759,17 +922,45 @@
 
     const switchedDraft = lastRenderedDraftId !== draft.id;
     lastRenderedDraftId = draft.id;
-    if (switchedDraft || draft.rating) {
-      updateStarsUi(draft.rating || 0);
+
+    const savedRating = draftRatings.has(draft.id) ? draftRatings.get(draft.id) : (draft.rating || 0);
+    if (switchedDraft || draft.rating || draftRatings.has(draft.id)) {
+      updateStarsUi(savedRating);
     }
-    if (switchedDraft) {
+
+    const commentArea = $('reviewCommentInput');
+    if (commentArea && switchedDraft) {
+      commentArea.value = draftComments.get(draft.id) || '';
+    }
+
+    const bgJob = getDraftRewriteState(draft.id);
+    const notice = draftActionNotices.get(draft.id);
+    if (bgJob?.status === 'running') {
+      setStatusMsg($('actionStatus'), bgJob.message || 'AI đang viết lại ngầm… Bạn có thể chuyển sang xem & duyệt bài khác ngay.', 'is-warn');
+    } else if (notice) {
+      setStatusMsg($('actionStatus'), notice.text, notice.tone);
+    } else if (switchedDraft) {
       setStatusMsg($('actionStatus'), '');
     }
 
-    const isApproved = draft.status === 'approved';
-    $('approveBtn').disabled = isApproved;
-    $('rewriteBtn').disabled = isApproved;
-    $('rejectBtn').disabled = isApproved;
+    syncActionDockForCurrentDraft(draft);
+  }
+
+  function syncActionDockForCurrentDraft(draft) {
+    const target = draft || getFilteredDrafts().find((d) => d.id === selectedDraftId) || null;
+    if (!target) return;
+    const isApproved = target.status === 'approved';
+    const isRewriting = getDraftRewriteState(target.id)?.status === 'running';
+    const isBusy = draftActionBusy.has(target.id);
+    const disabled = isApproved || isRewriting || isBusy;
+
+    if ($('approveBtn')) $('approveBtn').disabled = disabled;
+    if ($('rewriteBtn')) {
+      $('rewriteBtn').disabled = disabled;
+      $('rewriteBtn').textContent = isRewriting ? '✎ Đang viết lại ngầm…' : '✎ Yêu cầu AI viết lại';
+    }
+    if ($('rejectBtn')) $('rejectBtn').disabled = disabled;
+    if ($('reviewCommentInput')) $('reviewCommentInput').disabled = isRewriting || isBusy;
   }
 
   async function reloadEditorialData() {
@@ -796,6 +987,7 @@
       updateCounters();
       renderDraftList();
       renderSelectedDraft();
+      renderBgRewriteSummary();
       renderWorkflowStatus(runs, cfLastRun);
     } finally {
       if (refreshBtn) refreshBtn.disabled = false;
@@ -860,8 +1052,24 @@
       clearTimeout(pollTimer);
       pollTimer = null;
     }
+    draftComments.clear();
+    draftRatings.clear();
+    draftActionBusy.clear();
+    backgroundRewrites.clear();
+    draftActionNotices.clear();
+    rewriteToasts = [];
+    renderBgRewriteSummary();
+    renderRewriteToasts();
     $('studioApp').hidden = true;
     $('authGate').hidden = false;
+  });
+
+  $('bgRewritePill')?.addEventListener('click', () => {
+    const running = getRunningRewrites();
+    if (!running.length) return;
+    const currentIdx = running.findIndex((j) => j.draftId === selectedDraftId);
+    const nextJob = currentIdx >= 0 ? running[(currentIdx + 1) % running.length] : running[0];
+    selectDraft(nextJob.draftId, { openMobileReview: true, revealIfHidden: true });
   });
 
   $('revThemeToggle')?.addEventListener('click', () => {
@@ -910,7 +1118,17 @@
   });
 
   document.querySelectorAll('#starButtons .rev-star').forEach((btn) => {
-    btn.addEventListener('click', () => updateStarsUi(Number(btn.getAttribute('data-star'))));
+    btn.addEventListener('click', () => {
+      const val = Number(btn.getAttribute('data-star'));
+      if (selectedDraftId) draftRatings.set(selectedDraftId, val);
+      updateStarsUi(val);
+    });
+  });
+
+  $('reviewCommentInput')?.addEventListener('input', (e) => {
+    if (selectedDraftId) {
+      draftComments.set(selectedDraftId, e.target.value || '');
+    }
   });
 
   document.querySelectorAll('.rev-quick-chip').forEach((chip) => {
@@ -919,108 +1137,220 @@
       const area = $('reviewCommentInput');
       if (!area) return;
       area.value = area.value.trim() ? `${area.value.trim()}\n- ${snippet}` : `- ${snippet}`;
+      if (selectedDraftId) draftComments.set(selectedDraftId, area.value);
       area.focus();
     });
   });
+
+  function startBackgroundRewrite(draft, comment, rating) {
+    const draftId = draft.id;
+    const title = draft.article?.title || draft.trendQuery || draftId;
+    const prevVersion = Number(draft.version || 1);
+    const runningMsg = 'AI đang viết lại & kiểm duyệt 2 vòng chạy ngầm… Bạn có thể chuyển sang xem & duyệt bài khác ngay.';
+
+    draftComments.set(draftId, comment);
+    if (rating) draftRatings.set(draftId, rating);
+    backgroundRewrites.set(draftId, {
+      draftId,
+      title,
+      startedAt: Date.now(),
+      status: 'running',
+      targetVersion: prevVersion + 1,
+      comment,
+      message: runningMsg,
+    });
+    setDraftNotice(draftId, runningMsg, 'is-warn');
+    renderDraftList();
+    renderBgRewriteSummary();
+    syncActionDockForCurrentDraft();
+
+    (async () => {
+      try {
+        const cfRes = await callCloudflareEditorialPost('/api/rewrite', {
+          draftId,
+          comment,
+          rating: rating || null,
+        });
+        const updatedDraft = cfRes?.draft
+          || (Array.isArray(cfRes?.draftsData?.drafts) ? cfRes.draftsData.drafts.find((d) => d && d.id === draftId) : null);
+        if (updatedDraft) {
+          mergeSingleDraftIntoLocal(updatedDraft);
+        } else if (cfRes?.draftsData) {
+          draftsData = cfRes.draftsData;
+        }
+        const newVersion = updatedDraft?.version || prevVersion + 1;
+        const okMsg = `Đã viết lại xong phiên bản v${newVersion} và cập nhật đánh giá AI!`;
+
+        draftComments.delete(draftId);
+        draftRatings.delete(draftId);
+        setDraftNotice(draftId, okMsg, 'is-ok');
+
+        if (selectedDraftId === draftId) {
+          backgroundRewrites.delete(draftId);
+          if ($('reviewCommentInput')) $('reviewCommentInput').value = '';
+          updateCounters();
+          renderDraftList();
+          renderSelectedDraft();
+          renderBgRewriteSummary();
+        } else {
+          backgroundRewrites.set(draftId, {
+            draftId,
+            title: updatedDraft?.article?.title || title,
+            finishedAt: Date.now(),
+            status: 'done',
+            newVersion,
+            message: okMsg,
+          });
+          updateCounters();
+          renderDraftList();
+          renderBgRewriteSummary();
+          pushRewriteToast({
+            draftId,
+            title: updatedDraft?.article?.title || title,
+            tone: 'is-ok',
+            message: okMsg,
+          });
+        }
+      } catch (err) {
+        const errMsg = err?.message || 'Chưa viết lại được bài nháp.';
+        draftComments.set(draftId, comment);
+        setDraftNotice(draftId, errMsg, 'is-err');
+        backgroundRewrites.set(draftId, {
+          draftId,
+          title,
+          finishedAt: Date.now(),
+          status: 'error',
+          message: errMsg,
+        });
+        renderDraftList();
+        renderBgRewriteSummary();
+        if (selectedDraftId === draftId) {
+          if ($('reviewCommentInput') && !$('reviewCommentInput').value.trim()) {
+            $('reviewCommentInput').value = comment;
+          }
+          syncActionDockForCurrentDraft();
+        } else {
+          pushRewriteToast({
+            draftId,
+            title,
+            tone: 'is-err',
+            message: errMsg,
+          });
+        }
+      }
+    })();
+  }
 
   async function handleEditorialAction(action) {
     const items = getFilteredDrafts();
     const draft = items.find((d) => d.id === selectedDraftId);
     if (!draft) return;
 
+    const targetDraftId = draft.id;
     const comment = $('reviewCommentInput').value.trim();
+    const rating = currentRating || null;
     const st = $('actionStatus');
-    if (action === 'rewrite' && !comment) {
-      setStatusMsg(st, 'Hãy nhập góp ý hoặc chọn chip gợi ý để AI biết cần sửa điểm nào.', 'is-warn');
-      $('reviewCommentInput').focus();
+
+    if (getDraftRewriteState(targetDraftId)?.status === 'running' || draftActionBusy.has(targetDraftId)) {
       return;
     }
 
-    const buttons = [$('approveBtn'), $('rewriteBtn'), $('rejectBtn')];
-    buttons.forEach((b) => { if (b) b.disabled = true; });
-    setStatusMsg(
-      st,
-      action === 'rewrite'
-        ? 'Đang gửi góp ý tới Cloudflare AI để viết lại & kiểm duyệt lại…'
-        : action === 'approve'
-          ? 'Đang xác nhận duyệt bài trên Cloudflare R2…'
-          : 'Đang cập nhật trạng thái từ chối trên Cloudflare R2…'
+    if (action === 'rewrite') {
+      if (!comment) {
+        setStatusMsg(st, 'Hãy nhập góp ý hoặc chọn chip gợi ý để AI biết cần sửa điểm nào.', 'is-warn');
+        $('reviewCommentInput').focus();
+        return;
+      }
+      startBackgroundRewrite(draft, comment, rating);
+      return;
+    }
+
+    draftActionBusy.set(targetDraftId, action);
+    syncActionDockForCurrentDraft();
+    setDraftNotice(
+      targetDraftId,
+      action === 'approve'
+        ? 'Đang xác nhận duyệt bài trên Cloudflare R2…'
+        : 'Đang cập nhật trạng thái từ chối trên Cloudflare R2…'
     );
 
     try {
-      if (action === 'rewrite') {
-        const cfRes = await callCloudflareEditorialPost('/api/rewrite', {
-          draftId: draft.id,
-          comment,
-          rating: currentRating || null,
-        });
-        if (cfRes?.draftsData) draftsData = cfRes.draftsData;
-        $('reviewCommentInput').value = '';
-        updateCounters();
-        renderDraftList();
-        renderSelectedDraft();
-        setStatusMsg(st, `Đã viết lại xong phiên bản v${cfRes?.draft?.version || (draft.version || 1) + 1} và cập nhật đánh giá AI!`, 'is-ok');
-        return;
-      }
-
       if (action === 'reject') {
         const cfRes = await callCloudflareEditorialPost('/api/reject', {
-          draftId: draft.id,
+          draftId: targetDraftId,
           comment,
-          rating: currentRating || null,
+          rating,
         });
-        if (cfRes?.draftsData) draftsData = cfRes.draftsData;
-        $('reviewCommentInput').value = '';
+        if (cfRes?.draft) {
+          mergeSingleDraftIntoLocal(cfRes.draft);
+        } else if (cfRes?.draftsData) {
+          draftsData = cfRes.draftsData;
+        }
+        draftComments.delete(targetDraftId);
+        draftRatings.delete(targetDraftId);
+        if (selectedDraftId === targetDraftId && $('reviewCommentInput')) {
+          $('reviewCommentInput').value = '';
+        }
         updateCounters();
         renderDraftList();
         renderSelectedDraft();
-        setStatusMsg(st, 'Đã từ chối bản nháp và cập nhật bộ chống trùng lặp trên Cloudflare R2.', 'is-ok');
+        setDraftNotice(targetDraftId, 'Đã từ chối bản nháp và cập nhật bộ chống trùng lặp trên Cloudflare R2.', 'is-ok');
         return;
       }
 
       // action === 'approve'
       const cfRes = await callCloudflareEditorialPost('/api/approve', {
-        draftId: draft.id,
+        draftId: targetDraftId,
         comment,
-        rating: currentRating || null,
+        rating,
       });
-      if (cfRes?.draftsData) draftsData = cfRes.draftsData;
+      if (cfRes?.draft) {
+        mergeSingleDraftIntoLocal(cfRes.draft);
+      } else if (cfRes?.draftsData) {
+        draftsData = cfRes.draftsData;
+      }
+      draftComments.delete(targetDraftId);
+      draftRatings.delete(targetDraftId);
+      if (selectedDraftId === targetDraftId && $('reviewCommentInput')) {
+        $('reviewCommentInput').value = '';
+      }
       updateCounters();
       renderDraftList();
       renderSelectedDraft();
 
       if (cfRes?.autoPublishMode === 'zero-token-queue') {
-        setStatusMsg(st, 'Đã duyệt và đưa vào hàng đợi xuất bản.', 'is-ok');
+        setDraftNotice(targetDraftId, 'Đã duyệt và đưa vào hàng đợi xuất bản.', 'is-ok');
         if (ghConfig.token) {
           try {
             await dispatchEditorialWorkflow({ publish_mode: 'auto-publish' }, PUBLISH_WORKFLOW_FILE);
-            setStatusMsg(st, 'Đã duyệt và gửi lệnh đồng bộ hàng đợi tới GitHub Actions.', 'is-ok');
+            setDraftNotice(targetDraftId, 'Đã duyệt và gửi lệnh đồng bộ hàng đợi tới GitHub Actions.', 'is-ok');
             scheduleWorkflowPolling(PUBLISH_WORKFLOW_FILE);
           } catch (_) {
-            setStatusMsg(st, 'Bài đã vào hàng đợi. GitHub sẽ thử đồng bộ theo lịch.', 'is-warn');
+            setDraftNotice(targetDraftId, 'Bài đã vào hàng đợi. GitHub sẽ thử đồng bộ theo lịch.', 'is-warn');
           }
         }
       } else if (ghConfig.token && cfRes?.article) {
-        setStatusMsg(st, 'Đã duyệt trên Cloudflare R2! Đang gửi lệnh xuất bản HTML tĩnh tới GitHub Actions…');
+        setDraftNotice(targetDraftId, 'Đã duyệt trên Cloudflare R2! Đang gửi lệnh xuất bản HTML tĩnh tới GitHub Actions…');
         await dispatchEditorialWorkflow({
           action: 'approve',
-          draft_id: draft.id,
+          draft_id: targetDraftId,
           article_json_b64: encodeUtf8Base64(JSON.stringify(cfRes.article)),
-          rating: currentRating ? String(currentRating) : '',
+          rating: rating ? String(rating) : '',
           comment,
           publish_mode: 'auto-publish',
         });
-        setStatusMsg(st, 'Đã duyệt! GitHub Actions đang kiểm định SEO, build HTML và tự động xuất bản live…', 'is-ok');
+        setDraftNotice(targetDraftId, 'Đã duyệt! GitHub Actions đang kiểm định SEO, build HTML và tự động xuất bản live…', 'is-ok');
         const runs = await fetchLatestWorkflowRuns();
         renderWorkflowStatus(runs, cfLastRun);
         scheduleWorkflowPolling();
       } else {
-        setStatusMsg(st, 'Đã lưu phê duyệt trên Cloudflare R2. Worker đang chạy bản chưa hỗ trợ đồng bộ hàng đợi.', 'is-warn');
+        setDraftNotice(targetDraftId, 'Đã lưu phê duyệt trên Cloudflare R2. Worker đang chạy bản chưa hỗ trợ đồng bộ hàng đợi.', 'is-warn');
       }
     } catch (err) {
-      setStatusMsg(st, err.message || 'Chưa xử lý được lệnh.', 'is-err');
+      setDraftNotice(targetDraftId, err.message || 'Chưa xử lý được lệnh.', 'is-err');
     } finally {
-      buttons.forEach((b) => { if (b) b.disabled = false; });
+      draftActionBusy.delete(targetDraftId);
+      syncActionDockForCurrentDraft();
     }
   }
 
@@ -1296,6 +1626,13 @@
       setStatusMsg(st, err.message || 'Không chạy được bộ quét Cloudflare.', 'is-err');
     } finally {
       btn.disabled = false;
+    }
+  });
+
+  window.addEventListener('beforeunload', (event) => {
+    if (getRunningRewrites().length > 0) {
+      event.preventDefault();
+      event.returnValue = '';
     }
   });
 

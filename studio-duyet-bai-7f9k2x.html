@@ -79,6 +79,7 @@
       </div>
       <div class="rev-run-info">
         <span id="lastScanLabel">Chưa có dữ liệu quét Trends</span>
+        <button type="button" class="rev-workflow-pill is-bg-running" id="bgRewritePill" hidden></button>
         <span class="rev-workflow-pill" id="workflowRunBadge" hidden></span>
         <a class="rev-run-link" id="workflowRunLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Xem log Actions ↗</a>
       </div>
@@ -168,6 +169,7 @@
         </div>
       </section>
     </main>
+    <div class="rev-toast-stack" id="bgToastStack" aria-live="polite" aria-label="Thông báo AI viết lại ngầm"></div>
   </div>
 
   <dialog class="rev-modal" id="githubModal" aria-labelledby="githubModalTitle">
