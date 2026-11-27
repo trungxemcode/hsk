@@ -263,9 +263,9 @@ function renderSearch() {
 
   const body=document.createElement('div');body.className='dictionary-row-body search-detail-body';
   const toolbar=document.createElement('div');toolbar.className='search-detail-toolbar';
-  const metaRow=document.createElement('div');metaRow.className='search-detail-meta';
-  if(w.hv){const hvSpan=document.createElement('span');hvSpan.className='search-detail-hv';hvSpan.textContent=`HV: ${w.hv.toUpperCase()}`;metaRow.append(hvSpan);}
-  if(!w.isExtended){const label=document.createElement('small');label.className='search-detail-status';label.textContent=recordOf(w)?statusOf(w)==='known'?'✓ Đã thuộc':'× Chưa thuộc':'Chưa đánh dấu';metaRow.append(label);}
+  const leftMeta=document.createElement('div');leftMeta.className='search-detail-left';
+  if(w.hv){const hvSpan=document.createElement('span');hvSpan.className='search-detail-hv';hvSpan.textContent=`HV: ${w.hv.toUpperCase()}`;leftMeta.append(hvSpan);}
+  if(!w.isExtended)leftMeta.append(makeMasteryTools(w));
 
   const actions=document.createElement('div');actions.className='search-detail-actions';
   const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)actions.append(speech);
@@ -273,14 +273,9 @@ function renderSearch() {
    const open=document.createElement('button');open.type='button';open.textContent='Mở thẻ HSK';open.onclick=()=>{if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};actions.append(open);
   }
   const notebook=window.HSKNotebook?.button(()=>w);if(notebook)actions.append(notebook);
-  if(metaRow.childElementCount)toolbar.append(metaRow);
+  if(leftMeta.childElementCount)toolbar.append(leftMeta);
   toolbar.append(actions);
   body.append(toolbar);
-  if(!w.isExtended){
-   const mastery=document.createElement('div');mastery.className='search-detail-mastery';
-   mastery.append(makeMasteryTools(w));
-   body.append(mastery);
-  }
 
   const senseBox=document.createElement('div');senseBox.className='search-sense-list';
   for(const item of groupedSearchSenses(w)){
@@ -298,14 +293,14 @@ function renderSearch() {
    const exTitle=document.createElement('h4');exTitle.textContent=`Ví dụ cách dùng (${Math.min(examples.length,3)})`;exWrap.append(exTitle);
    for(const e of examples.slice(0,3)){
     const exCard=document.createElement('div');exCard.className='search-example-item';
-    const exTop=document.createElement('div');exTop.className='search-example-top';
+    const exContent=document.createElement('div');exContent.className='search-example-content';
     const exCn=document.createElement('p');exCn.className='search-example-cn';exCn.textContent=e.cn;
-    exTop.append(exCn);
-    const exSpeech=window.HSKSpeech?.button(e.cn,'Nghe câu ví dụ');if(exSpeech)exTop.append(exSpeech);
-    exCard.append(exTop);
-    if(e.pin)exCard.append(pinyinLine(e.pin));
+    exContent.append(exCn);
+    if(e.pin)exContent.append(pinyinLine(e.pin));
     const exVi=document.createElement('p');exVi.className='search-example-vi';exVi.textContent=e.vi;
-    exCard.append(exVi);
+    exContent.append(exVi);
+    exCard.append(exContent);
+    const exSpeech=window.HSKSpeech?.button(e.cn,'Nghe câu ví dụ');if(exSpeech)exCard.append(exSpeech);
     exWrap.append(exCard);
    }
    body.append(exWrap);
