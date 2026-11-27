@@ -2,6 +2,1701 @@
   "schema": 1,
   "articles": [
     {
+      "slug": "hai-thanh-ba-lien-nhau-cach-doc-ni-hao",
+      "category": "meo-hoc",
+      "categoryLabel": "Mẹo học HSK",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Vì sao 你好 viết nǐ hǎo mà nghe như ní hǎo?",
+      "metaTitle": "Hai thanh 3 liền nhau đọc thế nào? | HSK Flashcards",
+      "metaDescription": "Hiểu vì sao 你好 viết nǐ hǎo nhưng khi nói liền nghe như ní hǎo. Luyện hai thanh 3 cạnh nhau và phân biệt với thanh 3 đứng trước thanh khác.",
+      "summary": "Hai âm tiết thanh 3 đứng liền nhau trong cùng một cụm thì tiếng đầu thường đọc gần như thanh 2. Vì vậy, 你好 viết Pinyin là nǐ hǎo, nhưng khi chào tự nhiên sẽ nghe gần như ní hǎo.",
+      "keywords": [
+        "các thanh trong tiếng Trung",
+        "hai thanh 3 đứng cạnh nhau",
+        "biến điệu thanh 3",
+        "cách đọc 你好",
+        "nǐ hǎo hay ní hǎo"
+      ],
+      "sources": [
+        {
+          "label": "PREP, giáo trình Hán ngữ bài 2, mục nửa thanh ba",
+          "url": "https://www.prepedu.com/vi/blog/giao-trinh-han-ngu-quyen-1-bai-2"
+        },
+        {
+          "label": "Hoa Văn SHZ, mục biến điệu của thanh 3",
+          "url": "https://hoavanshz.com/cach-phat-am-tieng-trung-756"
+        },
+        {
+          "label": "Tiếng Trung Thượng Hải, bài thanh điệu và quy tắc phát âm",
+          "url": "https://tiengtrungthuonghai.vn/tailieuhoc/bai-12-thanh-dieu-va-quy-tac-phat-am-tieng-trung/"
+        }
+      ],
+      "sections": [
+        {
+          "id": "cach-doc",
+          "heading": "Viết nǐ hǎo, đọc gần như ní hǎo",
+          "paragraphs": [
+            "你 (nǐ, bạn) và 好 (hǎo, tốt) đều mang thanh 3 khi đứng riêng. Ghép thành 你好 (nǐ hǎo, xin chào), âm 你 thường lên giọng gần như thanh 2 khi nói liền. Dấu trên Pinyin vẫn ghi thanh gốc của 你. Cách phát âm thay đổi vì âm tiết đứng cạnh nhau được gọi là biến điệu.",
+            "Ví dụ, nói 很好 (hěn hǎo, rất tốt) bằng cách lên giọng ở 很, gần như hén hǎo. Với 水果 (shuǐguǒ, trái cây), phần 水 nghe gần như shuí. Với 雨伞 (yǔsǎn, ô), phần 雨 nghe gần như yú. Các cách ghi gần đúng ở đây chỉ để tập nói. Khi tra từ, vẫn tìm hěn hǎo, shuǐguǒ và yǔsǎn."
+          ]
+        },
+        {
+          "id": "so-sanh",
+          "heading": "Giữ nguyên 很, đổi từ phía sau để nghe khác biệt",
+          "paragraphs": [
+            "很好 (hěn hǎo) — Rất tốt. 好 là thanh 3 nên 很 đứng trước đọc gần như thanh 2.",
+            "很忙 (hěn máng) — Rất bận. 忙 là thanh 2 nên 很 đứng trước thường đọc thấp và ngắn, phần cuối của thanh 3 ít hoặc không bật lên trong lời nói liền.",
+            "Giữ nguyên từ 很 ở đầu cả hai cụm. Khi đổi 好 thành 忙, thanh của tiếng đứng sau thay đổi. Vì thế, ở 很好, âm đầu đi lên. Ở 很忙, âm đầu giữ thấp rồi chuyển sang âm 忙. Thử đọc thêm 很累 (hěn lèi, rất mệt). 累 mang thanh 4, nên 很 cũng thường giữ thấp.",
+            "Trong lời nói tự nhiên, đọc thanh 3 thấp và ngắn thường dễ hơn việc cố kéo xuống rồi lên rõ ở từng chữ. Lúc đọc riêng một âm tiết để luyện hoặc nói có ngắt nhịp, phần cuối thanh 3 có thể nghe rõ hơn."
+          ]
+        },
+        {
+          "id": "tu-luyen",
+          "heading": "Luyện từ hai âm tiết trước khi nối vào câu",
+          "paragraphs": [
+            "Đọc riêng 你 và 好 một lượt để nhớ thanh gốc. Sau đó nối hai âm tiết thành 你好, lên nhẹ ở 你 và giữ 好 tự nhiên. Lặp lại với 很好. Khi đã quen, xen kẽ 很好 và 很忙 rồi tự nghe lại xem tiếng 很 có đổi theo từ phía sau không.",
+            "Thử nói 你好，最近很忙吗？ (Nǐ hǎo, zuìjìn hěn máng ma?) — Chào bạn, dạo này bận lắm à? Cùng một câu có hai kiểu. 你 trong 你好 thường lên nhẹ, còn 很 trong 很忙 giữ thấp. Khi gặp ba thanh 3 trở lên, cách đọc có thể phụ thuộc vào việc người nói chia cụm theo nghĩa và nhịp. Bắt đầu bằng các cụm hai âm tiết trước."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "meo-luyen-nghe-va-doc-hieu-hsk-tang-diem-nhanh",
+        "khi-nao-dung-er-va-liang"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127141002-hai-thanh-ba-lien-nhau-cach-doc-"
+    },
+    {
+      "slug": "mien-bac-mien-trung-mien-nam-tieng-trung",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "Tiếng Trung thực tế",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Miền Bắc, miền Trung và miền Nam tiếng Trung nói thế nào?",
+      "metaTitle": "Miền Bắc, miền Trung, miền Nam tiếng Trung | HSK Flashcards",
+      "metaDescription": "Biết cách nói miền Bắc, miền Trung, miền Nam Việt Nam bằng tiếng Trung. Phân biệt 越南北部 với 越南以北 và cách nói vị trí quanh một địa điểm.",
+      "summary": "Miền Bắc, miền Trung và miền Nam Việt Nam lần lượt là 越南北部 (Yuènán běibù), 越南中部 (Yuènán zhōngbù) và 越南南部 (Yuènán nánbù). Khi nói một nơi nằm về phía bắc của Việt Nam, dùng 越南以北 (Yuènán yǐběi). Cách nói này lấy Việt Nam làm mốc.",
+      "keywords": [
+        "miền Bắc miền Trung miền Nam tiếng Trung",
+        "miền Trung Việt Nam tiếng Trung",
+        "越南中部",
+        "越南北部",
+        "北部 và 以北"
+      ],
+      "sources": [
+        {
+          "label": "Google Trends Việt Nam, nguồn truy vấn đang thịnh hành",
+          "url": "https://trends.google.com/trending/rss?geo=VN"
+        },
+        {
+          "label": "Fang Fang Education, phương vị từ trong tiếng Trung",
+          "url": "https://fangfang.edu.vn/phuong-vi-tu-trong-tieng-trung/"
+        },
+        {
+          "label": "Tiếng Trung Thượng Hải, bài hỏi đường",
+          "url": "https://tiengtrungthuonghai.vn/tailieuhoc/bai-19-hoc-tieng-trung-qua-chu-de-hoi-duong/"
+        },
+        {
+          "label": "PREP, cách đặt câu với 在 để chỉ vị trí",
+          "url": "https://prepedu.com/vi/blog/tu-vung-ve-noi-chon-dia-diem-tieng-trung"
+        }
+      ],
+      "sections": [
+        {
+          "id": "goi-ten-vung",
+          "heading": "Gọi tên ba miền và giới thiệu mình đến từ đâu",
+          "paragraphs": [
+            "北部 (běibù) là phần phía bắc của một khu vực. 中部 (zhōngbù) là phần ở giữa. 南部 (nánbù) là phần phía nam. Đặt tên nước hoặc địa phương trước từ chỉ vùng. Chẳng hạn 越南中部 là miền Trung Việt Nam.",
+            "我来自越南中部。 (Wǒ láizì Yuènán zhōngbù.) — Tôi đến từ miền Trung Việt Nam.",
+            "我住在越南中部。 (Wǒ zhù zài Yuènán zhōngbù.) — Tôi sống ở miền Trung Việt Nam.",
+            "Cả hai câu nhắc cùng một vùng. 来自 cho biết xuất thân hoặc nơi đến từ. 住在 cho biết nơi đang sống. Nếu muốn nói tên thành phố, có thể dùng 岘港在越南中部。 (Xiàngǎng zài Yuènán zhōngbù.) — Đà Nẵng nằm ở miền Trung Việt Nam."
+          ]
+        },
+        {
+          "id": "bac-bo-va-di-bac",
+          "heading": "Phân biệt miền Bắc Việt Nam với phía bắc của Việt Nam",
+          "paragraphs": [
+            "这些城市在越南北部。 (Zhèxiē chéngshì zài Yuènán běibù.) — Những thành phố này nằm ở miền Bắc Việt Nam.",
+            "这些城市在越南以北。 (Zhèxiē chéngshì zài Yuènán yǐběi.) — Những thành phố này nằm về phía bắc của Việt Nam.",
+            "Đổi 北部 thành 以北 là đổi cách nhìn trên bản đồ. 越南北部 chỉ một vùng nằm trong Việt Nam. 越南以北 dùng Việt Nam làm mốc để xác định hướng. Khi đọc câu có 以北, hình dung người nói đang hỏi nơi đó nằm về hướng nào so với mốc.",
+            "Ở quy mô nhỏ, có thể dùng 北边 (běibian) để chỉ vị trí tương đối. Ví dụ 地铁站在公园北边。 (Dìtiězhàn zài gōngyuán běibian.) — Ga tàu điện ngầm ở phía bắc công viên. Nếu muốn nói rõ một nơi ở bên trong phần phía bắc của công viên, có thể dùng 公园北部 (gōngyuán běibù)."
+          ]
+        },
+        {
+          "id": "giua",
+          "heading": "Khi nào dùng 中部 và khi nào dùng 中间?",
+          "paragraphs": [
+            "这座山在岛的中部。 (Zhè zuò shān zài dǎo de zhōngbù.) — Ngọn núi này nằm ở phần giữa hòn đảo. 中部 ở đây chỉ một phần của hòn đảo.",
+            "书店在银行和咖啡店中间。 (Shūdiàn zài yínháng hé kāfēidiàn zhōngjiān.) — Hiệu sách nằm giữa ngân hàng và quán cà phê. 中间 cho biết vị trí giữa hai mốc cụ thể. Nếu hỏi một thành phố thuộc miền nào, dùng mẫu 在 + tên nước + 北部、中部 hoặc 南部. Nếu hỏi một cửa hàng nằm giữa hai địa điểm nào, dùng mẫu 在 A 和 B 中间."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "cac-loai-tu-trong-tieng-trung-co-ban",
+        "tong-hop-ngu-phap-hsk-quan-trong-hay-thi"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127110855-mien-bac-mien-trung-mien-nam-tie"
+    },
+    {
+      "slug": "phan-biet-qi-zuo-kai-khi-noi-di-xe",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 5,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Phân biệt 骑, 坐 và 开 khi nói đi xe bằng tiếng Trung",
+      "metaTitle": "Cách dùng 骑, 坐, 开 khi nói đi xe | HSK Flashcards",
+      "metaDescription": "Biết cách nói đi xe máy, ngồi sau xe và lái ô tô bằng tiếng Trung. Phân biệt 骑, 坐 và 开 qua cùng một chuyến đi, có Pinyin và nghĩa Việt.",
+      "summary": "Tự chạy xe máy thường nói 骑摩托车 (qí mótuōchē), còn tự lái ô tô nói 开车 (kāichē). Khi đi xe với tư cách hành khách, dùng 坐 (zuò), chẳng hạn 坐公交车 (zuò gōngjiāochē) là đi xe buýt.",
+      "keywords": [
+        "phân biệt 骑 坐 开",
+        "đi xe máy tiếng Trung",
+        "骑摩托车",
+        "坐车",
+        "开车",
+        "phương tiện giao thông tiếng Trung"
+      ],
+      "sources": [
+        {
+          "label": "Từ điển Bộ Giáo dục Đài Loan, mục 騎",
+          "url": "https://dict.concised.moe.edu.tw/dictView.jsp?ID=24526"
+        },
+        {
+          "label": "Từ điển Bộ Giáo dục Đài Loan, mục 開車",
+          "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=76784&la=0&powerMode=0"
+        },
+        {
+          "label": "Tiếng Trung Thượng Hải, bài đi taxi",
+          "url": "https://tiengtrungthuonghai.vn/tailieuhoc/bai-18-hoc-tieng-trung-qua-chu-de-bat-taxi/"
+        },
+        {
+          "label": "Fang Fang, từ vựng tiếng Trung chủ đề du lịch",
+          "url": "https://fangfang.edu.vn/tu-vung-tieng-trung-chu-de-du-lich/"
+        }
+      ],
+      "sections": [
+        {
+          "id": "tu-lai-hay-duoc-cho",
+          "heading": "Cùng một chuyến xe máy, ai là người lái?",
+          "paragraphs": [
+            "他骑摩托车去车站。 (Tā qí mótuōchē qù chēzhàn.) — Anh ấy chạy xe máy đến nhà ga.",
+            "我坐他的摩托车去车站。 (Wǒ zuò tā de mótuōchē qù chēzhàn.) — Tôi đi xe máy của anh ấy đến nhà ga. Trong tình huống này, anh ấy chở tôi.",
+            "Cùng một chiếc xe và cùng nơi đến. 骑 làm nổi bật người cưỡi hoặc điều khiển loại xe đó, còn 坐 nhấn vào việc đi cùng xe với vai trò hành khách. Nếu cần nói rõ vị trí, có thể dùng 我坐在摩托车后座。 (Wǒ zuò zài mótuōchē hòuzuò.) — Tôi ngồi ở ghế sau xe máy. 后座 (hòuzuò) là chỗ ngồi phía sau.",
+            "Với xe đạp cũng dùng 骑, chẳng hạn 骑自行车 (qí zìxíngchē). Dịch tiếng Việt cả hai là “đi xe” thì dễ nhầm. Hãy nhìn loại xe và xem người trong câu tự lái hay được chở."
+          ]
+        },
+        {
+          "id": "lai-o-to-va-ngoi-o-to",
+          "heading": "Dùng 开 khi nói mình lái ô tô",
+          "paragraphs": [
+            "我开车去车站。 (Wǒ kāichē qù chēzhàn.) — Tôi lái ô tô đến nhà ga.",
+            "我坐车去车站。 (Wǒ zuò chē qù chēzhàn.) — Tôi đi xe đến nhà ga.",
+            "Chỉ đổi 开 thành 坐, người nói chuyển từ người lái sang người đi xe. 坐车 chưa cho biết đó là ô tô của người quen, xe buýt hay xe khác. Muốn nói rõ phương tiện, thêm tên xe, chẳng hạn 坐公交车 (zuò gōngjiāochē, đi xe buýt) hoặc 坐出租车 (zuò chūzūchē, đi taxi)."
+          ],
+          "table": {
+            "headers": [
+              "Cụm tiếng Trung",
+              "Pinyin",
+              "Nghĩa"
+            ],
+            "rows": [
+              [
+                "骑自行车",
+                "qí zìxíngchē",
+                "Đi xe đạp"
+              ],
+              [
+                "骑摩托车",
+                "qí mótuōchē",
+                "Chạy xe máy"
+              ],
+              [
+                "开车",
+                "kāichē",
+                "Lái ô tô"
+              ],
+              [
+                "坐地铁",
+                "zuò dìtiě",
+                "Đi tàu điện ngầm"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "tu-chon",
+          "heading": "Hỏi người đối diện đi bằng phương tiện nào",
+          "paragraphs": [
+            "你怎么去车站？ (Nǐ zěnme qù chēzhàn?) — Bạn đến nhà ga bằng cách nào? Có thể trả lời 我骑车去。 (Wǒ qí chē qù.) — Tôi đi xe. Nếu loại xe có ý nghĩa, nói rõ 骑自行车 hay 骑摩托车, vì 骑车 tự nó có thể được hiểu theo ngữ cảnh.",
+            "Trong một tình huống thực tế, nếu hẹn bạn ra ga và nói 我开车送你。 (Wǒ kāichē sòng nǐ.), người bạn sẽ hiểu “Tôi lái ô tô chở bạn đi”. Nếu hai người đặt taxi, nói 我们坐出租车去。 (Wǒmen zuò chūzūchē qù.) — Mình đi taxi. Hai câu đều giúp người nghe hình dung cách đi và ai sẽ lái."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "cac-loai-tu-trong-tieng-trung-co-ban",
+        "tong-hop-ngu-phap-hsk-quan-trong-hay-thi"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127130929-phan-biet-qi-zuo-kai-khi-noi-di-"
+    },
+    {
+      "slug": "cach-doc-ho-ten-tieng-trung",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 5,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Cách đọc họ tên tiếng Trung và phân biệt 姓 với 叫",
+      "metaTitle": "Cách đọc họ tên tiếng Trung và cách hỏi | HSK Flashcards",
+      "metaDescription": "Đọc tên 刘亦菲 là Liú Yìfēi, nhận ra đâu là họ và đâu là tên riêng. Phân biệt 你姓什么 với 你叫什么名字 qua ví dụ có Pinyin và nghĩa Việt.",
+      "summary": "刘亦菲 đọc là Liú Yìfēi. 刘 (Liú) là họ Lưu, còn 亦菲 (Yìfēi) là tên riêng Diệc Phi. Khi làm quen, dùng 你姓什么？ để hỏi họ và 你叫什么名字？ để hỏi tên gọi.",
+      "keywords": [
+        "cách đọc họ tên tiếng Trung",
+        "Lưu Diệc Phi tiếng Trung",
+        "刘亦菲 Pinyin",
+        "你姓什么",
+        "你叫什么名字"
+      ],
+      "sources": [
+        {
+          "label": "PREP, cách hỏi và trả lời tên trong tiếng Trung",
+          "url": "https://prepedu.com/vi/blog/ban-ten-gi-tieng-trung"
+        },
+        {
+          "label": "Tiếng Trung Thượng Hải, bài giới thiệu làm quen",
+          "url": "https://tiengtrungthuonghai.vn/tailieuhoc/bai-11-hoc-tieng-trung-qua-chu-de-gioi-thieu-lam-quen/"
+        },
+        {
+          "label": "Bộ Giáo dục Trung Quốc, quy tắc viết Pinyin GB/T 16159–2012",
+          "url": "https://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/13/20150113091717604.pdf"
+        },
+        {
+          "label": "China Daily, bài song ngữ ghi tên 刘亦菲 và Liu Yifei",
+          "url": "https://language.chinadaily.com.cn/2017-11/30/content_35140275.htm"
+        }
+      ],
+      "sections": [
+        {
+          "id": "doc-ten",
+          "heading": "Đọc 刘亦菲 theo hai phần",
+          "paragraphs": [
+            "刘亦菲 — Liú Yìfēi — Lưu Diệc Phi. Khi đọc bằng tiếng Quan thoại, phát âm cả tên theo Pinyin. Phiên âm Pinyin dùng chữ cái Latinh và dấu thanh để ghi cách đọc tiếng Trung. Lưu Diệc Phi là cách đọc Hán Việt của ba chữ này.",
+            "Trong Liú Yìfēi, họ Liú viết riêng, hai âm tiết của tên Yìfēi viết liền. Nếu đọc tên trên trang tiếng Anh, dạng Liu Yifei bỏ dấu thanh nhưng vẫn tách hai phần. Cách viết có dấu giúp biết 刘 đọc liú, 亦 đọc yì và 菲 trong tên này đọc fēi.",
+            "Nhiều họ có một chữ. Một số họ có hai chữ, chẳng hạn 欧阳 (Ōuyáng). Trong 欧阳明 (Ōuyáng Míng), cả 欧阳 là họ và 明 là tên riêng. Vì có trường hợp như vậy, khi cần gọi đúng họ của người vừa gặp, hãy hỏi họ trước."
+          ]
+        },
+        {
+          "id": "hoi-ho-ten",
+          "heading": "Hỏi họ hay hỏi tên gọi?",
+          "paragraphs": [
+            "你姓什么？ (Nǐ xìng shénme?) — Bạn họ gì? Nếu người đối diện mang họ Lưu, họ có thể đáp 我姓刘。 (Wǒ xìng Liú.) — Tôi họ Lưu.",
+            "你叫什么名字？ (Nǐ jiào shénme míngzi?) — Bạn tên gì? Câu này cho phép người đối diện giới thiệu tên họ muốn dùng trong cuộc trò chuyện. Chẳng hạn 我叫刘明。 (Wǒ jiào Liú Míng.) — Tôi tên Lưu Minh.",
+            "Trong cùng một lần làm quen với Lưu Minh, câu hỏi có 姓 cần phần 刘, còn câu có 叫 nhận câu trả lời 刘明. Nói 我姓刘明 sẽ khiến người nghe hiểu 刘明 là cả một họ. Khi học thuộc mẫu, nhớ 我姓 + họ và 我叫 + tên dùng để giới thiệu.",
+            "Trong lần gặp khách hàng hoặc người lớn tuổi, có thể hỏi 请问，您贵姓？ (Qǐngwèn, nín guìxìng?) — Xin hỏi, anh/chị họ gì ạ? Câu trả lời đơn giản là 我姓刘. Khi nói về họ của chính mình, chỉ cần dùng 姓."
+          ]
+        },
+        {
+          "id": "goi-the-nao",
+          "heading": "Biết họ rồi thì gọi thế nào?",
+          "paragraphs": [
+            "Khi nói với giáo viên họ Lưu, có thể gọi 刘老师 (Liú lǎoshī) — thầy hoặc cô Lưu. Cách gọi này dùng họ đứng trước vai trò hoặc cách xưng hô. Với người mới gặp và chưa chắc nên gọi bằng tên hay họ, dùng 我怎么称呼您？ (Wǒ zěnme chēnghu nín?) — Tôi nên xưng hô với anh/chị thế nào ạ?",
+            "Trong giao tiếp, 我叫…… dùng để giới thiệu cả họ tên hoặc tên quen gọi. Khi điền biểu mẫu, xem đúng nhãn ô. 姓氏 (xìngshì) yêu cầu họ. 中文姓名 (Zhōngwén xìngmíng) yêu cầu họ tên bằng tiếng Trung. Ví dụ với 刘明, ô 姓氏 điền 刘, ô 中文姓名 điền 刘明."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "cac-loai-tu-trong-tieng-trung-co-ban",
+        "tong-hop-ngu-phap-hsk-quan-trong-hay-thi"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127120855-cach-doc-ho-ten-tieng-trung"
+    },
+    {
+      "slug": "cach-doc-ty-so-bong-da-bang-tieng-trung",
+      "category": "meo-hoc",
+      "categoryLabel": "Mẹo học HSK",
+      "hskTag": "Tiếng Trung thực tế",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Cách đọc tỷ số bóng đá bằng tiếng Trung và nói thắng, thua, hòa",
+      "metaTitle": "Cách đọc tỷ số bóng đá bằng tiếng Trung | HSK Flashcards",
+      "metaDescription": "Học cách đọc tỷ số bóng đá bằng tiếng Trung qua 二比一, 零比零 và 二比二. Xem cách nói đang dẫn, thắng, thua và hòa qua cùng một trận giả định.",
+      "summary": "Tỷ số 2–1 đọc là 二比一 (èr bǐ yī). Để nói đội A đang dẫn 2–1, dùng A队二比一领先. Khi trận đã kết thúc và đội A thắng, dùng A队二比一获胜.",
+      "keywords": [
+        "cách đọc tỷ số bóng đá bằng tiếng Trung",
+        "tỷ số bóng đá tiếng Trung",
+        "比分",
+        "thắng thua hòa tiếng Trung",
+        "二比一"
+      ],
+      "sources": [
+        {
+          "label": "Google Trends Việt Nam, nguồn truy vấn đang thịnh hành",
+          "url": "https://trends.google.com/trending/rss?geo=VN"
+        },
+        {
+          "label": "Tân Hoa Xã, ví dụ về tỷ số hòa trong thời gian thi đấu chính thức và thắng luân lưu",
+          "url": "https://www.news.cn/sports/20261003/b6923d5217344ca195a7817fa23b2507/c.html"
+        },
+        {
+          "label": "Engoo Đài Loan, mục diễn đạt tỷ số bằng tiếng Trung",
+          "url": "https://engoo.com.tw/blog/theme/world_cup_football_soccer_terms/"
+        }
+      ],
+      "sections": [
+        {
+          "id": "doc-ty-so",
+          "heading": "Đọc hai số theo thứ tự hai đội",
+          "paragraphs": [
+            "比分 (bǐfēn) nghĩa là tỷ số. Đọc số bàn của đội đứng trước, thêm 比, rồi đọc số bàn của đội đứng sau. Ví dụ, bảng ghi A–B và tỷ số 0–2 thì đọc 零比二 (líng bǐ èr). Nếu đổi thứ tự hai đội thành B–A, cùng kết quả đó đọc 二比零 (èr bǐ líng).",
+            "Số 2 trong tỷ số đọc là 二 (èr). 二比一 (èr bǐ yī) là 2–1. Khi đếm bàn, có thể dùng 两. Chẳng hạn A队进了两个球。 (A duì jìn le liǎng ge qiú.) nghĩa là đội A đã ghi hai bàn. Câu này chỉ cho biết số bàn của A, nên muốn biết tỷ số vẫn cần số bàn của B."
+          ],
+          "table": {
+            "headers": [
+              "Tỷ số",
+              "Chữ Hán",
+              "Pinyin"
+            ],
+            "rows": [
+              [
+                "0–0",
+                "零比零",
+                "líng bǐ líng"
+              ],
+              [
+                "1–0",
+                "一比零",
+                "yī bǐ líng"
+              ],
+              [
+                "2–1",
+                "二比一",
+                "èr bǐ yī"
+              ],
+              [
+                "2–2",
+                "二比二",
+                "èr bǐ èr"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "dan-va-thang",
+          "heading": "Đang dẫn 2–1 và thắng 2–1 nói khác nhau thế nào?",
+          "paragraphs": [
+            "A队二比一领先。 (A duì èr bǐ yī lǐngxiān.) — Đội A đang dẫn 2–1.",
+            "A队二比一获胜。 (A duì èr bǐ yī huòshèng.) — Đội A thắng 2–1.",
+            "Cùng tỷ số 2–1. Đổi 领先 thành 获胜 là đổi từ tình hình trong trận sang kết quả chiến thắng. Nếu xem đến phút 70 và A đang dẫn, dùng 领先. Nếu đọc bản tin sau tiếng còi kết thúc, có thể gặp A队以二比一战胜B队。 (A duì yǐ èr bǐ yī zhànshèng B duì.) — Đội A thắng đội B với tỷ số 2–1. Cụm 以二比一 cho biết tỷ số của trận thắng.",
+            "Nếu kể cùng trận từ phía đội B, có thể nói B队一比二输给A队。 (B duì yī bǐ èr shūgěi A duì.) — Đội B thua đội A 1–2. Khi đặt B làm chủ thể trong câu này, đưa số bàn của B lên trước."
+          ]
+        },
+        {
+          "id": "hoa",
+          "heading": "Đang hòa và kết thúc với tỷ số hòa",
+          "paragraphs": [
+            "比赛还在进行，现在二比二。 (Bǐsài hái zài jìnxíng, xiànzài èr bǐ èr.) — Trận vẫn đang diễn ra, hiện là 2–2.",
+            "两队最终二比二战平。 (Liǎng duì zuìzhōng èr bǐ èr zhànpíng.) — Hai đội kết thúc với tỷ số hòa 2–2.",
+            "现在 là hiện tại, còn 最终 là cuối cùng. Trong tin về trận có loạt luân lưu, có thể đọc thấy 常规时间 (chángguī shíjiān, thời gian thi đấu chính thức) đi cùng một tỷ số hòa, rồi 点球大战 (diǎnqiú dàzhàn, loạt sút luân lưu) dẫn tới một đội thắng. Khi tóm tắt, hãy nêu rõ tỷ số thuộc phần nào của trận."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "khi-nao-dung-er-va-liang",
+        "cac-loai-tu-trong-tieng-trung-co-ban"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127110845-cach-doc-ty-so-bong-da-bang-tien"
+    },
+    {
+      "slug": "cach-hoi-size-quan-ao-bang-tieng-trung",
+      "category": "meo-hoc",
+      "categoryLabel": "Mẹo học HSK",
+      "hskTag": "Tiếng Trung thực tế",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Cách hỏi size quần áo bằng tiếng Trung và đọc bảng số đo",
+      "metaTitle": "Cách hỏi size quần áo bằng tiếng Trung | HSK Flashcards",
+      "metaDescription": "Học cách hỏi size quần áo bằng tiếng Trung qua 多大码, 有M码吗 và 尺码表. Đọc nhãn 170/88A và phân biệt số đo cơ thể với số đo áo.",
+      "summary": "Muốn hỏi một chiếc áo có những cỡ nào, nói 这件衣服有哪些尺码？ (Zhè jiàn yīfu yǒu nǎxiē chǐmǎ?). Nếu đã biết cần cỡ M, hỏi thẳng 这件有M码吗？ (Zhè jiàn yǒu M mǎ ma?). Khi mua trực tuyến, nên xem thêm 尺码表 (chǐmǎbiǎo, bảng kích cỡ) để biết số trên bảng đo cơ thể hay đo chiếc áo.",
+      "keywords": [
+        "cách hỏi size quần áo bằng tiếng Trung",
+        "size quần áo tiếng Trung",
+        "bảng size tiếng Trung",
+        "尺码表",
+        "170/88A nghĩa là gì"
+      ],
+      "sources": [
+        {
+          "label": "Tiếng Trung Thượng Hải, hội thoại mua sắm quần áo",
+          "url": "https://tiengtrungthuonghai.vn/tailieuhoc/bai-16-tieng-trung-chu-de-mua-sam-quan-ao/"
+        },
+        {
+          "label": "Hoa Văn SHZ, từ vựng quần áo và số đo",
+          "url": "https://hoavanshz.com/tu-vung-tieng-trung-ve-quan-ao-758"
+        },
+        {
+          "label": "Cơ quan quản lý thị trường Tô Châu, cách đọc 号型",
+          "url": "https://scjgj.suzhou.gov.cn/szqts/bmzs/201801/41c320bfa8034aec971447041a347cda.shtml"
+        }
+      ],
+      "sections": [
+        {
+          "id": "hoi-co",
+          "heading": "Hỏi cỡ đang có, cỡ của chiếc áo và cỡ nên chọn",
+          "paragraphs": [
+            "这件衣服有M码吗？ (Zhè jiàn yīfu yǒu M mǎ ma?) — Chiếc áo này có cỡ M không? Đây là câu hỏi về một cỡ cụ thể. Người bán có thể đáp 有 (yǒu, có) hoặc M码卖完了 (M mǎ mài wán le, cỡ M bán hết rồi).",
+            "这件是多大码的？ (Zhè jiàn shì duō dà mǎ de?) — Chiếc này cỡ bao nhiêu? Câu hỏi nhắm vào chiếc áo đang được chỉ tới. Nếu cần biết tất cả các cỡ có thể mua, hỏi 这件有哪些尺码？ (Zhè jiàn yǒu nǎxiē chǐmǎ?).",
+            "我身高一米七，胸围八十八厘米，穿多大码合适？ (Wǒ shēngāo yì mǐ qī, xiōngwéi bāshíbā límǐ, chuān duō dà mǎ héshì?) — Tôi cao 1,70 m, vòng ngực 88 cm. Tôi mặc cỡ nào thì vừa? Ở đây, 穿……合适 chuyển câu hỏi sang việc chọn cỡ cho người mặc. Nếu số đo mới chỉ là ước chừng, có thể thêm 大约 (dàyuē, khoảng) trước con số."
+          ]
+        },
+        {
+          "id": "doc-bang",
+          "heading": "Đọc 尺码表 theo cột và theo dòng chú thích",
+          "paragraphs": [
+            "Hãy nhìn tiêu đề cột trước khi so với số đo của mình. 胸围 có thể chỉ vòng ngực cơ thể hoặc vòng ngực của áo, tùy bảng. Từ 净体 (jìngtǐ) chỉ số đo trên người. 成衣 (chéngyī) chỉ quần áo đã may xong. Hai bảng đều có thể viết đơn vị cm, nhưng mỗi bảng trả lời một câu hỏi khác nhau.",
+            "Ví dụ, nếu bảng ghi 成衣胸围 96厘米 và vòng ngực người mặc là 88 cm, chênh lệch danh nghĩa là 8 cm. Kết quả này chưa cho biết áo ôm hay rộng vì còn phụ thuộc kiểu áo và độ co giãn. Nếu chú thích ghi 平铺测量 (píngpū cèliáng, đo khi trải phẳng) và số 48 cm là bề ngang ngực áo, vòng tương ứng xấp xỉ 96 cm khi nhân đôi. Nếu bảng đã ghi số đo vòng ngực thành phẩm, dùng số đó trực tiếp.",
+            "Khi chưa rõ, hỏi 这里的胸围是净体胸围，还是成衣胸围？ (Zhèlǐ de xiōngwéi shì jìngtǐ xiōngwéi, háishi chéngyī xiōngwéi?) — Vòng ngực ở đây là số đo cơ thể hay số đo của áo?"
+          ],
+          "table": {
+            "headers": [
+              "Trên bảng",
+              "Pinyin",
+              "Nghĩa"
+            ],
+            "rows": [
+              [
+                "身高",
+                "shēngāo",
+                "Chiều cao"
+              ],
+              [
+                "胸围",
+                "xiōngwéi",
+                "Vòng ngực"
+              ],
+              [
+                "肩宽",
+                "jiānkuān",
+                "Rộng vai"
+              ],
+              [
+                "腰围",
+                "yāowéi",
+                "Vòng eo"
+              ],
+              [
+                "衣长",
+                "yīcháng",
+                "Dài áo"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "doc-nhan",
+          "heading": "Nhãn 170/88A cho biết điều gì?",
+          "paragraphs": [
+            "Trong hệ ghi 号型 của Trung Quốc, 170/88A trên áo lấy chiều cao 170 cm và vòng ngực cơ thể 88 cm làm mốc. Chữ A là mã thể hình dựa trên chênh lệch giữa vòng ngực và vòng eo. Trên quần, số sau dấu gạch chéo có thể chỉ vòng eo cơ thể theo hệ ghi tương ứng. Khi một cửa hàng bán theo S, M, L, tra bảng của chính mẫu đó để biết cách quy đổi.",
+            "Nếu chiếc áo đã chọn mặc hơi chật, nói 这件有点儿紧，能换大一码吗？ (Zhè jiàn yǒudiǎnr jǐn, néng huàn dà yì mǎ ma?) — Chiếc này hơi chật, có thể đổi lên một cỡ không? Nếu muốn hỏi xin thử trước khi quyết định, dùng 我可以试穿一下吗？ (Wǒ kěyǐ shìchuān yíxià ma?) — Tôi có thể mặc thử được không? Hai câu dùng cho hai thời điểm khác nhau trong cùng một lần mua, trước và sau khi biết áo có vừa."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "khi-nao-dung-er-va-liang",
+        "cac-loai-tu-trong-tieng-trung-co-ban"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127100826-cach-hoi-size-quan-ao-bang-tieng"
+    },
+    {
+      "slug": "cach-doc-ngay-thang-trong-tieng-trung",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Cách đọc ngày tháng trong tiếng Trung và phân biệt 号 với 日",
+      "metaTitle": "Cách đọc ngày tháng trong tiếng Trung | HSK Flashcards",
+      "metaDescription": "Đọc ngày tháng tiếng Trung đúng thứ tự 年、月、日. Phân biệt 号 với 日, cách hỏi thứ và ngày, cách xác nhận lịch hẹn dương hay âm.",
+      "summary": "Tiếng Trung đọc ngày theo thứ tự năm, tháng, ngày. Ngày 27/11/2026 viết là 2026年11月27日. Khi nói, có thể dùng 号 (hào) ở cuối thay cho 日 (rì). Nếu hỏi lịch hẹn, 几号 hỏi ngày trong tháng, còn 星期几 hỏi thứ trong tuần.",
+      "keywords": [
+        "cách đọc ngày tháng trong tiếng Trung",
+        "号 và 日",
+        "hỏi thứ ngày tiếng Trung",
+        "农历 正月初一",
+        "hẹn lịch tiếng Trung"
+      ],
+      "sources": [
+        {
+          "label": "PREP, cách nói thứ, ngày, tháng và năm",
+          "url": "https://prepedu.com/vi/blog/ngay-thang-nam-tieng-trung"
+        },
+        {
+          "label": "Tiếng Trung Thượng Hải, bài nói thời gian",
+          "url": "https://tiengtrungthuonghai.vn/tailieuhoc/bai-14-noi-thoi-gian-trong-tieng-trung/"
+        },
+        {
+          "label": "Đài Thiên văn Hồng Kông, lịch đối chiếu dương và âm năm 2027",
+          "url": "https://www.hko.gov.hk/en/gts/time/calendar/pdf/files/2027e.pdf"
+        }
+      ],
+      "sections": [
+        {
+          "id": "thu-tu",
+          "heading": "Đọc năm theo từng chữ số, tháng và ngày theo số đếm",
+          "paragraphs": [
+            "二零二六年十一月二十七日 (èr líng èr liù nián shíyī yuè èrshíqī rì) là ngày 27 tháng 11 năm 2026. Đọc 2026 theo từng chữ số trước 年. Đọc 11 và 27 theo số đếm thông thường trước 月 và 日. Trong văn bản, hai cách ghi 零 và 〇 đều biểu thị số 0 trong năm. 二零二六年 và 二〇二六年 đọc giống nhau.",
+            "Trong tin nhắn hẹn gặp, 十一月二十七号 (shíyī yuè èrshíqī hào) rất tự nhiên. Trên lịch, biểu mẫu và thông báo, 十一月二十七日 là cách ghi thường gặp. Cả hai chỉ cùng một ngày. Từ chỉ ngày đi sau 月, nên ngày 6 tháng 2 là 二月六号 (èryuè liù hào). Nếu đảo thành 六月二号 (liùyuè èr hào), ngày hẹn chuyển sang 2 tháng 6.",
+            "Số 2 trong ngày tháng là 二 (èr). Tháng Hai đọc 二月 (èryuè), còn 两个月 (liǎng ge yuè) là khoảng thời gian hai tháng. Ví dụ 二月开始 (èryuè kāishǐ) nghĩa là bắt đầu vào tháng Hai, còn 两个月后开始 (liǎng ge yuè hòu kāishǐ) nghĩa là bắt đầu sau hai tháng."
+          ]
+        },
+        {
+          "id": "hoi-lich",
+          "heading": "Hỏi đúng phần thông tin còn thiếu khi hẹn lịch",
+          "paragraphs": [
+            "Nếu hai người đã nói về tháng 11, 我们几号见？ (Wǒmen jǐ hào jiàn?) đủ để hỏi ngày gặp trong tháng đó. Khi chưa biết cả tháng lẫn ngày, dùng 我们几月几号见？ (Wǒmen jǐ yuè jǐ hào jiàn?). Để hỏi ngày đó rơi vào thứ mấy, đổi sang 那天是星期几？ (Nà tiān shì xīngqī jǐ?).",
+            "Khi nhận lịch có cả thứ lẫn giờ, có thể nhắc lại theo thứ tự từ mốc lớn tới mốc nhỏ. 我们十一月二十七号星期五下午三点见。 (Wǒmen shíyī yuè èrshíqī hào xīngqīwǔ xiàwǔ sān diǎn jiàn.) — Chúng ta gặp nhau lúc 3 giờ chiều thứ Sáu, ngày 27/11. Nếu người đối diện trả lời 下午三点 khi được hỏi 几号, giờ hẹn đã rõ nhưng vẫn cần hỏi thêm ngày."
+          ],
+          "table": {
+            "headers": [
+              "Cần biết",
+              "Cách hỏi",
+              "Dạng câu trả lời"
+            ],
+            "rows": [
+              [
+                "Ngày trong tháng",
+                "几号？ (jǐ hào?)",
+                "二十七号, ngày 27"
+              ],
+              [
+                "Cả tháng và ngày",
+                "几月几号？ (jǐ yuè jǐ hào?)",
+                "十一月二十七号, 27/11"
+              ],
+              [
+                "Thứ trong tuần",
+                "星期几？ (xīngqī jǐ?)",
+                "星期五, thứ Sáu"
+              ],
+              [
+                "Giờ hẹn",
+                "几点？ (jǐ diǎn?)",
+                "下午三点, 3 giờ chiều"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "am-duong",
+          "heading": "Xác nhận âm lịch hay dương lịch khi nói về Tết",
+          "paragraphs": [
+            "公历 (gōnglì) là dương lịch và 农历 (nónglì) là âm lịch truyền thống. Trong lịch âm, 正月 (zhēngyuè) là tháng Giêng và 初一 (chūyī) là mùng Một. Cách đọc mặc định của chữ 正 trong nhiều từ là zhèng, nhưng trong 正月 đọc zhēng.",
+            "Ngày 6/2/2027 dương lịch tương ứng mùng Một tháng Giêng theo bảng đối chiếu của Đài Thiên văn Hồng Kông. Có thể nói 二零二七年公历二月六日是农历正月初一。 (Èr líng èr qī nián gōnglì èryuè liù rì shì nónglì zhēngyuè chūyī.) — Ngày 6/2/2027 dương lịch là mùng Một tháng Giêng âm lịch. Cùng một ngày có hai cách ghi, vì vậy khi dịch lời hẹn cần giữ rõ loại lịch.",
+            "Nếu nghe người quen nói sẽ họp mặt vào mùng Sáu mà chưa rõ lịch nào, hỏi 你说的是公历还是农历？ (Nǐ shuō de shì gōnglì háishi nónglì?) — Anh/chị đang nói ngày dương lịch hay âm lịch? Với ngày giỗ hay lễ Tết, một câu xác nhận như vậy giúp tránh ghi nhầm lịch."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "khi-nao-dung-er-va-liang",
+        "cac-loai-tu-trong-tieng-trung-co-ban"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127100833-cach-doc-ngay-thang-trong-tieng-"
+    },
+    {
+      "slug": "cach-noi-giam-gia-trong-tieng-trung",
+      "category": "meo-hoc",
+      "categoryLabel": "Mẹo học HSK",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 5,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Cách nói giảm giá trong tiếng Trung: 打八折, 降价 và 满减",
+      "metaTitle": "Cách nói giảm giá trong tiếng Trung | HSK Flashcards",
+      "metaDescription": "Đọc biển sale tiếng Trung và tính số tiền thực trả. Phân biệt 打八折, 降价20% và 满200减30 qua ví dụ giá tiền và mẫu câu hỏi ở cửa hàng.",
+      "summary": "打八折 (dǎ bā zhé) nghĩa là trả 80% giá gốc, tức giảm 20%. Nếu áo giá 200 tệ, 打八折 đưa giá xuống 160 tệ. Cùng chiếc áo đó, 满200减30 lại có nghĩa là đủ ngưỡng 200 tệ thì trừ 30 tệ, nên còn 170 tệ. Khi gặp biển 黑色星期五 (hēisè xīngqīwǔ, Black Friday), phân biệt hai cách ghi này sẽ giúp tính đúng số tiền trước khi thanh toán.",
+      "keywords": [
+        "cách nói giảm giá trong tiếng Trung",
+        "Black Friday tiếng Trung",
+        "打八折 là giảm bao nhiêu",
+        "cách đọc 满减",
+        "từ vựng săn sale tiếng Trung"
+      ],
+      "sources": [
+        {
+          "label": "PREP, cách nói giảm giá trong tiếng Trung",
+          "url": "https://www.prepedu.com/vi/blog/cach-noi-giam-gia-trong-tieng-trung"
+        },
+        {
+          "label": "Hoa Văn SHZ, từ vựng siêu thị và mua sắm",
+          "url": "https://hoavanshz.com/100-tu-vung-tieng-trung-chu-de-sieu-thi-mua-sam-1034"
+        },
+        {
+          "label": "Từ điển Bộ Giáo dục Đài Loan, mục 打折",
+          "url": "https://dict.concised.moe.edu.tw/dictView.jsp?ID=6880&la=1&powerMode=0"
+        }
+      ],
+      "sections": [
+        {
+          "id": "muc-1",
+          "heading": "Đọc biển có 折 bằng phần giá phải trả",
+          "paragraphs": [
+            "打折 (dǎzhé) là giảm giá. Trong mẫu 打 + số + 折, con số biểu thị số phần mười của giá gốc mà người mua trả. Với 8,5 折, lấy 8,5 chia cho 10 rồi nhân giá gốc. Có thể nhẩm theo bảng sau với một món giá 200 tệ.",
+            "这件衣服打八折。   Zhè jiàn yīfu dǎ bā zhé.   Chiếc áo này giảm 20%.",
+            "这件衣服降价百分之八十。   Zhè jiàn yīfu jiàngjià bǎifēnzhī bāshí.   Chiếc áo này giảm giá 80%.",
+            "Cùng thấy số 8, nhưng 打八折 nói phần còn lại và 降价百分之八十 nói phần bị trừ. Với giá gốc 200 tệ, hai câu cho ra 160 và 40 tệ. Muốn diễn đạt mức giảm tương đương 打八折 bằng phần trăm, dùng 降价百分之二十 (jiàngjià bǎifēnzhī èrshí)."
+          ],
+          "table": {
+            "headers": [
+              "Biển ghi",
+              "Pinyin",
+              "Phần giá phải trả",
+              "Còn lại"
+            ],
+            "rows": [
+              [
+                "九折",
+                "jiǔ zhé",
+                "90%",
+                "180 tệ"
+              ],
+              [
+                "八五折 hoặc 8.5折",
+                "bā wǔ zhé hoặc bā diǎn wǔ zhé",
+                "85%",
+                "170 tệ"
+              ],
+              [
+                "八折",
+                "bā zhé",
+                "80%",
+                "160 tệ"
+              ],
+              [
+                "五折",
+                "wǔ zhé",
+                "50%",
+                "100 tệ"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "muc-2",
+          "heading": "Đọc 满减 bằng hai con số có vai trò khác nhau",
+          "paragraphs": [
+            "Trong 满200减30 (mǎn èrbǎi jiǎn sānshí), 满200 cho biết ngưỡng cần đạt và 减30 cho biết số tệ được trừ. Nếu giỏ hàng hợp lệ có giá 199 tệ thì chưa đạt ngưỡng. Nếu giỏ có giá 210 tệ, áp dụng một lần sẽ còn 180 tệ trước các khoản phí khác.",
+            "Đôi khi biển thêm chữ 每 (měi, mỗi) và ghi 每满200减30 (měi mǎn èrbǎi jiǎn sānshí). Lúc đó, nếu 400 tệ đều được tính và chương trình cho áp dụng hai lượt, số tiền giảm là 60 tệ. Với biển chỉ ghi 满200减30, câu chữ xác nhận có ưu đãi khi đủ 200 tệ. Muốn biết đơn 400 tệ được trừ thêm hay có thể ghép mã, xem điều lệ hoặc hỏi người bán.",
+            "这张优惠券可以和满减一起用吗？   Zhè zhāng yōuhuìquàn kěyǐ hé mǎnjiǎn yìqǐ yòng ma?   Mã ưu đãi này dùng chung với chương trình mua đủ mức được giảm không?"
+          ]
+        },
+        {
+          "id": "muc-3",
+          "heading": "Hỏi “có giảm không”, “giảm mức nào” và “còn bao nhiêu tiền”",
+          "paragraphs": [
+            "这件衣服打折吗？ (Zhè jiàn yīfu dǎzhé ma?) hỏi chiếc áo có giảm giá hay không. Câu trả lời có thể chỉ là có hoặc không.",
+            "这件衣服打几折？ (Zhè jiàn yīfu dǎ jǐ zhé?) hỏi mức giảm. Nếu người bán đáp 打八折, hãy lấy giá gốc nhân 0,8.",
+            "打完折一共多少钱？ (Dǎ wán zhé yígòng duōshao qián?) hỏi tổng số tiền sau khi giảm. Câu này hữu ích khi có nhiều món và mỗi món áp dụng một mức khác nhau.",
+            "Thử so sánh hai biển trên cùng một đơn 300 tệ đủ điều kiện. Biển 九折 cho giá 270 tệ, còn 满200减40 cho giá 260 tệ nếu ưu đãi áp dụng một lần. Nếu 300 tệ gồm 150 tệ hàng được tính vào chương trình và 150 tệ hàng bị loại, ngưỡng 200 có thể chưa đạt. Vì vậy khi đọc biển, hãy xác định phần hàng được tính rồi mới áp dụng phép tính."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "khi-nao-dung-er-va-liang",
+        "cac-loai-tu-trong-tieng-trung-co-ban"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127090643-cach-noi-giam-gia-trong-tieng-tr"
+    },
+    {
+      "slug": "12-con-giap-tieng-trung",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 5,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "12 con giáp tiếng Trung: Tên, Pinyin và cách hỏi 你属什么",
+      "metaTitle": "12 con giáp tiếng Trung và cách hỏi tuổi | HSK Flashcards",
+      "metaDescription": "Tra 12 con giáp tiếng Trung, chữ Hán và Pinyin. Học cách hỏi 你属什么, trả lời 我属 và diễn đạt tuổi Mão theo hệ con giáp Việt Nam.",
+      "summary": "Mười hai con giáp trong tiếng Trung là 十二生肖 (shí’èr shēngxiào). Để hỏi “Bạn tuổi con gì?”, dùng 你属什么？ (Nǐ shǔ shénme?). Để đáp “Tôi tuổi Rồng”, nói 我属龙。 (Wǒ shǔ lóng.). Khi nói về tuổi Mão theo cách gọi của người Việt, nên nêu rõ hệ con giáp đang dùng vì cùng một vị trí 卯, Trung Quốc dùng thỏ còn Việt Nam dùng mèo.",
+      "keywords": [
+        "12 con giáp tiếng Trung",
+        "十二生肖 pinyin",
+        "hỏi tuổi con gì trong tiếng Trung",
+        "tuổi Mão tiếng Trung",
+        "你属什么"
+      ],
+      "sources": [
+        {
+          "label": "Bảo tàng V&A, The Lunar Zodiac, đối chiếu con giáp Việt Nam và Trung Quốc",
+          "url": "https://www.vam.ac.uk/articles/the-lunar-zodiac"
+        },
+        {
+          "label": "Từ điển Bộ Giáo dục Đài Loan, mục 生肖",
+          "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=132439&la=0&powerMode=0"
+        },
+        {
+          "label": "Từ điển Bộ Giáo dục Đài Loan, mục 屬相",
+          "url": "https://dict.concised.moe.edu.tw/dictView.jsp?ID=35399&la=1&powerMode=0"
+        }
+      ],
+      "sections": [
+        {
+          "id": "muc-1",
+          "heading": "Tên 12 con giáp tiếng Trung theo thứ tự",
+          "paragraphs": [
+            "Cột địa chi giúp đọc cách ghép như 卯兔 (mǎotù) trong lịch và bài viết văn hóa. Khi trả lời 你属什么, thông thường chỉ cần dùng chữ chỉ con vật, chẳng hạn 兔 trong 我属兔.",
+            "Hai địa chi 巳 (sì, Tỵ) và 戌 (xū, Tuất) dễ đọc nhầm khi chỉ nhìn lướt. Có thể học theo cặp 巳蛇 (sìshé, tuổi Rắn) và 戌狗 (xūgǒu, tuổi Chó) để nối chữ địa chi với con vật. Với 羊, trong hội thoại về con giáp cứ dùng một chữ này. Khi cần gọi đúng loài động vật, 山羊 (shānyáng) là dê và 绵羊 (miányáng) là cừu."
+          ],
+          "table": {
+            "headers": [
+              "Địa chi",
+              "Con vật trong hệ Trung Quốc",
+              "Pinyin của tên con vật",
+              "Tuổi tương ứng trong hệ Việt Nam"
+            ],
+            "rows": [
+              [
+                "子 zǐ",
+                "鼠, chuột",
+                "shǔ",
+                "Tý, chuột"
+              ],
+              [
+                "丑 chǒu",
+                "牛, bò theo cách dịch phổ biến của hệ Trung Quốc",
+                "niú",
+                "Sửu, trâu"
+              ],
+              [
+                "寅 yín",
+                "虎, hổ",
+                "hǔ",
+                "Dần, hổ"
+              ],
+              [
+                "卯 mǎo",
+                "兔, thỏ",
+                "tù",
+                "Mão, mèo"
+              ],
+              [
+                "辰 chén",
+                "龙, rồng",
+                "lóng",
+                "Thìn, rồng"
+              ],
+              [
+                "巳 sì",
+                "蛇, rắn",
+                "shé",
+                "Tỵ, rắn"
+              ],
+              [
+                "午 wǔ",
+                "马, ngựa",
+                "mǎ",
+                "Ngọ, ngựa"
+              ],
+              [
+                "未 wèi",
+                "羊, tên chung có thể chỉ dê hoặc cừu tùy ngữ cảnh",
+                "yáng",
+                "Mùi, dê"
+              ],
+              [
+                "申 shēn",
+                "猴, khỉ",
+                "hóu",
+                "Thân, khỉ"
+              ],
+              [
+                "酉 yǒu",
+                "鸡, gà",
+                "jī",
+                "Dậu, gà"
+              ],
+              [
+                "戌 xū",
+                "狗, chó",
+                "gǒu",
+                "Tuất, chó"
+              ],
+              [
+                "亥 hài",
+                "猪, lợn hoặc heo",
+                "zhū",
+                "Hợi, lợn hoặc heo"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "muc-2",
+          "heading": "Dùng 属 để hỏi con giáp và 岁 để hỏi số tuổi",
+          "paragraphs": [
+            "Hai câu đầu đều có thể được dịch với từ “tuổi” trong tiếng Việt. 属什么 yêu cầu tên một con vật. 多大 hỏi số tuổi. Khi đã biết ai đó tuổi Ngựa và muốn hỏi năm sinh để phân biệt các vòng con giáp, có thể hỏi 你是哪一年出生的？ (Nǐ shì nǎ yì nián chūshēng de?) — Bạn sinh năm nào?",
+            "Nếu muốn dùng danh từ 生肖, có thể hỏi 你的生肖是什么？ (Nǐ de shēngxiào shì shénme?) — Con giáp của bạn là gì? Hai cách hỏi đều hướng đến cùng một thông tin. Mẫu có 属 ngắn và tiện dùng khi nói chuyện."
+          ],
+          "table": {
+            "headers": [
+              "Muốn hỏi",
+              "Câu tiếng Trung và Pinyin",
+              "Cách trả lời"
+            ],
+            "rows": [
+              [
+                "Bạn tuổi con gì?",
+                "你属什么？ Nǐ shǔ shénme?",
+                "我属马。 Wǒ shǔ mǎ. — Tôi tuổi Ngựa."
+              ],
+              [
+                "Năm nay bạn bao nhiêu tuổi?",
+                "你今年多大？ Nǐ jīnnián duō dà?",
+                "我今年二十岁。 Wǒ jīnnián èrshí suì. — Năm nay tôi 20 tuổi."
+              ],
+              [
+                "Cô ấy có tuổi Dê/Mùi không?",
+                "她属羊吗？ Tā shǔ yáng ma?",
+                "她属羊。 Tā shǔ yáng. — Cô ấy tuổi Mùi."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "muc-3",
+          "heading": "Nói tuổi Mão với người Trung Quốc",
+          "paragraphs": [
+            "我属兔。 (Wǒ shǔ tù.) có nghĩa là tôi tuổi Thỏ theo hệ con giáp Trung Quốc. Khi giới thiệu cách gọi của Việt Nam, có thể nói 按越南的生肖，我属猫。 (Àn Yuènán de shēngxiào, wǒ shǔ māo.) — Theo con giáp Việt Nam, tôi tuổi Mèo. Cụm 按越南的生肖 báo cho người nghe biết vì sao câu trả lời có mèo.",
+            "Muốn giải thích sự khác nhau trong một câu, có thể nói 在越南，卯年是猫年，在中国，卯年是兔年。 (Zài Yuènán, mǎonián shì māonián, zài Zhōngguó, mǎonián shì tùnián.) — Ở Việt Nam, năm Mão là năm Mèo. Ở Trung Quốc, năm Mão là năm Thỏ. Cách diễn đạt này giữ chung chữ 卯 khi nói về địa chi và đổi tên con vật theo từng hệ.",
+            "Thử áp dụng trong tình huống sau. Một người nói 我今年二十岁. Muốn hỏi tiếp người đó tuổi con gì, dùng 你属什么？. Nếu họ đáp 我属牛, có thể hiểu là tuổi Sửu. Khi giải thích biểu tượng Việt Nam, có thể nói 越南用水牛代表丑年。 (Yuènán yòng shuǐniú dàibiǎo chǒunián.) — Việt Nam dùng hình tượng trâu để đại diện cho năm Sửu."
+          ]
+        }
+      ],
+      "faqs": [],
+      "relatedSlugs": [
+        "tong-hop-ngu-phap-hsk-quan-trong-hay-thi",
+        "cac-loai-tu-trong-tieng-trung-co-ban"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127090652-12-con-giap-tieng-trung"
+    },
+    {
+      "slug": "cach-dung-haishi-huozhe-hoi-lua-chon",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Phân biệt 还是 và 或者 khi hỏi và đưa ra lựa chọn",
+      "metaTitle": "Phân biệt 还是 và 或者 trong tiếng Trung | HSK Flashcards",
+      "metaDescription": "Hướng dẫn phân biệt 还是 (háishì) và 或者 (huòzhě) khi hỏi lựa chọn trong tiếng Trung. Có quy trình chọn từ, ví dụ câu hỏi, câu trả lời và bảng đối chiếu chi tiết.",
+      "summary": "还是 dùng trong câu hỏi lựa chọn để người nghe chọn một phương án. 或者 dùng để liệt kê các phương án có thể trong câu khẳng định hoặc câu hỏi xác nhận có hoặc không. Bài viết cung cấp quy trình thực hành, ví dụ và bảng đối chiếu.",
+      "keywords": [
+        "cách dùng 还是 và 或者",
+        "phân biệt háishì và huòzhě",
+        "câu hỏi lựa chọn tiếng Trung",
+        "cách nói hoặc trong tiếng Trung"
+      ],
+      "sources": [
+        {
+          "label": "PREP – Khảo sát câu hỏi về 还是 và 或者",
+          "url": "https://prepedu.com/vi/blog/phan-biet-haishi-va-huozhe-trong-tieng-trung"
+        },
+        {
+          "label": "Mango Languages – Cách dùng 还是 và 或者 trong tiếng Phổ thông",
+          "url": "https://www.mangolanguages.com/resources/learn/grammar/mandarin-chinese/how-to-distinguish-the-conjunctions-haishi-and-huozhe-in-mandarin"
+        }
+      ],
+      "sections": [
+        {
+          "id": "ket-qua-va-dieu-kien",
+          "heading": "Kết quả đạt được và điều kiện cần chuẩn bị",
+          "paragraphs": [
+            "Sau khi làm theo bài này, người đọc biết chọn đúng 还是 hoặc 或者 trong câu hỏi lựa chọn, câu liệt kê phương án và câu hỏi xác nhận có hoặc không. Người đọc cũng nhận ra trường hợp 还是 xuất hiện trong câu kể để diễn tả lựa chọn chưa quyết định.",
+            "Điều kiện cần: nắm được cấu trúc câu cơ bản tiếng Trung, biết đọc Pinyin và hiểu nghĩa các từ phổ biến HSK 1–3 như 来 (lái), 坐 (zuò), 骑车 (qí chē)."
+          ]
+        },
+        {
+          "id": "quy-trinh-chon-tu",
+          "heading": "Quy trình chọn 还是 hoặc 或者",
+          "paragraphs": [
+            "Bước 1: Xác định mục đích câu. Nếu muốn người nghe chọn một trong các phương án, hãy dùng 还是. Nếu chỉ liệt kê các phương án có thể mà không bắt buộc chọn, hãy dùng 或者.",
+            "Bước 2: Xác định vị trí từ nối. 还是 thường nối hai phương án trong câu hỏi hoặc trong mệnh đề lựa chọn của câu kể. 或者 nối các danh từ, động từ hoặc cụm từ trong câu khẳng định.",
+            "Bước 3: Kiểm tra dấu câu và trợ từ. Câu hỏi lựa chọn thường kết thúc bằng dấu hỏi. Nếu câu hỏi xác nhận có hoặc không, có thể dùng 或者 cùng với 吗.",
+            "Dấu hiệu làm đúng: sau câu hỏi với 还是, người nghe trả lời bằng một phương án cụ thể; sau câu với 或者, người nghe có thể đồng ý với một hoặc nhiều phương án đã nêu."
+          ],
+          "example": {
+            "han": "你想周三来，还是周五来？",
+            "py": "Nǐ xiǎng zhōusān lái, háishì zhōuwǔ lái?",
+            "vi": "Bạn muốn đến thứ Tư, hay thứ Sáu?"
+          }
+        },
+        {
+          "id": "vi-du-chi-tiet",
+          "heading": "Giải thích chi tiết ví dụ câu hỏi lựa chọn",
+          "paragraphs": [
+            "Câu 你想周三来，还是周五来？ (Nǐ xiǎng zhōusān lái, háishì zhōuwǔ lái?) yêu cầu người nghe chọn thứ Tư hoặc thứ Sáu. 还是 nối hai phương án “thứ Tư đến” và “thứ Sáu đến”. Người nghe không được trả lời “cả hai” trừ khi cả hai đều phù hợp và người nói chấp nhận.",
+            "Một câu trả lời phù hợp là 我想周五来。 (Wǒ xiǎng zhōuwǔ lái.) — Tôi muốn đến thứ Sáu. Trong câu trả lời này, người nghe chọn một phương án đã được nêu trong câu hỏi. Nếu trả lời 我想周三和周五都来， nghĩa là từ chối yêu cầu chọn một phương án của câu hỏi."
+          ]
+        },
+        {
+          "id": "cau-hoi-gian-tiep",
+          "heading": "Dùng 还是 khi lựa chọn nằm bên trong câu kể",
+          "paragraphs": [
+            "Câu 我还没决定坐地铁还是骑车。 (Wǒ hái méi juédìng zuò dìtiě háishì qí chē.) có nghĩa là tôi vẫn chưa quyết định đi tàu điện ngầm hay đi xe đạp. Toàn câu kể về quyết định còn bỏ ngỏ. Cụm 坐地铁还是骑车 giữ nghĩa của câu hỏi “đi tàu điện ngầm hay đi xe đạp”.",
+            "Khi đọc một câu có 还是, hãy nhìn vào phần nối hai phương án. Những cụm như 还没决定 (hái méi juédìng, vẫn chưa quyết định) và 不知道 (bù zhīdào, không biết) có thể đứng trước một lựa chọn chưa được giải đáp."
+          ]
+        },
+        {
+          "id": "hoi-co-khong",
+          "heading": "Nhận ra câu hỏi có hoặc không chứa 或者",
+          "paragraphs": [
+            "Câu 你周三或者周五有空吗？ (Nǐ zhōusān huòzhě zhōuwǔ yǒu kòng ma?) hỏi người nghe có rảnh vào ít nhất một trong hai ngày hay không. 或者 liệt kê các ngày được xét. Trợ từ 吗 đặt câu hỏi có hoặc không cho cả mệnh đề.",
+            "Nếu cần chốt ngày, hỏi 你周三有空，还是周五有空？ (Nǐ zhōusān yǒu kòng, háishì zhōuwǔ yǒu kòng?) Câu này hướng người nghe trả lời bằng một ngày cụ thể. Trong hội thoại thực tế, người nghe vẫn có thể trả lời rằng mình rảnh cả hai ngày."
+          ]
+        },
+        {
+          "id": "tu-kiem-tra",
+          "heading": "Tự kiểm tra bằng tình huống gửi tài liệu",
+          "paragraphs": [
+            "Điền từ phù hợp vào 我可以发邮件__发短信。 Người nói muốn cho biết cả email lẫn tin nhắn đều là phương án có thể. Đáp án là 或者. Đọc cả câu là Wǒ kěyǐ fā yóujiàn huòzhě fā duǎnxìn — Tôi có thể gửi email hoặc gửi tin nhắn.",
+            "Điền vào 你想收邮件__收短信？ Người nói muốn biết người nhận chọn cách nào. Đáp án là 还是. Đọc cả câu là Nǐ xiǎng shōu yóujiàn háishì shōu duǎnxìn? — Bạn muốn nhận email hay tin nhắn?"
+          ]
+        },
+        {
+          "id": "ket-luan-so-sanh",
+          "heading": "Kết luận: dùng 还是 khi nào, dùng 或者 khi nào",
+          "paragraphs": [
+            "Dùng 还是 khi câu hỏi yêu cầu người nghe chọn một phương án trong hai hoặc nhiều phương án đã nêu. Ví dụ: 你想喝茶，还是喝咖啡？ (Nǐ xiǎng hē chá, háishì hē kāfēi?) — Bạn muốn uống trà hay cà phê?",
+            "Dùng 或者 khi chỉ muốn liệt kê các phương án có thể, không bắt buộc người nghe chọn một cái. Ví dụ: 我周三或者周五有空。 (Wǒ zhōusān huòzhě zhōuwǔ yǒu kòng.) — Tôi rảnh thứ Tư hoặc thứ Sáu.",
+            "Nếu câu hỏi có hoặc không và liệt kê các ngày có thể, dùng 或者 cùng 吗: 你周三或者周五有空吗？ Nếu muốn người nghe chốt một ngày, dùng 还是: 你周三有空，还是周五有空？"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Hỏi ba phương án thì dùng 还是 thế nào?",
+          "a": "Có thể lặp lại 还是 giữa các lựa chọn. 你想喝茶，还是喝咖啡，还是喝水？ (Nǐ xiǎng hē chá, háishì hē kāfēi, háishì hē shuǐ?) — Bạn muốn uống trà, cà phê hay nước?"
+        },
+        {
+          "q": "还是 trong câu 我还是坐地铁吧 có nghĩa là ‘hay’ không?",
+          "a": "Trong câu này, 还是 thể hiện lựa chọn sau khi cân nhắc. 我还是坐地铁吧。 (Wǒ háishi zuò dìtiě ba.) có thể dịch tự nhiên là “Thôi, tôi đi tàu điện ngầm vậy.”"
+        }
+      ],
+      "relatedSlugs": [
+        "tong-hop-ngu-phap-hsk-quan-trong-hay-thi",
+        "phan-biet-cac-cap-tu-hay-nham-khi-thi-hsk"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261126144604-cach-dung-haishi-huozhe-hoi-lua-"
+    },
+    {
+      "slug": "phan-biet-you-va-zai-lai-lan-nua",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 4,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Phân biệt 又 và 再 khi nói «lại» trong tiếng Trung",
+      "metaTitle": "Phân biệt 又 và 再 trong tiếng Trung | HSK Flashcards",
+      "metaDescription": "Dùng 又 khi ghi nhận một việc tái diễn và 再 khi nói đến lần làm thêm. Học qua cặp câu đối chiếu có Pinyin, ví dụ ngoại lệ và bài tập.",
+      "summary": "又 (yòu) thường ghi nhận một việc lại xảy ra. 再 (zài) hướng tới một lần làm thêm, như khi nhờ làm lại hoặc dự định làm lại. Nếu lần lặp đã diễn ra, thường dùng 又. Nếu đang nói đến lần tiếp theo, thường dùng 再.",
+      "keywords": [
+        "phân biệt 又 và 再",
+        "cách dùng yòu và zài",
+        "lại lần nữa trong tiếng Trung",
+        "ngữ pháp tiếng Trung sơ cấp"
+      ],
+      "sources": [
+        {
+          "label": "PREP – Cách dùng 又 và 再",
+          "url": "https://prepedu.com/vi/blog/cach-dung-you-va-zai-trong-tieng-trung"
+        },
+        {
+          "label": "WordSwing – 又 và 再 khi diễn tả sự lặp lại",
+          "url": "https://hsk.wordswing.com/grammar/you-zai-again/"
+        }
+      ],
+      "sections": [
+        {
+          "id": "cung-hanh-dong",
+          "heading": "Cùng một hành động, chọn theo lần đang nói tới",
+          "paragraphs": [
+            "他刚才又给我打电话了。 (Tā gāngcái yòu gěi wǒ dǎ diànhuà le.) — Anh ấy vừa gọi lại cho tôi. 又 đứng trước cụm động từ để báo cuộc gọi đã xảy ra thêm một lần.",
+            "请他晚一点儿再给我打电话。 (Qǐng tā wǎn yìdiǎnr zài gěi wǒ dǎ diànhuà.) — Nhờ anh ấy lát nữa gọi lại cho tôi. 再 đứng trước cụm động từ để chỉ cuộc gọi tiếp theo mà người nói đang đề nghị."
+          ],
+          "example": {
+            "han": "我想再听一遍。",
+            "py": "Wǒ xiǎng zài tīng yí biàn.",
+            "vi": "Tôi muốn nghe lại một lượt."
+          }
+        },
+        {
+          "id": "lan-lap-da-xay-ra",
+          "heading": "Dùng 又 khi báo một việc tái diễn",
+          "paragraphs": [
+            "今天上课时，投影仪又坏了。 (Jīntiān shàngkè shí, tóuyǐngyí yòu huài le.) — Hôm nay đang học thì máy chiếu lại hỏng. Câu này cho biết máy chiếu từng hỏng và giờ lại gặp sự cố.",
+            "又 tự nó chỉ sự lặp lại. Cảm giác khó chịu trong ví dụ đến từ việc máy chiếu hỏng giữa buổi học. Với việc vui, có thể nói 我们又见面了。 (Wǒmen yòu jiànmiàn le.) — Chúng ta lại gặp nhau rồi."
+          ]
+        },
+        {
+          "id": "lan-tiep-theo",
+          "heading": "Dùng 再 cho lần tiếp theo hoặc bước kế tiếp",
+          "paragraphs": [
+            "Nếu máy chiếu đã hỏng và muốn thử khởi động thêm lần nữa, nói 我们再试一次吧。 (Wǒmen zài shì yí cì ba.) — Chúng ta thử lại một lần nữa đi. Lần thử này đang được đề nghị.",
+            "再 còn đặt một việc sau việc khác. 先保存文件，再关电脑。 (Xiān bǎocún wénjiàn, zài guān diànnǎo.) — Lưu tệp trước rồi tắt máy tính. Trong trường hợp này, 再 chỉ bước kế tiếp trong trình tự."
+          ]
+        },
+        {
+          "id": "moc-tuong-lai",
+          "heading": "Đừng chọn từ chỉ dựa vào «hôm qua» hay «ngày mai»",
+          "paragraphs": [
+            "明天又是星期一了。 (Míngtiān yòu shì xīngqīyī le.) — Mai lại là thứ Hai rồi. Dù câu có 明天, người nói đang nhìn ngày thứ Hai như một mốc lặp lại theo tuần.",
+            "Tự kiểm tra qua hai câu. «Hôm nay máy in lại kẹt giấy» dùng 打印机今天又卡纸了。 (Dǎyìnjī jīntiān yòu kǎzhǐ le.) «Lát nữa in lại một bản» dùng 等会儿再打一份。 (Děng huìr zài dǎ yí fèn.) Câu đầu báo việc tái diễn. Câu sau nói về lần in tiếp theo."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Có thể dùng 又 chỉ vì câu có 了 không?",
+          "a": "Hãy xác định việc nào đã xảy ra. Trong 吃完了再走 (chīwán le zài zǒu, ăn xong rồi đi), 了 thuộc phần ăn xong. 再 đứng trước 走 và chỉ việc đi sau đó."
+        },
+        {
+          "q": "«Đọc lại một lượt» dùng 遍 hay 次?",
+          "a": "Dùng 遍 (biàn) khi nhấn mạnh đọc trọn một lượt, như 再读一遍 (zài dú yí biàn). 次 (cì) chỉ số lần thực hiện, như 再试一次 (zài shì yí cì, thử lại một lần)."
+        }
+      ],
+      "relatedSlugs": [
+        "khi-nao-dung-er-va-liang",
+        "lich-thi-hsk-va-lich-tra-ket-qua-chinh-thuc",
+        "thong-bao-hsk-3-0-moi-nhat-va-cau-truc-bai-thi"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127074948-phan-biet-you-va-zai-lai-lan-nua"
+    },
+    {
+      "slug": "jiu-cai-cung-mot-moc-gio",
+      "category": "ngu-phap",
+      "categoryLabel": "Phân biệt & Ngữ pháp",
+      "hskTag": "HSK 1–3",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 3,
+      "featured": false,
+      "editorialVoice": "chatgpt-editorial",
+      "title": "Phân biệt 就 và 才: Cùng 8 giờ, vì sao lúc «đã», lúc «mới»?",
+      "metaTitle": "Phân biệt 就 và 才 khi nói giờ đến | HSK Flashcards",
+      "metaDescription": "Cùng một mốc 8 giờ, dùng 就 khi thấy sớm và 才 khi thấy muộn. Xem câu đối chiếu có chữ Hán, Pinyin và bài tập đặt câu theo ngữ cảnh.",
+      "summary": "Khi nói về thời điểm, dùng 就 (jiù) nếu người nói coi việc đó xảy ra sớm hoặc nhanh. Dùng 才 (cái) nếu người nói coi việc đó xảy ra muộn hoặc phải đợi đến lúc ấy. Cùng một mốc 8 giờ có thể đi với cả hai từ, tùy giờ hẹn.",
+      "keywords": [
+        "phân biệt 就 và 才",
+        "cách dùng jiù và cái",
+        "nói sớm và muộn tiếng Trung",
+        "ngữ pháp thời gian tiếng Trung"
+      ],
+      "sources": [
+        {
+          "label": "PREP – So sánh 就 và 才",
+          "url": "https://prepedu.com/vi/blog/cach-dung-jiu-trong-tieng-trung"
+        },
+        {
+          "label": "WordSwing – 就 và 才 khi đánh giá thời điểm",
+          "url": "https://hsk.wordswing.com/grammar/cai-jiu-time/"
+        }
+      ],
+      "sections": [
+        {
+          "id": "cung-tam-gio",
+          "heading": "Hẹn 9 giờ và đến lúc 8 giờ: dùng 就",
+          "paragraphs": [
+            "Lớp bắt đầu lúc 9 giờ. Minh đến lúc 8 giờ, sớm hơn giờ học một tiếng. Có thể nói 他八点就到了。 (Tā bā diǎn jiù dào le.) — Tám giờ anh ấy đã đến rồi.",
+            "就 đứng sau mốc 八点 (bā diǎn, 8 giờ) và trước 到 (dào, đến). Dịch là «đã … rồi» để giữ ý người nói coi giờ đến là sớm."
+          ],
+          "example": {
+            "han": "他八点就到了。",
+            "py": "Tā bā diǎn jiù dào le.",
+            "vi": "Tám giờ anh ấy đã đến rồi."
+          }
+        },
+        {
+          "id": "cho-den-tam-gio",
+          "heading": "Hẹn 7 giờ và đến lúc 8 giờ: dùng 才",
+          "paragraphs": [
+            "Cuộc hẹn bắt đầu lúc 7 giờ. Minh đến lúc 8 giờ, muộn hơn giờ hẹn một tiếng. Có thể nói 他八点才到。 (Tā bā diǎn cái dào.) — Đến 8 giờ anh ấy mới tới.",
+            "八点 vẫn là cùng một mốc. Thay 就 bằng 才 làm thay đổi cách người nói đánh giá giờ đến. Trong cặp câu này, có thể dịch 才 là «đến … mới» để thể hiện sự chờ đợi."
+          ],
+          "example": {
+            "han": "他八点才到。",
+            "py": "Tā bā diǎn cái dào.",
+            "vi": "Đến 8 giờ anh ấy mới tới."
+          }
+        },
+        {
+          "id": "khoang-thoi-gian",
+          "heading": "Dùng cùng cách chọn khi nói mất bao lâu",
+          "paragraphs": [
+            "Nếu nghĩ việc làm xong mất cả buổi nhưng thực tế chỉ mất 20 phút, có thể nói 我二十分钟就做完了。 (Wǒ èrshí fēnzhōng jiù zuòwán le.) — Tôi làm xong chỉ trong 20 phút.",
+            "Nếu chờ được trả lời suốt hai ngày, nói 我等了两天才收到回复。 (Wǒ děng le liǎng tiān cái shōudào huífù.) — Tôi đợi hai ngày mới nhận được phản hồi. Mốc so sánh ở đây là khoảng thời gian chờ."
+          ]
+        },
+        {
+          "id": "tu-kiem-tra",
+          "heading": "Tự kiểm tra bằng cùng một giờ kết thúc",
+          "paragraphs": [
+            "Điền từ vào 会议六点__结束。 (Huìyì liù diǎn __ jiéshù.) Nếu lịch dự kiến là 5 giờ, chọn 才 vì phải đến 6 giờ cuộc họp mới xong. Nếu lịch dự kiến là 7 giờ, chọn 就 và có thể nói 会议六点就结束了。 — Sáu giờ cuộc họp đã kết thúc rồi.",
+            "Khi phân vân, hỏi «so với lịch hẹn hoặc kỳ vọng, thời điểm này sớm hơn hay muộn hơn?». Chọn 就 cho mốc được coi là sớm và 才 cho mốc được coi là muộn."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Nếu chỉ muốn báo giờ đến thì nói thế nào?",
+          "a": "Có thể nói 他八点到的。 (Tā bā diǎn dào de.) — Anh ấy đến lúc 8 giờ. Câu tập trung vào giờ đến."
+        },
+        {
+          "q": "Trong 我才十八岁, 才 có nghĩa là đến muộn không?",
+          "a": "Trong 我才十八岁 (Wǒ cái shíbā suì), 才 có nghĩa là «mới» hoặc «chỉ mới» 18 tuổi. Đây là cách nhấn mạnh số tuổi còn thấp, khác với cách đánh giá thời điểm trong bài."
+        }
+      ],
+      "relatedSlugs": [
+        "khi-nao-dung-er-va-liang",
+        "lich-thi-hsk-va-lich-tra-ket-qua-chinh-thuc",
+        "thong-bao-hsk-3-0-moi-nhat-va-cau-truc-bai-thi"
+      ],
+      "cta": {
+        "heading": "Luyện thi HSK 1–6 và hỏi Gia sư AI miễn phí ngay hôm nay",
+        "body": "Mở trực tiếp HSK Flashcards trên trình duyệt để ôn flashcard SRS, sửa câu tiếng Trung và luyện đề HSK miễn phí.",
+        "buttonLabel": "Mở HSK Flashcards miễn phí"
+      },
+      "sourceDraftId": "draft-cgpt-20261127075027-jiu-cai-cung-mot-moc-gio"
+    },
+    {
+      "slug": "cach-noi-xin-loi-trong-tieng-trung",
+      "category": "meo-hoc",
+      "categoryLabel": "Mẹo học HSK",
+      "hskTag": "Tiếng Trung thực tế",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "educational-how-to",
+      "title": "Cách nói xin lỗi trong tiếng trung: Quy chuẩn người bản xứ và ví dụ thực tế",
+      "metaTitle": "Cách nói xin lỗi trong tiếng trung chuẩn ngữ - HSK Flashcards",
+      "metaDescription": "Hướng dẫn cách nói xin lỗi trong tiếng trung chính xác. Học từ vựng, ví dụ Pinyin – tiếng Việt và tránh những lỗi ngữ pháp hay mắc phải của người học Việt.",
+      "summary": "Bài viết hướng dẫn cách nói xin lỗi trong tiếng trung chuẩn người bản xứ, từ từ vựng cơ bản đến ngữ cảnh sử dụng, giúp người học tránh những lỗi ngữ pháp hay mắc phải của người học Việt.",
+      "keywords": [
+        "cách nói xin lỗi trong tiếng trung",
+        "từ vựng xin lỗi tiếng trung",
+        "ngữ pháp xin lỗi HSK",
+        "cách xin lỗi chuẩn ngữ"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "muc-1",
+          "heading": "Từ vựng và câu nói xin lỗi cơ bản",
+          "paragraphs": [
+            "Khi nói xin lỗi trong tiếng Trung, lựa chọn từ vựng phụ thuộc vào mức độ nghiêm trọng của lỗi và mối quan hệ giữa người nói và người nghe. Dưới đây là những từ và câu phổ biến nhất:"
+          ],
+          "bullets": [
+            "对不起 (duìbuqǐ): Xin lỗi, cảm lỗi. Đây là từ phổ biến nhất, dùng trong hầu hết các tình huống hàng ngày.",
+            "抱歉 (bàoqiàn): Xin lỗi, tiếc nuối. Thường dùng khi xin lỗi về một việc gì đó đã xảy ra hoặc lỗi nghiêm trọng hơn.",
+            "抱歉打扰了 (bàoqiàn dǎrǎole): Xin lỗi đã làm phiền. Dùng khi打扰对方 (tạo phiền cho người khác).",
+            "麻烦您了 (máfan nín le): Dùng với người không quen hoặc có địa vị cao."
+          ],
+          "example": {
+            "han": "对不起",
+            "py": "duìbuqǐ",
+            "vi": "Xin lỗi"
+          },
+          "tip": "Nhớ rằng对不起 là từ 'mặc định' cho hầu hết các tình huống xin lỗi hàng ngày."
+        },
+        {
+          "id": "muc-2",
+          "heading": "Quy tắc sử dụng và ngữ cảnh",
+          "paragraphs": [
+            "1. Mức độ nghiêm trọng: Sử dụng xin lỗi nhẹ (对不起) cho những lỗi nhỏ, và xin lỗi nghiêm trọng (抱歉) cho những lỗi gây hậu quả lớn.",
+            "2. Quan hệ xã hội: Khi nói với người đứng trên, người lớn, nên thêm từ khay respect (như 您 nín) hoặc dùng câu nói lịch sự hơn.",
+            "3. Hành động bù đắp: Trong văn hóa Trung, việc xin lỗi thường đi kèm với việc bù đắp (ví dụ: mang đồ ăn, giúp việc) để thể hiện sự chân thành."
+          ],
+          "example": {
+            "han": "抱歉打扰了",
+            "py": "bàoqiàn dǎrǎole",
+            "vi": "Xin lỗi đã làm phiền"
+          },
+          "tip": "Khi xin lỗi với người bạn thân, bạn có thể dùng giọng điệu nhẹ nhàng để thể hiện thái độ buông bỏ."
+        },
+        {
+          "id": "muc-3",
+          "heading": "Lỗi hay gặp của người học Việt và cách khắc phục",
+          "paragraphs": [
+            "Nhiều người học tiếng Trung tại Việt Nam thường mắc các lỗi sau khi nói xin lỗi:"
+          ],
+          "bullets": [
+            "Lỗi phát âm thanh điệu: Từ对不起 và抱歉 có thanh điệu khác nhau (dì vs bào). Việc đầm thanh hoặc đảo điệu sẽ thay đổi nghĩa hoặc khiến người nghe không hiểu.",
+            "Dùng từ khắt khe: Một số người dùng xin lỗi bằng tiếng Việt trong đầu và dịch ra tiếng Trung một cách máy móc, dẫn đến câu không tự nhiên (ví dụ: dùng 谢谢 thay vì xin lỗi).",
+            "Bỏ qua ngữ cảnh quan hệ: Dùng对不起 với người cao tuổi hoặc trong các tình huống công việc nghiêm trọng có thể bị coi là thiếu lễ độ."
+          ],
+          "table": {
+            "headers": [
+              "Lỗi",
+              "Cách khắc phục"
+            ],
+            "rows": [
+              [
+                "Đọc lầm thanh điệu của对不起",
+                "Luyện tập thanh điệu: dì (thanh 4) vs bào (thanh 4 đầu lên). Sử dụng từ nghe lặp lại."
+              ],
+              [
+                "Dùng謝謝 (cảm tạ) để xin lỗi",
+                "Nhớ rằng謝谢 chỉ dùng để cảm tạ, không tương đương với Xin lỗi."
+              ]
+            ]
+          },
+          "example": {
+            "han": "抱歉",
+            "py": "bàoqiàn",
+            "vi": "Xin lỗi (về việc đã xảy ra)"
+          },
+          "tip": "Nếu không chắc về từ nào dùng, hãy bắt đầu bằng对不起, từ này an toàn và hiếm khi gây hiểu lầm."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Có cần dùng xin lỗi bằng tiếng Trung khi nói chuyện với người Việt không?",
+          "a": "Không bắt buộc, nhưng nếu bạn đang học hoặc giao tiếp với người Trung, việc dùng từ đúng ngữ cảnh sẽ thể hiện sự tôn trọng và làm tốt 印象 (ấn tượng)."
+        },
+        {
+          "q": "Từ Xin lỗi trong tiếng Trung có khác nhau giữa nam và nữ không?",
+          "a": "Không, các từ xin lỗi như对不起,抱歉 là trung tính và dùng chung cho cả nam và nữ. Chỉ khác biệt ở cách phát âm và thái độ."
+        }
+      ],
+      "relatedSlugs": [
+        "khi-nao-dung-er-va-liang",
+        "lich-thi-hsk-va-lich-tra-ket-qua-chinh-thuc",
+        "thong-bao-hsk-3-0-moi-nhat-va-cau-truc-bai-thi"
+      ],
+      "cta": {
+        "heading": "Bắt đầu luyện tập ngay hôm nay",
+        "body": "Sử dụng HSK Flashcards để luyện từ vựng và câu nói xin lỗi qua các bài tập SRS và nhận phản hồi từ Gia sư AI.",
+        "buttonLabel": "Truy cập HSK Flashcards"
+      },
+      "sourceDraftId": "draft-20261126183636-cach-noi-xin-loi-trong-tieng-trung"
+    },
+    {
+      "slug": "hoc-tieng-trung-giao-tiep",
+      "category": "meo-hoc",
+      "categoryLabel": "Mẹo học HSK",
+      "hskTag": "Tiếng Trung thực tế",
+      "publishedAt": "2026-11-27",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "educational-how-to",
+      "title": "Hướng dẫn chi tiết học tiếng trung giao tiếp: Cách dùng chuẩn người bản xứ, ví dụ Pinyin – tiếng Việt và lỗi hay gặp",
+      "metaTitle": "Học tiếng trung giao tiếp chuẩn người bản xứ | Cách dùng Pinyin – tiếng Việt",
+      "metaDescription": "Hướng dẫn chi tiết học tiếng trung giao tiếp. Nắm vững cách dùng Pinyin, ví dụ thực tế và lỗi hay gặp của người Việt để giao tiếp tự tin hàng ngày.",
+      "summary": "Bài viết cung cấp lộ trình thực hành tiếng trung giao tiếp từ cơ bản đến nâng cao, giúp người học hiểu đúng ngữ pháp và phát âm theo chuẩn người bản xứ. Nội dung tập trung vào việc khắc phục lỗi phổ biến, tinh chỉnh khuyến nghị thời gian học và đưa ra các giải pháp ngữ cảnh linh hoạt.",
+      "keywords": [
+        "học tiếng trung giao tiếp",
+        "học tiếng trung giao tiếp cơ bản",
+        "luyện giao tiếp tiếng trung",
+        "từ vựng giao tiếp trung",
+        "ngữ pháp giao tiếp trung",
+        "hsk giao tiếp"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "muc-1",
+          "heading": "Kiến thức cần chuẩn bị trước khi bắt đầu học giao tiếp",
+          "paragraphs": [
+            "Để xây dựng kỹ năng giao tiếp tiếng Trung hiệu quả, người học cần nắm vững 3 nền tảng cơ bản sau:",
+            "Phát âm là nền tảng then chốt để tránh hiểu lầm nghĩa từ do thanh điệu. Tiếng Trung là ngôn ngữ sắc bản, việc nắm đúng 4 thanh điệu hiện đại (bình thượng khứ nhập) và thanh điệu trung tính quyết định nghĩa từ. Một lỗi thanh điệu đơn giản có thể thay đổi hoàn toàn nghĩa của câu.",
+            "Từ vựng giao tiếp hàng ngày. Tập trung vào những từ và câu dùng trong cuộc sống thực như: chào hỏi, giới thiệu bản thân, mua sắm, hỏi đường. Tránh việc học quá nhiều từ vựng chuyên ngành hoặc văn học ban đầu.",
+            "Cấu trúc câu cơ bản. Tiếng Trung thường dùng cấu trúc chủ ngữ + động từ + tân ngữ (主语 + 谓语 + 宾语), khác với cách dịch trực tiếp từ tiếng Việt. Việc hiểu cấu trúc này giúp người học tạo câu nhanh và chính xác."
+          ],
+          "bullets": [
+            "Nắm vững 4 thanh điệu hiện đại: bình thượng khứ nhập",
+            "Hiểu cấu trúc câu chủ ngữ + động từ + tân ngữ của tiếng Trung đối chiếu với tiếng Việt",
+            "Chọn từ vựng thực tế cho cuộc sống hàng ngày thay vì học từ liệt kê"
+          ],
+          "example": {
+            "han": "你好",
+            "py": "nǐ hǎo",
+            "vi": "Chào hỏi / Xin chào"
+          },
+          "tip": "Bắt đầu mỗi buổi học bằng việc lặp lại 5 từ có thanh điệu khác nhau trong 1 phút để cơ bắp phát âm nhớ hình thái."
+        },
+        {
+          "id": "muc-2",
+          "heading": "Quy trình học tiếng trung giao tiếp theo đúng thứ tự người bản xứ",
+          "paragraphs": [
+            "Quy trình giao tiếp được chia thành 4 bước tiến bộ từ cơ bản đến nâng cao. Khuyến nghị luyện cặp thanh điệu định kỳ để củng cố nền tảng.",
+            "Bước 1: Nắm vững phát âm và cặp thanh điệu. Trước khi học từ vựng, người học cần luyện tập các cặp thanh điệu. Ví dụ: mā (mẹ), má (cát), mǎ (mã), mà (câu hỏi). Điều này giúp não bộ quen với sự thay đổi thanh điệu. Khuyến nghị luyện cặp thanh điệu 15 phút mỗi ngày trong 2 tuần đầu tiên.",
+            "Bước 2: Học từ vựng theo chủ đề cuộc sống. Tập trung vào 3 chủ đề đầu tiên: 1) Giao tiếp cơ bản (chào hỏi, xin cảm ơn, từ chối), 2) Giới thiệu bản thân (tên tuổi nghề), 3) Mua hàng (giá, số lượng, thanh toán).",
+            "Bước 3: Học cấu trúc câu cơ bản. Nắm quy tắc chủ ngữ + động từ + tân ngữ và các từ nối phổ biến như 而且 (érqiě - đồng thời), 因为 (yīnwèi - vì), 但是 (dànshì - nhưng).",
+            "Bước 4: Luyện nghe và nói thực tế. Sử dụng nguồn nghe người bản xứ (bài hát, phim, podcast) và lặp lại theo phương pháp Shadowing (đọc theo sau)."
+          ],
+          "bullets": [
+            "Bước 1: Luyện cặp thanh điệu định kỳ để củng cố nền tảng",
+            "Bước 2: Tập từ vựng chủ đề 'Giao tiếp cơ bản', 'Giới thiệu bản thân', 'Mua hàng'",
+            "Bước 3: Học cấu trúc chủ ngữ + động từ + tân ngữ và từ nối phổ biến",
+            "Bước 4: Áp dụng Shadowing với nguồn nghe người bản xứ"
+          ],
+          "example": {
+            "han": "我叫李明",
+            "py": "wǒ jiào Lǐ Míng",
+            "vi": "Tôi tên là Lý Minh"
+          },
+          "tip": "Sử dụng ứng dụng ghi âm để so sánh giọng nói với audio người bản xứ, điều chỉnh thanh điệu cho khớp chính xác."
+        },
+        {
+          "id": "muc-3",
+          "heading": "Ví dụ thực tế Pinyin – tiếng Việt và lưu ý quan trọng",
+          "paragraphs": [
+            "Phần này cung cấp các ví dụ từ vựng giao tiếp phổ biến với định dạng Pinyin chính xác. Lưu ý quan trọng về quy tắc thanh điệu và nghĩa tiếng Việt tự nhiên.",
+            "Trong tiếng Trung, một âm tiết cùng thanh điệu có thể có nhiều nghĩa khác nhau. Dưới đây là các ví dụ giao tiếp cơ bản:"
+          ],
+          "bullets": [
+            "Phát âm chính xác là chìa khóa để người nghe hiểu ý bạn",
+            "Nhiều từ có thanh điệu giống hệt nhưng nghĩa khác, cần chú ý ngữ cảnh (bối cảnh)"
+          ],
+          "table": {
+            "headers": [
+              "Chữ Hán",
+              "Pinyin (Thanh điệu)",
+              "Nghĩa tiếng Việt",
+              "Ví dụ câu"
+            ],
+            "rows": [
+              [
+                "你",
+                "nǐ",
+                "Bạn / Ngươi",
+                "你好吗? (Bạn khỏe không?)"
+              ],
+              [
+                "好",
+                "hǎo",
+                "Khỏe / Tốt",
+                "今天天气真好 (Thời tiết hôm nay thật tốt)"
+              ],
+              [
+                "吗",
+                "ma",
+                "Câu hỏi (vế sau)",
+                "你是学生吗? (Bạn là sinh viên không?)"
+              ],
+              [
+                "很",
+                "hěn",
+                "Rất (trình từ)",
+                "我很好 (Tôi rất khỏe)"
+              ]
+            ]
+          },
+          "example": {
+            "han": "谢谢",
+            "py": "xiè xie",
+            "vi": "Cảm ơn"
+          },
+          "tip": "Khi đọc Pinyin, hãy chỉ vào thanh điệu trên âm tiết, đừng nhớ nghĩa ngay lập tức, hãy tập trung vào cách nói lên."
+        },
+        {
+          "id": "muc-4",
+          "heading": "Lỗi hay gặp của người học tiếng Trung và cách khắc phục",
+          "paragraphs": [
+            "Nhiều học viên Việt Nam thường mắc các lỗi phổ biến do sự tương đồng từ vựng hay cách tư duy ngôn ngữ. Phần này phân tích lỗi và cung cấp giải pháp cụ thể.",
+            "Việc nhận diện lỗi là bước đầu tiên để cải thiện kỹ năng giao tiếp tự nhiên và chính xác."
+          ],
+          "bullets": [
+            "Lỗi phát âm thanh điệu: Người Việt thường nhòe thanh điệu hoặc đọc bằng giọng phẳng, khiến nghĩa từ thay đổi.",
+            "Lỗi cấu trúc câu: Dùng cấu trúc tiếng Việt (chủ ngữ + động từ + tân ngữ) để dịch trực tiếp sang tiếng Trung, dẫn đến câu dài và thiếu từ nối logic.",
+            "Lỗi chọn từ: Dùng từ vựng viết văn hoặc quá trang trọng trong cuộc hội thoại hàng ngày."
+          ],
+          "table": {
+            "headers": [
+              "Lỗi",
+              "Nguyên nhân",
+              "Cách khắc phục"
+            ],
+            "rows": [
+              [
+                "Đọc thanh điệu phẳng cho từ má (cát)",
+                "Thiếu tập cặp thanh điệu",
+                "Luyện 10 cặp thanh điệu hàng ngày, ghi âm so sánh"
+              ],
+              [
+                "Dịch 'Tôi yêu bạn'",
+                "Tùy vào tình cảm và độ thân thiết",
+                "Dùng 我很喜欢你 cho tình cảm nhẹ nhàng; dùng 我爱你 cho tình cảm sâu sắc"
+              ],
+              [
+                "Dùng cấu trúc tiếng Việt dịch trực tiếp",
+                "Thiếu từ nối logic cho cấu trúc chủ ngữ + động từ + tân ngữ",
+                "Thêm từ nối như 而且, 因为, 但是 hoặc điều chỉnh từ thứ tự để khớp cấu trúc tiếng Trung"
+              ]
+            ]
+          },
+          "example": {
+            "han": "没关系",
+            "py": "méi guān xi",
+            "vi": "Không sao / Được rồi (khắc phục lỗi dịch quá trực tiếp)"
+          },
+          "tip": "Thay vì dịch từng từ, hãy tìm hiểu ý muốn truyền đạt và tìm từ tương đương trong tiếng Trung."
+        },
+        {
+          "id": "muc-5",
+          "heading": "Tóm tắt và lưu ý quan trọng",
+          "paragraphs": [
+            "Học tiếng trung giao tiếp hiệu quả đòi hỏi người học nắm vững 4 thanh điệu hiện đại, cấu trúc câu chủ ngữ + động từ + tân ngữ và từ vựng thực tế theo chủ đề cuộc sống.",
+            "Không hứa hẹn mốc kết quả cố định thiếu căn cứ. Thời gian tiến bộ phụ thuộc vào mục tiêu và tần suất luyện tập hàng ngày. Người học nên duy trì tần suất thường xuyên thay vì gắn bó với mốc thời gian cố định."
+          ],
+          "bullets": [
+            "4 thanh điệu hiện đại: bình thượng khứ nhập",
+            "Cấu trúc câu: chủ ngữ + động từ + tân ngữ",
+            "Luyện tập thường xuyên quan trọng hơn mốc thời gian cố định"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Học tiếng trung giao tiếp cần nhiều thời gian?",
+          "a": "Thời gian phụ thuộc vào mục tiêu và thời gian luyện tập hàng ngày. Người học nên duy trì tần suất thường xuyên thay vì gắn bó với mốc thời gian cố định."
+        },
+        {
+          "q": "Có cần học Hán tự trước khi giao tiếp không?",
+          "a": "Không bắt buộc. Nhiều người học giao tiếp thành công chỉ qua Pinyin ban đầu. Tuy nhiên, học Hán tự sau này giúp mở rộng từ vựng và hiểu sâu cấu trúc từ. Người học có thể bắt đầu bằng Pinyin và chuyển sang Hán tự khi muốn đọc sách hoặc viết."
+        }
+      ],
+      "relatedSlugs": [
+        "cach-tra-diem-thi-hsk-online",
+        "thang-diem-dau-hsk-1-den-6"
+      ],
+      "cta": {
+        "heading": "Bắt đầu luyện giao tiếp ngay hôm nay",
+        "body": "Truy cập HSK Flashcards trên trình duyệt để bắt đầu luyện tập từ vựng giao tiếp.",
+        "buttonLabel": "Truy cập HSK Flashcards"
+      },
+      "sourceDraftId": "draft-20261126153450-hoc-tieng-trung-giao-tiep"
+    },
+    {
+      "slug": "thi-hsk-o-dau",
+      "category": "meo-hoc",
+      "categoryLabel": "Mẹo học HSK",
+      "hskTag": "Tiếng Trung thực tế",
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-27",
+      "readMinutes": 6,
+      "featured": false,
+      "editorialVoice": "educational-how-to",
+      "title": "Hướng dẫn chi tiết thi HSK ở đâu: Địa điểm, quy trình và lưu ý quan trọng",
+      "metaTitle": "Thi HSK ở đâu? Địa điểm và cách đăng ký thi HSK tại Việt Nam",
+      "metaDescription": "Tìm hiểu thi HSK ở đâu qua danh sách các điểm thi chính thức tại Việt Nam. Hướng dẫn quy trình đăng ký và cách chọn hình thức thi phù hợp nhất.",
+      "summary": "Việc xác định địa điểm thi HSK chính thức là bước đầu tiên quan trọng để đảm bảo chứng chỉ có giá trị quốc tế. Bài viết cung cấp danh sách các đơn vị tổ chức thi tại Việt Nam, cách phân biệt hình thức thi và quy trình đăng ký cụ thể.",
+      "keywords": [
+        "thi hsk ở đâu",
+        "địa điểm thi hsk",
+        "đăng ký thi hsk",
+        "thi hsk tại việt nam"
+      ],
+      "sources": [],
+      "sections": [
+        {
+          "id": "muc-1",
+          "heading": "Các địa điểm thi HSK chính thức tại Việt Nam",
+          "paragraphs": [
+            "Tại Việt Nam, việc tổ chức thi HSK được thực hiện bởi các đơn vị được ủy quyền chính thức từ đơn vị tổ chức thi quốc tế (CTI). Người học không nên đăng ký qua các trung tâm không có giấy phép để tránh rủi ro về tính pháp lý của chứng chỉ.",
+            "Tùy vào khu vực sinh sống, bạn có thể lựa chọn các điểm thi tại các thành phố lớn như Hà Nội, TP. Hồ Chí Minh, Đà Nẵng hoặc các tỉnh thành có sự hiện diện của các cơ sở giáo dục Trung Quốc.",
+            "Lệ phí thi HSK tại Việt Nam hiện nay dao động từ 1.500.000 đồng đến 3.000.000 đồng tùy thuộc vào cấp độ thi và hình thức thi."
+          ],
+          "bullets": [
+            "Các trường Đại học Ngoại ngữ trọng điểm.",
+            "Các Viện Khổng Tử trực thuộc các trường đại học lớn.",
+            "Các trung tâm ngôn ngữ được cấp phép tổ chức thi định kỳ."
+          ],
+          "table": {
+            "headers": [
+              "Khu vực",
+              "Loại hình điểm thi phổ biến",
+              "Lưu ý"
+            ],
+            "rows": [
+              [
+                "Miền Bắc",
+                "Đại học Ngoại ngữ (Hà Nội)",
+                "Số lượng thí sinh đông, lịch thi dày"
+              ],
+              [
+                "Miền Trung",
+                "Đại học Ngoại ngữ (Đà Nẵng)",
+                "Cần kiểm tra lịch thi định kỳ"
+              ],
+              [
+                "Miền Nam",
+                "Đại học KHXH&NV (TP.HCM)",
+                "Phổ biến cho thí sinh khu vực phía Nam"
+              ]
+            ]
+          },
+          "tip": "Trước khi quyết định thi ở đâu, hãy liên hệ trực tiếp với hotline của điểm thi để xác nhận lịch thi gần nhất và hình thức thi (máy tính hoặc giấy)."
+        },
+        {
+          "id": "muc-2",
+          "heading": "Phân biệt hình thức thi HSK trên máy tính và trên giấy",
+          "paragraphs": [
+            "Hiện nay, thí sinh có hai lựa chọn chính là thi HSK trên máy tính (Internet-based) và thi trên giấy (Paper-based). Việc lựa chọn hình thức nào phụ thuộc vào kỹ năng thực tế của người học.",
+            "Thi trên máy tính giúp kết quả phần thi Viết (viết chữ Hán bằng Pinyin) nhanh chóng và thuận tiện hơn, trong khi thi trên giấy phù hợp với những người có thói quen viết tay và muốn kiểm soát tốc độ viết chữ."
+          ],
+          "example": {
+            "han": "我想参加电脑考试。",
+            "py": "Wǒ xiǎng cānjiā diànnǎo kǎoshì.",
+            "vi": "Tôi muốn tham gia kỳ thi trên máy tính."
+          }
+        },
+        {
+          "id": "muc-3",
+          "heading": "Quy trình đăng ký thi HSK chuẩn xác",
+          "paragraphs": [
+            "Để đăng ký thi thành công, thí sinh cần thực hiện theo các bước sau nhằm tránh sai sót thông tin cá nhân trên chứng chỉ.",
+            "Bước 1: Truy cập trang web chính thức của điểm thi hoặc liên hệ trực tiếp qua văn phòng tuyển sinh của đơn vị tổ chức.",
+            "Bước 2: Cung cấp thông tin cá nhân chính xác bao gồm: Họ tên (khớp với CCCD/Hộ chiếu), ngày tháng năm sinh, số định danh và ảnh thẻ.",
+            "Bước 3: Chọn cấp độ thi (HSK 1–6) và hình thức thi mong muốn.",
+            "Bước 4: Hoàn tất lệ phí thi theo hướng dẫn của đơn vị tổ chức.",
+            "Thời gian thi HSK thường diễn ra vào thứ Bảy hoặc Chủ nhật, và thí sinh cần đến điểm thi trước 30 phút để làm thủ tục."
+          ],
+          "tip": "Luôn kiểm tra kỹ họ tên và ngày sinh trên phiếu đăng ký trước khi thanh toán. Bất kỳ sai sót nào cũng sẽ dẫn đến việc chứng chỉ không hợp lệ khi làm hồ sơ du học."
+        },
+        {
+          "id": "muc-4",
+          "heading": "Các lỗi thường gặp khi chuẩn bị thi HSK",
+          "paragraphs": [
+            "Nhiều thí sinh gặp khó khăn không phải do kiến thức mà do khâu chuẩn bị thủ tục và tâm lý thi cử.",
+            "Lỗi thiếu giấy tờ tùy thân là lỗi phổ biến nhất. Bạn bắt buộc phải mang theo CCCD hoặc Hộ chiếu bản gốc có thông tin trùng khớp với phiếu đăng ký.",
+            "Lỗi nhầm lẫn giữa các cấp độ HSK cũ và HSK 3.0 cũng thường xuyên xảy ra. Hiện tại, các kỳ thi vẫn đang áp dụng theo khung chuẩn HSK 2.0 (từ cấp 1 đến cấp 6)."
+          ],
+          "bullets": [
+            "Quên mang giấy tờ tùy thân bản gốc.",
+            "Đến phòng thi muộn sau khi đã đóng cửa.",
+            "Không chuẩn bị kỹ kỹ năng gõ Pinyin khi chọn thi máy tính."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Chứng chỉ HSK có thời hạn bao lâu?",
+          "a": "Thông thường, chứng chỉ HSK có giá trị trong vòng 2 năm kể từ ngày cấp để phục vụ các mục đích như du học hoặc xin việc."
+        },
+        {
+          "q": "Có thể đăng ký thi HSK online tại nhà không?",
+          "a": "Hiện tại, việc thi HSK yêu cầu thí sinh phải có mặt tại các điểm thi được ủy quyền để đảm bảo tính nghiêm túc và giám sát chặt chẽ. Bạn chỉ thực hiện đăng ký trực tuyến qua hệ thống của điểm thi."
+        }
+      ],
+      "relatedSlugs": [
+        "danh-sach-dia-diem-thi-hsk-tai-viet-nam-va-cach-dang-ky",
+        "huong-dan-dang-ky-thi-hsk-va-lich-thi",
+        "lich-thi-hsk-va-lich-tra-ket-qua-chinh-thuc"
+      ],
+      "cta": {
+        "heading": "Nâng cao kỹ năng thi HSK ngay hôm nay",
+        "body": "Luyện tập với kho đề thi HSK 1–6 và Flashcard thông minh để tự tin đạt điểm cao trong kỳ thi sắp tới.",
+        "buttonLabel": "Luyện thi HSK miễn phí"
+      },
+      "sourceDraftId": "draft-20261126143741-thi-hsk-o-dau"
+    },
+    {
       "slug": "khi-nao-dung-er-va-liang",
       "category": "ngu-phap",
       "categoryLabel": "Phân biệt & Ngữ pháp",
