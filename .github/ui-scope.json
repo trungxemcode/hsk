@@ -1,9 +1,10 @@
 {
-  "request": "Clean-room rewrite of all 146 HSK lessons, full vocabulary coverage (+626 words to 5,637), replacement of all 4,578 Hanzii examples, and rewrite of confusable groups, pair notes, and relation/about UI copy to remove all Hanzii copyright dependencies.",
+  "request": "Clean-room rewrite of all 146 HSK lessons, full vocabulary coverage (+626 words to 5,637), replacement of all 4,578 Hanzii examples, rewrite of confusable groups/pair notes/relation UI, and upgraded regular dictionary search results & scannable master-detail layout.",
   "excludedRoutes": [
     "lessons",
     "learn",
     "compare",
-    "about"
+    "about",
+    "search"
   ]
 }
