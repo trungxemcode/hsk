@@ -94,7 +94,7 @@ test('inferCategoryAndTag and buildEducationalTopicTitle map queries accurately'
   assert.match(buildEducationalTopicTitle('xin lỗi trong tiếng trung'), /xin lỗi trong tiếng trung/);
 });
 
-test('evaluateDraftQuality grades high-quality SEO articles and warns on missing elements', () => {
+test('evaluateDraftQuality checks technical SEO without requiring optional content blocks', () => {
   const strongArticle = {
     slug: 'xin-loi-trong-tieng-trung',
     category: 'meo-hoc',
@@ -133,6 +133,13 @@ test('evaluateDraftQuality grades high-quality SEO articles and warns on missing
   assert.equal(high.score, 100);
   assert.equal(high.warnings.length, 0);
 
+  const oneSection = evaluateDraftQuality({
+    ...strongArticle,
+    sections: [{ id: 'cach-chon', heading: 'Chọn theo tình huống', paragraphs: ['Giải thích tình huống.'] }],
+    faqs: [],
+  });
+  assert.deepEqual(oneSection, high);
+
   const weak = evaluateDraftQuality({
     slug: 'bai-thieu',
     category: 'meo-hoc',
@@ -144,8 +151,8 @@ test('evaluateDraftQuality grades high-quality SEO articles and warns on missing
     sections: [{ id: 'muc-1', heading: 'Chỉ 1 mục', paragraphs: ['Chưa có ví dụ hay bảng.'] }],
     faqs: [],
   });
-  assert.ok(weak.score < 50);
-  assert.ok(weak.warnings.length >= 4);
+  assert.ok(weak.score < high.score);
+  assert.equal(weak.warnings.length, 2);
 });
 
 test('buildTrendDraftPrompt, buildRewriteDraftPrompt, approveDraftIntoArticles, and rejectDraftRecord work end to end', () => {

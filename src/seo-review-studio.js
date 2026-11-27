@@ -471,7 +471,7 @@
       return `<button type="button" class="rev-draft-card${selected}" data-draft-id="${escHtml(d.id)}">
         <div class="rev-card-top">
           <span class="rev-card-source">${cgptChip}${escHtml(d.trendSource || 'google-trends')}${spike} · v${escHtml(d.version || 1)}</span>
-          <span class="rev-card-score">SEO ${escHtml(score)}${escHtml(xkiroAvg)}${stars}</span>
+          <span class="rev-card-score">Kỹ thuật ${escHtml(score)}${escHtml(xkiroAvg)}${stars}</span>
         </div>
         <h3 class="rev-card-title">${escHtml(d.article?.title || d.trendQuery)}</h3>
         <span class="rev-card-query">Từ khóa: ${escHtml(d.trendQuery || '—')}</span>
@@ -658,7 +658,7 @@
       : '<p>Chưa có checklist đạt chuẩn.</p>';
     const warningsHtml = (q.warnings || []).length
       ? `<ul class="rev-audit-list is-warn">${q.warnings.map((w) => `<li>! ${escHtml(w)}</li>`).join('')}</ul>`
-      : '<p style="color:var(--rev-emerald)">Không có cảnh báo chất lượng SEO nào.</p>';
+      : '<p style="color:var(--rev-emerald)">Không có cảnh báo kỹ thuật SEO nào.</p>';
     const historyHtml = (draft.reviewHistory || []).length
       ? draft.reviewHistory.slice().reverse().map((h) => `<div class="rev-history-item">
           <strong>${escHtml(h.action)} · ${escHtml(formatTimeVi(h.at))}${h.rating ? ` · ${h.rating}/5★` : ''}</strong>
@@ -731,7 +731,7 @@
     $('draftBadges').innerHTML = [
       `<span class="rev-tag ${statusTone}">${escHtml(STATUS_LABELS[draft.status] || draft.status)}</span>`,
       isChatgptDraft(draft) ? `<span class="rev-tag is-chatgpt">ChatGPT · ${escHtml(draft.authorModel || 'ChatGPT Plus')}</span>` : '',
-      `<span class="rev-tag ${scoreTone}">SEO ${escHtml(score)}/100</span>`,
+      `<span class="rev-tag ${scoreTone}">Kỹ thuật ${escHtml(score)}/100</span>`,
       ...xkiroBadges,
       draft.aiReviews?.autoPolished ? '<span class="rev-tag is-accent">Đã tự chỉnh sửa vòng 2</span>' : '',
       `<span class="rev-tag">v${escHtml(draft.version || 1)}</span>`,
@@ -1057,9 +1057,9 @@
       'Mỗi giờ một lần, hãy dùng kết nối MCP HSK SEO Editorial để tự động tạo và nộp ĐÚNG 01 bài viết SEO tiếng Trung HSK vào hàng đợi Chờ duyệt (KHÔNG push lên GitHub):',
       '1. Gọi công cụ get_seo_brief (count: 5). Nếu quota.canSubmitNow = false thì dừng và báo lý do cho tôi.',
       '2. Chọn 1 chủ đề mới hấp dẫn nhất từ suggestedTopics (tuyệt đối không trùng với doNotDuplicate).',
-      '3. Viết bài SEO tiếng Việt 100% nội dung gốc cho người Việt học HSK 1–6: metaTitle dài 35–75 ký tự kết thúc bằng " | HSK Flashcards", metaDescription 110–170 ký tự, 3–4 sections (id bắt đầu bằng chữ thường), ít nhất 1 bảng 3–6 dòng, ít nhất 1 example đủ Chữ Hán giản thể + Pinyin chuẩn dấu thanh điệu + nghĩa tiếng Việt tự nhiên, ít nhất 1 tip ghi nhớ, 2–3 faqs và 2–3 relatedSlugs lấy từ availableRelatedSlugs. Cấm dùng từ "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".',
+      '3. Viết theo editorialRules trong brief. Trả lời thẳng từ đầu, chia mục theo nội dung, giải thích đủ để người đọc tự áp dụng. Bài phân biệt cần vài cặp ví dụ cho thấy đổi từ thì nghĩa hoặc cách dùng đổi thế nào. Chỉ thêm bảng, mẹo hoặc FAQ khi có ích.',
       '4. Gọi submit_seo_draft để nộp bài vào trạng thái pending_review (đợi Hội đồng AI chấm điểm phụ và đợi tôi duyệt trong Phòng Duyệt Bài).',
-      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, điểm SEO tự động và điểm Hội đồng AI.',
+      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, điểm kỹ thuật và điểm Hội đồng AI.',
     ].join('\n');
   }
 

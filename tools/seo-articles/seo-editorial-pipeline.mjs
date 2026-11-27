@@ -22,6 +22,7 @@ import {
   resolveAiConfig,
   slugifyVi,
 } from './generate-ai-article.mjs';
+import { evaluateDraftQuality as evaluateTechnicalQuality } from '../../server/seo-editorial/pipeline-core.mjs';
 import { runDualXkiroReview } from './xkiro-reviewers.mjs';
 import {
   WRITER_STANDARD_ID,
@@ -38,93 +39,7 @@ const DRAFTS_PATH = path.join(ROOT, 'content/seo-articles/drafts.json');
 const SNAPSHOT_PATH = path.join(ROOT, 'content/seo-articles/trends-snapshot.json');
 
 export function evaluateDraftQuality(article) {
-  const checks = [];
-  const warnings = [];
-  let score = 0;
-
-  try {
-    validateArticle(article);
-    checks.push('Cấu trúc JSON & kiểm tra từ khóa cấm đạt chuẩn.');
-    score += 20;
-  } catch (err) {
-    warnings.push(`Lỗi kiểm định cấu trúc: ${err.message}`);
-  }
-
-  const metaTitleLen = String(article?.metaTitle || '').trim().length;
-  if (metaTitleLen >= 35 && metaTitleLen <= 75) {
-    checks.push(`Độ dài metaTitle chuẩn (${metaTitleLen} ký tự).`);
-    score += 10;
-  } else {
-    warnings.push(`metaTitle (${metaTitleLen} ký tự) nên nằm trong khoảng 35–75 ký tự.`);
-    if (metaTitleLen >= 20) score += 5;
-  }
-
-  const metaDescLen = String(article?.metaDescription || '').trim().length;
-  if (metaDescLen >= 110 && metaDescLen <= 170) {
-    checks.push(`Độ dài metaDescription chuẩn SEO (${metaDescLen} ký tự).`);
-    score += 10;
-  } else {
-    warnings.push(`metaDescription (${metaDescLen} ký tự) nên dài 110–170 ký tự.`);
-    if (metaDescLen >= 60) score += 5;
-  }
-
-  const sections = Array.isArray(article?.sections) ? article.sections : [];
-  if (sections.length >= 3) {
-    checks.push(`Đủ chiều sâu nội dung (${sections.length} phần).`);
-    score += 15;
-  } else {
-    warnings.push(`Bài mới có ${sections.length} mục; nên có tối thiểu 3–4 mục rõ ràng.`);
-    if (sections.length >= 2) score += 8;
-  }
-
-  const hasValidTable = sections.some(
-    (s) => s?.table && Array.isArray(s.table.rows) && s.table.rows.length >= 2 && s.table.rows.length <= 6
-  );
-  const hasOversizedTable = sections.some(
-    (s) => s?.table && Array.isArray(s.table.rows) && s.table.rows.length > 6
-  );
-  if (hasValidTable && !hasOversizedTable) {
-    checks.push('Có bảng so sánh/tổng hợp gọn <= 6 dòng.');
-    score += 15;
-  } else if (hasOversizedTable) {
-    warnings.push('Có bảng vượt quá 6 dòng — nên tách gọn <= 6 dòng mỗi bảng.');
-    score += 8;
-  } else {
-    warnings.push('Nên bổ sung ít nhất 1 bảng đối chiếu hoặc tổng hợp 3–6 dòng.');
-  }
-
-  const hasExample = sections.some(
-    (s) => s?.example?.han && s?.example?.py && s?.example?.vi
-  );
-  if (hasExample) {
-    checks.push('Có ví dụ đầy đủ Chữ Hán + Pinyin + Nghĩa tiếng Việt.');
-    score += 15;
-  } else {
-    warnings.push('Thiếu khối ví dụ 3 lớp (Chữ Hán + Pinyin có dấu + Nghĩa tiếng Việt).');
-  }
-
-  const hasTip = sections.some((s) => typeof s?.tip === 'string' && s.tip.trim().length > 10);
-  if (hasTip) {
-    checks.push('Có hộp Mẹo thực tế giúp người học dễ nhớ.');
-    score += 5;
-  } else {
-    warnings.push('Nên thêm ít nhất 1 hộp tip ghi nhớ nhanh.');
-  }
-
-  const faqs = Array.isArray(article?.faqs) ? article.faqs : [];
-  if (faqs.length >= 2) {
-    checks.push(`Có ${faqs.length} câu hỏi FAQ chuẩn Schema.`);
-    score += 10;
-  } else {
-    warnings.push('Nên có ít nhất 2 câu FAQ cuối bài.');
-    if (faqs.length === 1) score += 5;
-  }
-
-  return {
-    score: Math.min(100, score),
-    checks,
-    warnings,
-  };
+  return evaluateTechnicalQuality(article, validateArticle);
 }
 
 export function buildTrendDraftPrompt(opts) {

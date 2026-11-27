@@ -628,7 +628,15 @@ test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council revie
             trendSpike: 'ChatGPT mỗi giờ',
             authorModel: 'ChatGPT Plus',
             status: 'approved', // malicious override attempt must be ignored
-            article: makeMockArticleJson('Cách nói xin lỗi trong tiếng Trung tự nhiên'),
+            article: {
+              ...makeMockArticleJson('Cách nói xin lỗi trong tiếng Trung tự nhiên'),
+              sections: [{
+                id: 'doi-chieu-tinh-huong',
+                heading: 'Chọn cách xin lỗi theo tình huống',
+                paragraphs: ['Tùy mức độ lỗi mà bạn chọn cụm từ tự nhiên nhất.'],
+              }],
+              faqs: undefined,
+            },
           },
         },
       }),

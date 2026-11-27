@@ -607,7 +607,6 @@ export function normalizeArticle(raw, defaults = {}) {
       if (s?.table && Array.isArray(s.table.headers) && s.table.headers.length && Array.isArray(s.table.rows) && s.table.rows.length) {
         const headers = s.table.headers.map((h) => sanitizeForbiddenText(h)).filter(Boolean);
         const rows = s.table.rows
-          .slice(0, 6)
           .map((r) => {
             const arr = Array.isArray(r) ? r.map((c) => sanitizeForbiddenText(c)) : [];
             while (arr.length < headers.length) arr.push('—');
@@ -667,7 +666,6 @@ export function normalizeArticle(raw, defaults = {}) {
       ? raw.faqs
           .filter((f) => f && f.q && f.a)
           .map((f) => ({ q: sanitizeForbiddenText(f.q), a: sanitizeForbiddenText(f.a) }))
-          .slice(0, 5)
       : [],
     relatedSlugs: Array.isArray(raw?.relatedSlugs)
       ? raw.relatedSlugs.filter((s) => existingSlugs.includes(s)).slice(0, 3)
@@ -700,8 +698,8 @@ export function validateArticle(article) {
   for (const field of ['title', 'metaTitle', 'metaDescription', 'summary', 'publishedAt']) {
     if (!String(article[field] || '').trim()) throw new Error(`Missing "${field}"`);
   }
-  if (!Array.isArray(article.sections) || article.sections.length < 2) {
-    throw new Error('Article must have at least 2 sections');
+  if (!Array.isArray(article.sections) || article.sections.length === 0) {
+    throw new Error('Article must have at least 1 section');
   }
   for (const sec of article.sections) {
     if (!/^[a-z][a-z0-9-]*$/.test(String(sec.id || ''))) {
@@ -714,15 +712,15 @@ export function validateArticle(article) {
   }
 }
 
-export function evaluateDraftQuality(article) {
+export function evaluateDraftQuality(article, validate = validateArticle) {
   const checks = [];
   const warnings = [];
   let score = 0;
 
   try {
-    validateArticle(article);
+    validate(article);
     checks.push('Cấu trúc JSON & kiểm tra từ khóa cấm đạt chuẩn.');
-    score += 20;
+    score += 50;
   } catch (err) {
     warnings.push(`Lỗi kiểm định cấu trúc: ${err.message}`);
   }
@@ -730,63 +728,19 @@ export function evaluateDraftQuality(article) {
   const metaTitleLen = String(article?.metaTitle || '').trim().length;
   if (metaTitleLen >= 35 && metaTitleLen <= 75) {
     checks.push(`Độ dài metaTitle chuẩn (${metaTitleLen} ký tự).`);
-    score += 10;
+    score += 25;
   } else {
     warnings.push(`metaTitle (${metaTitleLen} ký tự) nên nằm trong khoảng 35–75 ký tự.`);
-    if (metaTitleLen >= 20) score += 5;
+    if (metaTitleLen >= 20) score += 12;
   }
 
   const metaDescLen = String(article?.metaDescription || '').trim().length;
   if (metaDescLen >= 110 && metaDescLen <= 170) {
     checks.push(`Độ dài metaDescription chuẩn SEO (${metaDescLen} ký tự).`);
-    score += 10;
+    score += 25;
   } else {
     warnings.push(`metaDescription (${metaDescLen} ký tự) nên dài 110–170 ký tự.`);
-    if (metaDescLen >= 60) score += 5;
-  }
-
-  const sections = Array.isArray(article?.sections) ? article.sections : [];
-  if (sections.length >= 3) {
-    checks.push(`Đủ chiều sâu nội dung (${sections.length} phần).`);
-    score += 15;
-  } else {
-    warnings.push(`Bài mới có ${sections.length} mục; nên có tối thiểu 3–4 mục rõ ràng.`);
-    if (sections.length >= 2) score += 8;
-  }
-
-  const hasValidTable = sections.some(
-    (s) => s?.table && Array.isArray(s.table.rows) && s.table.rows.length >= 2 && s.table.rows.length <= 6
-  );
-  if (hasValidTable) {
-    checks.push('Có bảng so sánh/tổng hợp gọn <= 6 dòng.');
-    score += 15;
-  } else {
-    warnings.push('Nên bổ sung ít nhất 1 bảng đối chiếu hoặc tổng hợp 3–6 dòng.');
-  }
-
-  const hasExample = sections.some((s) => s?.example?.han && s?.example?.py && s?.example?.vi);
-  if (hasExample) {
-    checks.push('Có ví dụ đầy đủ Chữ Hán + Pinyin + Nghĩa tiếng Việt.');
-    score += 15;
-  } else {
-    warnings.push('Thiếu khối ví dụ 3 lớp (Chữ Hán + Pinyin + Nghĩa tiếng Việt).');
-  }
-
-  const hasTip = sections.some((s) => typeof s?.tip === 'string' && s.tip.trim().length > 10);
-  if (hasTip) {
-    checks.push('Có hộp Mẹo thực tế giúp người học dễ nhớ.');
-    score += 5;
-  } else {
-    warnings.push('Nên thêm ít nhất 1 hộp tip ghi nhớ nhanh.');
-  }
-
-  const faqs = Array.isArray(article?.faqs) ? article.faqs : [];
-  if (faqs.length >= 2) {
-    checks.push(`Có ${faqs.length} câu hỏi FAQ chuẩn Schema.`);
-    score += 10;
-  } else {
-    warnings.push('Nên có ít nhất 2 câu FAQ cuối bài.');
-    if (faqs.length === 1) score += 5;
+    if (metaDescLen >= 60) score += 12;
   }
 
   return { score: Math.min(100, score), checks, warnings };
@@ -970,7 +924,7 @@ export async function callWriterJson({ prompt, env = {}, fetchImpl = fetch }) {
         model,
         systemPrompt,
         userPrompt: prompt,
-        maxTokens: 2100,
+        maxTokens: 4000,
         temperature: 0.55,
       });
       return { data, provider: 'cloudflare-ai', model };
