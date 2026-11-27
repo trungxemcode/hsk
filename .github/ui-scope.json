@@ -1,57 +1,6 @@
 {
-  "request": "Clean-room rewrite of all 146 HSK lessons, full vocabulary coverage (+626 words to 5,637), replacement of 4,578 Hanzii examples, and rewrite of confusable groups, pair notes and relation/about copy. Keep every existing route under strict screenshot and geometry comparison except the pre-existing lessons exclusion. For data-driven routes only, serve the exact main-branch data assets in both captures so random/sample vocabulary changes do not mask CSS or layout regressions. Normalize only the about-panel content and compare-intro copy that are intentionally rewritten. Normalize only the shared vocabulary count labels and the Profile learned-count label to the exact main-branch text during visual capture; keep all screenshots and geometry checks enabled.",
+  "request": "Expand regular dictionary search results (+10,160 Vietnamese-glossed entries, relevance-first ranking) and redesign #searchResults into a scannable master-detail layout with quick candidate chips, POS-grouped meanings, and examples.",
   "excludedRoutes": [
-    "lessons"
-  ],
-  "dataStableRoutes": [
-    "home",
-    "learn",
-    "quiz",
-    "srs",
-    "match-game",
-    "sentence-game",
-    "compare",
-    "about"
-  ],
-  "stableDataFiles": [
-    "content/data/words.js",
-    "content/data/words.js.gz",
-    "content/data/dictionarySupplement.js",
-    "content/data/dictionarySupplement.js.gz",
-    "content/data/checkedPracticeExamples.js",
-    "content/data/checkedPracticeExamples.js.gz",
-    "content/data/confusableGroups.js",
-    "content/data/confusableGroups.js.gz",
-    "content/data/usageFactsData.js",
-    "content/data/usageFactsData.js.gz",
-    "content/data/wordRelationsData.js",
-    "content/data/wordRelationsData.js.gz",
-    "lesson-mini-data.json",
-    "lesson-content-hsk1.json",
-    "lesson-content-hsk2.json",
-    "lesson-content-hsk3.json",
-    "lesson-content-hsk4.json",
-    "lesson-content-hsk5.json",
-    "lesson-content-hsk6.json"
-  ],
-  "baselineScripts": {
-    "compare": [
-      "app.js",
-      "src/ui/dictionary-relations.js"
-    ]
-  },
-  "contentPanelOverrides": {
-    "about": {
-      "#aboutPanel": "innerHTML"
-    },
-    "compare": {
-      "#compareIntro": "textContent"
-    },
-    "profile": {
-      "#studioKnownCount": "textContent"
-    }
-  },
-  "sharedContentOverrides": {
-    "SMALL.studio-filter-count": "textContent"
-  }
+    "search"
+  ]
 }

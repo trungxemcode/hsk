@@ -147,19 +147,53 @@ function switchMode(next) {
  if(mode==='mistakes')renderMistakes();if(mode==='compare')renderComparisons(); stats();
 }
 let searchMatches=[], visibleResults=40, searchTimer, searchPinyinAllowed=true, searchScope='hsk',searchExplicit=false;
+let extendedSearchPoolCache=null;
+const BASE_EXTRA_WORDS=[
+ {han:'饭',pin:'fàn',hv:'Phạn',mean:'cơm; bữa cơm; bữa ăn; thức ăn nấu chín',posSenses:[{pos:'Danh từ',mean:'cơm; bữa cơm; bữa ăn; thức ăn nấu chín'}],examples:[{cn:'晚饭已经做好了，快过来吃吧。',pin:'Wǎnfàn yǐjīng zuòhǎo le, kuài guòlái chī ba.',vi:'Cơm tối đã nấu xong rồi, mau lại ăn đi.'},{cn:'我中午在公司附近吃了一顿便饭。',pin:'Wǒ zhōngwǔ zài gōngsī fùjìn chī le yī dùn biànfàn.',vi:'Buổi trưa tôi ăn một bữa cơm bình dân gần công ty.'}]}
+];
+const SEARCH_POS_LABELS={n:'Danh từ',v:'Động từ',adj:'Tính từ',adv:'Phó từ',prep:'Giới từ',conj:'Liên từ',pron:'Đại từ',num:'Số từ',numb:'Số từ',classifier:'Lượng từ',particle:'Trợ từ',part:'Trợ từ',interj:'Thán từ',a:'Tính từ',d:'Phó từ',m:'Số từ',q:'Lượng từ',p:'Giới từ',c:'Liên từ',r:'Đại từ',u:'Trợ từ',idiom:'Thành ngữ'};
+function searchPosLabel(pos){return SEARCH_POS_LABELS[pos]||pos||'Nghĩa';}
+function getExtendedSearchPool(){
+ if(extendedSearchPoolCache)return extendedSearchPoolCache;
+ const hskHans=new Set(words.map(w=>w.han));
+ const list=[];
+ for(const item of BASE_EXTRA_WORDS){
+  if(hskHans.has(item.han))continue;
+  const w={...item,hsk:null,isExtended:true};
+  sensesMap.set(w,splitSenses(w));
+  list.push(w);
+  hskHans.add(item.han);
+ }
+ if(typeof usageFactsData!=='undefined'&&usageFactsData?.words){
+  for(const [han,entry] of Object.entries(usageFactsData.words)){
+   if(hskHans.has(han)||!entry?.variants?.length)continue;
+   const v=entry.variants[0];
+   const rawSenses=(v.senses||[]).filter(s=>s&&s.mean);
+   if(!rawSenses.length)continue;
+   const mean=[...new Set(rawSenses.map(s=>s.mean))].join('; ');
+   const w={han,pin:v.pin||'',mean,hv:'',hsk:null,isExtended:true,posSenses:rawSenses.map(s=>({pos:searchPosLabel(s.pos),mean:s.mean})),structures:v.structures||[]};
+   sensesMap.set(w,splitSenses(w));
+   list.push(w);
+  }
+ }
+ extendedSearchPoolCache=list;
+ return list;
+}
 function searchScore(w,q,terms) {
- if(w.han===q.trim())return 150;
- if(/^[\u3400-\u9fff]+$/.test(q.trim())&&w.han.includes(q.trim()))return 110;
- if(searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(q)&&/[a-z]/i.test(q))return 120;
- const senses=sensesMap.get(w), vietnamese=senses.map(viText);
+ const trimmed=q.trim();
+ if(w.han===trimmed)return 150;
+ if(/^[\u3400-\u9fff]+$/.test(trimmed)&&w.han.includes(trimmed))return 110;
+ if(searchPinyinAllowed&&w.pin&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(q)&&/[a-z]/i.test(q))return 120;
+ const senses=sensesMap.get(w)||splitSenses(w), vietnamese=senses.map(viText);
  const meanings=senses.map(s=>hasAccent(q)?viText(s):fold(s)), query=hasAccent(q)?viText(q):fold(q);
  if(meanings.some(s=>s===query))return 100;
  if(meanings.some(s=>phraseIn(s,query)))return 90;
  // Synonym expansion preserves accents (bố ≠ bỏ). A short alias must be a whole sense.
  if(vietnamese.some(s=>terms.some(t=>t.split(' ').length===1?bareSense(s)===t:phraseIn(s,t))))return 75;
+ if(w.hv&&(hasAccent(q)?viText(w.hv)===query:fold(w.hv)===query))return 65;
  const tokens=query.split(' ');
  if(tokens.length>1 && meanings.some(s=>tokens.filter(t=>phraseIn(s,t)).length>=Math.max(2,Math.ceil(tokens.length*.75))))return 45;
- if(senses.some(s=>typoSimilar(fold(q),fold(s))))return 25;
+ if(!w.isExtended&&senses.some(s=>typoSimilar(fold(q),fold(s))))return 25;
  return 0;
 }
 let handwritingSearchCharacter='';
@@ -169,22 +203,125 @@ function runSearch() {
  if(!q){searchMatches=[];renderSearch();return;}
  const terms=expandedTerms($('searchInput').value);
  const query=$('searchInput').value.trim(),normalized=hasAccent(query)?viText(query):fold(query);
- searchPinyinAllowed=!words.some(w=>sensesMap.get(w).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized));
- const pool=searchScope==='general'?words:[...new Set([...levelWords(),...words.filter(w=>w.han===query||searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(query)&&/[a-z]/i.test(query))])];
- searchMatches=pool.map((w,i)=>({w,score:searchScore(w,query,terms),i})).filter(r=>r.score>0).sort((a,b)=>Number(b.score>=120)-Number(a.score>=120)||Number(a.w.hsk)-Number(b.w.hsk)||b.score-a.score||a.i-b.i);
+ const includeExtended=searchScope==='hsk'&&activeLevel==='all';
+ const extraPool=includeExtended?getExtendedSearchPool():[];
+ searchPinyinAllowed=!words.some(w=>sensesMap.get(w).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized))&&!extraPool.some(w=>(sensesMap.get(w)||[]).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized));
+ const hskPool=searchScope==='general'?words:[...new Set([...levelWords(),...words.filter(w=>w.han===query||searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(query)&&/[a-z]/i.test(query))])];
+ const pool=includeExtended?[...hskPool,...extraPool]:hskPool;
+ searchMatches=pool.map((w,i)=>({w,score:searchScore(w,query,terms),i})).filter(r=>r.score>0).sort((a,b)=>Number(b.score>=120)-Number(a.score>=120)||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||Number(a.w.hsk||99)-Number(b.w.hsk||99)||a.w.han.length-b.w.han.length||a.i-b.i);
  renderSearch();
+}
+function groupedSearchSenses(w){
+ if(w.posSenses?.length)return w.posSenses;
+ const groups=new Map();
+ const uRows=typeof usageFactsData!=='undefined'?usageFactsData.words?.[w.han]?.variants||[]:[];
+ const matchedVar=uRows.find(v=>typeof usageReading==='function'&&usageReading(v.pin)===usageReading(w.pin))||uRows[0];
+ if(matchedVar?.senses?.length){
+  for(const s of matchedVar.senses){
+   const label=searchPosLabel(s.pos);
+   if(!groups.has(label))groups.set(label,[]);
+   if(s.mean&&!groups.get(label).includes(s.mean))groups.get(label).push(s.mean);
+  }
+ }
+ if(!groups.size&&w.dictionary?.meanings?.length){
+  for(const m of w.dictionary.meanings){
+   const label=m.pos||'Nghĩa';
+   if(!groups.has(label))groups.set(label,[]);
+   if(m.gloss&&!groups.get(label).includes(m.gloss))groups.get(label).push(m.gloss);
+  }
+ }
+ if(!groups.size)return [{pos:'Nghĩa chính',mean:w.mean}];
+ return [...groups.entries()].map(([pos,items])=>({pos,mean:items.join('; ')}));
 }
 function renderSearch() {
  const general=searchScope==='general';$('searchResults').hidden=general;$('searchSummary').hidden=general;
  $('searchResults').replaceChildren(); const q=fold($('searchInput').value);
- $('searchSummary').textContent=handwritingSearchCharacter?(searchMatches.length?`Chứa chữ ${handwritingSearchCharacter} · ${searchMatches.length} kết quả`:`Chưa thấy từ chứa ${handwritingSearchCharacter}. Thử đổi bộ lọc hoặc vẽ lại.`):!q?'':searchMatches.length?`${searchMatches.length} kết quả${visibleResults<searchMatches.length?' · Đang hiện '+visibleResults:''}`:'Chưa tìm thấy. Thử từ ngắn hơn hoặc đổi cách diễn đạt.';
- for(const {w} of searchMatches.slice(0,visibleResults)) {
-  const card=document.createElement('details');card.className='result-card dictionary-row';const summary=document.createElement('summary');summary.className='dictionary-row-summary';const han=document.createElement('span');han.className='result-open dictionary-row-han';han.textContent=w.han;const meaning=document.createElement('span');meaning.className='dictionary-row-meaning';meaning.textContent=w.mean.split(/[;；\n]/)[0];const pin=document.createElement('span');pin.className='dictionary-row-pinyin';pin.textContent=w.pin;summary.append(han,meaning,pin);card.append(summary);
-  const body=document.createElement('div');body.className='dictionary-row-body';body.append(makeMasteryTools(w));const tag=document.createElement('span');tag.className=`hsk-tag hsk${w.hsk}-tag`;tag.textContent=`HSK ${w.hsk}`;body.append(tag);
-  const open=document.createElement('button');open.type='button';open.textContent='Mở thẻ HSK';open.onclick=()=>{if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};body.append(open);const notebook=window.HSKNotebook?.button(()=>w);if(notebook)body.append(notebook);
-  for(const value of [w.pin,w.mean]) {const p=document.createElement('p');p.textContent=value;body.append(p);}const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)body.append(speech);
-  const label=document.createElement('small');label.textContent=recordOf(w)?statusOf(w)==='known'?'✓ Đã thuộc':'× Chưa thuộc':'Chưa đánh dấu';body.append(label,wordRelationDetails(w));card.append(body);$('searchResults').append(card);
+ const hskCount=searchMatches.filter(r=>!r.w.isExtended).length, extCount=searchMatches.length-hskCount;
+ $('searchSummary').textContent=handwritingSearchCharacter?(searchMatches.length?`Chứa chữ ${handwritingSearchCharacter} · ${searchMatches.length} kết quả`:`Chưa thấy từ chứa ${handwritingSearchCharacter}. Thử đổi bộ lọc hoặc vẽ lại.`):!q?'':searchMatches.length?`${searchMatches.length} kết quả${extCount?` (${hskCount} HSK · ${extCount} mở rộng)`:''}${visibleResults<searchMatches.length?' · Đang hiện '+visibleResults:''}`:'Chưa tìm thấy. Thử từ ngắn hơn hoặc đổi cách diễn đạt.';
+ const shown=searchMatches.slice(0,visibleResults);
+ const cards=[];
+ if(shown.length>1){
+  const strip=document.createElement('div');strip.className='search-quick-strip';strip.setAttribute('role','list');strip.setAttribute('aria-label','Chọn nhanh từ khớp');
+  shown.slice(0,14).forEach(({w},idx)=>{
+   const chip=document.createElement('button');chip.type='button';chip.className='search-quick-chip'+(idx===0?' is-active':'');
+   const cHan=document.createElement('strong');cHan.textContent=w.han;
+   const cPin=document.createElement('span');cPin.textContent=w.pin||'';
+   chip.append(cHan,cPin);
+   chip.onclick=()=>{
+    strip.querySelectorAll('.search-quick-chip').forEach(b=>b.classList.remove('is-active'));
+    chip.classList.add('is-active');
+    cards.forEach((c,ci)=>{c.open=ci===idx;});
+    cards[idx]?.scrollIntoView?.({behavior:'smooth',block:'nearest'});
+   };
+   strip.append(chip);
+  });
+  $('searchResults').append(strip);
  }
+ shown.forEach(({w},idx)=>{
+  const card=document.createElement('details');card.className='result-card dictionary-row'+(w.isExtended?' is-extended-result':'');
+  if(idx===0)card.open=true;
+  const summary=document.createElement('summary');summary.className='dictionary-row-summary';
+  const han=document.createElement('span');han.className='result-open dictionary-row-han';han.textContent=w.han;
+  const pin=document.createElement('span');pin.className='dictionary-row-pinyin';pin.textContent=w.pin||'';
+  const badge=document.createElement('span');badge.className=w.hsk?`hsk-tag hsk${w.hsk}-tag search-row-badge`:'hsk-tag search-row-badge is-extended';badge.textContent=w.hsk?`HSK ${w.hsk}`:'Mở rộng';
+  const meaning=document.createElement('span');meaning.className='dictionary-row-meaning';meaning.textContent=w.mean.split(/[;；\n]/).slice(0,2).join('; ');
+  summary.append(han,pin,badge,meaning);card.append(summary);
+
+  const body=document.createElement('div');body.className='dictionary-row-body search-detail-body';
+  const hero=document.createElement('div');hero.className='search-detail-hero';
+  const heroLeft=document.createElement('div');heroLeft.className='search-detail-head';
+  const bigHan=document.createElement('strong');bigHan.className='search-detail-han';bigHan.textContent=w.han;
+  const metaRow=document.createElement('div');metaRow.className='search-detail-meta';
+  const pinSpan=document.createElement('span');pinSpan.className='search-detail-pin';pinSpan.textContent=w.pin?`[${w.pin}]`:'';
+  metaRow.append(pinSpan);
+  if(w.hv){const hvSpan=document.createElement('span');hvSpan.className='search-detail-hv';hvSpan.textContent=`[${w.hv.toUpperCase()}]`;metaRow.append(hvSpan);}
+  const tag=document.createElement('span');tag.className=w.hsk?`hsk-tag hsk${w.hsk}-tag`:'hsk-tag is-extended';tag.textContent=w.hsk?`HSK ${w.hsk}`:'Từ mở rộng';metaRow.append(tag);
+  if(!w.isExtended){const label=document.createElement('small');label.className='search-detail-status';label.textContent=recordOf(w)?statusOf(w)==='known'?'✓ Đã thuộc':'× Chưa thuộc':'Chưa đánh dấu';metaRow.append(label);}
+  heroLeft.append(bigHan,metaRow);
+
+  const actions=document.createElement('div');actions.className='search-detail-actions';
+  const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)actions.append(speech);
+  if(!w.isExtended){
+   const open=document.createElement('button');open.type='button';open.textContent='Mở thẻ HSK';open.onclick=()=>{if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};actions.append(open);
+  }
+  const notebook=window.HSKNotebook?.button(()=>w);if(notebook)actions.append(notebook);
+  hero.append(heroLeft,actions);body.append(hero);
+  if(!w.isExtended)body.append(makeMasteryTools(w));
+
+  const senseBox=document.createElement('div');senseBox.className='search-sense-list';
+  for(const item of groupedSearchSenses(w)){
+   const row=document.createElement('div');row.className='search-sense-row';
+   const pos=document.createElement('span');pos.className='search-sense-pos';pos.textContent=item.pos;
+   const txt=document.createElement('p');txt.className='search-sense-text';txt.textContent=item.mean;
+   row.append(pos,txt);senseBox.append(row);
+  }
+  body.append(senseBox);
+
+  const examples=(w.practice?.examples||w.examples||[]).filter(e=>e&&e.cn&&e.vi);
+  if(!examples.length&&w.exCn&&w.exVi)examples.push({cn:w.exCn,pin:w.originalExampleMetadata?.pin||'',vi:w.exVi});
+  if(examples.length){
+   const exWrap=document.createElement('div');exWrap.className='search-example-list';
+   const exTitle=document.createElement('h4');exTitle.textContent=`Ví dụ cách dùng (${Math.min(examples.length,3)})`;exWrap.append(exTitle);
+   for(const e of examples.slice(0,3)){
+    const exCard=document.createElement('div');exCard.className='search-example-item';
+    const exTop=document.createElement('div');exTop.className='search-example-top';
+    const exCn=document.createElement('p');exCn.className='search-example-cn';exCn.textContent=e.cn;
+    exTop.append(exCn);
+    const exSpeech=window.HSKSpeech?.button(e.cn,'Nghe câu ví dụ');if(exSpeech)exTop.append(exSpeech);
+    exCard.append(exTop);
+    if(e.pin)exCard.append(pinyinLine(e.pin));
+    const exVi=document.createElement('p');exVi.className='search-example-vi';exVi.textContent=e.vi;
+    exCard.append(exVi);
+    exWrap.append(exCard);
+   }
+   body.append(exWrap);
+  }
+
+  if(!w.isExtended)body.append(wordRelationDetails(w));
+  card.append(body);
+  cards.push(card);
+  $('searchResults').append(card);
+ });
  $('searchMore').hidden=general||visibleResults>=searchMatches.length;
  const submitted=searchExplicit;searchExplicit=false;window.dispatchEvent(new CustomEvent('hsk-search-rendered',{detail:{submitted}}));
 }
