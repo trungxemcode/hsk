@@ -950,3 +950,175 @@ test('configured authoring and review fall back to Workers AI when external prov
   assert.equal(audit.status, 'completed');
   assert.deepEqual(ai.calls, [env.CF_REVIEWER_1_MODEL]);
 });
+
+test('concurrent /api/rewrite preserves /api/approve made while AI rewrite is in-flight', async () => {
+  const r2 = createMemoryR2();
+  const initialDrafts = {
+    schema: 1,
+    updatedAt: '2026-11-27T07:00:00.000Z',
+    drafts: [
+      {
+        id: 'draft-a',
+        version: 1,
+        status: 'pending_review',
+        trendQuery: 'xin lỗi tiếng trung',
+        article: { ...makeMockArticleJson('Bài A bản v1'), slug: 'bai-a' },
+      },
+      {
+        id: 'draft-b',
+        version: 1,
+        status: 'pending_review',
+        trendQuery: 'cảm ơn tiếng trung',
+        article: { ...makeMockArticleJson('Bài B chờ duyệt'), slug: 'bai-b' },
+      },
+    ],
+  };
+  await r2.put('seo-editorial/drafts.json', JSON.stringify(initialDrafts));
+
+  let releaseRewriteWriter;
+  const writerStarted = new Promise((resolve) => {
+    let released = false;
+    releaseRewriteWriter = () => {
+      if (!released) {
+        released = true;
+        resolve();
+      }
+    };
+  });
+  let notifyWriterCalled;
+  const writerCalledPromise = new Promise((resolve) => {
+    notifyWriterCalled = resolve;
+  });
+
+  const baseFetch = createMockFetch();
+  const fetchImpl = async (url, init) => {
+    const u = String(url);
+    if (u.includes('openrouter.ai')) {
+      const body = JSON.parse(init.body);
+      const sys = String(body.messages?.[0]?.content || '');
+      if (!sys.includes(AUDIT_PROTOCOL_ID)) {
+        notifyWriterCalled();
+        await writerStarted;
+        return Response.json({
+          choices: [
+            {
+              message: {
+                content: JSON.stringify({
+                  writerBrief: { styleId: 'educational-how-to', primaryKeyword: 'xin lỗi tiếng trung' },
+                  ...makeMockArticleJson('Bài A đã viết lại v2'),
+                  revisionSummary: 'Đã mở rộng ví dụ và kết luận rõ ràng.',
+                }),
+              },
+            },
+          ],
+        });
+      }
+      return Response.json({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                lockedIntent: 'Xin lỗi trong tiếng Trung',
+                targetAudience: 'Người tự học HSK',
+                scores: {
+                  A: { score: 13, evidence: 'Tốt' },
+                  B: { score: 15, evidence: 'Chuẩn' },
+                  C: { score: 13, evidence: 'Đủ sâu' },
+                  D: { score: 11, evidence: 'Có giá trị' },
+                  E: { score: 9, evidence: 'Logic' },
+                  F: { score: 9, evidence: 'SEO' },
+                  G: { score: 7, evidence: 'Mạch lạc' },
+                  H: { score: 7, evidence: 'Tự nhiên' },
+                  I: { score: 5, evidence: 'Ứng dụng' },
+                  J: { score: 4, evidence: 'Minh bạch' },
+                },
+                hardFails: [],
+                challengeResults: [],
+                errors: [],
+                strengths: ['Rõ ràng'],
+                summary: 'Đạt chuẩn.',
+              }),
+            },
+          },
+        ],
+      });
+    }
+    return baseFetch(url, init);
+  };
+
+  const env = {
+    AI: createMockAi(),
+    SEO_BUCKET: r2,
+    OPENROUTER_API_KEY: 'sk-or-test-concurrent',
+    FIREBASE_API_KEY: 'test-fb-key',
+    ALLOWED_ORIGINS: 'https://hskfreelearningai.pages.dev',
+  };
+
+  // Start background rewrite for draft-a
+  const rewritePromise = handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/rewrite', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer fake-admin-id-token',
+        'Content-Type': 'application/json',
+        Origin: 'https://hskfreelearningai.pages.dev',
+      },
+      body: JSON.stringify({ draftId: 'draft-a', comment: 'Bổ sung ví dụ', rating: 4 }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+
+  // Wait until draft-a rewrite is mid-flight at OpenRouter, then approve draft-b concurrently
+  await writerCalledPromise;
+  const approveRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/approve', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer fake-admin-id-token',
+        'Content-Type': 'application/json',
+        Origin: 'https://hskfreelearningai.pages.dev',
+      },
+      body: JSON.stringify({ draftId: 'draft-b', comment: 'OK xuất bản', rating: 5 }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(approveRes.status, 200);
+
+  // Let draft-a's AI rewrite finish and persist
+  releaseRewriteWriter();
+  const rewriteRes = await rewritePromise;
+  assert.equal(rewriteRes.status, 200);
+  const rewriteBody = await rewriteRes.json();
+
+  assert.equal(rewriteBody.draft.id, 'draft-a');
+  assert.equal(rewriteBody.draft.version, 2);
+
+  const stored = JSON.parse((await r2.get('seo-editorial/drafts.json')) ? await (await r2.get('seo-editorial/drafts.json')).text() : '{}');
+  const storedA = stored.drafts.find((d) => d.id === 'draft-a');
+  const storedB = stored.drafts.find((d) => d.id === 'draft-b');
+  assert.equal(storedA?.version, 2, 'Draft A must be updated to v2');
+  assert.equal(storedA?.article?.title, 'Bài A đã viết lại v2');
+  assert.equal(storedB?.status, 'approved', 'Draft B approval must NOT be clobbered by concurrent rewrite');
+  assert.equal(storedB?.publishState, 'queued');
+
+  // Calling /api/rewrite on an already approved draft returns 409
+  const conflictRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/rewrite', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer fake-admin-id-token',
+        'Content-Type': 'application/json',
+        Origin: 'https://hskfreelearningai.pages.dev',
+      },
+      body: JSON.stringify({ draftId: 'draft-b', comment: 'Thử viết lại bài đã duyệt' }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(conflictRes.status, 409);
+});

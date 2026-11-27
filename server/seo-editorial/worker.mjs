@@ -58,6 +58,10 @@ function corsHeaders(origin, env) {
   return headers;
 }
 
+function cloneJson(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
 async function readR2Json(bucket, key, fallback) {
   if (!bucket) return fallback;
   try {
@@ -176,7 +180,15 @@ export async function runScanTrendsPipeline(
       }
     }
     if (createdDrafts.length > 0) {
-      draftsData.drafts = drafts;
+      const latestDraftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
+      const latestDrafts = Array.isArray(latestDraftsData.drafts) ? latestDraftsData.drafts : [];
+      const createdIdSet = new Set(createdDrafts.map((d) => d.id));
+      const mergedDrafts = [
+        ...createdDrafts,
+        ...latestDrafts.filter((d) => d && !createdIdSet.has(d.id)),
+      ];
+      drafts.splice(0, drafts.length, ...mergedDrafts);
+      draftsData.drafts = mergedDrafts;
       draftsData.updatedAt = new Date().toISOString();
       await writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, draftsData);
     }
@@ -338,13 +350,17 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
       const drafts = Array.isArray(draftsData.drafts) ? draftsData.drafts : [];
       const draft = drafts.find((d) => d.id === draftId);
       if (!draft) return json({ error: `Không tìm thấy bản nháp "${draftId}".` }, 404);
+      if (draft.status === 'approved') {
+        return json({ error: 'Bài nháp này đã được duyệt, không thể viết lại.' }, 409);
+      }
 
       const publishedArticles = await fetchPublishedArticles(env, fetchImpl);
       const existingSlugs = publishedArticles.map((a) => a.slug).filter(Boolean);
       const today = new Date().toISOString().slice(0, 10);
 
+      const workingDraft = cloneJson(draft);
       await rewriteDraftRecord({
-        draft,
+        draft: workingDraft,
         comment: typeof payload?.comment === 'string' ? payload.comment : '',
         rating: payload?.rating || null,
         existingSlugs,
@@ -353,9 +369,21 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
         fetchImpl,
       });
 
-      draftsData.updatedAt = new Date().toISOString();
-      await writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, draftsData);
-      return json({ ok: true, draft, draftsData });
+      const latestDraftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
+      const latestDrafts = Array.isArray(latestDraftsData.drafts) ? latestDraftsData.drafts : [];
+      const latestIdx = latestDrafts.findIndex((d) => d.id === draftId);
+      if (latestIdx >= 0 && latestDrafts[latestIdx]?.status === 'approved') {
+        return json({ error: 'Bài nháp này vừa được duyệt trong lúc AI đang viết lại.' }, 409);
+      }
+      if (latestIdx >= 0) {
+        latestDrafts[latestIdx] = workingDraft;
+      } else {
+        latestDrafts.unshift(workingDraft);
+      }
+      latestDraftsData.drafts = latestDrafts;
+      latestDraftsData.updatedAt = new Date().toISOString();
+      await writeR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, latestDraftsData);
+      return json({ ok: true, draft: workingDraft, draftsData: latestDraftsData });
     }
 
     if (url.pathname === '/api/reject' && request.method === 'POST') {
