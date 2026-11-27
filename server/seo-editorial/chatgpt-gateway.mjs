@@ -8,6 +8,7 @@
  *   Only Admin authenticated via Firebase ID Token in `studio-duyet-bai-7f9k2x.html`
  *   can approve and push to GitHub.
  */
+import { EDITORIAL_DEPTH_RULES } from './writer-standard.mjs';
 import {
   CATEGORIES,
   buildExistingCorpus,
@@ -302,8 +303,7 @@ export async function buildChatgptBrief({
     editorialRules: [
       'Viết 100% nội dung gốc bằng tiếng Việt tự nhiên cho người Việt học tiếng Trung HSK 1–6 (không dịch máy, không mở bài rập khuôn).',
       'metaTitle dài 35–75 ký tự, kết thúc bằng " | HSK Flashcards". metaDescription dài 110–170 ký tự.',
-      'Có 3–4 sections với id bắt đầu bằng chữ cái thường (vd: "phan-biet-nhanh", "loi-nguoi-viet", "ung-dung").',
-      'Có ít nhất 1 bảng (table) gồm 3–6 dòng (KHÔNG quá 6 dòng), ít nhất 1 khối example đủ { han, py, vi } chuẩn dấu thanh điệu Pinyin, ít nhất 1 tip và 2–3 faqs.',
+      ...EDITORIAL_DEPTH_RULES,
       'TUYỆT ĐỐI không dùng các cụm từ cấm: "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".',
       'Chọn 2–3 relatedSlugs nằm trong danh sách availableRelatedSlugs.',
     ],
@@ -318,8 +318,8 @@ function unwrapIncomingArticle(payload) {
   if (!String(rawArticle?.title || '').trim()) {
     throw Object.assign(new Error('Thiếu tiêu đề bài viết (article.title).'), { status: 400 });
   }
-  if (!Array.isArray(rawArticle?.sections) || rawArticle.sections.length < 2) {
-    throw Object.assign(new Error('Bài viết cần ít nhất 2 mục nội dung (article.sections, khuyên dùng 3–4 mục).'), { status: 400 });
+  if (!Array.isArray(rawArticle?.sections) || rawArticle.sections.length === 0) {
+    throw Object.assign(new Error('Bài viết cần có nội dung trong article.sections.'), { status: 400 });
   }
   return rawArticle;
 }
@@ -649,7 +649,7 @@ export function getMcpToolsDefinition() {
           },
           article: {
             type: 'object',
-            required: ['title', 'metaTitle', 'metaDescription', 'summary', 'sections', 'faqs'],
+            required: ['title', 'metaTitle', 'metaDescription', 'summary', 'sections'],
             properties: {
               slug: { type: 'string', description: 'URL slug không dấu gạch ngang (tùy chọn, tự sinh từ title nếu bỏ trống).' },
               category: {
@@ -666,8 +666,8 @@ export function getMcpToolsDefinition() {
               keywords: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 8 },
               sections: {
                 type: 'array',
-                minItems: 3,
-                maxItems: 5,
+                minItems: 1,
+                description: 'Chia mục theo những nội dung cần giải thích.',
                 items: {
                   type: 'object',
                   required: ['id', 'heading', 'paragraphs'],
@@ -682,7 +682,6 @@ export function getMcpToolsDefinition() {
                         headers: { type: 'array', items: { type: 'string' } },
                         rows: {
                           type: 'array',
-                          maxItems: 6,
                           items: { type: 'array', items: { type: 'string' } },
                         },
                       },
@@ -701,8 +700,7 @@ export function getMcpToolsDefinition() {
               },
               faqs: {
                 type: 'array',
-                minItems: 2,
-                maxItems: 5,
+                description: 'Tùy chọn, chỉ thêm câu hỏi mang thông tin mới.',
                 items: {
                   type: 'object',
                   required: ['q', 'a'],
@@ -923,7 +921,7 @@ async function handleSingleMcpRpc(rpc, context) {
         version: '1.0.0',
       },
       instructions:
-        'Cổng nộp bài SEO tiếng Trung HSK cho HSK Flashcards. Quy trình mỗi giờ: (1) Gọi get_seo_brief để xem hạn mức và chọn 1 chủ đề mới không trùng lặp; (2) Viết bài SEO tiếng Việt đầy đủ chữ Hán + Pinyin chuẩn thanh điệu + bảng <=6 dòng + ví dụ + tip + FAQ; (3) Gọi submit_seo_draft để đưa bài vào hàng đợi Chờ duyệt (pending_review). Cổng này không thể tự duyệt hoặc push lên GitHub.',
+        'Cổng nộp bài SEO tiếng Trung HSK cho HSK Flashcards. Quy trình mỗi giờ: (1) Gọi get_seo_brief để xem hạn mức và chọn 1 chủ đề mới không trùng lặp; (2) Viết bài SEO tiếng Việt theo brief, trả lời thẳng và giải thích đủ sâu bằng ví dụ đối chiếu có chữ Hán, Pinyin và nghĩa Việt khi phù hợp; (3) Gọi submit_seo_draft để đưa bài vào hàng đợi Chờ duyệt (pending_review). Cổng này không thể tự duyệt hoặc push lên GitHub.',
     });
   }
 

@@ -631,7 +631,16 @@ test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council revie
             trendSpike: 'ChatGPT mỗi giờ',
             authorModel: 'ChatGPT Plus',
             status: 'approved', // malicious override attempt must be ignored
-            article: makeMockArticleJson('Cách nói xin lỗi trong tiếng Trung tự nhiên'),
+            article: {
+              ...makeMockArticleJson('Cách nói xin lỗi trong tiếng Trung tự nhiên'),
+              sections: [{
+                id: 'doi-chieu-tinh-huong',
+                heading: 'Chọn cách xin lỗi theo tình huống',
+                paragraphs: ['Tùy mức độ lỗi mà bạn chọn cụm từ tự nhiên nhất.'],
+              }],
+              summary: 'Dùng «  đã  » và «mới». Pinyin (jiù) giữ nguyên.',
+              faqs: undefined,
+            },
           },
         },
       }),
@@ -666,6 +675,7 @@ test('ChatGPT SEO Gateway supports MCP secret URL, REST Bearer, AI council revie
   assert.equal(adminDraftsJson.draftsData.drafts[0].status, 'pending_review');
   const submittedDraft = adminDraftsJson.draftsData.drafts[0];
   assert.equal(submittedDraft.article.title, 'Cách nói xin lỗi trong tiếng Trung tự nhiên');
+  assert.equal(submittedDraft.article.summary, 'Dùng “đã” và “mới”. Pinyin (jiù) giữ nguyên.');
   assert.equal(submittedDraft.article.sections[0].paragraphs[0], makeMockArticleJson().sections[0].paragraphs[0]);
   assert.equal(submittedDraft.aiReviews.pipeline[0], 'chatgpt');
   assert.equal(submittedDraft.aiReviews.protocol, AUDIT_PROTOCOL_ID);

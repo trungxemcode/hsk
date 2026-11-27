@@ -640,7 +640,7 @@
       return `<button type="button" class="rev-draft-card${selected}${rewritingCls}" data-draft-id="${escHtml(d.id)}">
         <div class="rev-card-top">
           <span class="rev-card-source">${cgptChip}${escHtml(d.trendSource || 'google-trends')}${spike} · v${escHtml(d.version || 1)}</span>
-          <span class="rev-card-score">SEO ${escHtml(score)}${escHtml(xkiroAvg)}${stars}</span>
+          <span class="rev-card-score">Kỹ thuật ${escHtml(score)}${escHtml(xkiroAvg)}${stars}</span>
         </div>
         <h3 class="rev-card-title">${escHtml(d.article?.title || d.trendQuery)}</h3>
         <span class="rev-card-query">Từ khóa: ${escHtml(d.trendQuery || '—')}</span>
@@ -657,39 +657,40 @@
 
   function renderArticlePreviewHtml(draft) {
     const a = draft.article || {};
+    const editorialText = (value) => escHtml(String(value ?? '').replace(/«[ \t]*([^«»\r\n]+?)[ \t]*»/g, '“$1”'));
     const catLabel = a.categoryLabel || CATEGORY_LABELS[a.category] || 'Mẹo học HSK';
     const sectionsHtml = (a.sections || []).map((sec, idx) => {
-      const paragraphs = (sec.paragraphs || []).map((p) => `<p>${escHtml(p)}</p>`).join('');
+      const paragraphs = (sec.paragraphs || []).map((p) => `<p>${editorialText(p)}</p>`).join('');
       const bullets = Array.isArray(sec.bullets) && sec.bullets.length
-        ? `<ul>${sec.bullets.map((b) => `<li>${escHtml(b)}</li>`).join('')}</ul>`
+        ? `<ul>${sec.bullets.map((b) => `<li>${editorialText(b)}</li>`).join('')}</ul>`
         : '';
       const table = sec.table && Array.isArray(sec.table.headers) && Array.isArray(sec.table.rows)
-        ? `<div class="rev-table-scroll"><table class="rev-table"><thead><tr>${sec.table.headers.map((h) => `<th>${escHtml(h)}</th>`).join('')}</tr></thead><tbody>${sec.table.rows.map((r) => `<tr>${r.map((c) => `<td>${escHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
+        ? `<div class="rev-table-scroll"><table class="rev-table"><thead><tr>${sec.table.headers.map((h) => `<th>${editorialText(h)}</th>`).join('')}</tr></thead><tbody>${sec.table.rows.map((r) => `<tr>${r.map((c) => `<td>${editorialText(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
         : '';
       const example = sec.example?.han
-        ? `<div class="rev-example"><span class="cn" lang="zh-Hans">${escHtml(sec.example.han)}</span>${sec.example.py ? `<span class="py">${escHtml(sec.example.py)}</span>` : ''}${sec.example.vi ? `<span class="vi">${escHtml(sec.example.vi)}</span>` : ''}</div>`
+        ? `<div class="rev-example"><span class="cn" lang="zh-Hans">${editorialText(sec.example.han)}</span>${sec.example.py ? `<span class="py">${editorialText(sec.example.py)}</span>` : ''}${sec.example.vi ? `<span class="vi">${editorialText(sec.example.vi)}</span>` : ''}</div>`
         : '';
-      const tip = sec.tip ? `<div class="rev-tip"><strong>Mẹo ghi nhớ:</strong> ${escHtml(sec.tip)}</div>` : '';
+      const tip = sec.tip ? `<div class="rev-tip"><strong>Mẹo ghi nhớ:</strong> ${editorialText(sec.tip)}</div>` : '';
 
-      return `<section class="rev-sec"><h2>${idx + 1}. ${escHtml(sec.heading)}</h2>${paragraphs}${bullets}${table}${example}${tip}</section>`;
+      return `<section class="rev-sec"><h2>${idx + 1}. ${editorialText(sec.heading)}</h2>${paragraphs}${bullets}${table}${example}${tip}</section>`;
     }).join('');
 
     const faqsHtml = Array.isArray(a.faqs) && a.faqs.length
-      ? `<section class="rev-sec"><h2>Câu hỏi thường gặp (FAQ Schema)</h2><div class="rev-faq-list">${a.faqs.map((f) => `<div class="rev-faq-item"><strong>${escHtml(f.q)}</strong><p>${escHtml(f.a)}</p></div>`).join('')}</div></section>`
+      ? `<section class="rev-sec"><h2>Câu hỏi thường gặp (FAQ Schema)</h2><div class="rev-faq-list">${a.faqs.map((f) => `<div class="rev-faq-item"><strong>${editorialText(f.q)}</strong><p>${editorialText(f.a)}</p></div>`).join('')}</div></section>`
       : '';
 
     const ctaHtml = a.cta?.heading
-      ? `<section class="rev-sec"><div class="rev-meta-box"><strong>CTA cuối bài: ${escHtml(a.cta.heading)}</strong><span>${escHtml(a.cta.body || '')}</span><span>Nút: <strong>${escHtml(a.cta.buttonLabel || 'Vào học ngay')}</strong></span></div></section>`
+      ? `<section class="rev-sec"><div class="rev-meta-box"><strong>CTA cuối bài: ${editorialText(a.cta.heading)}</strong><span>${editorialText(a.cta.body || '')}</span><span>Nút: <strong>${editorialText(a.cta.buttonLabel || 'Vào học ngay')}</strong></span></div></section>`
       : '';
 
     return `<article class="rev-article">
       <div class="rev-meta-box">
-        <span><strong>URL dự kiến:</strong> /bai-viet/${escHtml(a.slug || draft.publishedSlug || '')} · <strong>Chuyên mục:</strong> ${escHtml(catLabel)}</span>
-        <span><strong>Meta Title:</strong> ${escHtml(a.metaTitle || '')} (${String(a.metaTitle || '').length} ký tự)</span>
-        <span><strong>Meta Description:</strong> ${escHtml(a.metaDescription || '')} (${String(a.metaDescription || '').length} ký tự)</span>
+        <span><strong>URL dự kiến:</strong> /bai-viet/${escHtml(a.slug || draft.publishedSlug || '')} · <strong>Chuyên mục:</strong> ${editorialText(catLabel)}</span>
+        <span><strong>Meta Title:</strong> ${editorialText(a.metaTitle || '')} (${String(a.metaTitle || '').length} ký tự)</span>
+        <span><strong>Meta Description:</strong> ${editorialText(a.metaDescription || '')} (${String(a.metaDescription || '').length} ký tự)</span>
       </div>
-      <h1>${escHtml(a.title || '')}</h1>
-      <p class="rev-summary">${escHtml(a.summary || '')}</p>
+      <h1>${editorialText(a.title || '')}</h1>
+      <p class="rev-summary">${editorialText(a.summary || '')}</p>
       ${sectionsHtml}
       ${faqsHtml}
       ${ctaHtml}
@@ -820,7 +821,7 @@
       : '<p>Chưa có checklist đạt chuẩn.</p>';
     const warningsHtml = (q.warnings || []).length
       ? `<ul class="rev-audit-list is-warn">${q.warnings.map((w) => `<li>! ${escHtml(w)}</li>`).join('')}</ul>`
-      : '<p style="color:var(--rev-emerald)">Không có cảnh báo chất lượng SEO nào.</p>';
+      : '<p style="color:var(--rev-emerald)">Không có cảnh báo kỹ thuật SEO nào.</p>';
     const historyHtml = (draft.reviewHistory || []).length
       ? draft.reviewHistory.slice().reverse().map((h) => `<div class="rev-history-item">
           <strong>${escHtml(h.action)} · ${escHtml(formatTimeVi(h.at))}${h.rating ? ` · ${h.rating}/5★` : ''}</strong>
@@ -893,7 +894,7 @@
     $('draftBadges').innerHTML = [
       `<span class="rev-tag ${statusTone}">${escHtml(STATUS_LABELS[draft.status] || draft.status)}</span>`,
       isChatgptDraft(draft) ? `<span class="rev-tag is-chatgpt">ChatGPT · ${escHtml(draft.authorModel || 'ChatGPT Plus')}</span>` : '',
-      `<span class="rev-tag ${scoreTone}">SEO ${escHtml(score)}/100</span>`,
+      `<span class="rev-tag ${scoreTone}">Kỹ thuật ${escHtml(score)}/100</span>`,
       ...xkiroBadges,
       draft.aiReviews?.autoPolished ? '<span class="rev-tag is-accent">Đã tự chỉnh sửa vòng 2</span>' : '',
       `<span class="rev-tag">v${escHtml(draft.version || 1)}</span>`,
@@ -1387,9 +1388,9 @@
       'Mỗi giờ một lần, hãy dùng kết nối MCP HSK SEO Editorial để tự động tạo và nộp ĐÚNG 01 bài viết SEO tiếng Trung HSK vào hàng đợi Chờ duyệt (KHÔNG push lên GitHub):',
       '1. Gọi công cụ get_seo_brief (count: 5). Nếu quota.canSubmitNow = false thì dừng và báo lý do cho tôi.',
       '2. Chọn 1 chủ đề mới hấp dẫn nhất từ suggestedTopics (tuyệt đối không trùng với doNotDuplicate).',
-      '3. Viết bài SEO tiếng Việt 100% nội dung gốc cho người Việt học HSK 1–6: metaTitle dài 35–75 ký tự kết thúc bằng " | HSK Flashcards", metaDescription 110–170 ký tự, 3–4 sections (id bắt đầu bằng chữ thường), ít nhất 1 bảng 3–6 dòng, ít nhất 1 example đủ Chữ Hán giản thể + Pinyin chuẩn dấu thanh điệu + nghĩa tiếng Việt tự nhiên, ít nhất 1 tip ghi nhớ, 2–3 faqs và 2–3 relatedSlugs lấy từ availableRelatedSlugs. Cấm dùng từ "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".',
+      '3. Viết theo editorialRules trong brief. Trả lời thẳng từ đầu, chia mục theo nội dung, giải thích đủ để người đọc tự áp dụng. Bài phân biệt cần vài cặp ví dụ cho thấy đổi từ thì nghĩa hoặc cách dùng đổi thế nào. Chỉ thêm bảng, mẹo hoặc FAQ khi có ích.',
       '4. Gọi submit_seo_draft để nộp bài vào trạng thái pending_review (đợi Hội đồng AI chấm điểm phụ và đợi tôi duyệt trong Phòng Duyệt Bài).',
-      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, điểm SEO tự động và điểm Hội đồng AI.',
+      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, điểm kỹ thuật và điểm Hội đồng AI.',
     ].join('\n');
   }
 
