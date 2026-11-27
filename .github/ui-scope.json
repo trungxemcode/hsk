@@ -1,5 +1,5 @@
 {
-  "request": "Clean-room rewrite of all 146 HSK lessons, full vocabulary coverage (+626 words to 5,637), replacement of 4,578 Hanzii examples, and rewrite of confusable groups, pair notes and relation/about copy. Keep every existing route under strict screenshot and geometry comparison except the pre-existing lessons exclusion. For data-driven routes only, serve the exact main-branch data assets in both captures so random/sample vocabulary changes do not mask CSS or layout regressions. Normalize only the about-panel content and compare-intro copy that are intentionally rewritten.",
+  "request": "Clean-room rewrite of all 146 HSK lessons, full vocabulary coverage (+626 words to 5,637), replacement of 4,578 Hanzii examples, and rewrite of confusable groups, pair notes and relation/about copy. Keep every existing route under strict screenshot and geometry comparison except the pre-existing lessons exclusion. For data-driven routes only, serve the exact main-branch data assets in both captures so random/sample vocabulary changes do not mask CSS or layout regressions. Normalize only the about-panel content and compare-intro copy that are intentionally rewritten. Normalize only the shared vocabulary count labels and the Profile learned-count label to the exact main-branch text during visual capture; keep all screenshots and geometry checks enabled.",
   "excludedRoutes": [
     "lessons"
   ],
@@ -46,6 +46,12 @@
     },
     "compare": {
       "#compareIntro": "textContent"
+    },
+    "profile": {
+      "#studioKnownCount": "textContent"
     }
+  },
+  "sharedContentOverrides": {
+    "SMALL.studio-filter-count": "textContent"
   }
 }

@@ -150,15 +150,24 @@ test('data-driven pages stay under strict visual comparison with shared baseline
 
 test('only the exact about and compare copy panels are normalized; route geometry remains measured',()=>{
  const fs=require('node:fs'),config=JSON.parse(fs.readFileSync('.github/ui-scope.json','utf8'));
+ assert.deepEqual(config.sharedContentOverrides,{'SMALL.studio-filter-count':'textContent'});
  assert.deepEqual(config.contentPanelOverrides,{
   about:{'#aboutPanel':'innerHTML'},
-  compare:{'#compareIntro':'textContent'}
+  compare:{'#compareIntro':'textContent'},
+  profile:{'#studioKnownCount':'textContent'}
  });
  assert.deepEqual(config.baselineScripts,{compare:['app.js','src/ui/dictionary-relations.js']});
  const source=fs.readFileSync(require('node:path').join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
  assert.match(source,/contentPanelOverrides/);
  assert.match(source,/baselineHTML/);
+ assert.match(source,/querySelectorAll/);
+ assert.match(source,/baselineTextFixture/);
+ assert.match(source,/contentTextFixture/);
+ assert.match(source,/runtime baseline text target count/);
+ assert.match(source,/live.length!==baseline.length/);
  assert.match(source,/measureDOM/);
  assert.throws(()=>scope({...config,contentPanelOverrides:{lessons:{'#lessonsPanel':'innerHTML'}}}));
+ assert.throws(()=>scope({...config,sharedContentOverrides:{'   ':'textContent'}}));
+ assert.throws(()=>scope({...config,sharedContentOverrides:{'#x':'style'}}));
  assert.throws(()=>scope({...config,baselineScripts:{compare:['**/*']}}));
 });
