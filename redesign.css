@@ -5084,7 +5084,7 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chi
   align-items:baseline;
   gap:6px;
   padding:8px 14px;
-  border-radius:999px;
+  border-radius:var(--radius-rd-006);
   border:1px solid var(--rd-line);
   background:var(--rd-surface);
   color:var(--rd-ink);
@@ -5102,12 +5102,12 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chi
   color:var(--rd-muted);
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chip.is-active{
-  background:var(--rd-brand,#4f46e5) !important;
-  border-color:var(--rd-brand,#4f46e5) !important;
-  color:#fff !important;
+  background:var(--rd-brand) !important;
+  border-color:var(--rd-brand) !important;
+  color:var(--palette-white) !important;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chip.is-active span{
-  color:rgba(255,255,255,.85) !important;
+  color:color-mix(in srgb,var(--palette-white) 85%,var(--palette-clear)) !important;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .result-card.dictionary-row{
   display:block !important;
@@ -5132,7 +5132,7 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-h
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-pinyin{
   font-size:14px !important;
   font-weight:500;
-  color:var(--rd-brand,#5b4fe9) !important;
+  color:var(--rd-brand) !important;
   white-space:nowrap;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-row-badge{
@@ -5140,14 +5140,14 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-row-badge
   display:inline-flex;
   align-items:center;
   padding:2px 8px;
-  border-radius:999px;
+  border-radius:var(--radius-rd-006);
   font-size:11px;
   font-weight:700;
   white-space:nowrap;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-row-badge.is-extended,
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .hsk-tag.is-extended{
-  background:rgba(100,116,139,.14) !important;
+  background:color-mix(in srgb,var(--rd-muted) 14%,var(--palette-clear)) !important;
   color:var(--rd-muted) !important;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-meaning{
@@ -5192,7 +5192,7 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-me
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-pin{
   font-size:15px;
   font-weight:600;
-  color:var(--rd-brand,#5b4fe9);
+  color:var(--rd-brand);
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-hv{
   font-size:13px;
@@ -5218,8 +5218,8 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-lis
   flex-direction:column;
   gap:8px;
   padding:12px 14px;
-  border-radius:12px;
-  background:var(--rd-surface-2,rgba(99,102,241,.04));
+  border-radius:var(--radius-rd-002);
+  background:var(--rd-brand-soft);
   border:1px solid var(--rd-line);
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-row{
@@ -5232,11 +5232,11 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-pos
   display:inline-flex;
   justify-content:center;
   padding:3px 8px;
-  border-radius:8px;
+  border-radius:var(--radius-rd-011);
   font-size:12px;
   font-weight:700;
-  background:rgba(79,70,229,.1);
-  color:var(--rd-brand,#4f46e5);
+  background:var(--rd-brand-soft);
+  color:var(--rd-brand);
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-text{
   margin:0;
@@ -5259,7 +5259,7 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-l
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item{
   padding:10px 14px;
-  border-radius:10px;
+  border-radius:var(--radius-rd-003);
   border:1px solid var(--rd-line);
   background:var(--rd-surface);
   display:flex;
@@ -5312,7 +5312,7 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-v
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-list,
 html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item{
-  background:rgba(255,255,255,.03) !important;
+  background:var(--rd-surface-soft) !important;
   border-color:var(--palette-dark-line) !important;
 }
 

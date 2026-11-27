@@ -151,7 +151,7 @@ let extendedSearchPoolCache=null;
 const BASE_EXTRA_WORDS=[
  {han:'饭',pin:'fàn',hv:'Phạn',mean:'cơm; bữa cơm; bữa ăn; thức ăn nấu chín',posSenses:[{pos:'Danh từ',mean:'cơm; bữa cơm; bữa ăn; thức ăn nấu chín'}],examples:[{cn:'晚饭已经做好了，快过来吃吧。',pin:'Wǎnfàn yǐjīng zuòhǎo le, kuài guòlái chī ba.',vi:'Cơm tối đã nấu xong rồi, mau lại ăn đi.'},{cn:'我中午在公司附近吃了一顿便饭。',pin:'Wǒ zhōngwǔ zài gōngsī fùjìn chī le yī dùn biànfàn.',vi:'Buổi trưa tôi ăn một bữa cơm bình dân gần công ty.'}]}
 ];
-const SEARCH_POS_LABELS={n:'Danh từ',v:'Động từ',adj:'Tính từ',adv:'Phó từ',prep:'Giới từ',conj:'Liên từ',pron:'Đại từ',num:'Số từ',numb:'Số từ',classifier:'Lượng từ',particle:'Trợ từ',part:'Trợ từ',interj:'Thán từ',a:'Tính từ',d:'Phó từ',m:'Số từ',q:'Lượng từ',p:'Giới từ',c:'Liên từ',r:'Đại từ',u:'Trợ từ',idiom:'Thành ngữ'};
+const SEARCH_POS_LABELS={n:'Danh từ',v:'Động từ',adj:'Tính từ',adv:'Phó từ',prep:'Giới từ',conj:'Liên từ',pron:'Đại từ',pro:'Đại từ',num:'Số từ',numb:'Số từ',classifier:'Lượng từ',particle:'Trợ từ',part:'Trợ từ',interj:'Thán từ',a:'Tính từ',d:'Phó từ',m:'Số từ',q:'Lượng từ',p:'Giới từ',c:'Liên từ',r:'Đại từ',u:'Trợ từ',idiom:'Thành ngữ'};
 function searchPosLabel(pos){return SEARCH_POS_LABELS[pos]||pos||'Nghĩa';}
 function getExtendedSearchPool(){
  if(extendedSearchPoolCache)return extendedSearchPoolCache;
