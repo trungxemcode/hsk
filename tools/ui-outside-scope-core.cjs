@@ -10,6 +10,21 @@ function scope(config) {
   for(const route of newRoutes){assert.ok(ROUTES.includes(route),'Unknown new route: '+route);assert.ok(!config.excludedRoutes.includes(route),'New routes cannot be excluded');}
   for (const route of config.excludedRoutes) assert.ok(ROUTES.includes(route), 'Unknown excluded route: '+route);
   assert.ok(config.excludedRoutes.length < ROUTES.length, 'Cannot exclude every page');
+  const dataStableRoutes=config.dataStableRoutes||[];
+  assert.ok(Array.isArray(dataStableRoutes),'dataStableRoutes must be an array');
+  assert.equal(new Set(dataStableRoutes).size,dataStableRoutes.length,'Duplicate data-stable route');
+  for(const route of dataStableRoutes){assert.ok(ROUTES.includes(route),'Unknown data-stable route: '+route);assert.ok(!config.excludedRoutes.includes(route),'Data-stable routes must remain visually protected');}
+  const stableDataFiles=config.stableDataFiles||[];
+  assert.ok(Array.isArray(stableDataFiles),'stableDataFiles must be an array');
+  assert.equal(new Set(stableDataFiles).size,stableDataFiles.length,'Duplicate stable data asset');
+  for(const file of stableDataFiles)assert.ok(typeof file==='string'&&file.length>0&&!file.startsWith('/')&&!file.split('/').includes('..')&&(/^(content\/data\/[^/]+\.js(?:\.gz)?|lesson-content-hsk[1-6]\.json|lesson-mini-data\.json)$/.test(file)),'Invalid stable data asset: '+file);
+  assert.ok(!dataStableRoutes.length||stableDataFiles.length>0,'Data-stable routes require explicit baseline assets');
+  const baselineScripts=config.baselineScripts||{};
+  assert.ok(baselineScripts&&typeof baselineScripts==='object'&&!Array.isArray(baselineScripts),'baselineScripts must be a route map');
+  for(const [route,files] of Object.entries(baselineScripts)){assert.ok(ROUTES.includes(route),'Unknown baseline-script route: '+route);assert.ok(!config.excludedRoutes.includes(route),'Baseline-script routes must remain visually protected');assert.ok(Array.isArray(files)&&files.length>0,'Baseline scripts must be a nonempty array');for(const file of files)assert.ok(['app.js','src/ui/dictionary-relations.js'].includes(file),'Unexpected baseline script: '+file);}
+  const contentPanelOverrides=config.contentPanelOverrides||{};
+  assert.ok(contentPanelOverrides&&typeof contentPanelOverrides==='object'&&!Array.isArray(contentPanelOverrides),'contentPanelOverrides must be a route map');
+  for(const [route,overrides] of Object.entries(contentPanelOverrides)){assert.ok(ROUTES.includes(route),'Unknown content override route: '+route);assert.ok(!config.excludedRoutes.includes(route),'Content override routes must remain visually protected');assert.ok(overrides&&typeof overrides==='object'&&!Array.isArray(overrides),'Content overrides must be a selector map');for(const [selector,mode] of Object.entries(overrides)){assert.ok(selector.trim(),'Content override selector is required');assert.ok(['innerHTML','textContent'].includes(mode),'Unsupported content override mode: '+mode);}}
   assert.ok(config.sharedHeaderOnly === undefined || typeof config.sharedHeaderOnly === 'boolean','Shared header scope must be boolean');
   if(config.sharedHeaderOnly) assert.equal(config.excludedRoutes.length,0,'A shared header edit must preserve visual checks on every route');
   assert.ok(config.sharedSidebarOnly===undefined||typeof config.sharedSidebarOnly==='boolean');

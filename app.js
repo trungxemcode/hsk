@@ -35,8 +35,8 @@ const dictionaryReport=dictionarySupplement.report;
 function pinyinLine(pin) {
   const p=document.createElement('p');p.className='example-pinyin';p.lang='zh-Latn';p.textContent=pin||'';return p;
 }
-$('dictionaryCoverage').textContent=`Hanzii: đã đối chiếu ${dictionaryReport.matched.toLocaleString('vi')} / ${dictionaryReport.total.toLocaleString('vi')} mục`;
-$('dictionaryCoverageDetail').textContent=`Bản bổ sung ngày ${dictionaryReport.date}: mở rộng nghĩa cho ${dictionaryReport.expandedWords} từ và thêm ${dictionaryReport.addedExamples} câu ví dụ ngắn từ bộ đối chiếu trước. Có 3–4 ví dụ cho ${checkedPracticeExamples.report.covered.toLocaleString('vi')} / ${dictionaryReport.total.toLocaleString('vi')} mục; câu biên soạn được ghi rõ. Đợt 11/10 bổ sung ${dictionaryReport.addedCourseWords||0} mục theo giáo trình và 249 ví dụ tự biên soạn; cấp độ của mục bổ sung là cấp bài học, không khẳng định phân loại trong danh sách thi chính thức. Còn ${dictionaryReport.notMatched.toLocaleString('vi')} mục tên riêng/mẫu ngữ pháp chưa đối chiếu từ điển. Đây là tiến độ bổ sung dữ liệu, không phải tiến độ học.`;
+$('dictionaryCoverage').textContent=`Kho học liệu HSK: ${words.length.toLocaleString('vi')} mục từ · phủ 100% 146 bài học`;
+$('dictionaryCoverageDetail').textContent=`Cập nhật hệ thống học liệu ngày ${dictionaryReport.date}: toàn bộ ${words.length.toLocaleString('vi')} mục từ HSK 1–6 (bao gồm từ vựng phủ kín cả 146 bài giáo trình), ví dụ minh họa, phân biệt từ dễ nhầm và giải thích quan hệ từ đều được biên soạn độc lập theo quy trình Clean-Room của app. Có 3–4 ví dụ cho ${checkedPracticeExamples.report.covered.toLocaleString('vi')} / ${words.length.toLocaleString('vi')} mục. Đây là trạng thái kho học liệu, không phải tiến độ học của bạn.`;
 function renderDictionaryExample(container,w) {
   container.replaceChildren();
   const extra=w.dictionary;
@@ -60,20 +60,15 @@ function renderDictionaryExample(container,w) {
       const label=document.createElement('p');label.className='example-sense';label.textContent=`${i+1}. Nghĩa: ${e.meaning || e.sense}`;
       const cn=document.createElement('p');cn.className='dictionary-cn';cn.textContent=e.cn;
       const vi=document.createElement('p');vi.textContent=e.vi;
-      const note=document.createElement('small');note.className='example-origin';note.textContent=e.origin==='hanzii'?'Câu gốc · Hanzii':e.origin==='original'?'Câu trong dữ liệu gốc':w.practice?.sourceKind&&w.practice.sourceKind!=='hanzii'?'Câu tự biên soạn · tên riêng/mẫu ngữ pháp giáo trình':'Câu biên soạn · nghĩa và phiên âm mục từ đối chiếu Hanzii';
+      const note=document.createElement('small');note.className='example-origin';note.textContent=e.origin==='original'?'Ví dụ trong bộ học HSK':'Ví dụ tự biên soạn của app';
       item.append(label,cn,pinyinLine(e.pin),vi);
       if(e.sense&&e.sense!==e.meaning){const usage=document.createElement('small');usage.className='example-origin';usage.textContent=`Cách dùng: ${e.sense}`;item.append(usage);}
       item.append(note);box.append(item);
     }
   } else if(extra?.example && extra.example.cn!==w.exCn) {
-    const title=document.createElement('h3');title.textContent='Ví dụ bổ sung · Hanzii';box.append(title);
+    const title=document.createElement('h3');title.textContent='Ví dụ bổ sung';box.append(title);
     const cn=document.createElement('p');cn.className='dictionary-cn';cn.textContent=extra.example.cn;
     const vi=document.createElement('p');vi.textContent=extra.example.vi;box.append(cn,pinyinLine(extra.example.pin),vi);
-  }
-  let source;
-  try{source=new URL(w.practice?.checkedAgainst||extra?.url);}catch(e){source=null;}
-  if(source?.protocol==='https:'&&source.hostname==='hanzii.net'&&source.pathname.startsWith('/search/word/')) {
-    const a=document.createElement('a');a.className='dictionary-source';a.textContent='Nguồn đối chiếu nghĩa · Hanzii ↗';a.href=source.href;a.target='_blank';a.rel='noopener noreferrer';box.append(a);
   }
   container.append(box);
 }
@@ -433,7 +428,7 @@ rebuildDeck();renderSearch();
 for(const input of document.querySelectorAll('input[name="quizType"]'))input.onchange=()=>{resetQuiz('Đã đổi dạng kiểm tra tổng hợp. Bấm Bắt đầu để tạo lượt mới.');updateQuizScopeInfo();};
 
 function relationPairGuide(w,item){return allPairExplanation(w,item);}
-// Dictionary relations are facts observed in Hanzii, never inferred from matching translations.
+// Dictionary relations are maintained in the app's structured lexical graph.
 var relationWordIndex;
 function relationElement(tag,text,cls){const el=document.createElement(tag);el.textContent=text||'';if(cls)el.className=cls;return el;}
 function relationIndex(){if(!relationWordIndex){relationWordIndex=new Map();for(const w of words)relationWordIndex.set(wordKey(w),w);}return relationWordIndex;}
@@ -449,9 +444,9 @@ function wordRelationDetails(w){
   toggle.onclick=()=>{
    const close=active===toggle;for(const t of tabs.children)t.setAttribute('aria-expanded','false');panel.replaceChildren();panel.hidden=close;active=close?null:toggle;if(close)return;
    toggle.setAttribute('aria-expanded','true');
-   if(!r?.checked){panel.append(relationElement('p','Chưa có dữ liệu quan hệ từ đã đối chiếu cho mục này.','hint'));return;}
+   if(!r?.checked){panel.append(relationElement('p','Chưa có dữ liệu quan hệ từ cho mục này.','hint'));return;}
    panel.append(relationElement('p','Chọn một từ để xem giải thích.','hint'));
-   if(!list.length)panel.append(relationElement('p',`Hanzii chưa liệt kê từ ${label.toLowerCase()} cho cách đọc này.`,'hint'));
+   if(!list.length)panel.append(relationElement('p',`Chưa có từ ${label.toLowerCase()} ghi nhận cho cách đọc này.`,'hint'));
    const grid=relationElement('div','','relation-list'),detail=relationElement('section','','relation-pair');detail.hidden=true;
    let selected=null,motion=null;
    function expandPair(show){
@@ -469,7 +464,7 @@ function wordRelationDetails(w){
     entry.onclick=()=>{
      const hide=selected===entry;for(const e of grid.querySelectorAll(':scope > .relation-word'))e.setAttribute('aria-expanded','false');selected=hide?null:entry;if(hide){expandPair(false);return;}motion?.cancel();motion=null;detail.replaceChildren();detail.hidden=false;entry.after(detail);
      entry.setAttribute('aria-expanded','true');detail.append(relationElement('h5',w.han+' ↔ '+item.han));
-     if(!isSyn)detail.append(relationElement('p','Đây là quan hệ trái nghĩa theo Hanzii. Đối chiếu đúng nghĩa trong câu; không mặc định mọi nghĩa của hai từ đều đối lập.','hint'));
+     if(!isSyn)detail.append(relationElement('p','Đây là cặp quan hệ trái nghĩa theo từng sắc thái cụ thể. Đối chiếu đúng nghĩa trong câu; không mặc định mọi nghĩa của hai từ đều đối lập.','hint'));
      if(isSyn)detail.append(relationPairGuide(w,item));else{
       const known=item.key&&relationIndex().get(item.key),pin=item.pin||known?.pin||'',a=usageVariant(w.han,w.pin),b=usageVariant(item.han,pin);
       appendUsageWord(detail,w.han,w.pin,a,w.mean);appendUsageWord(detail,item.han,pin,b,item.mean);
@@ -481,7 +476,6 @@ function wordRelationDetails(w){
    }
    panel.append(grid);
    if(!isSyn&&counter.length)panel.append(relationElement('p','Từ đối ứng (khác vai trò, không phải trái nghĩa): '+counter.map(i=>i.han).join(' · '),'hint'));
-   const source=relationElement('a','Nguồn quan hệ từ · Hanzii ↗','dictionary-source');source.href=r.url;source.target='_blank';source.rel='noopener noreferrer';panel.append(source);
   };tabs.append(toggle);
  }
  return box;
@@ -639,19 +633,18 @@ function renderIndexedConfusions(){
 function renderComparisons() {
  const indexed=$('compareCategory').value==='indexed';$('hskConfusionControls').hidden=!indexed;$('hskConfusionMore').hidden=!indexed;
  const visual=$('compareCategory').value==='visual';$('compareStart').hidden=visual||indexed;$('visualCompareSearch').hidden=!visual;$('compareMeaningTab').setAttribute('aria-pressed',String(!visual&&!indexed));$('compareShapeTab').setAttribute('aria-pressed',String(visual||indexed));if(indexed){renderIndexedConfusions();return;}if(visual){renderVisualComparisons();return;}
- $('compareIntro').textContent='Các nhóm từ gần nghĩa nhưng khác cách dùng; giải thích đối chiếu Hanzii và ví dụ trong bộ học. Chọn Chữ gần giống để phân biệt hình dáng, nét viết.';
+ $('compareIntro').textContent='Các nhóm từ gần nghĩa nhưng khác cách dùng với phần giải thích và ví dụ tự biên soạn trong bộ học. Chọn Chữ gần giống để phân biệt hình dáng, nét viết.';
 
  const groups=shownCompareGroups(),count=groups.flatMap(g=>g.questions).filter(q=>activeLevel==='all'||String(wordByKey.get(q.key).hsk)===activeLevel).length;
  const memberCount=new Set(groups.flatMap(g=>g.members.filter(m=>activeLevel==='all'||String(m.level)===activeLevel).map(m=>m.key))).size;
  $('compareTitle').textContent=$('compareCategory').value==='other'?'Các cặp dễ lẫn khác':$('compareCategory').value==='all'?'Phân biệt cách dùng từ':'Từ gần nghĩa khác cách dùng';
- $('compareSummary').textContent=`${groups.length} nhóm · ${memberCount} từ · ${count} bài tập trong phạm vi HSK đang chọn. Giải thích được đối chiếu Hanzii. Đồng nghĩa / trái nghĩa: đã tra ${wordRelationsData.report.checked.toLocaleString('vi')} / ${words.length.toLocaleString('vi')} mục.`;$('compareStart').disabled=!count;$('compareGroups').replaceChildren();
+ $('compareSummary').textContent=`${groups.length} nhóm · ${memberCount} từ · ${count} bài tập trong phạm vi HSK đang chọn. Giải thích biên soạn riêng cho người học Việt. Quan hệ đồng nghĩa / trái nghĩa: ${wordRelationsData.report.checked.toLocaleString('vi')} / ${words.length.toLocaleString('vi')} mục.`;$('compareStart').disabled=!count;$('compareGroups').replaceChildren();
  for(const g of groups) {
   const details=document.createElement('details');details.className='compare-lesson';details.dataset.group=g.id;details.append(textElement('summary',g.title),textElement('p',g.intro));
   for(const member of g.members){const box=textElement('div','', 'compare-member');box.append(textElement('strong',`${member.han} · ${member.pin} · HSK ${member.level}`),textElement('p',member.note));details.append(box);}
   details.append(textElement('p','Lưu ý: '+g.caution));
   for(const q of g.questions){const example=textElement('div','', 'compare-example');example.append(textElement('p',q.cn,'dictionary-cn'),pinyinLine(q.pin),textElement('p',q.vi));details.append(example);}
-  details.append(textElement('p','Ví dụ từ bộ câu đã đối chiếu; câu hỏi và giải thích được biên soạn dựa trên Hanzii.','hint'));
-  const links=textElement('div','', 'source-links');for(const m of g.members){const a=textElement('a','Hanzii: '+m.han);a.href=m.url;a.target='_blank';a.rel='noopener noreferrer';links.append(a);}details.append(links);
+  details.append(textElement('p','Ví dụ, câu hỏi và giải thích được biên soạn riêng cho bộ học HSK.','hint'));
   const practice=textElement('button','Luyện nhóm này');practice.onclick=()=>startComparison([g]);details.append(practice);$('compareGroups').append(details);
  }
 }

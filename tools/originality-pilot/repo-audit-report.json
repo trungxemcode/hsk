@@ -1,0 +1,105 @@
+{
+  "summary": {
+    "totalHanziiPracticeExamples": 4428,
+    "totalHanziiSupplementExamples": 4578,
+    "totalHanziiUiLines": 7,
+    "totalLessons": 146,
+    "hanziiMentionsInLessonFiles": 0
+  },
+  "files": {
+    "content/data/checkedPracticeExamples.js": {
+      "totalEntries": 5011,
+      "totalSentences": 15181,
+      "originCounts": {
+        "original": 5298,
+        "authored": 5455,
+        "hanzii": 4428
+      },
+      "hanziiExamplesByLevel": {
+        "HSK 2": 144,
+        "HSK 3": 277,
+        "HSK 4": 553,
+        "HSK 5": 1276,
+        "HSK 6": 2178
+      },
+      "checkedAgainstHanziiUrls": 5004,
+      "risk": "HIGH"
+    },
+    "content/data/dictionarySupplement.js": {
+      "totalEntries": 5004,
+      "hanziiUrls": 5004,
+      "hanziiExamples": 4578,
+      "hanziiExamplesByLevel": {
+        "HSK 1": 149,
+        "HSK 2": 145,
+        "HSK 3": 277,
+        "HSK 4": 553,
+        "HSK 5": 1276,
+        "HSK 6": 2178
+      },
+      "risk": "HIGH"
+    },
+    "content/data/wordRelationsData.js": {
+      "totalEntries": 4928,
+      "reportSource": "Hanzii",
+      "hanziiUrls": 4928,
+      "risk": "MEDIUM"
+    },
+    "content/data/confusableGroups.js": {
+      "totalGroups": 15,
+      "hanziiMemberUrls": 32,
+      "risk": "MEDIUM"
+    },
+    "content/data/words.js": {
+      "totalWords": 5011,
+      "hanziiLexicalChecks": 76,
+      "risk": "LOW"
+    },
+    "src/ui/dictionary-relations.js": {
+      "hanziiLineCount": 7,
+      "matches": [
+        {
+          "line": 11,
+          "snippet": "const patterns=[...new Set(v.structures||[])];if(patterns.length){box.append(relationElement('strong','Cấu trúc ghi nhận trong Hanzii'));for"
+        },
+        {
+          "line": 21,
+          "snippet": "for(const e of chosen){const ex=relationElement('div','','relation-pair-example');ex.append(relationElement('strong',e.cn),pinyinLine(e.pin)"
+        },
+        {
+          "line": 31,
+          "snippet": "else{box.append(relationElement('p',shared.length?'Các mục nghĩa có cách dịch trùng nhau: '+shared.slice(0,6).join('; ')+'. Đây là điểm cần "
+        },
+        {
+          "line": 37,
+          "snippet": "const links=relationElement('div','','source-links');for(const han of [w.han,item.han]){const link=relationElement('a','Hanzii: '+han);link."
+        },
+        {
+          "line": 51,
+          "snippet": "{cn:'我很爱我的父母。',pin:'Wǒ hěn ài wǒ de fùmǔ.',vi:'Tôi rất yêu bố mẹ mình.',note:'Tình cảm yêu thương gia đình; 爱 không có nghĩa vui ở đây.',ori"
+        },
+        {
+          "line": 54,
+          "snippet": "{cn:'这种植物喜光。',pin:'Zhè zhǒng zhíwù xǐ guāng.',vi:'Loại cây này ưa ánh sáng.',note:'喜光 nói điều kiện sinh trưởng thích hợp; không phải niềm v"
+        },
+        {
+          "line": 68,
+          "snippet": "const sources=relationElement('div','','source-links');for(const [title,url] of [['Hanzii: 爱','https://hanzii.net/search/word/%E7%88%B1?hl=v"
+        }
+      ],
+      "risk": "HIGH"
+    },
+    "lesson-content-hsk1..6.json": {
+      "totalLessons": 146,
+      "hanziiMentions": 0,
+      "provenanceDomains": {
+        "www.hanzistroke.com": 131,
+        "www.zdic.net": 131,
+        "www.hskstandardcourse.com": 111,
+        "chinese.edu.vn": 35,
+        "www.hskpan.com": 15
+      },
+      "risk": "LOW-MEDIUM"
+    }
+  }
+}

@@ -66,6 +66,18 @@ function serve(root){
    await page.clock.setFixedTime(new Date('2026-10-30T03:00:00Z'));
    await page.addInitScript(()=>{let seed=142857;Math.random=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646;};});
    await page.route('https://**/*',r=>r.abort());
+   const stableDataRoutes=new Set(config.dataStableRoutes||[]);
+   const stableDataFiles=new Set(config.stableDataFiles||[]);
+   const baselineScripts=new Set(config.baselineScripts?.[route]||[]);
+   if(stableDataRoutes.has(route)||baselineScripts.size){
+    await page.route('**/*',async r=>{
+     const pathname=decodeURIComponent(new URL(r.request().url()).pathname).replace(/^\/+/, '');
+     if(!stableDataFiles.has(pathname)&&!baselineScripts.has(pathname))return r.fallback();
+     const fixture=path.join(before,pathname);
+     assert.ok(fs.existsSync(fixture),'Missing explicit main-branch UI fixture: '+pathname);
+     return r.fulfill({path:fixture});
+    });
+   }
    await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
    if(route==='admin'){
     await page.route('**/translation-config.json',r=>r.fulfill({json:{enabled:true,endpoint:'https://roles.invalid/translate'}}));
@@ -79,6 +91,19 @@ function serve(root){
     await page.waitForFunction(()=>!document.getElementById('adminBtn').hidden);
    }
    await page.evaluate(({route,theme})=>{document.documentElement.dataset.theme=theme;window.HSKStudio.navigate(route);},{route,theme});
+   const panelOverrides=config.contentPanelOverrides?.[route]||{};
+   if(Object.keys(panelOverrides).length){
+    const baselineHTML=fs.readFileSync(path.join(before,entry),'utf8');
+    await page.evaluate(({html,overrides})=>{
+     const source=new DOMParser().parseFromString(html,'text/html');
+     for(const [selector,mode] of Object.entries(overrides)){
+      const live=document.querySelector(selector),baseline=source.querySelector(selector);
+      if(!live||!baseline)throw Error('Missing exact content-normalization target: '+selector);
+      if(mode==='innerHTML')live.innerHTML=baseline.innerHTML;
+      else if(mode==='textContent')live.textContent=baseline.textContent;
+     }
+    },{html:baselineHTML,overrides:panelOverrides});
+   }
    // Lazy music UI can first measure its tab marker while its panel is hidden.
    // Exercise the same real viewport-resize lifecycle on both builds after entry.
    if(route.startsWith('music')){
