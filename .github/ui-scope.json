@@ -1,6 +1,9 @@
 {
-  "request": "Upgrade offline Vietnamese voice pack in guided lessons to natural Northern Vietnamese models (Alto Tram & Diem Dam) with selector and 1-click upgrade from legacy VAIS-1000. Preserve all unrelated routes, app layout, player navigation and dock.",
+  "request": "Clean-room rewrite of all 146 HSK lessons, full vocabulary coverage (+626 words to 5,637), replacement of all 4,578 Hanzii examples, and rewrite of confusable groups, pair notes, and relation/about UI copy to remove all Hanzii copyright dependencies.",
   "excludedRoutes": [
-    "lessons"
+    "lessons",
+    "learn",
+    "compare",
+    "about"
   ]
 }

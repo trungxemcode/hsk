@@ -1,0 +1,352 @@
+{
+  "schemaVersion": 1,
+  "quarantineNotice": "DO NOT feed this file into authoring prompts. Use ONLY for automated originality verification.",
+  "lesson": {
+    "id": "standard-1-04",
+    "objectives": [
+      "Hỏi người nào và nước nào.",
+      "Biểu thị sở hữu bằng 的, hỏi tiếp bằng 呢."
+    ],
+    "summary": "Kết hợp đại từ, quốc tịch và quan hệ giữa người với người. Dùng 谁 để hỏi danh tính, 哪 để chọn trong một tập hợp, 的 để tạo cụm sở hữu và 呢 để hỏi tiếp cùng chủ đề.",
+    "grammar": [
+      {
+        "title": "Hỏi ai bằng 谁",
+        "pattern": "谁 + vị ngữ / chủ ngữ + 是 + 谁",
+        "usage": "谁 thay cho người chưa xác định. Có cách đọc shuí và shéi; bài này dùng shuí nhất quán.",
+        "error": "谁 hỏi người, không hỏi địa điểm.",
+        "examples": [
+          {
+            "cn": "谁是你的老师？",
+            "pin": "Shuí shì nǐ de lǎoshī?",
+            "vi": "Ai là giáo viên của bạn?"
+          }
+        ]
+      },
+      {
+        "title": "Hỏi lựa chọn bằng 哪",
+        "pattern": "哪 + lượng từ + danh từ；哪国人",
+        "usage": "哪 hỏi cái/người nào trong các khả năng. 哪国人 là cách hỏi người nước nào.",
+        "error": "Phân biệt 哪 nǎ (nào) với 那 nà (kia).",
+        "examples": [
+          {
+            "cn": "你是哪国人？",
+            "pin": "Nǐ shì nǎ guó rén?",
+            "vi": "Bạn là người nước nào?"
+          }
+        ]
+      },
+      {
+        "title": "Sở hữu và quan hệ với 的",
+        "pattern": "Người sở hữu + 的 + danh từ",
+        "usage": "的 đặt giữa thành phần bổ nghĩa và danh từ. Với quan hệ thân thuộc có thể bỏ 的 trong một số cách nói, như 我妈妈.",
+        "error": "Không đảo thành danh từ + 的 + người sở hữu.",
+        "examples": [
+          {
+            "cn": "她是我朋友的老师。",
+            "pin": "Tā shì wǒ péngyou de lǎoshī.",
+            "vi": "Cô ấy là giáo viên của bạn tôi."
+          }
+        ]
+      },
+      {
+        "title": "Hỏi tiếp bằng 呢",
+        "pattern": "Chủ đề đã rõ + người/vật + 呢？",
+        "usage": "呢 rút gọn câu hỏi khi hai bên đã biết đang hỏi về điều gì. Có thể hỏi lại cùng thông tin hoặc hỏi một đối tượng đang ở đâu theo ngữ cảnh.",
+        "error": "Không coi 呢 là thay thế cho 吗 trong mọi câu hỏi.",
+        "examples": [
+          {
+            "cn": "我是学生，你呢？",
+            "pin": "Wǒ shì xuésheng, nǐ ne?",
+            "vi": "Tôi là học sinh, còn bạn?"
+          }
+        ]
+      }
+    ],
+    "reading": {
+      "title": "Bài đọc vận dụng · Cô ấy là giáo viên tiếng Trung của tôi",
+      "kind": "long-form-original",
+      "lines": [
+        {
+          "cn": "我有两个朋友，他是我的同学，她是我的汉语老师。老师问：“他是谁？”我说：“他是我的同学，也是我的朋友。”老师又问：“他是哪国人？”我说：“他是中国人。”",
+          "pin": "wǒ yǒu liǎng gè péng yǒu， tā shì wǒ de tóng xué， tā shì wǒ de hàn yǔ lǎo shī。 lǎo shī wèn：“ tā shì shuí？” wǒ shuō：“ tā shì wǒ de tóng xué， yě shì wǒ de péng yǒu。” lǎo shī yòu wèn：“ tā shì nǎ guórén？” wǒ shuō：“ tā shì zhōng guórén。”",
+          "vi": "Tôi có hai người bạn: anh ấy là bạn học, cô ấy là giáo viên tiếng Trung của tôi. Cô hỏi anh ấy là ai. Tôi đáp anh ấy vừa là bạn học vừa là bạn tôi. Cô hỏi anh ấy là người nước nào, tôi nói anh ấy là người Trung Quốc."
+        },
+        {
+          "cn": "我的同学问：“她是你的老师吗？”我说：“是，她是我的汉语老师。你的老师呢？”他说：“我的老师也是中国人。”我们在学校学习汉语。她说汉语，我们听她说，也和她说汉语。",
+          "pin": "wǒ de tóng xué wèn：“ tā shì nǐ de lǎo shī ma？” wǒ shuō：“ shì， tā shì wǒ de hàn yǔ lǎo shī。 nǐ de lǎo shī ne？” tā shuō：“ wǒ de lǎo shī yě shì zhōng guórén。” wǒ men zài xué xiào xué xí hàn yǔ。 tā shuō hàn yǔ， wǒ men tīng tā shuō， yě hé tā shuō hàn yǔ。",
+          "vi": "Bạn học hỏi cô ấy có phải giáo viên của tôi không. Tôi xác nhận và hỏi giáo viên của bạn thì sao. Bạn nói giáo viên của bạn cũng là người Trung Quốc. Chúng tôi học tiếng Trung ở trường: nghe cô nói rồi cùng nói tiếng Trung với cô."
+        },
+        {
+          "cn": "老师有一本汉语书，她请我们看。我问：“这是谁的书？”她说：“这是我的书，你们的书呢？”",
+          "pin": "lǎo shī yǒu yī běn hàn yǔ shū， tā qǐng wǒ men kàn。 wǒ wèn：“ zhè shì shéi de shū？” tā shuō：“ zhè shì wǒ de shū， nǐ men de shū ne？”",
+          "vi": "Cô có sách tiếng Trung, mời xem. Tôi hỏi sách ai. Cô nói sách cô và hỏi sách chúng tôi đâu."
+        }
+      ],
+      "task": "Đọc liền mạch, xác định diễn biến hoặc lập luận, rồi tìm các câu vận dụng từ vựng và cấu trúc của bài.",
+      "characterCount": 151,
+      "lessonApplication": {
+        "vocabularyUsed": [
+          "的",
+          "汉语",
+          "哪",
+          "呢",
+          "朋友",
+          "谁",
+          "他",
+          "她",
+          "同学",
+          "国"
+        ],
+        "vocabularyNotUsed": [],
+        "grammarApplied": [
+          {
+            "title": "Hỏi ai bằng 谁",
+            "pattern": "谁 + vị ngữ / chủ ngữ + 是 + 谁",
+            "paragraph": 1,
+            "example": "老师问：“他是谁？",
+            "matchRule": "谁"
+          },
+          {
+            "title": "Hỏi lựa chọn bằng 哪",
+            "pattern": "哪 + lượng từ + danh từ；哪国人",
+            "paragraph": 1,
+            "example": "”老师又问：“他是哪国人？",
+            "matchRule": "哪国人|哪个"
+          },
+          {
+            "title": "Sở hữu và quan hệ với 的",
+            "pattern": "Người sở hữu + 的 + danh từ",
+            "paragraph": 1,
+            "example": "我有两个朋友，他是我的同学，她是我的汉语老师。",
+            "matchRule": "[我他她你]的"
+          },
+          {
+            "title": "Hỏi tiếp bằng 呢",
+            "pattern": "Chủ đề đã rõ + người/vật + 呢？",
+            "paragraph": 2,
+            "example": "你的老师呢？",
+            "matchRule": "呢？"
+          }
+        ],
+        "grammarMissing": []
+      }
+    },
+    "dialogues": [
+      {
+        "title": "Hỏi về một người",
+        "lines": [
+          {
+            "cn": "她是谁？",
+            "pin": "Tā shì shuí?",
+            "vi": "Cô ấy là ai?",
+            "speaker": "A"
+          },
+          {
+            "cn": "她是我的朋友。",
+            "pin": "Tā shì wǒ de péngyou.",
+            "vi": "Cô ấy là bạn tôi.",
+            "speaker": "B"
+          }
+        ]
+      },
+      {
+        "title": "Hỏi quốc tịch",
+        "lines": [
+          {
+            "cn": "你是哪国人？",
+            "pin": "Nǐ shì nǎ guó rén?",
+            "vi": "Bạn là người nước nào?",
+            "speaker": "A"
+          },
+          {
+            "cn": "我是中国人。",
+            "pin": "Wǒ shì Zhōngguó rén.",
+            "vi": "Tôi là người Trung Quốc.",
+            "speaker": "B"
+          }
+        ]
+      },
+      {
+        "title": "Hỏi lại",
+        "lines": [
+          {
+            "cn": "我是老师，你呢？",
+            "pin": "Wǒ shì lǎoshī, nǐ ne?",
+            "vi": "Tôi là giáo viên, còn bạn?",
+            "speaker": "A"
+          },
+          {
+            "cn": "我是学生。",
+            "pin": "Wǒ shì xuésheng.",
+            "vi": "Tôi là học sinh.",
+            "speaker": "B"
+          }
+        ]
+      }
+    ],
+    "practice": [
+      {
+        "id": "understanding",
+        "prompt": "Theo đoạn ngắn khởi động: Đang nói về nghề nghiệp: 我是老师，___？ Chọn câu hỏi lại tự nhiên.",
+        "options": [
+          "你呢",
+          "你哪儿",
+          "你什么吗",
+          "你的是"
+        ],
+        "answer": 0,
+        "explanation": "Chủ đề nghề nghiệp đã rõ nên 你呢 có nghĩa còn bạn thì sao.",
+        "source": "warmup"
+      },
+      {
+        "id": "understanding-2",
+        "prompt": "Theo đoạn ngắn khởi động: Điền: 她是我___朋友。",
+        "options": [
+          "的",
+          "吗",
+          "谁",
+          "呢"
+        ],
+        "answer": 0,
+        "explanation": "的 nối người sở hữu/quan hệ 我 với danh từ 朋友.",
+        "source": "warmup"
+      },
+      {
+        "id": "understanding-3",
+        "prompt": "Bài đọc nói mẹ của người bạn làm nghề gì?",
+        "options": [
+          "Giáo viên tiếng Trung",
+          "Bác sĩ",
+          "Học sinh",
+          "Chưa nói nghề nghiệp"
+        ],
+        "answer": 0,
+        "explanation": "他的妈妈是汉语老师: mẹ anh ấy là giáo viên tiếng Trung."
+      }
+    ],
+    "provenance": {
+      "kind": "original",
+      "label": "Biên soạn riêng cho app theo chủ đề và điểm ngôn ngữ đối chiếu của HSK Standard Course. Có thêm phần ôn và giải thích; hội thoại/bài đọc không phải nguyên văn sách.",
+      "sources": [
+        {
+          "label": "Mục lục HSK Standard Course 1",
+          "url": "https://www.hskstandardcourse.com/hsk-standard-course-level-1/hsk-standard-course-1-textbook/"
+        },
+        {
+          "label": "Đối chiếu điểm ngôn ngữ theo bài",
+          "url": "https://www.hskpan.com/courses/hsk-1/grammar"
+        }
+      ],
+      "allReadings": {
+        "kind": "original",
+        "revision": "all-readings-20261011",
+        "label": "Bài đọc vận dụng biên soạn riêng, dùng từ vựng chọn lọc và các điểm ngôn ngữ đang có trong app; không phải bài khóa nguyên văn. Ngữ pháp được ghi kèm câu minh chứng. Pinyin có hỗ trợ sinh và sửa theo ngữ cảnh, chưa là bản kiểm định ngữ âm chuyên môn."
+      }
+    },
+    "warmupReading": {
+      "title": "Bài đọc vận dụng",
+      "lines": [
+        {
+          "cn": "他是我的朋友。他是中国人。",
+          "pin": "Tā shì wǒ de péngyou. Tā shì Zhōngguó rén.",
+          "vi": "Anh ấy là bạn của tôi. Anh ấy là người Trung Quốc."
+        },
+        {
+          "cn": "他的妈妈是汉语老师。",
+          "pin": "Tā de māma shì Hànyǔ lǎoshī.",
+          "vi": "Mẹ anh ấy là giáo viên tiếng Trung."
+        }
+      ]
+    }
+  },
+  "vocabSources": [
+    {
+      "key": "1|的|de",
+      "han": "的",
+      "examples": [],
+      "supplementExample": {
+        "cn": "我们的老师姓王。",
+        "vi": "Thầy giáo của tôi họ Vương.",
+        "pin": "wǒmen de lǎoshī xìng wáng.",
+        "meaning": "của (chỉ sở hữu)"
+      }
+    },
+    {
+      "key": "1|汉语|Hànyǔ",
+      "han": "汉语",
+      "examples": [],
+      "supplementExample": {
+        "cn": "我学习汉语。",
+        "vi": "Tớ học tiếng Hán.",
+        "pin": "Wǒ xuéxí Hànyǔ.",
+        "meaning": "tiếng Hán"
+      }
+    },
+    {
+      "key": "1|呢|ne",
+      "han": "呢",
+      "examples": [],
+      "supplementExample": {
+        "cn": "他呢，喜欢打篮球。",
+        "vi": "Anh ấy ư, thích chơi bóng rổ.",
+        "pin": "tā ne, xǐhuan dǎ lánqiú.",
+        "meaning": "ư"
+      }
+    },
+    {
+      "key": "1|朋友|péngyou",
+      "han": "朋友",
+      "examples": [],
+      "supplementExample": {
+        "cn": "您好，亲爱的朋友!",
+        "vi": "Xin chào các bạn thân mến của tôi!",
+        "pin": "nín hǎo, qīn'ài de péngyou!",
+        "meaning": "bạn"
+      }
+    },
+    {
+      "key": "1|谁|shéi",
+      "han": "谁",
+      "examples": [],
+      "supplementExample": {
+        "cn": "谁告诉你这个消息的？",
+        "vi": "Ai đã nói cho bạn tin này vậy?",
+        "pin": "shéi gàosù nǐ zhège xiāoxi de?",
+        "meaning": "ai"
+      }
+    },
+    {
+      "key": "1|他|tā",
+      "han": "他",
+      "examples": [],
+      "supplementExample": {
+        "cn": "他的脾气很好。",
+        "vi": "Tính tình anh ấy rất tốt.",
+        "pin": "tā de píqi hěn hǎo.",
+        "meaning": "anh ấy"
+      }
+    },
+    {
+      "key": "1|她|tā",
+      "han": "她",
+      "examples": [],
+      "supplementExample": {
+        "cn": "她是我的好朋友。",
+        "vi": "Cô ấy là bạn tốt của tôi.",
+        "pin": "tā shì wǒ de hǎo péngyou.",
+        "meaning": "cô ấy"
+      }
+    },
+    {
+      "key": "1|同学|tóngxué",
+      "han": "同学",
+      "examples": [],
+      "supplementExample": {
+        "cn": "这位是我的同班同学。",
+        "vi": "Người này là bạn cùng lớp của tôi.",
+        "pin": "zhèwèi shì wǒ de tóngbāntóngxué.",
+        "meaning": "bạn học"
+      }
+    }
+  ]
+}

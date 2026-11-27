@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "mode": "clean-room-blueprint",
+  "id": "standard-1-04",
+  "hsk": 1,
+  "number": 4,
+  "topicCn": "她是我的汉语老师",
+  "topicVi": "Cô ấy là giáo viên tiếng Trung của tôi",
+  "vocabulary": [
+    {
+      "key": "1|的|de",
+      "han": "的",
+      "pin": "de",
+      "mean": "của (thuộc tính)",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|汉语|Hànyǔ",
+      "han": "汉语",
+      "pin": "Hànyǔ",
+      "mean": "tiếng Hán",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|哪|nǎ",
+      "han": "哪",
+      "pin": "nǎ",
+      "mean": "nào; cái nào",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|呢|ne",
+      "han": "呢",
+      "pin": "ne",
+      "mean": "thì sao? (dùng để hỏi thêm)",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|朋友|péngyou",
+      "han": "朋友",
+      "pin": "péngyou",
+      "mean": "bạn",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|谁|shéi",
+      "han": "谁",
+      "pin": "shéi",
+      "mean": "ai",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|他|tā",
+      "han": "他",
+      "pin": "tā",
+      "mean": "anh ấy, ông ấy",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|她|tā",
+      "han": "她",
+      "pin": "tā",
+      "mean": "cô ấy, bà ấy",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|同学|tóngxué",
+      "han": "同学",
+      "pin": "tóngxué",
+      "mean": "bạn học",
+      "inWordsDb": true
+    },
+    {
+      "key": "1|国|guó",
+      "han": "国",
+      "pin": "guó",
+      "mean": "nước; quốc gia",
+      "inWordsDb": true
+    }
+  ],
+  "grammarPoints": [
+    {
+      "pattern": "谁 + vị ngữ / chủ ngữ + 是 + 谁",
+      "conceptTopic": "Hỏi ai bằng 谁"
+    },
+    {
+      "pattern": "哪 + lượng từ + danh từ；哪国人",
+      "conceptTopic": "Hỏi lựa chọn bằng 哪"
+    },
+    {
+      "pattern": "Người sở hữu + 的 + danh từ",
+      "conceptTopic": "Sở hữu và quan hệ với 的"
+    },
+    {
+      "pattern": "Chủ đề đã rõ + người/vật + 呢？",
+      "conceptTopic": "Hỏi tiếp bằng 呢"
+    }
+  ],
+  "practiceIds": [
+    "understanding",
+    "understanding-2",
+    "understanding-3"
+  ],
+  "readingRequirements": {
+    "minParagraphs": 3,
+    "minHanziChars": 120,
+    "requireWarmup": true,
+    "minDialogues": 3,
+    "minPracticeQuestions": 3
+  },
+  "vocabExamplesNeeded": [
+    {
+      "key": "1|的|de",
+      "han": "的",
+      "pin": "de",
+      "mean": "của (thuộc tính)",
+      "neededPracticeExamples": 0,
+      "neededSupplementExample": 1,
+      "targetSenses": [
+        "của (chỉ sở hữu)"
+      ]
+    },
+    {
+      "key": "1|汉语|Hànyǔ",
+      "han": "汉语",
+      "pin": "Hànyǔ",
+      "mean": "tiếng Hán",
+      "neededPracticeExamples": 0,
+      "neededSupplementExample": 1,
+      "targetSenses": [
+        "tiếng Hán"
+      ]
+    },
+    {
+      "key": "1|呢|ne",
+      "han": "呢",
+      "pin": "ne",
+      "mean": "thì sao? (dùng để hỏi thêm)",
+      "neededPracticeExamples": 0,
+      "neededSupplementExample": 1,
+      "targetSenses": [
+        "ư"
+      ]
+    },
+    {
+      "key": "1|朋友|péngyou",
+      "han": "朋友",
+      "pin": "péngyou",
+      "mean": "bạn",
+      "neededPracticeExamples": 0,
+      "neededSupplementExample": 1,
+      "targetSenses": [
+        "bạn"
+      ]
+    },
+    {
+      "key": "1|谁|shéi",
+      "han": "谁",
+      "pin": "shéi",
+      "mean": "ai",
+      "neededPracticeExamples": 0,
+      "neededSupplementExample": 1,
+      "targetSenses": [
+        "ai"
+      ]
+    },
+    {
+      "key": "1|他|tā",
+      "han": "他",
+      "pin": "tā",
+      "mean": "anh ấy, ông ấy",
+      "neededPracticeExamples": 0,
+      "neededSupplementExample": 1,
+      "targetSenses": [
+        "anh ấy"
+      ]
+    },
+    {
+      "key": "1|她|tā",
+      "han": "她",
+      "pin": "tā",
+      "mean": "cô ấy, bà ấy",
+      "neededPracticeExamples": 0,
+      "neededSupplementExample": 1,
+      "targetSenses": [
+        "cô ấy"
+      ]
+    },
+    {
+      "key": "1|同学|tóngxué",
+      "han": "同学",
+      "pin": "tóngxué",
+      "mean": "bạn học",
+      "neededPracticeExamples": 0,
+      "neededSupplementExample": 1,
+      "targetSenses": [
+        "bạn học"
+      ]
+    }
+  ]
+}
