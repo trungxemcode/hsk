@@ -60,12 +60,24 @@ function serve(root){
  const headServer=servers[servers.length-1],approvedServer=approval?servers[1]:null;
  const browser=await chromium.launch({headless:true,args:['--disable-gpu','--force-color-profile=srgb'],...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  let failures=0;
- async function capture({server,entry},route,width,theme,prefix){
+ async function capture({server,entry},route,width,theme,prefix,baselineTextFixture=null){
   const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1,locale:'vi-VN',timezoneId:'Asia/Ho_Chi_Minh',reducedMotion:'reduce',serviceWorkers:'block'});
   try{
    await page.clock.setFixedTime(new Date('2026-10-30T03:00:00Z'));
    await page.addInitScript(()=>{let seed=142857;Math.random=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646;};});
    await page.route('https://**/*',r=>r.abort());
+   const stableDataRoutes=new Set(config.dataStableRoutes||[]);
+   const stableDataFiles=new Set(config.stableDataFiles||[]);
+   const baselineScripts=new Set(config.baselineScripts?.[route]||[]);
+   if(stableDataRoutes.has(route)||baselineScripts.size){
+    await page.route('**/*',async r=>{
+     const pathname=decodeURIComponent(new URL(r.request().url()).pathname).replace(/^\/+/, '');
+     if(!stableDataFiles.has(pathname)&&!baselineScripts.has(pathname))return r.fallback();
+     const fixture=path.join(before,pathname);
+     assert.ok(fs.existsSync(fixture),'Missing explicit main-branch UI fixture: '+pathname);
+     return r.fulfill({path:fixture});
+    });
+   }
    await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
    if(route==='admin'){
     await page.route('**/translation-config.json',r=>r.fulfill({json:{enabled:true,endpoint:'https://roles.invalid/translate'}}));
@@ -79,6 +91,37 @@ function serve(root){
     await page.waitForFunction(()=>!document.getElementById('adminBtn').hidden);
    }
    await page.evaluate(({route,theme})=>{document.documentElement.dataset.theme=theme;window.HSKStudio.navigate(route);},{route,theme});
+   const contentOverrides={...(config.sharedContentOverrides||{}),...(config.contentPanelOverrides?.[route]||{})};
+   const textOverrides=Object.fromEntries(Object.entries(contentOverrides).filter(([,mode])=>mode==='textContent'));
+   const htmlOverrides=Object.fromEntries(Object.entries(contentOverrides).filter(([,mode])=>mode==='innerHTML'));
+   let contentTextFixture={};
+   if(Object.keys(textOverrides).length){
+    contentTextFixture=await page.evaluate(({overrides,fixture})=>{
+     const result={};
+     for(const selector of Object.keys(overrides)){
+      const live=[...document.querySelectorAll(selector)];
+      if(!live.length)throw Error('Missing exact live text-normalization target: '+selector);
+      if(fixture){
+       const baseline=fixture[selector];
+       if(!Array.isArray(baseline)||baseline.length!==live.length)throw Error('Missing or changed runtime baseline text target count for '+selector+': live='+live.length+', baseline='+(baseline?.length??0));
+       live.forEach((node,index)=>node.textContent=baseline[index]);
+       result[selector]=baseline;
+      }else result[selector]=live.map(node=>node.textContent);
+     }
+     return result;
+    },{overrides:textOverrides,fixture:baselineTextFixture});
+   }
+   if(Object.keys(htmlOverrides).length){
+    const baselineHTML=fs.readFileSync(path.join(before,entry),'utf8');
+    await page.evaluate(({html,overrides})=>{
+     const source=new DOMParser().parseFromString(html,'text/html');
+     for(const selector of Object.keys(overrides)){
+      const live=[...document.querySelectorAll(selector)],baseline=[...source.querySelectorAll(selector)];
+      if(!live.length||live.length!==baseline.length)throw Error('Missing or changed exact HTML-normalization target count for '+selector+': live='+live.length+', baseline='+baseline.length);
+      live.forEach((node,index)=>node.innerHTML=baseline[index].innerHTML);
+     }
+    },{html:baselineHTML,overrides:htmlOverrides});
+   }
    // Lazy music UI can first measure its tab marker while its panel is hidden.
    // Exercise the same real viewport-resize lifecycle on both builds after entry.
    if(route.startsWith('music')){
@@ -138,7 +181,7 @@ function serve(root){
     await page.waitForTimeout(50);
     const file=prefix+'-'+i+'.png';await page.screenshot({path:file,fullPage:true,animations:'disabled'});images.push(file);
    }
-   return {title,geometry,images};
+   return {title,geometry,images,contentTextFixture};
   }finally{await page.close();}
  }
  try{
@@ -160,7 +203,7 @@ function serve(root){
     // immutable owner-approved design with head, strictly on all protected pages.
     const baseline=approval?await capture(servers[0],route,width,theme,path.join(out,key+'-baseline')):null;
     const a=await capture(approval?approvedServer:servers[0],route,width,theme,path.join(out,key+'-before'));
-    const b=await capture(headServer,route,width,theme,path.join(out,key+'-after'));
+    const b=await capture(headServer,route,width,theme,path.join(out,key+'-after'),(baseline||a).contentTextFixture);
     result={key,title:a.title,geometryEqual:JSON.stringify(a.geometry)===JSON.stringify(b.geometry),imageCountEqual:a.images.length===b.images.length,rawChangedPixels:0,changedPixels:0};
     if(approval){
      result.originalBaselineCompared=true;

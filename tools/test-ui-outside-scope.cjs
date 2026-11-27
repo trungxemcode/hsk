@@ -128,3 +128,46 @@ test('global owner approval pins original main, approved design and every route 
  assert.ok(!workflow.includes('ui-global-approval.json'),'Do not alter workflows or require workflow write scope');
  assert.throws(()=>verifyVisual([],approval.baseSHA,'new-head',['.github/ui-global-approval.json'],{request:'global design',excludedRoutes:[]},approval),'missing scenarios always fail');
 });
+
+test('data-driven pages stay under strict visual comparison with shared baseline data fixtures',()=>{
+ const fs=require('node:fs'),config=JSON.parse(fs.readFileSync('.github/ui-scope.json','utf8'));
+ const protectedRoutes=scope(config);
+ assert.deepEqual(config.excludedRoutes,['lessons'],'Only the pre-existing lessons exclusion remains');
+ for(const route of config.dataStableRoutes)assert.ok(protectedRoutes.includes(route),'Data fixture must not exclude '+route);
+ assert.ok(config.stableDataFiles.includes('content/data/words.js'));
+ assert.ok(config.stableDataFiles.includes('content/data/words.js.gz'));
+ assert.ok(config.stableDataFiles.includes('content/data/wordRelationsData.js'));
+ assert.ok(config.stableDataFiles.includes('lesson-mini-data.json'));
+ const source=fs.readFileSync(require('node:path').join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
+ assert.match(source,/stableDataRoutes/);
+ assert.match(source,/stableDataFiles/);
+ assert.match(source,/r\.fallback\(\)/);
+ assert.match(source,/Missing explicit main-branch UI fixture/);
+ assert.throws(()=>scope({...config,dataStableRoutes:['not-a-route']}));
+ assert.throws(()=>scope({...config,dataStableRoutes:['lessons']}));
+ assert.throws(()=>scope({...config,stableDataFiles:['../../app.js']}));
+});
+
+test('only the exact about and compare copy panels are normalized; route geometry remains measured',()=>{
+ const fs=require('node:fs'),config=JSON.parse(fs.readFileSync('.github/ui-scope.json','utf8'));
+ assert.deepEqual(config.sharedContentOverrides,{'SMALL.studio-filter-count':'textContent'});
+ assert.deepEqual(config.contentPanelOverrides,{
+  about:{'#aboutPanel':'innerHTML'},
+  compare:{'#compareIntro':'textContent'},
+  profile:{'#studioKnownCount':'textContent'}
+ });
+ assert.deepEqual(config.baselineScripts,{compare:['app.js','src/ui/dictionary-relations.js']});
+ const source=fs.readFileSync(require('node:path').join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
+ assert.match(source,/contentPanelOverrides/);
+ assert.match(source,/baselineHTML/);
+ assert.match(source,/querySelectorAll/);
+ assert.match(source,/baselineTextFixture/);
+ assert.match(source,/contentTextFixture/);
+ assert.match(source,/runtime baseline text target count/);
+ assert.match(source,/live.length!==baseline.length/);
+ assert.match(source,/measureDOM/);
+ assert.throws(()=>scope({...config,contentPanelOverrides:{lessons:{'#lessonsPanel':'innerHTML'}}}));
+ assert.throws(()=>scope({...config,sharedContentOverrides:{'   ':'textContent'}}));
+ assert.throws(()=>scope({...config,sharedContentOverrides:{'#x':'style'}}));
+ assert.throws(()=>scope({...config,baselineScripts:{compare:['**/*']}}));
+});

@@ -1,0 +1,355 @@
+{
+  "lesson": {
+    "id": "standard-1-04",
+    "objectives": [
+      "Biết cách hỏi và giới thiệu danh tính, mối quan hệ quen biết bằng 谁 và 的.",
+      "Hỏi quốc tịch hoặc lựa chọn cụ thể với 哪, đồng thời biết hỏi ngược tự nhiên bằng 呢 khi tiếp nối cuộc trò chuyện.",
+      "Đọc hiểu và đối thoại ngắn xoay quanh tình huống gặp gỡ, làm quen trong lớp học tiếng Trung."
+    ],
+    "summary": "Bài học tập trung vào bốn công cụ mở đầu giao tiếp hằng ngày: hỏi ai, hỏi quốc tịch/lựa chọn, nối quan hệ sở hữu và hỏi lại theo mạch đối thoại. Thay vì học thuộc từng câu rời, bạn nên tự thay đổi vai nhân vật (bạn cùng lớp, đồng nghiệp, người hướng dẫn) để tập phản xạ hỏi – đáp liền mạch.",
+    "grammar": [
+      {
+        "title": "Xác định danh tính người bằng đại từ nghi vấn 谁",
+        "pattern": "[Chủ ngữ] + 是 + 谁？ / 谁 + [Động từ + Tân ngữ]？",
+        "usage": "Dùng 谁 (shéi/shuí) để hỏi người chưa rõ danh tính. Điểm thuận tiện trong tiếng Trung là 谁 đứng đúng vị trí của câu trả lời: muốn hỏi chủ thể làm hành động thì đặt 谁 đầu câu; muốn hỏi danh tính của ai đó sau 是 thì đặt 谁 cuối câu, không cần đảo ngữ.",
+        "error": "Người học Việt hay thêm 吗 vào cuối câu đã có 谁 (như 他是谁吗？). Khi câu đã có từ để hỏi như 谁, tuyệt đối không gắn thêm 吗.",
+        "examples": [
+          {
+            "cn": "门口站着的那位女士是谁？",
+            "pin": "Ménkǒu zhànzhe de nà wèi nǚshì shì shéi?",
+            "vi": "Người phụ nữ đứng ngay cửa là ai vậy?"
+          },
+          {
+            "cn": "今天下午谁教我们写汉字？",
+            "pin": "Jīntiān xiàwǔ shéi jiāo wǒmen xiě Hànzì?",
+            "vi": "Chiều nay ai dạy chúng ta viết chữ Hán?"
+          }
+        ]
+      },
+      {
+        "title": "Hỏi chọn lọc đối tượng và quốc tịch với 哪",
+        "pattern": "哪 + [Lượng từ] + [Danh từ] / 哪国人",
+        "usage": "哪 (nǎ) dùng khi muốn chọn ra một đối tượng cụ thể trong một nhóm nhiều khả năng. Trước danh từ thông thường cần có lượng từ đi kèm (như 哪本书, 哪位). Riêng khi hỏi quê quán, quốc tịch, tiếng Trung ghép gọn thành cụm 哪国人.",
+        "error": "Hay nhầm giữa 哪 (nǎ, thanh 3: nào) và 那 (nà, thanh 4: kia/đó), hoặc quên lượng từ khi dịch sát tiếng Việt (viết nhầm 哪书 thay vì 哪本书).",
+        "examples": [
+          {
+            "cn": "桌上有两本词典，哪本是你的？",
+            "pin": "Zhuō shàng yǒu liǎng běn cídiǎn, nǎ běn shì nǐ de?",
+            "vi": "Trên bàn có hai cuốn từ điển, cuốn nào là của bạn?"
+          },
+          {
+            "cn": "新来的交换生是哪国人？",
+            "pin": "Xīn lái de jiāohuànshēng shì nǎ guó rén?",
+            "vi": "Du học sinh trao đổi mới tới là người nước nào?"
+          }
+        ]
+      },
+      {
+        "title": "Nối quan hệ sở hữu và bổ nghĩa bằng trợ từ 的",
+        "pattern": "[Chủ sở hữu / Định ngữ] + 的 + [Danh từ trung tâm]",
+        "usage": "Trật tự bổ nghĩa tiếng Trung ngược với tiếng Việt: thành phần sở hữu hoặc miêu tả đứng trước, danh từ chính đứng sau, nối ở giữa bằng 的. Khi nói về người thân ruột thịt hoặc đơn vị gắn bó rất gần (như 我妈妈, 我们学校), 的 có thể lược bớt cho tự nhiên.",
+        "error": "Dịch xuôi theo trật tự tiếng Việt (viết nhầm 书的我 hoặc 老师汉语). Luôn đưa danh từ chính về cuối cụm: 我的书, 汉语老师.",
+        "examples": [
+          {
+            "cn": "这把蓝色的雨伞是小陈的。",
+            "pin": "Zhè bǎ lánsè de yǔsǎn shì Xiǎo Chén de.",
+            "vi": "Chiếc ô màu xanh dương này là của Tiểu Trần."
+          },
+          {
+            "cn": "林明是我在夜校认识的同学。",
+            "pin": "Lín Míng shì wǒ zài yèxiào rènshi de tóngxué.",
+            "vi": "Lâm Minh là bạn học tôi quen ở lớp học buổi tối."
+          }
+        ]
+      },
+      {
+        "title": "Hỏi nối mạch ngắn gọn bằng trợ từ ngữ khí 呢",
+        "pattern": "[Người / Vật mới] + 呢？",
+        "usage": "Khi ngữ cảnh trước đó đã nêu rõ câu chuyện đang bàn (quốc tịch, nghề nghiệp, nơi ở hoặc thói quen), bạn chỉ cần nhắc tên đối tượng mới rồi thêm 呢 ở cuối để hỏi tiếp “còn ... thì sao?”, giúp lời nói gọn và tự nhiên hơn hẳn việc lặp lại cả câu dài.",
+        "error": "Đặt 呢 mở đầu cuộc trò chuyện khi chưa có ngữ cảnh trước đó khiến người nghe không hiểu đang hỏi về điều gì. Chỉ dùng câu tỉnh lược với 呢 sau khi vế trước đã rõ ý.",
+        "examples": [
+          {
+            "cn": "我周末打算去爬山，你的计划呢？",
+            "pin": "Wǒ zhōumò dǎsuàn qù páshān, nǐ de jìhuà ne?",
+            "vi": "Cuối tuần này tôi định đi leo núi, kế hoạch của cậu ra sao?"
+          },
+          {
+            "cn": "咖啡已经送到桌上了，茶呢？",
+            "pin": "Kāfēi yǐjīng sòng dào zhuō shàng le, chá ne?",
+            "vi": "Cà phê đã mang ra bàn rồi, còn trà thì sao?"
+          }
+        ]
+      }
+    ],
+    "reading": {
+      "title": "Bài đọc tình huống · Buổi sinh hoạt câu lạc bộ tiếng Trung",
+      "kind": "long-form-original",
+      "lines": [
+        {
+          "cn": "星期六上午，我去图书馆参加汉语角活动。刚走进房间，我就看到一位笑得很亲切的女士。我轻声问旁边的男生：“请问，前面那位是谁？”他告诉我：“她姓周，是教我们口语的汉语老师，人特别耐心。”",
+          "pin": "Xīngqīliù shàngwǔ, wǒ qù túshūguǎn cānjiā Hànyǔjiǎo huódòng. Gāng zǒujìn fángjiān, wǒ jiù kàndào yí wèi xiào de hěn qīnqiè de nǚshì. Wǒ qīngshēng wèn pángbiān de nánshēng: “Qǐngwèn, qiánmiàn nà wèi shì shéi?” Tā gàosu wǒ: “Tā xìng Zhōu, shì jiāo wǒmen kǒuyǔ de Hànyǔ lǎoshī, rén tèbié nàixīn.”",
+          "vi": "Sáng thứ Bảy, tôi tới thư viện dự buổi sinh hoạt câu lạc bộ tiếng Trung. Vừa bước vào phòng, tôi đã thấy một cô cười rất thân thiện. Tôi khẽ hỏi cậu bạn bên cạnh xem người đứng phía trước là ai. Cậu ấy bảo cô họ Chu, là cô giáo dạy khẩu ngữ tiếng Trung của lớp và rất kiên nhẫn."
+        },
+        {
+          "cn": "坐下来以后，我和身边的几个新人聊天。我先介绍自己来自河内，接着顺口问左边坐着的女孩：“你是哪国人？”她笑着回答：“我是韩国人，来这里学习半年了。这位坐在我对面的小伙子是我的大学同学，也是我在北京最好的朋友。”",
+          "pin": "Zuò xiàlái yǐhòu, wǒ hé shēnbiān de jǐ gè xīnrén liáotiān. Wǒ xiān jièshào zìjǐ láizì Hénèi, jiēzhe shùnkǒu wèn zuǒbiān zuòzhe de nǚhái: “Nǐ shì nǎ guó rén?” Tā xiàozhe huídá: “Wǒ shì Hánguórén, lái zhèlǐ xuéxí bànnián le. Zhè wèi zuò zài wǒ duìmiàn de xiǎohuǒzi shì wǒ de dàxué tóngxué, yě shì wǒ zài Běijīng zuì hǎo de péngyou.”",
+          "vi": "Ngồi xuống rồi, tôi trò chuyện với vài thành viên mới quanh bàn. Tôi giới thiệu mình đến từ Hà Nội, rồi hỏi cô gái ngồi bên trái là người nước nào. Cô ấy cười đáp mình là người Hàn Quốc, sang đây học nửa năm rồi, còn chàng trai ngồi đối diện là bạn đại học kiêm bạn thân nhất của cô ở Bắc Kinh."
+        },
+        {
+          "cn": "活动快结束时，周老师拿出几本练习册让大家挑选。我指着桌角问：“周老师，这几本里哪本适合刚开始学对话的人？”她递给我一本蓝封面的书，又笑着问那个男孩：“你喜欢读短故事，你的那本呢？”我们一边翻书一边约定下周再来练习。",
+          "pin": "Huódòng kuài jiéshù shí, Zhōu lǎoshī náchū jǐ běn liànxícè ràng dàjiā tiāoxuǎn. Wǒ zhǐzhe zhuōjiǎo wèn: “Zhōu lǎoshī, zhè jǐ běn lǐ nǎ běn shìhé gāng kāishǐ xué duìhuà de rén?” Tā dì gěi wǒ yì běn lán fēngmiàn de shū, yòu xiàozhe wèn nàge nánhái: “Nǐ xǐhuan dú duǎn gùshi, nǐ de nà běn ne?” Wǒmen yìbiān fān shū yìbiān yuēdìng xiàzhōu zài lái liànxí.",
+          "vi": "Gần cuối buổi, cô Chu lấy vài cuốn sách bài tập cho mọi người chọn. Tôi chỉ góc bàn hỏi cuốn nào phù hợp cho người mới tập đối thoại. Cô đưa tôi quyển bìa xanh dương, rồi cười hỏi cậu bạn kia rằng cuốn đọc truyện ngắn của cậu đâu. Chúng tôi vừa lật sách vừa hẹn tuần sau lại đến luyện cùng nhau."
+        }
+      ],
+      "task": "Đọc trọn ba đoạn về buổi sinh hoạt câu lạc bộ tiếng Trung, xác định danh tính từng nhân vật và gạch chân các câu dùng 谁, 哪, 的, 呢.",
+      "characterCount": 259,
+      "lessonApplication": {
+        "vocabularyUsed": [
+          "的",
+          "汉语",
+          "哪",
+          "呢",
+          "朋友",
+          "谁",
+          "他",
+          "她",
+          "同学",
+          "国"
+        ],
+        "vocabularyNotUsed": [],
+        "grammarApplied": [
+          {
+            "title": "Xác định danh tính người bằng đại từ nghi vấn 谁",
+            "pattern": "[Chủ ngữ] + 是 + 谁？ / 谁 + [Động từ + Tân ngữ]？",
+            "paragraph": 1,
+            "example": "前面那位是谁？",
+            "matchRule": "谁"
+          },
+          {
+            "title": "Hỏi chọn lọc đối tượng và quốc tịch với 哪",
+            "pattern": "哪 + [Lượng từ] + [Danh từ] / 哪国人",
+            "paragraph": 2,
+            "example": "你是哪国人？",
+            "matchRule": "哪国人|哪本"
+          },
+          {
+            "title": "Nối quan hệ sở hữu và bổ nghĩa bằng trợ từ 的",
+            "pattern": "[Chủ sở hữu / Định ngữ] + 的 + [Danh từ trung tâm]",
+            "paragraph": 2,
+            "example": "我的大学同学",
+            "matchRule": "的"
+          },
+          {
+            "title": "Hỏi nối mạch ngắn gọn bằng trợ từ ngữ khí 呢",
+            "pattern": "[Người / Vật mới] + 呢？",
+            "paragraph": 3,
+            "example": "你的那本呢？",
+            "matchRule": "呢？"
+          }
+        ],
+        "grammarMissing": []
+      }
+    },
+    "warmupReading": {
+      "title": "Đoạn khởi động · Làm quen trước giờ học",
+      "lines": [
+        {
+          "cn": "走廊里那位背黑包的男生是谁？他是我的新同学，来自越南。",
+          "pin": "Zǒuláng lǐ nà wèi bēi hēi bāo de nánshēng shì shéi? Tā shì wǒ de xīn tóngxué, láizì Yuènán.",
+          "vi": "Chàng trai đeo balo đen ngoài hành lang là ai vậy? Cậu ấy là bạn học mới của tôi, đến từ Việt Nam."
+        },
+        {
+          "cn": "他旁边的女孩会说汉语，她也是我们班的朋友。",
+          "pin": "Tā pángbiān de nǚhái huì shuō Hànyǔ, tā yě shì wǒmen bān de péngyou.",
+          "vi": "Cô gái đứng cạnh cậu ấy biết nói tiếng Trung, cô ấy cũng là bạn trong lớp chúng tôi."
+        }
+      ]
+    },
+    "dialogues": [
+      {
+        "title": "Nhận diện đồng nghiệp mới tại văn phòng",
+        "lines": [
+          {
+            "speaker": "A",
+            "cn": "会议室里正在整理资料的那位是谁？",
+            "pin": "Huìyìshì lǐ zhèngzài zhěnglǐ zīliào de nà wèi shì shéi?",
+            "vi": "Người đang sắp xếp tài liệu trong phòng họp kia là ai thế?"
+          },
+          {
+            "speaker": "B",
+            "cn": "她是设计部的新同事，也是我以前在大学认识的朋友。",
+            "pin": "Tā shì shèjìbù de xīn tóngshì, yě shì wǒ yǐqián zài dàxué rènshi de péngyou.",
+            "vi": "Cô ấy là đồng nghiệp mới bên bộ phận thiết kế, cũng là bạn tôi quen hồi đại học."
+          }
+        ]
+      },
+      {
+        "title": "Hỏi quốc tịch khi đăng ký lớp ngoại ngữ",
+        "lines": [
+          {
+            "speaker": "A",
+            "cn": "你好，请问这位同学是哪国人？",
+            "pin": "Nǐ hǎo, qǐngwèn zhè wèi tóngxué shì nǎ guó rén?",
+            "vi": "Xin chào, cho hỏi bạn học này là người nước nào ạ?"
+          },
+          {
+            "speaker": "B",
+            "cn": "他是新加坡人，刚报了初级汉语班。",
+            "pin": "Tā shì Xīnjiāpōrén, gāng bào le chūjí Hànyǔ bān.",
+            "vi": "Cậu ấy là người Singapore, vừa đăng ký lớp tiếng Trung sơ cấp."
+          }
+        ]
+      },
+      {
+        "title": "Hỏi ngược về đồ uống ở quán nước",
+        "lines": [
+          {
+            "speaker": "A",
+            "cn": "我想点一杯热绿茶，你呢？",
+            "pin": "Wǒ xiǎng diǎn yì bēi rè lǜchá, nǐ ne?",
+            "vi": "Tôi muốn gọi một ly trà xanh nóng, còn bạn?"
+          },
+          {
+            "speaker": "B",
+            "cn": "我要一杯冰柠檬水，谢谢。",
+            "pin": "Wǒ yào yì bēi bīng níngméngshuǐ, xièxie.",
+            "vi": "Tôi lấy một ly nước chanh đá nhé, cảm ơn."
+          }
+        ]
+      }
+    ],
+    "practice": [
+      {
+        "id": "understanding",
+        "prompt": "Trong tình huống ở quán nước: “我想点一杯热绿茶，___？” — chọn cụm hỏi lại tự nhiên nhất.",
+        "options": [
+          "你呢",
+          "你吗",
+          "谁呢",
+          "哪国"
+        ],
+        "answer": 0,
+        "explanation": "Vế trước đã nói rõ chuyện chọn đồ uống, nên chỉ cần thêm 呢 sau 你 (你呢？) để hỏi ngược đối phương muốn uống gì.",
+        "source": "warmup"
+      },
+      {
+        "id": "understanding-2",
+        "prompt": "Điền trợ từ đúng để diễn đạt “bạn học mới của tôi”: 我___新同学。",
+        "options": [
+          "的",
+          "呢",
+          "哪",
+          "谁"
+        ],
+        "answer": 0,
+        "explanation": "Trợ từ 的 nối chủ thể 我 ở phía trước với cụm danh từ chính 新同学 ở phía sau.",
+        "source": "warmup"
+      },
+      {
+        "id": "understanding-3",
+        "prompt": "Theo bài đọc câu lạc bộ tiếng Trung, cô gái ngồi bên trái người kể chuyện đến từ đâu?",
+        "options": [
+          "Hàn Quốc",
+          "Singapore",
+          "Nhật Bản",
+          "Bài đọc không nhắc tới"
+        ],
+        "answer": 0,
+        "explanation": "Ở đoạn 2 bài đọc, cô gái trả lời rõ: “我是韩国人，来这里学习半年了。” (Cô ấy là người Hàn Quốc).",
+        "source": "reading"
+      }
+    ],
+    "provenance": {
+      "kind": "original",
+      "label": "Học liệu biên soạn độc lập cho app HSK theo quy trình Clean-Room (tách khung kiến thức chuẩn, tự sáng tác toàn bộ lời giải thích, ví dụ, bài đọc, hội thoại và câu hỏi kiểm tra).",
+      "sources": [],
+      "allReadings": {
+        "kind": "original",
+        "revision": "clean-room-pilot-v1",
+        "label": "Bài đọc vận dụng biên soạn độc lập, phủ đủ từ vựng mục tiêu và điểm ngữ pháp bài học, đã qua kiểm định chống trùng lặp tự động."
+      }
+    }
+  },
+  "vocabReplacements": [
+    {
+      "key": "1|的|de",
+      "han": "的",
+      "supplementExample": {
+        "cn": "书包里的笔记本是刚买的。",
+        "pin": "Shūbāo lǐ de bǐjìběn shì gāng mǎi de.",
+        "vi": "Cuốn sổ tay trong cặp sách là mới mua.",
+        "meaning": "của (chỉ sở hữu / bổ nghĩa)"
+      }
+    },
+    {
+      "key": "1|汉语|Hànyǔ",
+      "han": "汉语",
+      "supplementExample": {
+        "cn": "她每晚用二十分钟听汉语广播。",
+        "pin": "Tā měiwǎn yòng èrshí fēnzhōng tīng Hànyǔ guǎngbō.",
+        "vi": "Tối nào cô ấy cũng dành hai mươi phút nghe phát thanh tiếng Trung.",
+        "meaning": "tiếng Hán"
+      }
+    },
+    {
+      "key": "1|呢|ne",
+      "han": "呢",
+      "supplementExample": {
+        "cn": "我已经把作业发到群里了，你的呢？",
+        "pin": "Wǒ yǐjīng bǎ zuòyè fā dào qún lǐ le, nǐ de ne?",
+        "vi": "Tôi đã gửi bài tập lên nhóm rồi, còn bài của bạn thì sao?",
+        "meaning": "thì sao? (hỏi nối mạch)"
+      }
+    },
+    {
+      "key": "1|朋友|péngyou",
+      "han": "朋友",
+      "supplementExample": {
+        "cn": "周末我约了两位老朋友去郊外骑车。",
+        "pin": "Zhōumò wǒ yuē le liǎng wèi lǎo péngyou qù jiāowài qíchē.",
+        "vi": "Cuối tuần tôi hẹn hai người bạn cũ ra ngoại ô đạp xe.",
+        "meaning": "bạn"
+      }
+    },
+    {
+      "key": "1|谁|shéi",
+      "han": "谁",
+      "supplementExample": {
+        "cn": "刚才在门口签收快递的是谁？",
+        "pin": "Gāngcái zài ménkǒu qiānshōu kuàidì de shì shéi?",
+        "vi": "Lúc nãy ai là người ký nhận bưu kiện ngoài cửa vậy?",
+        "meaning": "ai"
+      }
+    },
+    {
+      "key": "1|他|tā",
+      "han": "他",
+      "supplementExample": {
+        "cn": "他习惯在出发前把行程写清楚。",
+        "pin": "Tā xíguàn zài chūfā qián bǎ xíngchéng xiě qīngchu.",
+        "vi": "Anh ấy có thói quen ghi rõ lịch trình trước khi khởi hành.",
+        "meaning": "anh ấy"
+      }
+    },
+    {
+      "key": "1|她|tā",
+      "han": "她",
+      "supplementExample": {
+        "cn": "她把桌上的文件按日期排得整整齐齐。",
+        "pin": "Tā bǎ zhuō shàng de wénjiàn àn rìqī pái de zhěngzhěngqíqí.",
+        "vi": "Cô ấy xếp tài liệu trên bàn theo ngày tháng rất gọn gàng.",
+        "meaning": "cô ấy"
+      }
+    },
+    {
+      "key": "1|同学|tóngxué",
+      "han": "同学",
+      "supplementExample": {
+        "cn": "下课后，我和几名同学一起留在教室讨论。",
+        "pin": "Xiàkè hòu, wǒ hé jǐ míng tóngxué yìqǐ liú zài jiàoshì tǎolùn.",
+        "vi": "Sau giờ học, tôi cùng vài bạn học ở lại lớp thảo luận.",
+        "meaning": "bạn học"
+      }
+    }
+  ]
+}

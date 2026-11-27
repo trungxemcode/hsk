@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "originalityGate": {
+    "passed": true,
+    "thresholds": {
+      "max_exact_cn_matches": 0,
+      "max_cn_5gram_overlap": 0.08,
+      "max_vi_4gram_overlap": 0.12,
+      "max_vi_field_similarity": 0.45,
+      "min_exact_cn_len": 4,
+      "min_vi_field_words": 6
+    },
+    "exactCnMatchCount": 0,
+    "exactCnMatches": [],
+    "cn5gramOverlapRatio": 0.0068,
+    "matchedCn5gramCount": 3,
+    "matchedCn5gramsSample": [
+      "你是哪国人",
+      "同学也是我",
+      "的汉语老师"
+    ],
+    "vi4gramOverlapRatio": 0.0068,
+    "matchedVi4gramCount": 6,
+    "matchedVi4gramsSample": [
+      "của bạn thì sao",
+      "hỏi lại tự nhiên",
+      "hỏi về điều gì",
+      "là người nước nào",
+      "đang hỏi về điều",
+      "ấy là bạn học"
+    ],
+    "maxViFieldSimilarity": 0.4444,
+    "highSimilarityPairs": [],
+    "bannedMarkers": [],
+    "failures": []
+  },
+  "schemaGate": {
+    "passed": true,
+    "hsk": 1,
+    "errors": [],
+    "warnings": []
+  }
+}
