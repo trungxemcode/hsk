@@ -156,6 +156,10 @@ ${writerBrief?.unverifiedNotes?.length ? `- Lưu ý người viết gửi kèm c
 THANG ĐIỂM 100 ĐỘC LẬP (A..J — chấm độc lập từng hạng mục kèm bằng chứng):
 ${rubricText}
 
+KIỂM TRA GIÁ TRỊ THỰC TẾ:
+- Khi chấm độ sâu, xác định chỗ nào người đọc vẫn chưa tự áp dụng được sau khi đọc. Dẫn đúng đoạn thiếu điều kiện, ngữ cảnh hoặc giải thích. Chỉ ra mục có thể bỏ vì lặp ý. Số mục, số từ, bảng, mẹo và FAQ tự chúng không làm tăng điểm.
+- Với bài phân biệt cách dùng, chọn một cặp ví dụ trong bản thảo và thử đổi hai phương án. Nếu bài chưa chỉ ra điểm khác về nghĩa, sắc thái hoặc tính tự nhiên, ghi vị trí và yêu cầu cụ thể. Kiểm tra thêm xem ví dụ tiếp theo có giải quyết tình huống mới và kết bài có giúp chọn trong câu chưa gặp hay không.
+
 BỘ THỬ THÁCH NỘI BỘ BẮT BUỘC CHO VÒNG ${effectiveRound} (chỉ kiểm tra nội bộ, ghi vào challengeResults):
 ${challengeText}
 

@@ -95,6 +95,14 @@ export function selectWriterStyle({ topic = '', query = '', category = '', reque
   return { ...fallback, reason: 'Chủ đề hướng dẫn thực hành học tiếng Trung cho người Việt.' };
 }
 
+export const EDITORIAL_DEPTH_RULES = [
+  'Trả lời thẳng câu hỏi chính ở mở bài. Chọn số mục theo nội dung; mỗi mục phải bổ sung thông tin giúp người đọc hiểu hoặc áp dụng. Gộp hoặc bỏ mục lặp. Bảng, FAQ và hộp mẹo chỉ dùng khi giúp tra cứu hoặc giải đáp điều mới.',
+  'Triển khai đủ để người đọc tự áp dụng: giải thích quy tắc, vị trí hoặc điều kiện sử dụng, rồi đi vào tình huống cụ thể. Độ dài theo phạm vi chủ đề. Dành thêm đoạn cho trường hợp dễ nhầm thay vì kéo dài mở bài hoặc chỉ liệt kê công thức.',
+  'Với bài phân biệt cách dùng, đặt các phương án cạnh nhau bằng vài cặp câu cụ thể theo những ngữ cảnh thực sự khác nhau. Giữ chung bối cảnh hoặc phần câu khi tự nhiên. Ghi chữ Hán, Pinyin, nghĩa tiếng Việt và chỉ rõ vì sao chọn mỗi cách, đổi sang cách kia sẽ đổi nghĩa, sắc thái hay làm câu gượng ở đâu.',
+  'Dùng ngoặc kép tiếng Việt “…” để trích từ hoặc nghĩa. Giữ ngoặc đơn cho Pinyin của từ ngắn. Với ví dụ nguyên câu đã có khối chữ Hán, Pinyin và nghĩa, đoạn giải thích chỉ phân tích điểm khác biệt, tránh chép lại cả câu và phần phiên âm.',
+  'Chốt bài so sánh bằng một dấu hiệu chọn từ có thể dùng cho câu mới. Chỉ thêm ngoại lệ hoặc bài tập nếu giúp áp dụng; ưu tiên ví dụ mới thay cho việc lặp câu đã xuất hiện.',
+];
+
 export const WRITER_SYSTEM_PROMPT = `Bạn là AI Viết bài SEO tiếng Việt cho nền tảng học tiếng Trung HSK Flashcards (https://hskfreelearningai.pages.dev), tuân thủ nghiêm ngặt quy chuẩn sản xuất nội dung ${WRITER_STANDARD_ID}.
 
 NGUYÊN TẮC CỐT LÕI:
@@ -113,7 +121,7 @@ NGUYÊN TẮC CỐT LÕI:
    - KHÔNG tự bịa giá, gói cước, số lượng đề/bài học chưa xác minh, hay nhắc "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập".
 6. Thiết kế cấu trúc (Mục 5–7):
    - Các section.id bắt đầu bằng chữ cái (ví dụ: "muc-1", "muc-2").
-   - Chỉ tạo bảng (tối đa 6 dòng) khi việc đối chiếu/tra cứu giúp người đọc hiểu rõ hơn; chỉ tạo FAQ khi cung cấp giá trị bổ sung, không lặp lại máy móc phần thân bài.
+${EDITORIAL_DEPTH_RULES.map((rule) => `   - ${rule}`).join('\n')}
 7. Người viết TUYỆT ĐỐI không tự ghi trạng thái "đã duyệt", không tự chấm điểm, không tự xuất bản.
 
 CHỈ TRẢ VỀ DUY NHẤT 01 JSON OBJECT HỢP LỆ, gọn gàng, không markdown bọc ngoài.`;
@@ -149,7 +157,7 @@ ${chosenStyle.instructions}
 
 YÊU CẦU NỘI DUNG & ĐẦU RA BÀN GIAO (Mục 5, 8, 9 của ${WRITER_STANDARD_ID}):
 1. Giải thích sâu, có cơ chế/nguyên nhân, quy tắc đi kèm ngoại lệ hoặc lỗi người Việt thường mắc (không viết chung chung hay liệt kê hời hợt).
-2. Mỗi section có 1 chức năng rõ ràng (3–4 sections, id dạng "muc-1", "muc-2"...), ít nhất 1 khối "example" chuẩn (Chữ Hán giản thể + Pinyin có thanh điệu + Nghĩa tiếng Việt tự nhiên), ít nhất 1 hộp "tip" thực tế, bảng so sánh/tra cứu <= 6 dòng nếu cần đối chiếu, và 2–3 câu "faqs" có giá trị bổ sung (không lặp lại nguyên văn thân bài).
+2. Dùng các đoạn văn hoặc một bảng đối chiếu hữu ích để đặt nhiều ví dụ cạnh nhau trong cùng mục. Các trường bullets, table, example, tip và faqs trong mẫu JSON là tùy chọn.
 3. Chỉ chọn 2–3 "relatedSlugs" hợp lệ từ: ${existingSlugs.slice(0, 10).join(', ')}.
 4. Nếu có tuyên bố về thông tin có thể thay đổi hoặc chi tiết sản phẩm chưa có nguồn đối chiếu trực tiếp, ghi rõ vào "writerBrief.unverifiedNotes" / "writerBrief.productClaimsToConfirm" để biên tập viên xác minh; không dùng từ cấm ("hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập").
 5. Không tự chấm điểm hay tự kết luận bài đã đạt chuẩn xuất bản.
@@ -199,6 +207,7 @@ export function buildStandardRevisionWriterPrompt({
   rating = null,
   existingSlugs = [],
   today,
+  retryHint = '',
 }) {
   const styleId = draft?.editorialVoice || draft?.writerBrief?.styleId || '';
   const style = selectWriterStyle({
@@ -208,20 +217,46 @@ export function buildStandardRevisionWriterPrompt({
     requestedStyle: styleId,
   });
 
+  const trimmedAdmin = String(adminComment || '').trim();
+  const trimmedFeedback = String(sanitizedFeedback || '').trim();
+  const trimmedRetry = String(retryHint || '').trim();
+
   const feedbackParts = [];
-  if (sanitizedFeedback && String(sanitizedFeedback).trim()) {
-    feedbackParts.push(`CÁC LỖI CẦN KHẮC PHỤC (kèm bằng chứng & vị trí):\n${String(sanitizedFeedback).trim()}`);
-  }
-  if (adminComment && String(adminComment).trim()) {
+  if (trimmedAdmin) {
     feedbackParts.push(
-      `GÓP Ý TRỰC TIẾP CỦA ADMIN${rating ? ` (${rating}/5 sao)` : ''}:\n"""\n${String(adminComment).trim()}\n"""`
+      `MỆNH LỆNH BẮT BUỘC TỪ ADMIN (ƯU TIÊN SỐ 1 — PHẢI THỰC HIỆN TRIỆT ĐỂ)${rating ? ` [Admin chấm ${rating}/5 sao]` : ''}:
+"""
+${trimmedAdmin}
+"""
+YÊU CẦU ĐẶC BIỆT ĐỐI VỚI MỆNH LỆNH ADMIN:
+- Thực hiện từng góp ý của Admin. Tái cấu trúc bài nếu cần để sửa lỗi nội dung.
+- Nếu Admin yêu cầu mở rộng, bổ sung kiến thức hoặc ví dụ vào đúng chỗ đang thiếu. Nếu chỉ yêu cầu sửa cách trình bày hay dấu câu, sửa đúng phạm vi góp ý.
+- Mở đầu trường "revisionSummary" bằng việc nêu rõ đã xử lý từng điểm Admin yêu cầu ở những mục nào.`
     );
-  }
-  if (!feedbackParts.length) {
-    feedbackParts.push('Nâng cấp độ sâu chuyên môn, chuẩn xác Chữ Hán – Pinyin – Việt, ngoại lệ ngữ pháp và tính tự nhiên tiếng Việt.');
+    if (trimmedRetry) {
+      feedbackParts.push(`CẢNH BÁO VIẾT LẠI BẮT BUỘC:\n${trimmedRetry}`);
+    }
+    if (trimmedFeedback) {
+      const compactFeedback = trimmedFeedback.length > 900
+        ? `${trimmedFeedback.slice(0, 900)}\n...(lược bớt phần phụ)`
+        : trimmedFeedback;
+      feedbackParts.push(
+        `LƯU Ý PHỤ TỪ KIỂM ĐỊNH TRƯỚC (chỉ để vá lỗi Pinyin/dữ kiện đi kèm — TUYỆT ĐỐI KHÔNG cắt ngắn hay làm sai lệch mệnh lệnh Admin ở trên):\n${compactFeedback}`
+      );
+    }
+  } else {
+    if (trimmedFeedback) {
+      feedbackParts.push(`CÁC LỖI CẦN KHẮC PHỤC (kèm bằng chứng & vị trí):\n${trimmedFeedback}`);
+    }
+    if (trimmedRetry) {
+      feedbackParts.push(`CẢNH BÁO VIẾT LẠI BẮT BUỘC:\n${trimmedRetry}`);
+    }
+    if (!feedbackParts.length) {
+      feedbackParts.push('Nâng cấp độ sâu chuyên môn, chuẩn xác Chữ Hán – Pinyin – Việt, ngoại lệ ngữ pháp và tính tự nhiên tiếng Việt.');
+    }
   }
 
-  return `Nhiệm vụ: Chỉnh sửa bản thảo bài SEO theo quy chuẩn ${WRITER_STANDARD_ID} để xử lý triệt để các lỗi được chỉ ra.
+  return `Nhiệm vụ: Chỉnh sửa bản thảo bài SEO theo quy chuẩn ${WRITER_STANDARD_ID} để xử lý triệt để các yêu cầu được chỉ ra.
 
 VĂN PHONG CHỦ ĐẠO CẦN GIỮ VỮNG — [${style.label}]:
 ${style.instructions}
@@ -232,15 +267,15 @@ BẢN THẢO HIỆN TẠI (version ${draft?.version || 1}, từ khóa: "${draft?
 ${JSON.stringify(draft?.article || {})}
 
 YÊU CẦU KHI SỬA BÀI:
-1. Sửa tận gốc từng lỗi được nêu theo đúng vị trí; khi thay đổi một luận điểm, rà soát các đoạn, bảng và ví dụ phụ thuộc để đảm bảo nhất quán toàn bài (không chỉ đổi chữ bề mặt).
+1. ${trimmedAdmin ? 'Thực hiện triệt để Mệnh lệnh Admin trước tiên; tái cấu trúc hoặc thêm section mới khi cần để giải quyết tận gốc vấn đề, bảo đảm mọi đoạn, bảng và ví dụ nhất quán toàn bài.' : 'Sửa tận gốc từng lỗi được nêu theo đúng vị trí; khi thay đổi một luận điểm, rà soát các đoạn, bảng và ví dụ phụ thuộc để đảm bảo nhất quán toàn bài (không chỉ đổi chữ bề mặt).'}
 2. Giữ chuẩn tiếng Việt ${WRITER_STANDARD_ID} (không đại từ trò chuyện, không từ sáo rỗng, không cường điệu, không bịa nguồn/số liệu, không dùng cụm "hạn mức", "hạn ngạch", "xác minh email", "yêu cầu đăng nhập").
-3. Kiểm tra lại Chữ Hán giản thể, dấu thanh điệu Pinyin, nghĩa tiếng Việt, các bảng (<= 6 dòng), ví dụ và FAQs.
+3. Trả paragraphs và bullets dưới dạng chuỗi. Kiểm tra lại chữ Hán, Pinyin, nghĩa tiếng Việt, bảng và FAQ hiện có. Gộp mục trùng, triển khai chỗ còn cụt và dùng cặp câu đối chiếu khi cần.
 4. Ngày cập nhật: "${today}". Chỉ chọn "relatedSlugs" từ: ${existingSlugs.slice(0, 10).join(', ')}.
 5. Không tự chấm điểm hoặc tự kết luận bài đạt chuẩn xuất bản.
 
 TRẢ VỀ DUY NHẤT 01 JSON OBJECT GỒM:
 {
-  "revisionSummary": "Tóm tắt ngắn gọn các phần nội dung đã sửa tận gốc",
+  "revisionSummary": "Nêu rõ đã sửa/mở rộng những phần nào theo góp ý",
   "writerBrief": ${JSON.stringify(draft?.writerBrief || { styleId: style.id, primaryKeyword: draft?.trendQuery || '' })},
   "title": "...",
   "metaTitle": "...",

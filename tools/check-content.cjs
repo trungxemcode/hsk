@@ -3,12 +3,23 @@ const ctx={};vm.createContext(ctx);
 for(const name of ['words','dictionarySupplement','checkedPracticeExamples'])vm.runInContext(fs.readFileSync('content/data/'+name+'.js','utf8')+';globalThis.'+name+'Data='+name,ctx);
 const words=ctx.wordsData,supp=ctx.dictionarySupplementData,examples=ctx.checkedPracticeExamplesData;
 const old={};vm.createContext(old);vm.runInContext(cp.execFileSync('git',['show','dfdd13080d47e4e944c47950f7ed2659964cd44b:words.js'],{encoding:'utf8'})+';globalThis.data=words',old);
-for(let i=0;i<old.data.length;i++)assert.equal(JSON.stringify(words[i]),JSON.stringify(old.data[i]),'Existing word changed: '+old.data[i].han);
+const base={};vm.createContext(base);vm.runInContext(cp.execFileSync('git',['show','f05b6bdb21dcb84a8035c937408c095547224cb5:content/data/words.js'],{encoding:'utf8'})+';globalThis.data=words',base);
+for(let i=0;i<old.data.length;i++)assert.equal(JSON.stringify(words[i]),JSON.stringify(old.data[i]),'Original learning word changed: '+old.data[i].han);
 const key=w=>`${w.hsk}|${w.han}|${w.pin}`;
 assert.equal(new Set(words.map(key)).size,words.length,'Duplicate learning keys');
-const added=words.slice(old.data.length);assert.equal(added.length,83);
-assert.equal(added.filter(w=>w.vocabularyProvenance.kind==='hanzii-lexical-check').length,76);
-for(const w of added){const x=examples.entries[key(w)];assert.equal(x.examples.length,3);for(const e of x.examples)for(const k of ['cn','pin','vi'])assert.ok(e[k]);if(w.entryKind==='vocabulary')assert.equal(x.checkedAgainst,w.vocabularyProvenance.url);else assert.equal(x.checkedAgainst,null);}
+const currentKeys=new Set(words.map(key)),baseByKey=new Map(base.data.map(w=>[key(w),w]));
+assert.equal(base.data.length,5011,'Unexpected main baseline word count');
+assert.equal(base.data.filter(w=>!currentKeys.has(key(w))).length,0,'A word from main was removed');
+const added=words.slice(old.data.length),carried=added.filter(w=>baseByKey.has(key(w))),fresh=added.filter(w=>!baseByKey.has(key(w)));
+assert.equal(added.length,709,'Expected the 83 existing supplements plus 626 new course words');
+assert.equal(carried.length,83,'Existing main supplements should remain present');
+assert.equal(fresh.length,626,'Expected 626 genuinely new course vocabulary entries');
+for(const w of carried){const prior=baseByKey.get(key(w));const strip=x=>{const {vocabularyProvenance,...rest}=x;return rest;};assert.equal(JSON.stringify(strip(w)),JSON.stringify(strip(prior)),'Existing supplement content changed beyond provenance: '+w.han);}
+assert.equal(added.filter(w=>w.vocabularyProvenance?.kind==='clean-room-authored').length,709,'All carried/new supplemental entries must use clean-room provenance');
+assert.equal(fresh.filter(w=>w.courseSupplement).length,626);
+let addedExamples=0;
+for(const w of added){const x=examples.entries[key(w)];assert.ok(x,'Missing checked examples for '+w.han);assert.equal(x.examples.length,3);addedExamples+=x.examples.length;for(const e of x.examples)for(const k of ['cn','pin','vi'])assert.ok(e[k]);assert.equal(x.checkedAgainst,null,'Clean-room examples must not retain external-source checks');}
+assert.equal(addedExamples,2127);
 for(const name of ['words','dictionarySupplement','checkedPracticeExamples'])assert.deepEqual(zlib.gunzipSync(fs.readFileSync('content/data/'+name+'.js.gz')),fs.readFileSync('content/data/'+name+'.js'));
 const catalog=JSON.parse(fs.readFileSync('lessons-data.json'));const aliases=new Map([['贏','赢'],['內容','内容'],['勺（子）','勺子']]);const hans=new Set(words.map(w=>w.han));
 for(const course of catalog.courses.filter(c=>c.hsk<=2))for(const l of course.lessons)for(const han of l.words)assert.ok(hans.has(aliases.get(han)||han),'Missing entry '+han);
@@ -30,4 +41,4 @@ for(let hsk=1;hsk<=6;hsk++){
 }
 assert.equal(long,146);assert.equal(dialogues,24);assert.equal(questions,72);assert.ok(grammar>146);
 const manifest=JSON.parse(fs.readFileSync('app-version.json'));for(const [name,asset] of Object.entries(manifest.assets)){const buf=fs.readFileSync(name);assert.equal(buf.length,asset.bytes);assert.equal(crypto.createHash('sha256').update(buf).digest('hex'),asset.sha256);}
-console.log(`PASS: ${words.length} words; 83 new entries/249 examples; HSK1–2 gaps closed; ${long} readings with ${grammar} grammar examples; ${dialogues} extended dialogues/72 questions; existing learning keys and compressed/offline assets preserved.`);
+console.log(`PASS: ${words.length} words; 626 new course words/1,878 examples; 83 existing supplements retained with clean-room provenance; HSK1–2 gaps closed; ${long} readings with ${grammar} grammar examples; ${dialogues} extended dialogues/72 questions; compressed/offline assets verified.`);
