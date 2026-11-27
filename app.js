@@ -237,26 +237,20 @@ function renderSearch() {
  const general=searchScope==='general';$('searchResults').hidden=general;$('searchSummary').hidden=general;
  $('searchResults').replaceChildren(); const q=fold($('searchInput').value);
  const hskCount=searchMatches.filter(r=>!r.w.isExtended).length, extCount=searchMatches.length-hskCount;
- $('searchSummary').textContent=handwritingSearchCharacter?(searchMatches.length?`Chứa chữ ${handwritingSearchCharacter} · ${searchMatches.length} kết quả`:`Chưa thấy từ chứa ${handwritingSearchCharacter}. Thử đổi bộ lọc hoặc vẽ lại.`):!q?'':searchMatches.length?`${searchMatches.length} kết quả${extCount?` (${hskCount} HSK · ${extCount} mở rộng)`:''}${visibleResults<searchMatches.length?' · Đang hiện '+visibleResults:''}`:'Chưa tìm thấy. Thử từ ngắn hơn hoặc đổi cách diễn đạt.';
- const shown=searchMatches.slice(0,visibleResults);
- const cards=[];
- if(shown.length>1){
-  const strip=document.createElement('div');strip.className='search-quick-strip';strip.setAttribute('role','list');strip.setAttribute('aria-label','Chọn nhanh từ khớp');
-  shown.slice(0,14).forEach(({w},idx)=>{
-   const chip=document.createElement('button');chip.type='button';chip.className='search-quick-chip'+(idx===0?' is-active':'');
-   const cHan=document.createElement('strong');cHan.textContent=w.han;
-   const cPin=document.createElement('span');cPin.textContent=w.pin||'';
-   chip.append(cHan,cPin);
-   chip.onclick=()=>{
-    strip.querySelectorAll('.search-quick-chip').forEach(b=>b.classList.remove('is-active'));
-    chip.classList.add('is-active');
-    cards.forEach((c,ci)=>{c.open=ci===idx;});
-    cards[idx]?.scrollIntoView?.({behavior:'smooth',block:'nearest'});
-   };
-   strip.append(chip);
-  });
-  $('searchResults').append(strip);
+ const summaryEl=$('searchSummary');summaryEl.replaceChildren();
+ if(handwritingSearchCharacter){
+  summaryEl.textContent=searchMatches.length?`Chứa chữ ${handwritingSearchCharacter} · ${searchMatches.length} kết quả`:`Chưa thấy từ chứa ${handwritingSearchCharacter}. Thử đổi bộ lọc hoặc vẽ lại.`;
+ }else if(q){
+  const summaryText=document.createElement('span');
+  summaryText.textContent=searchMatches.length?`${searchMatches.length} kết quả${extCount?` (${hskCount} HSK · ${extCount} mở rộng)`:''}${visibleResults<searchMatches.length?' · Đang hiện '+visibleResults:''}${!general&&activeLevel!=='all'?` trong HSK ${activeLevel}`:''}`:(activeLevel!=='all'&&!general?`Chưa tìm thấy trong HSK ${activeLevel}.`:'Chưa tìm thấy. Thử từ ngắn hơn hoặc đổi cách diễn đạt.');
+  summaryEl.append(summaryText);
+  if(!general&&activeLevel!=='all'){
+   const widen=document.createElement('button');widen.type='button';widen.className='search-scope-reset';widen.textContent='Tìm tất cả HSK 1–6';
+   widen.onclick=()=>document.querySelector('[data-filter="all"]')?.click();
+   summaryEl.append(widen);
+  }
  }
+ const shown=searchMatches.slice(0,visibleResults);
  shown.forEach(({w},idx)=>{
   const card=document.createElement('details');card.className='result-card dictionary-row'+(w.isExtended?' is-extended-result':'');
   if(idx===0)card.open=true;
@@ -268,16 +262,10 @@ function renderSearch() {
   summary.append(han,pin,badge,meaning);card.append(summary);
 
   const body=document.createElement('div');body.className='dictionary-row-body search-detail-body';
-  const hero=document.createElement('div');hero.className='search-detail-hero';
-  const heroLeft=document.createElement('div');heroLeft.className='search-detail-head';
-  const bigHan=document.createElement('strong');bigHan.className='search-detail-han';bigHan.textContent=w.han;
+  const toolbar=document.createElement('div');toolbar.className='search-detail-toolbar';
   const metaRow=document.createElement('div');metaRow.className='search-detail-meta';
-  const pinSpan=document.createElement('span');pinSpan.className='search-detail-pin';pinSpan.textContent=w.pin?`[${w.pin}]`:'';
-  metaRow.append(pinSpan);
-  if(w.hv){const hvSpan=document.createElement('span');hvSpan.className='search-detail-hv';hvSpan.textContent=`[${w.hv.toUpperCase()}]`;metaRow.append(hvSpan);}
-  const tag=document.createElement('span');tag.className=w.hsk?`hsk-tag hsk${w.hsk}-tag`:'hsk-tag is-extended';tag.textContent=w.hsk?`HSK ${w.hsk}`:'Từ mở rộng';metaRow.append(tag);
+  if(w.hv){const hvSpan=document.createElement('span');hvSpan.className='search-detail-hv';hvSpan.textContent=`HV: ${w.hv.toUpperCase()}`;metaRow.append(hvSpan);}
   if(!w.isExtended){const label=document.createElement('small');label.className='search-detail-status';label.textContent=recordOf(w)?statusOf(w)==='known'?'✓ Đã thuộc':'× Chưa thuộc':'Chưa đánh dấu';metaRow.append(label);}
-  heroLeft.append(bigHan,metaRow);
 
   const actions=document.createElement('div');actions.className='search-detail-actions';
   const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)actions.append(speech);
@@ -285,8 +273,14 @@ function renderSearch() {
    const open=document.createElement('button');open.type='button';open.textContent='Mở thẻ HSK';open.onclick=()=>{if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};actions.append(open);
   }
   const notebook=window.HSKNotebook?.button(()=>w);if(notebook)actions.append(notebook);
-  hero.append(heroLeft,actions);body.append(hero);
-  if(!w.isExtended)body.append(makeMasteryTools(w));
+  if(metaRow.childElementCount)toolbar.append(metaRow);
+  toolbar.append(actions);
+  body.append(toolbar);
+  if(!w.isExtended){
+   const mastery=document.createElement('div');mastery.className='search-detail-mastery';
+   mastery.append(makeMasteryTools(w));
+   body.append(mastery);
+  }
 
   const senseBox=document.createElement('div');senseBox.className='search-sense-list';
   for(const item of groupedSearchSenses(w)){
@@ -317,9 +311,10 @@ function renderSearch() {
    body.append(exWrap);
   }
 
-  if(!w.isExtended)body.append(wordRelationDetails(w));
+  const relEntry=!w.isExtended?wordRelationsData?.entries?.[wordKey(w)]:null;
+  const hasRelations=Boolean((relEntry?.synonyms?.length||0)+(relEntry?.antonyms?.length||0));
+  if(hasRelations)body.append(wordRelationDetails(w));
   card.append(body);
-  cards.push(card);
   $('searchResults').append(card);
  });
  $('searchMore').hidden=general||visibleResults>=searchMatches.length;

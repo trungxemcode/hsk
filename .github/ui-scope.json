@@ -1,5 +1,5 @@
 {
-  "request": "Expand regular dictionary search with 10,160 Vietnamese-glossed entries and improve result scanning through a master-detail layout. Preserve all existing route comparisons and the established main-branch fixtures.",
+  "request": "Fix dictionary search UI/UX regressions in #searchPanel: enforce [hidden] on #searchResults in general scope, fix card border-radius and -12px summary margin causing chevron clipping, remove duplicate header/chip strip and empty word-relation boxes, compact mastery controls, and surface active HSK level filter reset.",
   "excludedRoutes": [
     "lessons"
   ],
