@@ -52,10 +52,14 @@
   if(!level){const action=button(items[C.id(w)]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS',()=>{const key=C.id(w);if(items[key]){delete items[key];queue=queue.filter(k=>k!==key);}else items=C.add(items,{...w,meanVi:vi(w)});save();action.textContent=items[key]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS';});action.className='dictionary-srs-add';action.__dictionaryWord=w;action.disabled=!vi(w);body.append(action);}
   if(!vi(w)){const retry=button('Thử lấy nghĩa Việt',()=>{viUnavailable=false;translateVisible();});retry.className='dictionary-meaning-retry';retry.__dictionaryWord=w;body.append(retry);};card.append(body);card.ontoggle=()=>{if(card.open)scheduleVi();};target.append(card);scheduleVi();}
  function prepare(event){++serial;controller?.abort();controller=null;lookupStatus=null;const token=serial,q=B.query().trim(),general=B.scope()==='general';box.replaceChildren();box.hidden=!q||!general&&B.results().length>0;if(box.hidden)return;
-  box.append(node('h3',general?'Kết quả tra cứu':'Tham khảo ngoài kho HSK'));const status=node('p','','hint'),results=node('div','','result-grid'),context=node('input');context.placeholder='Câu chứa từ (không bắt buộc)';context.maxLength=280;context.setAttribute('aria-label','Ngữ cảnh của từ cần tra');context.className='dictionary-context';
+  const bar=node('div','','open-dict-bar'),head=node('div','','open-dict-head'),tools=node('div','','open-dict-tools');
+  const status=node('p','','hint'),results=node('div','','result-grid'),context=node('input');context.placeholder='Câu chứa từ (không bắt buộc)';context.maxLength=280;context.setAttribute('aria-label','Ngữ cảnh của từ cần tra');context.className='dictionary-context';
   const aiPanel=node('div','','dictionary-ai-panel'),onTerms=(terms,t,answer,chips)=>semanticMatches(terms,results,status,t,answer,chips),explain=()=>askAI({han:q,trad:q,pin:'',mean:'Chưa có nghĩa từ điển; cần xác định theo ngữ cảnh.'},aiPanel,context.value,onTerms);
   const actions=node('div','','dictionary-actions');if(!general)actions.append(button('Tra từ mở rộng',()=>lookup(q,results,status,serial)));actions.append(button('Tra nghĩa / Giải thích bằng AI',explain));
-  box.append(actions,context,status,aiPanel,results);
+  head.append(node('h3',general?'Kết quả tra cứu':'Tham khảo ngoài kho HSK'),status);
+  tools.append(context,actions);
+  bar.append(head,tools);
+  box.append(bar,aiPanel,results);
   const semantic=C.semanticQuery(q),autoSemantic=semantic&&(general||Boolean(event?.detail?.submitted));
   if(autoSemantic){for(const {w} of B.results().slice(0,40))renderWord({han:w.han,trad:w.han,pin:w.pin,mean:w.mean,native:true},results);status.textContent='Tra theo nghĩa · Cần đăng nhập và mạng.';if(event?.detail?.submitted)explain();}
   else if(general){for(const {w} of B.results().slice(0,40))renderWord({han:w.han,trad:w.han,pin:w.pin,mean:w.mean,native:true},results);lookup(q,results,status,token,true);}else if(/^[\p{Script=Han}]+$/u.test(q)&&!B.exact(q))lookup(q,results,status,token);
