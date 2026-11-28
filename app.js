@@ -328,6 +328,148 @@ function filterSearchMatches(matches,rawQuery,foldCompounds){
  if(searchIntentFilter==='frequent')return matches.filter(r=>(R?.hitCount(rawQuery,r.w)?.total||0)>0);
  return base;
 }
+const charCompoundCache=new Map();
+function compoundsContainingHan(han,limit=12){
+ const key=String(han||'').trim();
+ if(!key||!/[\u3400-\u9fff]/.test(key))return [];
+ if(charCompoundCache.has(key))return charCompoundCache.get(key).slice(0,limit);
+ const R=window.HSKSearchRanking,seen=new Set([key]),found=[];
+ for(const w of words){
+  if(w.han.length>key.length&&w.han.includes(key)&&!seen.has(w.han)){
+   seen.add(w.han);found.push({w,rank:R?R.commonality(w):0});
+  }
+ }
+ if(typeof usageFactsData!=='undefined'&&usageFactsData?.words){
+  for(const [h,entry] of Object.entries(usageFactsData.words)){
+   if(h.length>key.length&&h.includes(key)&&!seen.has(h)&&entry?.variants?.[0]?.senses?.[0]?.mean){
+    seen.add(h);
+    const v=entry.variants[0];
+    const w={han:h,pin:v.pin||'',mean:v.senses.map(s=>s.mean).filter(Boolean).join('; '),hsk:null,isExtended:true};
+    found.push({w,rank:R?R.commonality(w):0});
+   }
+  }
+ }
+ found.sort((a,b)=>b.rank-a.rank||a.w.han.length-b.w.han.length);
+ const top=found.slice(0,24);
+ if(charCompoundCache.size>60)charCompoundCache.delete(charCompoundCache.keys().next().value);
+ charCompoundCache.set(key,top);
+ return top.slice(0,limit);
+}
+function lookupSingleCharMeta(ch){
+ const exactHsk=words.find(w=>w.han===ch);
+ const uEntry=typeof usageFactsData!=='undefined'?usageFactsData.words?.[ch]?.variants||[]:[];
+ const pins=[...new Set([exactHsk?.pin,...uEntry.map(v=>v.pin)].filter(Boolean))].slice(0,3);
+ const mean=exactHsk?.primaryMean||exactHsk?.mean||uEntry[0]?.senses?.[0]?.mean||'';
+ return {pin:pins.join(', '),hv:exactHsk?.hv||'',mean:String(mean).split(/[;；\n]/)[0].trim()};
+}
+let searchCharRenderSerial=0;
+function renderSearchCharPanel(panel,w){
+ panel.replaceChildren();
+ const chars=[...new Set(Array.from(String(w?.han||'')).filter(c=>/[\u3400-\u9fff]/.test(c)))];
+ if(!chars.length){panel.hidden=true;return;}
+ panel.hidden=false;
+ const tabs=document.createElement('div');tabs.className='search-char-tabs';tabs.setAttribute('role','tablist');
+ const stageWrap=document.createElement('div');stageWrap.className='search-char-stage-wrap';
+ const stage=document.createElement('div');stage.className='search-char-stage';stage.setAttribute('aria-label','Khung nét chữ Hán');
+ const replayBtn=document.createElement('button');replayBtn.type='button';replayBtn.className='search-char-replay';replayBtn.textContent='↻';replayBtn.title='Xem lại thứ tự nét';replayBtn.setAttribute('aria-label','Xem lại thứ tự nét');
+ stageWrap.append(stage,replayBtn);
+ const metaBox=document.createElement('div');metaBox.className='search-char-meta';
+ const practiceBtn=document.createElement('button');practiceBtn.type='button';practiceBtn.className='search-char-practice-btn';practiceBtn.textContent='Tập viết';
+ practiceBtn.onclick=()=>window.HSKWritingPractice?.open?.(w.han);
+ panel.append(tabs,stageWrap,metaBox,practiceBtn);
+
+ let activeWriter=null;
+ const selectChar=async ch=>{
+  const token=++searchCharRenderSerial;
+  activeWriter?.pauseAnimation?.();activeWriter=null;
+  for(const b of tabs.children){const on=b.dataset.char===ch;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false');}
+  stage.replaceChildren();
+  const fallback=document.createElement('span');fallback.className='search-char-fallback';fallback.textContent=ch;
+  stage.append(fallback);
+  const info=lookupSingleCharMeta(ch);
+  metaBox.replaceChildren();
+  const pinRow=document.createElement('div');pinRow.className='search-char-row';
+  const pinLabel=document.createElement('span');pinLabel.className='search-char-label';pinLabel.textContent='Bính âm:';
+  const pinVal=document.createElement('strong');pinVal.textContent=info.pin||'—';
+  pinRow.append(pinLabel,pinVal);
+  const chSpeech=window.HSKSpeech?.button(ch,'Nghe phát âm '+ch);
+  if(chSpeech){chSpeech.classList.add('search-char-speech');pinRow.append(chSpeech);}
+  metaBox.append(pinRow);
+  if(info.hv){
+   const hvRow=document.createElement('div');hvRow.className='search-char-row';
+   const hvL=document.createElement('span');hvL.className='search-char-label';hvL.textContent='Hán-Việt:';
+   const hvV=document.createElement('strong');hvV.textContent=info.hv.toUpperCase();
+   hvRow.append(hvL,hvV);metaBox.append(hvRow);
+  }
+  const strokeRow=document.createElement('div');strokeRow.className='search-char-row';
+  const stL=document.createElement('span');stL.className='search-char-label';stL.textContent='Số nét:';
+  const stV=document.createElement('strong');stV.textContent='…';
+  strokeRow.append(stL,stV);metaBox.append(strokeRow);
+  if(info.mean){
+   const mRow=document.createElement('div');mRow.className='search-char-row is-mean';
+   const mL=document.createElement('span');mL.className='search-char-label';mL.textContent='Nghĩa chữ:';
+   const mV=document.createElement('span');mV.textContent=info.mean;
+   mRow.append(mL,mV);metaBox.append(mRow);
+  }
+  replayBtn.hidden=true;
+  if(typeof window.HanziWriter==='undefined'||typeof window.HSKWritingPractice?.characterData!=='function'){stV.textContent='—';return;}
+  try{
+   const data=await window.HSKWritingPractice.characterData(ch);
+   if(token!==searchCharRenderSerial)return;
+   stV.textContent=`${data.strokes.length} nét`;
+   stage.replaceChildren();
+   const rootCss=getComputedStyle(document.documentElement);
+   const isDark=document.documentElement.dataset.theme==='dark';
+   const hexOr=(v,fb)=>/^#[0-9a-f]{3,8}$/i.test(String(v||'').trim())?String(v).trim():fb;
+   const strokeColor=hexOr(rootCss.getPropertyValue('--ink'),isDark?'#c9c9de':'#3a3a57');
+   const radicalColor=hexOr(rootCss.getPropertyValue('--accent'),isDark?'#a78bfa':'#5b4ef0');
+   const outlineColor=hexOr(rootCss.getPropertyValue('--line-dark'),isDark?'#334155':'#cbd5e1');
+   activeWriter=window.HanziWriter.create(stage,ch,{width:176,height:176,padding:12,showCharacter:true,showOutline:true,strokeColor,radicalColor,outlineColor,strokeAnimationSpeed:1.15,delayBetweenStrokes:180,charDataLoader:()=>data});
+   replayBtn.hidden=false;
+   replayBtn.onclick=()=>{activeWriter?.animateCharacter?.();};
+  }catch(_){
+   if(token===searchCharRenderSerial)stV.textContent='—';
+  }
+ };
+ for(const ch of chars){
+  const tab=document.createElement('button');tab.type='button';tab.className='search-char-tab';tab.dataset.char=ch;tab.setAttribute('role','tab');tab.textContent=ch;
+  tab.onclick=()=>selectChar(ch);
+  tabs.append(tab);
+ }
+ selectChar(chars[0]);
+}
+function buildRelationAccordion(w,title,list,cls){
+ if(!list?.length)return null;
+ const acc=document.createElement('details');acc.className=`search-acc-card ${cls}`;
+ const sum=document.createElement('summary');sum.className='search-acc-summary';
+ const arrow=document.createElement('span');arrow.className='search-acc-arrow';arrow.setAttribute('aria-hidden','true');
+ const label=document.createElement('span');label.className='search-acc-title';label.textContent=title;
+ const count=document.createElement('span');count.className='search-acc-count';count.textContent=String(list.length);
+ sum.append(arrow,label,count);acc.append(sum);
+ const body=document.createElement('div');body.className='search-acc-body';
+ const grid=document.createElement('div');grid.className='relation-list search-rel-chips';
+ const detail=document.createElement('section');detail.className='relation-pair';detail.hidden=true;
+ let selected=null;
+ for(const item of list){
+  const entry=document.createElement('button');entry.type='button';entry.className='relation-word search-compound-chip';entry.setAttribute('aria-expanded','false');
+  const h=document.createElement('strong');h.textContent=item.han;
+  const p=document.createElement('span');p.textContent=item.pin||item.mean||'';
+  entry.append(h,p);
+  entry.onclick=()=>{
+   const hide=selected===entry;
+   for(const b of grid.querySelectorAll('.relation-word'))b.setAttribute('aria-expanded','false');
+   selected=hide?null:entry;
+   detail.replaceChildren();detail.hidden=hide;
+   if(hide)return;
+   entry.setAttribute('aria-expanded','true');
+   const h5=document.createElement('h5');h5.textContent=`${w.han} ↔ ${item.han}`;
+   detail.append(h5,allPairExplanation(w,item));
+  };
+  grid.append(entry);
+ }
+ body.append(grid,detail);acc.append(body);
+ return acc;
+}
 function renderSearch() {
  const general=searchScope==='general';$('searchResults').hidden=general;$('searchSummary').hidden=general;
  $('searchResults').replaceChildren(); const rawQuery=$('searchInput').value.trim(),q=fold(rawQuery);
@@ -373,43 +515,63 @@ function renderSearch() {
    summaryEl.append(widen);
   }
  }
- const shown=activeMatches.slice(0,visibleResults), multi=shown.length>1, wide=typeof window!=='undefined'&&window.innerWidth>=960;
- $('searchResults').classList.toggle('has-master-detail',multi);
- const masterList=multi?document.createElement('div'):null;
- if(masterList){masterList.className='search-master-list';masterList.setAttribute('role','listbox');masterList.setAttribute('aria-label','Danh sách từ khớp');}
- const cardsCol=multi?document.createElement('div'):null;
- if(cardsCol)cardsCol.className='search-cards-col';
+ const shown=activeMatches.slice(0,visibleResults), multi=shown.length>1;
+ $('searchResults').classList.toggle('has-master-detail',shown.length>0);
+ if(!shown.length){
+  $('searchMore').hidden=true;
+  const submitted=searchExplicit;searchExplicit=false;window.dispatchEvent(new CustomEvent('hsk-search-rendered',{detail:{submitted}}));
+  return;
+ }
+ const mainCol=document.createElement('div');mainCol.className='search-main-col';
+ const charPanel=document.createElement('aside');charPanel.className='search-char-panel';charPanel.setAttribute('aria-label','Phân tích chữ Hán và nét viết');
+ const candidateStrip=multi?document.createElement('div'):null;
+ if(candidateStrip){candidateStrip.className='search-master-list search-candidate-strip';candidateStrip.setAttribute('role','listbox');candidateStrip.setAttribute('aria-label','Danh sách từ khớp');}
+ const cardsCol=document.createElement('div');cardsCol.className='search-cards-col';
  const cards=[], masterItems=[];
+ const selectIndex=(idx,record=false)=>{
+  const activeMatch=shown[idx];
+  if(!activeMatch)return;
+  if(record&&rawQuery)R?.record(rawQuery,activeMatch.w);
+  masterItems.forEach((b,bi)=>{const on=bi===idx;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false');});
+  cards.forEach((c,ci)=>{const on=ci===idx;c.classList.toggle('is-selected',on);c.open=on;});
+  renderSearchCharPanel(charPanel,activeMatch.w);
+ };
  shown.forEach((match,idx)=>{
   const {w}=match;
-  if(masterList){
+  if(candidateStrip){
    const item=document.createElement('button');item.type='button';item.className='search-master-item'+(idx===0?' is-active':'');
    item.setAttribute('role','option');item.setAttribute('aria-selected',idx===0?'true':'false');
    const mHan=document.createElement('strong');mHan.className='search-master-han';mHan.textContent=w.han;
    const mPin=document.createElement('span');mPin.className='search-master-pin';mPin.textContent=w.pin||'';
-   const mBadge=document.createElement('span');mBadge.className=w.hsk?`hsk-tag hsk${w.hsk}-tag search-master-badge`:'hsk-tag search-master-badge is-extended';mBadge.textContent=w.hsk?`HSK ${w.hsk}`:'Mở rộng';
-   const mMean=document.createElement('span');mMean.className='search-master-mean';mMean.textContent=w.mean.split(/[;；\n]/).slice(0,2).join('; ');
-   item.append(mHan,mPin,mBadge,mMean);
-   item.onclick=()=>{
-    if(rawQuery)R?.record(rawQuery,w);
-    masterItems.forEach((b,bi)=>{const on=bi===idx;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false');});
-    cards.forEach((c,ci)=>{const on=ci===idx;c.classList.toggle('is-selected',on);c.open=on;});
-   };
-   masterItems.push(item);masterList.append(item);
+   item.append(mHan,mPin);
+   item.onclick=()=>selectIndex(idx,true);
+   masterItems.push(item);candidateStrip.append(item);
   }
-  const card=document.createElement('details');card.className='result-card dictionary-row'+(w.isExtended?' is-extended-result':'')+(idx===0?' is-selected':'');
-  if(!multi||(idx===0&&wide))card.open=true;
-  const summary=document.createElement('summary');summary.className='dictionary-row-summary';
+  const card=document.createElement('details');card.className='result-card dictionary-row search-hanzii-card'+(w.isExtended?' is-extended-result':'')+(idx===0?' is-selected':'');
+  if(idx===0)card.open=true;
+  const summary=document.createElement('summary');summary.className='dictionary-row-summary search-hero-summary';
+  const heroHead=document.createElement('div');heroHead.className='search-hero-head';
   const han=document.createElement('span');han.className='result-open dictionary-row-han';han.textContent=w.han;
-  const pin=document.createElement('span');pin.className='dictionary-row-pinyin';pin.textContent=w.pin||'';
-  const badge=document.createElement('span');badge.className=w.hsk?`hsk-tag hsk${w.hsk}-tag search-row-badge`:'hsk-tag search-row-badge is-extended';badge.textContent=w.hsk?`HSK ${w.hsk}`:'Mở rộng';
-  const meaning=document.createElement('span');meaning.className='dictionary-row-meaning';meaning.textContent=w.mean.split(/[;；\n]/).slice(0,2).join('; ');
-  summary.append(han,pin,badge,meaning);card.append(summary);
+  heroHead.append(han);
+  if(!w.isExtended){
+   const verified=document.createElement('span');verified.className='search-hero-verified';verified.title='Từ vựng chuẩn HSK';verified.textContent='✓';
+   heroHead.append(verified);
+  }
+  const phonetic=document.createElement('div');phonetic.className='search-hero-phonetic';
+  const pin=document.createElement('span');pin.className='dictionary-row-pinyin';pin.textContent=w.pin?`[${w.pin}]`:'';
+  phonetic.append(pin);
+  if(w.hv){
+   const hvSpan=document.createElement('span');hvSpan.className='search-detail-hv';hvSpan.textContent=`[${w.hv.toUpperCase()}]`;
+   phonetic.append(hvSpan);
+  }
+  summary.append(heroHead,phonetic);card.append(summary);
 
   const body=document.createElement('div');body.className='dictionary-row-body search-detail-body';
-  const toolbar=document.createElement('div');toolbar.className='search-detail-toolbar';
+  const heroMeta=document.createElement('div');heroMeta.className='search-detail-toolbar search-hero-meta';
   const leftMeta=document.createElement('div');leftMeta.className='search-detail-left';
-  if(w.hv){const hvSpan=document.createElement('span');hvSpan.className='search-detail-hv';hvSpan.textContent=`HV: ${w.hv.toUpperCase()}`;leftMeta.append(hvSpan);}
+  const lvlLabel=document.createElement('span');lvlLabel.className='search-level-label';lvlLabel.textContent='Cấp độ:';
+  const badge=document.createElement('span');badge.className=w.hsk?`hsk-tag hsk${w.hsk}-tag search-row-badge`:'hsk-tag search-row-badge is-extended';badge.textContent=w.hsk?`HSK ${w.hsk}`:'Mở rộng';
+  leftMeta.append(lvlLabel,badge);
   if(!w.isExtended)leftMeta.append(makeMasteryTools(w));
 
   const actions=document.createElement('div');actions.className='search-detail-actions';
@@ -418,77 +580,100 @@ function renderSearch() {
    const open=document.createElement('button');open.type='button';open.textContent='Mở thẻ HSK';open.onclick=()=>{if(rawQuery)R?.record(rawQuery,w);if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};actions.append(open);
   }
   const notebook=window.HSKNotebook?.button(()=>w);if(notebook)actions.append(notebook);
-  if(leftMeta.childElementCount)toolbar.append(leftMeta);
-  toolbar.append(actions);
-  body.append(toolbar);
+  heroMeta.append(leftMeta,actions);
+  body.append(heroMeta);
 
-  const senseBox=document.createElement('div');senseBox.className='search-sense-list';
-  for(const item of groupedSearchSenses(w)){
-   const row=document.createElement('div');row.className='search-sense-row';
-   const pos=document.createElement('span');pos.className='search-sense-pos';pos.textContent=item.pos;
-   const txt=document.createElement('p');txt.className='search-sense-text';txt.textContent=item.mean;
-   row.append(pos,txt);senseBox.append(row);
-  }
-  body.append(senseBox);
-
-  if(foldCompounds&&match.tier>=2){
-   const relComp=relatedCompoundsFor(match,searchMatches,8);
-   if(relComp.items.length){
-    const compWrap=document.createElement('div');compWrap.className='search-related-compounds';
-    const compHead=document.createElement('div');compHead.className='search-related-head';
-    const compTitle=document.createElement('h4');compTitle.textContent=`${relComp.title} (${relComp.items.length})`;
-    compHead.append(compTitle);
-    if(compoundCount>relComp.items.length){
-     const moreBtn=document.createElement('button');moreBtn.type='button';moreBtn.className='search-related-all';moreBtn.textContent=`Xem tất cả (${compoundCount})`;
-     moreBtn.onclick=()=>{searchIntentFilter='compounds';visibleResults=40;renderSearch();};
-     compHead.append(moreBtn);
-    }
-    const compList=document.createElement('div');compList.className='search-compound-list';
-    for(const c of relComp.items){
-     const chip=document.createElement('button');chip.type='button';chip.className='search-compound-chip';
-     const cHan=document.createElement('strong');cHan.textContent=c.w.han;
-     const cMean=document.createElement('span');cMean.textContent=c.w.mean.split(/[;；\n]/)[0].trim();
-     chip.append(cHan,cMean);
-     chip.onclick=()=>{if(rawQuery)R?.record(rawQuery,c.w);$('searchInput').value=c.w.han;searchExplicit=true;runSearch();};
-     compList.append(chip);
-    }
-    compWrap.append(compHead,compList);
-    body.append(compWrap);
-   }
-  }
-
+  const accStack=document.createElement('div');accStack.className='search-acc-stack';
+  const sensesList=groupedSearchSenses(w);
   const examples=(w.practice?.examples||w.examples||[]).filter(e=>e&&e.cn&&e.vi);
   if(!examples.length&&w.exCn&&w.exVi)examples.push({cn:w.exCn,pin:w.originalExampleMetadata?.pin||'',vi:w.exVi});
-  if(examples.length){
-   const exWrap=document.createElement('div');exWrap.className='search-example-list';
-   const exTitle=document.createElement('h4');exTitle.textContent=`Ví dụ cách dùng (${Math.min(examples.length,3)})`;exWrap.append(exTitle);
-   for(const e of examples.slice(0,3)){
-    const exCard=document.createElement('div');exCard.className='search-example-item';
-    const exContent=document.createElement('div');exContent.className='search-example-content';
-    const exCn=document.createElement('p');exCn.className='search-example-cn';exCn.textContent=e.cn;
-    exContent.append(exCn);
-    if(e.pin)exContent.append(pinyinLine(e.pin));
-    const exVi=document.createElement('p');exVi.className='search-example-vi';exVi.textContent=e.vi;
-    exContent.append(exVi);
-    exCard.append(exContent);
-    const exSpeech=window.HSKSpeech?.button(e.cn,'Nghe câu ví dụ');if(exSpeech)exCard.append(exSpeech);
-    exWrap.append(exCard);
+
+  sensesList.forEach((item,sIdx)=>{
+   const acc=document.createElement('details');acc.className='search-acc-card is-pos';
+   if(sIdx===0)acc.open=true;
+   const sum=document.createElement('summary');sum.className='search-acc-summary';
+   const arrow=document.createElement('span');arrow.className='search-acc-arrow';arrow.setAttribute('aria-hidden','true');
+   const title=document.createElement('span');title.className='search-acc-title';title.textContent=item.pos;
+   const senseItems=String(item.mean||'').split(/[;；]/).map(s=>s.trim()).filter(Boolean);
+   const count=document.createElement('span');count.className='search-acc-count';count.textContent=String(Math.max(1,senseItems.length));
+   sum.append(arrow,title,count);acc.append(sum);
+   const accBody=document.createElement('div');accBody.className='search-acc-body';
+   const senseP=document.createElement('p');senseP.className='search-acc-senses-inline';
+   senseP.textContent=(senseItems.length?senseItems:[item.mean]).join('; ');
+   accBody.append(senseP);
+   if(sIdx===0&&examples.length){
+    const exWrap=document.createElement('div');exWrap.className='search-example-list';
+    const exTitle=document.createElement('h4');exTitle.textContent=`Ví dụ cách dùng (${Math.min(examples.length,3)})`;exWrap.append(exTitle);
+    for(const e of examples.slice(0,2)){
+     const exCard=document.createElement('div');exCard.className='search-example-item';
+     const exContent=document.createElement('div');exContent.className='search-example-content';
+     const exCn=document.createElement('p');exCn.className='search-example-cn';exCn.textContent=e.cn;
+     exContent.append(exCn);
+     if(e.pin)exContent.append(pinyinLine(e.pin));
+     const exVi=document.createElement('p');exVi.className='search-example-vi';exVi.textContent=e.vi;
+     exContent.append(exVi);
+     exCard.append(exContent);
+     const exSpeech=window.HSKSpeech?.button(e.cn,'Nghe câu ví dụ');if(exSpeech)exCard.append(exSpeech);
+     exWrap.append(exCard);
+    }
+    accBody.append(exWrap);
    }
-   body.append(exWrap);
+   acc.append(accBody);
+   accStack.append(acc);
+  });
+
+  // Compounds accordion ("▸ Từ ghép (N)") — merges folded query compounds + words containing this Hanzi.
+  const mergedCompounds=[], compSeen=new Set([w.han]);
+  if(foldCompounds&&match.tier>=2){
+   const relComp=relatedCompoundsFor(match,searchMatches,10);
+   for(const c of relComp.items){if(!compSeen.has(c.w.han)){compSeen.add(c.w.han);mergedCompounds.push(c.w);}}
+  }
+  for(const c of compoundsContainingHan(w.han,12)){if(!compSeen.has(c.w.han)){compSeen.add(c.w.han);mergedCompounds.push(c.w);}}
+  if(mergedCompounds.length){
+   const compAcc=document.createElement('details');compAcc.className='search-acc-card is-compounds';
+   const sum=document.createElement('summary');sum.className='search-acc-summary';
+   const arrow=document.createElement('span');arrow.className='search-acc-arrow';arrow.setAttribute('aria-hidden','true');
+   const title=document.createElement('span');title.className='search-acc-title';title.textContent='Từ ghép';
+   const count=document.createElement('span');count.className='search-acc-count';count.textContent=String(foldCompounds&&compoundCount>mergedCompounds.length?compoundCount:mergedCompounds.length);
+   sum.append(arrow,title,count);compAcc.append(sum);
+   const compBody=document.createElement('div');compBody.className='search-acc-body';
+   const compList=document.createElement('div');compList.className='search-compound-list';
+   for(const cw of mergedCompounds.slice(0,12)){
+    const chip=document.createElement('button');chip.type='button';chip.className='search-compound-chip';
+    const cHan=document.createElement('strong');cHan.textContent=cw.han;
+    const cMean=document.createElement('span');cMean.textContent=cw.mean.split(/[;；\n]/)[0].trim();
+    chip.append(cHan,cMean);
+    chip.onclick=()=>{if(rawQuery)R?.record(rawQuery,cw);$('searchInput').value=cw.han;searchExplicit=true;runSearch();};
+    compList.append(chip);
+   }
+   compBody.append(compList);
+   if(foldCompounds&&compoundCount>mergedCompounds.length){
+    const moreBtn=document.createElement('button');moreBtn.type='button';moreBtn.className='search-related-all';moreBtn.textContent=`Xem tất cả từ ghép (${compoundCount})`;
+    moreBtn.onclick=()=>{searchIntentFilter='compounds';visibleResults=40;renderSearch();};
+    compBody.append(moreBtn);
+   }
+   compAcc.append(compBody);
+   accStack.append(compAcc);
   }
 
   const relEntry=!w.isExtended?wordRelationsData?.entries?.[wordKey(w)]:null;
-  const hasRelations=Boolean((relEntry?.synonyms?.length||0)+(relEntry?.antonyms?.length||0));
-  if(hasRelations)body.append(wordRelationDetails(w));
+  const synAcc=buildRelationAccordion(w,'Từ cận nghĩa',relEntry?.synonyms,'is-synonyms');
+  if(synAcc)accStack.append(synAcc);
+  const antAcc=buildRelationAccordion(w,'Từ trái nghĩa',relEntry?.antonyms,'is-antonyms');
+  if(antAcc)accStack.append(antAcc);
+
+  body.append(accStack);
   card.append(body);
   card.addEventListener('toggle',()=>{
-   if(card.open&&rawQuery&&(!wide||!multi||!card.classList.contains('is-selected')))R?.record(rawQuery,w);
-   if(multi&&window.innerWidth>=960&&card.classList.contains('is-selected')&&!card.open)card.open=true;
+   if(card.classList.contains('is-selected')&&!card.open)card.open=true;
   });
   cards.push(card);
-  (cardsCol||$('searchResults')).append(card);
+  cardsCol.append(card);
  });
- if(multi)$('searchResults').append(masterList,cardsCol);
+ if(candidateStrip)mainCol.append(candidateStrip);
+ mainCol.append(cardsCol);
+ $('searchResults').append(mainCol,charPanel);
+ renderSearchCharPanel(charPanel,shown[0].w);
  $('searchMore').hidden=general||visibleResults>=activeMatches.length;
  const submitted=searchExplicit;searchExplicit=false;window.dispatchEvent(new CustomEvent('hsk-search-rendered',{detail:{submitted}}));
 }
