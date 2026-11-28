@@ -1,5 +1,5 @@
 {
-  "request": "Fix dictionary search UI/UX regressions in #searchPanel: enforce [hidden] on #searchResults in general scope, fix card border-radius and -12px summary margin causing chevron clipping, remove duplicate header/chip strip and empty word-relation boxes, compact mastery controls, and surface active HSK level filter reset.",
+  "request": "Optimize the one-touch dictionary search experience in #searchPanel: compact the desktop header and open-dictionary controls, show more results above the fold with desktop 2-column/general and master-detail HSK layouts, keep mobile result rows compact and tappable, and preserve every other route and shared navigation unchanged.",
   "excludedRoutes": [
     "lessons",
     "search"
