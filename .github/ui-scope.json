@@ -1,6 +1,7 @@
 {
   "request": "Optimize the open dictionary inside the HSK search page: remove English gloss display, use the Hanzii-style two-column master-detail layout with a visible candidate list and character stroke panel, and keep mobile result rows compact and tappable. Only the search route may change; all other routes and shared navigation remain protected.",
   "excludedRoutes": [
+    "lessons",
     "search"
   ],
   "dataStableRoutes": [
