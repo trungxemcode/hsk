@@ -122,6 +122,42 @@ class ChatGPTCookieBackendTests(unittest.TestCase):
         self.assertEqual(header_cookies["oai-did"], "dev-123")
         self.assertEqual(header_cookies["__Secure-next-auth.session-token.1"], "part1")
 
+        single_cookie = parse_session_cookies("Cookie: __Secure-next-auth.session-token=single-val\n")
+        self.assertEqual(single_cookie["__Secure-next-auth.session-token"], "single-val")
+
+        host_cookie = parse_session_cookies("__Host-next-auth.session-token=host-val")
+        self.assertEqual(host_cookie["__Host-next-auth.session-token"], "host-val")
+
+    def test_delta_v1_sse_and_session_manager_lookup(self):
+        sm = ChatGPTSessionManager("fake-cookie")
+        client = ChatGPTClient(sm)
+        self.assertIs(client._get_session_manager("fake-cookie"), sm)
+        other_sm = client._get_session_manager("other-cookie")
+        self.assertIsNot(other_sm, sm)
+        self.assertEqual(other_sm.session_token, "other-cookie")
+
+        delta_sse = "\n".join([
+            'event: delta_encoding',
+            'data: "v1"',
+            'event: delta',
+            'data: {"v":{"message":{"id":"m-thought","author":{"role":"assistant"},"recipient":"all","content":{"content_type":"thoughts","parts":[""]}},"conversation_id":"conv-v1"}}',
+            'event: delta',
+            'data: {"p":"/message/content/parts/0","o":"append","v":"hidden thinking"}',
+            'event: delta',
+            'data: {"v":{"message":{"id":"m-ans","author":{"role":"assistant"},"recipient":"all","content":{"content_type":"text","parts":[""]}},"conversation_id":"conv-v1"}}',
+            'event: delta',
+            'data: {"p":"/message/content/parts/0","o":"append","v":"Ăn tối là "}',
+            'event: delta',
+            'data: {"v":"吃晚饭"}',
+            'event: delta',
+            'data: {"o":"patch","v":[{"p":"/message/content/parts/0","o":"append","v":" (chī wǎnfàn)."}]}',
+            'data: [DONE]',
+        ])
+        parsed = client._parse_sse_response(delta_sse)
+        self.assertEqual(parsed["conversation_id"], "conv-v1")
+        self.assertEqual(parsed["message_id"], "m-ans")
+        self.assertEqual(parsed["reply"], "Ăn tối là 吃晚饭 (chī wǎnfàn).")
+
 
 if __name__ == "__main__":
     unittest.main()

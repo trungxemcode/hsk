@@ -276,3 +276,154 @@ test('Worker supports ChatGPT Cookie in Personal AI settings, Shared Server Cook
  assert.equal(bridgeCall.headers['X-HSK-Bridge-Key'],'bridge-test-key');
  assert.equal(bridgeCall.headers['X-ChatGPT-Session-Token'],splitCookie);
 });
+
+test('parseChatGptSseResponse parses delta_encoding v1 streams and ignores thinking channels',()=>{
+ const deltaV1Sse=[
+  'event: delta_encoding',
+  'data: "v1"',
+  'event: delta',
+  'data: {"v":{"message":{"id":"m-thought","author":{"role":"assistant"},"recipient":"all","content":{"content_type":"thoughts","parts":[""]}},"conversation_id":"conv-v1"}}',
+  'event: delta',
+  'data: {"p":"/message/content/parts/0","o":"append","v":"internal reasoning that must not leak"}',
+  'event: delta',
+  'data: {"v":{"message":{"id":"m-final","author":{"role":"assistant"},"recipient":"all","content":{"content_type":"text","parts":[""]}},"conversation_id":"conv-v1"}}',
+  'event: delta',
+  'data: {"p":"/message/content/parts/0","o":"append","v":"{\\"answer\\":\\"Ăn tối là "}',
+  'event: delta',
+  'data: {"v":"吃晚饭 (chī wǎnfàn)"}',
+  'event: delta',
+  'data: {"o":"patch","v":[{"p":"/message/content/parts/0","o":"append","v":".\\"}" },{"p":"/message/status","o":"replace","v":"finished_successfully"}]}',
+  'data: [DONE]'
+ ].join('\n');
+ const parsed=parseChatGptSseResponse(deltaV1Sse);
+ assert.equal(parsed.conversation_id,'conv-v1');
+ assert.equal(parsed.message_id,'m-final');
+ assert.equal(parsed.reply,'{"answer":"Ăn tối là 吃晚饭 (chī wǎnfàn)."}');
+});
+
+test('ChatGPTSessionManager handles single/Host cookie formats and respects JWT exp',async()=>{
+ const singleHeader=new ChatGPTSessionManager('Cookie: __Secure-next-auth.session-token=tok-single\n');
+ assert.equal(singleHeader.getCookieHeader(),'__Secure-next-auth.session-token=tok-single');
+ const hostHeader=new ChatGPTSessionManager('__Host-next-auth.session-token=tok-host');
+ assert.equal(hostHeader.getCookieHeader(),'__Host-next-auth.session-token=tok-host');
+
+ let nowMs=1000000*1000;
+ let calls=0;
+ const shortJwt='hdr.'+Buffer.from(JSON.stringify({exp:1000000+600})).toString('base64url')+'.sig';
+ const sm=new ChatGPTSessionManager('raw-cookie-val',{now:()=>nowMs});
+ const fakeFetch=async()=>{calls++;return Response.json({accessToken:shortJwt});};
+ await sm.getValidAccessToken(fakeFetch);
+ assert.equal(calls,1);
+ // After 7 minutes (past exp - 5m buffer), must refresh rather than waiting 55 minutes
+ nowMs+=420*1000;
+ await sm.getValidAccessToken(fakeFetch);
+ assert.equal(calls,2);
+});
+
+test('ChatGPTClient retries on 401 refresh, falls back to auto on model_not_found, and falls back to /backend-api/f/conversation',async()=>{
+ // 1. 401 token refresh + model_not_found -> auto fallback
+ const sm1=new ChatGPTSessionManager('cookie-retry');
+ const client1=new ChatGPTClient(sm1);
+ let sessionCount=0,postCount=0;
+ const seenModels=[];
+ const res1=await client1.sendStatelessMessage('ăn tối là gì',{
+  model:'gpt-6-thinking',
+  fetchFn:async(url,init)=>{
+   if(url.endsWith('/api/auth/session')){sessionCount++;return Response.json({accessToken:'tok-'+sessionCount});}
+   if(url.endsWith('/backend-api/conversation')&&init.method==='POST'){
+    postCount++;
+    const body=JSON.parse(init.body);
+    seenModels.push(body.model);
+    if(postCount===1)return new Response('unauthorized',{status:401});
+    if(postCount===2)return Response.json({detail:'Model not found'},{status:404});
+    const sse='event: delta\ndata: {"v":{"message":{"id":"m1","author":{"role":"assistant"},"content":{"content_type":"text","parts":["吃晚饭"]}},"conversation_id":"c-auto"}}\ndata: [DONE]\n';
+    return new Response(sse,{status:200,headers:{'Content-Type':'text/event-stream'}});
+   }
+   if(init.method==='PATCH')return Response.json({ok:true});
+   throw Error('Unexpected URL: '+url);
+  }
+ });
+ assert.equal(sessionCount,2,'401 invalidates cached accessToken and fetches a new one');
+ assert.deepEqual(seenModels,['gpt-6-thinking','gpt-6-thinking','auto']);
+ assert.equal(res1.reply,'吃晚饭');
+
+ // 2. Route 404 -> /backend-api/f/conversation fallback
+ const sm2=new ChatGPTSessionManager('cookie-route');
+ const client2=new ChatGPTClient(sm2);
+ const seenUrls=[];
+ const res2=await client2.sendStatelessMessage('xin chào',{
+  model:'auto',
+  fetchFn:async(url,init)=>{
+   seenUrls.push(url);
+   if(url.endsWith('/api/auth/session'))return Response.json({accessToken:'tok-r'});
+   if(url.endsWith('/backend-api/conversation')&&init.method==='POST')return new Response('Not Found',{status:404});
+   if(url.endsWith('/backend-api/f/conversation')&&init.method==='POST'){
+    const sse='data: {"v":{"message":{"id":"m2","author":{"role":"assistant"},"content":{"content_type":"text","parts":["你好"]}},"conversation_id":"c-f"}}\ndata: [DONE]\n';
+    return new Response(sse,{status:200,headers:{'Content-Type':'text/event-stream'}});
+   }
+   if(init.method==='PATCH')return Response.json({ok:true});
+   throw Error('Unexpected URL: '+url);
+  }
+ });
+ assert.ok(seenUrls.some(u=>u.endsWith('/backend-api/f/conversation')));
+ assert.equal(res2.reply,'你好');
+});
+
+test('Worker surfaces Cloudflare challenge and offline bridge diagnostics for chatgpt-cookie',async()=>{
+ const records=new Map();
+ const makeEnv=(extra={})=>({
+  AI_PERSONAL_KEY_SECRET:secret,
+  FIREBASE_API_KEY:'fake-firebase',
+  QA_CACHE_ENABLED:'false',
+  CHATGPT_SESSION_TOKEN:'shared-cookie-token-123456',
+  AI_QA_PROVIDER:'chatgpt-cookie',
+  AI_CONTROL:{
+   idFromName:name=>name,
+   get(name){
+    if(!records.has(name))records.set(name,new Map());
+    const data=records.get(name);
+    const store={get:async k=>data.get(k),put:async(k,v)=>data.set(k,v),delete:async k=>data.delete(k)};
+    store.transaction=fn=>fn(store);
+    const object=new HSkaIControl({storage:store},makeEnv(extra));
+    return {fetch:(url,init)=>object.fetch(new Request(url,init))};
+   }
+  },
+  ...extra
+ });
+ const makeToken=uid=>'header.'+Buffer.from(JSON.stringify({aud:'hsk-flashcards-44631',iss:'https://securetoken.google.com/hsk-flashcards-44631',sub:uid,exp:Math.floor(Date.now()/1000)+3600})).toString('base64url')+'.sig';
+ const qaBody={question:'ăn tối là gì',hsk:3,aiProvider:'system-chatgpt',lesson:{id:'ai-qa',title:'AI',words:[],content:{mode:'ai-qa',questionMessageId:'q-1',learning_snapshot:{}}},history:[]};
+
+ // Offline bridge (530 HTML from Cloudflare tunnel)
+ const bridgeDownWorker=createHandler(async(url,init)=>{
+  if(String(url).includes('identitytoolkit')){
+   const claims=JSON.parse(Buffer.from(JSON.parse(init.body).idToken.split('.')[1],'base64url').toString());
+   return Response.json({users:[{localId:claims.sub}]});
+  }
+  return new Response('<html>Tunnel Error 1033</html>',{status:530,headers:{'Content-Type':'text/html'}});
+ });
+ const rDown=await bridgeDownWorker(new Request('https://worker.test/lesson-ask',{
+  method:'POST',headers:{Origin:origin,Authorization:'Bearer '+makeToken('u-bridge-down'),'Content-Type':'application/json'},
+  body:JSON.stringify(qaBody)
+ }),makeEnv({CHATGPT_COOKIE_BRIDGE_URL:'https://bridge.test',CHATGPT_COOKIE_BRIDGE_KEY:'key'}));
+ assert.equal(rDown.status,502);
+ const dDown=await rDown.json();
+ assert.equal(dDown.code,'CHATGPT_BRIDGE_UNAVAILABLE');
+ assert.match(dDown.error,/Bridge\/Tunnel/i);
+
+ // Cloudflare challenge (403 cf-mitigated: challenge)
+ const cfWorker=createHandler(async(url,init)=>{
+  if(String(url).includes('identitytoolkit')){
+   const claims=JSON.parse(Buffer.from(JSON.parse(init.body).idToken.split('.')[1],'base64url').toString());
+   return Response.json({users:[{localId:claims.sub}]});
+  }
+  return new Response('<html>Just a moment...</html>',{status:403,headers:{'cf-mitigated':'challenge'}});
+ });
+ const rCf=await cfWorker(new Request('https://worker.test/lesson-ask',{
+  method:'POST',headers:{Origin:origin,Authorization:'Bearer '+makeToken('u-cf'),'Content-Type':'application/json'},
+  body:JSON.stringify(qaBody)
+ }),makeEnv());
+ assert.equal(rCf.status,502);
+ const dCf=await rCf.json();
+ assert.equal(dCf.code,'CHATGPT_CLOUDFLARE_CHALLENGE');
+ assert.match(dCf.error,/Cloudflare/i);
+});

@@ -11,15 +11,22 @@
     gemini:'https://generativelanguage.googleapis.com/v1beta/models/'
   };
   const MODEL_LABELS={
+    'auto':'Tự động (ChatGPT)',
     'gpt-6':'GPT-6 (Cân bằng)',
     'gpt-6-instant':'GPT-6 (Tức thì)',
     'gpt-6-thinking':'GPT-6 (Suy luận)',
+    'gpt-6-pro':'GPT-6 Pro',
     'gpt-5-6':'GPT-5.6 Sol',
     'gpt-5-6-instant':'GPT-5.6 Sol (Tức thì)',
     'gpt-5-6-thinking':'GPT-5.6 Sol (Suy luận)',
+    'gpt-5-6-pro':'GPT-5.6 Pro',
     'gpt-5.6':'GPT-5.6 Sol',
     'gpt-5.6-sol':'GPT-5.6 Sol',
     'gpt-6-mini':'GPT-6 mini',
+    'gpt-5':'GPT-5',
+    'gpt-5-instant':'GPT-5 (Tức thì)',
+    'gpt-5-thinking':'GPT-5 (Suy luận)',
+    'gpt-5-mini':'GPT-5 mini',
     'gpt-4o-mini':'GPT-4o mini',
     'gpt-4o':'GPT-4o',
     'o3-mini':'o3-mini (Suy luận)',
@@ -280,9 +287,9 @@
         ];
       }
       const rawList=Array.isArray(p?.models)&&p.models.length?p.models:DEFAULT_PROVIDER_MODELS['chatgpt-plus'];
-      const allowed=new Set(['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','gpt-4o-mini','o3-mini']);
+      const allowed=new Set(['auto','gpt-6-instant','gpt-6','gpt-6-thinking','gpt-6-pro','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-5-6-pro','gpt-6-mini','gpt-5','gpt-5-instant','gpt-5-thinking','gpt-5-mini','gpt-4o','gpt-4o-mini','o3-mini','o4-mini','gpt-4-1','gpt-4.1']);
       const filtered=rawList.filter(m=>allowed.has(m)||Object.hasOwn(MODEL_LABELS,m));
-      const priority=['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','o3-mini'];
+      const priority=['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-pro','gpt-5-6-pro','gpt-6-mini','gpt-5','gpt-5-instant','gpt-5-thinking','gpt-5-mini','auto','gpt-4o','o4-mini','o3-mini','gpt-4-1','gpt-4.1','gpt-4o-mini'];
       filtered.sort((a,b)=>{const ia=priority.indexOf(a),ib=priority.indexOf(b);if(ia!==-1&&ib!==-1)return ia-ib;if(ia!==-1)return -1;if(ib!==-1)return 1;return 0;});
       const unique=[...new Set([...filtered,...(savedModel&&savedModel!=='gpt-4o-mini'?[savedModel]:[])])];
       const tierSlots=['low','medium','high'];
