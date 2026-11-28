@@ -98,8 +98,11 @@ function createMockFetch() {
     if (u.includes('suggestqueries.google.com')) {
       return Response.json([
         'seed',
-        ['chửi bậy tiếng trung', 'dịch tiếng trung', 'xin lỗi trong tiếng trung'],
+        ['chửi bậy tiếng trung', 'dịch tiếng trung', 'học tiếng trung cần thơ', 'xin lỗi trong tiếng trung'],
       ]);
+    }
+    if (u.includes('news.google.com/rss/search')) {
+      return new Response('<rss><channel><item><title><![CDATA[Lịch thi HSK 2027 tại Hà Nội mới nhất - Báo Giáo Dục]]></title></item></channel></rss>');
     }
     if (u.includes('accounts:lookup')) {
       return Response.json({
@@ -118,7 +121,7 @@ test('collectTrendTopicsWorker filters toxic/translator noise and deduplicates a
     fetchImpl: createMockFetch(),
   });
   assert.equal(res.topics.length, 1);
-  assert.equal(res.topics[0].query, 'xin lỗi trong tiếng trung');
+  assert.equal(res.topics[0].query, 'Lịch thi HSK 2027 tại Hà Nội mới nhất');
 });
 
 test('normalizeArticle stringifies object bullets and paragraphs without [object Object]', () => {
@@ -326,7 +329,67 @@ test('ChatGPT Gateway MCP/REST works with zero internal AI, supports revision re
   const toolNames = (await listToolsRes.json()).result.tools.map((t) => t.name);
   assert.deepEqual(toolNames, ['get_seo_brief', 'submit_seo_draft', 'update_seo_draft', 'list_chatgpt_drafts']);
 
-  // ChatGPT submits 1 draft via MCP submit_seo_draft -> pending_review, zero internal AI
+  // Admin can save Google Trends CSV keywords into R2 pool
+  const poolRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/trends-pool', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer fake-admin-id-token',
+        'Content-Type': 'application/json',
+        Origin: 'https://hskfreelearningai.pages.dev',
+      },
+      body: JSON.stringify({ rawCsv: 'luyện nghe hsk 4 hiệu quả,+220%' }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(poolRes.status, 200);
+  assert.equal((await poolRes.json()).count, 1);
+
+  // Calling get_seo_brief before submit issues trend topics & returns topicId
+  const initialBriefRes = await handleSeoEditorialFetch(
+    new Request(secretMcpUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 10,
+        method: 'tools/call',
+        params: { name: 'get_seo_brief', arguments: { count: 5 } },
+      }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  const initialBrief = (await initialBriefRes.json()).result.structuredContent;
+  assert.equal(initialBrief.trendLockRequired, true);
+  assert.ok(initialBrief.suggestedTopics.some((t) => t.query === 'xin lỗi trong tiếng trung' && t.topicId));
+  const pickedXinLoi = initialBrief.suggestedTopics.find((t) => t.query === 'xin lỗi trong tiếng trung');
+  const pickedLichThi = initialBrief.suggestedTopics.find((t) => t.query.includes('Lịch thi HSK 2027'));
+
+  // Off-trend arbitrary topic must be rejected (400 trend_topic_required)
+  const offTrendRes = await handleSeoEditorialFetch(
+    new Request('https://seo.workers.dev/api/chatgpt/drafts', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${rotatedCfg.apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        trendQuery: 'chủ đề tự nghĩ ngoài google trends',
+        article: makeMockArticleJson('Chủ đề tự nghĩ không nằm trong Google Trends'),
+      }),
+    }),
+    env,
+    {},
+    { fetchImpl }
+  );
+  assert.equal(offTrendRes.status, 400);
+  assert.equal((await offTrendRes.json()).code, 'trend_topic_required');
+
+  // ChatGPT submits 1 draft via MCP submit_seo_draft using issued topicId -> pending_review, zero internal AI
   const submitRes = await handleSeoEditorialFetch(
     new Request(secretMcpUrl, {
       method: 'POST',
@@ -338,7 +401,8 @@ test('ChatGPT Gateway MCP/REST works with zero internal AI, supports revision re
         params: {
           name: 'submit_seo_draft',
           arguments: {
-            trendQuery: 'xin lỗi trong tiếng trung',
+            topicId: pickedXinLoi.topicId,
+            trendQuery: pickedXinLoi.query,
             authorModel: 'ChatGPT Plus',
             article: makeMockArticleJson('Phân biệt xin lỗi trong tiếng Trung chuẩn bản xứ'),
           },
@@ -458,7 +522,7 @@ test('ChatGPT Gateway MCP/REST works with zero internal AI, supports revision re
   );
   assert.equal(dupRes.status, 409);
 
-  // Submit 2nd distinct draft via REST PUT fails on nonexistent, POST succeeds, 3rd hits hourly 429
+  // Submit 2nd distinct draft via REST using issued Google News VN topic succeeds, 3rd hits hourly 429
   const post2 = await handleSeoEditorialFetch(
     new Request('https://seo.workers.dev/api/chatgpt/drafts', {
       method: 'POST',
@@ -467,7 +531,8 @@ test('ChatGPT Gateway MCP/REST works with zero internal AI, supports revision re
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        trendQuery: 'lịch thi hsk 2027 tại hà nội',
+        topicId: pickedLichThi?.topicId,
+        trendQuery: pickedLichThi?.query || 'Lịch thi HSK 2027 tại Hà Nội mới nhất',
         article: makeMockArticleJson('Lịch thi HSK 2027 tại Hà Nội mới nhất'),
       }),
     }),
@@ -485,8 +550,8 @@ test('ChatGPT Gateway MCP/REST works with zero internal AI, supports revision re
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        trendQuery: 'cách học bộ thủ tiếng trung nhanh',
-        article: makeMockArticleJson('Cách học bộ thủ tiếng Trung nhớ lâu'),
+        trendQuery: 'luyện nghe hsk 4 hiệu quả',
+        article: makeMockArticleJson('Luyện nghe HSK 4 hiệu quả theo Google Trends'),
       }),
     }),
     env,
