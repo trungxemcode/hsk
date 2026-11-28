@@ -151,7 +151,9 @@ function switchMode(next) {
 let searchMatches=[], visibleResults=40, searchTimer, searchPinyinAllowed=true, searchScope='hsk',searchExplicit=false;
 let extendedSearchPoolCache=null;
 const BASE_EXTRA_WORDS=[
- {han:'饭',pin:'fàn',hv:'Phạn',mean:'cơm; bữa cơm; bữa ăn; thức ăn nấu chín',posSenses:[{pos:'Danh từ',mean:'cơm; bữa cơm; bữa ăn; thức ăn nấu chín'}],examples:[{cn:'晚饭已经做好了，快过来吃吧。',pin:'Wǎnfàn yǐjīng zuòhǎo le, kuài guòlái chī ba.',vi:'Cơm tối đã nấu xong rồi, mau lại ăn đi.'},{cn:'我中午在公司附近吃了一顿便饭。',pin:'Wǒ zhōngwǔ zài gōngsī fùjìn chī le yī dùn biànfàn.',vi:'Buổi trưa tôi ăn một bữa cơm bình dân gần công ty.'}]}
+ {han:'饭',pin:'fàn',hv:'Phạn',mean:'cơm; bữa cơm; bữa ăn; thức ăn nấu chín',posSenses:[{pos:'Danh từ',mean:'cơm; bữa cơm; bữa ăn; thức ăn nấu chín'}],examples:[{cn:'晚饭已经做好了，快过来吃吧。',pin:'Wǎnfàn yǐjīng zuòhǎo le, kuài guòlái chī ba.',vi:'Cơm tối đã nấu xong rồi, mau lại ăn đi.'},{cn:'我中午在公司附近吃了一顿便饭。',pin:'Wǒ zhōngwǔ zài gōngsī fùjìn chī le yī dùn biànfàn.',vi:'Buổi trưa tôi ăn một bữa cơm bình dân gần công ty.'}]},
+ {han:'讨饭',pin:'tǎofàn',hv:'Thảo phạn',mean:'xin ăn; ăn xin; đi ăn mày',posSenses:[{pos:'Động từ',mean:'xin ăn; ăn xin; đi ăn mày'}],examples:[{cn:'旧社会很多穷人不得不沿街讨饭。',pin:'Jiù shèhuì hěn duō qióngrén bùdébù yánjiē tǎofàn.',vi:'Ở xã hội cũ, nhiều người nghèo buộc phải đi xin ăn dọc đường.'}]},
+ {han:'要饭',pin:'yàofàn',hv:'Yếu phạn',mean:'xin ăn; ăn xin (khẩu ngữ)',posSenses:[{pos:'Động từ',mean:'xin ăn; ăn xin (khẩu ngữ)'}],examples:[{cn:'街角坐着一个要饭的老人。',pin:'Jiējiǎo zuòzhe yī gè yàofàn de lǎorén.',vi:'Ở góc phố có một ông cụ đang ngồi xin ăn.'}]}
 ];
 const SEARCH_POS_LABELS={n:'Danh từ',v:'Động từ',adj:'Tính từ',adv:'Phó từ',prep:'Giới từ',conj:'Liên từ',pron:'Đại từ',pro:'Đại từ',num:'Số từ',numb:'Số từ',classifier:'Lượng từ',particle:'Trợ từ',part:'Trợ từ',interj:'Thán từ',a:'Tính từ',d:'Phó từ',m:'Số từ',q:'Lượng từ',p:'Giới từ',c:'Liên từ',r:'Đại từ',u:'Trợ từ',idiom:'Thành ngữ'};
 function searchPosLabel(pos){return SEARCH_POS_LABELS[pos]||pos||'Nghĩa';}
@@ -184,25 +186,33 @@ function getExtendedSearchPool(){
  extendedSearchPoolCache=list;
  return list;
 }
+function sameTokenSet(senseStr,qTokens){
+ const sTokens=String(senseStr||'').split(' ').filter(Boolean);
+ if(sTokens.length!==qTokens.length)return false;
+ const bag=new Map();
+ for(const t of sTokens)bag.set(t,(bag.get(t)||0)+1);
+ for(const t of qTokens){const c=bag.get(t)||0;if(!c)return false;bag.set(t,c-1);}
+ return true;
+}
 function searchMatchInfo(w,q,terms) {
  const trimmed=q.trim();
- if(!trimmed)return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
- if(w.han===trimmed)return {score:160,tier:3,kind:'han',exact:true,hasVi:false,hasPinyin:false};
+ if(!trimmed)return {score:0,tier:0,band:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+ if(w.han===trimmed)return {score:160,tier:3,band:6,kind:'han',exact:true,hasVi:false,hasPinyin:false};
  if(/^[\u3400-\u9fff]+$/.test(trimmed)){
-  if(w.han.startsWith(trimmed))return {score:132,tier:1,kind:'han',exact:false,hasVi:false,hasPinyin:false};
-  if(w.han.includes(trimmed))return {score:118,tier:1,kind:'han',exact:false,hasVi:false,hasPinyin:false};
-  return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+  if(w.han.startsWith(trimmed))return {score:132,tier:1,band:4,kind:'han',exact:false,hasVi:false,hasPinyin:false};
+  if(w.han.includes(trimmed))return {score:118,tier:1,band:3,kind:'han',exact:false,hasVi:false,hasPinyin:false};
+  return {score:0,tier:0,band:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
  }
  const C=window.HSKOpenDictionaryCore;
- let pinScore=0,pinExact=false;
+ let pinScore=0,pinBand=0,pinExact=false;
  if(searchPinyinAllowed&&w.pin&&/[a-z]/i.test(trimmed)&&C){
   const p=C.fold(w.pin),f=C.fold(trimmed);
-  if(f&&p===f){pinScore=145;pinExact=true;}
+  if(f&&p===f){pinScore=145;pinBand=5;pinExact=true;}
   else if(f.length>=2&&C.pinyinQuery(trimmed)){
    const syls=window.HSKSearchRanking?.splitPinyinSyllables?window.HSKSearchRanking.splitPinyinSyllables(w.pin):String(w.pin).trim().split(/[\s,/·-]+/).filter(Boolean).map(s=>C.fold(s));
    const qToks=trimmed.split(/[\s'’]+/).map(s=>C.fold(s)).filter(Boolean);
-   if(qToks.length>=1&&syls.length>qToks.length&&qToks.every((t,i)=>syls[i]===t))pinScore=112;
-   else if(qToks.length===1&&syls.includes(f))pinScore=92;
+   if(qToks.length>=1&&syls.length>qToks.length&&qToks.every((t,i)=>syls[i]===t)){pinScore=112;pinBand=4;}
+   else if(qToks.length===1&&syls.includes(f)){pinScore=92;pinBand=3;}
   }
  }
  const senses=sensesMap.get(w)||splitSenses(w),vietnamese=senses.map(viText);
@@ -210,24 +220,24 @@ function searchMatchInfo(w,q,terms) {
  const accented=hasAccent(trimmed),query=accented?viText(trimmed):fold(trimmed);
  const pMeanings=primarySenses.map(s=>accented?viText(s):fold(s));
  const meanings=senses.map(s=>accented?viText(s):fold(s));
- let viScore=0,viKind='vi',viExact=false;
- if(pMeanings.some(s=>s===query)){viScore=pMeanings[0]===query?144:140;viExact=true;}
- else if(pMeanings.some(s=>phraseIn(s,query))){viScore=118;}
- else if(meanings.some(s=>s===query)){viScore=92;}
- else if(meanings.some(s=>phraseIn(s,query))){viScore=78;}
+ const tokens=query.split(' ').filter(Boolean);
+ let viScore=0,viBand=0,viKind='vi',viExact=false;
+ if(pMeanings.some(s=>s===query)){viScore=pMeanings[0]===query?144:140;viBand=5;viExact=true;}
+ else if(tokens.length>=2&&tokens.length<=4&&pMeanings.some(s=>sameTokenSet(s,tokens))){viScore=136;viBand=5;viExact=true;}
+ else if(pMeanings.some(s=>phraseIn(s,query))){viScore=118;viBand=4;}
+ else if(tokens.length>=2&&tokens.length<=4&&meanings.some(s=>sameTokenSet(s,tokens))){viScore=108;viBand=4;}
  // Synonym expansion preserves accents (bố ≠ bỏ). A short alias must be a whole sense.
- else if(vietnamese.some(s=>terms.some(t=>t.split(' ').length===1?bareSense(s)===t:phraseIn(s,t)))){viScore=72;}
- else if(w.hv&&(accented?viText(w.hv)===query:fold(w.hv)===query)){viScore=64;viKind='hv';}
- else {
-  const tokens=query.split(' ');
-  if(tokens.length>1&&meanings.some(s=>tokens.filter(t=>phraseIn(s,t)).length>=Math.max(2,Math.ceil(tokens.length*.75))))viScore=45;
-  else if(!w.isExtended&&senses.some(s=>typoSimilar(fold(trimmed),fold(s))))viScore=25;
- }
+ else if(vietnamese.some(s=>terms.some(t=>t.split(' ').length===1?bareSense(s)===t:phraseIn(s,t)))){viScore=102;viBand=4;}
+ else if(meanings.some(s=>s===query)){viScore=92;viBand=3;}
+ else if(meanings.some(s=>phraseIn(s,query))){viScore=78;viBand=3;}
+ else if(w.hv&&(accented?viText(w.hv)===query:fold(w.hv)===query)){viScore=64;viBand=3;viKind='hv';}
+ else if(tokens.length>1&&meanings.some(s=>tokens.filter(t=>phraseIn(s,t)).length>=Math.max(2,Math.ceil(tokens.length*.75)))){viScore=45;viBand=2;}
+ else if(!w.isExtended&&senses.some(s=>accented?typoSimilar(viText(trimmed),viText(s)):typoSimilar(fold(trimmed),fold(s)))){viScore=25;viBand=1;}
  const hasPin=pinScore>0,hasVi=viScore>0&&viKind==='vi';
- if(!pinScore&&!viScore)return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
- const tier=(pinExact||viExact)?2:1;
- if(pinScore>viScore)return {score:pinScore,tier,kind:'pinyin',exact:pinExact,hasVi,hasPinyin:hasPin};
- return {score:viScore,tier,kind:viKind,exact:viExact,hasVi,hasPinyin:hasPin};
+ if(!pinScore&&!viScore)return {score:0,tier:0,band:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+ const tier=(pinExact||viExact)?2:(Math.max(pinBand,viBand)===1?0:1);
+ if(pinBand>viBand||(pinBand===viBand&&pinScore>viScore))return {score:pinScore,tier,band:pinBand,kind:'pinyin',exact:pinExact,hasVi,hasPinyin:hasPin};
+ return {score:viScore,tier,band:viBand,kind:viKind,exact:viExact,hasVi,hasPinyin:hasPin};
 }
 function searchScore(w,q,terms) { return searchMatchInfo(w,q,terms).score; }
 function isSingleRootQuery(rawQuery){
@@ -274,12 +284,15 @@ function runSearch() {
  searchPinyinAllowed=accented?(!C?.vietnamese?.(query)&&!exactViExists):(Boolean(C?.pinyinQuery?.(query))||!exactViExists);
  const hskPool=searchScope==='general'?words:[...new Set([...levelWords(),...words.filter(w=>w.han===query||searchPinyinAllowed&&C?.fold(w.pin)===C?.fold(query)&&/[a-z]/i.test(query))])];
  const pool=includeExtended?[...hskPool,...extraPool]:hskPool;
- searchMatches=pool.map((w,i)=>{
+ const rawMatches=pool.map((w,i)=>{
   const info=searchMatchInfo(w,query,terms);
   if(!info.score)return null;
   const rank=info.score+(R?R.commonality(w)+R.boost(query,w):0);
-  return {w,score:info.score,tier:info.tier,kind:info.kind,exact:info.exact,hasVi:info.hasVi,hasPinyin:info.hasPinyin,rank,i};
- }).filter(Boolean).sort((a,b)=>Number(b.exact&&b.kind==='han')-Number(a.exact&&a.kind==='han')||b.tier-a.tier||b.rank-a.rank||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||a.w.han.length-b.w.han.length||Number(a.w.hsk||99)-Number(b.w.hsk||99)||a.i-b.i);
+  return {w,score:info.score,tier:info.tier,band:info.band,kind:info.kind,exact:info.exact,hasVi:info.hasVi,hasPinyin:info.hasPinyin,rank,i};
+ }).filter(Boolean);
+ // Typo fallback (band 1) only surfaces when zero real semantic/exact/phrase matches exist.
+ const hasRealMatch=rawMatches.some(r=>r.band>=2);
+ searchMatches=(hasRealMatch?rawMatches.filter(r=>r.band>=2):rawMatches).sort((a,b)=>Number(b.exact&&b.kind==='han')-Number(a.exact&&a.kind==='han')||b.tier-a.tier||b.band-a.band||b.rank-a.rank||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||a.w.han.length-b.w.han.length||Number(a.w.hsk||99)-Number(b.w.hsk||99)||a.i-b.i);
  renderSearch();
 }
 function groupedSearchSenses(w){

@@ -131,7 +131,7 @@
   const isPinyinQ=!/^[\p{Script=Han}]+$/u.test(q)&&C.pinyinQuery(q);
   const draw=(done,n=0)=>{if(token!==serial)return;
    for(const entry of found)entry._rank=rankEntry(entry,q);
-   found.sort((a,b)=>Number(b.w.han===q||b.w.trad===q)-Number(a.w.han===q||a.w.trad===q)||Number(Boolean(vi(b.w)))-Number(Boolean(vi(a.w)))||b.tier-a.tier||b._rank-a._rank||b.score-a.score||a.w.han.length-b.w.han.length||a.w.han.localeCompare(b.w.han));
+   found.sort((a,b)=>Number(b.w.han===q||b.w.trad===q)-Number(a.w.han===q||a.w.trad===q)||Number(Boolean(vi(b.w)))-Number(Boolean(vi(a.w)))||b.tier-a.tier||(b.band||0)-(a.band||0)||b._rank-a._rank||b.score-a.score||a.w.han.length-b.w.han.length||a.w.han.localeCompare(b.w.han));
    const foldCompounds=shouldFoldOpen(found,q);
    let view=filterOpenEntries(found,activeFilter,q,foldCompounds);
    if(activeFilter!=='all'&&!view.length){activeFilter='all';view=filterOpenEntries(found,'all',q,foldCompounds);}
@@ -144,8 +144,8 @@
    if(shown<view.length)target.append(button('Xem thêm kết quả',()=>{shown+=40;draw(target.dataset.complete==='true',n);}));
   };
   if(searchCache.has(cacheKey)){draw(true);return;}
-  if(general)for(const r of B.results()){const {w,score}=r,item=bridgeItem(w);seenHanPin.add(w.han+'|'+C.reading(w.pin));found.push({w:item,score,tier:r.tier||(score>=140?2:1),hasPinyin:Boolean(r.hasPinyin),hasViMatch:Boolean(r.hasVi)});}
-  const ingest=rows=>{for(const r of rows){const key=r.slice(0,3).join('|'),rp=C.reading(r[2]),score=general?C.score(r,q):C.matches(r,q)?150:0;if(!score||seen.has(key)||seenHanPin.has(r[0]+'|'+rp)||seenHanPin.has(r[1]+'|'+rp))continue;seen.add(key);const meanVi=resolveLocalVi(r[0],r[1],r[2]),pinDisplay=C.formatPinyin?C.formatPinyin(r[2]):r[2];const tier=(r[0]===q||r[1]===q)?3:(score>=140?2:1);found.push({w:{han:r[0],trad:r[1],pin:r[2],pinDisplay,mean:r[3].join('; '),...(meanVi?{meanVi}:{})},score,tier,hasPinyin:isPinyinQ,hasViMatch:false});}};
+  if(general)for(const r of B.results()){const {w,score}=r,item=bridgeItem(w);seenHanPin.add(w.han+'|'+C.reading(w.pin));found.push({w:item,score,tier:r.tier||(score>=140?2:1),band:r.band||(score>=140?5:score>=110?4:3),hasPinyin:Boolean(r.hasPinyin),hasViMatch:Boolean(r.hasVi)});}
+  const ingest=rows=>{for(const r of rows){const key=r.slice(0,3).join('|'),rp=C.reading(r[2]),score=general?C.score(r,q):C.matches(r,q)?150:0;if(!score||seen.has(key)||seenHanPin.has(r[0]+'|'+rp)||seenHanPin.has(r[1]+'|'+rp))continue;seen.add(key);const meanVi=resolveLocalVi(r[0],r[1],r[2]),pinDisplay=C.formatPinyin?C.formatPinyin(r[2]):r[2];const tier=(r[0]===q||r[1]===q)?3:(score>=140?2:1);const band=(r[0]===q||r[1]===q)?6:(score>=140?5:score>=110?4:score>=80?3:2);found.push({w:{han:r[0],trad:r[1],pin:r[2],pinDisplay,mean:r[3].join('; '),...(meanVi?{meanVi}:{})},score,tier,band,hasPinyin:isPinyinQ,hasViMatch:false});}};
   try{const chinese=/^[\p{Script=Han}]+$/u.test(q),primary=chinese?q.codePointAt(0)%32:null;let n=0;
    if(primary!==null){ingest(await shard(primary));n++;draw(!general,n);if(!general)return;}
    const order=Array.from({length:32},(_,i)=>i).filter(i=>i!==primary).sort((a,b)=>Number(loaded.has(b))-Number(loaded.has(a)));

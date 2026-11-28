@@ -6,6 +6,16 @@ const viText = s => String(s || '').normalize('NFC').toLocaleLowerCase('vi').rep
 const hasAccent = s => /[\u0300-\u036f]/.test(String(s).normalize('NFD')) || /[đĐ]/.test(s);
 function typoSimilar(a,b) {
   if(a.length < 5 || b.length < 5 || Math.abs(a.length-b.length)>1) return false;
+  if(a.includes(' ') || b.includes(' ')) {
+    const wa=a.split(' '), wb=b.split(' ');
+    if(wa.length!==wb.length) return false;
+    let diffIdx=-1;
+    for(let i=0;i<wa.length;i++) if(wa[i]!==wb[i]) { if(diffIdx>=0) return false; diffIdx=i; }
+    if(diffIdx<0) return true;
+    const x=wa[diffIdx], y=wb[diffIdx];
+    if(x.length<4 || y.length<4) return false;
+    a=x; b=y;
+  }
   let previous=Array.from({length:b.length+1},(_,i)=>i);
   for(let i=1;i<=a.length;i++) {
     const row=[i];
