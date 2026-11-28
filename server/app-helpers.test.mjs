@@ -64,6 +64,8 @@ test('search commonality prior favors everyday HSK words over archaic/variant/pr
  assert.ok(run("HSKSearchRanking.corpusFrequency('微信')")>=20,'modern everyday term 微信 must carry high corpus frequency');
  assert.ok(run("HSKSearchRanking.corpusFrequency('新') > HSKSearchRanking.corpusFrequency('馨')"),'common 新 must outrank rare 馨 in corpus frequency');
  assert.ok(run("HSKSearchRanking.commonality({han:'心',pin:'xīn',mean:'tim'}) > HSKSearchRanking.commonality({han:'馨',pin:'xīn',mean:'thơm'})"),'corpus frequency must elevate 心 well above rare 馨');
+ const everydayHans=run("HSKSearchRanking.everydayWords.map(w=>w.han)");
+ for(const mustHave of ['你好','您好','欢迎光临','吃早饭','吃午饭','吃晚饭','喝水','上学','奶茶','外卖'])assert.ok(everydayHans.includes(mustHave),mustHave);
 });
 test('search frequency store normalizes pinyin keys, applies bounded recency boost, and tracks hit counts',()=>{
  const run=helpers();
