@@ -141,3 +141,213 @@ function phoneticCandidateScore(pinyin,hints) {
 }
 
 if(typeof window!=='undefined'&&window.HSKOpenDictionaryCore)Object.assign(window.HSKOpenDictionaryCore,{expandVietnamesePhonetic,flattenPhoneticHints,normalizePhoneticKey,phoneticCandidateScore});
+
+// Hanzii-style commonality prior + local search-frequency ranking engine.
+// Combines static everyday usage demand (HSK tier, verified examples, corpus
+// richness, archaic/variant demotion) with bounded personal search-click history.
+const SEARCH_FREQ_KEY = 'hsk-search-frequency-v1';
+const SEARCH_FREQ_MAX_WORDS = 400;
+const SEARCH_FREQ_MAX_QUERIES = 250;
+const SEARCH_FREQ_MAX_PER_QUERY = 16;
+const ARCHAIC_GLOSS_RE = /^(?:(?:old\s+)?variant\s+of\b|archaic\b|surname\s+|abbr\.\s+(?:for|of)\b|see\s+also\b|used\s+in\b|japanese\s+variant\b|erhua\s+variant\b|taiwan\s+pr\.|\(literary\)|\(archaic\)|\(old\)|\(dialect\)|cl:)/i;
+const HSK_COMMONALITY_BONUS = { 1: 54, 2: 48, 3: 42, 4: 34, 5: 26, 6: 18 };
+const SINGLE_PINYIN_SYL_RE = /^(?:(?:[bpmfdtnlgkhjqxrzcswy]|zh|ch|sh)?(?:a|o|e|ai|ei|ao|ou|an|en|ang|eng|ong|i|ia|ie|iao|iu|ian|in|iang|ing|iong|u|ua|uo|uai|ui|uan|un|uang|ueng|v|ve|van|vn)|er)$/;
+
+function segmentPinyinChunk(chunk) {
+  if (!chunk) return [];
+  if (SINGLE_PINYIN_SYL_RE.test(chunk)) return [chunk];
+  const n = chunk.length, dp = Array(n + 1).fill(null);
+  dp[0] = [];
+  for (let i = 0; i < n; i++) {
+    if (!dp[i]) continue;
+    for (let len = Math.min(6, n - i); len >= 1; len--) {
+      const part = chunk.slice(i, i + len);
+      if (SINGLE_PINYIN_SYL_RE.test(part)) {
+        const cand = dp[i].concat(part);
+        if (!dp[i + len] || cand.length < dp[i + len].length) dp[i + len] = cand;
+      }
+    }
+  }
+  return dp[n] || [chunk];
+}
+function splitPinyinSyllables(pin) {
+  const foldFn = (typeof window !== 'undefined' && window.HSKOpenDictionaryCore?.fold)
+    ? window.HSKOpenDictionaryCore.fold
+    : s => stripVietnameseTone(s).replace(/[^a-z]/g, '');
+  const parts = String(pin || '').trim().split(/[\s,/·'’-]+/).filter(Boolean);
+  const out = [];
+  for (const part of parts) {
+    const folded = foldFn(part);
+    if (!folded) continue;
+    for (const syl of segmentPinyinChunk(folded)) out.push(syl);
+  }
+  return out;
+}
+
+function searchQueryKey(q) {
+  const raw = String(q || '').trim();
+  if (!raw) return '';
+  const norm = typeof fold === 'function' ? fold(raw) : raw.toLowerCase().replace(/\s+/g, ' ').trim();
+  return norm.slice(0, 40);
+}
+function searchWordKey(w) {
+  if (!w || !w.han) return '';
+  const pin = String(w.pin || w.pinDisplay || '');
+  const reading = (typeof window !== 'undefined' && window.HSKOpenDictionaryCore?.reading)
+    ? window.HSKOpenDictionaryCore.reading(pin)
+    : stripVietnameseTone(pin).replace(/\s+/g, '');
+  return `${String(w.han).trim()}|${reading}`;
+}
+function emptySearchFrequency() {
+  return { version: 1, words: Object.create(null), queries: Object.create(null) };
+}
+let searchFreqCache = null;
+function loadSearchFrequency(storage) {
+  const store = storage || (typeof localStorage !== 'undefined' ? localStorage : null);
+  if (!storage && searchFreqCache) return searchFreqCache;
+  const out = emptySearchFrequency();
+  if (!store) return out;
+  try {
+    const raw = JSON.parse(store.getItem(SEARCH_FREQ_KEY) || '{}');
+    if (raw && raw.version === 1) {
+      if (raw.words && typeof raw.words === 'object') {
+        for (const [k, v] of Object.entries(raw.words)) {
+          if (k && v && Number.isFinite(v.count) && v.count > 0 && Number.isFinite(v.lastAt)) {
+            out.words[k] = { count: Math.min(999, Math.floor(v.count)), lastAt: v.lastAt };
+          }
+        }
+      }
+      if (raw.queries && typeof raw.queries === 'object') {
+        for (const [qk, map] of Object.entries(raw.queries)) {
+          if (!qk || !map || typeof map !== 'object') continue;
+          const bucket = Object.create(null);
+          for (const [wk, v] of Object.entries(map)) {
+            if (wk && v && Number.isFinite(v.count) && v.count > 0 && Number.isFinite(v.lastAt)) {
+              bucket[wk] = { count: Math.min(999, Math.floor(v.count)), lastAt: v.lastAt };
+            }
+          }
+          if (Object.keys(bucket).length) out.queries[qk] = bucket;
+        }
+      }
+    }
+  } catch (_) {}
+  if (!storage) searchFreqCache = out;
+  return out;
+}
+function saveSearchFrequency(data, storage) {
+  const store = storage || (typeof localStorage !== 'undefined' ? localStorage : null);
+  const wordKeys = Object.keys(data.words).sort((a, b) => (data.words[b].lastAt || 0) - (data.words[a].lastAt || 0));
+  for (const old of wordKeys.slice(SEARCH_FREQ_MAX_WORDS)) delete data.words[old];
+  const qKeys = Object.keys(data.queries).sort((a, b) => {
+    const maxA = Math.max(0, ...Object.values(data.queries[a]).map(x => x.lastAt || 0));
+    const maxB = Math.max(0, ...Object.values(data.queries[b]).map(x => x.lastAt || 0));
+    return maxB - maxA;
+  });
+  for (const old of qKeys.slice(SEARCH_FREQ_MAX_QUERIES)) delete data.queries[old];
+  for (const qk of Object.keys(data.queries)) {
+    const bucket = data.queries[qk];
+    const entries = Object.keys(bucket).sort((a, b) => (bucket[b].count - bucket[a].count) || ((bucket[b].lastAt || 0) - (bucket[a].lastAt || 0)));
+    for (const old of entries.slice(SEARCH_FREQ_MAX_PER_QUERY)) delete bucket[old];
+  }
+  if (!storage) searchFreqCache = data;
+  if (!store) return;
+  try { store.setItem(SEARCH_FREQ_KEY, JSON.stringify(data)); } catch (_) {}
+}
+function recordSearchHit(query, word, now = Date.now(), storage) {
+  const wKey = searchWordKey(word);
+  if (!wKey) return false;
+  const data = loadSearchFrequency(storage);
+  const prevWord = data.words[wKey];
+  data.words[wKey] = { count: Math.min(999, (prevWord?.count || 0) + 1), lastAt: now };
+  const qKey = searchQueryKey(query);
+  if (qKey) {
+    const bucket = data.queries[qKey] || (data.queries[qKey] = Object.create(null));
+    const prevQ = bucket[wKey];
+    bucket[wKey] = { count: Math.min(999, (prevQ?.count || 0) + 1), lastAt: now };
+  }
+  saveSearchFrequency(data, storage);
+  return true;
+}
+function searchHitCount(query, word, data) {
+  const wKey = searchWordKey(word);
+  if (!wKey) return { total: 0, queryCount: 0 };
+  const store = data || loadSearchFrequency();
+  const qKey = searchQueryKey(query);
+  return {
+    total: store.words[wKey]?.count || 0,
+    queryCount: (qKey && store.queries[qKey]?.[wKey]?.count) || 0
+  };
+}
+function searchFrequencyBoost(query, word, now = Date.now(), data) {
+  const wKey = searchWordKey(word);
+  if (!wKey) return 0;
+  const store = data || loadSearchFrequency();
+  const qKey = searchQueryKey(query);
+  const wEntry = store.words[wKey];
+  const qEntry = qKey ? store.queries[qKey]?.[wKey] : null;
+  const decay = lastAt => {
+    const ageDays = Math.max(0, (now - (lastAt || now)) / 86400000);
+    return 1 / (1 + ageDays / 30);
+  };
+  let boost = 0;
+  if (qEntry && qEntry.count > 0) {
+    boost += Math.min(28, Math.round(14 * Math.log2(1 + qEntry.count) * decay(qEntry.lastAt)));
+  }
+  if (wEntry && wEntry.count > 0) {
+    boost += Math.min(12, Math.round(5 * Math.log2(1 + wEntry.count) * decay(wEntry.lastAt)));
+  }
+  return Math.min(36, boost);
+}
+function isArchaicOrVariantGloss(rawGloss) {
+  const pieces = String(rawGloss || '').split(/[;；\n]/).map(s => s.trim()).filter(Boolean);
+  if (!pieces.length) return false;
+  if (ARCHAIC_GLOSS_RE.test(pieces[0])) return true;
+  return pieces.every(p => ARCHAIC_GLOSS_RE.test(p));
+}
+function wordCommonalityScore(word, meta = {}) {
+  if (!word || !word.han) return 0;
+  const level = Number(meta.hsk ?? word.hsk) || 0;
+  let score = HSK_COMMONALITY_BONUS[level] || 0;
+  const len = Array.from(String(word.han).trim()).length;
+  if (len === 2) score += 6;
+  else if (len === 1) score += 4;
+  else if (len === 3) score += 2;
+  const hasExamples = Boolean(meta.hasExamples || (word.practice?.examples?.length >= 2) || (word.examples?.length >= 1));
+  if (hasExamples) score += 6;
+  const uEntry = typeof usageFactsData !== 'undefined' ? usageFactsData?.words?.[word.han] : null;
+  if (!level && uEntry?.variants?.length) {
+    score += 6;
+    const senseCount = uEntry.variants[0]?.senses?.length || 0;
+    const structCount = uEntry.variants[0]?.structures?.length || 0;
+    if (senseCount >= 2 && structCount >= 1) score += 4;
+    else if (senseCount >= 2 || structCount >= 1) score += 2;
+  }
+  const pin = String(word.pin || word.pinDisplay || '').trim();
+  const isProperNoun = !level && /^[A-Z]/.test(pin);
+  if (isProperNoun) score -= 18;
+  const rawSource = word.sourceMean || (!word.native && !word.meanVi && word.meanLanguage !== 'vi' ? word.mean : '');
+  if (!level && rawSource && isArchaicOrVariantGloss(rawSource)) score -= 22;
+  if (!level && meta.hasVi === false) score -= 6;
+  return score;
+}
+function clearSearchFrequencyCache() { searchFreqCache = null; }
+
+const HSKSearchRanking = {
+  KEY: SEARCH_FREQ_KEY,
+  wordKey: searchWordKey,
+  queryKey: searchQueryKey,
+  splitPinyinSyllables,
+  load: loadSearchFrequency,
+  record: recordSearchHit,
+  hitCount: searchHitCount,
+  boost: searchFrequencyBoost,
+  commonality: wordCommonalityScore,
+  isArchaicGloss: isArchaicOrVariantGloss,
+  clearCache: clearSearchFrequencyCache
+};
+if (typeof window !== 'undefined') window.HSKSearchRanking = HSKSearchRanking;
+if (typeof module !== 'undefined') module.exports = {
+  splitSenses, bareSense, expandedTerms, nearSenses,
+  HSKSearchRanking, searchWordKey, searchQueryKey, splitPinyinSyllables, loadSearchFrequency,
+  recordSearchHit, searchHitCount, searchFrequencyBoost, wordCommonalityScore, isArchaicOrVariantGloss
+};

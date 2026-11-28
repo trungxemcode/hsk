@@ -5118,6 +5118,61 @@ html body:not(#_rd).studio-enabled #searchPanel #searchSummary .search-scope-res
   font-weight:650 !important;
   cursor:pointer;
 }
+html body:not(#_rd).studio-enabled #searchPanel .search-intent-filters{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+}
+html body:not(#_rd).studio-enabled #searchPanel .search-intent-filters[hidden]{
+  display:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary .open-dict-filters{
+  margin:0 0 8px;
+}
+html body:not(#_rd).studio-enabled #searchPanel .search-intent-chip{
+  min-height:28px !important;
+  height:28px;
+  padding:0 11px !important;
+  border-radius:var(--radius-rd-006) !important;
+  border:1px solid var(--rd-line) !important;
+  background:var(--rd-surface) !important;
+  color:var(--rd-ink-2) !important;
+  font-size:12px !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  cursor:pointer;
+  white-space:nowrap;
+  box-shadow:none !important;
+  transition:background-color .14s ease,border-color .14s ease,color .14s ease;
+}
+html body:not(#_rd).studio-enabled #searchPanel .search-intent-chip:hover{
+  background:var(--rd-surface-soft) !important;
+  border-color:var(--rd-brand) !important;
+  color:var(--rd-ink) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel .search-intent-chip[aria-pressed="true"]{
+  background:var(--rd-brand-soft) !important;
+  border-color:var(--rd-brand) !important;
+  color:var(--rd-brand) !important;
+  font-weight:700 !important;
+}
+@media (max-width:720px){
+  html body:not(#_rd).studio-enabled #searchPanel .search-intent-filters{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    max-width:100%;
+    padding-bottom:2px;
+    scrollbar-width:none;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel .search-intent-chip{
+    min-height:34px !important;
+    height:34px;
+    padding:0 12px !important;
+    font-size:12.5px !important;
+    flex:0 0 auto;
+  }
+}
 html body:not(#_rd).studio-enabled #searchPanel #openDictionary{
   margin-top:10px !important;
   padding-top:10px !important;
@@ -5802,6 +5857,21 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-bo
 html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchSummary .search-scope-reset{
   background:var(--rd-surface-soft) !important;
   border-color:var(--palette-dark-line) !important;
+  color:var(--palette-dark-violet) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel .search-intent-chip{
+  background:var(--rd-surface) !important;
+  border-color:var(--palette-dark-line) !important;
+  color:var(--rd-muted) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel .search-intent-chip:hover{
+  background:var(--rd-surface-soft) !important;
+  border-color:var(--palette-dark-violet) !important;
+  color:var(--rd-ink) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel .search-intent-chip[aria-pressed="true"]{
+  background:var(--palette-dark-violet-soft) !important;
+  border-color:var(--palette-dark-violet) !important;
   color:var(--palette-dark-violet) !important;
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-item{
