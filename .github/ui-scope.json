@@ -1,7 +1,6 @@
 {
-  "request": "Optimize the one-touch dictionary search experience in #searchPanel: compact the desktop header and open-dictionary controls, show more results above the fold with desktop 2-column/general and master-detail HSK layouts, keep mobile result rows compact and tappable, and preserve every other route and shared navigation unchanged.",
+  "request": "Optimize the open dictionary inside the HSK search page: remove English gloss display, use the Hanzii-style two-column master-detail layout with a visible candidate list and character stroke panel, and keep mobile result rows compact and tappable. Only the search route may change; all other routes and shared navigation remain protected.",
   "excludedRoutes": [
-    "lessons",
     "search"
   ],
   "dataStableRoutes": [
