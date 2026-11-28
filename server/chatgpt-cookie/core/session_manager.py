@@ -2,6 +2,7 @@
 import base64
 import hashlib
 import json
+import os
 import random
 import time
 import uuid
@@ -22,11 +23,23 @@ NEXTAUTH_COOKIE_NAME = "__Secure-next-auth.session-token"
 NEXTAUTH_CHUNK_SIZE = 3967
 
 
+NEXTAUTH_HOST_COOKIE_NAME = "__Host-next-auth.session-token"
+
+
 class ChatGPTUpstreamError(Exception):
-    def __init__(self, stage: str, status: int, challenge: bool = False):
+    def __init__(
+        self,
+        stage: str,
+        status: int,
+        challenge: bool = False,
+        detail_message: str = "",
+        detail_code: str = "",
+    ):
         self.stage = stage
         self.status = status
         self.challenge = challenge
+        self.detail_message = str(detail_message or "")[:240]
+        self.detail_code = str(detail_code or "")[:80]
         super().__init__(f"ChatGPT {stage}: HTTP {status}")
 
 
@@ -80,14 +93,33 @@ def solve_sentinel_pow(
     return "gAAAAABwQ8Lk5FbGpA2NcR9dShT6gYjU7VxZ4D" + fallback
 
 
+def _is_auth_cookie_key(key: str) -> bool:
+    return (
+        key.startswith(NEXTAUTH_COOKIE_NAME)
+        or key.startswith(NEXTAUTH_HOST_COOKIE_NAME)
+        or key == "oai-sc"
+    )
+
+
 def parse_session_cookies(raw_token: str) -> dict[str, str]:
     """Chuẩn hóa chuỗi Cookie (đơn, ghép bằng '|', tự chia mảnh >3967 ký tự, hoặc nguyên dòng Cookie header)."""
-    token = (raw_token or "").strip()
+    token = (raw_token or "").replace("\r", "").replace("\n", "").strip()
+    if token.lower().startswith("cookie:"):
+        token = token[7:].strip()
     if not token or token == "YOUR_SESSION_TOKEN_HERE":
         raise ValueError("Chưa cấu hình Cookie __Secure-next-auth.session-token.")
 
-    # Hỗ trợ dán nguyên chuỗi Cookie header từ DevTools Network (ví dụ: a=1; b=2)
-    if ";" in token and "=" in token:
+    looks_like_cookie_header = "=" in token and (
+        ";" in token
+        or token.startswith(f"{NEXTAUTH_COOKIE_NAME}=")
+        or token.startswith(f"{NEXTAUTH_COOKIE_NAME}.")
+        or token.startswith(f"{NEXTAUTH_HOST_COOKIE_NAME}=")
+        or token.startswith(f"{NEXTAUTH_HOST_COOKIE_NAME}.")
+        or token.startswith("oai-sc=")
+    )
+
+    # Hỗ trợ dán nguyên chuỗi Cookie header từ DevTools Network (ví dụ: a=1; b=2 hoặc single key=val)
+    if looks_like_cookie_header:
         cookies: dict[str, str] = {}
         for pair in token.split(";"):
             part = pair.strip()
@@ -98,12 +130,12 @@ def parse_session_cookies(raw_token: str) -> dict[str, str]:
             if not k or not v or any(c.isspace() or c in ';,"\\' for c in v):
                 raise ValueError("Định dạng Cookie ChatGPT không hợp lệ.")
             cookies[k] = v
-        if not any(k.startswith(NEXTAUTH_COOKIE_NAME) or k == "oai-sc" for k in cookies):
+        if not any(_is_auth_cookie_key(k) for k in cookies):
             raise ValueError("Định dạng Cookie ChatGPT không hợp lệ.")
         return cookies
 
     if "|" in token:
-        parts = token.split("|")
+        parts = [p.strip() for p in token.split("|")]
     elif len(token) > 4000:
         parts = [
             token[i : i + NEXTAUTH_CHUNK_SIZE]
@@ -119,6 +151,23 @@ def parse_session_cookies(raw_token: str) -> dict[str, str]:
         (f"{NEXTAUTH_COOKIE_NAME}.{index}" if len(parts) > 1 else NEXTAUTH_COOKIE_NAME): part
         for index, part in enumerate(parts)
     }
+
+
+def extract_jwt_expiry(access_token: str) -> Optional[float]:
+    if not isinstance(access_token, str):
+        return None
+    parts = access_token.split(".")
+    if len(parts) < 2 or not parts[1]:
+        return None
+    try:
+        pad = parts[1] + "=" * (-len(parts[1]) % 4)
+        claims = json.loads(base64.urlsafe_b64decode(pad.encode("ascii")).decode("utf-8"))
+        exp = claims.get("exp")
+        if isinstance(exp, (int, float)) and exp > 0:
+            return float(exp)
+    except Exception:
+        return None
+    return None
 
 
 def extract_plan_type(data: dict) -> str:
@@ -156,6 +205,16 @@ class ChatGPTSessionManager:
         self.device_id: str = str(uuid.uuid4())
         self.plan_type: str = "free"
         self.available_models: list[str] = []
+
+    def invalidate_access_token(self) -> None:
+        self.access_token = None
+        self.token_expires_at = 0
+
+    def get_proxies(self) -> Optional[dict[str, str]]:
+        proxy_url = (os.getenv("CHATGPT_PROXY_URL") or "").strip()
+        if not proxy_url:
+            return None
+        return {"http": proxy_url, "https": proxy_url}
 
     def get_cookies(self) -> dict[str, str]:
         if not self.cookies:
@@ -208,7 +267,7 @@ class ChatGPTSessionManager:
 
         cookies = self.get_cookies()
 
-        async with AsyncSession(impersonate="chrome120", cookies=cookies) as session:
+        async with AsyncSession(impersonate="chrome120", cookies=cookies, proxies=self.get_proxies()) as session:
             response = await session.get(
                 f"{self.base_url}/api/auth/session",
                 headers=self._get_headers(include_auth=False),
@@ -218,10 +277,20 @@ class ChatGPTSessionManager:
             self.update_cookies(getattr(session, "cookies", None))
 
             if response.status_code != 200:
+                is_challenge = (
+                    response.headers.get("cf-mitigated") == "challenge"
+                    or (
+                        response.status_code in (403, 503)
+                        and any(
+                            marker in (response.text or "").lower()
+                            for marker in ("just a moment", "cf-turnstile", "challenge-platform", "__cf_chl_")
+                        )
+                    )
+                )
                 raise ChatGPTUpstreamError(
                     "session",
                     response.status_code,
-                    response.headers.get("cf-mitigated") == "challenge",
+                    is_challenge,
                 )
 
             data = response.json()
@@ -230,8 +299,13 @@ class ChatGPTSessionManager:
 
             self.access_token = data["accessToken"]
             self.plan_type = extract_plan_type(data)
-            # Lưu cache Access Token trong 1 giờ (3600 giây)
-            self.token_expires_at = time.time() + 3600
+            now_sec = time.time()
+            jwt_exp = extract_jwt_expiry(self.access_token)
+            self.token_expires_at = (
+                min(now_sec + 3600, jwt_exp)
+                if jwt_exp and jwt_exp > now_sec + 60
+                else now_sec + 3600
+            )
             return self.access_token
 
     async def get_account_info(self) -> dict:
@@ -239,7 +313,7 @@ class ChatGPTSessionManager:
         access_token = await self.get_valid_access_token()
         if AsyncSession is not None and not self.available_models:
             try:
-                async with AsyncSession(impersonate="chrome120", cookies=self.get_cookies()) as session:
+                async with AsyncSession(impersonate="chrome120", cookies=self.get_cookies(), proxies=self.get_proxies()) as session:
                     res = await session.get(
                         f"{self.base_url}/backend-api/models",
                         headers=self._get_headers(include_auth=True, access_token=access_token),
@@ -250,24 +324,37 @@ class ChatGPTSessionManager:
                     if res.status_code == 200:
                         items = (res.json() or {}).get("models") or []
                         allowed_user_slugs = {
-                            "gpt-6-instant", "gpt-6", "gpt-6-thinking",
-                            "gpt-5-6", "gpt-5-6-instant", "gpt-5-6-thinking",
-                            "gpt-6-mini", "gpt-4o", "gpt-4o-mini", "o3-mini", "gpt-4.1",
+                            "auto",
+                            "gpt-6-instant", "gpt-6", "gpt-6-thinking", "gpt-6-pro",
+                            "gpt-5-6", "gpt-5-6-instant", "gpt-5-6-thinking", "gpt-5-6-pro",
+                            "gpt-6-mini",
+                            "gpt-5", "gpt-5-instant", "gpt-5-thinking", "gpt-5-mini",
+                            "gpt-4o", "gpt-4o-mini", "o3-mini", "o4-mini", "gpt-4-1", "gpt-4.1",
                         }
-                        slugs = [
-                            str(m.get("slug")).strip()
-                            for m in items
-                            if isinstance(m, dict) and isinstance(m.get("slug"), str) and m.get("slug").strip() in allowed_user_slugs
-                        ]
+                        slugs = []
+                        for m in items:
+                            if isinstance(m, dict) and isinstance(m.get("slug"), str):
+                                slug = m["slug"].strip()
+                                if slug in allowed_user_slugs and slug not in slugs:
+                                    slugs.append(slug)
                         priority_order = [
                             "gpt-6-instant", "gpt-6", "gpt-6-thinking",
                             "gpt-5-6", "gpt-5-6-instant", "gpt-5-6-thinking",
-                            "gpt-6-mini", "gpt-4o", "o3-mini",
+                            "gpt-6-pro", "gpt-5-6-pro", "gpt-6-mini",
+                            "gpt-5", "gpt-5-instant", "gpt-5-thinking", "gpt-5-mini",
+                            "auto", "gpt-4o", "o4-mini", "o3-mini", "gpt-4-1", "gpt-4.1", "gpt-4o-mini",
                         ]
                         slugs.sort(key=lambda s: priority_order.index(s) if s in priority_order else 999)
                         if slugs:
                             self.available_models = slugs[:10]
-                            if any(s in slugs for s in ("gpt-6", "gpt-6-instant", "gpt-6-thinking", "gpt-5-6", "gpt-4o", "gpt-4-1", "o4-mini", "gpt-4.5")):
+                            if any(
+                                s in slugs
+                                for s in (
+                                    "gpt-6", "gpt-6-instant", "gpt-6-thinking", "gpt-6-pro",
+                                    "gpt-5-6", "gpt-5-6-instant", "gpt-5-6-thinking", "gpt-5-6-pro",
+                                    "gpt-5", "gpt-4o", "gpt-4-1", "o4-mini", "gpt-4.5",
+                                )
+                            ):
                                 self.plan_type = "plus"
             except Exception:
                 pass

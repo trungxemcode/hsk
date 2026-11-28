@@ -217,9 +217,14 @@ async def stateless_cookie_bridge(
         )
     except ChatGPTUpstreamError as exc:
         # A tunnel can replace origin 502 responses and discard the diagnostic body.
+        detail = {"stage": exc.stage, "status": exc.status, "challenge": exc.challenge}
+        if exc.detail_message:
+            detail["detail_message"] = exc.detail_message
+        if exc.detail_code:
+            detail["detail_code"] = exc.detail_code
         raise HTTPException(
             status_code=429 if exc.status == 429 else 424,
-            detail={"stage": exc.stage, "status": exc.status, "challenge": exc.challenge}
+            detail=detail
         ) from exc
     except ValueError:
         raise HTTPException(status_code=400, detail="Dữ liệu phiên ChatGPT không hợp lệ.")
@@ -240,9 +245,19 @@ async def cookie_session_info(
     if not token:
         raise HTTPException(status_code=400, detail="Thiếu cookie ChatGPT.")
     try:
-        mgr = chat_client._get_session_manager(token)
+        mgr, _ = chat_client._resolve_session(token)
         return await mgr.get_account_info()
     except ValueError:
         raise HTTPException(status_code=400, detail="Dữ liệu phiên ChatGPT không hợp lệ.")
     except Exception:
         raise HTTPException(status_code=502, detail="Chưa kiểm tra được phiên ChatGPT.")
+
+
+@app.get("/health")
+@bridge_app.get("/health")
+async def bridge_health():
+    return {
+        "ok": True,
+        "service": "hsk-chatgpt-cookie-bridge",
+        "proxy_configured": bool(session_mgr.get_proxies()),
+    }

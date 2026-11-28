@@ -1431,9 +1431,9 @@ Dữ liệu bài học JSON: ${JSON.stringify(body.lesson)}`;
      }
      if(!response.ok&&!sentenceFallbackUsed){
       const failure=await response.json().catch(()=>null);
-      const safeCodes=['CHATGPT_SESSION_HTTP','CHATGPT_SESSION_NO_TOKEN','CHATGPT_CONVERSATION_HTTP'];
+      const safeCodes=['CHATGPT_SESSION_HTTP','CHATGPT_SESSION_NO_TOKEN','CHATGPT_CONVERSATION_HTTP','CHATGPT_CLOUDFLARE_CHALLENGE','CHATGPT_MODEL_NOT_FOUND','CHATGPT_BRIDGE_UNAVAILABLE','CHATGPT_EMPTY_REPLY'];
       const error=safeCodes.includes(failure?.code)?failure.error:response.status===401?'Không xác thực được phiên ChatGPT.':'ChatGPT chưa trả lời được. Hãy thử lại sau.';
-      return reply({error,code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},response.status===429?429:502);
+      return reply({error,code:safeCodes.includes(failure?.code)?failure.code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},response.status===429?429:502);
      }
     }else{
      // Rotate keys without switching the chosen chat model or provider.

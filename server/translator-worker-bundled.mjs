@@ -582,30 +582,186 @@ export function formatSlidingWindowHistory(messages=[],maxTurns=4){
  return recent.map(t=>`- Học viên: ${t.user}\n- Gia sư HSK: ${t.ai}`).join('\n');
 }
 
+function isVisibleAssistantMessage(message){
+ if(!message||typeof message!=='object')return false;
+ if(message?.author?.role!=='assistant')return false;
+ const contentType=String(message?.content?.content_type||'text').toLowerCase();
+ if(contentType!=='text'&&contentType!=='multimodal_text')return false;
+ const recipient=String(message?.recipient||'all').toLowerCase();
+ return recipient==='all';
+}
+
+function extractTextFromParts(parts){
+ if(!Array.isArray(parts))return '';
+ return parts.filter(part=>typeof part==='string').join('');
+}
+
 export function parseChatGptSseResponse(rawSse){
  let fullText='',convId=null,msgId=null;
- for(const rawLine of String(rawSse||'').split('\n')){
+ let activeVisible=false,hasMessageHeader=false,activeRole=null,activeContentType='text',activeRecipient='all';
+ let currentDeltaText='',lastPath='',lastOp='';
+
+ const syncVisibility=()=>{
+  activeVisible=(activeRole==='assistant'||(!hasMessageHeader&&activeRole===null))
+   &&(activeContentType==='text'||activeContentType==='multimodal_text'||!activeContentType)
+   &&(activeRecipient==='all'||!activeRecipient);
+ };
+
+ const applyPatchOp=(opObj)=>{
+  if(!opObj||typeof opObj!=='object')return;
+  if(typeof opObj.p==='string')lastPath=opObj.p;
+  if(typeof opObj.o==='string')lastOp=opObj.o;
+  const path=typeof opObj.p==='string'?opObj.p:lastPath;
+  const op=typeof opObj.o==='string'?opObj.o:lastOp;
+  const val=opObj.v;
+  if(path==='/message/content/content_type'&&typeof val==='string'){
+   activeContentType=val.toLowerCase();
+   syncVisibility();
+   return;
+  }
+  if(path==='/message/recipient'&&typeof val==='string'){
+   activeRecipient=val.toLowerCase();
+   syncVisibility();
+   return;
+  }
+  if(path==='/message/author/role'&&typeof val==='string'){
+   activeRole=val.toLowerCase();
+   hasMessageHeader=true;
+   syncVisibility();
+   return;
+  }
+  if(!activeVisible)return;
+  if(path==='/message/content/parts/0'||path==='/message/content/parts'){
+   if(op==='append'&&typeof val==='string'){
+    currentDeltaText+=val;
+    if(currentDeltaText)fullText=currentDeltaText;
+   }else if(op==='replace'||op==='add'){
+    const next=typeof val==='string'?val:extractTextFromParts(val);
+    if(next){
+     currentDeltaText=next;
+     fullText=currentDeltaText;
+    }
+   }
+  }
+ };
+
+ const rawStr=String(rawSse||'');
+ let sawDataLine=false;
+ for(const rawLine of rawStr.split('\n')){
   const line=rawLine.trim();
-  if(!line.startsWith('data: '))continue;
-  const dataStr=line.slice(6).trim();
-  if(dataStr==='[DONE]')break;
+  if(!line.startsWith('data:'))continue;
+  sawDataLine=true;
+  const dataStr=line.slice(5).trim();
+  if(!dataStr||dataStr==='[DONE]')break;
   try{
    const data=JSON.parse(dataStr);
-   const message=data?.message||{};
-   if(message?.author?.role==='assistant'){
-    const parts=message?.content?.parts||[];
-    if(parts.length&&typeof parts[0]==='string')fullText=parts[0];
-    if(message.id)msgId=message.id;
-    if(data.conversation_id)convId=data.conversation_id;
+   if(!data||typeof data!=='object')continue;
+   if(typeof data.conversation_id==='string'&&data.conversation_id)convId=data.conversation_id;
+   if(typeof data?.v?.conversation_id==='string'&&data.v.conversation_id)convId=data.v.conversation_id;
+
+   // Legacy SSE payload with top-level message snapshot
+   if(data.message&&typeof data.message==='object'){
+    if(isVisibleAssistantMessage(data.message)){
+     const text=extractTextFromParts(data.message?.content?.parts);
+     if(text)fullText=text;
+     if(data.message.id)msgId=data.message.id;
+    }
+    continue;
+   }
+
+   // delta_encoding v1: initial message object wrapped in {v: {message: ...}}
+   if(data.v&&typeof data.v==='object'&&!Array.isArray(data.v)&&data.v.message&&typeof data.v.message==='object'){
+    const m=data.v.message;
+    hasMessageHeader=true;
+    activeRole=String(m?.author?.role||'').toLowerCase()||null;
+    activeContentType=String(m?.content?.content_type||'text').toLowerCase();
+    activeRecipient=String(m?.recipient||'all').toLowerCase();
+    syncVisibility();
+    lastPath='';lastOp='';
+    if(activeVisible){
+     if(m.id)msgId=m.id;
+     const initial=extractTextFromParts(m?.content?.parts);
+     currentDeltaText=initial;
+     if(initial)fullText=initial;
+    }else{
+     currentDeltaText='';
+    }
+    continue;
+   }
+
+   // delta_encoding v1: batch patch {o: 'patch', v: [...]}
+   if(data.o==='patch'&&Array.isArray(data.v)){
+    for(const item of data.v)applyPatchOp(item);
+    continue;
+   }
+
+   // delta_encoding v1: single patch {p, o, v} or shorthand continuation {v: "..."}
+   if(typeof data.p==='string'||typeof data.o==='string'||typeof data.v==='string'){
+    applyPatchOp(data);
    }
   }catch{}
  }
+
+ if(!sawDataLine&&rawStr.trim().startsWith('{')){
+  try{
+   const parsed=JSON.parse(rawStr.trim());
+   if(typeof parsed?.conversation_id==='string')convId=parsed.conversation_id;
+   if(isVisibleAssistantMessage(parsed?.message)){
+    const text=extractTextFromParts(parsed.message?.content?.parts);
+    if(text)fullText=text;
+    if(parsed.message.id)msgId=parsed.message.id;
+   }
+  }catch{}
+ }
+
  return {reply:fullText,conversation_id:convId,message_id:msgId};
+}
+
+function extractJwtExpiry(accessToken){
+ if(typeof accessToken!=='string')return null;
+ const parts=accessToken.split('.');
+ if(parts.length<2||!parts[1])return null;
+ try{
+  const claims=JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+  return Number.isFinite(claims?.exp)?Number(claims.exp):null;
+ }catch{
+  return null;
+ }
+}
+
+function parseUpstreamErrorBody(rawBody){
+ const text=String(rawBody||'').trim();
+ if(!text)return {detail:'',code:''};
+ try{
+  const parsed=JSON.parse(text);
+  const rawDetail=parsed?.detail;
+  const detail=typeof rawDetail==='string'?rawDetail:
+   typeof rawDetail?.message==='string'?rawDetail.message:
+   typeof parsed?.error?.message==='string'?parsed.error.message:
+   typeof parsed?.message==='string'?parsed.message:'';
+  const code=typeof rawDetail?.code==='string'?rawDetail.code:
+   typeof parsed?.error?.code==='string'?parsed.error.code:
+   typeof parsed?.code==='string'?parsed.code:'';
+  return {detail:detail.trim(),code:code.trim()};
+ }catch{
+  return {detail:text.slice(0,240),code:''};
+ }
+}
+
+function isCloudflareChallengeResponse(response,rawBody=''){
+ if(response?.headers?.get?.('cf-mitigated')==='challenge')return true;
+ const body=String(rawBody||'');
+ return (response?.status===403||response?.status===503)&&/just a moment|cf-turnstile|challenge-platform|__cf_chl_/i.test(body);
+}
+
+function isModelNotFoundResponse(status,detail='',code=''){
+ if(status!==404&&status!==400)return false;
+ return /model_not_found|model not found|does not exist|invalid_model|not supported|do not have access/i.test(`${code} ${detail}`);
 }
 
 export class ChatGPTSessionManager{
  constructor(sessionToken,{baseUrl=CHATGPT_BASE_URL,now=()=>Date.now()}={}){
-  this.sessionToken=String(sessionToken||'').trim();
+  this.sessionToken=String(sessionToken||'').replace(/^cookie\s*:\s*/i,'').replace(/[\r\n]+/g,'').trim();
   this.accessToken=null;
   this.tokenExpiresAt=0;
   this.baseUrl=baseUrl.replace(/\/+$/,'');
@@ -613,11 +769,21 @@ export class ChatGPTSessionManager{
   this.deviceId=crypto.randomUUID();
   this.extraCookies=new Map();
  }
+ invalidateAccessToken(){
+  this.accessToken=null;
+  this.tokenExpiresAt=0;
+ }
  getCookieHeader(){
   if(!this.sessionToken)throw Error('Cookie đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie mới.');
   const cookieName='__Secure-next-auth.session-token';
+  const hostCookieName='__Host-next-auth.session-token';
+  const isAuthCookieKey=k=>k.startsWith(cookieName)||k.startsWith(hostCookieName)||k==='oai-sc';
   const entries=[];
-  if(this.sessionToken.includes(';')&&this.sessionToken.includes('=')){
+  const looksLikeCookieHeader=this.sessionToken.includes('=')&&(
+   this.sessionToken.includes(';')||
+   /^(?:__Secure-next-auth\.session-token(?:\.\d+)?|__Host-next-auth\.session-token(?:\.\d+)?|oai-sc)=/.test(this.sessionToken)
+  );
+  if(looksLikeCookieHeader){
    for(const rawPair of this.sessionToken.split(';')){
     const pair=rawPair.trim();
     if(!pair||!pair.includes('='))continue;
@@ -626,9 +792,9 @@ export class ChatGPTSessionManager{
     if(k==='oai-did')this.deviceId=v;
     entries.push(`${k}=${v}`);
    }
-   if(!entries.some(e=>e.startsWith(cookieName)||e.startsWith('oai-sc=')))throw Error('Định dạng Cookie ChatGPT không hợp lệ.');
+   if(!entries.some(e=>isAuthCookieKey(e.slice(0,e.indexOf('=')))))throw Error('Định dạng Cookie ChatGPT không hợp lệ.');
   }else{
-   const parts=this.sessionToken.includes('|')?this.sessionToken.split('|'):
+   const parts=this.sessionToken.includes('|')?this.sessionToken.split('|').map(p=>p.trim()):
     this.sessionToken.length>4000?Array.from({length:Math.ceil(this.sessionToken.length/3967)},(_,i)=>this.sessionToken.slice(i*3967,(i+1)*3967)):
     [this.sessionToken];
    if(parts.some(part=>!part||/[\s;,"\\]/.test(part)))throw Error('Định dạng Cookie ChatGPT không hợp lệ.');
@@ -688,9 +854,13 @@ export class ChatGPTSessionManager{
   });
   this.captureResponseCookies(response);
   if(!response.ok){
-   const err=Error(`ChatGPT từ chối kiểm tra phiên (HTTP ${response.status}).`);
+   const rawErr=await response.text().catch(()=>'');
+   const challenge=isCloudflareChallengeResponse(response,rawErr);
+   const err=Error(challenge
+    ?'ChatGPT đang bật xác minh Cloudflare (HTTP 403) trên kết nối trực tiếp từ Worker. Cần chạy cầu nối Python Bridge (server/chatgpt-cookie) và kiểm tra CHATGPT_COOKIE_BRIDGE_URL.'
+    :`ChatGPT từ chối kiểm tra phiên (HTTP ${response.status}).`);
    err.status=response.status;
-   err.code='CHATGPT_SESSION_HTTP';
+   err.code=challenge?'CHATGPT_CLOUDFLARE_CHALLENGE':'CHATGPT_SESSION_HTTP';
    throw err;
   }
   const data=await response.json().catch(()=>null);
@@ -701,7 +871,8 @@ export class ChatGPTSessionManager{
    throw err;
   }
   this.accessToken=data.accessToken.trim();this.planType=extractChatGptPlanType(data);
-  this.tokenExpiresAt=nowSec+3600;
+  const jwtExp=extractJwtExpiry(this.accessToken);
+  this.tokenExpiresAt=jwtExp&&jwtExp>nowSec+60?Math.min(nowSec+3600,jwtExp):nowSec+3600;
   return this.accessToken;
  }
 }
@@ -710,6 +881,7 @@ export class ChatGPTClient{
  constructor(sessionManager){
   this.sm=sessionManager;
   this.apiUrl=`${this.sm.baseUrl}/backend-api/conversation`;
+  this.frontendApiUrl=`${this.sm.baseUrl}/backend-api/f/conversation`;
   this.queue=Promise.resolve();
  }
  _withLock(fn){
@@ -717,41 +889,82 @@ export class ChatGPTClient{
   this.queue=next.catch(()=>{});
   return next;
  }
+ _buildPayload(prompt,model){
+  return {
+   action:'next',
+   messages:[{
+    id:crypto.randomUUID(),
+    author:{role:'user'},
+    content:{content_type:'text',parts:[prompt]}
+   }],
+   parent_message_id:crypto.randomUUID(),
+   model:model||'gpt-4o-mini',
+   timezone_offset_min:-420,
+   conversation_mode:{kind:'primary_assistant'},
+   history_and_training_disabled:true
+  };
+ }
  async sendStatelessMessage(prompt,{model='gpt-4o-mini',fetchFn=fetch,signal,ctx=null}={}){
   return this._withLock(async()=>{
-   await this.sm.getValidAccessToken(fetchFn,signal);
-   const headers={
-    ...this.sm.getHeaders(true),
-    'Accept':'text/event-stream'
-   };
-   const payload={
-    action:'next',
-    messages:[{
-     id:crypto.randomUUID(),
-     author:{role:'user'},
-     content:{content_type:'text',parts:[prompt]}
-    }],
-    parent_message_id:crypto.randomUUID(),
-    model:model||'gpt-4o-mini',
-    timezone_offset_min:-420,
-    history_and_training_disabled:true
-   };
-   const response=await fetchFn(this.apiUrl,{
-    method:'POST',headers,body:JSON.stringify(payload),signal,redirect:'manual'
-   });
-   if(!response.ok){
-    const err=Error(`ChatGPT từ chối gửi tin nhắn (HTTP ${response.status}).`);
-    err.code='CHATGPT_CONVERSATION_HTTP';
-    err.status=response.status;
-    throw err;
+   let activeUrl=this.apiUrl;
+   let activeModel=model||'gpt-4o-mini';
+   let retriedAuth=false,retriedEndpoint=false,retriedModel=false;
+
+   while(true){
+    await this.sm.getValidAccessToken(fetchFn,signal);
+    const headers={
+     ...this.sm.getHeaders(true),
+     'Accept':'text/event-stream'
+    };
+    const payload=this._buildPayload(prompt,activeModel);
+    const response=await fetchFn(activeUrl,{
+     method:'POST',headers,body:JSON.stringify(payload),signal,redirect:'manual'
+    });
+    this.sm.captureResponseCookies(response);
+
+    if(response.status===401&&!retriedAuth){
+     retriedAuth=true;
+     this.sm.invalidateAccessToken();
+     continue;
+    }
+
+    if(!response.ok){
+     const rawErr=await response.text().catch(()=>'');
+     const {detail,code}=parseUpstreamErrorBody(rawErr);
+     const challenge=isCloudflareChallengeResponse(response,rawErr);
+     const modelMissing=!challenge&&isModelNotFoundResponse(response.status,detail,code);
+     const routeMissing=!challenge&&!modelMissing&&(response.status===404||response.status===405)&&activeUrl===this.apiUrl;
+
+     if(modelMissing&&activeModel!=='auto'&&!retriedModel){
+      retriedModel=true;
+      activeModel='auto';
+      continue;
+     }
+     if(routeMissing&&!retriedEndpoint){
+      retriedEndpoint=true;
+      activeUrl=this.frontendApiUrl;
+      continue;
+     }
+
+     const err=Error(
+      challenge?'ChatGPT đang bật xác minh Cloudflare (HTTP 403) trên kết nối trực tiếp từ Worker. Cần chạy cầu nối Python Bridge (server/chatgpt-cookie) và kiểm tra CHATGPT_COOKIE_BRIDGE_URL.':
+      modelMissing?`Model "${activeModel}" không khả dụng trên tài khoản ChatGPT này. Hãy đổi model sang "auto" trong Cài đặt.`:
+      response.status===401?'Không xác thực được phiên ChatGPT (HTTP 401). Cookie đã hết hạn trên chatgpt.com. Hãy sao chép lại cookie mới trong Cài đặt.':
+      `ChatGPT từ chối gửi tin nhắn (HTTP ${response.status}).`
+     );
+     err.code=challenge?'CHATGPT_CLOUDFLARE_CHALLENGE':modelMissing?'CHATGPT_MODEL_NOT_FOUND':'CHATGPT_CONVERSATION_HTTP';
+     err.status=response.status;
+     throw err;
+    }
+
+    const rawText=await response.text();
+    const result=parseChatGptSseResponse(rawText);
+    if(result.conversation_id){
+     const cleanup=this.deleteConversation(result.conversation_id,fetchFn);
+     if(ctx?.waitUntil)ctx.waitUntil(cleanup);
+    }
+    return result;
    }
-   const rawText=await response.text();
-   const result=parseChatGptSseResponse(rawText);
-   if(result.conversation_id){
-    const cleanup=this.deleteConversation(result.conversation_id,fetchFn);
-    if(ctx?.waitUntil)ctx.waitUntil(cleanup);
-   }
-   return result;
   });
  }
  async deleteConversation(conversationId,fetchFn=fetch){
@@ -886,48 +1099,117 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
  const combinedSystem=`${systemText}\n\n[HỒ SƠ CÁ NHÂN HÓA CỦA HỌC VIÊN]:\n${memoryBlock}\n\n[HỘI THOẠI GẦN ĐÂY (Tối đa 4 lượt)]:\n<recent_chat>\n${slidingHistory}\n</recent_chat>\n\nCó thể bổ sung trường "memory_update": {"detected_weak_vocab": null, "detected_weak_grammar": null, "new_personal_fact": null} trong JSON trả về để cập nhật hồ sơ điểm yếu của học viên.`;
  const safePrompt=sharedGuardrail.wrapSandwichPrompt(userQuestion,combinedSystem);
  const bridgeUrl=String(config?.bridgeUrl||env?.CHATGPT_COOKIE_BRIDGE_URL||'').trim();
+ const bridgeKey=String(env?.CHATGPT_COOKIE_BRIDGE_KEY||'').trim();
  let replyText='';
- try{
-  if(bridgeUrl){
-   const endpoint=new URL('/api/hsk/bridge',bridgeUrl);
-   const bridgeKey=String(env?.CHATGPT_COOKIE_BRIDGE_KEY||'').trim();
-   if(endpoint.protocol!=='https:'||!bridgeKey)return new Response(null,{status:502});
-   const response=await fetchFn(endpoint,{
-    method:'POST',
-    headers:{
-     'Content-Type':'application/json',
-     'X-HSK-Bridge-Key':bridgeKey,
-     'X-ChatGPT-Session-Token':rawToken
-    },
-    body:JSON.stringify({prompt:safePrompt,model}),
-    signal,
-    redirect:'manual'
-   });
-   if(response.status>=300&&response.status<400)return new Response(null,{status:502});
-   const payload=await response.json().catch(()=>null);
-   if(!response.ok){
-    const {stage,status,challenge}=payload?.detail||{};
-    if(['session','conversation'].includes(stage)&&Number.isInteger(status)&&status>=300&&status<=599){
-     const action=stage==='session'?'kiểm tra phiên':'gửi tin nhắn';
-     const code=stage==='session'?'CHATGPT_SESSION_HTTP':'CHATGPT_CONVERSATION_HTTP';
-     const reason=challenge===true?', Cloudflare challenge':'';
-     const msg=status===401?'Không xác thực được phiên ChatGPT (HTTP 401). Cookie đã hết hạn trên chatgpt.com. Hãy sao chép lại cookie mới trong Cài đặt.':`ChatGPT từ chối ${action} (HTTP ${status}${reason}).`;
-      return Response.json({error:msg,code},{status:status===429?429:502});
-    }
-    return new Response(null,{status:502});
+ let bridgeFailedOffline=false;
+
+ const runDirect=async()=>{
+  const client=getOrCreateCookieClient(rawToken,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
+  const result=await client.sendStatelessMessage(safePrompt,{model,fetchFn,signal,ctx});
+  return result.reply;
+ };
+
+ const buildTimedBridgeSignal=timeoutMs=>{
+  if(typeof AbortController==='undefined')return {signal,cleanup:()=>{}};
+  const ac=new AbortController();
+  const onParentAbort=()=>ac.abort(signal?.reason);
+  if(signal?.aborted)ac.abort(signal.reason);
+  else signal?.addEventListener?.('abort',onParentAbort,{once:true});
+  const timer=setTimeout(()=>ac.abort(new Error('BRIDGE_TIMEOUT')),timeoutMs);
+  return {
+   signal:ac.signal,
+   cleanup:()=>{
+    clearTimeout(timer);
+    signal?.removeEventListener?.('abort',onParentAbort);
    }
-   replyText=typeof payload?.reply==='string'?payload.reply:'';
-  }else{
-   const client=getOrCreateCookieClient(rawToken,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
-   const result=await client.sendStatelessMessage(safePrompt,{model,fetchFn,signal,ctx});
-   replyText=result.reply;
+  };
+ };
+
+ try{
+  if(bridgeUrl&&bridgeKey){
+   let endpoint=null;
+   try{
+    const parsed=new URL('/api/hsk/bridge',bridgeUrl);
+    if(parsed.protocol==='https:')endpoint=parsed;
+   }catch{}
+   if(!endpoint){
+    bridgeFailedOffline=true;
+   }else{
+    const timed=buildTimedBridgeSignal(20000);
+    let response=null;
+    try{
+     response=await fetchFn(endpoint,{
+      method:'POST',
+      headers:{
+       'Content-Type':'application/json',
+       'X-HSK-Bridge-Key':bridgeKey,
+       'X-ChatGPT-Session-Token':rawToken
+      },
+      body:JSON.stringify({prompt:safePrompt,model}),
+      signal:timed.signal,
+      redirect:'manual'
+     });
+    }catch(bridgeErr){
+     if(signal?.aborted)throw bridgeErr;
+     bridgeFailedOffline=true;
+    }finally{
+     timed.cleanup();
+    }
+    if(response&&!bridgeFailedOffline){
+     if(response.status>=300&&response.status<400){
+      bridgeFailedOffline=true;
+     }else{
+      const payload=await response.json().catch(()=>null);
+      if(!response.ok){
+       const detailObj=payload?.detail&&typeof payload.detail==='object'?payload.detail:null;
+       const {stage,status,challenge,detail_message:detailMessage,detail_code:detailCode}=detailObj||{};
+       if(['session','conversation'].includes(stage)&&Number.isInteger(status)&&status>=300&&status<=599){
+        const action=stage==='session'?'kiểm tra phiên':'gửi tin nhắn';
+        const modelMissing=!challenge&&isModelNotFoundResponse(status,detailMessage||'',detailCode||'');
+        const code=challenge===true?'CHATGPT_CLOUDFLARE_CHALLENGE':modelMissing?'CHATGPT_MODEL_NOT_FOUND':stage==='session'?'CHATGPT_SESSION_HTTP':'CHATGPT_CONVERSATION_HTTP';
+        const msg=status===401
+         ?'Không xác thực được phiên ChatGPT (HTTP 401). Cookie đã hết hạn trên chatgpt.com. Hãy sao chép lại cookie mới trong Cài đặt.'
+         :challenge===true
+         ?`ChatGPT đang bật xác minh Cloudflare khi ${action} (HTTP ${status}). Hãy làm mới phiên chatgpt.com hoặc thử lại sau ít phút.`
+         :modelMissing
+         ?`Model "${model}" không khả dụng trên tài khoản ChatGPT này. Hãy đổi model sang "auto" trong Cài đặt.`
+         :`ChatGPT từ chối ${action} (HTTP ${status}).`;
+        return Response.json({error:msg,code},{status:status===429?429:502});
+       }
+       if(response.status===400&&typeof payload?.detail==='string'&&payload.detail.trim()){
+        return Response.json({error:payload.detail.trim(),code:'CHATGPT_SESSION_NO_TOKEN'},{status:400});
+       }
+       if(response.status>=500&&response.status<=599&&!detailObj){
+        bridgeFailedOffline=true;
+       }else{
+        return new Response(null,{status:502});
+       }
+      }else{
+       replyText=typeof payload?.reply==='string'?payload.reply:'';
+       if(!replyText.trim())bridgeFailedOffline=true;
+      }
+     }
+    }
+   }
+  }
+
+  if(!bridgeUrl||!bridgeKey||bridgeFailedOffline){
+   replyText=await runDirect();
   }
  }catch(err){
   if(err?.name==='AbortError'||signal?.aborted)throw err;
+  if(bridgeFailedOffline&&err?.code==='CHATGPT_CLOUDFLARE_CHALLENGE'){
+   return Response.json({
+    error:'Cầu nối Bridge/Tunnel đang ngoại tuyến và kết nối trực tiếp tới ChatGPT bị Cloudflare chặn (HTTP 403). Hãy bật lại Python Bridge (server/chatgpt-cookie/start-bridge.ps1) hoặc cập nhật CHATGPT_COOKIE_BRIDGE_URL.',
+    code:'CHATGPT_BRIDGE_UNAVAILABLE'
+   },{status:502});
+  }
   const status=Number.isInteger(err?.status)&&err.status>=400&&err.status<600?err.status:502;
   return new Response(JSON.stringify({error:err?.message||'Lỗi gọi ChatGPT Cookie.',code:err?.code,upstreamStatus:err?.status}),{status});
  }
- if(!replyText||!replyText.trim())return new Response(null,{status:502});
+ if(!replyText||!replyText.trim()){
+  return Response.json({error:'ChatGPT trả về phản hồi trống hoặc định dạng luồng mới chưa đọc được. Hãy thử lại hoặc đổi model sang "auto".',code:'CHATGPT_EMPTY_REPLY'},{status:502});
+ }
  const normalized=normalizeChatGptTutorReply(replyText,{userId:uid,questionText:userQuestion,memoryManager:sharedMemoryManager});
  if(normalized?.outOfScope){
   return Response.json({candidates:[{content:{parts:[{text:JSON.stringify({error:'OUT_OF_SCOPE',message:normalized.error})}]}}]});
@@ -979,14 +1261,14 @@ export async function probeChatGptCookieAccount(rawToken,{env={},fetchFn=fetch,s
  }
  try{
   const client=getOrCreateCookieClient(token,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
-  if(!client.sm.planType&&!bridgeUrl)await client.sm.getValidAccessToken(fetchFn,signal);
-  if(!client.sm.availableModels&&!bridgeUrl&&client.sm.accessToken){
+  if(!client.sm.planType)await client.sm.getValidAccessToken(fetchFn,signal);
+  if(!client.sm.availableModels&&client.sm.accessToken){
    try{
     const mRes=await fetchFn(`${client.sm.baseUrl}/backend-api/models`,{method:'GET',headers:client.sm.getHeaders(true),signal,redirect:'manual'});
     if(mRes.ok){
      const mData=await mRes.json().catch(()=>null);
-     const allow=new Set(['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','gpt-4o-mini','o3-mini']);
-     const priority=['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','o3-mini'];
+     const allow=new Set(['auto','gpt-6-instant','gpt-6','gpt-6-thinking','gpt-6-pro','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-5-6-pro','gpt-6-mini','gpt-5','gpt-5-instant','gpt-5-thinking','gpt-5-mini','gpt-4o','gpt-4o-mini','o3-mini','o4-mini','gpt-4-1','gpt-4.1']);
+     const priority=['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-pro','gpt-5-6-pro','gpt-6-mini','gpt-5','gpt-5-instant','gpt-5-thinking','gpt-5-mini','auto','gpt-4o','o4-mini','o3-mini','gpt-4-1','gpt-4.1','gpt-4o-mini'];
      const slugs=[];
      for(const item of Array.isArray(mData?.models)?mData.models:[]){
       const slug=typeof item?.slug==='string'?item.slug.trim():'';
@@ -2350,14 +2632,16 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   return Response.json({...personalPublic(record),apiKey});
  }
  if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey','endpoint'].includes(k)))return Response.json({}, {status:400});
- const {provider,model,enabled,apiKey,endpoint}=settings;
+ const {provider,model,enabled,endpoint}=settings;
+ const rawApiKey=settings.apiKey;
+ const apiKey=typeof rawApiKey==='string'&&provider==='chatgpt-cookie'?rawApiKey.replace(/[\r\n]+/g,'').trim():rawApiKey;
  const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?16384:512;
  if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._/:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
   provider==='custom'&&endpoint!==undefined&&!isValidEndpointUrl(endpoint)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
  const cipher=await personalCipher(env);
- const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
+ const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-6-pro','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-5-6-pro','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
  return storage.transaction(async tx=>{
   const legacy=await tx.get(key);
   let previous=await tx.get('personal-ai-prov:'+provider);
@@ -2459,6 +2743,7 @@ const STATIC_PROVIDER_MODELS={
   {id:'gpt-6.2-astra',description:'GPT-6.2 Astra'}
  ],
  'chatgpt-cookie':[
+  {id:'auto',description:'Tự động (ChatGPT tự chọn model khả dụng, ít lỗi nhất)'},
   {id:'gpt-6',description:'GPT-6 (Mặc định)'},
   {id:'gpt-6-instant',description:'GPT-6 Instant'},
   {id:'gpt-6-thinking',description:'GPT-6 Thinking'},
@@ -6176,9 +6461,9 @@ Dữ liệu bài học JSON: ${JSON.stringify(body.lesson)}`;
      }
      if(!response.ok&&!sentenceFallbackUsed){
       const failure=await response.json().catch(()=>null);
-      const safeCodes=['CHATGPT_SESSION_HTTP','CHATGPT_SESSION_NO_TOKEN','CHATGPT_CONVERSATION_HTTP'];
+      const safeCodes=['CHATGPT_SESSION_HTTP','CHATGPT_SESSION_NO_TOKEN','CHATGPT_CONVERSATION_HTTP','CHATGPT_CLOUDFLARE_CHALLENGE','CHATGPT_MODEL_NOT_FOUND','CHATGPT_BRIDGE_UNAVAILABLE','CHATGPT_EMPTY_REPLY'];
       const error=safeCodes.includes(failure?.code)?failure.error:response.status===401?'Không xác thực được phiên ChatGPT.':'ChatGPT chưa trả lời được. Hãy thử lại sau.';
-      return reply({error,code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},response.status===429?429:502);
+      return reply({error,code:safeCodes.includes(failure?.code)?failure.code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},response.status===429?429:502);
      }
     }else{
      // Rotate keys without switching the chosen chat model or provider.

@@ -132,14 +132,16 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   return Response.json({...personalPublic(record),apiKey});
  }
  if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey','endpoint'].includes(k)))return Response.json({}, {status:400});
- const {provider,model,enabled,apiKey,endpoint}=settings;
+ const {provider,model,enabled,endpoint}=settings;
+ const rawApiKey=settings.apiKey;
+ const apiKey=typeof rawApiKey==='string'&&provider==='chatgpt-cookie'?rawApiKey.replace(/[\r\n]+/g,'').trim():rawApiKey;
  const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?16384:512;
  if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._/:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
   provider==='custom'&&endpoint!==undefined&&!isValidEndpointUrl(endpoint)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
  const cipher=await personalCipher(env);
- const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
+ const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-6-pro','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-5-6-pro','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
  return storage.transaction(async tx=>{
   const legacy=await tx.get(key);
   let previous=await tx.get('personal-ai-prov:'+provider);
@@ -241,6 +243,7 @@ const STATIC_PROVIDER_MODELS={
   {id:'gpt-6.2-astra',description:'GPT-6.2 Astra'}
  ],
  'chatgpt-cookie':[
+  {id:'auto',description:'Tự động (ChatGPT tự chọn model khả dụng, ít lỗi nhất)'},
   {id:'gpt-6',description:'GPT-6 (Mặc định)'},
   {id:'gpt-6-instant',description:'GPT-6 Instant'},
   {id:'gpt-6-thinking',description:'GPT-6 Thinking'},
