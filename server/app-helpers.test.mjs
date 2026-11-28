@@ -5,7 +5,7 @@ import vm from 'node:vm';
 const root=new URL('../',import.meta.url);
 function helpers(){
  const context=vm.createContext({usageFactsData:{words:{'行':{variants:[{pin:'xíng',senses:[{mean:'đi'}]},{pin:'háng',senses:[{mean:'hàng'}]}]}}}});context.window=context;
- for(const name of ['src/utils/text.js','src/utils/format.js','src/modules/dictionary/open-dictionary-core.js','src/modules/dictionary/search-core.js','src/ui/dictionary-relations.js'])vm.runInContext(fs.readFileSync(new URL(name,root),'utf8'),context);
+ for(const name of ['content/data/wordFrequency.js','src/utils/text.js','src/utils/format.js','src/modules/dictionary/open-dictionary-core.js','src/modules/dictionary/search-core.js','src/ui/dictionary-relations.js'])vm.runInContext(fs.readFileSync(new URL(name,root),'utf8'),context);
  return code=>JSON.parse(vm.runInContext('JSON.stringify('+code+')',context));
 }
 test('search normalization preserves Vietnamese meanings while allowing accent-free lookup',()=>{
@@ -42,4 +42,44 @@ test('dictionary reading selection does not merge different pronunciations of on
  assert.equal(run("usageVariant('行','xíng').rows[0].senses[0].mean"),'đi');
  assert.equal(run("usageVariant('行','háng').rows[0].senses[0].mean"),'hàng');
  assert.equal(run("usageVariant('行','wrong').rows.length"),0);
+});
+test('search commonality prior favors everyday HSK words over archaic/variant/proper-noun entries',()=>{
+ const run=helpers();
+ const hskNew=run("HSKSearchRanking.commonality({han:'新',pin:'xīn',hsk:2,practice:{examples:[{},{},{}]}})");
+ const hskNews=run("HSKSearchRanking.commonality({han:'新闻',pin:'xīnwén',hsk:3,practice:{examples:[{},{}]}})");
+ const surname=run("HSKSearchRanking.commonality({han:'新',pin:'Xin1',mean:'surname Xin'})");
+ const archaic=run("HSKSearchRanking.commonality({han:'伈',pin:'xin3',mean:'variant of 心; (literary) timid'})");
+ assert.ok(hskNew>surname&&hskNews>archaic,'HSK everyday words must rank well above surname/archaic entries');
+ assert.equal(run("HSKSearchRanking.isArchaicGloss('variant of 心; timid')"),true);
+ assert.equal(run("HSKSearchRanking.isArchaicGloss('new; fresh')"),false);
+ assert.deepEqual(run("HSKSearchRanking.splitPinyinSyllables('xīnnián')"),['xin','nian']);
+ assert.deepEqual(run("HSKSearchRanking.splitPinyinSyllables('xìngfú')"),['xing','fu']);
+ assert.deepEqual(run("HSKSearchRanking.splitPinyinSyllables('kāixīn')"),['kai','xin']);
+ assert.ok(run("HSKSearchRanking.corpusFrequency('心')")>=25,'everyday non-HSK character 心 must carry high corpus frequency');
+ assert.ok(run("HSKSearchRanking.corpusFrequency('微信')")>=20,'modern everyday term 微信 must carry high corpus frequency');
+ assert.ok(run("HSKSearchRanking.corpusFrequency('新') > HSKSearchRanking.corpusFrequency('馨')"),'common 新 must outrank rare 馨 in corpus frequency');
+ assert.ok(run("HSKSearchRanking.commonality({han:'心',pin:'xīn',mean:'tim'}) > HSKSearchRanking.commonality({han:'馨',pin:'xīn',mean:'thơm'})"),'corpus frequency must elevate 心 well above rare 馨');
+});
+test('search frequency store normalizes pinyin keys, applies bounded recency boost, and tracks hit counts',()=>{
+ const run=helpers();
+ const res=run(`(()=>{
+  const bag=new Map();
+  const store={getItem:k=>bag.get(k)||null,setItem:(k,v)=>bag.set(k,String(v))};
+  const t0=1730000000000;
+  recordSearchHit('kiem',{han:'赚',pin:'zhuan4'},t0,store);
+  recordSearchHit('kiem',{han:'赚',pin:'zhuàn'},t0+1000,store);
+  const data=loadSearchFrequency(store);
+  return {
+   sameKey:searchWordKey({han:'赚',pin:'zhuan4'})===searchWordKey({han:'赚',pin:'zhuàn'}),
+   counts:searchHitCount('kiem',{han:'赚',pin:'zhuàn'},data),
+   freshBoost:searchFrequencyBoost('kiem',{han:'赚',pin:'zhuàn'},t0+2000,data),
+   staleBoost:searchFrequencyBoost('kiem',{han:'赚',pin:'zhuàn'},t0+60*86400000,data),
+   otherWordBoost:searchFrequencyBoost('kiem',{han:'找',pin:'zhǎo'},t0+2000,data)
+  };
+ })()`);
+ assert.equal(res.sameKey,true);
+ assert.deepEqual(res.counts,{total:2,queryCount:2});
+ assert.ok(res.freshBoost>0&&res.freshBoost<=36);
+ assert.ok(res.staleBoost<res.freshBoost,'older clicks must decay cleanly');
+ assert.equal(res.otherWordBoost,0);
 });

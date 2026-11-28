@@ -44,7 +44,7 @@
   const syllables=String(pin||'').trim().split(/[\s,/·-]+/).filter(Boolean).map(fold);
   const qTokens=q.split(/[\s'’]+/).map(fold).filter(Boolean);
   const isPinyin=pinyinQuery(q);
-  const english=mean.join('; ').toLowerCase(),query=q.toLowerCase(),enWords=english.split(/[^a-z]+/);
+  const english=mean.join('; ').replace(/\[[^\]]*\]/g,' ').toLowerCase(),query=q.toLowerCase(),enWords=english.split(/[^a-z]+/);
   if(mean.some(s=>s.toLowerCase()===query))return 140;
   if(qTokens.length>=1&&syllables.length>qTokens.length&&qTokens.every((t,i)=>syllables[i]===t))return 112;
   if(query.length>=2&&enWords.includes(query))return 110;

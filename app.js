@@ -28,6 +28,7 @@ for (const w of words) {
   let base=w.mean;
   const m=base.match(/^([^()]+)\(([^()]+)\)\s*$/);
   if(m&&m[1].trim().toLocaleLowerCase('vi')===w.hv.toLocaleLowerCase('vi'))base=m[2];
+  w.primaryMean=base;
   const meanings=[base,...(extra?.meanings||[]).map(m=>m.gloss),...(w.practice?.meanings||[]),extra?.example?.meaning,w.originalExampleMetadata.meaning].filter(Boolean);
   w.mean=[...new Set(meanings)].join('; ');
 }
@@ -75,6 +76,7 @@ function renderDictionaryExample(container,w) {
 const recordOf = w => records[wordKey(w)];
 const statusOf = w => recordOf(w)?.status || 'unknown';
 const sensesMap = new Map(words.map(w => [w,splitSenses(w)]));
+const primarySensesMap = new Map(words.map(w => [w,splitSenses({mean:w.primaryMean||w.mean,hv:w.hv})]));
 let activeLevel='all', mode='learn', currentWords=[], index=0;
 const levelWords = () => activeLevel==='all' ? words : words.filter(w=>String(w.hsk)===activeLevel);
 function matchStatus(w,scope) { return scope==='all' || (scope==='due' ? !!recordOf(w)&&recordOf(w).due<=Date.now() : statusOf(w)===scope); }
@@ -159,8 +161,9 @@ function getExtendedSearchPool(){
  const list=[];
  for(const item of BASE_EXTRA_WORDS){
   if(hskHans.has(item.han))continue;
-  const w={...item,hsk:null,isExtended:true};
+  const w={...item,primaryMean:item.mean,hsk:null,isExtended:true};
   sensesMap.set(w,splitSenses(w));
+  primarySensesMap.set(w,splitSenses(w));
   list.push(w);
   hskHans.add(item.han);
  }
@@ -171,44 +174,112 @@ function getExtendedSearchPool(){
    const rawSenses=(v.senses||[]).filter(s=>s&&s.mean);
    if(!rawSenses.length)continue;
    const mean=[...new Set(rawSenses.map(s=>s.mean))].join('; ');
-   const w={han,pin:v.pin||'',mean,hv:'',hsk:null,isExtended:true,posSenses:rawSenses.map(s=>({pos:searchPosLabel(s.pos),mean:s.mean})),structures:v.structures||[]};
+   const primaryMean=rawSenses[0].mean;
+   const w={han,pin:v.pin||'',mean,primaryMean,hv:'',hsk:null,isExtended:true,posSenses:rawSenses.map(s=>({pos:searchPosLabel(s.pos),mean:s.mean})),structures:v.structures||[]};
    sensesMap.set(w,splitSenses(w));
+   primarySensesMap.set(w,splitSenses({mean:primaryMean,hv:''}));
    list.push(w);
   }
  }
  extendedSearchPoolCache=list;
  return list;
 }
-function searchScore(w,q,terms) {
+function searchMatchInfo(w,q,terms) {
  const trimmed=q.trim();
- if(w.han===trimmed)return 150;
- if(/^[\u3400-\u9fff]+$/.test(trimmed)&&w.han.includes(trimmed))return 110;
- if(searchPinyinAllowed&&w.pin&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(q)&&/[a-z]/i.test(q))return 120;
- const senses=sensesMap.get(w)||splitSenses(w), vietnamese=senses.map(viText);
- const meanings=senses.map(s=>hasAccent(q)?viText(s):fold(s)), query=hasAccent(q)?viText(q):fold(q);
- if(meanings.some(s=>s===query))return 100;
- if(meanings.some(s=>phraseIn(s,query)))return 90;
+ if(!trimmed)return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+ if(w.han===trimmed)return {score:160,tier:3,kind:'han',exact:true,hasVi:false,hasPinyin:false};
+ if(/^[\u3400-\u9fff]+$/.test(trimmed)){
+  if(w.han.startsWith(trimmed))return {score:132,tier:1,kind:'han',exact:false,hasVi:false,hasPinyin:false};
+  if(w.han.includes(trimmed))return {score:118,tier:1,kind:'han',exact:false,hasVi:false,hasPinyin:false};
+  return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+ }
+ const C=window.HSKOpenDictionaryCore;
+ let pinScore=0,pinExact=false;
+ if(searchPinyinAllowed&&w.pin&&/[a-z]/i.test(trimmed)&&C){
+  const p=C.fold(w.pin),f=C.fold(trimmed);
+  if(f&&p===f){pinScore=145;pinExact=true;}
+  else if(f.length>=2&&C.pinyinQuery(trimmed)){
+   const syls=window.HSKSearchRanking?.splitPinyinSyllables?window.HSKSearchRanking.splitPinyinSyllables(w.pin):String(w.pin).trim().split(/[\s,/·-]+/).filter(Boolean).map(s=>C.fold(s));
+   const qToks=trimmed.split(/[\s'’]+/).map(s=>C.fold(s)).filter(Boolean);
+   if(qToks.length>=1&&syls.length>qToks.length&&qToks.every((t,i)=>syls[i]===t))pinScore=112;
+   else if(qToks.length===1&&syls.includes(f))pinScore=92;
+  }
+ }
+ const senses=sensesMap.get(w)||splitSenses(w),vietnamese=senses.map(viText);
+ const primarySenses=primarySensesMap.get(w)||splitSenses({mean:w.primaryMean||w.mean,hv:w.hv});
+ const accented=hasAccent(trimmed),query=accented?viText(trimmed):fold(trimmed);
+ const pMeanings=primarySenses.map(s=>accented?viText(s):fold(s));
+ const meanings=senses.map(s=>accented?viText(s):fold(s));
+ let viScore=0,viKind='vi',viExact=false;
+ if(pMeanings.some(s=>s===query)){viScore=pMeanings[0]===query?144:140;viExact=true;}
+ else if(pMeanings.some(s=>phraseIn(s,query))){viScore=118;}
+ else if(meanings.some(s=>s===query)){viScore=92;}
+ else if(meanings.some(s=>phraseIn(s,query))){viScore=78;}
  // Synonym expansion preserves accents (bố ≠ bỏ). A short alias must be a whole sense.
- if(vietnamese.some(s=>terms.some(t=>t.split(' ').length===1?bareSense(s)===t:phraseIn(s,t))))return 75;
- if(w.hv&&(hasAccent(q)?viText(w.hv)===query:fold(w.hv)===query))return 65;
- const tokens=query.split(' ');
- if(tokens.length>1 && meanings.some(s=>tokens.filter(t=>phraseIn(s,t)).length>=Math.max(2,Math.ceil(tokens.length*.75))))return 45;
- if(!w.isExtended&&senses.some(s=>typoSimilar(fold(q),fold(s))))return 25;
- return 0;
+ else if(vietnamese.some(s=>terms.some(t=>t.split(' ').length===1?bareSense(s)===t:phraseIn(s,t)))){viScore=72;}
+ else if(w.hv&&(accented?viText(w.hv)===query:fold(w.hv)===query)){viScore=64;viKind='hv';}
+ else {
+  const tokens=query.split(' ');
+  if(tokens.length>1&&meanings.some(s=>tokens.filter(t=>phraseIn(s,t)).length>=Math.max(2,Math.ceil(tokens.length*.75))))viScore=45;
+  else if(!w.isExtended&&senses.some(s=>typoSimilar(fold(trimmed),fold(s))))viScore=25;
+ }
+ const hasPin=pinScore>0,hasVi=viScore>0&&viKind==='vi';
+ if(!pinScore&&!viScore)return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+ const tier=(pinExact||viExact)?2:1;
+ if(pinScore>viScore)return {score:pinScore,tier,kind:'pinyin',exact:pinExact,hasVi,hasPinyin:hasPin};
+ return {score:viScore,tier,kind:viKind,exact:viExact,hasVi,hasPinyin:hasPin};
 }
-let handwritingSearchCharacter='';
+function searchScore(w,q,terms) { return searchMatchInfo(w,q,terms).score; }
+function isSingleRootQuery(rawQuery){
+ const trimmed=String(rawQuery||'').trim();
+ return Boolean(trimmed)&&!handwritingSearchCharacter&&!/[\u3400-\u9fff]/.test(trimmed)&&trimmed.split(/\s+/).length===1;
+}
+function shouldFoldSearchCompounds(matches,rawQuery){
+ if(!isSingleRootQuery(rawQuery))return false;
+ const heads=matches.filter(r=>r.tier>=2).length;
+ return heads>=1&&heads<matches.length;
+}
+function relatedCompoundsFor(match,allMatches,limit=8){
+ const compounds=allMatches.filter(r=>r.tier<2&&r.w.han!==match.w.han);
+ if(!compounds.length)return {title:'',items:[]};
+ const w=match.w;
+ // For a Pinyin/character headword (e.g. 新, 心, 信), show everyday compounds containing that character first.
+ if(match.hasPinyin&&!match.hasVi){
+  const containing=compounds.filter(r=>r.w.han.includes(w.han));
+  if(containing.length)return {title:`Từ ghép chứa "${w.han}"`,items:containing.slice(0,limit)};
+  return {title:'',items:[]};
+ }
+ // For a Vietnamese headword (e.g. 请/申请/求 for "xin", 饭/米饭 for "cơm"), show specific phrases (xin lỗi, xin ăn, ăn cơm...).
+ const viCompounds=compounds.filter(r=>r.hasVi);
+ if(!viCompounds.length)return {title:'',items:[]};
+ const sameChar=viCompounds.filter(r=>r.w.han.includes(w.han));
+ const others=viCompounds.filter(r=>!r.w.han.includes(w.han));
+ const picked=[...sameChar,...others].slice(0,limit);
+ return {title:`Từ ghép & nghĩa cụ thể liên quan`,items:picked};
+}
+let handwritingSearchCharacter='',searchIntentFilter='all',lastSearchQueryKey='';
 function runSearch() {
  clearTimeout(searchTimer); const q=fold($('searchInput').value); visibleResults=40;
- if(handwritingSearchCharacter){searchMatches=(searchScope==='general'?words:levelWords()).filter(w=>w.han.includes(handwritingSearchCharacter)).map((w,i)=>({w,score:110,i})).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||a.i-b.i);renderSearch();return;}
+ if(q!==lastSearchQueryKey){searchIntentFilter='all';lastSearchQueryKey=q;}
+ if(handwritingSearchCharacter){searchMatches=(searchScope==='general'?words:levelWords()).filter(w=>w.han.includes(handwritingSearchCharacter)).map((w,i)=>({w,score:110,tier:1,kind:'han',exact:false,hasVi:false,hasPinyin:false,rank:110+(window.HSKSearchRanking?.commonality(w)||0),i})).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||b.rank-a.rank||a.i-b.i);renderSearch();return;}
  if(!q){searchMatches=[];renderSearch();return;}
  const terms=expandedTerms($('searchInput').value);
- const query=$('searchInput').value.trim(),normalized=hasAccent(query)?viText(query):fold(query);
+ const query=$('searchInput').value.trim(),accented=hasAccent(query),normalized=accented?viText(query):fold(query);
  const includeExtended=searchScope==='general'||activeLevel==='all';
  const extraPool=includeExtended?getExtendedSearchPool():[];
- searchPinyinAllowed=!words.some(w=>sensesMap.get(w).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized))&&!extraPool.some(w=>(sensesMap.get(w)||[]).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized));
- const hskPool=searchScope==='general'?words:[...new Set([...levelWords(),...words.filter(w=>w.han===query||searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(query)&&/[a-z]/i.test(query))])];
+ const C=window.HSKOpenDictionaryCore,R=window.HSKSearchRanking;
+ const exactViExists=words.some(w=>sensesMap.get(w).some(s=>(accented?viText(s):fold(s))===normalized))||extraPool.some(w=>(sensesMap.get(w)||[]).some(s=>(accented?viText(s):fold(s))===normalized));
+ // Accented Vietnamese (e.g. "bạn", "cơm") must never be parsed as pinyin.
+ // Unaccented valid pinyin syllables (e.g. "xin", "ni men") compete cleanly alongside Vietnamese meanings.
+ searchPinyinAllowed=accented?(!C?.vietnamese?.(query)&&!exactViExists):(Boolean(C?.pinyinQuery?.(query))||!exactViExists);
+ const hskPool=searchScope==='general'?words:[...new Set([...levelWords(),...words.filter(w=>w.han===query||searchPinyinAllowed&&C?.fold(w.pin)===C?.fold(query)&&/[a-z]/i.test(query))])];
  const pool=includeExtended?[...hskPool,...extraPool]:hskPool;
- searchMatches=pool.map((w,i)=>({w,score:searchScore(w,query,terms),i})).filter(r=>r.score>0).sort((a,b)=>Number(b.score>=120)-Number(a.score>=120)||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||Number(a.w.hsk||99)-Number(b.w.hsk||99)||a.w.han.length-b.w.han.length||a.i-b.i);
+ searchMatches=pool.map((w,i)=>{
+  const info=searchMatchInfo(w,query,terms);
+  if(!info.score)return null;
+  const rank=info.score+(R?R.commonality(w)+R.boost(query,w):0);
+  return {w,score:info.score,tier:info.tier,kind:info.kind,exact:info.exact,hasVi:info.hasVi,hasPinyin:info.hasPinyin,rank,i};
+ }).filter(Boolean).sort((a,b)=>Number(b.exact&&b.kind==='han')-Number(a.exact&&a.kind==='han')||b.tier-a.tier||b.rank-a.rank||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||a.w.han.length-b.w.han.length||Number(a.w.hsk||99)-Number(b.w.hsk||99)||a.i-b.i);
  renderSearch();
 }
 function groupedSearchSenses(w){
@@ -233,31 +304,71 @@ function groupedSearchSenses(w){
  if(!groups.size)return [{pos:'Nghĩa chính',mean:w.mean}];
  return [...groups.entries()].map(([pos,items])=>({pos,mean:items.join('; ')}));
 }
+function filterSearchMatches(matches,rawQuery,foldCompounds){
+ const base=foldCompounds?matches.filter(r=>r.tier>=2):matches;
+ if(searchIntentFilter==='all')return base;
+ const R=window.HSKSearchRanking;
+ if(searchIntentFilter==='compounds')return matches.filter(r=>r.tier<2);
+ if(searchIntentFilter==='hsk')return base.filter(r=>!r.w.isExtended);
+ if(searchIntentFilter==='vi')return base.filter(r=>r.hasVi);
+ if(searchIntentFilter==='pinyin')return base.filter(r=>r.hasPinyin);
+ if(searchIntentFilter==='frequent')return matches.filter(r=>(R?.hitCount(rawQuery,r.w)?.total||0)>0);
+ return base;
+}
 function renderSearch() {
  const general=searchScope==='general';$('searchResults').hidden=general;$('searchSummary').hidden=general;
- $('searchResults').replaceChildren(); const q=fold($('searchInput').value);
- const hskCount=searchMatches.filter(r=>!r.w.isExtended).length, extCount=searchMatches.length-hskCount;
+ $('searchResults').replaceChildren(); const rawQuery=$('searchInput').value.trim(),q=fold(rawQuery);
+ const R=window.HSKSearchRanking;
+ const foldCompounds=shouldFoldSearchCompounds(searchMatches,rawQuery);
+ const headMatches=foldCompounds?searchMatches.filter(r=>r.tier>=2):searchMatches;
+ const compoundCount=foldCompounds?searchMatches.length-headMatches.length:0;
+ const hskCount=headMatches.filter(r=>!r.w.isExtended).length, extCount=headMatches.length-hskCount;
+ const viCount=headMatches.filter(r=>r.hasVi).length, pinCount=headMatches.filter(r=>r.hasPinyin).length;
+ const freqCount=R?searchMatches.filter(r=>(R.hitCount(rawQuery,r.w)?.total||0)>0).length:0;
+ const filteredMatches=filterSearchMatches(searchMatches,rawQuery,foldCompounds);
+ if(searchIntentFilter!=='all'&&!filteredMatches.length){searchIntentFilter='all';}
+ const activeMatches=filterSearchMatches(searchMatches,rawQuery,foldCompounds);
  const summaryEl=$('searchSummary');summaryEl.replaceChildren();
  if(handwritingSearchCharacter){
   summaryEl.textContent=searchMatches.length?`Chứa chữ ${handwritingSearchCharacter} · ${searchMatches.length} kết quả`:`Chưa thấy từ chứa ${handwritingSearchCharacter}. Thử đổi bộ lọc hoặc vẽ lại.`;
  }else if(q){
   const summaryText=document.createElement('span');
-  summaryText.textContent=searchMatches.length?`${searchMatches.length} kết quả${extCount?` (${hskCount} HSK · ${extCount} mở rộng)`:''}${visibleResults<searchMatches.length?' · Đang hiện '+visibleResults:''}${!general&&activeLevel!=='all'?` trong HSK ${activeLevel}`:''}`:(activeLevel!=='all'&&!general?`Chưa tìm thấy trong HSK ${activeLevel}.`:'Chưa tìm thấy. Thử từ ngắn hơn hoặc đổi cách diễn đạt.');
+  summaryText.textContent=activeMatches.length?`${activeMatches.length} ${foldCompounds&&searchIntentFilter==='all'?'từ gốc':'kết quả'}${searchIntentFilter==='all'&&!foldCompounds&&extCount?` (${hskCount} HSK · ${extCount} mở rộng)`:''}${visibleResults<activeMatches.length?' · Đang hiện '+visibleResults:''}${!general&&activeLevel!=='all'?` trong HSK ${activeLevel}`:''}`:(activeLevel!=='all'&&!general?`Chưa tìm thấy trong HSK ${activeLevel}.`:'Chưa tìm thấy. Thử từ ngắn hơn hoặc đổi cách diễn đạt.');
   summaryEl.append(summaryText);
+  if(!general&&searchMatches.length>1){
+   const chips=[];
+   if(foldCompounds&&compoundCount>0)chips.push(['compounds',`Từ ghép cụ thể (${compoundCount})`]);
+   if(hskCount>0&&extCount>0)chips.push(['hsk',`HSK (${hskCount})`]);
+   if(viCount>0&&viCount<headMatches.length)chips.push(['vi',`Nghĩa Việt (${viCount})`]);
+   if(pinCount>0&&pinCount<headMatches.length)chips.push(['pinyin',`Pinyin (${pinCount})`]);
+   if(freqCount>0)chips.push(['frequent',`Hay tra (${freqCount})`]);
+   if(chips.length){
+    const bar=document.createElement('div');bar.className='search-intent-filters';bar.setAttribute('role','group');bar.setAttribute('aria-label','Lọc kết quả theo ý định tra cứu');
+    const firstLabel=foldCompounds?`Từ gốc (${headMatches.length})`:`Tất cả (${searchMatches.length})`;
+    for(const [id,label] of [['all',firstLabel],...chips]){
+     const chip=document.createElement('button');chip.type='button';chip.className='search-intent-chip';chip.dataset.searchIntent=id;
+     chip.setAttribute('aria-pressed',String(searchIntentFilter===id));chip.textContent=label;
+     chip.onclick=()=>{searchIntentFilter=id;visibleResults=40;renderSearch();};
+     bar.append(chip);
+    }
+    summaryEl.append(bar);
+   }
+  }
   if(!general&&activeLevel!=='all'){
    const widen=document.createElement('button');widen.type='button';widen.className='search-scope-reset';widen.textContent='Tìm tất cả HSK 1–6';
    widen.onclick=()=>document.querySelector('[data-filter="all"]')?.click();
    summaryEl.append(widen);
   }
  }
- const shown=searchMatches.slice(0,visibleResults), multi=shown.length>1, wide=typeof window!=='undefined'&&window.innerWidth>=960;
+ const shown=activeMatches.slice(0,visibleResults), multi=shown.length>1, wide=typeof window!=='undefined'&&window.innerWidth>=960;
  $('searchResults').classList.toggle('has-master-detail',multi);
  const masterList=multi?document.createElement('div'):null;
  if(masterList){masterList.className='search-master-list';masterList.setAttribute('role','listbox');masterList.setAttribute('aria-label','Danh sách từ khớp');}
  const cardsCol=multi?document.createElement('div'):null;
  if(cardsCol)cardsCol.className='search-cards-col';
  const cards=[], masterItems=[];
- shown.forEach(({w},idx)=>{
+ shown.forEach((match,idx)=>{
+  const {w}=match;
   if(masterList){
    const item=document.createElement('button');item.type='button';item.className='search-master-item'+(idx===0?' is-active':'');
    item.setAttribute('role','option');item.setAttribute('aria-selected',idx===0?'true':'false');
@@ -267,6 +378,7 @@ function renderSearch() {
    const mMean=document.createElement('span');mMean.className='search-master-mean';mMean.textContent=w.mean.split(/[;；\n]/).slice(0,2).join('; ');
    item.append(mHan,mPin,mBadge,mMean);
    item.onclick=()=>{
+    if(rawQuery)R?.record(rawQuery,w);
     masterItems.forEach((b,bi)=>{const on=bi===idx;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false');});
     cards.forEach((c,ci)=>{const on=ci===idx;c.classList.toggle('is-selected',on);c.open=on;});
    };
@@ -290,7 +402,7 @@ function renderSearch() {
   const actions=document.createElement('div');actions.className='search-detail-actions';
   const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)actions.append(speech);
   if(!w.isExtended){
-   const open=document.createElement('button');open.type='button';open.textContent='Mở thẻ HSK';open.onclick=()=>{if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};actions.append(open);
+   const open=document.createElement('button');open.type='button';open.textContent='Mở thẻ HSK';open.onclick=()=>{if(rawQuery)R?.record(rawQuery,w);if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};actions.append(open);
   }
   const notebook=window.HSKNotebook?.button(()=>w);if(notebook)actions.append(notebook);
   if(leftMeta.childElementCount)toolbar.append(leftMeta);
@@ -305,6 +417,32 @@ function renderSearch() {
    row.append(pos,txt);senseBox.append(row);
   }
   body.append(senseBox);
+
+  if(foldCompounds&&match.tier>=2){
+   const relComp=relatedCompoundsFor(match,searchMatches,8);
+   if(relComp.items.length){
+    const compWrap=document.createElement('div');compWrap.className='search-related-compounds';
+    const compHead=document.createElement('div');compHead.className='search-related-head';
+    const compTitle=document.createElement('h4');compTitle.textContent=`${relComp.title} (${relComp.items.length})`;
+    compHead.append(compTitle);
+    if(compoundCount>relComp.items.length){
+     const moreBtn=document.createElement('button');moreBtn.type='button';moreBtn.className='search-related-all';moreBtn.textContent=`Xem tất cả (${compoundCount})`;
+     moreBtn.onclick=()=>{searchIntentFilter='compounds';visibleResults=40;renderSearch();};
+     compHead.append(moreBtn);
+    }
+    const compList=document.createElement('div');compList.className='search-compound-list';
+    for(const c of relComp.items){
+     const chip=document.createElement('button');chip.type='button';chip.className='search-compound-chip';
+     const cHan=document.createElement('strong');cHan.textContent=c.w.han;
+     const cMean=document.createElement('span');cMean.textContent=c.w.mean.split(/[;；\n]/)[0].trim();
+     chip.append(cHan,cMean);
+     chip.onclick=()=>{if(rawQuery)R?.record(rawQuery,c.w);$('searchInput').value=c.w.han;searchExplicit=true;runSearch();};
+     compList.append(chip);
+    }
+    compWrap.append(compHead,compList);
+    body.append(compWrap);
+   }
+  }
 
   const examples=(w.practice?.examples||w.examples||[]).filter(e=>e&&e.cn&&e.vi);
   if(!examples.length&&w.exCn&&w.exVi)examples.push({cn:w.exCn,pin:w.originalExampleMetadata?.pin||'',vi:w.exVi});
@@ -331,13 +469,14 @@ function renderSearch() {
   if(hasRelations)body.append(wordRelationDetails(w));
   card.append(body);
   card.addEventListener('toggle',()=>{
+   if(card.open&&rawQuery&&(!wide||!multi||!card.classList.contains('is-selected')))R?.record(rawQuery,w);
    if(multi&&window.innerWidth>=960&&card.classList.contains('is-selected')&&!card.open)card.open=true;
   });
   cards.push(card);
   (cardsCol||$('searchResults')).append(card);
  });
  if(multi)$('searchResults').append(masterList,cardsCol);
- $('searchMore').hidden=general||visibleResults>=searchMatches.length;
+ $('searchMore').hidden=general||visibleResults>=activeMatches.length;
  const submitted=searchExplicit;searchExplicit=false;window.dispatchEvent(new CustomEvent('hsk-search-rendered',{detail:{submitted}}));
 }
 window.HSKHandwritingSearch={

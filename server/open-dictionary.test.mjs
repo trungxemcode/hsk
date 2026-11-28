@@ -10,6 +10,7 @@ test('semantic intent and tone-sensitive readings avoid cross-reading meaning co
  for(const q of ['ping fan','zhi2 bo1','nǐ hǎo','lv4','直播间'])assert.equal(C.semanticQuery(q),false,q);
  assert.equal(C.sameReading('píngfán','ping2 fan2'),true);assert.equal(C.sameReading('zhòng','zhong4'),true);assert.equal(C.sameReading('zhòng','zhong1'),false);assert.equal(C.sameReading('shù','shu3'),false);assert.equal(C.sameReading('lǜ','lu:4'),true);
  assert.equal(C.score(['形','形','xing2',['shape']],'he'),0,'short English substrings must not match unrelated glosses');
+ assert.equal(C.score(['的','的','de5',['of; (as in 新的[xin1 de5] "new one")']],'xin'),0,'bracketed pinyin references inside English glosses must not trigger false matches');
 });
 test('AI dictionary proposals are post-verified against local Hanzi and pinyin',()=>{
  const rows=[['怎么办','怎麼辦','zěn me bàn',['làm thế nào; làm sao đây']]];
