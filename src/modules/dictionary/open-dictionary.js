@@ -18,6 +18,7 @@
   const map=new Map();
   const add=(han,pin,mean)=>{if(!han||!mean)return;const xs=map.get(han)||[];if(!xs.some(x=>x.pin===(pin||'')&&x.mean===mean))xs.push({pin:pin||'',mean});map.set(han,xs);};
   for(const w of window.HSKVocabularyBridge?.snapshot?.()||[])add(w.han,w.pin,w.mean);
+  for(const w of window.HSKSearchRanking?.everydayWords||[])add(w.han,w.pin,w.mean);
   const facts=window.HSKVocabularyBridge?.facts?.()?.words;
   if(facts)for(const [han,entry] of Object.entries(facts))for(const vr of entry?.variants||[]){
    const means=[...new Set((vr.senses||[]).map(s=>s?.mean).filter(Boolean))];
@@ -147,7 +148,7 @@
   }
  }
  function buildOpenHeroView(entry,query='',openCtx=null){
-  const w=entry.w,level=membership(w),hskDetails=level?B.details?.(w.han,w.pin):null;
+  const w=entry.w,level=membership(w),hskDetails=B.details?.(w.han,w.pin)||null;
   const wrap=node('article','','open-hanzii-active');
   const hero=node('div','','search-hero-summary');
   const head=node('div','','search-hero-head');
