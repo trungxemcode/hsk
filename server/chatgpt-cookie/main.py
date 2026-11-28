@@ -256,4 +256,8 @@ async def cookie_session_info(
 @app.get("/health")
 @bridge_app.get("/health")
 async def bridge_health():
-    return {"ok": True, "service": "hsk-chatgpt-cookie-bridge"}
+    return {
+        "ok": True,
+        "service": "hsk-chatgpt-cookie-bridge",
+        "proxy_configured": bool(session_mgr.get_proxies()),
+    }

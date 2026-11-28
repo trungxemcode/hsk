@@ -107,7 +107,7 @@ class ChatGPTClient:
             retried_model = False
             retried_endpoint = False
 
-            async with AsyncSession(impersonate="chrome120", cookies=sm.get_cookies()) as session:
+            async with AsyncSession(impersonate="chrome120", cookies=sm.get_cookies(), proxies=sm.get_proxies()) as session:
                 while True:
                     access_token = await sm.get_valid_access_token()
                     payload = {
@@ -197,7 +197,7 @@ class ChatGPTClient:
             headers = target_sm._get_headers(include_auth=True, access_token=access_token)
             if AsyncSession is None:
                 return
-            async with AsyncSession(impersonate="chrome120", cookies=target_sm.get_cookies()) as session:
+            async with AsyncSession(impersonate="chrome120", cookies=target_sm.get_cookies(), proxies=target_sm.get_proxies()) as session:
                 await session.patch(
                     f"{self.api_url}/{conversation_id}",
                     headers=headers,
