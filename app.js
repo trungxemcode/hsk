@@ -250,10 +250,30 @@ function renderSearch() {
    summaryEl.append(widen);
   }
  }
- const shown=searchMatches.slice(0,visibleResults);
+ const shown=searchMatches.slice(0,visibleResults), multi=shown.length>1, wide=typeof window!=='undefined'&&window.innerWidth>=960;
+ $('searchResults').classList.toggle('has-master-detail',multi);
+ const masterList=multi?document.createElement('div'):null;
+ if(masterList){masterList.className='search-master-list';masterList.setAttribute('role','listbox');masterList.setAttribute('aria-label','Danh sách từ khớp');}
+ const cardsCol=multi?document.createElement('div'):null;
+ if(cardsCol)cardsCol.className='search-cards-col';
+ const cards=[], masterItems=[];
  shown.forEach(({w},idx)=>{
-  const card=document.createElement('details');card.className='result-card dictionary-row'+(w.isExtended?' is-extended-result':'');
-  if(idx===0)card.open=true;
+  if(masterList){
+   const item=document.createElement('button');item.type='button';item.className='search-master-item'+(idx===0?' is-active':'');
+   item.setAttribute('role','option');item.setAttribute('aria-selected',idx===0?'true':'false');
+   const mHan=document.createElement('strong');mHan.className='search-master-han';mHan.textContent=w.han;
+   const mPin=document.createElement('span');mPin.className='search-master-pin';mPin.textContent=w.pin||'';
+   const mBadge=document.createElement('span');mBadge.className=w.hsk?`hsk-tag hsk${w.hsk}-tag search-master-badge`:'hsk-tag search-master-badge is-extended';mBadge.textContent=w.hsk?`HSK ${w.hsk}`:'Mở rộng';
+   const mMean=document.createElement('span');mMean.className='search-master-mean';mMean.textContent=w.mean.split(/[;；\n]/).slice(0,2).join('; ');
+   item.append(mHan,mPin,mBadge,mMean);
+   item.onclick=()=>{
+    masterItems.forEach((b,bi)=>{const on=bi===idx;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false');});
+    cards.forEach((c,ci)=>{const on=ci===idx;c.classList.toggle('is-selected',on);c.open=on;});
+   };
+   masterItems.push(item);masterList.append(item);
+  }
+  const card=document.createElement('details');card.className='result-card dictionary-row'+(w.isExtended?' is-extended-result':'')+(idx===0?' is-selected':'');
+  if(!multi||(idx===0&&wide))card.open=true;
   const summary=document.createElement('summary');summary.className='dictionary-row-summary';
   const han=document.createElement('span');han.className='result-open dictionary-row-han';han.textContent=w.han;
   const pin=document.createElement('span');pin.className='dictionary-row-pinyin';pin.textContent=w.pin||'';
@@ -310,8 +330,13 @@ function renderSearch() {
   const hasRelations=Boolean((relEntry?.synonyms?.length||0)+(relEntry?.antonyms?.length||0));
   if(hasRelations)body.append(wordRelationDetails(w));
   card.append(body);
-  $('searchResults').append(card);
+  card.addEventListener('toggle',()=>{
+   if(multi&&window.innerWidth>=960&&card.classList.contains('is-selected')&&!card.open)card.open=true;
+  });
+  cards.push(card);
+  (cardsCol||$('searchResults')).append(card);
  });
+ if(multi)$('searchResults').append(masterList,cardsCol);
  $('searchMore').hidden=general||visibleResults>=searchMatches.length;
  const submitted=searchExplicit;searchExplicit=false;window.dispatchEvent(new CustomEvent('hsk-search-rendered',{detail:{submitted}}));
 }
