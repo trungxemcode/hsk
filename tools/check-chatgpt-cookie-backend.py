@@ -158,6 +158,18 @@ class ChatGPTCookieBackendTests(unittest.TestCase):
         self.assertEqual(parsed["message_id"], "m-ans")
         self.assertEqual(parsed["reply"], "Ăn tối là 吃晚饭 (chī wǎnfàn).")
 
+        import os
+        with patch.dict(os.environ, {"CHATGPT_PROXY_URL": ""}, clear=False):
+            self.assertIsNone(sm.get_proxies())
+        with patch.dict(os.environ, {"CHATGPT_PROXY_URL": "http://user:pass@proxy.example:8080"}, clear=False):
+            self.assertEqual(
+                sm.get_proxies(),
+                {
+                    "http": "http://user:pass@proxy.example:8080",
+                    "https": "http://user:pass@proxy.example:8080",
+                },
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

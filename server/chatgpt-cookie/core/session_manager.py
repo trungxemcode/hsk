@@ -2,6 +2,7 @@
 import base64
 import hashlib
 import json
+import os
 import random
 import time
 import uuid
@@ -209,6 +210,12 @@ class ChatGPTSessionManager:
         self.access_token = None
         self.token_expires_at = 0
 
+    def get_proxies(self) -> Optional[dict[str, str]]:
+        proxy_url = (os.getenv("CHATGPT_PROXY_URL") or "").strip()
+        if not proxy_url:
+            return None
+        return {"http": proxy_url, "https": proxy_url}
+
     def get_cookies(self) -> dict[str, str]:
         if not self.cookies:
             self.cookies = parse_session_cookies(self.session_token)
@@ -260,7 +267,7 @@ class ChatGPTSessionManager:
 
         cookies = self.get_cookies()
 
-        async with AsyncSession(impersonate="chrome120", cookies=cookies) as session:
+        async with AsyncSession(impersonate="chrome120", cookies=cookies, proxies=self.get_proxies()) as session:
             response = await session.get(
                 f"{self.base_url}/api/auth/session",
                 headers=self._get_headers(include_auth=False),
@@ -306,7 +313,7 @@ class ChatGPTSessionManager:
         access_token = await self.get_valid_access_token()
         if AsyncSession is not None and not self.available_models:
             try:
-                async with AsyncSession(impersonate="chrome120", cookies=self.get_cookies()) as session:
+                async with AsyncSession(impersonate="chrome120", cookies=self.get_cookies(), proxies=self.get_proxies()) as session:
                     res = await session.get(
                         f"{self.base_url}/backend-api/models",
                         headers=self._get_headers(include_auth=True, access_token=access_token),
