@@ -5,7 +5,7 @@ import vm from 'node:vm';
 const root=new URL('../',import.meta.url);
 function helpers(){
  const context=vm.createContext({usageFactsData:{words:{'行':{variants:[{pin:'xíng',senses:[{mean:'đi'}]},{pin:'háng',senses:[{mean:'hàng'}]}]}}}});context.window=context;
- for(const name of ['src/utils/text.js','src/utils/format.js','src/modules/dictionary/open-dictionary-core.js','src/modules/dictionary/search-core.js','src/ui/dictionary-relations.js'])vm.runInContext(fs.readFileSync(new URL(name,root),'utf8'),context);
+ for(const name of ['content/data/wordFrequency.js','src/utils/text.js','src/utils/format.js','src/modules/dictionary/open-dictionary-core.js','src/modules/dictionary/search-core.js','src/ui/dictionary-relations.js'])vm.runInContext(fs.readFileSync(new URL(name,root),'utf8'),context);
  return code=>JSON.parse(vm.runInContext('JSON.stringify('+code+')',context));
 }
 test('search normalization preserves Vietnamese meanings while allowing accent-free lookup',()=>{
@@ -55,6 +55,10 @@ test('search commonality prior favors everyday HSK words over archaic/variant/pr
  assert.deepEqual(run("HSKSearchRanking.splitPinyinSyllables('xīnnián')"),['xin','nian']);
  assert.deepEqual(run("HSKSearchRanking.splitPinyinSyllables('xìngfú')"),['xing','fu']);
  assert.deepEqual(run("HSKSearchRanking.splitPinyinSyllables('kāixīn')"),['kai','xin']);
+ assert.ok(run("HSKSearchRanking.corpusFrequency('心')")>=25,'everyday non-HSK character 心 must carry high corpus frequency');
+ assert.ok(run("HSKSearchRanking.corpusFrequency('微信')")>=20,'modern everyday term 微信 must carry high corpus frequency');
+ assert.ok(run("HSKSearchRanking.corpusFrequency('新') > HSKSearchRanking.corpusFrequency('馨')"),'common 新 must outrank rare 馨 in corpus frequency');
+ assert.ok(run("HSKSearchRanking.commonality({han:'心',pin:'xīn',mean:'tim'}) > HSKSearchRanking.commonality({han:'馨',pin:'xīn',mean:'thơm'})"),'corpus frequency must elevate 心 well above rare 馨');
 });
 test('search frequency store normalizes pinyin keys, applies bounded recency boost, and tracks hit counts',()=>{
  const run=helpers();

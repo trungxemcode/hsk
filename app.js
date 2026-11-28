@@ -186,12 +186,12 @@ function getExtendedSearchPool(){
 }
 function searchMatchInfo(w,q,terms) {
  const trimmed=q.trim();
- if(!trimmed)return {score:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
- if(w.han===trimmed)return {score:160,kind:'han',exact:true,hasVi:false,hasPinyin:false};
+ if(!trimmed)return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+ if(w.han===trimmed)return {score:160,tier:3,kind:'han',exact:true,hasVi:false,hasPinyin:false};
  if(/^[\u3400-\u9fff]+$/.test(trimmed)){
-  if(w.han.startsWith(trimmed))return {score:132,kind:'han',exact:false,hasVi:false,hasPinyin:false};
-  if(w.han.includes(trimmed))return {score:118,kind:'han',exact:false,hasVi:false,hasPinyin:false};
-  return {score:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+  if(w.han.startsWith(trimmed))return {score:132,tier:1,kind:'han',exact:false,hasVi:false,hasPinyin:false};
+  if(w.han.includes(trimmed))return {score:118,tier:1,kind:'han',exact:false,hasVi:false,hasPinyin:false};
+  return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
  }
  const C=window.HSKOpenDictionaryCore;
  let pinScore=0,pinExact=false;
@@ -224,16 +224,44 @@ function searchMatchInfo(w,q,terms) {
   else if(!w.isExtended&&senses.some(s=>typoSimilar(fold(trimmed),fold(s))))viScore=25;
  }
  const hasPin=pinScore>0,hasVi=viScore>0&&viKind==='vi';
- if(!pinScore&&!viScore)return {score:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
- if(pinScore>viScore)return {score:pinScore,kind:'pinyin',exact:pinExact,hasVi,hasPinyin:hasPin};
- return {score:viScore,kind:viKind,exact:viExact,hasVi,hasPinyin:hasPin};
+ if(!pinScore&&!viScore)return {score:0,tier:0,kind:'',exact:false,hasVi:false,hasPinyin:false};
+ const tier=(pinExact||viExact)?2:1;
+ if(pinScore>viScore)return {score:pinScore,tier,kind:'pinyin',exact:pinExact,hasVi,hasPinyin:hasPin};
+ return {score:viScore,tier,kind:viKind,exact:viExact,hasVi,hasPinyin:hasPin};
 }
 function searchScore(w,q,terms) { return searchMatchInfo(w,q,terms).score; }
+function isSingleRootQuery(rawQuery){
+ const trimmed=String(rawQuery||'').trim();
+ return Boolean(trimmed)&&!handwritingSearchCharacter&&!/[\u3400-\u9fff]/.test(trimmed)&&trimmed.split(/\s+/).length===1;
+}
+function shouldFoldSearchCompounds(matches,rawQuery){
+ if(!isSingleRootQuery(rawQuery))return false;
+ const heads=matches.filter(r=>r.tier>=2).length;
+ return heads>=1&&heads<matches.length;
+}
+function relatedCompoundsFor(match,allMatches,limit=8){
+ const compounds=allMatches.filter(r=>r.tier<2&&r.w.han!==match.w.han);
+ if(!compounds.length)return {title:'',items:[]};
+ const w=match.w;
+ // For a Pinyin/character headword (e.g. 新, 心, 信), show everyday compounds containing that character first.
+ if(match.hasPinyin&&!match.hasVi){
+  const containing=compounds.filter(r=>r.w.han.includes(w.han));
+  if(containing.length)return {title:`Từ ghép chứa "${w.han}"`,items:containing.slice(0,limit)};
+  return {title:'',items:[]};
+ }
+ // For a Vietnamese headword (e.g. 请/申请/求 for "xin", 饭/米饭 for "cơm"), show specific phrases (xin lỗi, xin ăn, ăn cơm...).
+ const viCompounds=compounds.filter(r=>r.hasVi);
+ if(!viCompounds.length)return {title:'',items:[]};
+ const sameChar=viCompounds.filter(r=>r.w.han.includes(w.han));
+ const others=viCompounds.filter(r=>!r.w.han.includes(w.han));
+ const picked=[...sameChar,...others].slice(0,limit);
+ return {title:`Từ ghép & nghĩa cụ thể liên quan`,items:picked};
+}
 let handwritingSearchCharacter='',searchIntentFilter='all',lastSearchQueryKey='';
 function runSearch() {
  clearTimeout(searchTimer); const q=fold($('searchInput').value); visibleResults=40;
  if(q!==lastSearchQueryKey){searchIntentFilter='all';lastSearchQueryKey=q;}
- if(handwritingSearchCharacter){searchMatches=(searchScope==='general'?words:levelWords()).filter(w=>w.han.includes(handwritingSearchCharacter)).map((w,i)=>({w,score:110,kind:'han',exact:false,hasVi:false,hasPinyin:false,rank:110+(window.HSKSearchRanking?.commonality(w)||0),i})).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||b.rank-a.rank||a.i-b.i);renderSearch();return;}
+ if(handwritingSearchCharacter){searchMatches=(searchScope==='general'?words:levelWords()).filter(w=>w.han.includes(handwritingSearchCharacter)).map((w,i)=>({w,score:110,tier:1,kind:'han',exact:false,hasVi:false,hasPinyin:false,rank:110+(window.HSKSearchRanking?.commonality(w)||0),i})).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||b.rank-a.rank||a.i-b.i);renderSearch();return;}
  if(!q){searchMatches=[];renderSearch();return;}
  const terms=expandedTerms($('searchInput').value);
  const query=$('searchInput').value.trim(),accented=hasAccent(query),normalized=accented?viText(query):fold(query);
@@ -250,8 +278,8 @@ function runSearch() {
   const info=searchMatchInfo(w,query,terms);
   if(!info.score)return null;
   const rank=info.score+(R?R.commonality(w)+R.boost(query,w):0);
-  return {w,score:info.score,kind:info.kind,exact:info.exact,hasVi:info.hasVi,hasPinyin:info.hasPinyin,rank,i};
- }).filter(Boolean).sort((a,b)=>Number(b.exact&&b.kind==='han')-Number(a.exact&&a.kind==='han')||b.rank-a.rank||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||Number(a.w.hsk||99)-Number(b.w.hsk||99)||a.w.han.length-b.w.han.length||a.i-b.i);
+  return {w,score:info.score,tier:info.tier,kind:info.kind,exact:info.exact,hasVi:info.hasVi,hasPinyin:info.hasPinyin,rank,i};
+ }).filter(Boolean).sort((a,b)=>Number(b.exact&&b.kind==='han')-Number(a.exact&&a.kind==='han')||b.tier-a.tier||b.rank-a.rank||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||a.w.han.length-b.w.han.length||Number(a.w.hsk||99)-Number(b.w.hsk||99)||a.i-b.i);
  renderSearch();
 }
 function groupedSearchSenses(w){
@@ -276,41 +304,48 @@ function groupedSearchSenses(w){
  if(!groups.size)return [{pos:'Nghĩa chính',mean:w.mean}];
  return [...groups.entries()].map(([pos,items])=>({pos,mean:items.join('; ')}));
 }
-function filterSearchMatches(matches,rawQuery){
- if(searchIntentFilter==='all')return matches;
+function filterSearchMatches(matches,rawQuery,foldCompounds){
+ const base=foldCompounds?matches.filter(r=>r.tier>=2):matches;
+ if(searchIntentFilter==='all')return base;
  const R=window.HSKSearchRanking;
- if(searchIntentFilter==='hsk')return matches.filter(r=>!r.w.isExtended);
- if(searchIntentFilter==='vi')return matches.filter(r=>r.hasVi);
- if(searchIntentFilter==='pinyin')return matches.filter(r=>r.hasPinyin);
+ if(searchIntentFilter==='compounds')return matches.filter(r=>r.tier<2);
+ if(searchIntentFilter==='hsk')return base.filter(r=>!r.w.isExtended);
+ if(searchIntentFilter==='vi')return base.filter(r=>r.hasVi);
+ if(searchIntentFilter==='pinyin')return base.filter(r=>r.hasPinyin);
  if(searchIntentFilter==='frequent')return matches.filter(r=>(R?.hitCount(rawQuery,r.w)?.total||0)>0);
- return matches;
+ return base;
 }
 function renderSearch() {
  const general=searchScope==='general';$('searchResults').hidden=general;$('searchSummary').hidden=general;
  $('searchResults').replaceChildren(); const rawQuery=$('searchInput').value.trim(),q=fold(rawQuery);
  const R=window.HSKSearchRanking;
- const hskCount=searchMatches.filter(r=>!r.w.isExtended).length, extCount=searchMatches.length-hskCount;
- const viCount=searchMatches.filter(r=>r.hasVi).length, pinCount=searchMatches.filter(r=>r.hasPinyin).length;
+ const foldCompounds=shouldFoldSearchCompounds(searchMatches,rawQuery);
+ const headMatches=foldCompounds?searchMatches.filter(r=>r.tier>=2):searchMatches;
+ const compoundCount=foldCompounds?searchMatches.length-headMatches.length:0;
+ const hskCount=headMatches.filter(r=>!r.w.isExtended).length, extCount=headMatches.length-hskCount;
+ const viCount=headMatches.filter(r=>r.hasVi).length, pinCount=headMatches.filter(r=>r.hasPinyin).length;
  const freqCount=R?searchMatches.filter(r=>(R.hitCount(rawQuery,r.w)?.total||0)>0).length:0;
- const filteredMatches=filterSearchMatches(searchMatches,rawQuery);
+ const filteredMatches=filterSearchMatches(searchMatches,rawQuery,foldCompounds);
  if(searchIntentFilter!=='all'&&!filteredMatches.length){searchIntentFilter='all';}
- const activeMatches=filterSearchMatches(searchMatches,rawQuery);
+ const activeMatches=filterSearchMatches(searchMatches,rawQuery,foldCompounds);
  const summaryEl=$('searchSummary');summaryEl.replaceChildren();
  if(handwritingSearchCharacter){
   summaryEl.textContent=searchMatches.length?`Chứa chữ ${handwritingSearchCharacter} · ${searchMatches.length} kết quả`:`Chưa thấy từ chứa ${handwritingSearchCharacter}. Thử đổi bộ lọc hoặc vẽ lại.`;
  }else if(q){
   const summaryText=document.createElement('span');
-  summaryText.textContent=activeMatches.length?`${activeMatches.length} kết quả${searchIntentFilter==='all'&&extCount?` (${hskCount} HSK · ${extCount} mở rộng)`:''}${visibleResults<activeMatches.length?' · Đang hiện '+visibleResults:''}${!general&&activeLevel!=='all'?` trong HSK ${activeLevel}`:''}`:(activeLevel!=='all'&&!general?`Chưa tìm thấy trong HSK ${activeLevel}.`:'Chưa tìm thấy. Thử từ ngắn hơn hoặc đổi cách diễn đạt.');
+  summaryText.textContent=activeMatches.length?`${activeMatches.length} ${foldCompounds&&searchIntentFilter==='all'?'từ gốc':'kết quả'}${searchIntentFilter==='all'&&!foldCompounds&&extCount?` (${hskCount} HSK · ${extCount} mở rộng)`:''}${visibleResults<activeMatches.length?' · Đang hiện '+visibleResults:''}${!general&&activeLevel!=='all'?` trong HSK ${activeLevel}`:''}`:(activeLevel!=='all'&&!general?`Chưa tìm thấy trong HSK ${activeLevel}.`:'Chưa tìm thấy. Thử từ ngắn hơn hoặc đổi cách diễn đạt.');
   summaryEl.append(summaryText);
   if(!general&&searchMatches.length>1){
    const chips=[];
+   if(foldCompounds&&compoundCount>0)chips.push(['compounds',`Từ ghép cụ thể (${compoundCount})`]);
    if(hskCount>0&&extCount>0)chips.push(['hsk',`HSK (${hskCount})`]);
-   if(viCount>0&&viCount<searchMatches.length)chips.push(['vi',`Nghĩa Việt (${viCount})`]);
-   if(pinCount>0&&pinCount<searchMatches.length)chips.push(['pinyin',`Pinyin (${pinCount})`]);
+   if(viCount>0&&viCount<headMatches.length)chips.push(['vi',`Nghĩa Việt (${viCount})`]);
+   if(pinCount>0&&pinCount<headMatches.length)chips.push(['pinyin',`Pinyin (${pinCount})`]);
    if(freqCount>0)chips.push(['frequent',`Hay tra (${freqCount})`]);
    if(chips.length){
     const bar=document.createElement('div');bar.className='search-intent-filters';bar.setAttribute('role','group');bar.setAttribute('aria-label','Lọc kết quả theo ý định tra cứu');
-    for(const [id,label] of [['all',`Tất cả (${searchMatches.length})`],...chips]){
+    const firstLabel=foldCompounds?`Từ gốc (${headMatches.length})`:`Tất cả (${searchMatches.length})`;
+    for(const [id,label] of [['all',firstLabel],...chips]){
      const chip=document.createElement('button');chip.type='button';chip.className='search-intent-chip';chip.dataset.searchIntent=id;
      chip.setAttribute('aria-pressed',String(searchIntentFilter===id));chip.textContent=label;
      chip.onclick=()=>{searchIntentFilter=id;visibleResults=40;renderSearch();};
@@ -332,7 +367,8 @@ function renderSearch() {
  const cardsCol=multi?document.createElement('div'):null;
  if(cardsCol)cardsCol.className='search-cards-col';
  const cards=[], masterItems=[];
- shown.forEach(({w},idx)=>{
+ shown.forEach((match,idx)=>{
+  const {w}=match;
   if(masterList){
    const item=document.createElement('button');item.type='button';item.className='search-master-item'+(idx===0?' is-active':'');
    item.setAttribute('role','option');item.setAttribute('aria-selected',idx===0?'true':'false');
@@ -381,6 +417,32 @@ function renderSearch() {
    row.append(pos,txt);senseBox.append(row);
   }
   body.append(senseBox);
+
+  if(foldCompounds&&match.tier>=2){
+   const relComp=relatedCompoundsFor(match,searchMatches,8);
+   if(relComp.items.length){
+    const compWrap=document.createElement('div');compWrap.className='search-related-compounds';
+    const compHead=document.createElement('div');compHead.className='search-related-head';
+    const compTitle=document.createElement('h4');compTitle.textContent=`${relComp.title} (${relComp.items.length})`;
+    compHead.append(compTitle);
+    if(compoundCount>relComp.items.length){
+     const moreBtn=document.createElement('button');moreBtn.type='button';moreBtn.className='search-related-all';moreBtn.textContent=`Xem tất cả (${compoundCount})`;
+     moreBtn.onclick=()=>{searchIntentFilter='compounds';visibleResults=40;renderSearch();};
+     compHead.append(moreBtn);
+    }
+    const compList=document.createElement('div');compList.className='search-compound-list';
+    for(const c of relComp.items){
+     const chip=document.createElement('button');chip.type='button';chip.className='search-compound-chip';
+     const cHan=document.createElement('strong');cHan.textContent=c.w.han;
+     const cMean=document.createElement('span');cMean.textContent=c.w.mean.split(/[;；\n]/)[0].trim();
+     chip.append(cHan,cMean);
+     chip.onclick=()=>{if(rawQuery)R?.record(rawQuery,c.w);$('searchInput').value=c.w.han;searchExplicit=true;runSearch();};
+     compList.append(chip);
+    }
+    compWrap.append(compHead,compList);
+    body.append(compWrap);
+   }
+  }
 
   const examples=(w.practice?.examples||w.examples||[]).filter(e=>e&&e.cn&&e.vi);
   if(!examples.length&&w.exCn&&w.exVi)examples.push({cn:w.exCn,pin:w.originalExampleMetadata?.pin||'',vi:w.exVi});

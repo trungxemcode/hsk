@@ -1,7 +1,7 @@
 (async function(){
  const status=document.getElementById('appLoadStatus');
  const dataRoot='./content/data/';
- const names=['words','dictionarySupplement','checkedPracticeExamples','exampleMetadata','wordRelationsData','usageFactsData','confusableGroups','contextQuizBank','visualConfusions','hskConfusionIndex'];
+ const names=['words','wordFrequency','dictionarySupplement','checkedPracticeExamples','exampleMetadata','wordRelationsData','usageFactsData','confusableGroups','contextQuizBank','visualConfusions','hskConfusionIndex'];
  // Bounded, local diagnostics only: no song names, queries, tokens or uploads.
  const timings={},longTasks=[];
  const mark=name=>{try{performance.clearMarks('music:'+name);performance.mark('music:'+name);}catch{}};

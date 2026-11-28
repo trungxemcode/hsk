@@ -150,8 +150,30 @@ const SEARCH_FREQ_MAX_WORDS = 400;
 const SEARCH_FREQ_MAX_QUERIES = 250;
 const SEARCH_FREQ_MAX_PER_QUERY = 16;
 const ARCHAIC_GLOSS_RE = /^(?:(?:old\s+)?variant\s+of\b|archaic\b|surname\s+|abbr\.\s+(?:for|of)\b|see\s+also\b|used\s+in\b|japanese\s+variant\b|erhua\s+variant\b|taiwan\s+pr\.|\(literary\)|\(archaic\)|\(old\)|\(dialect\)|cl:)/i;
-const HSK_COMMONALITY_BONUS = { 1: 54, 2: 48, 3: 42, 4: 34, 5: 26, 6: 18 };
+const HSK_COMMONALITY_BONUS = { 1: 44, 2: 38, 3: 32, 4: 24, 5: 18, 6: 12 };
 const SINGLE_PINYIN_SYL_RE = /^(?:(?:[bpmfdtnlgkhjqxrzcswy]|zh|ch|sh)?(?:a|o|e|ai|ei|ao|ou|an|en|ang|eng|ong|i|ia|ie|iao|iu|ian|in|iang|ing|iong|u|ua|uo|uai|ui|uan|un|uang|ueng|v|ve|van|vn)|er)$/;
+let corpusFreqMapCache = null;
+
+function getCorpusFrequencyMap() {
+  if (corpusFreqMapCache) return corpusFreqMapCache;
+  if (typeof wordFrequency === 'undefined' || !Array.isArray(wordFrequency?.tiers)) return null;
+  const map = new Map();
+  wordFrequency.tiers.forEach((line, idx) => {
+    if (!line) return;
+    const tier = idx + 1;
+    for (const w of line.split(' ')) {
+      if (w) map.set(w, tier);
+    }
+  });
+  corpusFreqMapCache = map;
+  return map;
+}
+function corpusFrequencyScore(han) {
+  const key = String(han || '').trim();
+  if (!key) return 0;
+  const map = getCorpusFrequencyMap();
+  return map ? (map.get(key) || 0) : 0;
+}
 
 function segmentPinyinChunk(chunk) {
   if (!chunk) return [];
@@ -308,12 +330,16 @@ function wordCommonalityScore(word, meta = {}) {
   if (!word || !word.han) return 0;
   const level = Number(meta.hsk ?? word.hsk) || 0;
   let score = HSK_COMMONALITY_BONUS[level] || 0;
+  // Prioritize single-character headwords over longer compound words when matching a root query.
   const len = Array.from(String(word.han).trim()).length;
-  if (len === 2) score += 6;
-  else if (len === 1) score += 4;
+  if (len === 1) score += 14;
+  else if (len === 2) score += 6;
   else if (len === 3) score += 2;
+  // Real Mandarin corpus frequency (0..30 -> 0..42), giving everyday non-HSK words (心, 饭, 微信, 外卖) natural prominence.
+  const corpusTier = corpusFrequencyScore(word.han);
+  if (corpusTier > 0) score += Math.round(corpusTier * 1.4);
   const hasExamples = Boolean(meta.hasExamples || (word.practice?.examples?.length >= 2) || (word.examples?.length >= 1));
-  if (hasExamples) score += 6;
+  if (hasExamples) score += 4;
   const uEntry = typeof usageFactsData !== 'undefined' ? usageFactsData?.words?.[word.han] : null;
   if (!level && uEntry?.variants?.length) {
     score += 6;
@@ -330,13 +356,14 @@ function wordCommonalityScore(word, meta = {}) {
   if (!level && meta.hasVi === false) score -= 6;
   return score;
 }
-function clearSearchFrequencyCache() { searchFreqCache = null; }
+function clearSearchFrequencyCache() { searchFreqCache = null; corpusFreqMapCache = null; }
 
 const HSKSearchRanking = {
   KEY: SEARCH_FREQ_KEY,
   wordKey: searchWordKey,
   queryKey: searchQueryKey,
   splitPinyinSyllables,
+  corpusFrequency: corpusFrequencyScore,
   load: loadSearchFrequency,
   record: recordSearchHit,
   hitCount: searchHitCount,
@@ -348,6 +375,6 @@ const HSKSearchRanking = {
 if (typeof window !== 'undefined') window.HSKSearchRanking = HSKSearchRanking;
 if (typeof module !== 'undefined') module.exports = {
   splitSenses, bareSense, expandedTerms, nearSenses,
-  HSKSearchRanking, searchWordKey, searchQueryKey, splitPinyinSyllables, loadSearchFrequency,
+  HSKSearchRanking, searchWordKey, searchQueryKey, splitPinyinSyllables, corpusFrequencyScore, loadSearchFrequency,
   recordSearchHit, searchHitCount, searchFrequencyBoost, wordCommonalityScore, isArchaicOrVariantGloss
 };
