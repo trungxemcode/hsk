@@ -133,7 +133,7 @@ test('data-driven pages stay under strict visual comparison with shared baseline
  const fs=require('node:fs'),config=JSON.parse(fs.readFileSync('.github/ui-scope.json','utf8'));
  const protectedRoutes=scope(config);
  const expectedExclusions=config.request.includes('#searchPanel')?['lessons','search']:['lessons'];
- assert.deepEqual(config.excludedRoutes,expectedExclusions,'Only the pre-existing lessons exclusion and the explicitly requested search page may be excluded');
+ assert.deepEqual(config.excludedRoutes,expectedExclusions,'Only the pre-existing lessons exclusion and the explicitly requested page may be excluded');
  if(config.excludedRoutes.includes('search'))assert.match(config.request,/#searchPanel/,'The search route may be excluded only when that exact page is the requested scope');
  for(const route of config.dataStableRoutes)assert.ok(protectedRoutes.includes(route),'Data fixture must not exclude '+route);
  assert.ok(config.stableDataFiles.includes('content/data/words.js'));
