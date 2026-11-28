@@ -5336,107 +5336,388 @@ html body:not(#_rd).studio-enabled #searchPanel #openDictionary .result-grid{
   gap:8px !important;
   margin-top:8px !important;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-list{
-  display:none;
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-main-col{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:0;
+  width:100%;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip{
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  align-items:center;
+  gap:6px;
+  padding:6px 8px;
+  border-radius:var(--radius-card);
+  border:1px solid var(--rd-line);
+  background:var(--rd-surface);
+  overflow-x:auto;
+  scrollbar-width:thin;
+  max-width:100%;
+  box-sizing:border-box;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip .search-master-item{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:6px;
+  flex:0 0 auto;
+  width:auto !important;
+  min-height:34px !important;
+  height:34px;
+  padding:0 14px !important;
+  border-radius:var(--radius-rd-006) !important;
+  border:1px solid var(--palette-clear) !important;
+  background:var(--palette-clear) !important;
+  color:var(--rd-ink) !important;
+  cursor:pointer;
+  white-space:nowrap;
+  box-shadow:none !important;
+  transition:background-color .14s ease,color .14s ease,border-color .14s ease;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip .search-master-item:hover{
+  background:var(--rd-surface-soft) !important;
+  border-color:var(--rd-line) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip .search-master-item.is-active{
+  background:var(--rd-brand) !important;
+  border-color:var(--rd-brand) !important;
+  color:var(--rd-static-color-021) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip .search-master-han{
+  font-size:15px;
+  font-weight:700;
+  line-height:1;
+  color:inherit !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip .search-master-pin{
+  font-size:12px;
+  font-weight:500;
+  line-height:1;
+  color:var(--rd-muted);
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip .search-master-item.is-active .search-master-han,
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip .search-master-item.is-active .search-master-pin{
+  color:var(--rd-static-color-021) !important;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-cards-col{
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:10px;
   min-width:0;
   width:100%;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults.has-master-detail details.result-card.dictionary-row:not(.is-selected){
+  display:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.search-hanzii-card{
+  background:var(--palette-clear) !important;
+  border:none !important;
+  padding:0 !important;
+  margin:0 !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.search-hanzii-card > summary.search-hero-summary{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:4px !important;
+  padding:16px 18px 12px !important;
+  border-radius:var(--radius-card) var(--radius-card) var(--radius-none) var(--radius-none) !important;
+  border:1px solid var(--rd-line) !important;
+  border-bottom:none !important;
+  background:var(--rd-surface) !important;
+  cursor:default;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.search-hanzii-card > summary.search-hero-summary::after{
+  display:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-head .dictionary-row-han{
+  font-size:28px !important;
+  font-weight:750 !important;
+  line-height:1.15 !important;
+  color:var(--rd-brand) !important;
+  letter-spacing:.01em;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-verified{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;
+  height:20px;
+  border-radius:var(--radius-rd-006);
+  background:var(--rd-jade-soft);
+  color:var(--rd-static-color-121);
+  font-size:11px;
+  font-weight:800;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-phonetic{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-phonetic .dictionary-row-pinyin{
+  font-size:14px !important;
+  font-weight:600 !important;
+  color:var(--rd-ink-2) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-phonetic .search-detail-hv{
+  padding:0 !important;
+  min-height:auto !important;
+  border:none !important;
+  background:var(--palette-clear) !important;
+  font-size:13.5px !important;
+  font-weight:700 !important;
+  color:var(--rd-muted) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.search-hanzii-card > .search-detail-body{
+  padding:0 !important;
+  gap:10px !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-meta{
+  padding:10px 18px 14px !important;
+  border-radius:var(--radius-none) var(--radius-none) var(--radius-card) var(--radius-card);
+  border:1px solid var(--rd-line);
+  border-top:1px solid var(--rd-line-soft);
+  background:var(--rd-surface);
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-level-label{
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--rd-muted);
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-stack{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.search-acc-card{
+  border-radius:var(--radius-card) !important;
+  border:1px solid var(--rd-line) !important;
+  background:var(--rd-surface) !important;
+  overflow:hidden;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.search-acc-card > summary.search-acc-summary{
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  padding:13px 16px !important;
+  cursor:pointer;
+  list-style:none;
+  user-select:none;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.search-acc-card > summary.search-acc-summary::-webkit-details-marker,
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.search-acc-card > summary.search-acc-summary::after{
+  display:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-arrow{
+  display:inline-block;
+  width:0;
+  height:0;
+  border-top:5px solid var(--palette-clear);
+  border-bottom:5px solid var(--palette-clear);
+  border-left:7px solid var(--rd-brand);
+  transition:transform .16s ease;
+  flex:0 0 auto;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.search-acc-card[open] > summary.search-acc-summary .search-acc-arrow{
+  transform:rotate(90deg);
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-title{
+  font-size:14.5px;
+  font-weight:700;
+  color:var(--rd-ink);
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-count{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:22px;
+  height:22px;
+  padding:0 7px;
+  border-radius:var(--radius-rd-006);
+  background:var(--rd-surface-soft);
+  border:1px solid var(--rd-line);
+  font-size:11.5px;
+  font-weight:700;
+  color:var(--rd-muted);
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-body{
+  padding:0 16px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-senses-inline{
+  margin:0;
+  font-size:14.5px;
+  font-weight:500;
+  line-height:1.5;
+  color:var(--rd-ink);
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-panel{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:14px 16px 16px;
+  border-radius:var(--radius-card);
+  border:1px solid var(--rd-line);
+  background:var(--rd-surface);
+  box-sizing:border-box;
+  min-width:0;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-panel[hidden]{
+  display:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-tab{
+  min-width:36px !important;
+  height:36px !important;
+  min-height:36px !important;
+  padding:0 10px !important;
+  border-radius:var(--radius-rd-002) !important;
+  border:1px solid var(--rd-line) !important;
+  background:var(--rd-surface-soft) !important;
+  color:var(--rd-ink) !important;
+  font-size:16px !important;
+  font-weight:700 !important;
+  cursor:pointer;
+  box-shadow:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-tab.is-active{
+  background:var(--rd-brand) !important;
+  border-color:var(--rd-brand) !important;
+  color:var(--rd-static-color-021) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-stage-wrap{
+  position:relative;
+  width:188px;
+  height:188px;
+  margin:2px auto;
+  border-radius:var(--radius-rd-002);
+  border:1px solid var(--rd-line);
+  background:
+    linear-gradient(to right, var(--palette-clear) 49.5%, var(--rd-line) 49.5%, var(--rd-line) 50.5%, var(--palette-clear) 50.5%),
+    linear-gradient(to bottom, var(--palette-clear) 49.5%, var(--rd-line) 49.5%, var(--rd-line) 50.5%, var(--palette-clear) 50.5%),
+    var(--rd-surface-soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-stage{
+  width:176px;
+  height:176px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-stage > svg{
+  width:176px !important;
+  height:176px !important;
+  display:block;
+  stroke:none;
+  fill:none;
+  stroke-width:initial;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-fallback{
+  font-size:112px;
+  line-height:1;
+  font-weight:500;
+  color:var(--rd-ink);
+  user-select:none;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-replay{
+  position:absolute;
+  right:6px;
+  bottom:6px;
+  width:28px !important;
+  min-width:28px !important;
+  height:28px !important;
+  min-height:28px !important;
+  padding:0 !important;
+  border-radius:var(--radius-rd-006) !important;
+  border:1px solid var(--rd-line) !important;
+  background:var(--rd-surface) !important;
+  color:var(--rd-ink-2) !important;
+  font-size:14px !important;
+  font-weight:700 !important;
+  cursor:pointer;
+  box-shadow:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-meta{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  font-size:13px;
+  line-height:1.45;
+  color:var(--rd-ink-2);
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-row{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-label{
+  color:var(--rd-muted);
+  font-weight:600;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-speech{
+  position:static !important;
+  width:26px !important;
+  min-width:26px !important;
+  height:26px !important;
+  min-height:26px !important;
+  padding:0 !important;
+  border-radius:var(--radius-rd-006) !important;
+  border:1px solid var(--rd-line) !important;
+  background:var(--rd-surface-soft) !important;
+  color:var(--rd-ink-2) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-practice-btn{
+  width:100% !important;
+  min-height:38px !important;
+  height:38px !important;
+  border-radius:var(--radius-rd-006) !important;
+  border:1px solid var(--rd-line) !important;
+  background:var(--rd-surface-soft) !important;
+  color:var(--rd-ink) !important;
+  font-size:13.5px !important;
+  font-weight:650 !important;
+  cursor:pointer;
+  box-shadow:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-practice-btn:hover{
+  background:var(--rd-brand-soft) !important;
+  border-color:var(--rd-brand) !important;
+  color:var(--rd-brand) !important;
 }
 @media (min-width:960px){
   html body:not(#_rd).studio-enabled #searchPanel #searchResults.result-grid.has-master-detail:not([hidden]){
     display:grid !important;
-    grid-template-columns:330px minmax(0,1fr) !important;
-    gap:14px !important;
+    grid-template-columns:minmax(0,1fr) 292px !important;
+    gap:16px !important;
     align-items:start;
     margin-top:10px !important;
   }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults.has-master-detail .search-master-list{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-panel{
     position:sticky;
     top:12px;
-    max-height:calc(100vh - 205px);
-    overflow-y:auto;
-    padding-right:4px;
-    scrollbar-width:thin;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-item{
-    display:grid;
-    grid-template-columns:auto minmax(0,1fr) auto;
-    grid-template-rows:auto auto;
-    align-items:center;
-    gap:2px 8px;
-    width:100%;
-    text-align:left;
-    padding:9px 12px !important;
-    min-height:54px;
-    border-radius:var(--radius-btn) !important;
-    border:1px solid var(--rd-line) !important;
-    background:var(--rd-surface) !important;
-    color:var(--rd-ink) !important;
-    cursor:pointer;
-    box-sizing:border-box;
-    transition:border-color .15s ease,background-color .15s ease;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-item:hover{
-    border-color:color-mix(in srgb,var(--rd-brand) 40%,var(--rd-line)) !important;
-    background:var(--rd-surface-soft) !important;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-item.is-active{
-    background:var(--rd-brand-soft) !important;
-    border-color:var(--rd-brand) !important;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-han{
-    font-size:17px;
-    font-weight:750;
-    color:var(--rd-ink);
-    line-height:1.25;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-pin{
-    font-size:12.5px;
-    font-weight:500;
-    color:var(--rd-brand);
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-badge{
-    position:static !important;
-    display:inline-flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    height:20px !important;
-    padding:0 7px !important;
-    margin:0 !important;
-    border-radius:var(--radius-rd-006);
-    font-size:10.5px !important;
-    font-weight:700;
-    line-height:1 !important;
-    white-space:nowrap;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-badge.is-extended{
-    background:color-mix(in srgb,var(--rd-muted) 14%,var(--palette-clear)) !important;
-    color:var(--rd-muted) !important;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-master-mean{
-    grid-column:1 / -1;
-    font-size:12.5px;
-    line-height:1.35;
-    color:var(--rd-muted);
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults.has-master-detail .search-cards-col{
-    display:block;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults.has-master-detail details.result-card.dictionary-row:not(.is-selected){
-    display:none !important;
   }
   html body:not(#_rd).studio-enabled #searchPanel #openDictionary .result-grid{
     display:grid !important;
@@ -5460,7 +5741,7 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-cards-col
     font-size:13px !important;
   }
 }
-html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row{
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row:not(.search-hanzii-card){
   display:block !important;
   padding:0 !important;
   min-height:0 !important;
@@ -5470,7 +5751,7 @@ html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictiona
   border:1px solid var(--rd-line) !important;
   box-shadow:var(--rd-shadow-xs) !important;
 }
-html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open]{
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open]:not(.search-hanzii-card){
   border-color:color-mix(in srgb,var(--rd-brand) 36%,var(--rd-line)) !important;
   box-shadow:var(--rd-shadow-sm) !important;
 }
@@ -5831,21 +6112,20 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-bo
   }
   html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row > summary.dictionary-row-summary,
   html body:not(#_rd).studio-enabled.mobile-ux #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row > summary.dictionary-row-summary,
-  html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary,
-  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
+  html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row[open] > summary.dictionary-row-summary,
+  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel #openDictionary details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
     margin:0 !important;
     border-radius:var(--radius-none) !important;
-    padding:9px 12px !important;
-  }
-  html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary,
-  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
     padding:12px 14px !important;
   }
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row:not([open]) > summary.dictionary-row-summary,
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
-    grid-template-columns:auto auto auto minmax(0,1fr) 20px !important;
-    gap:2px 8px;
-    min-height:44px;
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.search-hanzii-card > summary.search-hero-summary,
+  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel #searchResults details.result-card.search-hanzii-card > summary.search-hero-summary{
+    margin:0 !important;
+    padding:14px 16px 10px !important;
+    border-radius:var(--radius-card) var(--radius-card) var(--radius-none) var(--radius-none) !important;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-meta{
+    padding:10px 16px 12px !important;
   }
   html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row > summary.dictionary-row-summary{
     grid-template-columns:auto minmax(0,1fr) 20px !important;
@@ -5993,7 +6273,47 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResult
   background:var(--rd-surface-soft) !important;
   color:var(--rd-muted) !important;
 }
-html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row{
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.search-hanzii-card > summary.search-hero-summary,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-meta,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults details.search-acc-card,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-panel{
+  background:var(--rd-surface) !important;
+  border-color:var(--palette-dark-line) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-head .dictionary-row-han{
+  color:var(--palette-dark-violet) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-hero-phonetic .dictionary-row-pinyin,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-title,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-senses-inline,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-fallback{
+  color:var(--rd-ink) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-arrow{
+  border-left-color:var(--palette-dark-violet) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-acc-count,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-tab,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-stage-wrap,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-speech,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-practice-btn{
+  background:var(--rd-surface-soft) !important;
+  border-color:var(--palette-dark-line) !important;
+  color:var(--rd-ink) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-tab.is-active,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-candidate-strip .search-master-item.is-active{
+  background:var(--rd-brand) !important;
+  border-color:var(--rd-brand) !important;
+  color:var(--rd-static-color-021) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-char-replay{
+  background:var(--rd-surface) !important;
+  border-color:var(--palette-dark-line) !important;
+  color:var(--rd-ink) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row:not(.search-hanzii-card){
   background:var(--rd-surface) !important;
   border-color:var(--palette-dark-line) !important;
 }

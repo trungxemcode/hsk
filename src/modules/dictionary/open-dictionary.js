@@ -160,6 +160,7 @@
   if(hskDetails?.hv)leftMeta.append(node('span','HV: '+hskDetails.hv.toUpperCase(),'search-detail-hv'));
   const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)actions.append(speech);
   if(w.native||level){const openBtn=button('Mở thẻ HSK',()=>{recordHit(query,w);B.open(w.han,w.pin);});actions.append(openBtn);}
+  if(window.HSKWritingPractice?.open){const writeBtn=button('Tập viết',()=>{recordHit(query,w);window.HSKWritingPractice.open(w.han);});actions.append(writeBtn);}
   const notebook=window.HSKNotebook?.button(()=>({...w,mean:vi(w),pin:w.pinDisplay||w.pin}));if(notebook)actions.append(notebook);
   if(!level){const action=button(items[C.id(w)]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS',()=>{recordHit(query,w);const key=C.id(w);if(items[key]){delete items[key];queue=queue.filter(k=>k!==key);}else items=C.add(items,{...w,meanVi:vi(w)});save();action.textContent=items[key]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS';});action.className='dictionary-srs-add';action.__dictionaryWord=w;action.disabled=!vi(w);actions.append(action);}
   toolbar.append(leftMeta,actions);body.append(toolbar);
