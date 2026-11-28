@@ -369,7 +369,7 @@ test('ChatGPTClient retries on 401 refresh, falls back to auto on model_not_foun
  assert.equal(res2.reply,'你好');
 });
 
-test('Worker surfaces Cloudflare challenge and offline bridge diagnostics for chatgpt-cookie',async()=>{
+test('Worker falls back from offline bridge to direct chatgpt.com and surfaces combined diagnostics when blocked',async()=>{
  const records=new Map();
  const makeEnv=(extra={})=>({
   AI_PERSONAL_KEY_SECRET:secret,
@@ -393,24 +393,61 @@ test('Worker surfaces Cloudflare challenge and offline bridge diagnostics for ch
  const makeToken=uid=>'header.'+Buffer.from(JSON.stringify({aud:'hsk-flashcards-44631',iss:'https://securetoken.google.com/hsk-flashcards-44631',sub:uid,exp:Math.floor(Date.now()/1000)+3600})).toString('base64url')+'.sig';
  const qaBody={question:'ăn tối là gì',hsk:3,aiProvider:'system-chatgpt',lesson:{id:'ai-qa',title:'AI',words:[],content:{mode:'ai-qa',questionMessageId:'q-1',learning_snapshot:{}}},history:[]};
 
- // Offline bridge (530 HTML from Cloudflare tunnel)
- const bridgeDownWorker=createHandler(async(url,init)=>{
-  if(String(url).includes('identitytoolkit')){
+ // 1. Offline bridge (530 tunnel error) -> automatically falls back to direct chatgpt.com and succeeds
+ const fallbackCalls=[];
+ const bridgeFallbackWorker=createHandler(async(url,init)=>{
+  const u=String(url);
+  if(u.includes('identitytoolkit')){
    const claims=JSON.parse(Buffer.from(JSON.parse(init.body).idToken.split('.')[1],'base64url').toString());
    return Response.json({users:[{localId:claims.sub}]});
   }
-  return new Response('<html>Tunnel Error 1033</html>',{status:530,headers:{'Content-Type':'text/html'}});
+  fallbackCalls.push(u);
+  if(u==='https://bridge.test/api/hsk/bridge'){
+   return new Response('<html>Tunnel Error 1033</html>',{status:530,headers:{'Content-Type':'text/html'}});
+  }
+  if(u.endsWith('/api/auth/session')){
+   return Response.json({accessToken:'direct-access-token'});
+  }
+  if(u.endsWith('/backend-api/conversation')&&init.method==='POST'){
+   const sse='event: delta\ndata: {"v":{"message":{"id":"m-fb","author":{"role":"assistant"},"content":{"content_type":"text","parts":["{\\"answer\\":\\"Ăn tối là 吃晚饭 (chī wǎnfàn).\\"}"]}},"conversation_id":"c-fb"}}\ndata: [DONE]\n';
+   return new Response(sse,{status:200,headers:{'Content-Type':'text/event-stream'}});
+  }
+  if(init.method==='PATCH')return Response.json({ok:true});
+  throw Error('Unexpected URL: '+u);
  });
- const rDown=await bridgeDownWorker(new Request('https://worker.test/lesson-ask',{
-  method:'POST',headers:{Origin:origin,Authorization:'Bearer '+makeToken('u-bridge-down'),'Content-Type':'application/json'},
+ const rFallback=await bridgeFallbackWorker(new Request('https://worker.test/lesson-ask',{
+  method:'POST',headers:{Origin:origin,Authorization:'Bearer '+makeToken('u-bridge-fb'),'Content-Type':'application/json'},
   body:JSON.stringify(qaBody)
  }),makeEnv({CHATGPT_COOKIE_BRIDGE_URL:'https://bridge.test',CHATGPT_COOKIE_BRIDGE_KEY:'key'}));
+ assert.equal(rFallback.status,200);
+ assert.equal(rFallback.headers.get('X-HSK-AI-Provider'),'chatgpt-cookie');
+ const dFallback=await rFallback.json();
+ assert.match(dFallback.answer,/吃晚饭/);
+ assert.ok(fallbackCalls.includes('https://bridge.test/api/hsk/bridge'));
+ assert.ok(fallbackCalls.some(u=>u.endsWith('/backend-api/conversation')));
+
+ // 2. Offline bridge (530) + direct chatgpt.com blocked by Cloudflare (403) -> clear CHATGPT_BRIDGE_UNAVAILABLE
+ const bridgeAndCfWorker=createHandler(async(url,init)=>{
+  const u=String(url);
+  if(u.includes('identitytoolkit')){
+   const claims=JSON.parse(Buffer.from(JSON.parse(init.body).idToken.split('.')[1],'base64url').toString());
+   return Response.json({users:[{localId:claims.sub}]});
+  }
+  if(u==='https://bridge.test/api/hsk/bridge'){
+   return new Response('<html>Tunnel Error 1033</html>',{status:530,headers:{'Content-Type':'text/html'}});
+  }
+  return new Response('<html>Just a moment...</html>',{status:403,headers:{'cf-mitigated':'challenge'}});
+ });
+ const rDown=await bridgeAndCfWorker(new Request('https://worker.test/lesson-ask',{
+  method:'POST',headers:{Origin:origin,Authorization:'Bearer '+makeToken('u-bridge-down'),'Content-Type':'application/json'},
+  body:JSON.stringify(qaBody)
+ }),makeEnv({CHATGPT_COOKIE_BRIDGE_URL:'https://bridge.test',CHATGPT_COOKIE_BRIDGE_KEY:'key',CHATGPT_SESSION_TOKEN:'shared-cookie-token-cf-down'}));
  assert.equal(rDown.status,502);
  const dDown=await rDown.json();
  assert.equal(dDown.code,'CHATGPT_BRIDGE_UNAVAILABLE');
  assert.match(dDown.error,/Bridge\/Tunnel/i);
 
- // Cloudflare challenge (403 cf-mitigated: challenge)
+ // 3. Direct Cloudflare challenge without bridge -> CHATGPT_CLOUDFLARE_CHALLENGE
  const cfWorker=createHandler(async(url,init)=>{
   if(String(url).includes('identitytoolkit')){
    const claims=JSON.parse(Buffer.from(JSON.parse(init.body).idToken.split('.')[1],'base64url').toString());
@@ -421,7 +458,7 @@ test('Worker surfaces Cloudflare challenge and offline bridge diagnostics for ch
  const rCf=await cfWorker(new Request('https://worker.test/lesson-ask',{
   method:'POST',headers:{Origin:origin,Authorization:'Bearer '+makeToken('u-cf'),'Content-Type':'application/json'},
   body:JSON.stringify(qaBody)
- }),makeEnv());
+ }),makeEnv({CHATGPT_SESSION_TOKEN:'shared-cookie-token-cf-only'}));
  assert.equal(rCf.status,502);
  const dCf=await rCf.json();
  assert.equal(dCf.code,'CHATGPT_CLOUDFLARE_CHALLENGE');

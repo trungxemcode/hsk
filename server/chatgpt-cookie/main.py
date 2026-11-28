@@ -251,3 +251,9 @@ async def cookie_session_info(
         raise HTTPException(status_code=400, detail="Dữ liệu phiên ChatGPT không hợp lệ.")
     except Exception:
         raise HTTPException(status_code=502, detail="Chưa kiểm tra được phiên ChatGPT.")
+
+
+@app.get("/health")
+@bridge_app.get("/health")
+async def bridge_health():
+    return {"ok": True, "service": "hsk-chatgpt-cookie-bridge"}

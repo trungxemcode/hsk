@@ -857,7 +857,7 @@ export class ChatGPTSessionManager{
    const rawErr=await response.text().catch(()=>'');
    const challenge=isCloudflareChallengeResponse(response,rawErr);
    const err=Error(challenge
-    ?'ChatGPT đang bật xác minh Cloudflare (HTTP 403), chặn truy cập bằng Cookie từ máy chủ. Hãy thử lại sau hoặc chuyển sang Gemini/API riêng.'
+    ?'ChatGPT đang bật xác minh Cloudflare (HTTP 403) trên kết nối trực tiếp từ Worker. Cần chạy cầu nối Python Bridge (server/chatgpt-cookie) và kiểm tra CHATGPT_COOKIE_BRIDGE_URL.'
     :`ChatGPT từ chối kiểm tra phiên (HTTP ${response.status}).`);
    err.status=response.status;
    err.code=challenge?'CHATGPT_CLOUDFLARE_CHALLENGE':'CHATGPT_SESSION_HTTP';
@@ -947,7 +947,7 @@ export class ChatGPTClient{
      }
 
      const err=Error(
-      challenge?'ChatGPT đang bật xác minh Cloudflare (HTTP 403), chặn truy cập bằng Cookie từ máy chủ. Hãy thử lại sau hoặc chuyển sang Gemini/API riêng.':
+      challenge?'ChatGPT đang bật xác minh Cloudflare (HTTP 403) trên kết nối trực tiếp từ Worker. Cần chạy cầu nối Python Bridge (server/chatgpt-cookie) và kiểm tra CHATGPT_COOKIE_BRIDGE_URL.':
       modelMissing?`Model "${activeModel}" không khả dụng trên tài khoản ChatGPT này. Hãy đổi model sang "auto" trong Cài đặt.`:
       response.status===401?'Không xác thực được phiên ChatGPT (HTTP 401). Cookie đã hết hạn trên chatgpt.com. Hãy sao chép lại cookie mới trong Cài đặt.':
       `ChatGPT từ chối gửi tin nhắn (HTTP ${response.status}).`
@@ -1099,57 +1099,111 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
  const combinedSystem=`${systemText}\n\n[HỒ SƠ CÁ NHÂN HÓA CỦA HỌC VIÊN]:\n${memoryBlock}\n\n[HỘI THOẠI GẦN ĐÂY (Tối đa 4 lượt)]:\n<recent_chat>\n${slidingHistory}\n</recent_chat>\n\nCó thể bổ sung trường "memory_update": {"detected_weak_vocab": null, "detected_weak_grammar": null, "new_personal_fact": null} trong JSON trả về để cập nhật hồ sơ điểm yếu của học viên.`;
  const safePrompt=sharedGuardrail.wrapSandwichPrompt(userQuestion,combinedSystem);
  const bridgeUrl=String(config?.bridgeUrl||env?.CHATGPT_COOKIE_BRIDGE_URL||'').trim();
+ const bridgeKey=String(env?.CHATGPT_COOKIE_BRIDGE_KEY||'').trim();
  let replyText='';
- try{
-  if(bridgeUrl){
-   const endpoint=new URL('/api/hsk/bridge',bridgeUrl);
-   const bridgeKey=String(env?.CHATGPT_COOKIE_BRIDGE_KEY||'').trim();
-   if(endpoint.protocol!=='https:'||!bridgeKey)return new Response(null,{status:502});
-   const response=await fetchFn(endpoint,{
-    method:'POST',
-    headers:{
-     'Content-Type':'application/json',
-     'X-HSK-Bridge-Key':bridgeKey,
-     'X-ChatGPT-Session-Token':rawToken
-    },
-    body:JSON.stringify({prompt:safePrompt,model}),
-    signal,
-    redirect:'manual'
-   });
-   if(response.status>=300&&response.status<400)return new Response(null,{status:502});
-   const payload=await response.json().catch(()=>null);
-   if(!response.ok){
-    const detailObj=payload?.detail&&typeof payload.detail==='object'?payload.detail:null;
-    const {stage,status,challenge,detail_message:detailMessage,detail_code:detailCode}=detailObj||{};
-    if(['session','conversation'].includes(stage)&&Number.isInteger(status)&&status>=300&&status<=599){
-     const action=stage==='session'?'kiểm tra phiên':'gửi tin nhắn';
-     const modelMissing=!challenge&&isModelNotFoundResponse(status,detailMessage||'',detailCode||'');
-     const code=challenge===true?'CHATGPT_CLOUDFLARE_CHALLENGE':modelMissing?'CHATGPT_MODEL_NOT_FOUND':stage==='session'?'CHATGPT_SESSION_HTTP':'CHATGPT_CONVERSATION_HTTP';
-     const msg=status===401
-      ?'Không xác thực được phiên ChatGPT (HTTP 401). Cookie đã hết hạn trên chatgpt.com. Hãy sao chép lại cookie mới trong Cài đặt.'
-      :challenge===true
-      ?`ChatGPT đang bật xác minh Cloudflare khi ${action} (HTTP ${status}). Hãy thử lại sau hoặc chuyển sang Gemini/API riêng.`
-      :modelMissing
-      ?`Model "${model}" không khả dụng trên tài khoản ChatGPT này. Hãy đổi model sang "auto" trong Cài đặt.`
-      :`ChatGPT từ chối ${action} (HTTP ${status}).`;
-     return Response.json({error:msg,code},{status:status===429?429:502});
-    }
-    if(response.status===400&&typeof payload?.detail==='string'&&payload.detail.trim()){
-     return Response.json({error:payload.detail.trim(),code:'CHATGPT_SESSION_NO_TOKEN'},{status:400});
-    }
-    if(response.status>=502&&response.status<=599&&!detailObj){
-     return Response.json({error:'Cầu nối ChatGPT Cookie (Bridge/Tunnel) đang ngoại tuyến hoặc không phản hồi. Hãy kiểm tra lại máy chạy bridge hoặc chuyển sang nhà cung cấp AI khác.',code:'CHATGPT_BRIDGE_UNAVAILABLE'},{status:502});
-    }
-    return new Response(null,{status:502});
+ let bridgeFailedOffline=false;
+
+ const runDirect=async()=>{
+  const client=getOrCreateCookieClient(rawToken,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
+  const result=await client.sendStatelessMessage(safePrompt,{model,fetchFn,signal,ctx});
+  return result.reply;
+ };
+
+ const buildTimedBridgeSignal=timeoutMs=>{
+  if(typeof AbortController==='undefined')return {signal,cleanup:()=>{}};
+  const ac=new AbortController();
+  const onParentAbort=()=>ac.abort(signal?.reason);
+  if(signal?.aborted)ac.abort(signal.reason);
+  else signal?.addEventListener?.('abort',onParentAbort,{once:true});
+  const timer=setTimeout(()=>ac.abort(new Error('BRIDGE_TIMEOUT')),timeoutMs);
+  return {
+   signal:ac.signal,
+   cleanup:()=>{
+    clearTimeout(timer);
+    signal?.removeEventListener?.('abort',onParentAbort);
    }
-   replyText=typeof payload?.reply==='string'?payload.reply:'';
-  }else{
-   const client=getOrCreateCookieClient(rawToken,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
-   const result=await client.sendStatelessMessage(safePrompt,{model,fetchFn,signal,ctx});
-   replyText=result.reply;
+  };
+ };
+
+ try{
+  if(bridgeUrl&&bridgeKey){
+   let endpoint=null;
+   try{
+    const parsed=new URL('/api/hsk/bridge',bridgeUrl);
+    if(parsed.protocol==='https:')endpoint=parsed;
+   }catch{}
+   if(!endpoint){
+    bridgeFailedOffline=true;
+   }else{
+    const timed=buildTimedBridgeSignal(20000);
+    let response=null;
+    try{
+     response=await fetchFn(endpoint,{
+      method:'POST',
+      headers:{
+       'Content-Type':'application/json',
+       'X-HSK-Bridge-Key':bridgeKey,
+       'X-ChatGPT-Session-Token':rawToken
+      },
+      body:JSON.stringify({prompt:safePrompt,model}),
+      signal:timed.signal,
+      redirect:'manual'
+     });
+    }catch(bridgeErr){
+     if(signal?.aborted)throw bridgeErr;
+     bridgeFailedOffline=true;
+    }finally{
+     timed.cleanup();
+    }
+    if(response&&!bridgeFailedOffline){
+     if(response.status>=300&&response.status<400){
+      bridgeFailedOffline=true;
+     }else{
+      const payload=await response.json().catch(()=>null);
+      if(!response.ok){
+       const detailObj=payload?.detail&&typeof payload.detail==='object'?payload.detail:null;
+       const {stage,status,challenge,detail_message:detailMessage,detail_code:detailCode}=detailObj||{};
+       if(['session','conversation'].includes(stage)&&Number.isInteger(status)&&status>=300&&status<=599){
+        const action=stage==='session'?'kiểm tra phiên':'gửi tin nhắn';
+        const modelMissing=!challenge&&isModelNotFoundResponse(status,detailMessage||'',detailCode||'');
+        const code=challenge===true?'CHATGPT_CLOUDFLARE_CHALLENGE':modelMissing?'CHATGPT_MODEL_NOT_FOUND':stage==='session'?'CHATGPT_SESSION_HTTP':'CHATGPT_CONVERSATION_HTTP';
+        const msg=status===401
+         ?'Không xác thực được phiên ChatGPT (HTTP 401). Cookie đã hết hạn trên chatgpt.com. Hãy sao chép lại cookie mới trong Cài đặt.'
+         :challenge===true
+         ?`ChatGPT đang bật xác minh Cloudflare khi ${action} (HTTP ${status}). Hãy làm mới phiên chatgpt.com hoặc thử lại sau ít phút.`
+         :modelMissing
+         ?`Model "${model}" không khả dụng trên tài khoản ChatGPT này. Hãy đổi model sang "auto" trong Cài đặt.`
+         :`ChatGPT từ chối ${action} (HTTP ${status}).`;
+        return Response.json({error:msg,code},{status:status===429?429:502});
+       }
+       if(response.status===400&&typeof payload?.detail==='string'&&payload.detail.trim()){
+        return Response.json({error:payload.detail.trim(),code:'CHATGPT_SESSION_NO_TOKEN'},{status:400});
+       }
+       if(response.status>=500&&response.status<=599&&!detailObj){
+        bridgeFailedOffline=true;
+       }else{
+        return new Response(null,{status:502});
+       }
+      }else{
+       replyText=typeof payload?.reply==='string'?payload.reply:'';
+       if(!replyText.trim())bridgeFailedOffline=true;
+      }
+     }
+    }
+   }
+  }
+
+  if(!bridgeUrl||!bridgeKey||bridgeFailedOffline){
+   replyText=await runDirect();
   }
  }catch(err){
   if(err?.name==='AbortError'||signal?.aborted)throw err;
+  if(bridgeFailedOffline&&err?.code==='CHATGPT_CLOUDFLARE_CHALLENGE'){
+   return Response.json({
+    error:'Cầu nối Bridge/Tunnel đang ngoại tuyến và kết nối trực tiếp tới ChatGPT bị Cloudflare chặn (HTTP 403). Hãy bật lại Python Bridge (server/chatgpt-cookie/start-bridge.ps1) hoặc cập nhật CHATGPT_COOKIE_BRIDGE_URL.',
+    code:'CHATGPT_BRIDGE_UNAVAILABLE'
+   },{status:502});
+  }
   const status=Number.isInteger(err?.status)&&err.status>=400&&err.status<600?err.status:502;
   return new Response(JSON.stringify({error:err?.message||'Lỗi gọi ChatGPT Cookie.',code:err?.code,upstreamStatus:err?.status}),{status});
  }
@@ -1207,8 +1261,8 @@ export async function probeChatGptCookieAccount(rawToken,{env={},fetchFn=fetch,s
  }
  try{
   const client=getOrCreateCookieClient(token,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
-  if(!client.sm.planType&&!bridgeUrl)await client.sm.getValidAccessToken(fetchFn,signal);
-  if(!client.sm.availableModels&&!bridgeUrl&&client.sm.accessToken){
+  if(!client.sm.planType)await client.sm.getValidAccessToken(fetchFn,signal);
+  if(!client.sm.availableModels&&client.sm.accessToken){
    try{
     const mRes=await fetchFn(`${client.sm.baseUrl}/backend-api/models`,{method:'GET',headers:client.sm.getHeaders(true),signal,redirect:'manual'});
     if(mRes.ok){
