@@ -4954,7 +4954,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
   html body:not(#_rd).studio-enabled.mobile-ux #searchPanel .dictionary-modes button{
     min-height:36px !important;
     padding:6px 12px !important;
-    border-radius:var(--radius-9px) !important;
+    border-radius:var(--radius-rd-010) !important;
     border-color:var(--palette-clear) !important;
     font-size:13px !important;
     font-weight:600 !important;
@@ -4964,6 +4964,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
     background:var(--rd-brand-soft) !important;
     color:var(--rd-brand) !important;
     border-color:var(--palette-clear) !important;
+    box-shadow:none !important;
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled.mobile-ux #searchPanel .dictionary-modes button[aria-pressed="true"]:not(:active):not(:focus-visible){
     background:var(--palette-dark-violet-soft) !important;
@@ -5064,93 +5065,167 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-
 }
 
 /* ============================================================ SEARCH RESULTS MASTER-DETAIL LAYOUT */
-html body:not(#_rd).studio-enabled #searchPanel #searchResults.result-grid{
+html body:not(#_rd).studio-enabled #searchPanel #searchResults[hidden],
+html body:not(#_rd).studio-enabled #searchPanel #searchSummary[hidden]{
+  display:none !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchSummary:not([hidden]):not(:empty){
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 10px;
+  margin-top:10px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchSummary .search-scope-reset{
+  min-height:32px !important;
+  padding:4px 12px !important;
+  border-radius:var(--radius-rd-006) !important;
+  border:1px solid var(--rd-line) !important;
+  background:var(--rd-surface) !important;
+  color:var(--rd-brand) !important;
+  font-size:12.5px !important;
+  font-weight:650 !important;
+  cursor:pointer;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults.result-grid:not([hidden]),
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary .result-grid{
   display:flex !important;
   flex-direction:column !important;
-  gap:12px !important;
-  margin-top:14px !important;
+  gap:10px !important;
+  margin-top:12px !important;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-strip{
-  display:flex;
-  flex-wrap:nowrap;
-  gap:8px;
-  overflow-x:auto;
-  padding:4px 2px 8px;
-  scrollbar-width:thin;
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chip{
-  flex:0 0 auto;
-  display:inline-flex;
-  align-items:baseline;
-  gap:6px;
-  padding:8px 14px;
-  border-radius:var(--radius-rd-006);
-  border:1px solid var(--rd-line);
-  background:var(--rd-surface);
-  color:var(--rd-ink);
-  cursor:pointer;
-  font-size:14px;
-  line-height:1.2;
-  transition:border-color .15s ease,background-color .15s ease,color .15s ease;
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chip strong{
-  font-size:16px;
-  font-weight:700;
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chip span{
-  font-size:12px;
-  color:var(--rd-muted);
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chip.is-active{
-  background:var(--rd-brand) !important;
-  border-color:var(--rd-brand) !important;
-  color:var(--palette-white) !important;
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-quick-chip.is-active span{
-  color:color-mix(in srgb,var(--palette-white) 85%,var(--palette-clear)) !important;
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .result-card.dictionary-row{
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row{
   display:block !important;
   padding:0 !important;
   min-height:0 !important;
   overflow:hidden;
+  border-radius:var(--rd-r-md) !important;
+  background:var(--rd-surface) !important;
+  border:1px solid var(--rd-line) !important;
+  box-shadow:var(--rd-shadow-xs) !important;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .result-card.dictionary-row > summary.dictionary-row-summary{
-  display:grid !important;
-  grid-template-columns:auto auto auto minmax(0,1fr) auto !important;
-  align-items:center;
-  gap:10px 14px;
-  padding:14px 18px !important;
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open]{
+  border-color:color-mix(in srgb,var(--rd-brand) 36%,var(--rd-line)) !important;
+  box-shadow:var(--rd-shadow-sm) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row > summary.dictionary-row-summary,
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
+  margin:0 !important;
+  border-radius:var(--radius-none) !important;
   cursor:pointer;
+  box-sizing:border-box;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-han{
-  font-size:22px !important;
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row > summary.dictionary-row-summary:focus-visible{
+  border-radius:var(--radius-none) !important;
+  outline-offset:-2px !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row:not([open]) > summary.dictionary-row-summary{
+  display:grid !important;
+  grid-template-columns:96px 124px 76px minmax(0,1fr) 20px !important;
+  align-items:center;
+  gap:8px 12px;
+  padding:13px 18px !important;
+  min-height:52px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
+  display:grid !important;
+  grid-template-columns:auto auto auto minmax(0,1fr) 20px !important;
+  align-items:center;
+  gap:8px 12px;
+  background:var(--rd-surface-soft);
+  border-bottom:1px solid var(--rd-line);
+  padding:14px 18px !important;
+  min-height:56px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row > summary.dictionary-row-summary{
+  display:grid !important;
+  grid-template-columns:96px minmax(0,1fr) 136px 20px !important;
+  align-items:center;
+  gap:8px 12px;
+  padding:13px 18px !important;
+  min-height:52px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
+  background:var(--rd-surface-soft);
+  border-bottom:1px solid var(--rd-line);
+  padding:14px 18px !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row > summary.dictionary-row-summary::after{
+  grid-column:5 !important;
+  grid-row:1 !important;
+  align-self:center !important;
+  justify-self:end !important;
+  margin-left:0 !important;
+  width:14px;
+  height:14px;
+  opacity:.55;
+}
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row > summary.dictionary-row-summary::after{
+  grid-column:4 !important;
+  grid-row:1 !important;
+  align-self:center !important;
+  justify-self:end !important;
+  margin-left:0 !important;
+  width:14px;
+  height:14px;
+  opacity:.55;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row:not([open]) .dictionary-row-han{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-han,
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary .dictionary-row-han{
+  margin:0 !important;
+  align-self:center !important;
+  font-size:21px !important;
   font-weight:750 !important;
   color:var(--rd-ink) !important;
   line-height:1.25;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-pinyin{
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row[open] > summary.dictionary-row-summary .dictionary-row-han{
+  font-size:26px !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .dictionary-row-pinyin{
+  align-self:center !important;
   font-size:14px !important;
   font-weight:500;
   color:var(--rd-brand) !important;
   white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary .dictionary-row-pinyin{
+  justify-self:end;
+  text-align:right;
+  max-width:100%;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-row-badge{
   position:static !important;
-  display:inline-flex;
-  align-items:center;
-  padding:2px 8px;
+  align-self:center !important;
+  justify-self:start;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  height:24px !important;
+  min-width:64px;
+  margin:0 !important;
+  padding:0 9px !important;
   border-radius:var(--radius-rd-006);
   font-size:11px;
   font-weight:700;
+  line-height:1 !important;
   white-space:nowrap;
+  box-sizing:border-box;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-row-badge.is-extended,
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .hsk-tag.is-extended{
   background:color-mix(in srgb,var(--rd-muted) 14%,var(--palette-clear)) !important;
   color:var(--rd-muted) !important;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-meaning{
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .dictionary-row-meaning{
+  align-self:center !important;
   font-size:14px !important;
   color:var(--rd-ink-2,var(--rd-ink)) !important;
   line-height:1.45;
@@ -5158,90 +5233,141 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-m
   text-overflow:ellipsis;
   white-space:nowrap;
 }
+html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row[open] > summary.dictionary-row-summary .dictionary-row-meaning{
+  display:none;
+}
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body{
-  padding:16px 20px 20px !important;
+  padding:16px 18px 18px !important;
   display:flex;
   flex-direction:column;
   gap:14px;
-  border-top:1px solid var(--rd-line);
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-hero{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px 16px;
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary .dictionary-row-body{
+  padding:14px 18px 16px !important;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-head{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-han{
-  font-size:34px;
-  font-weight:800;
-  line-height:1.15;
-  color:var(--rd-ink);
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-meta{
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-toolbar{
   display:flex;
   flex-wrap:wrap;
   align-items:center;
-  gap:8px;
+  justify-content:space-between;
+  gap:10px 14px;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-pin{
-  font-size:15px;
-  font-weight:600;
-  color:var(--rd-brand);
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-left{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 10px;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-hv{
-  font-size:13px;
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:0 10px;
+  border-radius:var(--radius-rd-011);
+  background:var(--rd-surface-soft);
+  border:1px solid var(--rd-line);
+  font-size:12px;
   font-weight:700;
   letter-spacing:.03em;
   color:var(--rd-muted);
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-status{
-  font-size:12px;
-  color:var(--rd-muted);
+  white-space:nowrap;
+  box-sizing:border-box;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions{
   display:flex;
   flex-wrap:wrap;
   align-items:center;
   gap:8px;
+  margin-left:auto;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions .sound-button{
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions > button{
+  min-height:36px !important;
+  height:36px;
+  padding:0 12px !important;
+  font-size:13px !important;
+  box-sizing:border-box;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions .speech-button,
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item > .speech-button{
   position:static !important;
+  flex:0 0 auto;
+  width:36px !important;
+  min-width:36px !important;
+  height:36px !important;
+  min-height:36px !important;
+  padding:0 !important;
+  border:1px solid var(--rd-line) !important;
+  background:var(--rd-surface) !important;
+  border-radius:var(--radius-btn) !important;
+  color:var(--rd-ink-2) !important;
+  box-sizing:border-box;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions .speech-button:hover,
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item > .speech-button:hover{
+  background:var(--rd-brand-tint) !important;
+  color:var(--rd-brand) !important;
+  border-color:color-mix(in srgb,var(--rd-brand) 36%,var(--rd-line)) !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body .mastery-tools{
+  position:static !important;
+  inset:auto !important;
+  display:inline-flex !important;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px !important;
+  padding:0 !important;
+  margin:0 !important;
+  width:auto !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body .mastery-btn{
+  flex:0 0 auto !important;
+  width:auto !important;
+  height:36px !important;
+  min-height:36px !important;
+  padding:0 14px !important;
+  font-size:13px !important;
+  line-height:1 !important;
+  border-radius:var(--radius-btn) !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-sizing:border-box;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-list{
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:10px;
   padding:12px 14px;
   border-radius:var(--radius-rd-002);
-  background:var(--rd-brand-soft);
+  background:var(--rd-surface-soft);
   border:1px solid var(--rd-line);
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-row{
   display:grid;
-  grid-template-columns:108px minmax(0,1fr);
-  align-items:baseline;
-  gap:10px;
+  grid-template-columns:92px minmax(0,1fr);
+  align-items:start;
+  gap:8px 12px;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-pos{
+  width:92px;
+  min-height:24px;
   display:inline-flex;
+  align-items:center;
   justify-content:center;
   padding:3px 8px;
   border-radius:var(--radius-rd-011);
   font-size:12px;
   font-weight:700;
+  line-height:1;
   background:var(--rd-brand-soft);
   color:var(--rd-brand);
+  white-space:nowrap;
+  box-sizing:border-box;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-text{
   margin:0;
   font-size:15px;
-  line-height:1.55;
+  line-height:24px;
   color:var(--rd-ink);
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-list{
@@ -5258,29 +5384,30 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-l
   color:var(--rd-muted);
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item{
-  padding:10px 14px;
+  padding:12px 14px;
   border-radius:var(--radius-rd-003);
   border:1px solid var(--rd-line);
   background:var(--rd-surface);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-content{
   display:flex;
   flex-direction:column;
-  gap:3px;
+  gap:4px;
+  min-width:0;
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-top .sound-button{
-  position:static !important;
-  flex:0 0 auto;
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-content .pinyin-line{
+  margin:0 !important;
+  line-height:1.45;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-cn{
   margin:0;
   font-size:16px;
   font-weight:600;
-  line-height:1.5;
+  line-height:1.45;
   color:var(--rd-ink);
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-vi{
@@ -5289,30 +5416,132 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-v
   line-height:1.45;
   color:var(--rd-muted);
 }
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body .word-relations{
+  border:1px solid var(--rd-line) !important;
+  border-radius:var(--radius-rd-002) !important;
+  background:var(--rd-surface-soft) !important;
+  padding:12px 14px !important;
+  margin-top:0 !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body .word-relations .relation-tabs{
+  margin:0 !important;
+  flex-wrap:wrap;
+  gap:8px !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body .word-relations .relation-toggle{
+  flex:0 1 auto !important;
+  min-height:38px !important;
+  padding:6px 14px !important;
+  font-size:13px !important;
+}
 @media (max-width:720px){
-  html body:not(#_rd).studio-enabled #searchPanel #searchResults .result-card.dictionary-row > summary.dictionary-row-summary{
-    grid-template-columns:auto auto minmax(0,1fr) !important;
-    gap:4px 10px;
+  html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row,
+  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row{
+    border-radius:var(--radius-btn) !important;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row > summary.dictionary-row-summary,
+  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row > summary.dictionary-row-summary,
+  html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary,
+  html body:not(#_rd).studio-enabled.mobile-ux #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
+    margin:0 !important;
+    border-radius:var(--radius-none) !important;
     padding:12px 14px !important;
   }
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row:not([open]) > summary.dictionary-row-summary,
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
+    grid-template-columns:auto auto auto minmax(0,1fr) 20px !important;
+    gap:6px 8px;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row > summary.dictionary-row-summary{
+    grid-template-columns:auto minmax(0,1fr) 20px !important;
+    gap:6px 10px;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row > summary.dictionary-row-summary::after{
+    grid-column:5 !important;
+    grid-row:1 !important;
+    align-self:center !important;
+    justify-self:end !important;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row > summary.dictionary-row-summary::after{
+    grid-column:3 !important;
+    grid-row:1 !important;
+    align-self:center !important;
+    justify-self:end !important;
+  }
   html body:not(#_rd).studio-enabled #searchPanel #searchResults .dictionary-row-meaning{
-    grid-column:1 / -1;
+    grid-column:1 / 5;
+    grid-row:2;
     white-space:normal;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #openDictionary .dictionary-row-meaning{
+    grid-column:1 / 3;
+    grid-row:2;
+    white-space:normal;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #openDictionary .dictionary-row-pinyin{
+    grid-column:2;
+    grid-row:1;
+    justify-self:end;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-toolbar{
+    align-items:flex-start;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions{
+    width:100%;
+    margin-left:0;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions > button,
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body .mastery-btn{
+    min-height:44px !important;
+    height:44px !important;
+  }
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions .speech-button,
+  html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item > .speech-button{
+    width:44px !important;
+    min-width:44px !important;
+    height:44px !important;
+    min-height:44px !important;
   }
   html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-row{
     grid-template-columns:1fr;
-    gap:4px;
+    gap:6px;
   }
   html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-pos{
+    width:auto;
     justify-self:start;
   }
   html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body{
     padding:14px !important;
   }
 }
-html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-list,
-html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item{
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchSummary .search-scope-reset{
   background:var(--rd-surface-soft) !important;
   border-color:var(--palette-dark-line) !important;
+  color:var(--palette-dark-violet) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row{
+  background:var(--rd-surface) !important;
+  border-color:var(--palette-dark-line) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary{
+  background:var(--rd-surface-soft) !important;
+  border-bottom-color:var(--palette-dark-line) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .dictionary-row-pinyin,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-pos{
+  color:var(--palette-dark-violet) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-hv,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions .speech-button,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item > .speech-button,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-list,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body .word-relations{
+  background:var(--rd-surface-soft) !important;
+  border-color:var(--palette-dark-line) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-actions .speech-button,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-item > .speech-button{
+  color:var(--rd-ink) !important;
 }
 
