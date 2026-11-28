@@ -278,7 +278,8 @@ function runSearch() {
  const includeExtended=searchScope==='general'||activeLevel==='all';
  const extraPool=includeExtended?getExtendedSearchPool():[];
  const C=window.HSKOpenDictionaryCore,R=window.HSKSearchRanking;
- const exactViExists=words.some(w=>sensesMap.get(w).some(s=>(accented?viText(s):fold(s))===normalized))||extraPool.some(w=>(sensesMap.get(w)||[]).some(s=>(accented?viText(s):fold(s))===normalized));
+ const exactViTargets=[normalized,...(accented?terms:[])];
+ const exactViExists=words.some(w=>sensesMap.get(w).some(s=>exactViTargets.includes(accented?viText(s):fold(s))))||extraPool.some(w=>(sensesMap.get(w)||[]).some(s=>exactViTargets.includes(accented?viText(s):fold(s))));
  // Accented Vietnamese (e.g. "bạn", "cơm") must never be parsed as pinyin.
  // Unaccented valid pinyin syllables (e.g. "xin", "ni men") compete cleanly alongside Vietnamese meanings.
  searchPinyinAllowed=accented?(!C?.vietnamese?.(query)&&!exactViExists):(Boolean(C?.pinyinQuery?.(query))||!exactViExists);
