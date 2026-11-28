@@ -17,14 +17,79 @@ import {
   isDuplicateTopic,
   isQueryAllowed,
   normalizeArticle,
+  normalizeTextForMatch,
+  parseGoogleTrendsCsv,
   slugifyVi,
 } from './pipeline-core.mjs';
 
 export const R2_CHATGPT_GATEWAY_KEY = 'seo-editorial/chatgpt-gateway.json';
+export const R2_ISSUED_TRENDS_KEY = 'seo-editorial/issued-trends.json';
+export const R2_TRENDS_POOL_KEY = 'seo-editorial/trends-pool.json';
 
 const MAX_BODY_BYTES = 120 * 1024;
 const ONE_HOUR_MS = 60 * 60 * 1000;
+const ISSUED_TREND_TTL_MS = 48 * ONE_HOUR_MS;
 const SUPPORTED_MCP_VERSIONS = ['2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05'];
+
+export function makeTrendTopicId(query) {
+  const norm = normalizeTextForMatch(query);
+  const slug = slugifyVi(query).slice(0, 28) || 'topic';
+  let h = 2166136261;
+  for (let i = 0; i < norm.length; i++) {
+    h ^= norm.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return `tr_${slug}_${(h >>> 0).toString(36)}`;
+}
+
+export async function readIssuedTrends(bucket) {
+  const empty = { schema: 1, updatedAt: '', topics: [] };
+  if (!bucket) return empty;
+  try {
+    const obj = await bucket.get(R2_ISSUED_TRENDS_KEY);
+    if (!obj) return empty;
+    const data = await obj.json();
+    const now = Date.now();
+    const list = Array.isArray(data?.topics)
+      ? data.topics.filter((t) => t && t.query && (!t.expiresAt || Date.parse(t.expiresAt) > now))
+      : [];
+    return { schema: 1, updatedAt: String(data?.updatedAt || ''), topics: list };
+  } catch (_) {
+    return empty;
+  }
+}
+
+export async function writeIssuedTrends(bucket, data) {
+  if (!bucket) return;
+  await bucket.put(R2_ISSUED_TRENDS_KEY, JSON.stringify(data, null, 2) + '\n', {
+    httpMetadata: { contentType: 'application/json; charset=utf-8' },
+  });
+}
+
+export async function readTrendsPool(bucket) {
+  const empty = { schema: 1, updatedAt: '', rawCsv: '', items: [] };
+  if (!bucket) return empty;
+  try {
+    const obj = await bucket.get(R2_TRENDS_POOL_KEY);
+    if (!obj) return empty;
+    const data = await obj.json();
+    return {
+      schema: 1,
+      updatedAt: String(data?.updatedAt || ''),
+      rawCsv: String(data?.rawCsv || ''),
+      items: Array.isArray(data?.items) ? data.items : [],
+    };
+  } catch (_) {
+    return empty;
+  }
+}
+
+export async function writeTrendsPool(bucket, data) {
+  if (!bucket) throw new Error('SEO_BUCKET R2 binding missing');
+  await bucket.put(R2_TRENDS_POOL_KEY, JSON.stringify(data, null, 2) + '\n', {
+    httpMetadata: { contentType: 'application/json; charset=utf-8' },
+  });
+}
 
 export function defaultGatewayConfig(env = {}) {
   const envHourly = Number(env.CHATGPT_MAX_PER_HOUR);
@@ -235,19 +300,64 @@ export async function buildChatgptBrief({
   count = 5,
   customQueries = '',
   fetchImpl = fetch,
+  readTrendsPoolFn = () => readTrendsPool(env?.SEO_BUCKET),
+  readIssuedTrendsFn = () => readIssuedTrends(env?.SEO_BUCKET),
+  writeIssuedTrendsFn = (next) => writeIssuedTrends(env?.SEO_BUCKET, next),
 }) {
   const safeCount = Math.max(1, Math.min(8, Number(count) || 5));
   const maxPending = Math.max(2, Number(env.MAX_PENDING_DRAFTS) || 24);
   const pendingCount = drafts.filter((d) => d.status === 'pending_review').length;
   const hourly = countRecentChatgptSubmissions(drafts);
+  const [poolData, issuedData] = await Promise.all([readTrendsPoolFn(), readIssuedTrendsFn()]);
+
+  const poolCsv = Array.isArray(poolData?.items) && poolData.items.length
+    ? poolData.items.map((x) => (x.spike ? `${x.query},${x.spike}` : x.query)).join('\n')
+    : String(poolData?.rawCsv || '');
 
   const collected = await collectTrendTopicsWorker({
     publishedArticles,
     drafts,
     count: safeCount,
     customQueries,
+    csvText: poolCsv,
     fetchImpl,
   });
+
+  const nowMs = Date.now();
+  const nowIso = new Date(nowMs).toISOString();
+  const expiresAt = new Date(nowMs + ISSUED_TREND_TTL_MS).toISOString();
+  const enrichedTopics = collected.topics.map((t) => ({
+    ...t,
+    topicId: makeTrendTopicId(t.query),
+  }));
+
+  const existingIssued = Array.isArray(issuedData?.topics) ? issuedData.topics : [];
+  const byId = new Map(existingIssued.map((t) => [t.topicId, t]));
+  for (const t of enrichedTopics) {
+    const prev = byId.get(t.topicId);
+    byId.set(t.topicId, {
+      topicId: t.topicId,
+      query: t.query,
+      normQuery: normalizeTextForMatch(t.query),
+      slug: t.slug,
+      source: t.source || 'google-trends',
+      spike: t.spike || '',
+      category: t.category,
+      hskTag: t.hskTag,
+      issuedAt: prev?.issuedAt || nowIso,
+      expiresAt,
+      usedAt: prev?.usedAt || '',
+    });
+  }
+  const mergedIssued = [...byId.values()]
+    .sort((a, b) => String(b.issuedAt || '').localeCompare(String(a.issuedAt || '')))
+    .slice(0, 80);
+  await writeIssuedTrendsFn({
+    schema: 1,
+    updatedAt: nowIso,
+    sources: collected.sources,
+    topics: mergedIssued,
+  }).catch(() => {});
 
   const existingPublished = publishedArticles.slice(0, 60).map((a) => ({
     slug: a.slug,
@@ -281,6 +391,8 @@ export async function buildChatgptBrief({
     ok: true,
     fetchedAt: collected.fetchedAt,
     today: new Date().toISOString().slice(0, 10),
+    trendLockRequired: true,
+    trendSources: collected.sources,
     approvalPolicy: {
       canPublishDirectly: false,
       forcedStatus: 'pending_review',
@@ -296,7 +408,8 @@ export async function buildChatgptBrief({
     },
     aiReviewEnabled: false,
     pendingRevisionRequests,
-    suggestedTopics: collected.topics.map((t) => ({
+    suggestedTopics: enrichedTopics.map((t) => ({
+      topicId: t.topicId,
       query: t.query,
       topic: t.topic,
       slug: t.slug,
@@ -315,6 +428,7 @@ export async function buildChatgptBrief({
       recentDrafts: existingDrafts,
     },
     editorialRules: [
+      'BẮT BUỘC chọn đúng 1 chủ đề từ suggestedTopics và truyền đúng topicId + trendQuery vào submit_seo_draft (Worker sẽ từ chối nếu tự bịa chủ đề ngoài danh sách Trends).',
       'Viết 100% nội dung gốc bằng tiếng Việt tự nhiên cho người Việt học tiếng Trung HSK 1–6 (đi thẳng vào trọng tâm, phân biệt rõ ngữ cảnh/ngoại lệ, không mở bài rập khuôn kiểu AI).',
       'metaTitle dài 35–75 ký tự, kết thúc bằng " | HSK Flashcards". metaDescription dài 110–170 ký tự.',
       'Triển khai bài viết đủ chiều sâu: ví dụ đối chiếu cụ thể (Chữ Hán giản thể – Pinyin đúng thanh điệu – nghĩa tiếng Việt), phân tích lỗi người Việt hay mắc phải, bảng đối chiếu/tóm tắt rõ ràng, tip ghi nhớ và FAQs thực tế.',
@@ -347,6 +461,10 @@ export async function submitChatgptDraft({
   writeDrafts,
   writeConfig,
   fetchImpl = fetch,
+  readIssuedTrendsFn = () => readIssuedTrends(env?.SEO_BUCKET),
+  writeIssuedTrendsFn = (next) => writeIssuedTrends(env?.SEO_BUCKET, next),
+  readTrendsPoolFn = () => readTrendsPool(env?.SEO_BUCKET),
+  writeTrendsPoolFn = (next) => writeTrendsPool(env?.SEO_BUCKET, next),
 }) {
   const drafts = Array.isArray(draftsData?.drafts) ? draftsData.drafts : [];
   const maxPending = Math.max(2, Number(env.MAX_PENDING_DRAFTS) || 24);
@@ -368,7 +486,47 @@ export async function submitChatgptDraft({
   }
 
   const rawArticle = unwrapIncomingArticle(payload);
-  const trendQuery = String(payload?.trendQuery || rawArticle?.trendQuery || rawArticle.title || '').trim();
+  const suppliedTopicId = String(payload?.topicId || rawArticle?.topicId || '').trim();
+  const suppliedTrendQuery = String(payload?.trendQuery || rawArticle?.trendQuery || '').trim();
+
+  // Enforce Google Trends / issued-brief lock: reject off-trend arbitrary topics.
+  const [issuedData, poolData] = await Promise.all([readIssuedTrendsFn(), readTrendsPoolFn()]);
+  const issuedTopics = Array.isArray(issuedData?.topics) ? issuedData.topics : [];
+  const poolItems = Array.isArray(poolData?.items) ? poolData.items : [];
+  const normSupplied = normalizeTextForMatch(suppliedTrendQuery);
+  const normSlug = slugifyVi(suppliedTrendQuery || rawArticle.slug || '');
+
+  let matchedTrend = issuedTopics.find((t) =>
+    (suppliedTopicId && t.topicId === suppliedTopicId) ||
+    (normSupplied && (t.normQuery === normSupplied || t.slug === normSlug))
+  );
+  if (matchedTrend && matchedTrend.usedAt) {
+    throw Object.assign(
+      new Error(`Chủ đề "${matchedTrend.query}" đã được dùng để nộp bài trước đó. Hãy gọi get_seo_brief để chọn chủ đề mới.`),
+      { status: 409, code: 'duplicate_topic', slug: matchedTrend.slug }
+    );
+  }
+  if (!matchedTrend && normSupplied) {
+    const poolHit = poolItems.find((p) => normalizeTextForMatch(p.query) === normSupplied);
+    if (poolHit) {
+      matchedTrend = {
+        topicId: makeTrendTopicId(poolHit.query),
+        query: poolHit.query,
+        normQuery: normSupplied,
+        slug: slugifyVi(poolHit.query),
+        source: poolHit.source || 'google-trends-csv',
+        spike: poolHit.spike || 'Google Trends VN',
+      };
+    }
+  }
+  if (!matchedTrend) {
+    throw Object.assign(
+      new Error('Bài viết phải bám đúng 1 chủ đề từ Google Trends trong get_seo_brief (truyền topicId và trendQuery từ suggestedTopics). Không tự viết chủ đề ngoài danh sách.'),
+      { status: 400, code: 'trend_topic_required' }
+    );
+  }
+
+  const trendQuery = matchedTrend.query;
   if (!isQueryAllowed(trendQuery) || !isQueryAllowed(rawArticle.title)) {
     throw Object.assign(
       new Error('Chủ đề không phù hợp bộ lọc nội dung học thuật HSK (tránh nội dung nhạy cảm hoặc tra từ điển đơn thuần).'),
@@ -428,8 +586,8 @@ export async function submitChatgptDraft({
   const draftId = `draft-cgpt-${stamp}-${article.slug.slice(0, 32)}`;
   const authorModel = String(payload?.authorModel || 'ChatGPT Plus').trim().slice(0, 64) || 'ChatGPT Plus';
   const authorNote = String(payload?.authorNote || '').trim().slice(0, 300);
-  const trendSource = String(payload?.trendSource || 'chatgpt-web').trim().slice(0, 48) || 'chatgpt-web';
-  const trendSpike = String(payload?.trendSpike || 'ChatGPT').trim().slice(0, 48);
+  const trendSource = String(matchedTrend.source || payload?.trendSource || 'google-trends').trim().slice(0, 48);
+  const trendSpike = String(matchedTrend.spike || payload?.trendSpike || trendSource).trim().slice(0, 48);
 
   const reviewHistory = [
     {
@@ -469,6 +627,28 @@ export async function submitChatgptDraft({
   draftsData.drafts = drafts;
   draftsData.updatedAt = nowIso;
   await writeDrafts(draftsData);
+
+  if (matchedTrend.topicId && issuedTopics.length) {
+    const nextIssued = issuedTopics.map((t) =>
+      t.topicId === matchedTrend.topicId ? { ...t, usedAt: nowIso } : t
+    );
+    await writeIssuedTrendsFn({
+      ...issuedData,
+      updatedAt: nowIso,
+      topics: nextIssued,
+    }).catch(() => {});
+  }
+  if (poolItems.length && matchedTrend.normQuery) {
+    const remainingPool = poolItems.filter((p) => normalizeTextForMatch(p.query) !== matchedTrend.normQuery);
+    if (remainingPool.length !== poolItems.length) {
+      await writeTrendsPoolFn({
+        ...poolData,
+        updatedAt: nowIso,
+        items: remainingPool,
+        rawCsv: remainingPool.map((x) => (x.spike ? `${x.query},${x.spike}` : x.query)).join('\n'),
+      }).catch(() => {});
+    }
+  }
 
   const nextConfig = {
     ...storedConfig,
@@ -723,11 +903,15 @@ export function getMcpToolsDefinition() {
         'Nộp 01 bài viết SEO tiếng Trung HSK hoàn chỉnh vào hàng đợi Chờ duyệt (pending_review) trên Cloudflare R2 và chạy Hội đồng kiểm duyệt AI chấm điểm phụ. Bài KHÔNG tự push lên GitHub — bắt buộc đợi Admin duyệt cuối trong Phòng Duyệt Bài.',
       inputSchema: {
         type: 'object',
-        required: ['article'],
+        required: ['trendQuery', 'article'],
         properties: {
+          topicId: {
+            type: 'string',
+            description: 'Mã topicId lấy từ suggestedTopics trong get_seo_brief (bắt buộc nếu viết bài từ danh sách Trends).',
+          },
           trendQuery: {
             type: 'string',
-            description: 'Từ khóa xu hướng chính mà bài viết nhắm tới.',
+            description: 'Từ khóa xu hướng chính khớp đúng suggestedTopics[].query trong get_seo_brief.',
           },
           trendSpike: {
             type: 'string',

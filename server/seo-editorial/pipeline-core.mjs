@@ -61,6 +61,8 @@ const STOP_TOKENS = new Set([
 ]);
 
 const RELEVANT_RSS_RE = /(?:hsk|tiếng\s*trung|trung\s*quốc|chinesetest|pinyin|chữ\s*hán|hán\s*ngữ|du\s*học\s*trung)/i;
+const LOCAL_CENTER_NOISE_RE = /(?:cần\s*thơ|sóc\s*trăng|cà\s*mau|bạc\s*liêu|kiên\s*giang|an\s*giang|tiền\s*giang|long\s*an|bến\s*tre|trà\s*vinh|vĩnh\s*long|hậu\s*giang|đồng\s*tháp|bình\s*dương|đồng\s*nai|vũng\s*tàu|khánh\s*hòa|nha\s*trang|đà\s*lạt|huế|đà\s*nẵng|hải\s*phòng|bắc\s*ninh|bắc\s*giang|nghệ\s*an|thanh\s*hóa|thái\s*nguyên|tphcm|tp\s*hcm|sài\s*gòn|quận\s*\d+|gò\s*vấp|thủ\s*đức|bình\s*thạnh|tân\s*bình|học\s*phí\s*trung\s*tâm|trung\s*tâm\s*nào\s*tốt|ở\s*đâu\s*tốt)/i;
+const OFFICIAL_EXAM_QUERY_RE = /(?:lịch\s*thi|địa\s*điểm\s*thi|đăng\s*ký\s*thi|điểm\s*thi|hsk\s*3\.0)/i;
 
 export function slugifyVi(input) {
   return String(input || '')
@@ -172,6 +174,7 @@ export function isQueryAllowed(query) {
   const q = String(query || '').trim();
   if (q.length < 4 || q.length > 110) return false;
   if (BLOCKED_TOXIC_RE.test(q)) return false;
+  if (LOCAL_CENTER_NOISE_RE.test(q) && !OFFICIAL_EXAM_QUERY_RE.test(q)) return false;
   for (const re of BLOCKED_PURE_TRANSLATE_RES) {
     if (re.test(q)) return false;
   }
@@ -203,8 +206,9 @@ export function buildEducationalTopicTitle(query) {
 
 function scoreTrendCandidate(item) {
   let score = 10;
-  if (item.source === 'google-trends-csv') score += 40;
-  else if (item.source === 'google-trends' || item.source === 'google-trends-rss') score += 32;
+  if (item.source === 'google-trends-csv') score += 45;
+  else if (item.source === 'google-trends' || item.source === 'google-trends-rss') score += 34;
+  else if (item.source === 'google-news-vn') score += 26;
   else if (item.source === 'google-suggest') score += 18;
   else if (item.source === 'manual-query') score += 50;
 
@@ -366,6 +370,44 @@ async function fetchGoogleTrendsRssVn(fetchImpl = fetch) {
   return results;
 }
 
+async function fetchGoogleNewsVn(queries, fetchImpl = fetch) {
+  const results = [];
+  const seen = new Set();
+  await Promise.all(
+    queries.map(async (q) => {
+      try {
+        const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=vi&gl=VN&ceid=VN:vi`;
+        const res = await fetchImpl(url, {
+          headers: { 'Accept-Language': 'vi-VN,vi;q=0.9' },
+          signal: AbortSignal.timeout(7000),
+        });
+        if (!res.ok) return;
+        const xml = await res.text();
+        let added = 0;
+        for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)) {
+          if (added >= 6) break;
+          const block = m[1];
+          const titleMatch = /<title><!\[CDATA\[([\s\S]*?)\]\]><\/title>|<title>([\s\S]*?)<\/title>/i.exec(block);
+          const rawTitle = String(titleMatch?.[1] || titleMatch?.[2] || '')
+            .replace(/\s+-\s+[^-]+$/, '')
+            .trim();
+          if (!rawTitle || !RELEVANT_RSS_RE.test(rawTitle)) continue;
+          const norm = normalizeTextForMatch(rawTitle);
+          if (!norm || seen.has(norm)) continue;
+          seen.add(norm);
+          results.push({
+            query: rawTitle.slice(0, 100),
+            spike: 'Google News VN',
+            source: 'google-news-vn',
+          });
+          added++;
+        }
+      } catch (_) {}
+    })
+  );
+  return results;
+}
+
 async function fetchGoogleSuggestVn(seeds, fetchImpl = fetch) {
   const results = [];
   const seen = new Set();
@@ -418,21 +460,27 @@ export async function collectTrendTopicsWorker({
     if (manualItems.length) usedSources.push(`manual(${manualItems.length})`);
   }
 
-  // Keep subrequests <= 7 (1 RSS + 6 Suggest) so Cloudflare Free 50-subrequest limit has huge headroom.
+  // Keep subrequests <= 9 (1 Trends RSS + 2 Google News VN + 6 Suggest) within Cloudflare Free limit.
   const start = (hourSeed * 3) % DEFAULT_TREND_SEEDS.length;
   const rotatedSeeds = [];
   for (let i = 0; i < 6; i++) {
     rotatedSeeds.push(DEFAULT_TREND_SEEDS[(start + i) % DEFAULT_TREND_SEEDS.length]);
   }
+  const newsQueries = ['thi HSK tiếng Trung', 'học tiếng Trung'];
 
-  const [rssItems, suggestItems] = await Promise.all([
+  const [rssItems, newsItems, suggestItems] = await Promise.all([
     fetchGoogleTrendsRssVn(fetchImpl),
+    fetchGoogleNewsVn(newsQueries, fetchImpl),
     fetchGoogleSuggestVn(rotatedSeeds, fetchImpl),
   ]);
 
   if (rssItems.length) {
     rawItems.push(...rssItems);
     usedSources.push(`google-trends-rss(${rssItems.length})`);
+  }
+  if (newsItems.length) {
+    rawItems.push(...newsItems);
+    usedSources.push(`google-news-vn(${newsItems.length})`);
   }
   if (suggestItems.length) {
     rawItems.push(...suggestItems);

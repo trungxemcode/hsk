@@ -1137,10 +1137,10 @@
     return [
       'Mỗi giờ một lần, hãy dùng kết nối MCP HSK SEO Editorial để xử lý bài viết SEO tiếng Trung HSK trong hàng đợi Chờ duyệt (KHÔNG push lên GitHub):',
       '1. Gọi công cụ get_seo_brief (count: 5). Nếu có mục trong pendingRevisionRequests, ưu tiên sửa bài theo góp ý của Admin rồi gọi update_seo_draft (truyền đúng draftId và article đã sửa).',
-      '2. Nếu quota.canSubmitNow = true, chọn 1 chủ đề mới hấp dẫn nhất từ suggestedTopics (tuyệt đối không trùng với doNotDuplicate).',
+      '2. Nếu quota.canSubmitNow = true, BẮT BUỘC chọn đúng 1 chủ đề từ suggestedTopics (tuyệt đối không tự nghĩ chủ đề ngoài danh sách Google Trends, Worker sẽ từ chối nếu không khớp topicId/trendQuery).',
       '3. Viết theo editorialRules trong brief: trả lời thẳng từ đầu, chia mục rõ ràng, phân tích sâu bản chất & ngoại lệ, ví dụ Chữ Hán – Pinyin – Việt chuẩn thanh điệu, bảng/mẹo/FAQ thực tế.',
-      '4. Gọi submit_seo_draft để nộp bài vào trạng thái pending_review (chờ Admin duyệt trong Phòng Duyệt Bài).',
-      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, điểm kỹ thuật SEO và kết quả xử lý pendingRevisionRequests (nếu có).',
+      '4. Gọi submit_seo_draft kèm đúng topicId và trendQuery của chủ đề đã chọn để nộp bài vào trạng thái pending_review (chờ Admin duyệt trong Phòng Duyệt Bài).',
+      '5. Báo ngắn gọn lại cho tôi: tiêu đề bài, slug, nguồn Trends đã dùng, điểm kỹ thuật SEO và kết quả xử lý pendingRevisionRequests (nếu có).',
     ].join('\n');
   }
 
@@ -1212,8 +1212,53 @@
     }
     chatgptGatewayState = data;
     renderChatgptGatewayModal();
+    loadTrendsPoolConfig().catch(() => {});
     setStatusMsg(st, '');
   }
+
+  async function loadTrendsPoolConfig() {
+    const pill = $('cgptTrendsPoolPill');
+    const input = $('cgptTrendsCsvInput');
+    if (!pill || !input) return;
+    const res = await fetch(`${CLOUDFLARE_EDITORIAL_URL}/api/trends-pool?t=${Date.now()}`, {
+      headers: await cfHeaders(false),
+      cache: 'no-store',
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) return;
+    const count = Array.isArray(data.items) ? data.items.length : 0;
+    pill.textContent = count
+      ? `${count} từ khóa Trends ưu tiên`
+      : `Tự động RSS/News/Suggest (${data.issuedActiveCount || 0} đã cấp)`;
+    if (!input.value && typeof data.rawCsv === 'string') {
+      input.value = data.rawCsv;
+    }
+  }
+
+  $('cgptSaveTrendsBtn')?.addEventListener('click', async () => {
+    const btn = $('cgptSaveTrendsBtn');
+    const st = $('cgptTrendsStatus');
+    const input = $('cgptTrendsCsvInput');
+    if (!btn || !input) return;
+    btn.disabled = true;
+    setStatusMsg(st, 'Đang lưu danh sách Google Trends vào Cloudflare R2…');
+    try {
+      const data = await callCloudflareEditorialPost('/api/trends-pool', {
+        rawCsv: input.value,
+      });
+      if ($('cgptTrendsPoolPill')) {
+        $('cgptTrendsPoolPill').textContent = data.count
+          ? `${data.count} từ khóa Trends ưu tiên`
+          : 'Tự động RSS/News/Suggest';
+      }
+      input.value = data.rawCsv || '';
+      setStatusMsg(st, `Đã lưu ${data.count} từ khóa Google Trends hợp lệ. ChatGPT sẽ ưu tiên viết theo danh sách này!`, 'is-ok');
+    } catch (err) {
+      setStatusMsg(st, err.message || 'Lưu nguồn Google Trends thất bại.', 'is-err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
 
   $('cgptToggleKeyBtn')?.addEventListener('click', () => {
     chatgptKeyRevealed = !chatgptKeyRevealed;

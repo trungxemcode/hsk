@@ -14,8 +14,12 @@ import {
   handleChatgptGatewayRoute,
   matchChatgptRoute,
   readGatewayConfig,
+  readIssuedTrends,
+  readTrendsPool,
   writeGatewayConfig,
+  writeTrendsPool,
 } from './chatgpt-gateway.mjs';
+import { isQueryAllowed, parseGoogleTrendsCsv } from './pipeline-core.mjs';
 
 const R2_DRAFTS_KEY = 'seo-editorial/drafts.json';
 
@@ -184,12 +188,24 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
     await requireAdmin(request, env, fetchImpl);
 
     if (url.pathname === '/api/drafts' && request.method === 'GET') {
-      const draftsData = await readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts());
+      const [draftsData, issuedTrends, trendsPool] = await Promise.all([
+        readR2Json(env.SEO_BUCKET, R2_DRAFTS_KEY, emptyDrafts()),
+        readIssuedTrends(env.SEO_BUCKET),
+        readTrendsPool(env.SEO_BUCKET),
+      ]);
+      const activeIssued = (issuedTrends.topics || []).filter((t) => !t.usedAt);
       return json({
         ok: true,
         mode: 'chatgpt-only',
         draftsData,
-        trendsSnapshot: emptySnapshot(),
+        trendsSnapshot: {
+          schema: 1,
+          fetchedAt: issuedTrends.updatedAt || trendsPool.updatedAt || '',
+          sources: issuedTrends.sources || [],
+          rawCount: activeIssued.length + (trendsPool.items?.length || 0),
+          topics: activeIssued.slice(0, 12),
+          poolCount: trendsPool.items?.length || 0,
+        },
         lastRun: null,
       });
     }
@@ -375,6 +391,41 @@ export async function handleSeoEditorialFetch(request, env, ctx, deps = {}) {
           drafts: draftsData.drafts || [],
         })
       );
+    }
+
+    if (url.pathname === '/api/trends-pool' && request.method === 'GET') {
+      const [trendsPool, issuedTrends] = await Promise.all([
+        readTrendsPool(env.SEO_BUCKET),
+        readIssuedTrends(env.SEO_BUCKET),
+      ]);
+      return json({
+        ok: true,
+        updatedAt: trendsPool.updatedAt || '',
+        rawCsv: trendsPool.rawCsv || '',
+        items: trendsPool.items || [],
+        issuedActiveCount: (issuedTrends.topics || []).filter((t) => !t.usedAt).length,
+      });
+    }
+
+    if (url.pathname === '/api/trends-pool' && request.method === 'POST') {
+      const payload = await request.json().catch(() => ({}));
+      const rawCsv = String(payload?.rawCsv || '').slice(0, 50000);
+      const parsed = parseGoogleTrendsCsv(rawCsv).filter((item) => isQueryAllowed(item.query));
+      const nowIso = new Date().toISOString();
+      const nextPool = {
+        schema: 1,
+        updatedAt: nowIso,
+        rawCsv: parsed.map((x) => (x.spike ? `${x.query},${x.spike}` : x.query)).join('\n'),
+        items: parsed.slice(0, 120),
+      };
+      await writeTrendsPool(env.SEO_BUCKET, nextPool);
+      return json({
+        ok: true,
+        updatedAt: nextPool.updatedAt,
+        count: nextPool.items.length,
+        items: nextPool.items,
+        rawCsv: nextPool.rawCsv,
+      });
     }
 
     return json({ error: 'Not found' }, 404);

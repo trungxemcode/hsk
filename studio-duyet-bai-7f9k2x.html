@@ -287,6 +287,18 @@
         <textarea id="cgptHourlyPromptInput" rows="6" readonly></textarea>
       </div>
 
+      <div class="rev-field">
+        <div class="rev-prompt-head">
+          <label for="cgptTrendsCsvInput">5. Nguồn từ khóa Google Trends VN ưu tiên (dán CSV / từ khóa tăng vọt)</label>
+          <span class="rev-tag" id="cgptTrendsPoolPill">Đang tải…</span>
+        </div>
+        <textarea id="cgptTrendsCsvInput" rows="4" placeholder="Dán danh sách từ khóa hoặc file CSV xuất từ trends.google.com (mỗi dòng 1 từ khóa, hoặc dạng: từ khóa,+180%)..."></textarea>
+        <div class="rev-cgpt-save-row">
+          <button type="button" class="rev-btn is-accent-soft" id="cgptSaveTrendsBtn">Lưu nguồn Google Trends vào R2</button>
+          <span class="rev-status-msg" id="cgptTrendsStatus" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+
       <ol class="rev-cgpt-steps">
         <li>Trên <strong>ChatGPT Web Plus</strong>, mở <code>chatgpt.com/plugins</code> (hoặc <em>Settings → Apps → Developer mode</em>) → <strong>Add custom MCP server</strong> → dán <strong>URL MCP</strong> ở mục 1 → chọn <strong>No authentication</strong> → <strong>Create</strong>.</li>
         <li>Mở mục <strong>Scheduled (Lịch hẹn giờ)</strong> trong ChatGPT Plus, chọn chạy lặp lại <strong>mỗi giờ</strong>, gắn plugin vừa tạo (<code>@HSK SEO Editorial</code>) và dán <strong>Prompt hẹn giờ</strong> ở mục 4.</li>
