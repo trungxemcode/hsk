@@ -6,6 +6,21 @@
  // Keep tones when identifying a dictionary reading; accent-free matching is only for search.
  const reading=s=>fold(s)+'|'+[...String(s||'').normalize('NFD')].map(c=>({'\u0304':'1','\u0301':'2','\u030c':'3','\u0300':'4'}[c]||(/[1-4]/.test(c)?c:''))).join('');
  const sameReading=(a,b)=>reading(a)===reading(b);
+ const TONE_MARKS={a:'aāáǎà',e:'eēéěè',i:'iīíǐì',o:'oōóǒò',u:'uūúǔù',v:'üǖǘǚǜ',A:'AĀÁǍÀ',E:'EĒÉĚÈ',I:'IĪÍǏÌ',O:'OŌÓǑÒ',U:'UŪÚǓÙ',V:'ÜǕǗǙǛ'};
+ function markToneSyllable(token,tone){
+  const body=token.replace(/u:/g,'ü').replace(/U:/g,'Ü').replace(/v/g,'ü').replace(/V/g,'Ü');
+  if(!tone||tone<1||tone>4)return body;
+  const lower=body.toLowerCase();
+  let target=lower.indexOf('a');if(target<0)target=lower.indexOf('e');
+  if(target<0&&lower.includes('ou'))target=lower.indexOf('o');
+  if(target<0)for(let i=lower.length-1;i>=0;i--)if('aeiouvü'.includes(lower[i])){target=i;break;}
+  if(target<0)return body;
+  const ch=body[target],key=ch==='ü'?'v':ch==='Ü'?'V':ch,table=TONE_MARKS[key];
+  return table?body.slice(0,target)+table[tone]+body.slice(target+1):body;
+ }
+ function formatPinyin(raw){
+  return String(raw||'').replace(/\b([A-Za-züÜ:]+?)([1-5])\b/g,(_,syl,num)=>markToneSyllable(syl,Number(num))).replace(/u:/g,'ü').replace(/U:/g,'Ü');
+ }
  function pinyinQuery(q){const tokens=String(q).trim().toLowerCase().split(/[\s'’]+/);return tokens.length>0&&tokens.every(t=>/^(?:(?:[bpmfdtnlgkhjqxrzcswy]|zh|ch|sh)?(?:a|o|e|ai|ei|ao|ou|an|en|ang|eng|ong|i|ia|ie|iao|iu|ian|in|iang|ing|iong|u|ua|uo|uai|ui|uan|un|uang|ueng|v|ve|van|vn)|er|m|n|ng)$/.test(fold(t))&&!/[^a-züv:\d\u00c0-\u024f\u1e00-\u1eff]/i.test(t));}
  const semanticQuery=q=>vietnamese(q)||!/[\p{Script=Han}]/u.test(q)&&/[a-zA-Z]/.test(q)&&!pinyinQuery(q);
  function valid(x){return !!x&&x.word&&['han','trad','mean'].every(k=>typeof x.word[k]==='string'&&x.word[k].length>0&&x.word[k].length<8000)&&typeof x.word.pin==='string'&&x.word.pin.length<8000&&Number.isFinite(x.due)&&Number.isFinite(x.interval)&&x.interval>=0&&Number.isFinite(x.ease)&&x.ease>=1.3&&Number.isInteger(x.reps)&&x.reps>=0;}
@@ -26,13 +41,19 @@
   if(han===q||trad===q)return 150;
   if(/\p{Script=Han}/u.test(q)){if(han.startsWith(q)||trad.startsWith(q))return 130;if(han.includes(q)||trad.includes(q))return 115;return q.length>=2&&(near(han,q)||near(trad,q))?60:0;}
   const p=fold(pin),f=fold(q);if(f&&p===f)return 145;
-  const english=mean.join('; ').toLowerCase(),query=q.toLowerCase();if(mean.some(s=>s.toLowerCase()===query))return 140;
-  if(query.length>=2&&english.split(/[^a-z]+/).includes(query))return 110;
-  if(query.length>=4&&english.includes(query))return 95;
-  if(query.split(/\s+/).length>1&&query.split(/\s+/).every(t=>english.includes(t)))return 85;
-  if(f.length>=2&&p.startsWith(f))return 100;if(f.length>=3&&p.includes(f))return 80;
+  const syllables=String(pin||'').trim().split(/[\s,/·-]+/).filter(Boolean).map(fold);
+  const qTokens=q.split(/[\s'’]+/).map(fold).filter(Boolean);
+  const isPinyin=pinyinQuery(q);
+  const english=mean.join('; ').toLowerCase(),query=q.toLowerCase(),enWords=english.split(/[^a-z]+/);
+  if(mean.some(s=>s.toLowerCase()===query))return 140;
+  if(qTokens.length>=1&&syllables.length>qTokens.length&&qTokens.every((t,i)=>syllables[i]===t))return 112;
+  if(query.length>=2&&enWords.includes(query))return 110;
+  if(!isPinyin&&query.length>=4&&english.includes(query))return 95;
+  if(qTokens.length===1&&f.length>=2&&syllables.includes(f))return 92;
+  if(!isPinyin&&query.split(/\s+/).length>1&&query.split(/\s+/).every(t=>english.includes(t)))return 85;
+  if(!isPinyin&&f.length>=2&&p.startsWith(f))return 100;if(!isPinyin&&f.length>=3&&p.includes(f))return 80;
   if(f.length>=4&&near(p,f))return 55;
-  return query.length>=4&&english.split(/[^a-z]+/).some(t=>near(t,query))?45:0;
+  return !isPinyin&&query.length>=4&&enWords.some(t=>near(t,query))?45:0;
  }
  const vietnamese=q=>/[đĐ]|[\u0302\u0306\u0309\u031b\u0323]/.test(String(q).normalize('NFD'));
  function translationKey(w){let h=2166136261;for(const c of w.sourceMean||w.mean||''){h^=c.codePointAt(0);h=Math.imul(h,16777619);}return id(w)+'|'+(h>>>0).toString(16);}
@@ -64,5 +85,5 @@
    return {...item,han,pinyin:checked.correctedPinyin||String(item?.pinyin||''),verification_status:checked.isValid?'char_verified':'unverified_ai',confidence:checked.isValid?.75:.4};
   }).sort((a,b)=>(b.confidence||0)-(a.confidence||0));
  }
- const api={KEY,id,fold,reading,sameReading,pinyinQuery,semanticQuery,valid,clean,add,rate,matches,near,score,vietnamese,translationKey,normalizePinyinWithoutTone,verifyCharacterByCharacter,reconcileAiTermsWithDictionary};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
+ const api={KEY,id,fold,reading,sameReading,formatPinyin,pinyinQuery,semanticQuery,valid,clean,add,rate,matches,near,score,vietnamese,translationKey,normalizePinyinWithoutTone,verifyCharacterByCharacter,reconcileAiTermsWithDictionary};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
