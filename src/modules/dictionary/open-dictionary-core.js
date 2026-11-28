@@ -9,17 +9,18 @@
  const TONE_MARKS={a:'aāáǎà',e:'eēéěè',i:'iīíǐì',o:'oōóǒò',u:'uūúǔù',v:'üǖǘǚǜ',A:'AĀÁǍÀ',E:'EĒÉĚÈ',I:'IĪÍǏÌ',O:'OŌÓǑÒ',U:'UŪÚǓÙ',V:'ÜǕǗǙǛ'};
  function markToneSyllable(token,tone){
   const body=token.replace(/u:/g,'ü').replace(/U:/g,'Ü').replace(/v/g,'ü').replace(/V/g,'Ü');
-  if(!tone||tone<1||tone>4)return body;
   const lower=body.toLowerCase();
+  if(tone===5)return (lower==='r'||/[aeiouvü]/.test(lower))?body:token+'5';
+  if(!tone||tone<1||tone>4)return body;
   let target=lower.indexOf('a');if(target<0)target=lower.indexOf('e');
   if(target<0&&lower.includes('ou'))target=lower.indexOf('o');
   if(target<0)for(let i=lower.length-1;i>=0;i--)if('aeiouvü'.includes(lower[i])){target=i;break;}
-  if(target<0)return body;
+  if(target<0)return token+String(tone);
   const ch=body[target],key=ch==='ü'?'v':ch==='Ü'?'V':ch,table=TONE_MARKS[key];
   return table?body.slice(0,target)+table[tone]+body.slice(target+1):body;
  }
  function formatPinyin(raw){
-  return String(raw||'').replace(/\b([A-Za-züÜ:]+?)([1-5])\b/g,(_,syl,num)=>markToneSyllable(syl,Number(num))).replace(/u:/g,'ü').replace(/U:/g,'Ü');
+  return String(raw||'').replace(/(?<![A-Za-züÜ])([A-Za-züÜ]+(?::[A-Za-züÜ]*)?)([1-5])(?![0-9])/g,(_,syl,num)=>markToneSyllable(syl,Number(num))).replace(/u:/g,'ü').replace(/U:/g,'Ü');
  }
  function pinyinQuery(q){const tokens=String(q).trim().toLowerCase().split(/[\s'’]+/);return tokens.length>0&&tokens.every(t=>/^(?:(?:[bpmfdtnlgkhjqxrzcswy]|zh|ch|sh)?(?:a|o|e|ai|ei|ao|ou|an|en|ang|eng|ong|i|ia|ie|iao|iu|ian|in|iang|ing|iong|u|ua|uo|uai|ui|uan|un|uang|ueng|v|ve|van|vn)|er|m|n|ng)$/.test(fold(t))&&!/[^a-züv:\d\u00c0-\u024f\u1e00-\u1eff]/i.test(t));}
  const semanticQuery=q=>vietnamese(q)||!/[\p{Script=Han}]/u.test(q)&&/[a-zA-Z]/.test(q)&&!pinyinQuery(q);

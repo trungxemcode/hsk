@@ -5834,6 +5834,10 @@ html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-c
   padding:14px 18px !important;
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row > summary.dictionary-row-summary::after{
+  position:static !important;
+  top:auto !important;
+  right:auto !important;
+  transform:none !important;
   grid-column:5 !important;
   grid-row:1 !important;
   align-self:center !important;
@@ -5844,6 +5848,10 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-ca
   opacity:.55;
 }
 html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row > summary.dictionary-row-summary::after{
+  position:static !important;
+  top:auto !important;
+  right:auto !important;
+  transform:none !important;
   grid-column:4 !important;
   grid-row:1 !important;
   align-self:center !important;
@@ -5852,6 +5860,9 @@ html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-c
   width:14px;
   height:14px;
   opacity:.55;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row[open] > summary.dictionary-row-summary::after{
+  transform:rotate(180deg) !important;
 }
 html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) details.result-card.dictionary-row:not([open]) .dictionary-row-han{
   overflow:hidden;
@@ -6177,12 +6188,18 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-bo
     min-height:44px;
   }
   html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row > summary.dictionary-row-summary::after{
+    position:static !important;
+    top:auto !important;
+    right:auto !important;
     grid-column:5 !important;
     grid-row:1 !important;
     align-self:center !important;
     justify-self:end !important;
   }
   html body:not(#_rd).studio-enabled #searchPanel #openDictionary details.result-card.dictionary-row > summary.dictionary-row-summary::after{
+    position:static !important;
+    top:auto !important;
+    right:auto !important;
     grid-column:3 !important;
     grid-row:1 !important;
     align-self:center !important;

@@ -544,11 +544,12 @@ function renderSearch() {
  };
  shown.forEach((match,idx)=>{
   const {w}=match;
+  const formattedPin=window.HSKOpenDictionaryCore?.formatPinyin?window.HSKOpenDictionaryCore.formatPinyin(w.pinDisplay||w.pin||''):(w.pinDisplay||w.pin||'');
   if(candidateStrip){
    const item=document.createElement('button');item.type='button';item.className='search-master-item'+(idx===0?' is-active':'');
    item.setAttribute('role','option');item.setAttribute('aria-selected',idx===0?'true':'false');
    const mHan=document.createElement('strong');mHan.className='search-master-han';mHan.textContent=w.han;
-   const mPin=document.createElement('span');mPin.className='search-master-pin';mPin.textContent=w.pin||'';
+   const mPin=document.createElement('span');mPin.className='search-master-pin';mPin.textContent=formattedPin;
    item.append(mHan,mPin);
    item.onclick=()=>selectIndex(idx,true);
    masterItems.push(item);candidateStrip.append(item);
@@ -564,7 +565,7 @@ function renderSearch() {
    heroHead.append(verified);
   }
   const phonetic=document.createElement('div');phonetic.className='search-hero-phonetic';
-  const pin=document.createElement('span');pin.className='dictionary-row-pinyin';pin.textContent=w.pin?`[${w.pin}]`:'';
+  const pin=document.createElement('span');pin.className='dictionary-row-pinyin';pin.textContent=formattedPin?`[${formattedPin}]`:'';
   phonetic.append(pin);
   if(w.hv){
    const hvSpan=document.createElement('span');hvSpan.className='search-detail-hv';hvSpan.textContent=`[${w.hv.toUpperCase()}]`;

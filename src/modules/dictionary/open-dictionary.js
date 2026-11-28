@@ -6,6 +6,7 @@
  const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
  const button=(text,fn)=>{const b=node('button',text);b.type='button';b.onclick=fn;return b;};
  const vi=w=>w.native||w.meanLanguage==='vi'?w.mean:w.meanVi||viCache[C.translationKey(w)]?.meaning||'';
+ const fmtPin=s=>C.formatPinyin?C.formatPinyin(s||''):String(s||'');
  const brief=s=>String(s).split(/[;；\n]/)[0].trim();
  const canAutoTranslate=()=>Boolean(window.HSKAccountDashboard?.user&&config&&!viUnavailable);
  const fallbackRowText=()=>canAutoTranslate()?'Đang tải nghĩa Việt…':'Chưa có nghĩa Việt offline';
@@ -71,7 +72,7 @@
    loaded.set(n,data);if(!hit&&cache)try{await cache.put(url,copy);}catch(_){}return data;
   })();pending.set(n,task);try{return await task;}finally{pending.delete(n);}}
  function membership(w){return B.hsk(w.han,w.trad);}
- const bridgeItem=w=>({han:w.han,trad:w.han,pin:w.pin,pinDisplay:w.pin,mean:w.mean,native:!w.isExtended,hsk:w.hsk||null,hasExamples:Boolean((w.practice?.examples?.length>=2)||(w.examples?.length>=1)),...(w.isExtended?{meanVi:w.mean,meanLanguage:'vi'}:{})});
+ const bridgeItem=w=>({han:w.han,trad:w.han,pin:w.pin,pinDisplay:fmtPin(w.pinDisplay||w.pin),mean:w.mean,native:!w.isExtended,hsk:w.hsk||null,hasExamples:Boolean((w.practice?.examples?.length>=2)||(w.examples?.length>=1)),...(w.isExtended?{meanVi:w.mean,meanLanguage:'vi'}:{})});
  function recordHit(q,w){if(q&&w)window.HSKSearchRanking?.record(q,w);}
  const isHanQuery=q=>/[\p{Script=Han}]/u.test(String(q||''));
  function isSingleRoot(q){const t=String(q||'').trim();return Boolean(t)&&!isHanQuery(t)&&t.split(/\s+/).length===1;}
@@ -155,7 +156,7 @@
    const badge=node('span','✓','search-hero-verified');badge.setAttribute('aria-hidden','true');badge.title=level?'Từ chuẩn HSK':'Đã đối chiếu từ điển';head.append(badge);
   }
   const phonetic=node('div','','search-hero-phonetic');
-  const pinText=w.pinDisplay||w.pin||'';
+  const pinText=fmtPin(w.pinDisplay||w.pin||'');
   if(pinText)phonetic.append(node('span',`[${pinText}]`,'dictionary-row-pinyin'));
   if(hskDetails?.hv)phonetic.append(node('span',`[${hskDetails.hv.toUpperCase()}]`,'search-detail-hv'));
   hero.append(head,phonetic);
@@ -239,7 +240,7 @@
    const compBody=node('div','','search-acc-body'),compList=node('div','','search-compound-list');
    for(const cw of relatedList){
     const chip=node('button','','search-compound-chip');chip.type='button';
-    chip.append(node('strong',cw.han),node('span',brief(vi(cw))||cw.mean||''));
+    chip.append(node('strong',cw.han),node('span',brief(vi(cw))||''));
     chip.onclick=()=>{recordHit(query,cw);const inp=$('searchInput'),form=$('searchForm');if(inp){inp.value=cw.han;form?.dispatchEvent(new Event('submit',{cancelable:true}));}};
     compList.append(chip);
    }
@@ -274,7 +275,7 @@
   const card=node('details','','result-card extended-word dictionary-row');
   const summary=node('summary','','dictionary-row-summary'),meaning=node('span',brief(vi(w))||fallbackRowText(),'dictionary-row-meaning'+(vi(w)?'':' is-fallback-gloss'));
   meaning.dataset.viKey=C.translationKey(w);meaning.__dictionaryWord=w;
-  summary.append(node('h3',w.han,'dictionary-row-han'),meaning,node('span',w.pinDisplay||w.pin,'dictionary-row-pinyin'));
+  summary.append(node('h3',w.han,'dictionary-row-han'),meaning,node('span',fmtPin(w.pinDisplay||w.pin),'dictionary-row-pinyin'));
   card.append(summary);
   card.ontoggle=()=>{if(card.open){recordHit(query,w);scheduleVi();}};
   target.append(card);
@@ -310,7 +311,8 @@
    const w=entry.w;
    const pill=node('button','','search-master-item');pill.type='button';pill.setAttribute('role','tab');
    pill.append(node('span',w.han,'search-master-han'));
-   if(w.pinDisplay||w.pin)pill.append(node('span',w.pinDisplay||w.pin,'search-master-pin'));
+   const pillPin=fmtPin(w.pinDisplay||w.pin);
+   if(pillPin)pill.append(node('span',pillPin,'search-master-pin'));
    pill.onclick=()=>selectAt(idx,true);
    pills.push(pill);strip.append(pill);
    renderWordRecord(w,records,query);
@@ -390,9 +392,9 @@
   try{const auth=await user.getIdToken();if(token!==serial||request.signal.aborted)return;if(w.han.length>160)throw Error('Hãy nhập từ hoặc cụm tối đa 160 ký tự.');const requestBody={query:w.han,context,...(w.pin?{word:{han:w.han,trad:w.trad||w.han,pin:w.pin,mean:(w.mean||'').slice(0,4000)}}:{}),...(grounding||{})};const response=await fetch(config.endpoint.replace(/\/translate$/,'/dictionary-lookup'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+auth},signal:request.signal,body:JSON.stringify(requestBody)});const data=await response.json();if(token!==serial||request.signal.aborted)return;if(!response.ok)throw Error(response.status===404?'Worker chưa có tính năng tra cứu mới. Hãy triển khai bản Worker đã gửi.':data.error||'AI chưa trả lời được.');if(typeof data.answer!=='string'||!data.answer.trim()||data.answer.length>5000||!Array.isArray(data.terms)||data.terms.length>6||!data.terms.every(t=>t&&['han','pinyin','meaning'].every(k=>typeof t[k]==='string'&&t[k].trim()&&t[k].length<600)&&/\p{Script=Han}/u.test(t.han)))throw Error('AI chưa trả kết quả tra cứu hợp lệ.');aiCache.set(key,data);if(aiCache.size>40)aiCache.delete(aiCache.keys().next().value);show(data);
   }catch(e){if(token===serial){if(silentError){target.replaceChildren();return;}status.textContent=friendlyNetError(e);retry();}}finally{stopLoading?.();clearTimeout(timer);if(controller===request)controller=null;}}
  function renderSrsHome(){reviewBox.replaceChildren(node('h3','SRS · Từ mở rộng'));const due=Object.keys(items).filter(k=>items[k].due<=Date.now()).sort((a,b)=>items[a].due-items[b].due);reviewBox.append(node('p',`${Object.keys(items).length} từ đã chọn · ${due.length} từ đến hạn`,'hint'));
-  reviewBox.append(button('Ôn từ mở rộng',()=>{queue=due.slice();revealed=false;window.HSKLoading?.flash('Phiên ôn SRS mở rộng đang load...','Đang chuẩn bị các từ mở rộng đến hạn...',undefined,reviewBox);renderReview();}));if(!queue.length&&Object.keys(items).length){const list=node('details'),summary=node('summary','Quản lý từ đã thêm');list.append(summary);for(const [key,r] of Object.entries(items)){const row=node('div','','dictionary-actions');row.append(node('span',r.word.han+' · '+r.word.pin),button('Gỡ khỏi SRS',()=>{delete items[key];save();}));list.append(row);}reviewBox.append(list);}}
+  reviewBox.append(button('Ôn từ mở rộng',()=>{queue=due.slice();revealed=false;window.HSKLoading?.flash('Phiên ôn SRS mở rộng đang load...','Đang chuẩn bị các từ mở rộng đến hạn...',undefined,reviewBox);renderReview();}));if(!queue.length&&Object.keys(items).length){const list=node('details'),summary=node('summary','Quản lý từ đã thêm');list.append(summary);for(const [key,r] of Object.entries(items)){const row=node('div','','dictionary-actions');row.append(node('span',r.word.han+' · '+fmtPin(r.word.pin)),button('Gỡ khỏi SRS',()=>{delete items[key];save();}));list.append(row);}reviewBox.append(list);}}
  function renderReview(){renderSrsHome();queue=queue.filter(k=>items[k]);if(!queue.length){window.HSKLoading?.flash('Kết quả SRS mở rộng đang load...','Đã hoàn thành phiên ôn từ mở rộng...',undefined,reviewBox);reviewBox.append(node('p','Đã hết từ đến hạn. Lịch này không tính vào tiến độ HSK.','hint'));return;}const key=queue[0],r=items[key],card=node('article','','extended-review');card.append(node('h3',r.word.han));const speech=window.HSKSpeech?.button(r.word.han,'Nghe phát âm '+r.word.han);if(speech)card.append(speech);
-  if(!revealed)card.append(button('Xem nghĩa',()=>{revealed=true;renderReview();}));else{const meaning=node('p',vi(r.word)||'Đang tra nghĩa Việt…');meaning.dataset.viKey=C.translationKey(r.word);meaning.__dictionaryWord=r.word;card.append(node('p',r.word.pin),meaning);const actions=node('div','','dictionary-actions');for(const [rating,label] of [['again','Chưa nhớ'],['hard','Khó'],['good','Nhớ'],['easy','Dễ']])actions.append(button(label,()=>{items[key]=C.rate(items[key],rating);queue.shift();revealed=false;save();renderReview();}));card.append(actions);}reviewBox.append(card);scheduleVi();}
+  if(!revealed)card.append(button('Xem nghĩa',()=>{revealed=true;renderReview();}));else{const meaning=node('p',vi(r.word)||'Đang tra nghĩa Việt…');meaning.dataset.viKey=C.translationKey(r.word);meaning.__dictionaryWord=r.word;card.append(node('p',fmtPin(r.word.pin)),meaning);const actions=node('div','','dictionary-actions');for(const [rating,label] of [['again','Chưa nhớ'],['hard','Khó'],['good','Nhớ'],['easy','Dễ']])actions.append(button(label,()=>{items[key]=C.rate(items[key],rating);queue.shift();revealed=false;save();renderReview();}));card.append(actions);}reviewBox.append(card);scheduleVi();}
  window.addEventListener('hsk-search-rendered',prepare);window.addEventListener('hsk-account-ready',()=>{++serial;controller?.abort();viPending?.abort();viPending=null;clearTimeout(viTimer);aiCache.clear();queue=[];try{items=C.clean(JSON.parse(localStorage.getItem(C.KEY)||'{}'));}catch(_){items={};}renderSrsHome();prepare();});
  window.HSKAIConfig?.loadTranslationConfig?.().then(c=>{if(c){config=c;scheduleVi();}});
 
@@ -410,13 +412,13 @@
     state.selected=null;result.replaceChildren();
     const query=input.value.trim()||hint.value.trim(),context=JSON.stringify({mode:'word-recovery',meaningHint:hint.value,previousSuggestions:state.previous}),requestSerial=serial;
     const remembered=rememberedLookup(query);
-    if(remembered&&!hint.value.trim()){state.selected={han:remembered.han,pinyin:remembered.pinyin,meaning:remembered.meaning};out.replaceChildren(node('p','Đã nhớ từ bạn từng xác nhận: '+remembered.han+' · '+remembered.pinyin+' · '+remembered.meaning));if(!comparison)out.append(button('Xem cách dùng với AI',()=>askAI({han:remembered.han,trad:remembered.han,pin:remembered.pinyin,mean:remembered.meaning},result)));return;}
+    if(remembered&&!hint.value.trim()){state.selected={han:remembered.han,pinyin:fmtPin(remembered.pinyin),meaning:remembered.meaning};out.replaceChildren(node('p','Đã nhớ từ bạn từng xác nhận: '+remembered.han+' · '+fmtPin(remembered.pinyin)+' · '+remembered.meaning));if(!comparison)out.append(button('Xem cách dùng với AI',()=>askAI({han:remembered.han,trad:remembered.han,pin:remembered.pinyin,mean:remembered.meaning},result)));return;}
     let grounding;try{grounding=await recoveryGrounding(query,hint.value,state.previous);}catch(_){grounding={phoneticHints:C.expandVietnamesePhonetic(query),localCandidates:[],excludedTerms:state.previous};}
     if(requestSerial!==serial)return;
     askAI({han:query,trad:query,pin:''},out,context,(terms,t,answer,chips)=>{
      if(t!==serial)return;out.replaceChildren(node('p',answer),node('p',terms.length?'Chọn đúng từ bạn muốn tìm; nếu chưa đúng, sửa nghĩa phía trên rồi bấm AI tìm chữ.':'Hãy bổ sung nghĩa hoặc câu ví dụ rồi tìm lại.'));
      state.previous=terms.map(x=>x.han.slice(0,24)).slice(0,6);
-     for(const term of terms)out.append(button(term.han+' · '+term.pinyin+' · '+term.meaning+(term.match_type?' · '+term.match_type:''),()=>{state.selected={han:term.han.slice(0,24),pinyin:term.pinyin.slice(0,60),meaning:term.meaning.slice(0,100)};rememberPhoneticLookup(query,state.selected);input.value=term.han;out.replaceChildren(node('p','Đã chọn và lưu thói quen phát âm: '+term.han+' · '+term.pinyin+' · '+term.meaning));if(!comparison)askAI({han:term.han,trad:term.han,pin:term.pinyin,mean:term.meaning},result); }));
+     for(const term of terms){const termPin=fmtPin(term.pinyin);out.append(button(term.han+' · '+termPin+' · '+term.meaning+(term.match_type?' · '+term.match_type:''),()=>{state.selected={han:term.han.slice(0,24),pinyin:termPin.slice(0,60),meaning:term.meaning.slice(0,100)};rememberPhoneticLookup(query,state.selected);input.value=term.han;out.replaceChildren(node('p','Đã chọn và lưu thói quen phát âm: '+term.han+' · '+termPin+' · '+term.meaning));if(!comparison)askAI({han:term.han,trad:term.han,pin:termPin,mean:term.meaning},result); }));}
      if(chips?.length){const chipBox=node('div','','dictionary-refinement-chips');chipBox.append(node('small','Chưa đúng? Chọn ngữ cảnh:','hint'));for(const chip of chips.slice(0,3))chipBox.append(button(chip,()=>{hint.value=chip;resolve.click();}));out.append(chipBox);}
     },grounding);
    });row.append(label,input,hint,resolve,out);panel.append(row);
