@@ -5477,6 +5477,10 @@ html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictiona
   text-overflow:ellipsis;
   white-space:nowrap;
 }
+html body:not(#_rd).studio-enabled #searchPanel #openDictionary .dictionary-row-meaning.is-fallback-gloss{
+  color:var(--rd-muted) !important;
+  font-style:italic;
+}
 html body:not(#_rd).studio-enabled #searchPanel #searchResults details.result-card.dictionary-row[open] > summary.dictionary-row-summary .dictionary-row-meaning{
   display:none;
 }

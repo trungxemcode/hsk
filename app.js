@@ -203,7 +203,7 @@ function runSearch() {
  if(!q){searchMatches=[];renderSearch();return;}
  const terms=expandedTerms($('searchInput').value);
  const query=$('searchInput').value.trim(),normalized=hasAccent(query)?viText(query):fold(query);
- const includeExtended=searchScope==='hsk'&&activeLevel==='all';
+ const includeExtended=searchScope==='general'||activeLevel==='all';
  const extraPool=includeExtended?getExtendedSearchPool():[];
  searchPinyinAllowed=!words.some(w=>sensesMap.get(w).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized))&&!extraPool.some(w=>(sensesMap.get(w)||[]).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized));
  const hskPool=searchScope==='general'?words:[...new Set([...levelWords(),...words.filter(w=>w.han===query||searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(query)&&/[a-z]/i.test(query))])];
