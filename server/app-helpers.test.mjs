@@ -26,6 +26,11 @@ test('synonym lookup retains ambiguous-query exclusions and whole-sense matching
 test('typo matching remains bounded and does not guess short words',()=>{
  const run=helpers();assert.equal(run("typoSimilar('studying','studing')"),true);
  assert.equal(run("typoSimilar('studying','running')"),false);assert.equal(run("typoSimilar('mua','mưa')"),false);
+ assert.equal(run("typoSimilar('xin an','in an')"),false,'short multi-word phrases must not cross-match xin an vs in an');
+ assert.equal(run("typoSimilar('xin ăn','in ấn')"),false,'accented Vietnamese phrases must not cross-match different tones');
+ assert.equal(run("typoSimilar('kiểm tra','kiếm tra')"),true,'genuine 1-char typo on 4+ letter word remains allowed');
+ assert.ok(run("expandedTerms('xin ăn')").includes('ăn xin'));
+ assert.ok(run("expandedTerms('xin ăn')").includes('ăn mày'));
 });
 test('phonetic recovery expands Vietnamese approximations and ranks grounded candidates',()=>{
  const run=helpers();const hints=run("HSKOpenDictionaryCore.expandVietnamesePhonetic('chửng mơ pan')");assert.ok(hints[0].some(x=>['cheng','chen','zung'].includes(x)));assert.equal(run("HSKOpenDictionaryCore.normalizePhoneticKey('nìa ni3')"),'nia ni');assert.ok(run("HSKOpenDictionaryCore.phoneticCandidateScore('zěnmebàn',HSKOpenDictionaryCore.expandVietnamesePhonetic('chửng mơ pan'))")>0);
