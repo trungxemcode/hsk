@@ -305,3 +305,20 @@ test('sentence-editor supports 5000 chars and rejects >5000 chars; sentence-ai-d
  assert.equal(detectData.aiDetection.flaggedSpans[0].text,'综上所述');
 });
 
+test('dictionary-examples validates senses and filters generated sentences containing target Hanzi',async()=>{
+ const geminiPayload={examples:[
+  {id:'s_0_0',cn:'那位勇士毫不退缩。',pin:'nà wèi yǒngshì háo bù tuìsuō.',vi:'Vị dũng sĩ đó không hề chùn bước.'},
+  {id:'s_0_1',cn:'没有目标词的句子。',pin:'méiyǒu mùbiāocí de jùzi.',vi:'Câu không chứa từ cần tra.'}
+ ]};
+ const {run}=setup(()=>Response.json({modelVersion:'gemini-test-version',candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(geminiPayload)}]}}]}));
+ const ok=await run('/dictionary-examples',{han:'勇士',pinyin:'yǒngshì',senses:[{id:'s_0_0',pos:'Danh từ',mean:'dũng sĩ'},{id:'s_0_1',pos:'Danh từ',mean:'chiến binh can đảm'}]});
+ assert.equal(ok.status,200);
+ const data=await ok.json();
+ assert.equal(data.examples.length,1,'must drop generated sentences missing target Hanzi');
+ assert.equal(data.examples[0].id,'s_0_0');
+ assert.match(data.examples[0].cn,/勇士/);
+ const bad=await run('/dictionary-examples',{han:'latin-only',pinyin:'x',senses:[{id:'s_0_0',pos:'Danh từ',mean:'nghĩa'}]});
+ assert.equal(bad.status,400);
+});
+
+

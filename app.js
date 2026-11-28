@@ -189,7 +189,7 @@ function getExtendedSearchPool(){
    const rawSenses=(v.senses||[]).filter(s=>s&&s.mean);
    if(!rawSenses.length)continue;
    const mean=[...new Set(rawSenses.map(s=>s.mean))].join('; ');
-   const primaryMean=rawSenses[0].mean;
+   const primaryMean=[...new Set(rawSenses.slice(0,3).map(s=>s.mean))].join('; ');
    const w={han,pin:v.pin||'',mean,primaryMean,hv:'',hsk:null,isExtended:true,posSenses:rawSenses.map(s=>({pos:searchPosLabel(s.pos),mean:s.mean})),structures:v.structures||[]};
    sensesMap.set(w,splitSenses(w));
    primarySensesMap.set(w,splitSenses({mean:primaryMean,hv:''}));
@@ -341,16 +341,117 @@ function runSearch() {
  const strongCount=rawMatches.filter(r=>r.band>=4).length;
  const hasRealMatch=rawMatches.some(r=>r.band>=2);
  const filteredMatches=strongCount>=1?rawMatches.filter(r=>r.band>=3):(hasRealMatch?rawMatches.filter(r=>r.band>=2):rawMatches);
- searchMatches=filteredMatches.sort((a,b)=>Number(b.exact&&b.kind==='han')-Number(a.exact&&a.kind==='han')||b.tier-a.tier||b.band-a.band||b.rank-a.rank||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||a.w.han.length-b.w.han.length||Number(a.w.hsk||99)-Number(b.w.hsk||99)||a.i-b.i);
+ searchMatches=filteredMatches.sort((a,b)=>{
+  const aHan=Number(a.exact&&a.kind==='han'),bHan=Number(b.exact&&b.kind==='han');
+  if(bHan!==aHan)return bHan-aHan;
+  if(b.tier!==a.tier)return b.tier-a.tier;
+  if(b.band!==a.band)return b.band-a.band;
+  const aHsk=Number(a.w.hsk)||99,bHsk=Number(b.w.hsk)||99;
+  if(aHsk!==bHsk)return aHsk-bHsk;
+  return b.rank-a.rank||b.score-a.score||Number(!b.w.isExtended)-Number(!a.w.isExtended)||a.w.han.length-b.w.han.length||a.i-b.i;
+ });
  renderSearch();
 }
+const SENSE_EX_CACHE_KEY='hsk-dict-sense-examples-v1';
+let senseExCache=null,corpusSentenceBank=null,senseExAbort=null;
+function readSenseExCache(){
+ if(senseExCache)return senseExCache;
+ senseExCache=Object.create(null);
+ try{
+  const raw=JSON.parse(localStorage.getItem(SENSE_EX_CACHE_KEY)||'{}');
+  if(raw&&typeof raw==='object'){
+   for(const [k,v] of Object.entries(raw)){
+    if(v&&Array.isArray(v.examples)&&Number.isFinite(v.t))senseExCache[k]=v;
+   }
+  }
+ }catch(_){}
+ return senseExCache;
+}
+function saveSenseExCache(key,examples){
+ const cache=readSenseExCache();
+ cache[key]={examples,t:Date.now()};
+ const keys=Object.keys(cache).sort((a,b)=>(cache[b].t||0)-(cache[a].t||0));
+ for(const old of keys.slice(450))delete cache[old];
+ try{localStorage.setItem(SENSE_EX_CACHE_KEY,JSON.stringify(cache));}catch(_){}
+}
+function getCorpusSentenceBank(){
+ if(corpusSentenceBank)return corpusSentenceBank;
+ const seen=new Set(),bank=[];
+ const pushEx=(cn,pin,vi,sense='',meaning='')=>{
+  const c=String(cn||'').trim(),v=String(vi||'').trim();
+  if(!c||!v||c.length<3||c.length>46||seen.has(c))return;
+  seen.add(c);
+  bank.push({cn:c,pin:String(pin||'').trim(),vi:v,sense:String(sense||''),meaning:String(meaning||'')});
+ };
+ for(const w of words){
+  for(const e of w.practice?.examples||[])pushEx(e.cn,e.pin,e.vi,e.sense,e.meaning);
+  if(w.dictionary?.example)pushEx(w.dictionary.example.cn,w.dictionary.example.pin,w.dictionary.example.vi,'',w.dictionary.example.meaning);
+  if(w.exCn&&w.exVi)pushEx(w.exCn,w.originalExampleMetadata?.pin||'',w.exVi,'',w.originalExampleMetadata?.meaning||'');
+ }
+ for(const item of [...BASE_EXTRA_WORDS,...(window.HSKSearchRanking?.everydayWords||[])]){
+  for(const e of item.examples||[])pushEx(e.cn,e.pin,e.vi,e.sense,e.meaning);
+ }
+ corpusSentenceBank=bank;
+ return bank;
+}
+function collectWordExamples(w){
+ if(!w||!w.han)return [];
+ const fmt=s=>window.HSKOpenDictionaryCore?.formatPinyin?window.HSKOpenDictionaryCore.formatPinyin(s||''):String(s||'');
+ const seen=new Set(),out=[];
+ const add=(e,fromCorpus=false)=>{
+  if(!e||!e.cn||!e.vi)return;
+  const cn=String(e.cn).trim();
+  if(!cn||cn===w.han||seen.has(cn))return;
+  seen.add(cn);
+  out.push({cn,pin:fmt(e.pin||''),vi:String(e.vi).trim(),sense:String(e.sense||''),meaning:String(e.meaning||''),id:e.id||'',fromCorpus});
+ };
+ for(const e of w.practice?.examples||[])add(e);
+ for(const e of w.examples||[])add(e);
+ if(w.dictionary?.example)add(w.dictionary.example);
+ if(w.exCn&&w.exVi)add({cn:w.exCn,pin:w.originalExampleMetadata?.pin||'',vi:w.exVi,meaning:w.originalExampleMetadata?.meaning||''});
+ const cacheKey=`${w.han}|${window.HSKOpenDictionaryCore?.reading?window.HSKOpenDictionaryCore.reading(w.pin||''):(w.pin||'')}`;
+ const cached=readSenseExCache()[cacheKey];
+ if(cached?.examples)for(const e of cached.examples)add(e);
+ if(out.length<12){
+  const candidates=[];
+  for(const s of getCorpusSentenceBank()){
+   if(s.cn.includes(w.han)&&!seen.has(s.cn))candidates.push(s);
+   if(candidates.length>=28)break;
+  }
+  candidates.sort((a,b)=>Math.abs(a.cn.length-16)-Math.abs(b.cn.length-16));
+  for(const c of candidates.slice(0,Math.max(0,12-out.length)))add(c,true);
+ }
+ return out.slice(0,12);
+}
 function groupedSearchSenses(w){
- if(w.posSenses?.length)return w.posSenses;
- const groups=new Map();
  const uRows=typeof usageFactsData!=='undefined'?usageFactsData.words?.[w.han]?.variants||[]:[];
  const matchedVar=uRows.find(v=>typeof usageReading==='function'&&usageReading(v.pin)===usageReading(w.pin))||uRows[0];
+ const structures=Array.isArray(matchedVar?.structures)?matchedVar.structures.slice(0,3):(Array.isArray(w.structures)?w.structures.slice(0,3):[]);
+ if(w.posSenses?.length){
+  const merged=new Map();
+  for(const g of w.posSenses){
+   const label=searchPosLabel(g.pos);
+   if(!merged.has(label))merged.set(label,[]);
+   const bucket=merged.get(label);
+   const parts=Array.isArray(g.items)&&g.items.length?g.items:splitSenses({mean:g.mean,hv:''});
+   for(const p of parts){
+    const norm=viText(coreSenseText(p));
+    const dupIdx=bucket.findIndex(x=>viText(coreSenseText(x))===norm);
+    if(dupIdx<0)bucket.push(p);
+    else if(p.length>bucket[dupIdx].length)bucket[dupIdx]=p;
+   }
+  }
+  return [...merged.entries()].map(([pos,items],idx)=>({
+   pos,
+   mean:items.join('; '),
+   items:items.slice(0,6),
+   structures:idx===0?structures:[]
+  }));
+ }
+ const groups=new Map();
  if(matchedVar?.senses?.length){
   for(const s of matchedVar.senses){
+   if(s.pos==='Lưu ý')continue;
    const label=searchPosLabel(s.pos);
    if(!groups.has(label))groups.set(label,[]);
    if(s.mean&&!groups.get(label).includes(s.mean))groups.get(label).push(s.mean);
@@ -358,19 +459,192 @@ function groupedSearchSenses(w){
  }
  if(!groups.size&&w.dictionary?.meanings?.length){
   for(const m of w.dictionary.meanings){
-   const label=m.pos||'Nghĩa';
+   const label=searchPosLabel(m.pos)||m.pos||'Nghĩa';
    if(!groups.has(label))groups.set(label,[]);
    if(m.gloss&&!groups.get(label).includes(m.gloss))groups.get(label).push(m.gloss);
   }
  }
- if(!groups.size)return [{pos:'Nghĩa chính',mean:w.mean}];
- const out=[...groups.entries()].map(([pos,items])=>({pos,mean:items.join('; ')}));
+ if(!groups.size){
+  const baseItems=splitSenses({mean:w.primaryMean||w.mean,hv:w.hv}).slice(0,5);
+  return [{pos:'Nghĩa chính',mean:w.mean,items:baseItems.length?baseItems:[w.mean],structures}];
+ }
+ const out=[...groups.entries()].map(([pos,items],idx)=>({pos,mean:items.join('; '),items:items.slice(0,6),structures:idx===0?structures:[]}));
  if(w.primaryMean){
-  const covered=out.flatMap(g=>splitSenses({mean:g.mean,hv:''})).map(s=>viText(coreSenseText(s)));
+  const covered=out.flatMap(g=>g.items.flatMap(it=>splitSenses({mean:it,hv:''}))).map(s=>viText(coreSenseText(s)));
   const missing=splitSenses({mean:w.primaryMean,hv:w.hv}).filter(s=>!covered.includes(viText(coreSenseText(s))));
-  if(missing.length)out.unshift({pos:'Nghĩa thông dụng',mean:missing.join('; ')});
+  if(missing.length)out.unshift({pos:'Nghĩa thông dụng',mean:missing.join('; '),items:missing,structures:[]});
  }
  return out;
+}
+function matchExamplesToPosSenses(sensesList,examples){
+ const slots=[];
+ sensesList.forEach((g,gIdx)=>{
+  const items=Array.isArray(g.items)&&g.items.length?g.items:[g.mean];
+  items.forEach((text,iIdx)=>{
+   const id=`s_${gIdx}_${iIdx}`;
+   const norm=viText(coreSenseText(text));
+   const toks=norm.split(' ').filter(t=>t.length>=2);
+   slots.push({id,gIdx,iIdx,text,norm,toks,examples:[]});
+  });
+ });
+ if(!slots.length||!examples.length)return slots;
+ const unassigned=[];
+ for(const ex of examples){
+  if(ex.id){
+   const byId=slots.find(sl=>sl.id===ex.id);
+   if(byId&&byId.examples.length<2){byId.examples.push(ex);continue;}
+  }
+  const tagNorm=viText(coreSenseText(ex.meaning||ex.sense||''));
+  const viNorm=viText(ex.vi||'');
+  let best=null,bestScore=0;
+  for(const sl of slots){
+   if(sl.examples.length>=2)continue;
+   let sc=0;
+   if(tagNorm){
+    if(sl.norm===tagNorm||sl.text.split(/[;；,]/).some(p=>viText(coreSenseText(p))===tagNorm))sc=120;
+    else if(phraseIn(sl.norm,tagNorm)||phraseIn(tagNorm,sl.norm))sc=90;
+   }
+   if(!sc&&viNorm){
+    if(sl.norm.length>=2&&phraseIn(viNorm,sl.norm))sc=65;
+    else{
+     const hits=sl.toks.filter(t=>phraseIn(viNorm,t)).length;
+     if(hits>0)sc=hits*24;
+    }
+   }
+   if(sc>bestScore){bestScore=sc;best=sl;}
+  }
+  if(best&&bestScore>=24)best.examples.push(ex);
+  else unassigned.push(ex);
+ }
+ for(const ex of unassigned){
+  if(slots.length===1){
+   if(slots[0].examples.length<2)slots[0].examples.push(ex);
+  }else if(slots[0]&&slots[0].examples.length===0){
+   slots[0].examples.push(ex);
+  }
+ }
+ return slots;
+}
+function makeExampleCardNode(ex,targetHan){
+ const exCard=document.createElement('div');exCard.className='search-example-item';
+ const exContent=document.createElement('div');exContent.className='search-example-content';
+ const exCn=document.createElement('p');exCn.className='search-example-cn';
+ const cnStr=String(ex.cn||''),hanStr=String(targetHan||'').trim();
+ if(hanStr&&cnStr.includes(hanStr)){
+  const parts=cnStr.split(hanStr);
+  parts.forEach((part,idx)=>{
+   if(part)exCn.append(document.createTextNode(part));
+   if(idx<parts.length-1){
+    const hl=document.createElement('mark');hl.className='search-example-hl';hl.textContent=hanStr;
+    exCn.append(hl);
+   }
+  });
+ }else{
+  exCn.textContent=cnStr;
+ }
+ exContent.append(exCn);
+ if(ex.pin){
+  const p=pinyinLine(window.HSKOpenDictionaryCore?.formatPinyin?window.HSKOpenDictionaryCore.formatPinyin(ex.pin):ex.pin);
+  exContent.append(p);
+ }
+ const exVi=document.createElement('p');exVi.className='search-example-vi';exVi.textContent=ex.vi||'';
+ exContent.append(exVi);
+ exCard.append(exContent);
+ const exSpeech=window.HSKSpeech?.button(cnStr,'Nghe câu ví dụ');if(exSpeech)exCard.append(exSpeech);
+ return exCard;
+}
+function renderPosAccordions(accStack,w,detailsObj=null,opts={}){
+ const sensesList=detailsObj?.posSenses?.length?detailsObj.posSenses:groupedSearchSenses(w);
+ const examples=detailsObj?.examples?.length?detailsObj.examples:collectWordExamples(w);
+ const slots=matchExamplesToPosSenses(sensesList,examples);
+ sensesList.forEach((item,sIdx)=>{
+  const acc=document.createElement('details');acc.className='search-acc-card is-pos';
+  if(sIdx===0||sIdx===1)acc.open=true;
+  const sum=document.createElement('summary');sum.className='search-acc-summary';
+  const arrow=document.createElement('span');arrow.className='search-acc-arrow';arrow.setAttribute('aria-hidden','true');
+  const title=document.createElement('span');title.className='search-acc-title';title.textContent=item.pos;
+  const groupSlots=slots.filter(sl=>sl.gIdx===sIdx);
+  const count=document.createElement('span');count.className='search-acc-count';count.textContent=String(Math.max(1,groupSlots.length));
+  sum.append(arrow,title,count);acc.append(sum);
+  const accBody=document.createElement('div');accBody.className='search-acc-body';
+  if(sIdx===0&&opts.hiddenMeaningMeta){
+   const rowMeaning=document.createElement('span');rowMeaning.className='dictionary-row-meaning';
+   rowMeaning.textContent=opts.hiddenMeaningMeta.text;
+   rowMeaning.dataset.viKey=opts.hiddenMeaningMeta.key;
+   rowMeaning.__dictionaryWord=opts.hiddenMeaningMeta.word;
+   rowMeaning.hidden=true;
+   accBody.append(rowMeaning);
+  }
+  if(item.structures?.length){
+   const st=document.createElement('p');st.className='search-structure-note';
+   st.textContent='Cấu trúc: '+item.structures.join(' · ');
+   accBody.append(st);
+  }
+  const senseListEl=document.createElement('div');senseListEl.className='search-sense-blocks';
+  groupSlots.forEach((sl,idx)=>{
+   const block=document.createElement('div');block.className='search-sense-block';
+   const head=document.createElement('p');head.className='search-sense-heading search-acc-senses-inline';
+   const num=document.createElement('span');num.className='search-sense-num';num.setAttribute('aria-hidden','true');num.textContent=`${idx+1}.`;
+   const txt=document.createElement('span');txt.className='search-sense-label';txt.textContent=sl.text;
+   head.append(num,txt);
+   block.append(head);
+   const exHost=document.createElement('div');exHost.className='search-example-list search-sense-examples';
+   exHost.dataset.senseSlot=sl.id;
+   exHost.dataset.sensePos=item.pos;
+   exHost.dataset.senseMean=sl.text;
+   for(const ex of sl.examples)exHost.append(makeExampleCardNode(ex,w.han));
+   if(!sl.examples.length)exHost.hidden=true;
+   block.append(exHost);
+   senseListEl.append(block);
+  });
+  accBody.append(senseListEl);
+  acc.append(accBody);
+  accStack.append(acc);
+ });
+}
+async function ensureWordSenseExamples(w,cardRoot){
+ if(!w||!w.han||!cardRoot)return;
+ const user=window.HSKAccountDashboard?.user;
+ if(!user)return;
+ const emptySlots=[...cardRoot.querySelectorAll('[data-sense-slot]')].filter(el=>!el.children.length&&el.dataset.senseMean&&!el.dataset.senseMean.includes('Chưa có nghĩa Việt')&&!el.dataset.senseMean.includes('Đang tải nghĩa Việt'));
+ if(!emptySlots.length)return;
+ const senses=emptySlots.slice(0,5).map(el=>({id:el.dataset.senseSlot,pos:String(el.dataset.sensePos||'Nghĩa').slice(0,40),mean:String(el.dataset.senseMean||'').slice(0,220)}));
+ let cfg=null;try{cfg=await window.HSKAIConfig?.loadTranslationConfig?.();}catch(_){}
+ if(!cfg?.endpoint)return;
+ senseExAbort?.abort();
+ const ac=new AbortController();senseExAbort=ac;
+ const timer=setTimeout(()=>ac.abort(),20000);
+ try{
+  const token=await user.getIdToken();
+  if(ac.signal.aborted||!cardRoot.isConnected)return;
+  const r=await fetch(cfg.endpoint.replace(/\/translate$/,'/dictionary-examples'),{
+   method:'POST',
+   headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},
+   body:JSON.stringify({han:w.han,pinyin:w.pin||'',senses}),
+   signal:ac.signal
+  });
+  if(!r.ok||ac.signal.aborted||!cardRoot.isConnected)return;
+  const data=await r.json();
+  if(!Array.isArray(data?.examples)||!data.examples.length)return;
+  const valid=data.examples.filter(e=>e&&typeof e.id==='string'&&typeof e.cn==='string'&&e.cn.includes(w.han)&&typeof e.vi==='string'&&e.vi.trim());
+  if(!valid.length)return;
+  const cacheKey=`${w.han}|${window.HSKOpenDictionaryCore?.reading?window.HSKOpenDictionaryCore.reading(w.pin||''):(w.pin||'')}`;
+  const existing=readSenseExCache()[cacheKey]?.examples||[];
+  const merged=[...existing];
+  for(const e of valid)if(!merged.some(x=>x.cn===e.cn))merged.push(e);
+  saveSenseExCache(cacheKey,merged.slice(0,8));
+  if(!cardRoot.isConnected)return;
+  for(const e of valid){
+   const slot=cardRoot.querySelector(`[data-sense-slot="${e.id}"]`);
+   if(slot&&!slot.children.length){
+    slot.hidden=false;
+    slot.append(makeExampleCardNode(e,w.han));
+   }
+  }
+ }catch(_){}finally{
+  clearTimeout(timer);
+  if(senseExAbort===ac)senseExAbort=null;
+ }
 }
 function filterSearchMatches(matches,rawQuery,foldCompounds){
  const base=foldCompounds?matches.filter(r=>r.tier>=2):matches;
@@ -596,6 +870,7 @@ function renderSearch() {
   masterItems.forEach((b,bi)=>{const on=bi===idx;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false');});
   cards.forEach((c,ci)=>{const on=ci===idx;c.classList.toggle('is-selected',on);c.open=on;});
   renderSearchCharPanel(charPanel,activeMatch.w);
+  if(cards[idx])ensureWordSenseExamples(activeMatch.w,cards[idx]);
  };
  shown.forEach((match,idx)=>{
   const {w}=match;
@@ -646,43 +921,8 @@ function renderSearch() {
   body.append(heroMeta);
 
   const accStack=document.createElement('div');accStack.className='search-acc-stack';
-  const sensesList=groupedSearchSenses(w);
-  const examples=(w.practice?.examples||w.examples||[]).filter(e=>e&&e.cn&&e.vi);
-  if(!examples.length&&w.exCn&&w.exVi)examples.push({cn:w.exCn,pin:w.originalExampleMetadata?.pin||'',vi:w.exVi});
-
-  sensesList.forEach((item,sIdx)=>{
-   const acc=document.createElement('details');acc.className='search-acc-card is-pos';
-   if(sIdx===0)acc.open=true;
-   const sum=document.createElement('summary');sum.className='search-acc-summary';
-   const arrow=document.createElement('span');arrow.className='search-acc-arrow';arrow.setAttribute('aria-hidden','true');
-   const title=document.createElement('span');title.className='search-acc-title';title.textContent=item.pos;
-   const senseItems=String(item.mean||'').split(/[;；]/).map(s=>s.trim()).filter(Boolean);
-   const count=document.createElement('span');count.className='search-acc-count';count.textContent=String(Math.max(1,senseItems.length));
-   sum.append(arrow,title,count);acc.append(sum);
-   const accBody=document.createElement('div');accBody.className='search-acc-body';
-   const senseP=document.createElement('p');senseP.className='search-acc-senses-inline';
-   senseP.textContent=(senseItems.length?senseItems:[item.mean]).join('; ');
-   accBody.append(senseP);
-   if(sIdx===0&&examples.length){
-    const exWrap=document.createElement('div');exWrap.className='search-example-list';
-    const exTitle=document.createElement('h4');exTitle.textContent=`Ví dụ cách dùng (${Math.min(examples.length,3)})`;exWrap.append(exTitle);
-    for(const e of examples.slice(0,2)){
-     const exCard=document.createElement('div');exCard.className='search-example-item';
-     const exContent=document.createElement('div');exContent.className='search-example-content';
-     const exCn=document.createElement('p');exCn.className='search-example-cn';exCn.textContent=e.cn;
-     exContent.append(exCn);
-     if(e.pin)exContent.append(pinyinLine(e.pin));
-     const exVi=document.createElement('p');exVi.className='search-example-vi';exVi.textContent=e.vi;
-     exContent.append(exVi);
-     exCard.append(exContent);
-     const exSpeech=window.HSKSpeech?.button(e.cn,'Nghe câu ví dụ');if(exSpeech)exCard.append(exSpeech);
-     exWrap.append(exCard);
-    }
-    accBody.append(exWrap);
-   }
-   acc.append(accBody);
-   accStack.append(acc);
-  });
+  renderPosAccordions(accStack,w);
+  if(idx===0)setTimeout(()=>ensureWordSenseExamples(w,card),0);
 
   // Compounds accordion ("▸ Từ ghép (N)") — merges folded query compounds + words containing this Hanzi.
   const mergedCompounds=[], compSeen=new Set([w.han]);
@@ -1316,7 +1556,7 @@ window.HSKLessons={
  quiz(ws,label,id){let state={};try{state=JSON.parse(localStorage.getItem('hsk-course-lessons-v1')||'{}').lessons?.[id]||{};}catch{};const pool=shuffled(ws).sort((a,b)=>(state.evidence?.[wordKey(a)]?.quizStreak||0)-(state.evidence?.[wordKey(b)]?.quizStreak||0));const qs=pool.slice(0,20).map((w,i)=>createQuestion(w,i%2?'mean':'han',words)).filter(Boolean);startSavedQuestions(qs,label);if(qs.length){quizSession.lessonId=id;$('lessonPracticeBack').hidden=!id;}},
  srs(ws,id){switchMode('srs');const due=ws.filter(w=>!recordOf(w)||recordOf(w).due<=Date.now()).sort((a,b)=>(recordOf(a)?.due||0)-(recordOf(b)?.due||0));srsSession={queue:due,total:due.length,done:0,lessonId:id};$('lessonPracticeBack').hidden=!id;$('srsMessage').textContent=due.length?'Ôn từ đến hạn và từ mới của bài học.':'Tất cả từ trong bài đã có lịch ôn và chưa đến hạn.';window.HSKLoading?.flash('Phiên ôn tập SRS đang load...','Ôn từ đến hạn và từ mới của bài học...',undefined,$('srsPanel'));renderSrs();}
 };
-window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput').value,exact:q=>words.some(w=>w.han===q),lookupExact(han){const matches=words.filter(word=>word.han===han);const entries=new Map(matches.filter(word=>word.mean).map(word=>[word.pin+'|'+word.mean,word]));if(entries.size!==1)return null;const word=entries.values().next().value;return {han:word.han,pin:word.pin,mean:word.mean};},hsk:(han,trad)=>words.find(w=>w.han===han||w.han===trad)?.hsk||null,details(han,pin){const C=window.HSKOpenDictionaryCore,pool=[...words,...getExtendedSearchPool()];const w=pool.find(x=>x.han===han&&(!pin||!C?.sameReading||C.sameReading(x.pin,pin)))||pool.find(x=>x.han===han);if(!w)return null;const examples=(w.practice?.examples||w.examples||[]).filter(e=>e&&e.cn&&e.vi).slice(0,3).map(e=>({cn:e.cn,pin:e.pin||'',vi:e.vi}));if(!examples.length&&w.exCn&&w.exVi)examples.push({cn:w.exCn,pin:w.originalExampleMetadata?.pin||'',vi:w.exVi});return {hv:w.hv||'',posSenses:groupedSearchSenses(w),examples};},relations(han,pin){const C=window.HSKOpenDictionaryCore;const w=words.find(x=>x.han===han&&(!pin||!C?.sameReading||C.sameReading(x.pin,pin)))||words.find(x=>x.han===han);if(!w)return null;const rel=typeof wordRelationsData!=='undefined'?wordRelationsData?.entries?.[wordKey(w)]:null;return rel&&(rel.synonyms?.length||rel.antonyms?.length)?{word:w,synonyms:rel.synonyms||[],antonyms:rel.antonyms||[]}:null;},relationAccordion:(w,title,list,cls)=>buildRelationAccordion(w,title,list,cls),compounds:(han,limit=12)=>compoundsContainingHan(han,limit),renderCharPanel:(panel,w)=>renderSearchCharPanel(panel,w),open(han,pin){const w=words.find(x=>x.han===han&&x.pin===pin)||words.find(x=>x.han===han);if(!w)return;if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');},scope:()=>searchScope,results:()=>searchMatches.slice(),setScope(value){if(!['hsk','general'].includes(value))return;searchScope=value;document.querySelectorAll('[data-search-scope]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.searchScope===value)));$('dictionaryModeHint').textContent=value==='hsk'?'Ưu tiên từ vựng HSK.':'Tìm cả từ ngoài HSK.';runSearch();}};
+window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput').value,exact:q=>words.some(w=>w.han===q),lookupExact(han){const matches=words.filter(word=>word.han===han);const entries=new Map(matches.filter(word=>word.mean).map(word=>[word.pin+'|'+word.mean,word]));if(entries.size!==1)return null;const word=entries.values().next().value;return {han:word.han,pin:word.pin,mean:word.mean};},hsk:(han,trad)=>words.find(w=>w.han===han||w.han===trad)?.hsk||null,details(han,pin){const C=window.HSKOpenDictionaryCore,pool=[...words,...getExtendedSearchPool()];const w=pool.find(x=>x.han===han&&(!pin||!C?.sameReading||C.sameReading(x.pin,pin)))||pool.find(x=>x.han===han);if(!w)return null;return {hv:w.hv||'',posSenses:groupedSearchSenses(w),examples:collectWordExamples(w)};},examplesFor:(w)=>collectWordExamples(w),makeExampleCard:(ex,han)=>makeExampleCardNode(ex,han),renderPosAccordions:(accStack,w,detailsObj,opts)=>renderPosAccordions(accStack,w,detailsObj,opts),ensureSenseExamples:(w,root)=>ensureWordSenseExamples(w,root),relations(han,pin){const C=window.HSKOpenDictionaryCore;const w=words.find(x=>x.han===han&&(!pin||!C?.sameReading||C.sameReading(x.pin,pin)))||words.find(x=>x.han===han);if(!w)return null;const rel=typeof wordRelationsData!=='undefined'?wordRelationsData?.entries?.[wordKey(w)]:null;return rel&&(rel.synonyms?.length||rel.antonyms?.length)?{word:w,synonyms:rel.synonyms||[],antonyms:rel.antonyms||[]}:null;},relationAccordion:(w,title,list,cls)=>buildRelationAccordion(w,title,list,cls),compounds:(han,limit=12)=>compoundsContainingHan(han,limit),renderCharPanel:(panel,w)=>renderSearchCharPanel(panel,w),open(han,pin){const w=words.find(x=>x.han===han&&x.pin===pin)||words.find(x=>x.han===han);if(!w)return;if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');},scope:()=>searchScope,results:()=>searchMatches.slice(),setScope(value){if(!['hsk','general'].includes(value))return;searchScope=value;document.querySelectorAll('[data-search-scope]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.searchScope===value)));$('dictionaryModeHint').textContent=value==='hsk'?'Ưu tiên từ vựng HSK.':'Tìm cả từ ngoài HSK.';runSearch();}};
 document.querySelectorAll('[data-search-scope]').forEach(b=>b.onclick=()=>window.HSKDictionaryBridge.setScope(b.dataset.searchScope));
 window.HSKFlashcardBridge={snapshot(){return {index,words:currentWords.map(w=>window.HSKPassiveCore?.word(w)).filter(Boolean)};},show(key){if(mode!=='learn')return false;const n=currentWords.findIndex(w=>wordKey(w)===key);if(n<0)return false;index=n;updateCard();return true;},reveal(){$('flashcard').classList.add('flipped');}};
 // Shared read-only data bridge for zero-token client modules.  Keep this
