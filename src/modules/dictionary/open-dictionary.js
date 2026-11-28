@@ -54,7 +54,46 @@
  async function localCandidatesFor(query,meaning){const hints=C.expandVietnamesePhonetic(query),allRows=[...loaded.values()].flat(),unique=new Map();for(const {w} of B.results()){const row=[w.han,w.han,w.pin,[w.mean]];const score=C.phoneticCandidateScore(w.pin,hints)+(meaning&&C.score(row,meaning)?24:0);if(score)unique.set(row.slice(0,3).join('|'),{han:w.han,pinyin:w.pin,meaning:String(w.mean||'').slice(0,240),score});}if(allRows.length<100){const shards=await Promise.all(Array.from({length:32},(_,i)=>shard(i)));allRows.push(...shards.flat());}for(const row of allRows){const key=row.slice(0,3).join('|');if(unique.has(key))continue;const phonetic=C.phoneticCandidateScore(row[2],hints),gloss=String(row[3]?.join(' ')||''),semantic=meaning&&C.score(row,meaning)?20:0;if(phonetic||semantic)unique.set(key,{han:row[0],pinyin:row[2],meaning:gloss.slice(0,240),score:phonetic+semantic});}return [...unique.values()].sort((a,b)=>b.score-a.score||a.han.length-b.han.length).slice(0,12).map(({score,...term})=>term);}
  async function recoveryGrounding(query,meaning,previous){const memory=readPhoneticMemory(),hints=C.expandVietnamesePhonetic(query),key=C.normalizePhoneticKey(query),learned=key.split(/\s+/).map(s=>memory.syllables[s]).filter(Boolean);if(learned.length)hints.push(learned);const candidates=await localCandidatesFor(query,meaning);const remembered=memory.exact[key];if(remembered&&!candidates.some(t=>t.han===remembered.han))candidates.unshift({han:remembered.han,pinyin:remembered.pinyin,meaning:remembered.meaning});return {phoneticHints:hints,localCandidates:candidates,excludedTerms:previous||[]};}
  function rememberVi(w,meaning){viCache[C.translationKey(w)]={meaning,time:Date.now()};const all=Object.keys(viCache).sort((a,b)=>viCache[b].time-viCache[a].time);for(const k of all.slice(1200))delete viCache[k];try{localStorage.setItem('hsk-dictionary-vietnamese-v2',JSON.stringify(viCache));}catch(_){}applyVi();}
- function applyVi(){document.querySelectorAll('[data-vi-key]').forEach(el=>{const w=el.__dictionaryWord,text=vi(w);if(text){el.textContent=el.classList.contains('dictionary-row-meaning')?brief(text):text;el.classList.remove('is-fallback-gloss');}});document.querySelectorAll('.dictionary-meaning-retry').forEach(b=>{b.hidden=!!vi(b.__dictionaryWord);});document.querySelectorAll('.dictionary-srs-add').forEach(b=>{b.disabled=!vi(b.__dictionaryWord);});}
+ function applyVi(){
+  document.querySelectorAll('[data-vi-key]').forEach(el=>{
+   const w=el.__dictionaryWord,text=vi(w);
+   if(text){
+    el.textContent=el.classList.contains('dictionary-row-meaning')&&!el.classList.contains('is-sense-primary')?brief(text):(el.classList.contains('is-sense-primary')?text.split(/[;；\n]/)[0].trim():text);
+    el.classList.remove('is-fallback-gloss');
+    const slot=el.closest('.search-sense-block')?.querySelector('[data-sense-slot]');
+    if(slot)slot.dataset.senseMean=el.textContent;
+   }
+  });
+  document.querySelectorAll('.open-hanzii-active[data-cedict-fallback="true"]').forEach(wrap=>{
+   const w=wrap.__dictionaryWord,text=w&&vi(w);
+   if(!text)return;
+   const parts=text.split(/[;；\n]/).map(x=>x.trim()).filter(Boolean);
+   const countEl=wrap.querySelector('.is-pos .search-acc-count');
+   if(countEl)countEl.textContent=String(Math.max(1,parts.length));
+   const blocksHost=wrap.querySelector('.search-sense-blocks');
+   if(blocksHost&&blocksHost.dataset.renderedVi!==text){
+    blocksHost.dataset.renderedVi=text;
+    const firstBlock=blocksHost.firstElementChild;
+    while(blocksHost.children.length>1)blocksHost.lastElementChild.remove();
+    const firstSlot=firstBlock?.querySelector('[data-sense-slot]');
+    if(firstSlot)firstSlot.dataset.senseMean=parts[0]||text;
+    parts.slice(1,5).forEach((senseText,idx)=>{
+     const block=node('div','','search-sense-block');
+     const head=node('p','','search-sense-heading search-acc-senses-inline');
+     const num=node('span',`${idx+2}.`,'search-sense-num');num.setAttribute('aria-hidden','true');
+     head.append(num,node('span',senseText,'search-sense-label'));
+     const exHost=node('div','','search-example-list search-sense-examples');
+     exHost.dataset.senseSlot=`s_0_${idx+1}`;exHost.dataset.sensePos='Nghĩa tiếng Việt';exHost.dataset.senseMean=senseText;exHost.hidden=true;
+     block.append(head,exHost);
+     blocksHost.append(block);
+    });
+   }
+   wrap.querySelectorAll('.dictionary-meaning.hint').forEach(h=>h.remove());
+   B.ensureSenseExamples?.(w,wrap);
+  });
+  document.querySelectorAll('.dictionary-meaning-retry').forEach(b=>{b.hidden=!!vi(b.__dictionaryWord);});
+  document.querySelectorAll('.dictionary-srs-add').forEach(b=>{b.disabled=!vi(b.__dictionaryWord);});
+ }
  function scheduleVi(){clearTimeout(viTimer);if(!viPending&&!viUnavailable)viTimer=setTimeout(translateVisible,120);}
  async function translateVisible(){const user=window.HSKAccountDashboard?.user;if(!user||!config||viPending||viUnavailable)return;const seen=new Set(),entries=[];for(const el of document.querySelectorAll('[data-vi-key]')){const w=el.__dictionaryWord,id=C.translationKey(w);if(!vi(w)&&!seen.has(id)){seen.add(id);entries.push({id,han:w.han,pinyin:w.pin,gloss:(w.sourceMean||w.mean).slice(0,1000)});}if(entries.length===10)break;}if(!entries.length)return;
   const owner=user.uid,request=new AbortController();let success=false;viPending=request;const timer=setTimeout(()=>request.abort(),45000);
@@ -175,50 +214,45 @@
   toolbar.append(leftMeta,actions);body.append(toolbar);
 
   const accStack=node('div','','search-acc-stack');
-  if(hskDetails?.posSenses?.length){
-   hskDetails.posSenses.forEach((s,sIdx)=>{
-    const acc=node('details','','search-acc-card is-pos');if(sIdx===0)acc.open=true;
-    const sum=node('summary','','search-acc-summary');
-    const arrow=node('span','','search-acc-arrow');arrow.setAttribute('aria-hidden','true');
-    const itemsList=String(s.mean||'').split(/[;；\n]/).map(x=>x.trim()).filter(Boolean);
-    sum.append(arrow,node('span',s.pos,'search-acc-title'),node('span',String(itemsList.length||1),'search-acc-count'));
-    acc.append(sum);
-    const accBody=node('div','','search-acc-body');
-    const p=node('p',s.mean,'search-acc-senses-inline');
-    if(sIdx===0){
-     const rowMeaning=node('span',brief(vi(w))||brief(s.mean),'dictionary-row-meaning');
-     rowMeaning.dataset.viKey=C.translationKey(w);rowMeaning.__dictionaryWord=w;
-     rowMeaning.hidden=true;
-     accBody.append(rowMeaning);
-    }
-    accBody.append(p);
-    if(sIdx===0&&hskDetails.examples?.length){
-     const exWrap=node('div','','search-example-list');
-     exWrap.append(node('h4',`Ví dụ cách dùng (${hskDetails.examples.length})`));
-     for(const ex of hskDetails.examples){
-      const exCard=node('div','','search-example-item'),exContent=node('div','','search-example-content');
-      exContent.append(node('p',ex.cn,'search-example-cn'));
-      if(ex.pin)exContent.append(node('p',ex.pin,'example-pinyin'));
-      exContent.append(node('p',ex.vi,'search-example-vi'));
-      exCard.append(exContent);
-      const exSpeech=window.HSKSpeech?.button(ex.cn,'Nghe câu ví dụ');if(exSpeech)exCard.append(exSpeech);
-      exWrap.append(exCard);
-     }
-     accBody.append(exWrap);
-    }
-    acc.append(accBody);accStack.append(acc);
+  if(hskDetails?.posSenses?.length&&B.renderPosAccordions){
+   B.renderPosAccordions(accStack,w,hskDetails,{
+    hiddenMeaningMeta:{key:C.translationKey(w),word:w,text:brief(vi(w))||brief(hskDetails.posSenses[0].mean)}
    });
+   setTimeout(()=>B.ensureSenseExamples?.(w,wrap),0);
   }else{
+   wrap.dataset.cedictFallback='true';wrap.__dictionaryWord=w;
    const acc=node('details','','search-acc-card is-pos');acc.open=true;
    const sum=node('summary','','search-acc-summary');
    const arrow=node('span','','search-acc-arrow');arrow.setAttribute('aria-hidden','true');
-   const curVi=vi(w),sensesCount=curVi?curVi.split(/[;；\n]/).filter(x=>x.trim()).length:1;
-   sum.append(arrow,node('span','Nghĩa tiếng Việt','search-acc-title'),node('span',String(sensesCount),'search-acc-count'));
+   const curVi=vi(w),viParts=curVi?curVi.split(/[;；\n]/).map(x=>x.trim()).filter(Boolean):[];
+   sum.append(arrow,node('span','Nghĩa tiếng Việt','search-acc-title'),node('span',String(Math.max(1,viParts.length)),'search-acc-count'));
    acc.append(sum);
    const accBody=node('div','','search-acc-body');
-   const meaningSpan=node('span',curVi||fallbackRowText(),'dictionary-row-meaning search-acc-senses-inline'+(curVi?'':' is-fallback-gloss'));
-   meaningSpan.dataset.viKey=C.translationKey(w);meaningSpan.__dictionaryWord=w;
-   accBody.append(meaningSpan);
+   const blocksHost=node('div','','search-sense-blocks');
+   if(curVi)blocksHost.dataset.renderedVi=curVi;
+   const corpusEx=B.examplesFor?B.examplesFor(w):[];
+   const listToRender=viParts.length?viParts.slice(0,5):[fallbackRowText()];
+   listToRender.forEach((senseText,idx)=>{
+    const block=node('div','','search-sense-block');
+    const head=node('p','','search-sense-heading search-acc-senses-inline');
+    const num=node('span',`${idx+1}.`,'search-sense-num');num.setAttribute('aria-hidden','true');
+    head.append(num);
+    if(idx===0){
+     const meaningSpan=node('span',senseText,'dictionary-row-meaning is-sense-primary search-sense-label'+(curVi?'':' is-fallback-gloss'));
+     meaningSpan.dataset.viKey=C.translationKey(w);meaningSpan.__dictionaryWord=w;
+     head.append(meaningSpan);
+    }else{
+     head.append(node('span',senseText,'search-sense-label'));
+    }
+    const exHost=node('div','','search-example-list search-sense-examples');
+    exHost.dataset.senseSlot=`s_0_${idx}`;exHost.dataset.sensePos='Nghĩa tiếng Việt';exHost.dataset.senseMean=curVi?senseText:'';
+    const slotEx=idx===0?corpusEx.slice(0,2):(corpusEx[idx+1]?[corpusEx[idx+1]]:[]);
+    for(const ex of slotEx)if(B.makeExampleCard)exHost.append(B.makeExampleCard(ex,w.han));
+    if(!exHost.children.length)exHost.hidden=true;
+    block.append(head,exHost);
+    blocksHost.append(block);
+   });
+   accBody.append(blocksHost);
    if(!curVi){
     const hint=node('p',fallbackBodyText(),'dictionary-meaning hint');hint.dataset.viKey=C.translationKey(w);hint.__dictionaryWord=w;accBody.append(hint);
    }
@@ -229,6 +263,7 @@
     retry.className='dictionary-meaning-retry';retry.__dictionaryWord=w;accBody.append(retry);
    }
    acc.append(accBody);accStack.append(acc);
+   if(curVi)setTimeout(()=>B.ensureSenseExamples?.(w,wrap),0);
   }
 
   const relatedList=openRelatedCompounds(entry,openCtx?.allEntries||[],12);
@@ -333,7 +368,7 @@
   const isPinyinQ=allowPinyinLookup&&!/^[\p{Script=Han}]+$/u.test(q)&&C.pinyinQuery(q);
   const draw=(done,n=0)=>{if(token!==serial)return;
    for(const entry of found)entry._rank=rankEntry(entry,q);
-   found.sort((a,b)=>Number(b.w.han===q||b.w.trad===q)-Number(a.w.han===q||a.w.trad===q)||Number(Boolean(vi(b.w)))-Number(Boolean(vi(a.w)))||b.tier-a.tier||(b.band||0)-(a.band||0)||b._rank-a._rank||b.score-a.score||a.w.han.length-b.w.han.length||a.w.han.localeCompare(b.w.han));
+   found.sort((a,b)=>Number(b.w.han===q||b.w.trad===q)-Number(a.w.han===q||a.w.trad===q)||Number(Boolean(vi(b.w)))-Number(Boolean(vi(a.w)))||b.tier-a.tier||(b.band||0)-(a.band||0)||(Number(a.w.hsk||membership(a.w))||99)-(Number(b.w.hsk||membership(b.w))||99)||b._rank-a._rank||b.score-a.score||a.w.han.length-b.w.han.length||a.w.han.localeCompare(b.w.han));
    const foldCompounds=shouldFoldOpen(found,q);
    let view=filterOpenEntries(found,activeFilter,q,foldCompounds);
    if(activeFilter!=='all'&&!view.length){activeFilter='all';view=filterOpenEntries(found,'all',q,foldCompounds);}

@@ -6077,10 +6077,67 @@ html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-sense-tex
   line-height:24px;
   color:var(--rd-ink);
 }
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-blocks{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-block{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-block + .search-sense-block{
+  padding-top:10px;
+  border-top:1px dashed var(--rd-line);
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-heading{
+  margin:0;
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+  font-size:15px;
+  font-weight:600;
+  line-height:1.5;
+  color:var(--rd-ink);
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-num{
+  font-weight:750;
+  color:var(--rd-ink);
+  flex:0 0 auto;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-label{
+  min-width:0;
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-structure-note{
+  margin:0;
+  padding:7px 11px;
+  border-radius:var(--radius-rd-006);
+  background:var(--rd-surface-soft);
+  border:1px solid var(--rd-line);
+  font-size:13px;
+  font-weight:600;
+  color:var(--rd-ink-2,var(--rd-ink));
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-examples{
+  margin-left:18px;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-hl{
+  background:var(--palette-clear);
+  color:var(--rd-brand);
+  font-weight:750;
+  padding:0;
+}
 html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-list{
   display:flex;
   flex-direction:column;
   gap:8px;
+}
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-list[hidden]{
+  display:none !important;
 }
 html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-list h4{
   margin:0;
@@ -6106,9 +6163,12 @@ html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictiona
   gap:4px;
   min-width:0;
 }
-html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-content .pinyin-line{
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-content .pinyin-line,
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-content .example-pinyin{
   margin:0 !important;
+  font-size:13.5px;
   line-height:1.45;
+  color:var(--rd-ink-2,var(--rd-ink));
 }
 html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-cn{
   margin:0;
@@ -6117,11 +6177,11 @@ html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictiona
   line-height:1.45;
   color:var(--rd-ink);
 }
-html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-example-vi{
+html body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-vi{
   margin:0;
   font-size:14px;
   line-height:1.45;
-  color:var(--rd-muted);
+  color:var(--rd-ink-2,var(--rd-ink));
 }
 html body:not(#_rd).studio-enabled #searchPanel #searchResults .search-detail-body .word-relations{
   border:1px solid var(--rd-line) !important;
@@ -6387,8 +6447,21 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchRe
   border-bottom-color:var(--palette-dark-line) !important;
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .dictionary-row-pinyin,
-html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-pos{
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-pos,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-hl{
   color:var(--palette-dark-violet) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-heading,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-num,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-cn,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-vi,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-example-content .example-pinyin,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-structure-note{
+  color:var(--rd-ink) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-sense-block + .search-sense-block,
+html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-structure-note{
+  border-color:var(--palette-dark-line) !important;
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-detail-hv,
 html[data-theme="dark"] body:not(#_rd).studio-enabled #searchPanel :is(#searchResults,#openDictionary) .search-detail-actions .speech-button,
