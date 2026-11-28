@@ -6,21 +6,28 @@
  const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
  const button=(text,fn)=>{const b=node('button',text);b.type='button';b.onclick=fn;return b;};
  const vi=w=>w.native||w.meanLanguage==='vi'?w.mean:w.meanVi||viCache[C.translationKey(w)]?.meaning||'';
+ const fmtPin=s=>C.formatPinyin?C.formatPinyin(s||''):String(s||'');
  const brief=s=>String(s).split(/[;；\n]/)[0].trim();
- const cleanSourceGloss=s=>String(s||'').split(/[;；\n]/).map(x=>x.trim()).filter(x=>x&&!/^(?:see\s+also|variant\s+of|old\s+variant\s+of|CL:)/i.test(x)).map(x=>x.replace(/\[[^\]]+\]/g,'').replace(/\s+/g,' ').trim()).filter(Boolean).slice(0,2).join('; ')||brief(s);
- const fallbackRowText=w=>{const g=cleanSourceGloss(w.sourceMean||w.mean);return g?'Anh: '+g:'Chưa có nghĩa Việt';};
- const fallbackBodyText=w=>{const g=String(w.sourceMean||w.mean||'').trim();return g?'Cần mạng và đăng nhập để dịch sang tiếng Việt · Nghĩa Anh: '+g:'Cần mạng và đăng nhập để lấy nghĩa tiếng Việt.';};
+ const canAutoTranslate=()=>Boolean(window.HSKAccountDashboard?.user&&config&&!viUnavailable);
+ const fallbackRowText=()=>canAutoTranslate()?'Đang tải nghĩa Việt…':'Chưa có nghĩa Việt offline';
+ const fallbackBodyText=()=>canAutoTranslate()?'Đang tự động dịch sang tiếng Việt…':'Chưa có nghĩa Việt trong kho offline. Đăng nhập và bật mạng để tự động dịch sang tiếng Việt.';
  const friendlyNetError=err=>{const msg=String(err?.message||'');if(err?.name==='AbortError')return 'Kết nối quá thời gian chờ. Hãy thử lại.';if(/failed to fetch|networkerror|load failed/i.test(msg))return 'Chưa kết nối được máy chủ dịch/AI (kiểm tra mạng hoặc đăng nhập lại).';return msg||'Chưa tải được dữ liệu.';};
  let localViMapCache=null;
  function getLocalViMap(){
   if(localViMapCache)return localViMapCache;
   const map=new Map();
-  const add=(han,pin,mean)=>{if(!han||!mean)return;const xs=map.get(han)||[];xs.push({pin:pin||'',mean});map.set(han,xs);};
+  const add=(han,pin,mean)=>{if(!han||!mean)return;const xs=map.get(han)||[];if(!xs.some(x=>x.pin===(pin||'')&&x.mean===mean))xs.push({pin:pin||'',mean});map.set(han,xs);};
   for(const w of window.HSKVocabularyBridge?.snapshot?.()||[])add(w.han,w.pin,w.mean);
   const facts=window.HSKVocabularyBridge?.facts?.()?.words;
   if(facts)for(const [han,entry] of Object.entries(facts))for(const vr of entry?.variants||[]){
    const means=[...new Set((vr.senses||[]).map(s=>s?.mean).filter(Boolean))];
    if(means.length)add(han,vr.pin||'',means.join('; '));
+  }
+  const relEntries=window.HSKVocabularyBridge?.relations?.()?.entries;
+  if(relEntries)for(const rel of Object.values(relEntries)){
+   for(const arr of [rel?.synonyms||[],rel?.antonyms||[]]){
+    for(const item of arr)if(item?.han&&item?.mean)add(item.han,item.pin||'',item.mean);
+   }
   }
   if(map.size)localViMapCache=map;
   return map;
@@ -32,6 +39,10 @@
    if(!list?.length)continue;
    const exact=list.find(x=>x.pin&&pin&&C.sameReading(x.pin,pin)&&(!isProper||/^[A-Z]/.test(String(x.pin).trim())));
    if(exact)return exact.mean;
+   if(!isProper&&list.length===1){
+    const only=list[0];
+    if(!only.pin||!pin||C.fold(only.pin)===C.fold(pin))return only.mean;
+   }
   }
   return '';
  }
@@ -43,7 +54,7 @@
  async function recoveryGrounding(query,meaning,previous){const memory=readPhoneticMemory(),hints=C.expandVietnamesePhonetic(query),key=C.normalizePhoneticKey(query),learned=key.split(/\s+/).map(s=>memory.syllables[s]).filter(Boolean);if(learned.length)hints.push(learned);const candidates=await localCandidatesFor(query,meaning);const remembered=memory.exact[key];if(remembered&&!candidates.some(t=>t.han===remembered.han))candidates.unshift({han:remembered.han,pinyin:remembered.pinyin,meaning:remembered.meaning});return {phoneticHints:hints,localCandidates:candidates,excludedTerms:previous||[]};}
  function rememberVi(w,meaning){viCache[C.translationKey(w)]={meaning,time:Date.now()};const all=Object.keys(viCache).sort((a,b)=>viCache[b].time-viCache[a].time);for(const k of all.slice(1200))delete viCache[k];try{localStorage.setItem('hsk-dictionary-vietnamese-v2',JSON.stringify(viCache));}catch(_){}applyVi();}
  function applyVi(){document.querySelectorAll('[data-vi-key]').forEach(el=>{const w=el.__dictionaryWord,text=vi(w);if(text){el.textContent=el.classList.contains('dictionary-row-meaning')?brief(text):text;el.classList.remove('is-fallback-gloss');}});document.querySelectorAll('.dictionary-meaning-retry').forEach(b=>{b.hidden=!!vi(b.__dictionaryWord);});document.querySelectorAll('.dictionary-srs-add').forEach(b=>{b.disabled=!vi(b.__dictionaryWord);});}
- function scheduleVi(){clearTimeout(viTimer);if(!viPending&&!viUnavailable)viTimer=setTimeout(translateVisible,400);}
+ function scheduleVi(){clearTimeout(viTimer);if(!viPending&&!viUnavailable)viTimer=setTimeout(translateVisible,120);}
  async function translateVisible(){const user=window.HSKAccountDashboard?.user;if(!user||!config||viPending||viUnavailable)return;const seen=new Set(),entries=[];for(const el of document.querySelectorAll('[data-vi-key]')){const w=el.__dictionaryWord,id=C.translationKey(w);if(!vi(w)&&!seen.has(id)){seen.add(id);entries.push({id,han:w.han,pinyin:w.pin,gloss:(w.sourceMean||w.mean).slice(0,1000)});}if(entries.length===10)break;}if(!entries.length)return;
   const owner=user.uid,request=new AbortController();let success=false;viPending=request;const timer=setTimeout(()=>request.abort(),45000);
   try{const token=await user.getIdToken();const response=await fetch(config.endpoint.replace(/\/translate$/,'/dictionary-translate'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({entries}),signal:request.signal});const data=await response.json();if(window.HSKAccountDashboard?.user?.uid!==owner||request.signal.aborted)return;if(!response.ok){if(response.status===404)viUnavailable=true;throw Error(response.status===404?'Cần cập nhật Worker để dịch nghĩa tiếng Việt theo nhóm.':data.error||'Chưa dịch được nghĩa Việt.');}if(data.language!=='vi'||!Array.isArray(data.translations)||data.translations.length!==entries.length||new Set(data.translations.map(t=>t.id)).size!==entries.length||!data.translations.every(t=>seen.has(t.id)&&typeof t.meaning==='string'&&t.meaning.trim()&&t.meaning.length<=240))throw Error('Bản dịch nhóm chưa hợp lệ.');for(const t of data.translations)viCache[t.id]={meaning:t.meaning,time:Date.now()};const all=Object.keys(viCache).sort((a,b)=>viCache[b].time-viCache[a].time);for(const k of all.slice(1200))delete viCache[k];try{localStorage.setItem('hsk-dictionary-vietnamese-v2',JSON.stringify(viCache));}catch(_){}applyVi();
@@ -61,13 +72,20 @@
    loaded.set(n,data);if(!hit&&cache)try{await cache.put(url,copy);}catch(_){}return data;
   })();pending.set(n,task);try{return await task;}finally{pending.delete(n);}}
  function membership(w){return B.hsk(w.han,w.trad);}
- const bridgeItem=w=>({han:w.han,trad:w.han,pin:w.pin,pinDisplay:w.pin,mean:w.mean,native:!w.isExtended,hsk:w.hsk||null,hasExamples:Boolean((w.practice?.examples?.length>=2)||(w.examples?.length>=1)),...(w.isExtended?{meanVi:w.mean,meanLanguage:'vi'}:{})});
+ const bridgeItem=w=>({han:w.han,trad:w.han,pin:w.pin,pinDisplay:fmtPin(w.pinDisplay||w.pin),mean:w.mean,native:!w.isExtended,hsk:w.hsk||null,hasExamples:Boolean((w.practice?.examples?.length>=2)||(w.examples?.length>=1)),...(w.isExtended?{meanVi:w.mean,meanLanguage:'vi'}:{})});
  function recordHit(q,w){if(q&&w)window.HSKSearchRanking?.record(q,w);}
- function isSingleRoot(q){const t=String(q||'').trim();return Boolean(t)&&!/[\p{Script=Han}]/u.test(t)&&t.split(/\s+/).length===1;}
+ const isHanQuery=q=>/[\p{Script=Han}]/u.test(String(q||''));
+ function isSingleRoot(q){const t=String(q||'').trim();return Boolean(t)&&!isHanQuery(t)&&t.split(/\s+/).length===1;}
  function shouldFoldOpen(entries,q){
   if(!isSingleRoot(q))return false;
   const heads=entries.filter(e=>e.tier>=2).length;
   return heads>=1&&heads<entries.length;
+ }
+ function shouldHideUntranslated(base,q){
+  if(isHanQuery(q))return false;
+  let viN=0,nonViN=0;
+  for(const e of base){if(vi(e.w))viN++;else nonViN++;}
+  return viN>0&&nonViN>0;
  }
  function rankEntry(entry,q){
   const R=window.HSKSearchRanking,level=membership(entry.w),hasVi=Boolean(vi(entry.w));
@@ -75,29 +93,29 @@
  }
  function filterOpenEntries(entries,filter,q,foldCompounds){
   const base=foldCompounds?entries.filter(e=>e.tier>=2):entries;
-  if(filter==='all')return base;
+  const hideNonVi=shouldHideUntranslated(base,q);
+  if(filter==='all')return hideNonVi?base.filter(e=>Boolean(vi(e.w))):base;
   const R=window.HSKSearchRanking;
   if(filter==='compounds')return entries.filter(e=>e.tier<2);
+  if(filter==='untranslated')return base.filter(e=>!vi(e.w));
   if(filter==='hsk')return base.filter(e=>Boolean(membership(e.w)));
   if(filter==='vi')return base.filter(e=>Boolean(vi(e.w)));
-  if(filter==='pinyin')return base.filter(e=>e.hasPinyin);
+  if(filter==='pinyin')return (hideNonVi?base.filter(e=>Boolean(vi(e.w))):base).filter(e=>e.hasPinyin);
   if(filter==='frequent')return entries.filter(e=>(R?.hitCount(q,e.w)?.total||0)>0);
   return base;
  }
- function openRelatedCompounds(entry,allEntries,limit=8){
-  const compounds=allEntries.filter(e=>e.tier<2&&e.w.han!==entry.w.han);
-  if(!compounds.length)return {title:'',items:[]};
-  const w=entry.w;
+ function openRelatedCompounds(entry,allEntries,limit=12){
+  const seen=new Set([entry.w.han]),items=[];
+  const pushItem=(w)=>{if(!w||!w.han||seen.has(w.han))return;seen.add(w.han);items.push(w);};
+  const compounds=(allEntries||[]).filter(e=>e.tier<2&&e.w.han!==entry.w.han&&Boolean(vi(e.w)));
   if(entry.hasPinyin&&!entry.hasViMatch){
-   const containing=compounds.filter(e=>e.w.han.includes(w.han));
-   if(containing.length)return {title:`Từ ghép chứa "${w.han}"`,items:containing.slice(0,limit)};
-   return {title:'',items:[]};
+   for(const e of compounds)if(e.w.han.includes(entry.w.han))pushItem(e.w);
+  }else{
+   for(const e of compounds)if(e.w.han.includes(entry.w.han))pushItem(e.w);
+   for(const e of compounds)if(!e.w.han.includes(entry.w.han))pushItem(e.w);
   }
-  const viCompounds=compounds.filter(e=>e.hasViMatch||Boolean(vi(e.w)));
-  if(!viCompounds.length)return {title:'',items:[]};
-  const sameChar=viCompounds.filter(e=>e.w.han.includes(w.han));
-  const others=viCompounds.filter(e=>!e.w.han.includes(w.han));
-  return {title:'Từ ghép & nghĩa cụ thể liên quan',items:[...sameChar,...others].slice(0,limit)};
+  for(const item of B.compounds?.(entry.w.han,limit)||[])pushItem(item.w);
+  return items.slice(0,limit);
  }
  function renderOpenFilters(filterBar,entries,activeFilter,q,foldCompounds,onSelect){
   if(!filterBar)return;
@@ -105,20 +123,22 @@
   if(entries.length<=1){filterBar.hidden=true;return;}
   const R=window.HSKSearchRanking;
   const base=foldCompounds?entries.filter(e=>e.tier>=2):entries;
+  const hideNonVi=shouldHideUntranslated(base,q);
+  const defaultBase=hideNonVi?base.filter(e=>Boolean(vi(e.w))):base;
+  const untranslatedCount=hideNonVi?base.length-defaultBase.length:0;
   const compoundCount=foldCompounds?entries.length-base.length:0;
   const hskCount=base.filter(e=>Boolean(membership(e.w))).length;
-  const viCount=base.filter(e=>Boolean(vi(e.w))).length;
-  const pinCount=base.filter(e=>e.hasPinyin).length;
+  const pinCount=defaultBase.filter(e=>e.hasPinyin).length;
   const freqCount=R?entries.filter(e=>(R.hitCount(q,e.w)?.total||0)>0).length:0;
   const chips=[];
   if(foldCompounds&&compoundCount>0)chips.push(['compounds',`Từ ghép cụ thể (${compoundCount})`]);
-  if(hskCount>0&&hskCount<base.length)chips.push(['hsk',`HSK (${hskCount})`]);
-  if(viCount>0&&viCount<base.length)chips.push(['vi',`Có nghĩa Việt (${viCount})`]);
-  if(pinCount>0&&pinCount<base.length)chips.push(['pinyin',`Pinyin (${pinCount})`]);
+  if(hskCount>0&&hskCount<defaultBase.length)chips.push(['hsk',`HSK (${hskCount})`]);
+  if(pinCount>0&&pinCount<defaultBase.length)chips.push(['pinyin',`Pinyin (${pinCount})`]);
   if(freqCount>0)chips.push(['frequent',`Hay tra (${freqCount})`]);
+  if(untranslatedCount>0)chips.push(['untranslated',`Ngoài kho Việt (${untranslatedCount})`]);
   if(!chips.length){filterBar.hidden=true;return;}
   filterBar.hidden=false;
-  const firstLabel=foldCompounds?`Từ gốc (${base.length})`:`Tất cả (${entries.length})`;
+  const firstLabel=foldCompounds?`Từ gốc (${defaultBase.length})`:`Tất cả (${defaultBase.length})`;
   for(const [id,label] of [['all',firstLabel],...chips]){
    const chip=node('button',label,'search-intent-chip');chip.type='button';chip.dataset.openFilter=id;
    chip.setAttribute('aria-pressed',String(activeFilter===id));
@@ -126,8 +146,188 @@
    filterBar.append(chip);
   }
  }
+ function buildOpenHeroView(entry,query='',openCtx=null){
+  const w=entry.w,level=membership(w),hskDetails=level?B.details?.(w.han,w.pin):null;
+  const wrap=node('article','','open-hanzii-active');
+  const hero=node('div','','search-hero-summary');
+  const head=node('div','','search-hero-head');
+  head.append(node('h3',w.han,'dictionary-row-han'));
+  if(level||w.verification_status==='verified'||w.verification_status==='pinyin_corrected'){
+   const badge=node('span','✓','search-hero-verified');badge.setAttribute('aria-hidden','true');badge.title=level?'Từ chuẩn HSK':'Đã đối chiếu từ điển';head.append(badge);
+  }
+  const phonetic=node('div','','search-hero-phonetic');
+  const pinText=fmtPin(w.pinDisplay||w.pin||'');
+  if(pinText)phonetic.append(node('span',`[${pinText}]`,'dictionary-row-pinyin'));
+  if(hskDetails?.hv)phonetic.append(node('span',`[${hskDetails.hv.toUpperCase()}]`,'search-detail-hv'));
+  hero.append(head,phonetic);
+
+  const body=node('div','','search-detail-body');
+  const toolbar=node('div','','search-detail-toolbar search-hero-meta'),leftMeta=node('div','','search-detail-left'),actions=node('div','','search-detail-actions');
+  leftMeta.append(node('span','Cấp độ:','search-level-label'),node('span',level?'HSK '+level:'Từ mở rộng','hsk-tag search-row-badge'+(level?'':' is-extended')));
+  const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)actions.append(speech);
+  if(w.native||level){actions.append(button('Mở thẻ HSK',()=>{recordHit(query,w);B.open(w.han,w.pin);}));}
+  const notebook=window.HSKNotebook?.button(()=>({...w,mean:vi(w),pin:pinText}));if(notebook)actions.append(notebook);
+  if(!level){
+   const action=button(items[C.id(w)]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS',()=>{recordHit(query,w);const key=C.id(w);if(items[key]){delete items[key];queue=queue.filter(k=>k!==key);}else items=C.add(items,{...w,meanVi:vi(w)});save();action.textContent=items[key]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS';});
+   action.className='dictionary-srs-add';action.__dictionaryWord=w;action.disabled=!vi(w);actions.append(action);
+  }
+  toolbar.append(leftMeta,actions);body.append(toolbar);
+
+  const accStack=node('div','','search-acc-stack');
+  if(hskDetails?.posSenses?.length){
+   hskDetails.posSenses.forEach((s,sIdx)=>{
+    const acc=node('details','','search-acc-card is-pos');if(sIdx===0)acc.open=true;
+    const sum=node('summary','','search-acc-summary');
+    const arrow=node('span','','search-acc-arrow');arrow.setAttribute('aria-hidden','true');
+    const itemsList=String(s.mean||'').split(/[;；\n]/).map(x=>x.trim()).filter(Boolean);
+    sum.append(arrow,node('span',s.pos,'search-acc-title'),node('span',String(itemsList.length||1),'search-acc-count'));
+    acc.append(sum);
+    const accBody=node('div','','search-acc-body');
+    const p=node('p',s.mean,'search-acc-senses-inline');
+    if(sIdx===0){
+     const rowMeaning=node('span',brief(vi(w))||brief(s.mean),'dictionary-row-meaning');
+     rowMeaning.dataset.viKey=C.translationKey(w);rowMeaning.__dictionaryWord=w;
+     rowMeaning.hidden=true;
+     accBody.append(rowMeaning);
+    }
+    accBody.append(p);
+    if(sIdx===0&&hskDetails.examples?.length){
+     const exWrap=node('div','','search-example-list');
+     exWrap.append(node('h4',`Ví dụ cách dùng (${hskDetails.examples.length})`));
+     for(const ex of hskDetails.examples){
+      const exCard=node('div','','search-example-item'),exContent=node('div','','search-example-content');
+      exContent.append(node('p',ex.cn,'search-example-cn'));
+      if(ex.pin)exContent.append(node('p',ex.pin,'example-pinyin'));
+      exContent.append(node('p',ex.vi,'search-example-vi'));
+      exCard.append(exContent);
+      const exSpeech=window.HSKSpeech?.button(ex.cn,'Nghe câu ví dụ');if(exSpeech)exCard.append(exSpeech);
+      exWrap.append(exCard);
+     }
+     accBody.append(exWrap);
+    }
+    acc.append(accBody);accStack.append(acc);
+   });
+  }else{
+   const acc=node('details','','search-acc-card is-pos');acc.open=true;
+   const sum=node('summary','','search-acc-summary');
+   const arrow=node('span','','search-acc-arrow');arrow.setAttribute('aria-hidden','true');
+   const curVi=vi(w),sensesCount=curVi?curVi.split(/[;；\n]/).filter(x=>x.trim()).length:1;
+   sum.append(arrow,node('span','Nghĩa tiếng Việt','search-acc-title'),node('span',String(sensesCount),'search-acc-count'));
+   acc.append(sum);
+   const accBody=node('div','','search-acc-body');
+   const meaningSpan=node('span',curVi||fallbackRowText(),'dictionary-row-meaning search-acc-senses-inline'+(curVi?'':' is-fallback-gloss'));
+   meaningSpan.dataset.viKey=C.translationKey(w);meaningSpan.__dictionaryWord=w;
+   accBody.append(meaningSpan);
+   if(!curVi){
+    const hint=node('p',fallbackBodyText(),'dictionary-meaning hint');hint.dataset.viKey=C.translationKey(w);hint.__dictionaryWord=w;accBody.append(hint);
+   }
+   if(w.verification_status)accBody.append(node('small',w.verification_status==='verified'?'✓ Đã đối chiếu từ điển':w.verification_status==='pinyin_corrected'?'✓ Đã sửa pinyin theo từ điển':'△ Gợi ý AI chưa có trong kho từ điển','dictionary-verification '+w.verification_status));
+   if(w.trad&&w.trad!==w.han)accBody.append(node('p','Phồn thể: '+w.trad,'hint'));
+   if(!curVi&&!level){
+    const retry=button('Thử lấy nghĩa Việt',()=>{viUnavailable=false;translateVisible();});
+    retry.className='dictionary-meaning-retry';retry.__dictionaryWord=w;accBody.append(retry);
+   }
+   acc.append(accBody);accStack.append(acc);
+  }
+
+  const relatedList=openRelatedCompounds(entry,openCtx?.allEntries||[],12);
+  if(relatedList.length){
+   const compAcc=node('details','','search-acc-card is-compounds');
+   const sum=node('summary','','search-acc-summary');
+   const arrow=node('span','','search-acc-arrow');arrow.setAttribute('aria-hidden','true');
+   sum.append(arrow,node('span','Từ ghép','search-acc-title'),node('span',String(relatedList.length),'search-acc-count'));
+   compAcc.append(sum);
+   const compBody=node('div','','search-acc-body'),compList=node('div','','search-compound-list');
+   for(const cw of relatedList){
+    const chip=node('button','','search-compound-chip');chip.type='button';
+    chip.append(node('strong',cw.han),node('span',brief(vi(cw))||''));
+    chip.onclick=()=>{recordHit(query,cw);const inp=$('searchInput'),form=$('searchForm');if(inp){inp.value=cw.han;form?.dispatchEvent(new Event('submit',{cancelable:true}));}};
+    compList.append(chip);
+   }
+   compBody.append(compList);
+   if(openCtx?.onShowCompounds){
+    const totalComp=(openCtx.allEntries||[]).filter(e=>e.tier<2).length;
+    if(totalComp>relatedList.length){
+     const more=button(`Xem tất cả (${totalComp})`,openCtx.onShowCompounds);more.className='search-related-all';compBody.append(more);
+    }
+   }
+   compAcc.append(compBody);accStack.append(compAcc);
+  }
+
+  const relData=B.relations?.(w.han,w.pin);
+  if(relData&&B.relationAccordion){
+   const synAcc=B.relationAccordion(relData.word,'Từ cận nghĩa',relData.synonyms,'is-synonyms');
+   const antAcc=B.relationAccordion(relData.word,'Từ trái nghĩa',relData.antonyms,'is-antonyms');
+   if(synAcc)accStack.append(synAcc);
+   if(antAcc)accStack.append(antAcc);
+  }
+
+  const ai=node('div','','dictionary-ai');
+  if(w.explanation)ai.append(node('p',w.explanation,'dictionary-ai-answer'));
+  else ai.append(button('Xem cách dùng và ví dụ',()=>{recordHit(query,w);askAI(w,ai);}));
+  accStack.append(ai);
+
+  body.append(accStack);
+  wrap.append(hero,body);
+  return wrap;
+ }
+ function renderWordRecord(w,target,query=''){
+  const card=node('details','','result-card extended-word dictionary-row');
+  const summary=node('summary','','dictionary-row-summary'),meaning=node('span',brief(vi(w))||fallbackRowText(),'dictionary-row-meaning'+(vi(w)?'':' is-fallback-gloss'));
+  meaning.dataset.viKey=C.translationKey(w);meaning.__dictionaryWord=w;
+  summary.append(node('h3',w.han,'dictionary-row-han'),meaning,node('span',fmtPin(w.pinDisplay||w.pin),'dictionary-row-pinyin'));
+  card.append(summary);
+  card.ontoggle=()=>{if(card.open){recordHit(query,w);scheduleVi();}};
+  target.append(card);
+ }
+ function renderOpenWorkspace(target,view,query,openCtx=null,shown=40,onMore=null,selectedRef=null){
+  target.replaceChildren();
+  const visible=view.slice(0,shown);
+  if(!visible.length){target.classList.remove('has-master-detail');return;}
+  target.classList.add('has-master-detail');
+  let activeIdx=0;
+  if(selectedRef?.key){
+   const foundIdx=visible.findIndex(e=>C.id(e.w)===selectedRef.key);
+   if(foundIdx>=0)activeIdx=foundIdx;
+  }
+  const mainCol=node('div','','search-main-col');
+  const strip=node('div','','search-candidate-strip');strip.setAttribute('role','tablist');strip.setAttribute('aria-label','Danh sách từ phù hợp');
+  const activeHost=node('div','','open-hanzii-host');
+  const records=node('div','','open-dict-records');records.hidden=true;
+  const charPanel=node('aside','','search-char-panel');charPanel.setAttribute('aria-label','Phân tích chữ Hán và thứ tự nét');
+
+  const pills=[];
+  const selectAt=(idx,fromUser=false)=>{
+   const entry=visible[idx];if(!entry)return;
+   activeIdx=idx;
+   if(selectedRef)selectedRef.key=C.id(entry.w);
+   pills.forEach((p,i)=>{const on=i===idx;p.classList.toggle('is-active',on);p.setAttribute('aria-selected',on?'true':'false');});
+   activeHost.replaceChildren(buildOpenHeroView(entry,query,openCtx));
+   B.renderCharPanel?.(charPanel,entry.w);
+   if(fromUser){recordHit(query,entry.w);scheduleVi();}
+  };
+
+  visible.forEach((entry,idx)=>{
+   const w=entry.w;
+   const pill=node('button','','search-master-item');pill.type='button';pill.setAttribute('role','tab');
+   pill.append(node('span',w.han,'search-master-han'));
+   const pillPin=fmtPin(w.pinDisplay||w.pin);
+   if(pillPin)pill.append(node('span',pillPin,'search-master-pin'));
+   pill.onclick=()=>selectAt(idx,true);
+   pills.push(pill);strip.append(pill);
+   renderWordRecord(w,records,query);
+  });
+
+  mainCol.append(strip,activeHost,records);
+  if(shown<view.length&&onMore){
+   const moreBtn=button('Xem thêm kết quả',onMore);moreBtn.className='open-dict-more-btn';mainCol.append(moreBtn);
+  }
+  target.append(mainCol,charPanel);
+  selectAt(activeIdx,false);
+  scheduleVi();
+ }
  async function lookup(q,target,status,token,general=false,filterBar=null){lookupStatus=status;status.textContent='Đang tra phần dữ liệu liên quan…';target.dataset.complete='false';
-  const cacheKey=(general?'general|':'exact|')+q,seen=new Set(),seenHanPin=new Set(),found=searchCache.get(cacheKey)?.slice()||[];let shown=40,activeFilter='all';
+  const cacheKey=(general?'general|':'exact|')+q,seen=new Set(),seenHanPin=new Set(),found=searchCache.get(cacheKey)?.slice()||[];let shown=40,activeFilter='all';const selectedRef={key:''};
   const isPinyinQ=!/^[\p{Script=Han}]+$/u.test(q)&&C.pinyinQuery(q);
   const draw=(done,n=0)=>{if(token!==serial)return;
    for(const entry of found)entry._rank=rankEntry(entry,q);
@@ -135,13 +335,11 @@
    const foldCompounds=shouldFoldOpen(found,q);
    let view=filterOpenEntries(found,activeFilter,q,foldCompounds);
    if(activeFilter!=='all'&&!view.length){activeFilter='all';view=filterOpenEntries(found,'all',q,foldCompounds);}
-   renderOpenFilters(filterBar,found,activeFilter,q,foldCompounds,next=>{activeFilter=next;shown=40;draw(target.dataset.complete==='true',n);});
-   target.replaceChildren();
-   const openCtx=foldCompounds?{allEntries:found,onShowCompounds:()=>{activeFilter='compounds';shown=40;draw(target.dataset.complete==='true',n);}}:null;
-   for(const entry of view.slice(0,shown))renderWord(entry.w,target,q,entry,openCtx);
+   renderOpenFilters(filterBar,found,activeFilter,q,foldCompounds,next=>{activeFilter=next;shown=40;selectedRef.key='';draw(target.dataset.complete==='true',n);});
+   const openCtx=foldCompounds?{allEntries:found,onShowCompounds:()=>{activeFilter='compounds';shown=40;selectedRef.key='';draw(target.dataset.complete==='true',n);}}:null;
+   renderOpenWorkspace(target,view,q,openCtx,shown,()=>{shown+=40;draw(target.dataset.complete==='true',n);},selectedRef);
    target.dataset.complete=String(done);
    status.textContent=view.length?`${view.length} ${foldCompounds&&activeFilter==='all'?'từ gốc':'kết quả'} · Hiển thị ${Math.min(shown,view.length)}${done?' · Đã tra xong':' · Đang bổ sung '+n+'/32 phần'}`:done?'Chưa có mục từ khớp. Có thể tra nghĩa tiếng Việt bằng AI.':`Đang tìm thêm · ${n}/32 phần…`;
-   if(shown<view.length)target.append(button('Xem thêm kết quả',()=>{shown+=40;draw(target.dataset.complete==='true',n);}));
   };
   if(searchCache.has(cacheKey)){draw(true);return;}
   if(general)for(const r of B.results()){const {w,score}=r,item=bridgeItem(w);seenHanPin.add(w.han+'|'+C.reading(w.pin));found.push({w:item,score,tier:r.tier||(score>=140?2:1),band:r.band||(score>=140?5:score>=110?4:3),hasPinyin:Boolean(r.hasPinyin),hasViMatch:Boolean(r.hasVi)});}
@@ -152,70 +350,12 @@
    for(let start=0;start<order.length;start+=4){if(token!==serial)return;const batch=await Promise.all(order.slice(start,start+4).map(shard));if(token!==serial)return;for(const rows of batch)ingest(rows);n+=batch.length;draw(n===32,n);await new Promise(r=>setTimeout(r,0));}
    if(found.length<=2000){searchCache.set(cacheKey,found.slice());if(searchCache.size>20)searchCache.delete(searchCache.keys().next().value);}
   }catch(e){if(token===serial){draw(true);status.textContent=found.length?'Đã có kết quả từ phần đã tải; chưa mở được các phần còn lại. '+e.message:e.message;target.dataset.complete='partial';}}}
- function renderWord(w,target,query='',entry=null,openCtx=null){const card=node('details','','result-card extended-word dictionary-row');const level=membership(w),summary=node('summary','','dictionary-row-summary'),meaning=node('span',brief(vi(w))||fallbackRowText(w),'dictionary-row-meaning'+(vi(w)?'':' is-fallback-gloss'));meaning.dataset.viKey=C.translationKey(w);meaning.__dictionaryWord=w;summary.append(node('h3',w.han,'dictionary-row-han'),meaning,node('span',w.pinDisplay||w.pin,'dictionary-row-pinyin'));card.append(summary);
-  const body=node('div','','dictionary-row-body search-detail-body');
-  const hskDetails=level?B.details?.(w.han,w.pin):null;
-  const toolbar=node('div','','search-detail-toolbar'),leftMeta=node('div','','search-detail-left'),actions=node('div','','search-detail-actions');
-  leftMeta.append(node('span',level?'HSK '+level:'Từ mở rộng','hsk-tag'));
-  if(hskDetails?.hv)leftMeta.append(node('span','HV: '+hskDetails.hv.toUpperCase(),'search-detail-hv'));
-  const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)actions.append(speech);
-  if(w.native||level){const openBtn=button('Mở thẻ HSK',()=>{recordHit(query,w);B.open(w.han,w.pin);});actions.append(openBtn);}
-  if(window.HSKWritingPractice?.open){const writeBtn=button('Tập viết',()=>{recordHit(query,w);window.HSKWritingPractice.open(w.han);});actions.append(writeBtn);}
-  const notebook=window.HSKNotebook?.button(()=>({...w,mean:vi(w),pin:w.pinDisplay||w.pin}));if(notebook)actions.append(notebook);
-  if(!level){const action=button(items[C.id(w)]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS',()=>{recordHit(query,w);const key=C.id(w);if(items[key]){delete items[key];queue=queue.filter(k=>k!==key);}else items=C.add(items,{...w,meanVi:vi(w)});save();action.textContent=items[key]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS';});action.className='dictionary-srs-add';action.__dictionaryWord=w;action.disabled=!vi(w);actions.append(action);}
-  toolbar.append(leftMeta,actions);body.append(toolbar);
-  if(hskDetails?.posSenses?.length){
-   const senseBox=node('div','','search-sense-list');
-   for(const s of hskDetails.posSenses){
-    const row=node('div','','search-sense-row');
-    row.append(node('span',s.pos,'search-sense-pos'),node('p',s.mean,'search-sense-text'));
-    senseBox.append(row);
-   }
-   body.append(senseBox);
-  }else{
-   const full=node('p',vi(w)||fallbackBodyText(w),'dictionary-meaning');full.dataset.viKey=C.translationKey(w);full.__dictionaryWord=w;body.append(full);
-  }
-  if(w.verification_status)body.append(node('small',w.verification_status==='verified'?'✓ Đã đối chiếu từ điển':w.verification_status==='pinyin_corrected'?'✓ Đã sửa pinyin theo từ điển':'△ Gợi ý AI chưa có trong kho từ điển','dictionary-verification '+w.verification_status));
-  if(w.trad&&w.trad!==w.han)body.append(node('p','Phồn thể: '+w.trad,'hint'));
-  if(hskDetails?.examples?.length){
-   const exWrap=node('div','','search-example-list');
-   exWrap.append(node('h4',`Ví dụ cách dùng (${hskDetails.examples.length})`));
-   for(const ex of hskDetails.examples){
-    const exCard=node('div','','search-example-item'),exContent=node('div','','search-example-content');
-    exContent.append(node('p',ex.cn,'search-example-cn'));
-    if(ex.pin)exContent.append(node('p',ex.pin,'example-pinyin'));
-    exContent.append(node('p',ex.vi,'search-example-vi'));
-    exCard.append(exContent);
-    const exSpeech=window.HSKSpeech?.button(ex.cn,'Nghe câu ví dụ');if(exSpeech)exCard.append(exSpeech);
-    exWrap.append(exCard);
-   }
-   body.append(exWrap);
-  }
-  if(openCtx&&entry&&entry.tier>=2){
-   const rel=openRelatedCompounds(entry,openCtx.allEntries,8);
-   if(rel.items.length){
-    const compWrap=node('div','','search-related-compounds'),compHead=node('div','','search-related-head');
-    compHead.append(node('h4',`${rel.title} (${rel.items.length})`));
-    const totalComp=openCtx.allEntries.filter(e=>e.tier<2).length;
-    if(totalComp>rel.items.length&&openCtx.onShowCompounds){const more=button(`Xem tất cả (${totalComp})`,openCtx.onShowCompounds);more.className='search-related-all';compHead.append(more);}
-    const compList=node('div','','search-compound-list');
-    for(const c of rel.items){
-     const chip=node('button','','search-compound-chip');chip.type='button';
-     chip.append(node('strong',c.w.han),node('span',brief(vi(c.w))||fallbackRowText(c.w)));
-     chip.onclick=()=>{recordHit(query,c.w);const inp=$('searchInput'),form=$('searchForm');if(inp){inp.value=c.w.han;form?.dispatchEvent(new Event('submit',{cancelable:true}));}};
-     compList.append(chip);
-    }
-    compWrap.append(compHead,compList);body.append(compWrap);
-   }
-  }
-  const ai=node('div','','dictionary-ai');if(w.explanation)ai.append(node('p',w.explanation,'dictionary-ai-answer'));else ai.append(button('Xem cách dùng và ví dụ',()=>{recordHit(query,w);askAI(w,ai);}));body.append(ai);
-  if(!vi(w)&&!level){const retry=button('Thử lấy nghĩa Việt',()=>{viUnavailable=false;translateVisible();});retry.className='dictionary-meaning-retry';retry.__dictionaryWord=w;body.append(retry);};card.append(body);card.ontoggle=()=>{if(card.open){recordHit(query,w);scheduleVi();}};target.append(card);scheduleVi();}
  function prepare(event){++serial;controller?.abort();controller=null;lookupStatus=null;const token=serial,q=B.query().trim(),general=B.scope()==='general';box.replaceChildren();box.hidden=!q||!general&&B.results().length>0;if(box.hidden)return;
   const bar=node('div','','open-dict-bar'),head=node('div','','open-dict-head'),tools=node('div','','open-dict-tools');
   const filterBar=node('div','','search-intent-filters open-dict-filters');filterBar.setAttribute('role','group');filterBar.setAttribute('aria-label','Lọc kết quả tra cứu');filterBar.hidden=true;
   const status=node('p','','hint'),results=node('div','','result-grid'),context=node('input');context.placeholder='Câu chứa từ (không bắt buộc)';context.maxLength=280;context.setAttribute('aria-label','Ngữ cảnh của từ cần tra');context.className='dictionary-context';
-  const aiPanel=node('div','','dictionary-ai-panel'),onTerms=(terms,t,answer,chips)=>{filterBar.replaceChildren();filterBar.hidden=true;semanticMatches(terms,results,status,t,answer,chips);},explain=()=>askAI({han:q,trad:q,pin:'',mean:'Chưa có nghĩa từ điển; cần xác định theo ngữ cảnh.'},aiPanel,context.value,onTerms);
-  const actions=node('div','','dictionary-actions');if(!general)actions.append(button('Tra từ mở rộng',()=>lookup(q,results,status,serial,false,filterBar)));actions.append(button('Tra nghĩa / Giải thích bằng AI',explain));
+  const aiPanel=node('div','','dictionary-ai-panel'),onTerms=(terms,t,answer,chips)=>{filterBar.replaceChildren();filterBar.hidden=true;semanticMatches(terms,results,status,t,answer,chips);},explain=(silentError=false)=>askAI({han:q,trad:q,pin:'',mean:'Chưa có nghĩa từ điển; cần xác định theo ngữ cảnh.'},aiPanel,context.value,onTerms,null,silentError);
+  const actions=node('div','','dictionary-actions');if(!general)actions.append(button('Tra từ mở rộng',()=>lookup(q,results,status,serial,false,filterBar)));actions.append(button('Tra nghĩa / Giải thích bằng AI',()=>explain(false)));
   head.append(node('h3',general?'Kết quả tra cứu':'Tham khảo ngoài kho HSK'),status);
   tools.append(context,actions);
   bar.append(head,tools);
@@ -224,38 +364,37 @@
   if(autoSemantic){
    const baseEntries=B.results().map(r=>({w:bridgeItem(r.w),score:r.score,tier:r.tier||(r.score>=140?2:1),hasPinyin:Boolean(r.hasPinyin),hasViMatch:Boolean(r.hasVi)}));
    const foldCompounds=shouldFoldOpen(baseEntries,q);
-   let activeFilter='all';
+   let activeFilter='all';const selectedRef={key:''};
    const drawSemantic=()=>{
     let view=filterOpenEntries(baseEntries,activeFilter,q,foldCompounds);
     if(activeFilter!=='all'&&!view.length){activeFilter='all';view=filterOpenEntries(baseEntries,'all',q,foldCompounds);}
-    renderOpenFilters(filterBar,baseEntries,activeFilter,q,foldCompounds,next=>{activeFilter=next;drawSemantic();});
-    results.replaceChildren();
-    const ctx=foldCompounds?{allEntries:baseEntries,onShowCompounds:()=>{activeFilter='compounds';drawSemantic();}}:null;
-    for(const entry of view.slice(0,40))renderWord(entry.w,results,q,entry,ctx);
-    status.textContent=view.length?`${view.length} ${foldCompounds&&activeFilter==='all'?'từ gốc':'kết quả'} · Tra theo nghĩa · AI cần đăng nhập và mạng.`:'Tra theo nghĩa · Cần đăng nhập và mạng.';
+    renderOpenFilters(filterBar,baseEntries,activeFilter,q,foldCompounds,next=>{activeFilter=next;selectedRef.key='';drawSemantic();});
+    const ctx=foldCompounds?{allEntries:baseEntries,onShowCompounds:()=>{activeFilter='compounds';selectedRef.key='';drawSemantic();}}:null;
+    renderOpenWorkspace(results,view,q,ctx,40,null,selectedRef);
+    status.textContent=view.length?`${view.length} ${foldCompounds&&activeFilter==='all'?'từ gốc':'kết quả'} · Tra theo nghĩa`:'Tra theo nghĩa · Cần đăng nhập và mạng.';
    };
    drawSemantic();
-   if(event?.detail?.submitted)explain();
+   if(event?.detail?.submitted&&(!baseEntries.length||window.HSKAccountDashboard?.user))explain(baseEntries.length>0);
   }
-  else if(general){for(const r of B.results().slice(0,40))renderWord(bridgeItem(r.w),results,q);lookup(q,results,status,token,true,filterBar);}else if(/^[\p{Script=Han}]+$/u.test(q)&&!B.exact(q))lookup(q,results,status,token,false,filterBar);
+  else if(general){const initial=B.results().slice(0,40).map(r=>({w:bridgeItem(r.w),score:r.score,tier:r.tier||(r.score>=140?2:1),hasPinyin:Boolean(r.hasPinyin),hasViMatch:Boolean(r.hasVi)}));renderOpenWorkspace(results,initial,q,null,40);lookup(q,results,status,token,true,filterBar);}else if(/^[\p{Script=Han}]+$/u.test(q)&&!B.exact(q))lookup(q,results,status,token,false,filterBar);
  }
- async function semanticMatches(terms,target,status,token,answer='',chips=[]){if(!terms.length){status.textContent='Chưa có mục từ đủ chắc chắn; hãy thêm ngữ cảnh.';return;}status.textContent='Đang đối chiếu các từ AI gợi ý với từ điển…';try{const seen=new Set(),matched=[];for(const t of terms){if(token!==serial) return;const rows=await shard(t.han.codePointAt(0)%32),verified=C.reconcileAiTermsWithDictionary([t],rows)[0],entry=rows.find(r=>r[0]===t.han||r[1]===t.han);if(entry&&C.sameReading(t.pinyin,entry[2])){const key=entry.slice(0,3).join('|');if(!seen.has(key)){seen.add(key);const w={han:entry[0],trad:entry[1],pin:entry[2],mean:entry[3].join('; '),meanVi:t.meaning,pinDisplay:entry[2],verification_status:verified.verification_status,explanation:terms.length===1?answer:'',matchType:t.match_type};if(w.meanVi)rememberVi(w,w.meanVi);matched.push(w);}}else if(!entry&&verified?.verification_status==='unverified_ai'){const w={han:verified.han,trad:verified.han,pin:verified.pinyin,mean:verified.meaning,meanVi:verified.meaning,verification_status:'unverified_ai',matchType:verified.match_type};if(!seen.has(w.han+'|'+w.pin)){seen.add(w.han+'|'+w.pin);matched.push(w);}}}if(token!==serial)return;if(matched.length)target.replaceChildren();for(const w of matched)renderWord(w,target);if(chips?.length){const chipBox=node('div','','dictionary-refinement-chips');chipBox.append(node('small','Thu hẹp ngữ cảnh:','hint'));for(const chip of chips.slice(0,3))chipBox.append(button(chip,()=>{const context=target.parentElement?.querySelector('.dictionary-context');if(context){context.value=chip;context.dispatchEvent(new Event('input'));target.parentElement?.querySelector('.dictionary-actions button:last-child')?.click();}}));target.prepend(chipBox);}status.textContent=matched.length?`${matched.length} mục từ được đối chiếu`:'AI đã gợi ý cách dịch; chưa có mục từ tương ứng trong kho hiện tại. Xem giải thích và bổ sung ngữ cảnh nếu cần.';}catch(e){if(token===serial)status.textContent='Đã có lời giải AI nhưng chưa tải được mục từ đối chiếu. '+e.message;}}
- async function askAI(w,target,context='',onTerms=null,grounding=null){
+ async function semanticMatches(terms,target,status,token,answer='',chips=[]){if(!terms.length){status.textContent='Chưa có mục từ đủ chắc chắn; hãy thêm ngữ cảnh.';return;}status.textContent='Đang đối chiếu các từ AI gợi ý với từ điển…';try{const seen=new Set(),matched=[];for(const t of terms){if(token!==serial) return;const rows=await shard(t.han.codePointAt(0)%32),verified=C.reconcileAiTermsWithDictionary([t],rows)[0],entry=rows.find(r=>r[0]===t.han||r[1]===t.han);if(entry&&C.sameReading(t.pinyin,entry[2])){const key=entry.slice(0,3).join('|');if(!seen.has(key)){seen.add(key);const w={han:entry[0],trad:entry[1],pin:entry[2],mean:entry[3].join('; '),meanVi:t.meaning,pinDisplay:C.formatPinyin?C.formatPinyin(entry[2]):entry[2],verification_status:verified.verification_status,explanation:terms.length===1?answer:'',matchType:t.match_type};if(w.meanVi)rememberVi(w,w.meanVi);matched.push({w,score:150,tier:3,hasPinyin:false,hasViMatch:true});}}else if(!entry&&verified?.verification_status==='unverified_ai'){const w={han:verified.han,trad:verified.han,pin:verified.pinyin,mean:verified.meaning,meanVi:verified.meaning,pinDisplay:C.formatPinyin?C.formatPinyin(verified.pinyin):verified.pinyin,verification_status:'unverified_ai',matchType:verified.match_type};if(!seen.has(w.han+'|'+w.pin)){seen.add(w.han+'|'+w.pin);matched.push({w,score:140,tier:2,hasPinyin:false,hasViMatch:true});}}}if(token!==serial)return;if(matched.length)renderOpenWorkspace(target,matched,'',null,40);if(chips?.length){const chipBox=node('div','','dictionary-refinement-chips');chipBox.append(node('small','Thu hẹp ngữ cảnh:','hint'));for(const chip of chips.slice(0,3))chipBox.append(button(chip,()=>{const context=target.parentElement?.querySelector('.dictionary-context');if(context){context.value=chip;context.dispatchEvent(new Event('input'));target.parentElement?.querySelector('.dictionary-actions button:last-child')?.click();}}));target.prepend(chipBox);}status.textContent=matched.length?`${matched.length} mục từ được đối chiếu`:'AI đã gợi ý cách dịch; chưa có mục từ tương ứng trong kho hiện tại. Xem giải thích và bổ sung ngữ cảnh nếu cần.';}catch(e){if(token===serial)status.textContent='Đã có lời giải AI nhưng chưa tải được mục từ đối chiếu. '+e.message;}}
+ async function askAI(w,target,context='',onTerms=null,grounding=null,silentError=false){
   ++serial;if(lookupStatus)lookupStatus.textContent='Đã tạm dừng mở rộng để tra AI. Bấm Tìm kiếm để mở lại toàn bộ kết quả.';lookupStatus=null;
   const user=window.HSKAccountDashboard?.user;target.replaceChildren();const status=node('p','','hint');target.append(status);
-  const retry=()=>target.append(button('Thử lại',()=>askAI(w,target,context,onTerms,grounding)));
-  if(!user){status.textContent='Hãy đăng nhập để dùng AI. Tra từ điển không cần tài khoản.';retry();return;}
-  if(!config){status.textContent='Chưa kết nối được AI.';retry();return;}
+  const retry=()=>target.append(button('Thử lại',()=>askAI(w,target,context,onTerms,grounding,false)));
+  if(!user){if(silentError){target.replaceChildren();return;}status.textContent='Hãy đăng nhập để dùng AI. Tra từ điển không cần tài khoản.';retry();return;}
+  if(!config){if(silentError){target.replaceChildren();return;}status.textContent='Chưa kết nối được AI.';retry();return;}
   controller?.abort();controller=new AbortController();const request=controller,token=serial,key=w.han+'|'+w.pin+'|'+context+'|'+JSON.stringify(grounding||{})+'|'+user.uid;
   const show=data=>{for(const t of data.terms||[])if((t.han===w.han||t.han===w.trad)&&C.sameReading(t.pinyin,w.pin))rememberVi(w,t.meaning);target.replaceChildren();if(onTerms){const detail=node('details','','dictionary-query-detail');detail.append(node('summary','Giải thích tổng quát'),node('p',data.answer,'dictionary-ai-answer'));target.append(detail);onTerms(data.terms,token,data.answer,data.refinement_chips||[]);}else target.append(node('small','Cách dùng và ví dụ'),node('p',data.answer,'dictionary-ai-answer'));};
   if(aiCache.has(key)){show(aiCache.get(key));return;}
   status.textContent='AI tra nghĩa từ điển đang load…';const stopLoading=window.HSKLoading?.show('AI tra nghĩa từ điển đang load...','Đang phân tích nghĩa và ví dụ cho: '+w.han);const timer=setTimeout(()=>request.abort(),30000);
   try{const auth=await user.getIdToken();if(token!==serial||request.signal.aborted)return;if(w.han.length>160)throw Error('Hãy nhập từ hoặc cụm tối đa 160 ký tự.');const requestBody={query:w.han,context,...(w.pin?{word:{han:w.han,trad:w.trad||w.han,pin:w.pin,mean:(w.mean||'').slice(0,4000)}}:{}),...(grounding||{})};const response=await fetch(config.endpoint.replace(/\/translate$/,'/dictionary-lookup'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+auth},signal:request.signal,body:JSON.stringify(requestBody)});const data=await response.json();if(token!==serial||request.signal.aborted)return;if(!response.ok)throw Error(response.status===404?'Worker chưa có tính năng tra cứu mới. Hãy triển khai bản Worker đã gửi.':data.error||'AI chưa trả lời được.');if(typeof data.answer!=='string'||!data.answer.trim()||data.answer.length>5000||!Array.isArray(data.terms)||data.terms.length>6||!data.terms.every(t=>t&&['han','pinyin','meaning'].every(k=>typeof t[k]==='string'&&t[k].trim()&&t[k].length<600)&&/\p{Script=Han}/u.test(t.han)))throw Error('AI chưa trả kết quả tra cứu hợp lệ.');aiCache.set(key,data);if(aiCache.size>40)aiCache.delete(aiCache.keys().next().value);show(data);
-  }catch(e){if(token===serial){status.textContent=friendlyNetError(e);retry();}}finally{stopLoading?.();clearTimeout(timer);if(controller===request)controller=null;}}
+  }catch(e){if(token===serial){if(silentError){target.replaceChildren();return;}status.textContent=friendlyNetError(e);retry();}}finally{stopLoading?.();clearTimeout(timer);if(controller===request)controller=null;}}
  function renderSrsHome(){reviewBox.replaceChildren(node('h3','SRS · Từ mở rộng'));const due=Object.keys(items).filter(k=>items[k].due<=Date.now()).sort((a,b)=>items[a].due-items[b].due);reviewBox.append(node('p',`${Object.keys(items).length} từ đã chọn · ${due.length} từ đến hạn`,'hint'));
-  reviewBox.append(button('Ôn từ mở rộng',()=>{queue=due.slice();revealed=false;window.HSKLoading?.flash('Phiên ôn SRS mở rộng đang load...','Đang chuẩn bị các từ mở rộng đến hạn...',undefined,reviewBox);renderReview();}));if(!queue.length&&Object.keys(items).length){const list=node('details'),summary=node('summary','Quản lý từ đã thêm');list.append(summary);for(const [key,r] of Object.entries(items)){const row=node('div','','dictionary-actions');row.append(node('span',r.word.han+' · '+r.word.pin),button('Gỡ khỏi SRS',()=>{delete items[key];save();}));list.append(row);}reviewBox.append(list);}}
+  reviewBox.append(button('Ôn từ mở rộng',()=>{queue=due.slice();revealed=false;window.HSKLoading?.flash('Phiên ôn SRS mở rộng đang load...','Đang chuẩn bị các từ mở rộng đến hạn...',undefined,reviewBox);renderReview();}));if(!queue.length&&Object.keys(items).length){const list=node('details'),summary=node('summary','Quản lý từ đã thêm');list.append(summary);for(const [key,r] of Object.entries(items)){const row=node('div','','dictionary-actions');row.append(node('span',r.word.han+' · '+fmtPin(r.word.pin)),button('Gỡ khỏi SRS',()=>{delete items[key];save();}));list.append(row);}reviewBox.append(list);}}
  function renderReview(){renderSrsHome();queue=queue.filter(k=>items[k]);if(!queue.length){window.HSKLoading?.flash('Kết quả SRS mở rộng đang load...','Đã hoàn thành phiên ôn từ mở rộng...',undefined,reviewBox);reviewBox.append(node('p','Đã hết từ đến hạn. Lịch này không tính vào tiến độ HSK.','hint'));return;}const key=queue[0],r=items[key],card=node('article','','extended-review');card.append(node('h3',r.word.han));const speech=window.HSKSpeech?.button(r.word.han,'Nghe phát âm '+r.word.han);if(speech)card.append(speech);
-  if(!revealed)card.append(button('Xem nghĩa',()=>{revealed=true;renderReview();}));else{const meaning=node('p',vi(r.word)||'Đang tra nghĩa Việt…');meaning.dataset.viKey=C.translationKey(r.word);meaning.__dictionaryWord=r.word;card.append(node('p',r.word.pin),meaning);const actions=node('div','','dictionary-actions');for(const [rating,label] of [['again','Chưa nhớ'],['hard','Khó'],['good','Nhớ'],['easy','Dễ']])actions.append(button(label,()=>{items[key]=C.rate(items[key],rating);queue.shift();revealed=false;save();renderReview();}));card.append(actions);}reviewBox.append(card);scheduleVi();}
+  if(!revealed)card.append(button('Xem nghĩa',()=>{revealed=true;renderReview();}));else{const meaning=node('p',vi(r.word)||'Đang tra nghĩa Việt…');meaning.dataset.viKey=C.translationKey(r.word);meaning.__dictionaryWord=r.word;card.append(node('p',fmtPin(r.word.pin)),meaning);const actions=node('div','','dictionary-actions');for(const [rating,label] of [['again','Chưa nhớ'],['hard','Khó'],['good','Nhớ'],['easy','Dễ']])actions.append(button(label,()=>{items[key]=C.rate(items[key],rating);queue.shift();revealed=false;save();renderReview();}));card.append(actions);}reviewBox.append(card);scheduleVi();}
  window.addEventListener('hsk-search-rendered',prepare);window.addEventListener('hsk-account-ready',()=>{++serial;controller?.abort();viPending?.abort();viPending=null;clearTimeout(viTimer);aiCache.clear();queue=[];try{items=C.clean(JSON.parse(localStorage.getItem(C.KEY)||'{}'));}catch(_){items={};}renderSrsHome();prepare();});
  window.HSKAIConfig?.loadTranslationConfig?.().then(c=>{if(c){config=c;scheduleVi();}});
 
@@ -273,13 +412,13 @@
     state.selected=null;result.replaceChildren();
     const query=input.value.trim()||hint.value.trim(),context=JSON.stringify({mode:'word-recovery',meaningHint:hint.value,previousSuggestions:state.previous}),requestSerial=serial;
     const remembered=rememberedLookup(query);
-    if(remembered&&!hint.value.trim()){state.selected={han:remembered.han,pinyin:remembered.pinyin,meaning:remembered.meaning};out.replaceChildren(node('p','Đã nhớ từ bạn từng xác nhận: '+remembered.han+' · '+remembered.pinyin+' · '+remembered.meaning));if(!comparison)out.append(button('Xem cách dùng với AI',()=>askAI({han:remembered.han,trad:remembered.han,pin:remembered.pinyin,mean:remembered.meaning},result)));return;}
+    if(remembered&&!hint.value.trim()){state.selected={han:remembered.han,pinyin:fmtPin(remembered.pinyin),meaning:remembered.meaning};out.replaceChildren(node('p','Đã nhớ từ bạn từng xác nhận: '+remembered.han+' · '+fmtPin(remembered.pinyin)+' · '+remembered.meaning));if(!comparison)out.append(button('Xem cách dùng với AI',()=>askAI({han:remembered.han,trad:remembered.han,pin:remembered.pinyin,mean:remembered.meaning},result)));return;}
     let grounding;try{grounding=await recoveryGrounding(query,hint.value,state.previous);}catch(_){grounding={phoneticHints:C.expandVietnamesePhonetic(query),localCandidates:[],excludedTerms:state.previous};}
     if(requestSerial!==serial)return;
     askAI({han:query,trad:query,pin:''},out,context,(terms,t,answer,chips)=>{
      if(t!==serial)return;out.replaceChildren(node('p',answer),node('p',terms.length?'Chọn đúng từ bạn muốn tìm; nếu chưa đúng, sửa nghĩa phía trên rồi bấm AI tìm chữ.':'Hãy bổ sung nghĩa hoặc câu ví dụ rồi tìm lại.'));
      state.previous=terms.map(x=>x.han.slice(0,24)).slice(0,6);
-     for(const term of terms)out.append(button(term.han+' · '+term.pinyin+' · '+term.meaning+(term.match_type?' · '+term.match_type:''),()=>{state.selected={han:term.han.slice(0,24),pinyin:term.pinyin.slice(0,60),meaning:term.meaning.slice(0,100)};rememberPhoneticLookup(query,state.selected);input.value=term.han;out.replaceChildren(node('p','Đã chọn và lưu thói quen phát âm: '+term.han+' · '+term.pinyin+' · '+term.meaning));if(!comparison)askAI({han:term.han,trad:term.han,pin:term.pinyin,mean:term.meaning},result); }));
+     for(const term of terms){const termPin=fmtPin(term.pinyin);out.append(button(term.han+' · '+termPin+' · '+term.meaning+(term.match_type?' · '+term.match_type:''),()=>{state.selected={han:term.han.slice(0,24),pinyin:termPin.slice(0,60),meaning:term.meaning.slice(0,100)};rememberPhoneticLookup(query,state.selected);input.value=term.han;out.replaceChildren(node('p','Đã chọn và lưu thói quen phát âm: '+term.han+' · '+termPin+' · '+term.meaning));if(!comparison)askAI({han:term.han,trad:term.han,pin:termPin,mean:term.meaning},result); }));}
      if(chips?.length){const chipBox=node('div','','dictionary-refinement-chips');chipBox.append(node('small','Chưa đúng? Chọn ngữ cảnh:','hint'));for(const chip of chips.slice(0,3))chipBox.append(button(chip,()=>{hint.value=chip;resolve.click();}));out.append(chipBox);}
     },grounding);
    });row.append(label,input,hint,resolve,out);panel.append(row);
